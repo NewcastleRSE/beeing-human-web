@@ -13,7 +13,8 @@ Newcastle University
 
 ## Built With
 
-[Svelte](https://svelte.dev/)  
+[Svelte](https://svelte.dev/)
+[Vite](https://vitejs.dev/)
 
 ## Getting Started
 
