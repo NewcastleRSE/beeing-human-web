@@ -2,17 +2,32 @@
   import svelteLogo from './assets/svelte.svg'
   import viteLogo from '/vite.svg'
   import Counter from './lib/Counter.svelte'
-  import HelloWorld from './lib/HelloWorld.svelte';
-  import Logo from './lib/Logo.svelte';
-  import Paragraph from './lib/Paragraph.svelte';
-  import NewCounter from './lib/NewCounter.svelte';
-  import AddNumber from './lib/AddNumber.svelte';
-  import Exported from './lib/Exported.svelte';
-  import ObjectProperties from './lib/ObjectProperties.svelte';
-  import Conditional from './lib/Conditional.svelte';
-  import NestedConditional from './lib/NestedConditional.svelte';
-  import LoopData from './lib/LoopData.svelte';
-  import KeyedBlock from './lib/KeyedBlock.svelte';
+    import ContentEditable from './lib/ConEditable.svelte';
+    // import NumericInput from './lib/NumericInput.svelte';
+  // import HelloWorld from './lib/HelloWorld.svelte';
+  // import Logo from './lib/Logo.svelte';
+  // import Paragraph from './lib/Paragraph.svelte';
+  // import NewCounter from './lib/NewCounter.svelte';
+  // import AddNumber from './lib/AddNumber.svelte';
+  // import Exported from './lib/Exported.svelte';
+  // import ObjectProperties from './lib/ObjectProperties.svelte';
+  // import Conditional from './lib/Conditional.svelte';
+  // import NestedConditional from './lib/NestedConditional.svelte';
+  // import LoopData from './lib/LoopData.svelte';
+  // import KeyedBlock from './lib/KeyedBlock.svelte';
+  // import Await from './lib/Await.svelte';
+  // import MouseEvent from './lib/MouseEvent.svelte';
+  // import MouseEventInline from './lib/MouseEventInline.svelte';
+  // import EventModifier from './lib/EventModifier.svelte';
+  // import EventDispatcher from './lib/EventDispatcher.svelte';
+  // import EventForwarding from './lib/EventForwarding.svelte';
+  // import DomForward from './lib/DomForward.svelte';
+  // import TextInputBinding from './lib/TextInputBinding.svelte';
+  // import CheckboxInput from './lib/CheckboxInput.svelte';
+  // import GroupInputs from './lib/GroupInputs.svelte';
+  // import TextAreaInput from './lib/TextAreaInput.svelte';
+  // import SelectBindings from './lib/SelectBindings.svelte';
+  import ConEditable from './lib/ConEditable.svelte';
 </script>
 
 <main>
@@ -27,7 +42,21 @@
   <!-- <Conditional></Conditional> -->
   <!-- <NestedConditional/> -->
   <!-- <LoopData/> -->
-  <KeyedBlock/>
+  <!-- <KeyedBlock/> -->
+  <!-- <Await/> -->
+  <!-- <MouseEvent/> -->
+  <!-- <MouseEventInline/> -->
+  <!-- <EventModifier/> -->
+  <!-- <EventDispatcher/> -->
+  <!-- <EventForwarding/> -->
+  <!-- <DomForward/> -->
+  <!-- <TextInputBinding/> -->
+  <!-- <NumericInput/> -->
+  <!-- <CheckboxInput/> -->
+  <!-- <GroupInputs/> -->
+  <!-- <TextAreaInput/> -->
+  <!-- <SelectBindings/> -->
+  <ConEditable/>
   <div>
     <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
       <img src={viteLogo} class="logo" alt="Vite Logo" />
