@@ -2,8 +2,8 @@
   import svelteLogo from './assets/svelte.svg'
   import viteLogo from '/vite.svg'
   import Counter from './lib/Counter.svelte'
-    import ContentEditable from './lib/ConEditable.svelte';
-    // import NumericInput from './lib/NumericInput.svelte';
+  // import ContentEditable from './lib/ConEditable.svelte';
+  // import NumericInput from './lib/NumericInput.svelte';
   // import HelloWorld from './lib/HelloWorld.svelte';
   // import Logo from './lib/Logo.svelte';
   // import Paragraph from './lib/Paragraph.svelte';
@@ -27,7 +27,15 @@
   // import GroupInputs from './lib/GroupInputs.svelte';
   // import TextAreaInput from './lib/TextAreaInput.svelte';
   // import SelectBindings from './lib/SelectBindings.svelte';
-  import ConEditable from './lib/ConEditable.svelte';
+  // import ConEditable from './lib/ConEditable.svelte';
+  // import EachBlockBind from './lib/EachBlockBind.svelte';
+  // import MediaBind from './lib/MediaBind.svelte';
+  // import DimensionsBind from './lib/DimensionsBind.svelte';
+  // import ThisBinding from './lib/ThisBinding.svelte';
+  // import ComponentBinding from './lib/ComponentBinding.svelte';
+  // import CompInstanceBind from './lib/CompInstanceBind.svelte';
+  // import CompOnDestroy from './lib/CompOnDestroy.svelte';
+  import Eliza from './lib/Eliza.svelte';
 </script>
 
 <main>
@@ -56,7 +64,15 @@
   <!-- <GroupInputs/> -->
   <!-- <TextAreaInput/> -->
   <!-- <SelectBindings/> -->
-  <ConEditable/>
+  <!-- <ConEditable/> -->
+  <!-- <EachBlockBind/> -->
+  <!-- <MediaBind/> -->
+  <!-- <DimensionsBind/> -->
+  <!-- <ThisBinding/> -->
+  <!-- <ComponentBinding/> -->
+  <!-- <CompInstanceBind/> -->
+  <!-- <CompOnDestroy/> -->
+  <Eliza/>
   <div>
     <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
       <img src={viteLogo} class="logo" alt="Vite Logo" />
