@@ -35,7 +35,13 @@
   // import ComponentBinding from './lib/ComponentBinding.svelte';
   // import CompInstanceBind from './lib/CompInstanceBind.svelte';
   // import CompOnDestroy from './lib/CompOnDestroy.svelte';
-  import Eliza from './lib/Eliza.svelte';
+  // import Eliza from './lib/Eliza.svelte';
+  // import Tick from './lib/Tick.svelte';
+  // import WritableStore from './lib/WritableStore.svelte';
+  // import ReadableStore from './lib/ReadableStore.svelte';
+  // import CustomStores from './lib/CustomStores.svelte';
+  // import StoreBinding from './lib/StoreBinding.svelte';
+  import MotionTweened from './lib/MotionTweened.svelte';
 </script>
 
 <main>
@@ -72,7 +78,13 @@
   <!-- <ComponentBinding/> -->
   <!-- <CompInstanceBind/> -->
   <!-- <CompOnDestroy/> -->
-  <Eliza/>
+  <!-- <Eliza/> -->
+  <!-- <Tick/> -->
+  <!-- <WritableStore/> -->
+  <!-- <ReadableStore/> -->
+  <!-- <CustomStores/> -->
+  <!-- <StoreBinding/> -->
+  <MotionTweened/>
   <div>
     <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
       <img src={viteLogo} class="logo" alt="Vite Logo" />
