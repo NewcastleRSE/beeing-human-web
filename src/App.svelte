@@ -1,9 +1,7 @@
 <script>
-  import SlotContent from "./lib/SlotContent.svelte";
+  import SlotProps from "./lib/SlotProps.svelte";
 </script>
 
 <main>
-  <SlotContent>
-    
-  </SlotContent>
+  <SlotProps></SlotProps>
 </main>
