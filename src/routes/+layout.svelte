@@ -1,6 +1,4 @@
 <script>
-  import "../app.postcss";
-
   // Your selected Skeleton theme:
   import '@skeletonlabs/skeleton/themes/theme-skeleton.css';
 
@@ -9,7 +7,10 @@
 
   // Finally, your application's global stylesheet (sometimes labeled 'app.css')
   import '../app.postcss';
-						
+
+  import { LightSwitch } from '@skeletonlabs/skeleton';
 </script>
+
+<LightSwitch/>
 
 <slot />

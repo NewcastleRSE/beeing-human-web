@@ -4,7 +4,7 @@ import adapter from "@sveltejs/adapter-static";
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   paths: {
-    base: "/beeing-human-web",
+    base: "/beeing-human-web"
   },
 
   kit: {
@@ -14,11 +14,7 @@ const config = {
     adapter: adapter(),
   },
 
-  preprocess: [
-    preprocess({
-      postcss: true,
-    }),
-  ],
+  preprocess: preprocess()
 };
 
 export default config;
