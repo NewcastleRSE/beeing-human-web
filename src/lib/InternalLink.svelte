@@ -3,4 +3,4 @@
     export let link;
 </script>
 
-<a href="{base}/{link}"><slot></slot></a>
+<a href="{base}/{link}" class="{$$restProps.class || ''}"><slot></slot></a>

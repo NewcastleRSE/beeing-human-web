@@ -1,5 +1,8 @@
 <script>
     import InternalLink from "../lib/InternalLink.svelte";
+    import ViewSelect from "../lib/ViewSelect.svelte";
+
+    import {view} from "../stores/viewChoice";
 </script>
 
 <h1>Bee-ing Human</h1>
@@ -8,3 +11,8 @@
 <h2>New update</h2>
 <p>Making sure the .nojekyll file becomes persistent.</p>
 <InternalLink link="about">About</InternalLink>
+
+<ViewSelect/>
+<InternalLink link="test" class="btn variant-filled">Go</InternalLink>
+
+<p>{$view}</p>
