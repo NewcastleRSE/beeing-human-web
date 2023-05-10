@@ -1,18 +1,23 @@
 <script>
     import {view} from '../../stores/viewChoice';
     import { compile } from 'mdsvex';
+    import { onMount } from 'svelte';
+    import { ProgressBar } from '@skeletonlabs/skeleton';
 
-    let modulePath = '../../content/' + $view + '/intro.md';
-    console.log(modulePath);
+    let introText = '';
 
-    let introText = (async() => {
-        await compile(`some *markup*`, mdsvexOptions)});
+    onMount(async() => {
+        let modulePath = './content/' + $view + '/intro.md';
+        introText = await fetch(modulePath).then(response => response.text());
+    });
 
-    // import(modulePath).then(obj => Intro);
 
-    // import Intro from '../../content/interdisciplinarity/intro.md';
 </script>
 
 <h1>{$view}</h1>
 <!-- <Intro/> -->
-<p>{introText}</p>
+{#if introText===""}
+    <ProgressBar value={undefined}/>
+{:else}
+    <p>{introText}</p>
+{/if}
