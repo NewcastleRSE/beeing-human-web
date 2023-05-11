@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import { ProgressBar } from "@skeletonlabs/skeleton";
+    import { ProgressRadial } from "@skeletonlabs/skeleton";
     import SvelteMarkdown from 'svelte-markdown';
 
     export let chosenView;
@@ -15,7 +15,7 @@
 </script>
 
 {#if mdString === ""}
-  <ProgressBar value={undefined} />
+  <ProgressRadial value={undefined} />
 {:else}
   <SvelteMarkdown source={mdString}/>
 {/if}
