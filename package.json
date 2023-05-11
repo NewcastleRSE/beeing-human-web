@@ -24,7 +24,6 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-svelte": "^2.26.0",
     "gh-pages": "^5.0.0",
-    "mdsvex": "^0.10.6",
     "postcss": "^8.4.23",
     "postcss-load-config": "^4.0.1",
     "prettier": "^2.8.0",
@@ -36,5 +35,8 @@
     "vite": "^4.3.0",
     "vitest": "^0.25.3"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "svelte-markdown": "^0.2.3"
+  }
 }

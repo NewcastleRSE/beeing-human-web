@@ -1,13 +1,13 @@
 ---
 name: User story template
 about: Basic structure of user story
-title: ''
+title: ""
 labels: user story
-assignees: ''
-
+assignees: ""
 ---
 
 ---
+
 name: User story issue template
 about: 'This template provides a basic structure for user story issues'
 title: As a [user/stakeholder] I want to [task/feature] so I can [do something]
@@ -22,21 +22,26 @@ This template is based on one used by The Turing Way & The Alan Turing Institute
 -->
 
 # User story
+
 "As a <user or stakeholder type>, I want <software feature or capability>, so that I can <achieve some aim or task> "
 "In order to <achieve some aim or task>, as a <stakeholder type>, I want <software feature or capability>"
 "User <stakeholder>, needs <software feature or capability>, so that they can <achieve some aim or task>"
-*(delete as appropriate)*
+_(delete as appropriate)_
 
 # Details
-*Please provide some more detail about the user story here, including any relevant links to further reading or information, or any notes from discussions - this will help people working on this story to understand it better*
+
+_Please provide some more detail about the user story here, including any relevant links to further reading or information, or any notes from discussions - this will help people working on this story to understand it better_
 
 # Acceptance criteria
-*In this section, write about what "done" looks like for this story*
+
+_In this section, write about what "done" looks like for this story_
+
 - [ ] Checklists are helpful to break down the story down into individual tasks
 
 # Estimation of work
 
-*Approximately how many hours/days do you expect this work to take?*
+_Approximately how many hours/days do you expect this work to take?_
 
 # Updates
-*Any updates from further down the thread are encouraged so people can easily see the status of this issue*
+
+_Any updates from further down the thread are encouraged so people can easily see the status of this issue_
