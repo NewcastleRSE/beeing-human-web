@@ -3,6 +3,10 @@
   import ViewSelect from "../lib/ViewSelect.svelte";
 
   import { view } from "../stores/viewChoice";
+
+  function handleClick() {
+    alert('Clicked!');
+  }
 </script>
 
 <h1>Bee-ing Human</h1>
@@ -31,7 +35,7 @@
 </ul>
 <InternalLink link="about">About</InternalLink>
 
-<ViewSelect />
+<ViewSelect on:click={handleClick}/>
 <InternalLink link="test" class="btn variant-filled">Go</InternalLink>
 
 <p>{$view}</p>
