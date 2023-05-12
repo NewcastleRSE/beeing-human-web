@@ -2,6 +2,7 @@
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
 
   import { view } from "../stores/viewChoice";
+
 </script>
 
 <RadioGroup>

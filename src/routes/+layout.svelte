@@ -3,7 +3,6 @@
   import { view } from '../stores/viewChoice'
 
   onMount(async () => {
-    console.log($view);
     // Your selected Skeleton theme:
     if ($view === 'literature') {
       await import("@skeletonlabs/skeleton/themes/theme-skeleton.css");
