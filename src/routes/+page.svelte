@@ -4,8 +4,10 @@
 
   import { view } from "../stores/viewChoice";
 
+  import { invalidateAll } from '$app/navigation';
+
   function handleClick() {
-    alert('Clicked!');
+    invalidateAll();
   }
 </script>
 
@@ -36,6 +38,6 @@
 <InternalLink link="about">About</InternalLink>
 
 <ViewSelect on:click={handleClick}/>
-<InternalLink link="test" class="btn variant-filled">Go</InternalLink>
+<InternalLink link="content/{$view}/  " class="btn variant-filled">Go</InternalLink>
 
 <p>{$view}</p>
