@@ -21,6 +21,7 @@
 
 <h2>New update</h2>
 <ul>
+    <li>Page loading based on view transformed to follow sveltekit best practices (preload)</li>
     <li>Extract injecting markdown into a separate component</li>
     <li>Render markdown according to each view</li>
     <li>Making sure the .nojekyll file becomes persistent.</li>
@@ -30,8 +31,8 @@
     <li>Change theme based on selected view</li>
     <li>Error catching:</li>
     <ul>
-        <li>markdown file does not exist</li>
-        <li>view does not exist/could not be selected</li>
+        <li><del>markdown file does not exist</del></li>
+        <li><del>view does not exist/could not be selected</del></li>
         <li>basic layout for dev</li>
     </ul>
 </ul>

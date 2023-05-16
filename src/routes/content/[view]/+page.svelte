@@ -1,10 +1,13 @@
 <script>
     export let data;
-    console.log(data);
+    import InjectMd from "../../../lib/InjectMD.svelte";
 </script>
 
 <h1>View page</h1>
 <h1>{data.view.title}</h1>
-<div>
-    {@html data.view.content}
-</div>
+{#each Object.entries(data.view.sections) as [title, sec]}
+    {#if sec.type === 'md'}
+        <h2>{title}</h2>
+        <InjectMd section = {sec}/>
+    {/if}
+{/each}
