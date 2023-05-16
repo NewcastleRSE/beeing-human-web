@@ -4,8 +4,10 @@
 
   import { view } from "../stores/viewChoice";
 
-  function handleViewChanged(event) {
-    console.log(event.detail.newView);
+  import { invalidateAll } from '$app/navigation';
+
+  function handleClick() {
+    invalidateAll();
   }
 </script>
 
@@ -19,6 +21,7 @@
 
 <h2>New update</h2>
 <ul>
+    <li>Page loading based on view transformed to follow sveltekit best practices (preload)</li>
     <li>Extract injecting markdown into a separate component</li>
     <li>Render markdown according to each view</li>
     <li>Making sure the .nojekyll file becomes persistent.</li>
@@ -28,14 +31,14 @@
     <li>Change theme based on selected view</li>
     <li>Error catching:</li>
     <ul>
-        <li>markdown file does not exist</li>
-        <li>view does not exist/could not be selected</li>
+        <li><del>markdown file does not exist</del></li>
+        <li><del>view does not exist/could not be selected</del></li>
         <li>basic layout for dev</li>
     </ul>
 </ul>
 <InternalLink link="about">About</InternalLink>
 
-<ViewSelect on:viewChanged={handleViewChanged}/>
-<InternalLink link="test" class="btn variant-filled">Go</InternalLink>
+<ViewSelect on:click={handleClick}/>
+<InternalLink link="content/{$view}/  " class="btn variant-filled">Go</InternalLink>
 
 <p>{$view}</p>
