@@ -1,8 +1,8 @@
 <script>
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
+  import { createEventDispatcher } from "svelte";
 
   import { view } from "../stores/viewChoice";
-
 </script>
 
 <RadioGroup>
