@@ -1,6 +1,7 @@
 <script>
     export let data;
     import InjectMd from "../../../lib/InjectMD.svelte";
+    console.log(data);
 </script>
 
 <h1>View page</h1>
