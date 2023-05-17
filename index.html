@@ -7,16 +7,16 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/0.5442b1ba.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/ProgressBar.4f1e9ba5.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.e3b0edd4.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.729723f0.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.0e418277.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.f667b0dd.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.e9d68721.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.4d678d2c.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/paths.583b836b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.24eb2c21.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/app.66654da5.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/0.ed53a8b2.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/2.1e299842.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/InternalLink.b703e26c.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/paths.d866e3e9.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.d9292fe0.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/app.2f320d30.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/0.de2d69b6.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/2.f8326c73.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/InternalLink.0856532a.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/ProgressBar.svelte_svelte_type_style_lang.077146c8.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/viewChoice.8f180d66.js"><!-- HEAD_svelte-1fqad1o_START --><!-- HTML_TAG_START --><script>(function setInitialClassState() {
   const elemHtmlClasses = document.documentElement.classList;
@@ -46,7 +46,8 @@
 </p>
 
 <h2>New update</h2>
-<ul><li>Page loading based on view transformed to follow sveltekit best practices (preload)</li>
+<ul><li>Page loading is now automatically done by simply creating a new md file in the correct location</li>
+    <li>Page loading based on view transformed to follow sveltekit best practices (preload)</li>
     <li>Extract injecting markdown into a separate component</li>
     <li>Render markdown according to each view</li>
     <li>Making sure the .nojekyll file becomes persistent.</li></ul>
@@ -82,7 +83,7 @@
 			
 			<script>
 				{
-					__sveltekit_12wc8hq = {
+					__sveltekit_1xlgepq = {
 						base: new URL(".", location).pathname.slice(0, -1),
 						env: {}
 					};
@@ -92,8 +93,8 @@
 					const data = [null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.e3b0edd4.js"),
-						import("./_app/immutable/entry/app.24eb2c21.js")
+						import("./_app/immutable/entry/start.729723f0.js"),
+						import("./_app/immutable/entry/app.d9292fe0.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2],
