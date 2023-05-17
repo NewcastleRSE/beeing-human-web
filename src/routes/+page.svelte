@@ -21,6 +21,7 @@
 
 <h2>New update</h2>
 <ul>
+    <li>Page loading is now automatically done by simply creating a new md file in the correct location</li>
     <li>Page loading based on view transformed to follow sveltekit best practices (preload)</li>
     <li>Extract injecting markdown into a separate component</li>
     <li>Render markdown according to each view</li>

@@ -1,10 +1,12 @@
 import { views } from '../data.js';
 import { error } from '@sveltejs/kit';
-import { findSectionNameAndType } from '../../../utils/stringManipulation.js';
+import parseMD from 'parse-md';
 
 export async function load({ fetch, params }) {
     let view = views.find((view) => view.slug === params.view);
     let listSections = []
+
+    if (!view) throw error(404, `${params.view} does not exist`);
 
     // get list of sections
     // import.meta.glob does not allow for dynamic variables in the search path, so it needs a switch statement to adjust based on the selected view
@@ -30,31 +32,12 @@ export async function load({ fetch, params }) {
     // iterate through the list of sections and add it to the `data.js` data
     let sections = {}
     for (const path in listSections) {
-        let fields = findSectionNameAndType(path);
-        sections[fields.section] = {type: fields.type, content: listSections[path]};
+        const {metadata, content} = parseMD(listSections[path]);
+        sections[metadata.title] = {...metadata, content: content};
     }
 
     // add section metadata and data to export view
     view['sections'] = sections;
-        
-    // // Get content for each listed section (i.e., fetch the .md file, place it in `data`)
-    // for (let section in view.sections) {
-    //     if (view['sections'][section]['type'] == 'md') {
-    //         let response = await fetch(`${view.slug}/${section}.md`)
-    //         .then(function(response) {
-    //             if (response.ok) {
-    //                 return response.text();
-    //             } else {
-    //                 throw error(404, `'${section}' section does not exist.`)
-    //             }
-    //         }).then(function (data) {
-    //             view['sections'][section]['content'] = data;
-    //         });   
-    //     }
-    // }
-
-
-    if (!view) throw error(404, `${view.slug} does not exist`);
 
     return {
         view

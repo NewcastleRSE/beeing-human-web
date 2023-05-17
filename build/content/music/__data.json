@@ -1,1 +1,0 @@
-{"type":"data","nodes":[null,{"type":"data","data":[{"view":1},{"slug":2,"title":3,"content":4,"sections":5},"music","Music test","This will be a test of music.",{"intro":6},{"type":7,"content":8},"md","This is a _test_ markdown in **music**!\n"],"uses":{"dependencies":["http://sveltekit-prerender/content/music/intro.md"],"params":["view"]}}]}
