@@ -1,6 +1,6 @@
 {
   "name": "beeing-human-web",
-  "version": "0.0.2-1",
+  "version": "0.0.2-2",
   "private": true,
   "scripts": {
     "dev": "vite dev",
@@ -37,6 +37,7 @@
   },
   "type": "module",
   "dependencies": {
+    "parse-md": "^3.0.3",
     "svelte-markdown": "^0.2.3"
   }
 }
