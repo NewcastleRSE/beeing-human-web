@@ -15,4 +15,14 @@ A fuller explanation of how GitHub works is outside the scope of this guide, but
 1. Head over to [https://github.com/](https://github.com/)
 1. Click the `Sign up` button in the top right of the screen
 ![GitHub landing page](./img/register-gh-1.png)
-1.
+1. Follow the instructions on your screen:
+    1. Enter your email address
+    1. Choose a **secure** password
+    1. Choose a username (the first part of your email, for example)
+    1. Choose your communications preference
+1. Open the email address you entered
+1. Copy the code you've been emailed in the corresponding box
+1. Feel free to skip the personalisation steps if you wish
+1. You should see a landing page like this:
+![Github logged in landing page](./img/register-gh-2.png)
+1. You're all done!
