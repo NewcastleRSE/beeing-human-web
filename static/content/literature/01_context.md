@@ -5,4 +5,5 @@ order: 00
 ---
 
 # Context
-This section was added by *simply* adding a `.md` file.
+
+This section was added by _simply_ adding a `.md` file.

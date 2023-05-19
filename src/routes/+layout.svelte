@@ -1,17 +1,17 @@
 <script>
-  import { onMount } from 'svelte';
-  import { view } from '../stores/viewChoice'
+  import { onMount } from "svelte";
+  import { view } from "../stores/viewChoice";
 
   onMount(async () => {
     // Your selected Skeleton theme:
-    if ($view === 'literature') {
+    if ($view === "literature") {
       await import("@skeletonlabs/skeleton/themes/theme-skeleton.css");
-    } else if ($view === 'science') {
-      await import('@skeletonlabs/skeleton/themes/theme-modern.css');
-    } else if ($view === 'music') {
-      await import('@skeletonlabs/skeleton/themes/theme-rocket.css');
-    } else if ($view === 'interdisciplinarity') {
-      await import('@skeletonlabs/skeleton/themes/theme-seasonal.css');
+    } else if ($view === "science") {
+      await import("@skeletonlabs/skeleton/themes/theme-modern.css");
+    } else if ($view === "music") {
+      await import("@skeletonlabs/skeleton/themes/theme-rocket.css");
+    } else if ($view === "interdisciplinarity") {
+      await import("@skeletonlabs/skeleton/themes/theme-seasonal.css");
     }
   });
 

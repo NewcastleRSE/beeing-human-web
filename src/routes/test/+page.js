@@ -1,5 +1,3 @@
-import {view} from '../../stores/viewChoice'
+import { view } from "../../stores/viewChoice";
 
-export function load({ params }) {
-    
-}
+export function load({ params }) {}

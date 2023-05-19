@@ -37,6 +37,8 @@
   },
   "type": "module",
   "dependencies": {
+    "CETEIcean": "^1.8.0",
+    "jsdom": "^22.0.0",
     "parse-md": "^3.0.3",
     "svelte-markdown": "^0.2.3"
   }
