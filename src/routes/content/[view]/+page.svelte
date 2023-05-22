@@ -2,7 +2,6 @@
   export let data;
   import InjectMd from "../../../lib/InjectMD.svelte";
   console.log(data);
-
   
 </script>
 
@@ -17,5 +16,4 @@
 
 {#if data.view.slug === "literature"}
   <h3>Test</h3>
-  {@html data.processedTEI}
 {/if}

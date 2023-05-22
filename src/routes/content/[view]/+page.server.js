@@ -58,24 +58,31 @@ export async function load({ fetch, params }) {
   let jdom = '';
   let processedTEI = '';
   let processedTEIString = '';
+  let teiDoc;
   if (view.slug === 'literature') {
-    testString = await fetch("literature/data/testTEI.xml")
+    testString = await fetch("literature/data/test2.xml")
       .then(function(response) {
         if (response.ok) {
           return response.text();
         }
       });
 
-    jdom = new JSDOM(`<TEI xmlns="http://www.tei-c.org/ns/1.0"><div>test</div></TEI>`, {contentType: 'text/xml'});
-    const teiDoc = jdom.window.document;
-    processedTEI = (new CETEI({documentObject: teiDoc}).domToHTML5(teiDoc));
+    // jdom = new JSDOM(`<TEI xmlns="http://www.tei-c.org/ns/1.0"><div>test</div></TEI>`, {contentType: 'text/xml'});
+    jdom = new JSDOM(testString, {contentType: 'text/xml'});
+    teiDoc = jdom.window.document;
+    
+    const ceteicean = new CETEI({documentObject: teiDoc,});
 
-    console.log(processedTEI.outerHTML);
+    const teiData = ceteicean.preprocess(teiDoc);
+    teiData.setAttribute("data-elements", Array.from(ceteicean.els).join(','));
+    
+    teiDoc.documentElement.replaceWith(teiData);
 
-    processedTEI = JSON.stringify(processedTEI.querySelector('tei-div').outerHTML);
+    teiDoc = jdom.serialize();
+
   }
 
   return {
-    view, processedTEI
+    view, teiDoc
   };
 }
