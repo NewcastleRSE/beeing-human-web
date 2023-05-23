@@ -3,6 +3,7 @@ import { error } from "@sveltejs/kit";
 import parseMD from "parse-md";
 import { JSDOM } from 'jsdom';
 import CETEI from 'CETEIcean';
+import { transformTEI } from "../../../utils/teiOperations.js";
 
 export async function load({ fetch, params }) {
   let view = views.find((view) => view.slug === params.view);
@@ -54,35 +55,21 @@ export async function load({ fetch, params }) {
   view["sections"] = sections;
 
   // TEST CETEICEAN
-  let testString = '';
-  let jdom = '';
-  let processedTEI = '';
-  let processedTEIString = '';
-  let teiDoc;
+  let tei = ''
   if (view.slug === 'literature') {
-    testString = await fetch("literature/data/test2.xml")
+    // Get the content of the TEI file into a string
+    const teiString = await fetch("literature/data/testTEI.xml")
       .then(function(response) {
         if (response.ok) {
           return response.text();
         }
       });
 
-    // jdom = new JSDOM(`<TEI xmlns="http://www.tei-c.org/ns/1.0"><div>test</div></TEI>`, {contentType: 'text/xml'});
-    jdom = new JSDOM(testString, {contentType: 'text/xml'});
-    teiDoc = jdom.window.document;
-    
-    const ceteicean = new CETEI({documentObject: teiDoc,});
-
-    const teiData = ceteicean.preprocess(teiDoc);
-    teiData.setAttribute("data-elements", Array.from(ceteicean.els).join(','));
-    
-    teiDoc.documentElement.replaceWith(teiData);
-
-    teiDoc = jdom.serialize();
+    tei = transformTEI(teiString);
 
   }
 
   return {
-    view, teiDoc
+    view, tei
   };
 }
