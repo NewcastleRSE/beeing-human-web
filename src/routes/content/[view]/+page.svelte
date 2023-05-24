@@ -17,5 +17,5 @@
 
 {#if data.view.slug === "literature"}
   <h3>Test</h3>
-  <TeiDocument doc = {data.tei.content} elements = {data.tei.elements}></TeiDocument>
+  <TeiDocument doc = {data.tei.teiHeader} elements = {data.tei.elements}></TeiDocument>
 {/if}

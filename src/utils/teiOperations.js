@@ -18,5 +18,18 @@ export function transformTEI(teiString) {
     teiDoc.documentElement.replaceWith(teiData);
     const elements = teiDoc.documentElement.getAttribute('data-elements').split(',');
 
-    return {content: jdom.serialize(), elements: elements};
+    const teiHeader = getTEIHeader(teiDoc);
+    // const teiText = getTEIText(teiDoc);
+
+    return {content: jdom.serialize(), elements: elements, teiHeader: teiHeader, /*teiText: teiText*/};
+}
+
+function getTEIHeader(teiDom) {
+    // receives a jdom.window.document object and returns the serialised teiHeader
+    return teiDom.querySelectorAll('tei-teiHeader')[0].outerHTML;
+}
+
+function getTEIText(teiDom) {
+    // receives a jdom.window.document object and returns the serialised text element
+    return teiDom.querySelectorAll('tei-text')[0].outerHTML;
 }

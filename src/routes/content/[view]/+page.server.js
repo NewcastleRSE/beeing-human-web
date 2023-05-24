@@ -58,7 +58,7 @@ export async function load({ fetch, params }) {
   let tei = ''
   if (view.slug === 'literature') {
     // Get the content of the TEI file into a string
-    const teiString = await fetch("literature/data/testTEI.xml")
+    const teiString = await fetch("literature/data/Coopers_hill_1655.xml")
       .then(function(response) {
         if (response.ok) {
           return response.text();
