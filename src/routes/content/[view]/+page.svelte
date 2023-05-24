@@ -2,6 +2,7 @@
   export let data;
   import InjectMd from "../../../lib/InjectMD.svelte";
   import TeiDocument from "../../../lib/TEIDocument.svelte";
+  import CeteiCeanTest from "../../../lib/CETEICeanTest.svelte";
   console.log(data);
   
 </script>
@@ -17,5 +18,6 @@
 
 {#if data.view.slug === "literature"}
   <h3>Test</h3>
-  <TeiDocument doc = {data.tei.teiHeader} elements = {data.tei.elements}></TeiDocument>
+  <!-- <TeiDocument doc = {data.tei.content} elements = {data.tei.elements}></TeiDocument> -->
+  <CeteiCeanTest teiString = {data.tei.teiString}></CeteiCeanTest>
 {/if}

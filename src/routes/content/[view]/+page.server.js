@@ -55,10 +55,11 @@ export async function load({ fetch, params }) {
   view["sections"] = sections;
 
   // TEST CETEICEAN
-  let tei = ''
+  let tei = '';
+  let teiString = '';
   if (view.slug === 'literature') {
     // Get the content of the TEI file into a string
-    const teiString = await fetch("literature/data/Coopers_hill_1655.xml")
+    teiString = await fetch("literature/data/test2.xml")
       .then(function(response) {
         if (response.ok) {
           return response.text();
@@ -70,6 +71,6 @@ export async function load({ fetch, params }) {
   }
 
   return {
-    view, tei
+    view, tei, teiString
   };
 }
