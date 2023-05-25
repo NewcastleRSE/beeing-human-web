@@ -1,15 +1,19 @@
 <script>
-    import CETEI from 'CETEIcean';
     import { onMount } from 'svelte';
 
-    export let teiString = '';
-    let transformed = '';
+    export let path = '';
 
     onMount(async () => {
         var cetei = new CETEI();
-        transformed = cetei.domToHTML5(teiString);
-        console.log(transformed)
+        cetei.getHTML5(path, function(data) {
+            document.getElementById('TEI-container').appendChild(data);
+        });
     })
 </script>
 
-<div></div>
+<svelte:head>
+    <script src="/js/CETEI.js"></script>
+    <link rel="stylesheet" type="text/css" href="/additional-style/TEIstyle.css"/>
+</svelte:head>
+
+<div id='TEI-container'></div>

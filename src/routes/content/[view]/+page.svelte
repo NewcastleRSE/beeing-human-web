@@ -19,5 +19,5 @@
 {#if data.view.slug === "literature"}
   <h3>Test</h3>
   <!-- <TeiDocument doc = {data.tei.content} elements = {data.tei.elements}></TeiDocument> -->
-  <CeteiCeanTest teiString = {data.tei.teiString}></CeteiCeanTest>
+  <CeteiCeanTest path = "/content/literature/data/Coopers_hill_1655.xml"></CeteiCeanTest>
 {/if}

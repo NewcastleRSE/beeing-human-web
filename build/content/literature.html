@@ -4,159 +4,86 @@
     <meta charset="utf-8" />
     <link rel="icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="content-security-policy" content="" />
-    <link href="../_app/immutable/assets/0.5442b1ba.css" rel="stylesheet" />
-    <link
-      href="../_app/immutable/assets/ProgressBar.4f1e9ba5.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="modulepreload"
-      href="../_app/immutable/entry/start.860ae96d.js"
-    />
-    <link
-      rel="modulepreload"
-      href="../_app/immutable/chunks/index.0e418277.js"
-    />
-    <link
-      rel="modulepreload"
-      href="../_app/immutable/chunks/singletons.04b4d720.js"
-    />
-    <link
-      rel="modulepreload"
-      href="../_app/immutable/chunks/index.4d678d2c.js"
-    />
-    <link
-      rel="modulepreload"
-      href="../_app/immutable/chunks/paths.d527816c.js"
-    />
-    <link rel="modulepreload" href="../_app/immutable/entry/app.c99406df.js" />
-    <link rel="modulepreload" href="../_app/immutable/chunks/app.fbf6c1dc.js" />
-    <link rel="modulepreload" href="../_app/immutable/chunks/0.db436a9a.js" />
-    <link rel="modulepreload" href="../_app/immutable/chunks/5.d674a876.js" />
-    <link
-      rel="modulepreload"
-      href="../_app/immutable/chunks/InjectMD.23ce860c.js"
-    />
-    <link
-      rel="modulepreload"
-      href="../_app/immutable/chunks/ProgressBar.svelte_svelte_type_style_lang.077146c8.js"
-    />
-    <!-- HEAD_svelte-1fqad1o_START -->
-    <!-- HTML_TAG_START -->
-    <script>
-      (function setInitialClassState() {
-        const elemHtmlClasses = document.documentElement.classList;
-        const condLocalStorageUserPrefs =
-          localStorage.getItem("modeUserPrefers") === "false";
-        const condLocalStorageUserPrefsExists = !(
-          "modeUserPrefers" in localStorage
-        );
-        const condMatchMedia = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        if (
-          condLocalStorageUserPrefs ||
-          (condLocalStorageUserPrefsExists && condMatchMedia)
-        ) {
-          elemHtmlClasses.add("dark");
-        } else {
-          elemHtmlClasses.remove("dark");
-        }
-      })();
-    </script>
-    <!-- HTML_TAG_END -->
-    <!-- HEAD_svelte-1fqad1o_END -->
+    <meta http-equiv="content-security-policy" content="">
+		<link href="../_app/immutable/assets/0.5442b1ba.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/ProgressBar.4f1e9ba5.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.b0e9e28a.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.56237a7b.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.94055097.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.ef09c2c3.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/paths.d99081c3.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.5db584f1.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/app.1952e755.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/0.765e578e.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/5.ca2813ce.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/InjectMD.d0e06f3e.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/ProgressBar.svelte_svelte_type_style_lang.2e254bba.js"><!-- HEAD_svelte-1fqad1o_START --><!-- HTML_TAG_START --><script>(function setInitialClassState() {
+  const elemHtmlClasses = document.documentElement.classList;
+  const condLocalStorageUserPrefs = localStorage.getItem("modeUserPrefers") === "false";
+  const condLocalStorageUserPrefsExists = !("modeUserPrefers" in localStorage);
+  const condMatchMedia = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if (condLocalStorageUserPrefs || condLocalStorageUserPrefsExists && condMatchMedia) {
+    elemHtmlClasses.add("dark");
+  } else {
+    elemHtmlClasses.remove("dark");
+  }
+})();</script><!-- HTML_TAG_END --><!-- HEAD_svelte-1fqad1o_END --><!-- HEAD_svelte-1x2ryks_START --><script src="/js/CETEI.js"></script><link rel="stylesheet" href="/TEIstyle.css"><!-- HEAD_svelte-1x2ryks_END -->
   </head>
   <body data-sveltekit-preload-data="hover">
     <div style="display: contents">
-      <div
-        class="lightswitch-track cursor-pointer transition-all duration-[200ms] w-12 h-6 ring-[1px] ring-surface-500/30 rounded-token bg-surface-900"
-        role="switch"
-        aria-label="Light Switch"
-        aria-checked="false"
-        title="Toggle Light Mode"
-        tabindex="0"
-      >
-        <div
-          class="lightswitch-thumb aspect-square scale-[0.8] flex justify-center items-center transition-all duration-[200ms] h-6 rounded-token bg-surface-50"
-        >
-          <svg
-            class="lightswitch-icon w-[70%] aspect-square fill-surface-900"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-          >
-            <path
-              d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"
-            ></path>
-          </svg>
-        </div>
-      </div>
 
-      <h1>View page</h1>
-      <h1>Literature test</h1>
-      <h2>Intro</h2>
-      <p>This is a <em>test</em> markdown in <strong>literature</strong>!</p>
-      <h2>Context</h2>
-      <h1 id="context">Context</h1>
-      <p>
-        This section was added by <em>simply</em> adding a
-        <code>.md</code> file.
-      </p>
 
-      <script>
-        {
-          __sveltekit_g2eqz9 = {
-            base: new URL("..", location).pathname.slice(0, -1),
-            env: {},
-          };
 
-          const element = document.currentScript.parentElement;
 
-          const data = [
-            null,
-            {
-              type: "data",
-              data: {
-                view: {
-                  slug: "literature",
-                  title: "Literature test",
-                  content: "This will be a test of literature.",
-                  sections: {
-                    Intro: {
-                      title: "Intro",
-                      type: "md",
-                      order: 0,
-                      content:
-                        "\nThis is a _test_ markdown in **literature**!\n",
-                    },
-                    Context: {
-                      title: "Context",
-                      type: "md",
-                      order: 0,
-                      content:
-                        "\n# Context\nThis section was added by *simply* adding a `.md` file.",
-                    },
-                  },
-                },
-              },
-              uses: { params: ["view"] },
-            },
-          ];
+<div class="lightswitch-track cursor-pointer transition-all duration-[200ms] w-12 h-6 ring-[1px] ring-surface-500/30 rounded-token bg-surface-900 " role="switch" aria-label="Light Switch" aria-checked="false" title="Toggle Light Mode" tabindex="0">
+	<div class="lightswitch-thumb aspect-square scale-[0.8] flex justify-center items-center transition-all duration-[200ms] h-6 rounded-token bg-surface-50 ">
+		<svg class="lightswitch-icon w-[70%] aspect-square fill-surface-900" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg></div></div>
 
-          Promise.all([
-            import("../_app/immutable/entry/start.860ae96d.js"),
-            import("../_app/immutable/entry/app.c99406df.js"),
-          ]).then(([kit, app]) => {
-            kit.start(app, element, {
-              node_ids: [0, 5],
-              data,
-              form: null,
-              error: null,
-            });
-          });
-        }
-      </script>
-    </div>
+<h1>View page</h1>
+<h1>Literature test</h1>
+<h2>Intro</h2>
+    <p>This is a <em>test</em> markdown in <strong>literature</strong>!</p><h2>Context</h2>
+    <h1 id="context">Context</h1><p>This section was added by <em>simply</em> adding a <code>.md</code> file.</p><h2>Adding new content</h2>
+    <h3 id="this-is-just-a-test">This is just a test.</h3><p>Created as part of the <code>add section content guide</code></p>
+
+<h3>Test</h3>
+  
+  
+
+
+<div id="TEI-container">
+
+
+<figure class="progress-radial progress-radial relative overflow-hidden w-36 " data-testid="progress-radial" role="meter" aria-labelledby="" aria-valuenow="0" aria-valuetext="Indeterminate Spinner" aria-valuemin="0" aria-valuemax="100">
+	<svg viewBox="0 0 512 512" class="rounded-full animate-spin"><circle class="progress-radial-track fill-transparent stroke-surface-500/30" stroke-width="40" r="256" cx="50%" cy="50%"></circle><circle class="progress-radial-meter fill-transparent transition-[stroke-dashoffset] duration-200 -rotate-90 origin-[50%_50%] stroke-surface-900 dark:stroke-surface-50" stroke-width="40" r="256" cx="50%" cy="50%" style="stroke-dasharray: 1608.495438637974
+			1608.495438637974; stroke-dashoffset: 1608.495438637974;"></circle></svg></figure></div>
+
+
+			
+			<script>
+				{
+					__sveltekit_12hqvlr = {
+						base: new URL("..", location).pathname.slice(0, -1),
+						env: {}
+					};
+
+					const element = document.currentScript.parentElement;
+
+					const data = [null,{"type":"data","data":{view:{slug:"literature",title:"Literature test",content:"This will be a test of literature.",sections:{Intro:{title:"Intro",type:"md",order:0,content:"\nThis is a _test_ markdown in **literature**!\n"},Context:{title:"Context",type:"md",order:0,content:"\n# Context\n\nThis section was added by _simply_ adding a `.md` file.\n"},"Adding new content":{title:"Adding new content",type:"md",order:2,content:"\n### This is just a test.\n\nCreated as part of the `add section content guide`\n"}}},tei:{content:"\u003Ctei-TEI data-xmlns=\"http:\u002F\u002Fwww.tei-c.org\u002Fns\u002F1.0\" data-origname=\"TEI\" data-origatts=\"xmlns\" data-elements=\"tei:teiHeader,tei:fileDesc,tei:titleStmt,tei:title,tei:publicationStmt,tei:p,tei:sourceDesc,tei:encondingDesc,tei:tagsDecl,tei:rendition,tei:text,tei:body,tei:div,tei:TEI\"\u003E\n    \u003Ctei-teiHeader data-origname=\"teiHeader\"\u003E\n        \u003Ctei-fileDesc data-origname=\"fileDesc\"\u003E\n            \u003Ctei-titleStmt data-origname=\"titleStmt\"\u003E\n                \u003Ctei-title data-origname=\"title\"\u003EThis is a test\u003C\u002Ftei-title\u003E\n            \u003C\u002Ftei-titleStmt\u003E\n            \u003Ctei-publicationStmt data-origname=\"publicationStmt\"\u003E\n                \u003Ctei-p data-origname=\"p\"\u003ESomething about the publication\u003C\u002Ftei-p\u003E\n            \u003C\u002Ftei-publicationStmt\u003E\n            \u003Ctei-sourceDesc data-origname=\"sourceDesc\"\u003E\n                \u003Ctei-p data-origname=\"p\"\u003EBorn digital\u003C\u002Ftei-p\u003E\n            \u003C\u002Ftei-sourceDesc\u003E\n        \u003C\u002Ftei-fileDesc\u003E\n        \u003Ctei-encondingDesc data-origname=\"encondingDesc\"\u003E\n            \u003Ctei-tagsDecl data-origname=\"tagsDecl\"\u003E\u003Cstyle\u003E.null{\nfont-style: italic;\n}\n\u003C\u002Fstyle\u003E\n                \u003Ctei-rendition scheme=\"css\" data-origname=\"rendition\" data-origatts=\"scheme\"\u003Efont-style: italic;\u003C\u002Ftei-rendition\u003E\n            \u003C\u002Ftei-tagsDecl\u003E\n        \u003C\u002Ftei-encondingDesc\u003E\n    \u003C\u002Ftei-teiHeader\u003E\n    \u003Ctei-text data-origname=\"text\"\u003E\n        \u003Ctei-body data-origname=\"body\"\u003E\n            \u003Ctei-div data-origname=\"div\"\u003Etest\u003C\u002Ftei-div\u003E\n        \u003C\u002Ftei-body\u003E\n    \u003C\u002Ftei-text\u003E\n\u003C\u002Ftei-TEI\u003E",elements:["tei:teiHeader","tei:fileDesc","tei:titleStmt","tei:title","tei:publicationStmt","tei:p","tei:sourceDesc","tei:encondingDesc","tei:tagsDecl","tei:rendition","tei:text","tei:body","tei:div","tei:TEI"],teiHeader:"\u003Ctei-teiHeader data-origname=\"teiHeader\"\u003E\n        \u003Ctei-fileDesc data-origname=\"fileDesc\"\u003E\n            \u003Ctei-titleStmt data-origname=\"titleStmt\"\u003E\n                \u003Ctei-title data-origname=\"title\"\u003EThis is a test\u003C\u002Ftei-title\u003E\n            \u003C\u002Ftei-titleStmt\u003E\n            \u003Ctei-publicationStmt data-origname=\"publicationStmt\"\u003E\n                \u003Ctei-p data-origname=\"p\"\u003ESomething about the publication\u003C\u002Ftei-p\u003E\n            \u003C\u002Ftei-publicationStmt\u003E\n            \u003Ctei-sourceDesc data-origname=\"sourceDesc\"\u003E\n                \u003Ctei-p data-origname=\"p\"\u003EBorn digital\u003C\u002Ftei-p\u003E\n            \u003C\u002Ftei-sourceDesc\u003E\n        \u003C\u002Ftei-fileDesc\u003E\n        \u003Ctei-encondingDesc data-origname=\"encondingDesc\"\u003E\n            \u003Ctei-tagsDecl data-origname=\"tagsDecl\"\u003E\u003Cstyle\u003E.null{\nfont-style: italic;\n}\n\u003C\u002Fstyle\u003E\n                \u003Ctei-rendition scheme=\"css\" data-origname=\"rendition\" data-origatts=\"scheme\"\u003Efont-style: italic;\u003C\u002Ftei-rendition\u003E\n            \u003C\u002Ftei-tagsDecl\u003E\n        \u003C\u002Ftei-encondingDesc\u003E\n    \u003C\u002Ftei-teiHeader\u003E"},teiString:"\u003CTEI xmlns=\"http:\u002F\u002Fwww.tei-c.org\u002Fns\u002F1.0\"\u003E\n    \u003CteiHeader\u003E\n        \u003CfileDesc\u003E\n            \u003CtitleStmt\u003E\n                \u003Ctitle\u003EThis is a test\u003C\u002Ftitle\u003E\n            \u003C\u002FtitleStmt\u003E\n            \u003CpublicationStmt\u003E\n                \u003Cp\u003ESomething about the publication\u003C\u002Fp\u003E\n            \u003C\u002FpublicationStmt\u003E\n            \u003CsourceDesc\u003E\n                \u003Cp\u003EBorn digital\u003C\u002Fp\u003E\n            \u003C\u002FsourceDesc\u003E\n        \u003C\u002FfileDesc\u003E\n        \u003CencondingDesc\u003E\n            \u003CtagsDecl\u003E\n                \u003Crendition scheme=\"css\"\u003Efont-style: italic;\u003C\u002Frendition\u003E\n            \u003C\u002FtagsDecl\u003E\n        \u003C\u002FencondingDesc\u003E\n    \u003C\u002FteiHeader\u003E\n    \u003Ctext\u003E\n        \u003Cbody\u003E\n            \u003Cdiv\u003Etest\u003C\u002Fdiv\u003E\n        \u003C\u002Fbody\u003E\n    \u003C\u002Ftext\u003E\n\u003C\u002FTEI\u003E"},"uses":{"dependencies":["http://sveltekit-prerender/content/literature/data/test2.xml"],"params":["view"]}}];
+
+					Promise.all([
+						import("../_app/immutable/entry/start.b0e9e28a.js"),
+						import("../_app/immutable/entry/app.5db584f1.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 5],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
   </body>
 </html>
