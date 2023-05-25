@@ -4,6 +4,7 @@
     import { onMount } from 'svelte';
     import CETEI from 'CETEIcean';
     import { ProgressRadial } from '@skeletonlabs/skeleton';
+    import { base } from "$app/paths";
 
     let loaded = false;
     export let path = '';
@@ -18,7 +19,7 @@
 </script>
 
 <svelte:head>
-    <link rel="stylesheet" type="text/css" href="/additional-style/TEIstyle.css"/>
+    <link rel="stylesheet" type="text/css" href="{base}/additional-style/TEIstyle.css"/>
 </svelte:head>
 
 <div id='TEI-container'>
