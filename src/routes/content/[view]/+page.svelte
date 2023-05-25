@@ -2,7 +2,7 @@
   export let data;
   import InjectMd from "../../../lib/InjectMD.svelte";
   import TeiDocument from "../../../lib/TEIDocument.svelte";
-  import SimpleTei from "../../../lib/SimpleTEI.svelte";
+  import TEISimple from "../../../lib/TEISimple.svelte";
   console.log(data);
   
 </script>
@@ -19,5 +19,5 @@
 {#if data.view.slug === "literature"}
   <h3>Test</h3>
   <!-- <TeiDocument doc = {data.tei.content} elements = {data.tei.elements}></TeiDocument> -->
-  <SimpleTei path = "/content/literature/data/Coopers_hill_1655.xml"/>
+  <TEISimple path = "/content/literature/data/Coopers_hill_1655.xml"/>
 {/if}

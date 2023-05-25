@@ -55,22 +55,23 @@ export async function load({ fetch, params }) {
   view["sections"] = sections;
 
   // TEST CETEICEAN
-  let tei = '';
-  let teiString = '';
-  if (view.slug === 'literature') {
-    // Get the content of the TEI file into a string
-    teiString = await fetch("literature/data/test2.xml")
-      .then(function(response) {
-        if (response.ok) {
-          return response.text();
-        }
-      });
+  // This would be necessary for a more granular approach to implement CETEIcean, but is not needed for the simple approach;
+  // let tei = '';
+  // let teiString = '';
+  // if (view.slug === 'literature') {
+  //   // Get the content of the TEI file into a string
+  //   teiString = await fetch("literature/data/test2.xml")
+  //     .then(function(response) {
+  //       if (response.ok) {
+  //         return response.text();
+  //       }
+  //     });
 
-    tei = transformTEI(teiString);
+  //   tei = transformTEI(teiString);
 
-  }
+  // }
 
   return {
-    view, tei, teiString
+    view /*, tei, teiString */
   };
 }

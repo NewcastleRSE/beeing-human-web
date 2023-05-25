@@ -1,3 +1,5 @@
+<!-- This is the beginning of a possible implementation that would take a more granular approach than the naive CEITEICEAN implementation currently working. It would essentially create a svelte element for each TEI custom element, and build a document from that, rather than load the CETEICEAN library on the client and make the transformation there. -->
+
 <script>
     import { defineCustomElement } from 'CETEIcean/utilities.js';
     import TeiElement from './TEIElement.svelte';
