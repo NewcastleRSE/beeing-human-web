@@ -5,4 +5,4 @@
 
 <h1>{$view}</h1>
 
-<InjectMd chosenView={$view} section='intro'/>
+<InjectMd chosenView={$view} section="intro" />

@@ -1,0 +1,25 @@
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>This is a test</title>
+            </titleStmt>
+            <publicationStmt>
+                <p>Something about the publication</p>
+            </publicationStmt>
+            <sourceDesc>
+                <p>Born digital</p>
+            </sourceDesc>
+        </fileDesc>
+        <encondingDesc>
+            <tagsDecl>
+                <rendition scheme="css">font-style: italic;</rendition>
+            </tagsDecl>
+        </encondingDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <div>test</div>
+        </body>
+    </text>
+</TEI>
