@@ -4,6 +4,7 @@
   import TeiDocument from "../../../lib/TEIDocument.svelte";
   import TEISimple from "../../../lib/TEISimple.svelte";
   import { base } from "$app/paths";
+  import AudioPlayer from "../../../lib/AudioPlayer.svelte";
   console.log(data);
   
 </script>
@@ -21,4 +22,7 @@
   <h3>Test</h3>
   <!-- <TeiDocument doc = {data.tei.content} elements = {data.tei.elements}></TeiDocument> -->
   <TEISimple path = "{base}/content/literature/data/Coopers_hill_1655.xml"/>
+{:else if data.view.slug === 'music'}
+  <h3>Music</h3>
+  <AudioPlayer audioPath = "{base}/content/music/media/virtualbarbershop.mp3"/>
 {/if}
