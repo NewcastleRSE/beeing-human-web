@@ -1,9 +1,6 @@
 import { views } from "../data.js";
 import { error } from "@sveltejs/kit";
 import parseMD from "parse-md";
-import { JSDOM } from 'jsdom';
-import CETEI from 'CETEIcean';
-import { transformTEI } from "../../../utils/teiOperations.js";
 
 export async function load({ fetch, params }) {
   let view = views.find((view) => view.slug === params.view);
