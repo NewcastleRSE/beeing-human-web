@@ -8,6 +8,7 @@ describe("InjectMD component", () => {
 
     it('should be able to mount the component', () => {
         const container = render(InjectMD);
+        console.log(container);
         expect(container).toBeTruthy();
     });
 
