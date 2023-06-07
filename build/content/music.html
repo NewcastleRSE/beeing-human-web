@@ -4,20 +4,21 @@
     <meta charset="utf-8" />
     <link rel="icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="content-security-policy" content="">
-		<link href="../_app/immutable/assets/0.6a6ff1b1.css" rel="stylesheet">
+    
+		<link href="../_app/immutable/assets/0.d0a8fff9.css" rel="stylesheet">
 		<link href="../_app/immutable/assets/ProgressBar.4f1e9ba5.css" rel="stylesheet">
-		<link rel="modulepreload" href="../_app/immutable/entry/start.684b9f24.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/index.0341ea25.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.5c41597a.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/index.92b80747.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/paths.2fa10757.js">
-		<link rel="modulepreload" href="../_app/immutable/entry/app.b303947d.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/app.d9ec71e3.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/0.3bf5834c.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/5.6112c5e5.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/InjectMD.a7083924.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/ProgressBar.svelte_svelte_type_style_lang.ac08d840.js"><!-- HEAD_svelte-1fqad1o_START --><!-- HTML_TAG_START --><script>(function setInitialClassState() {
+		<link rel="modulepreload" href="../_app/immutable/entry/start.b86133ca.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.b4c0a2ee.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.d399ed2a.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.c3f56ca0.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/paths.eb67e631.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.c58ab13c.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/preload-helper.41c905a7.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/0.65ad1841.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/viewChoice.7f9dbe2c.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/ProgressBar.svelte_svelte_type_style_lang.fe7672a9.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/5.19f15072.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/InjectMD.9af2ae20.js"><!-- HEAD_svelte-qwgpj2_START --><!-- HTML_TAG_START --><script nonce="%sveltekit.nonce%">(function setInitialClassState() {
   const elemHtmlClasses = document.documentElement.classList;
   const condLocalStorageUserPrefs = localStorage.getItem("modeUserPrefers") === "false";
   const condLocalStorageUserPrefsExists = !("modeUserPrefers" in localStorage);
@@ -27,7 +28,7 @@
   } else {
     elemHtmlClasses.remove("dark");
   }
-})();</script><!-- HTML_TAG_END --><!-- HEAD_svelte-1fqad1o_END -->
+})();</script><!-- HTML_TAG_END --><!-- HEAD_svelte-qwgpj2_END -->
   </head>
   <body data-sveltekit-preload-data="hover">
     <div style="display: contents">
@@ -42,8 +43,12 @@
 <h1>View page</h1>
 <h1>Music test</h1>
 <h2>Intro</h2>
-    <p>This is a <em>test</em> markdown in <strong>music</strong>!</p><h2>Another Testing Section</h2>
-    <p>Adding another file to make sure ordering works</p>
+    
+
+<p>This is a <em>test</em> markdown in <strong>music</strong>!</p><h2>Another Testing Section</h2>
+    
+
+<p>Adding another file to make sure ordering works</p>
 
 <h3>Music</h3>
   <audio controls><source src="/content/music/media/virtualbarbershop.mp3" type="audio/mpeg"></audio>
@@ -52,18 +57,18 @@
 			
 			<script>
 				{
-					__sveltekit_iujtyz = {
+					__sveltekit_15ndcmp = {
 						base: new URL("..", location).pathname.slice(0, -1),
 						env: {}
 					};
 
 					const element = document.currentScript.parentElement;
 
-					const data = [null,{"type":"data","data":{view:{slug:"music",title:"Music test",content:"This will be a test of music.",sections:{Intro:{title:"Intro",type:"md",order:0,content:"\r\nThis is a _test_ markdown in **music**!\r\n"},"Another Testing Section":{title:"Another Testing Section",type:"md",order:1,testProperty:"something in this property",content:"\r\nAdding another file to make sure ordering works\r\n"}}}},"uses":{"params":["view"]}}];
+					const data = [null,{"type":"data","data":{view:{slug:"music",title:"Music test",content:"This will be a test of music.",sections:{Intro:{title:"Intro",type:"md",order:0,content:"\nThis is a _test_ markdown in **music**!\n"},"Another Testing Section":{title:"Another Testing Section",type:"md",order:1,testProperty:"something in this property",content:"\nAdding another file to make sure ordering works\n"}}}},"uses":{"params":["view"]}}];
 
 					Promise.all([
-						import("../_app/immutable/entry/start.684b9f24.js"),
-						import("../_app/immutable/entry/app.b303947d.js")
+						import("../_app/immutable/entry/start.b86133ca.js"),
+						import("../_app/immutable/entry/app.c58ab13c.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 5],

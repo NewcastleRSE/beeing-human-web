@@ -6,6 +6,7 @@ const config = {
   },
   testDir: "tests",
   testMatch: /(.+\.)?(test|spec)\.[jt]s/,
+  testIgnore: '/components/*'
 };
 
 export default config;
