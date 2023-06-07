@@ -6,5 +6,8 @@ export default defineConfig({
   test: {
     include: ["src/**/*.{test,spec}.{js,ts}", "tests/components/*.{test,spec}.{js,ts}"],
     environment: 'jsdom',
+    alias: [
+      { find: /^svelte$/, replacement: "svelte/internal" }
+    ],
   },
 });

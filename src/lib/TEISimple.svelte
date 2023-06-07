@@ -45,7 +45,7 @@
     <link rel="stylesheet" type="text/css" href="{base}/additional-style/TEIstyle.css"/>
 </svelte:head>
 
-<div id='TEI-container'>
+<div id='TEI-container' data-testid="TEI-container">
     {#if !loaded}
         <ProgressRadial/>
     {/if}
