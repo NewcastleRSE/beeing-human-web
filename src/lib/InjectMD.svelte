@@ -1,15 +1,24 @@
 <script>
-  import { onMount } from "svelte";
   import { ProgressRadial } from "@skeletonlabs/skeleton";
   import SvelteMarkdown from "svelte-markdown";
 
-  export let section;
+  export let content = undefined;
 
-  let mdString = section.content;
+  
 </script>
 
-{#if mdString === ""}
+<!-- 
+  @component
+  This component creates a progress radial while waiting for a md string to be fetched from a file
+
+  Usage:
+  ```
+  <InjectMD content = 'This string contains **markdown** syntax'/>
+  ```
+-->
+
+{#if content === undefined}
   <ProgressRadial value={undefined} />
 {:else}
-  <SvelteMarkdown source={mdString} />
+  <SvelteMarkdown source={content} />
 {/if}

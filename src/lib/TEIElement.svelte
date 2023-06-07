@@ -1,4 +1,7 @@
-<!-- Component to create a named custom tei- element -->
+<!--
+    @component
+    Component to create a named custom tei- element 
+-->
 
 <script>
     export let element = '';

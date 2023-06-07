@@ -53,5 +53,3 @@
 <InternalLink link="content/{$view}/  " class="btn variant-filled"
   >Go</InternalLink
 >
-
-<p>{$view}</p>

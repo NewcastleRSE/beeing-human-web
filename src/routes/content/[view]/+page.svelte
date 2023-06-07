@@ -1,7 +1,6 @@
 <script>
   export let data;
   import InjectMd from "../../../lib/InjectMD.svelte";
-  import TeiDocument from "../../../lib/TEIDocument.svelte";
   import TEISimple from "../../../lib/TEISimple.svelte";
   import { base } from "$app/paths";
   import AudioPlayer from "../../../lib/AudioPlayer.svelte";
@@ -14,7 +13,7 @@
 {#each Object.entries(data.view.sections) as [title, sec]}
   {#if sec.type === "md"}
     <h2>{title}</h2>
-    <InjectMd section={sec} />
+    <InjectMd content={sec.content} />
   {/if}
 {/each}
 
