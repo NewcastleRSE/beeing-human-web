@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [dev]
 jobs:
-  test:
+  E2E-playwright-test-suite:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:

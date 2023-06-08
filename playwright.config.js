@@ -6,7 +6,11 @@ const config = {
   },
   testDir: "tests",
   testMatch: /(.+\.)?(test|spec)\.[jt]s/,
-  testIgnore: '/components/*'
+  testIgnore: '/components/*',
+  // Run all tests in parallel.
+  fullyParallel: true,
+  // Reporter to use
+  reporter: 'html',
 };
 
 export default config;
