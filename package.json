@@ -6,7 +6,7 @@
     "dev": "vite dev",
     "build": "npm run clean && vite build",
     "preview": "vite preview",
-    "test": "playwright test",
+    "test": "playwright test --ui",
     "test:unit": "vitest --ui",
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "format": "prettier --plugin-search-dir . --write .",
