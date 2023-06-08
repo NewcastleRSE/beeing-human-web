@@ -11,6 +11,10 @@ const config = {
   fullyParallel: true,
   // Reporter to use
   reporter: 'html',
+  retries: 1,
+  use: {
+    trace: 'on-first-retry',
+  },
 };
 
 export default config;
