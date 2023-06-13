@@ -7,7 +7,13 @@
 <script>
     import { onMount } from "svelte";
     import verovio from 'verovio';
-    import MidiPlayer from "./MIDIPlayer.svelte";
+    // import MidiPlayer from "./MIDIPlayer.svelte";
+    import MidiPlayerSimple from "./MIDIPlayerSimple.svelte";
+    import { ProgressRadial } from '@skeletonlabs/skeleton'
+    
+    let midiString = '';
+    let base64midi = '';
+    let ready = false;
 
     onMount(async () => {
         verovio.module.onRuntimeInitialized = function () {
@@ -25,8 +31,9 @@
                 .then((meiXML) => {
                     let svg = vrvToolkit.renderData(meiXML, {});
                     document.getElementById("MEI-container").innerHTML = svg;
-                    let base64midi = vrvToolkit.renderToMidi();
-                    let midiString = 'data:audio/midi;base64,' + base64midi;
+                    base64midi = vrvToolkit.renderToMIDI();
+                    midiString = 'data:audio/midi;base64,' + base64midi;
+                    ready = true;
                 });
         }
 
@@ -35,5 +42,13 @@
 </script>
 
 <div id="MEI-container" data-testid="MEI-Container">
+    {#if !ready}
+        <ProgressRadial/>
+    {/if}
 </div>
-<MidiPlayer midiFile = midiString/>
+{#if !base64midi}
+    <p>Not ready yet!</p>
+{:else}
+    <!-- <MidiPlayer midiFile = {base64midi}/> -->
+    <MidiPlayerSimple midiFile = {midiString}/>
+{/if}
