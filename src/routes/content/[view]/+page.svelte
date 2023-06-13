@@ -4,7 +4,8 @@
   import TEISimple from "../../../lib/TEISimple.svelte";
   import { base } from "$app/paths";
   import AudioPlayer from "../../../lib/AudioPlayer.svelte";
-  import MeiSimple from "../../../lib/MEISimple.svelte"; 
+  console.log(data);
+  
 </script>
 
 <h1>View page</h1>
@@ -23,5 +24,4 @@
 {:else if data.view.slug === 'music'}
   <h3>Music</h3>
   <AudioPlayer audioPath = "{base}/content/music/media/virtualbarbershop.mp3"/>
-  <MeiSimple></MeiSimple>
 {/if}
