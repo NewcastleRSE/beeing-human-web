@@ -1,7 +1,9 @@
 import { views } from "../data.js";
 import { error } from "@sveltejs/kit";
 import parseMD from "parse-md";
-import verovio from 'verovio';
+// import verovio from 'verovio';
+import createVerovioModule from 'verovio/wasm';
+import {VerovioToolkit} from 'verovio/esm';
 
 export async function load({ fetch, params }) {
   let view = views.find((view) => view.slug === params.view);
@@ -75,38 +77,42 @@ export async function load({ fetch, params }) {
   let meiMidi = '';
   let mei = {};
   if (view.slug === 'music') {
-    // Start verovio toolkit
-    const vTk = new verovio.toolkit();
-    
-    // Set default options for the toolkit
-    vTk.setOptions({
-      scale: 30,
-    });
-
     // fetch MEI file, convert to string;
     meiString = await fetch('music/data/CRIM_Model_0001.mei')
       .then(function(response) {
         if (response.ok) {
           return response.text();
         };
+    });
+    
+    // Perform Verovio operations
+    createVerovioModule().then(VerovioModule => {
+
+      // Start new toolkit
+      const vTk = new VerovioToolkit(VerovioModule);
+    
+      // Set default options for the toolkit
+      vTk.setOptions({
+        scale: 30,
       });
 
-    let loaded = vTk.loadData(meiString);
-    if (loaded) {
-      let nrPages = vTk.getPageCount();
-      for (let page = 1; page <= nrPages; page++) {
-        let meiPage = vTk.renderToSVG(page);
-        meiSvg.push(meiPage);
-      }
+      let loaded = vTk.loadData(meiString);
+      if (loaded) {
+        let nrPages = vTk.getPageCount();
+        for (let page = 1; page <= nrPages; page++) {
+          let meiPage = vTk.renderToSVG(page);
+          meiSvg.push(meiPage);
+        }
       let base64midi = vTk.renderToMIDI();
       meiMidi = 'data:audio/midi;base64,' + base64midi;
-    }
-    if (meiSvg.length > 0) {
-      mei.svg = meiSvg;
-      mei.midi = meiMidi
-      view["mei"] = {...mei};
-    }
+      }
 
+      if (meiSvg.length > 0) {
+        mei.svg = meiSvg;
+        mei.midi = meiMidi
+        view["mei"] = {...mei};
+      }
+    });
   }
 
   return {
