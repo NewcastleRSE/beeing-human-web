@@ -86,33 +86,31 @@ export async function load({ fetch, params }) {
     });
     
     // Perform Verovio operations
-    createVerovioModule().then(VerovioModule => {
-
-      // Start new toolkit
-      const vTk = new VerovioToolkit(VerovioModule);
+    let VerovioModule = await createVerovioModule();
+    // Start new toolkit
+    const vTk = new VerovioToolkit(VerovioModule);
     
-      // Set default options for the toolkit
-      vTk.setOptions({
-        scale: 30,
-      });
-
-      let loaded = vTk.loadData(meiString);
-      if (loaded) {
-        let nrPages = vTk.getPageCount();
-        for (let page = 1; page <= nrPages; page++) {
-          let meiPage = vTk.renderToSVG(page);
-          meiSvg.push(meiPage);
-        }
-      let base64midi = vTk.renderToMIDI();
-      meiMidi = 'data:audio/midi;base64,' + base64midi;
-      }
-
-      if (meiSvg.length > 0) {
-        mei.svg = meiSvg;
-        mei.midi = meiMidi
-        view["mei"] = {...mei};
-      }
+    // Set default options for the toolkit
+    vTk.setOptions({
+      scale: 30,
     });
+
+    let loaded = vTk.loadData(meiString);
+    if (loaded) {
+      let nrPages = vTk.getPageCount();
+      for (let page = 1; page <= nrPages; page++) {
+        let meiPage = vTk.renderToSVG(page);
+        meiSvg.push(meiPage);
+      }
+    let base64midi = vTk.renderToMIDI();
+    meiMidi = 'data:audio/midi;base64,' + base64midi;
+    }
+
+    if (meiSvg.length > 0) {
+      mei.svg = meiSvg;
+      mei.midi = meiMidi
+      view["mei"] = {...mei};
+    }
   }
 
   return {
