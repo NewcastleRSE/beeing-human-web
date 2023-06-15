@@ -1,9 +1,8 @@
 import { views } from "../data.js";
 import { error } from "@sveltejs/kit";
 import parseMD from "parse-md";
-// import verovio from 'verovio';
-import createVerovioModule from 'verovio/wasm';
-import {VerovioToolkit} from 'verovio/esm';
+import { loadMei } from "../../../utils/loadFunctions.js";
+
 
 export async function load({ fetch, params }) {
   let view = views.find((view) => view.slug === params.view);
@@ -72,43 +71,19 @@ export async function load({ fetch, params }) {
   // }
 
   // Load MEI if in the music view
-  let meiSvg = [];
-  let meiString = '';
-  let meiMidi = '';
-  let mei = {};
   if (view.slug === 'music') {
     // fetch MEI file, convert to string;
-    meiString = await fetch('music/data/CRIM_Model_0001.mei')
-      .then(function(response) {
+    let meiString = await fetch('music/data/CRIM_Model_0001.mei')
+    .then(function(response) {
         if (response.ok) {
-          return response.text();
+        return response.text();
         };
     });
-    
-    // Perform Verovio operations
-    let VerovioModule = await createVerovioModule();
-    // Start new toolkit
-    const vTk = new VerovioToolkit(VerovioModule);
-    
-    // Set default options for the toolkit
-    vTk.setOptions({
-      scale: 30,
-    });
+    // load mei into verovio, generate SVG and MIDI
+    let mei = await loadMei(meiString);
 
-    let loaded = vTk.loadData(meiString);
-    if (loaded) {
-      let nrPages = vTk.getPageCount();
-      for (let page = 1; page <= nrPages; page++) {
-        let meiPage = vTk.renderToSVG(page);
-        meiSvg.push(meiPage);
-      }
-    let base64midi = vTk.renderToMIDI();
-    meiMidi = 'data:audio/midi;base64,' + base64midi;
-    }
-
-    if (meiSvg.length > 0) {
-      mei.svg = meiSvg;
-      mei.midi = meiMidi
+    // if the transformation was successful, add mei to data.view
+    if (mei) {
       view["mei"] = {...mei};
     }
   }
