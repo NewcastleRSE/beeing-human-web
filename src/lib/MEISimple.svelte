@@ -13,12 +13,14 @@
 
 <script>
     import MidiPlayerSimple from "./MIDIPlayerSimple.svelte";
+    import MIDIPlayer from "./MIDIPlayer.svelte";
 
     export let meiSvg = undefined;
     export let meiMidi = undefined;
 </script>
 
-<MidiPlayerSimple midiFile = {meiMidi}/>
+<!-- <MidiPlayerSimple midiFile = {meiMidi}/> -->
+<MIDIPlayer midiFile = {meiMidi}/>
 <div id="MEI-container">
     {#each meiSvg as page}
         {@html page}

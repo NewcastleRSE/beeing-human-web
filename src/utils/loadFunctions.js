@@ -1,16 +1,18 @@
 import createVerovioModule from 'verovio/wasm';
 import {VerovioToolkit} from 'verovio/esm';
 
-export async function loadMei(meiString) {
+export async function loadMei(meiString, arrBuff = false) {
     /**
      * Function takes an MEI file as a string and returns the generated SVG(array) and MIDI(string base64) in an object
     * @param {string} meiString - an MEI file as a string
+    * @param {boolean} arrBuff - flag to output the MIDI file as an array buffer. False by default.
     */
 
     // Initialise variables
     let meiSvg = [];
     let meiMidi = '';
     let mei = {};
+    let base64midi = '';
     
     // waits for the creation of the Verovio Module
     let VerovioModule = await createVerovioModule();
@@ -38,14 +40,18 @@ export async function loadMei(meiString) {
         }
 
         // render the mei into a base64 string, add the necessary header
-        let base64midi = vTk.renderToMIDI();
-        meiMidi = 'data:audio/midi;base64,' + base64midi;
+        base64midi = vTk.renderToMIDI();
     }
 
     // if the engraving was successful, build and return the mei object
     if (meiSvg.length > 0) {
         mei.svg = meiSvg;
-        mei.midi = meiMidi;
+        if (arrBuff) {
+            mei.midi = base64midi;
+        } else {
+            meiMidi = 'data:audio/midi;base64,' + base64midi;
+            mei.midi = meiMidi;
+        }
         return mei;
     } else {
         return false;
