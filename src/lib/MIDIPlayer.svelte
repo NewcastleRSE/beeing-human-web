@@ -14,7 +14,7 @@
 <script>
     import MidiPlayer from 'midi-player-js';
     import Icon from '@iconify/svelte';
-    import { RangeSlider } from '@skeletonlabs/skeleton';
+    import { RangeSlider, ProgressRadial, SlideToggle } from '@skeletonlabs/skeleton';
     import { onMount } from 'svelte';
 
     import {Soundfont} from 'smplr';
@@ -27,6 +27,9 @@
     let instruments = [];
     let totalTime = 0;
     let currentTime = 0;
+    let loaded = false;
+    // initialise data object for voices
+    let voicesDict = []
 
     const startPlay = function() {
         if (Player.isPlaying()) {
@@ -53,6 +56,14 @@
     const playNote = function(event) {
         context.resume();
         // in the example file, stopped notes have velocity = 0, this might need to be readjusted
+
+        // disable all voices that have been turned off -- this is needed if the user skips to a certain time after enabling or disabling voices
+        for (const voice in voicesDict) {
+            if (!voicesDict[voice]['playing']) {
+                Player.tracks[parseInt(voice) + 1].disable();
+            }
+        }
+
         if (event.name == 'Note on' && event.velocity > 0) {
             // playable tracks start at index 1, instruments at index 0, but track 1 does not have a playable instrument -- this might need to be adjusted for the real case;
             instruments[event.track - 2].start({note: event.noteName, velocity: event.velocity});
@@ -62,7 +73,6 @@
     }
 
     const skipTo = async function() {
-        // function works but is a bit flaky -- need to await the result of skip to restart
         if (Player.isPlaying()) {
             stopInstruments();
             await Player.stop();
@@ -70,37 +80,73 @@
             startPlay();
         } else {
             Player.skipToSeconds(currentTime);
-            console.log('here');
+        }
+    }
+
+    const toggleVoice = function () {
+        // splits the index and name in the prop name of the SlideToggle
+        // this.name is in the format [int]-name
+        const indexName = this.name.split('-')
+
+        if (!voicesDict[parseInt(indexName[0])]['playing']) {
+            instruments[parseInt(indexName[0])].stop();
+            Player.tracks[parseInt(indexName[0]) + 1].disable();
+        } else {
+            Player.tracks[parseInt(indexName[0]) + 1].enable();
         }
     }
 
     onMount(async ()=> {
-        // start player
+        // # start player
         Player = new MidiPlayer.Player((event) => playNote(event));
-        // let buffer = base64ToBuffer(midiFile);
-        // Player.loadArrayBuffer(buffer);
+        
+        // # Load midi file
         Player.loadDataUri(midiFile);
         totalTime = Player.getSongTime();
         
-        // create audio context
+        // # create audio context
         context = new AudioContext();
 
-        // load instrument per track
-        let nrInstruments = Player.tracks.length - 1
-        for (let i = 0; i < nrInstruments; i++) {
-            let instrument = await new Soundfont(context, {
-                instrument: 'church_organ'
-                // instrument: 'acoustic_grand_piano'
-            }).loaded();
-            instruments.push(instrument);
-        };
+        // # Find voices list and load instruments
+        
+        // get list of events (one track for each voice, plus one track with playback information (eventList[0]))
+        let eventList = Player.getEvents();
 
-        // update current play time
+        // initialise object with chosen samples for each voice -- this needs to be updated manually to reflect the names of each voice and the chosen instrument from https://gleitz.github.io/midi-js-soundfonts/MusyngKite/names.json
+        const instrumentsChosen = {
+            'Superius': 'violin',
+            'Contratenor': 'viola',
+            'PrimusTenor': 'cello',
+            'SecundusTenor': 'flute',
+            'Bassus': 'contrabass',
+        }
+        
+        // Gets voices names from event list, initialises the instrument sample, builds the data object for voices
+        for (let i = 1; i < eventList.length; i++) {
+            if (eventList[i][0]['name'] === 'Sequence/Track Name') {
+                let instrument = await new Soundfont(context, {
+                    instrument: instrumentsChosen[eventList[i][0]['string']]
+                }).loaded();
+                instruments.push(instrument);
+                voicesDict.push({
+                    name: eventList[i][0]['string'],
+                    instrumentTrack: i-1,
+                    chosenInstrument: instrumentsChosen[eventList[i][0]['string']],
+                    playing: true
+                })
+            }
+        }
+        console.log(voicesDict);
+        
+        // # update current play time
         setInterval(function () {
             if (Player.isPlaying()) {
                 currentTime = totalTime - Player.getSongTimeRemaining();
             }
         }, 1000)
+
+        // # Finish loading
+        loaded = true;
     });
 
     // Utility functions (might be separated into a different module later)
@@ -118,7 +164,15 @@
 <button id="playMIDI" on:click={startPlay}><Icon icon="material-symbols:play-pause"/></button>
 <button id="stopMIDI" on:click={stopPlay}><Icon icon="material-symbols:stop"/></button>
 <span>
-    {secsToMinSecs(currentTime)}
-    <RangeSlider bind:value={currentTime} bind:max={totalTime} step={0.5} on:click={skipTo(currentTime)}/>
-    {secsToMinSecs(totalTime)}
+    {#if !loaded}
+        <ProgressRadial/>
+    {:else}
+        {secsToMinSecs(currentTime)}
+        <RangeSlider bind:value={currentTime} bind:max={totalTime} step={0.5} on:click={skipTo(currentTime)}/>
+        {secsToMinSecs(totalTime)}
+        {#each voicesDict as voice}
+            <br/>
+            <span>{voice.name}</span><SlideToggle name={voice.instrumentTrack}-{voice.name} bind:checked={voice.playing} on:change={toggleVoice}/>
+        {/each}
+    {/if}
 </span>
