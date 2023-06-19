@@ -26,7 +26,7 @@
     let context = undefined;
     let instruments = [];
     let totalTime = 0;
-    let currentTime = 0
+    let currentTime = 0;
 
     const startPlay = function() {
         if (Player.isPlaying()) {
@@ -41,6 +41,7 @@
         stopInstruments();
         context.suspend();
         Player.stop();
+        currentTime = 0;
     }
 
     const stopInstruments = function() {
@@ -63,11 +64,13 @@
     const skipTo = async function() {
         // function works but is a bit flaky -- need to await the result of skip to restart
         if (Player.isPlaying()) {
+            stopInstruments();
             await Player.stop();
             await Player.skipToSeconds(currentTime);
             startPlay();
         } else {
-            await Player.skipToSeconds(currentTime);
+            Player.skipToSeconds(currentTime);
+            console.log('here');
         }
     }
 
@@ -87,15 +90,17 @@
         for (let i = 0; i < nrInstruments; i++) {
             let instrument = await new Soundfont(context, {
                 instrument: 'church_organ'
+                // instrument: 'acoustic_grand_piano'
             }).loaded();
             instruments.push(instrument);
         };
 
         // update current play time
         setInterval(function () {
-            currentTime = totalTime - Player.getSongTimeRemaining();
-        }, 200)
-
+            if (Player.isPlaying()) {
+                currentTime = totalTime - Player.getSongTimeRemaining();
+            }
+        }, 1000)
     });
 
     // Utility functions (might be separated into a different module later)
@@ -114,6 +119,6 @@
 <button id="stopMIDI" on:click={stopPlay}><Icon icon="material-symbols:stop"/></button>
 <span>
     {secsToMinSecs(currentTime)}
-    <RangeSlider bind:value={currentTime} bind:max={totalTime} step={0.2} on:click={skipTo(currentTime)}/>
+    <RangeSlider bind:value={currentTime} bind:max={totalTime} step={0.5} on:click={skipTo(currentTime)}/>
     {secsToMinSecs(totalTime)}
 </span>
