@@ -15,12 +15,16 @@
     import MidiPlayer from 'midi-player-js';
     import Icon from '@iconify/svelte';
     import { RangeSlider, ProgressRadial, SlideToggle } from '@skeletonlabs/skeleton';
-    import { onMount } from 'svelte';
+    import { onMount, createEventDispatcher } from 'svelte';
 
     import {Soundfont} from 'smplr';
 
     // PARAMETERS
     export let midiFile = undefined;
+    export let timeMap = undefined;
+
+    // Event dispatcher
+    const dispatch = createEventDispatcher();
 
     let Player = undefined;
     let context = undefined;
@@ -64,10 +68,30 @@
             }
         }
 
+        console.log(event);
+        
+        // gets the timeNow in miliseconds to allow for dynamic highlighting of the MEI score - 120 is the default BPM, need a way of getting this programatically
+        let timeNow = Math.round(event.tick / Player.division / 120 * 60 * 1000);
         if (event.name == 'Note on' && event.velocity > 0) {
+            try {
+                dispatch('noteOn', timeMap[timeNow]['on']);
+            }
+            catch (error) {
+                console.log(error);
+                console.log(timeNow);
+                console.log(timeMap);
+            }
             // playable tracks start at index 1, instruments at index 0, but track 1 does not have a playable instrument -- this might need to be adjusted for the real case;
             instruments[event.track - 2].start({note: event.noteName, velocity: event.velocity});
         } else if (event.name == 'Note on' && event.velocity == 0) {
+            try {
+                dispatch('noteOff', timeMap[timeNow]['off']);
+            }
+            catch (error) {
+                console.log(error);
+                console.log(timeNow);
+                console.log(timeMap);
+            }
             instruments[event.track -2].stop();
         }
     }

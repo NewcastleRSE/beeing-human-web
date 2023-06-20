@@ -52,6 +52,17 @@ export async function loadMei(meiString, arrBuff = false) {
             meiMidi = 'data:audio/midi;base64,' + base64midi;
             mei.midi = meiMidi;
         }
+        // Get timemap of notes on and off in miliseconds
+        let timeMap = vTk.renderToTimemap();
+
+        // Refactor timemap so that notes can be called by time
+        let refactoredTimeMap = {}
+        for (let entry of timeMap) {
+            refactoredTimeMap[parseInt(entry.tstamp)] = entry;
+        }
+        // add timemap to mei object
+        mei.timeMap = refactoredTimeMap;
+        
         return mei;
     } else {
         return false;

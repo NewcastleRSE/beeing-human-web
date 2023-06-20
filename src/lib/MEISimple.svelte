@@ -4,9 +4,10 @@
     props:
         `meiSvg`: an array of SVGs (one per page) to be rendered;
         `meiMidi`: a base64 string representing a MIDI file;
+        `timeMap`: a JSON object callable by time in miliseconds, timeMap[{time}][on] returns an array of notes being played and timeMap[{time}][off] returns an array of notes that should stop playing
     usage:
         ```
-        <MEISimple meiSvg = {data.view.mei.svg} meiMidi = {data.view.mei.midi}/>
+        <MEISimple meiSvg = {data.view.mei.svg} meiMidi = {data.view.mei.midi} timeMap = {data.view.mei.timeMap}/>
         ```
     
 -->
@@ -17,12 +18,38 @@
 
     export let meiSvg = undefined;
     export let meiMidi = undefined;
+    export let timeMap = undefined;
+
+    const noteOn = function (event) {
+        // when a note is played, add a custom class to the element with the corresponding note id
+        for (let i in event.detail) {
+            let element = document.getElementById(event.detail[i])
+            element.classList.add('note-playing');
+        }
+    }
+
+    const noteOff = function (event) {
+        // when a note stops playing, removes the custom class to the element with the corresponding note id
+        for (let i in event.detail) {
+            let element = document.getElementById(event.detail[i])
+            element.classList.remove('note-playing');
+        }
+    }
 </script>
 
 <!-- <MidiPlayerSimple midiFile = {meiMidi}/> -->
-<MIDIPlayer midiFile = {meiMidi}/>
+<!-- MIDIPlayer currently emits two custom events, one with a note being played (noteOn) and one when a note stops playing (noteOff) -->
+<MIDIPlayer midiFile = {meiMidi} timeMap = {timeMap} on:noteOn={noteOn} on:noteOff={noteOff}/>
 <div id="MEI-container">
     {#each meiSvg as page}
         {@html page}
     {/each}
 </div>
+
+<style>
+    /* Style to fill in notes currently being played */
+    :global(.note-playing) {
+        fill: red;
+        color: red;
+    }
+</style>

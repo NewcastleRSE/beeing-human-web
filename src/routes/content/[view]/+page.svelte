@@ -26,6 +26,6 @@
   <AudioPlayer audioPath = "{base}/content/music/media/virtualbarbershop.mp3"/>
   <h3>MEI engraving and playback test</h3>
   {#if 'mei' in data.view}
-    <MeiSimple meiSvg = {data.view.mei.svg} meiMidi = {data.view.mei.midi}></MeiSimple>
+    <MeiSimple meiSvg = {data.view.mei.svg} meiMidi = {data.view.mei.midi} timeMap = {data.view.mei.timeMap}></MeiSimple>
   {/if}
 {/if}
