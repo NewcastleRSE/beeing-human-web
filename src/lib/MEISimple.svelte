@@ -35,11 +35,25 @@
             element.classList.remove('note-playing');
         }
     }
+
+    const allNotesOff = function (event) {
+        // removes the 'note-playing' class from all notes
+        const collection = document.getElementsByClassName('note-playing');
+        let ids = []
+        // Because getElementsByClassName, this loop should only get the ids of elements to be updated -- changing the class list on the HTMLCollection loop leads to unpredictable results
+        for (let element of collection) {
+            ids.push(element.id);
+        }
+        for (let id of ids) {
+            let el = document.getElementById(id);
+            el.classList.remove('note-playing');
+        }
+    }
 </script>
 
 <!-- <MidiPlayerSimple midiFile = {meiMidi}/> -->
 <!-- MIDIPlayer currently emits two custom events, one with a note being played (noteOn) and one when a note stops playing (noteOff) -->
-<MIDIPlayer midiFile = {meiMidi} timeMap = {timeMap} on:noteOn={noteOn} on:noteOff={noteOff}/>
+<MIDIPlayer midiFile = {meiMidi} timeMap = {timeMap} on:noteOn={noteOn} on:noteOff={noteOff} on:playStopped={allNotesOff} on:skipPlay={allNotesOff}/>
 <div id="MEI-container">
     {#each meiSvg as page}
         {@html page}

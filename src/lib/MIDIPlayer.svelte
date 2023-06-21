@@ -49,6 +49,7 @@
         context.suspend();
         Player.stop();
         currentTime = 0;
+        dispatch('playStopped');
     }
 
     const stopInstruments = function() {
@@ -68,7 +69,7 @@
             }
         }
 
-        console.log(event);
+        // console.log(event);
         
         // gets the timeNow in miliseconds to allow for dynamic highlighting of the MEI score - 120 is the default BPM, need a way of getting this programatically
         let timeNow = Math.round(event.tick / Player.division / 120 * 60 * 1000);
@@ -99,6 +100,7 @@
     const skipTo = async function() {
         if (Player.isPlaying()) {
             stopInstruments();
+            dispatch('skipPlay');
             await Player.stop();
             await Player.skipToSeconds(currentTime);
             startPlay();
@@ -123,6 +125,11 @@
     onMount(async ()=> {
         // # start player
         Player = new MidiPlayer.Player((event) => playNote(event));
+
+        // Emit event when player reaches the end of the file
+        Player.on('endOfFile', function() {
+            dispatch('playStopped');
+        })
         
         // # Load midi file
         Player.loadDataUri(midiFile);
