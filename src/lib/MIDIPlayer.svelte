@@ -19,6 +19,8 @@
 
     import {Soundfont} from 'smplr';
 
+    import { getMissingEvents } from '../utils/MIDIPlaybackHelper'
+
     // PARAMETERS
     export let midiFile = undefined;
     export let timeMap = undefined;
@@ -34,6 +36,8 @@
     let loaded = false;
     // initialise data object for voices
     let voicesDict = []
+
+    let missingEvents = undefined;
 
     const startPlay = function() {
         if (Player.isPlaying()) {
@@ -69,10 +73,18 @@
             }
         }
 
-        // console.log(event);
         
         // gets the timeNow in miliseconds to allow for dynamic highlighting of the MEI score - 120 is the default BPM, need a way of getting this programatically
         let timeNow = Math.round(event.tick / Player.division / 120 * 60 * 1000);
+
+        // sets timer to dispatch events that are not played
+        if (missingEvents[timeNow]) {
+            setTimeout(function () {
+                console.log(missingEvents[timeNow]);
+                dispatch('noteOn', missingEvents[timeNow]['onNotes']);
+                dispatch('noteOff', missingEvents[timeNow]['offNotes']);
+            }, missingEvents[timeNow]['timerDelta']);
+        }
         if (event.name == 'Note on' && event.velocity > 0) {
             try {
                 dispatch('noteOn', timeMap[timeNow]['on']);
@@ -167,7 +179,6 @@
                 })
             }
         }
-        console.log(voicesDict);
         
         // # update current play time
         setInterval(function () {
@@ -175,6 +186,9 @@
                 currentTime = totalTime - Player.getSongTimeRemaining();
             }
         }, 1000)
+
+        missingEvents = getMissingEvents(eventList, timeMap, Player.division);
+        console.log(missingEvents);
 
         // # Finish loading
         loaded = true;

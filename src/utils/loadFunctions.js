@@ -55,10 +55,17 @@ export async function loadMei(meiString, arrBuff = false) {
         // Get timemap of notes on and off in miliseconds
         let timeMap = vTk.renderToTimemap();
 
+        // Get list of notes that are turned on but never turned off
+        // let danglingNotes = getDanglingNotes(timeMap);
+
         // Refactor timemap so that notes can be called by time
         let refactoredTimeMap = {}
         for (let entry of timeMap) {
             refactoredTimeMap[parseInt(entry.tstamp)] = entry;
+        }
+        var keys = Object.keys(refactoredTimeMap);
+        for (let i = 0; i <= 10; i++) {
+            console.log(`${keys[i]} :`, refactoredTimeMap[keys[i]]);
         }
         // add timemap to mei object
         mei.timeMap = refactoredTimeMap;
@@ -67,4 +74,23 @@ export async function loadMei(meiString, arrBuff = false) {
     } else {
         return false;
     }
+}
+
+function getDanglingNotes(timeMap) {
+    // Function looks through the timemap to find notes that are turned on but never turned off
+    let leftoverNotes = []
+    for (let entry of timeMap) {
+        if (entry.on) {
+            for (let note of entry.on) {
+                leftoverNotes.push(note);
+            }
+        }
+        if (entry.off) {
+            for (let note of entry.off) {
+                leftoverNotes = leftoverNotes.filter(e => e !== note);
+            }
+        }
+    }
+    console.log(leftoverNotes);
+
 }
