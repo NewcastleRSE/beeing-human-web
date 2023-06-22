@@ -20,12 +20,24 @@
     export let meiMidi = undefined;
     export let timeMap = undefined;
 
+    let goToPage;
+
     const noteOn = function (event) {
         // when a note is played, add a custom class to the element with the corresponding note id
         // console.log('Notes on: ', event.detail);
         for (let i in event.detail) {
             let element = document.getElementById(event.detail[i])
-            element.classList.add('note-playing');
+            if (!element) {
+                // if the element does not exist in the currently displayed SVG, it looks for the page that has it and displays that page.
+                for (page in meiSvg) {
+                    if (meiSvg[page].includes(`id="${event.detail[i]}"`)) {
+                        goToPage(page);
+                    }
+                }
+            }
+            if (element) {
+                element.classList.add('note-playing');
+            }
         }
     }
 
@@ -34,7 +46,10 @@
         // console.log('Notes off: ', event.detail);
         for (let i in event.detail) {
             let element = document.getElementById(event.detail[i])
-            element.classList.remove('note-playing');
+            if(element) {
+                // Only removes the class if the element is currently visible (if it isn't, it won't have the class anyway)
+                element.classList.remove('note-playing');
+            }
         }
     }
 
@@ -58,7 +73,7 @@
 <MIDIPlayer midiFile = {meiMidi} timeMap = {timeMap} on:noteOn={noteOn} on:noteOff={noteOff} on:playStopped={allNotesOff} on:skipPlay={allNotesOff}/>
 <div id="MEI-container">
     {#if meiSvg.length > 1}
-        <Paginator data = {meiSvg} raw=true/>
+        <Paginator data = {meiSvg} raw=true bind:goToPage={goToPage}/>
     {:else}
         {@html meiSvg[0]}
     {/if}

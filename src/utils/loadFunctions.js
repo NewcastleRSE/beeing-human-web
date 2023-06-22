@@ -23,7 +23,7 @@ export async function loadMei(meiString, arrBuff = false) {
     // Set default options for the toolkit
     // console.log(vTk.getOptions()) for a full list of available options
     vTk.setOptions({
-    scale: 30,
+    scale: 40,
     });
 
     // Load the MEI string into the verovio toolkit, returns true if sucessful

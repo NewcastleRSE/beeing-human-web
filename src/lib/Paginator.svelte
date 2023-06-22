@@ -16,15 +16,15 @@
 
     let currentPage = 0;
     
-    function nextPage() {
+    export function nextPage() {
         currentPage++;
     }
 
-    function prevPage() {
+    export function prevPage() {
         currentPage--;
     }
 
-    function goToPage(page) {
+    export function goToPage(page) {
         currentPage = page;
     }
 </script>
@@ -32,7 +32,7 @@
 <div id="page">
     <div class="left">
         {#if currentPage > 0}
-            <button type="button" class="btn variant-filled" on:click={prevPage}>Prev</button>
+            <button type="button" class="btn variant-filled" on:click={prevPage}>&lt;</button>
         {/if}
     </div>
     <div id="content">
@@ -44,7 +44,7 @@
     </div>
     <div class="right">
         {#if currentPage < data.length - 1}
-            <button type="button" class="btn variant-filled" on:click={nextPage}>Next</button>
+            <button type="button" class="btn variant-filled" on:click={nextPage}>&gt;</button>
         {/if}
     </div>
 </div>
@@ -57,7 +57,7 @@
     .left, .right {
         display: flex;
         min-width: 10%;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
     }
 </style>
