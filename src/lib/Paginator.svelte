@@ -29,14 +29,35 @@
     }
 </script>
 
-{#if currentPage > 0}
-    <button type="button" class="btn variant-filled" on:click={prevPage}>Prev</button>
-{/if}
-{#if raw}
-    {@html data[currentPage]}
-{:else}
-    data[currentPage];
-{/if}
-{#if currentPage < data.length - 1}
-    <button type="button" class="btn variant-filled" on:click={nextPage}>Next</button>
-{/if}
+<div id="page">
+    <div class="left">
+        {#if currentPage > 0}
+            <button type="button" class="btn variant-filled" on:click={prevPage}>Prev</button>
+        {/if}
+    </div>
+    <div id="content">
+        {#if raw}
+            {@html data[currentPage]}
+        {:else}
+            data[currentPage];
+        {/if}
+    </div>
+    <div class="right">
+        {#if currentPage < data.length - 1}
+            <button type="button" class="btn variant-filled" on:click={nextPage}>Next</button>
+        {/if}
+    </div>
+</div>
+
+<style>
+    #page {
+        display: flex;
+    }
+
+    .left, .right {
+        display: flex;
+        min-width: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
