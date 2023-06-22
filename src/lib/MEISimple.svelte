@@ -13,8 +13,8 @@
 -->
 
 <script>
-    import MidiPlayerSimple from "./MIDIPlayerSimple.svelte";
     import MIDIPlayer from "./MIDIPlayer.svelte";
+    import Paginator from "./Paginator.svelte";
 
     export let meiSvg = undefined;
     export let meiMidi = undefined;
@@ -57,9 +57,11 @@
 <!-- MIDIPlayer currently emits two custom events, one with a note being played (noteOn) and one when a note stops playing (noteOff) -->
 <MIDIPlayer midiFile = {meiMidi} timeMap = {timeMap} on:noteOn={noteOn} on:noteOff={noteOff} on:playStopped={allNotesOff} on:skipPlay={allNotesOff}/>
 <div id="MEI-container">
-    {#each meiSvg as page}
-        {@html page}
-    {/each}
+    {#if meiSvg.length > 1}
+        <Paginator data = {meiSvg} raw=true/>
+    {:else}
+        {@html meiSvg[0]}
+    {/if}
 </div>
 
 <style>
