@@ -22,6 +22,7 @@
 
     const noteOn = function (event) {
         // when a note is played, add a custom class to the element with the corresponding note id
+        // console.log('Notes on: ', event.detail);
         for (let i in event.detail) {
             let element = document.getElementById(event.detail[i])
             element.classList.add('note-playing');
@@ -30,6 +31,7 @@
 
     const noteOff = function (event) {
         // when a note stops playing, removes the custom class to the element with the corresponding note id
+        // console.log('Notes off: ', event.detail);
         for (let i in event.detail) {
             let element = document.getElementById(event.detail[i])
             element.classList.remove('note-playing');

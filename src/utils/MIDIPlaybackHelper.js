@@ -1,5 +1,12 @@
 export function getMissingEvents(eventList, timeMap, division) {
     // returns an object indexed by miliseconds that includes details of missing events so that a timer can be triggered on play events
+    /**
+     * @typedef {Object} previousEvents, indexed by milliseconmds
+     * @property {int} missingEvent - the missing event it corresponds to, in milliseconds
+     * @property {int} timerDelta - the value to set the timer to, in milliseconds
+     * @property {Array[string]} onNotes - an array of ids identifying the notes that should be on
+     * @property {Array[string]} offNotes - an array of ids identigying the notes that should be off
+     */
     
     // Figure out ticks that have 'Note On' events
     let listOfPlayEvents = {}
@@ -34,6 +41,7 @@ export function getMissingEvents(eventList, timeMap, division) {
     for (let missingEvent of listOfMissingEvents) {
         for (let i=0; i<keys.length; i++) {
             if (parseInt(keys[i]) < missingEvent) {
+                // Build the previous event object
                 previousEvent = listOfPlayEvents[keys[i]];
                 previousEvent['missingEvent'] = missingEvent;
                 previousEvent['timerDelta'] = missingEvent - previousEvent.milliseconds;
@@ -45,4 +53,13 @@ export function getMissingEvents(eventList, timeMap, division) {
     }
 
     return previousEvents
+}
+
+export function secsToMinSecs(time) {
+    // converts total time in seconds into a minutes:seconds string
+    let minutes = Math.floor(time / 60);
+    let seconds = Math.floor(time - minutes *60);
+    minutes = minutes.toString().padStart(2, '0');
+    seconds = seconds.toString().padStart(2, '0');
+    return `${minutes}:${seconds}`
 }

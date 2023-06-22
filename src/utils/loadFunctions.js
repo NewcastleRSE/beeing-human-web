@@ -63,10 +63,7 @@ export async function loadMei(meiString, arrBuff = false) {
         for (let entry of timeMap) {
             refactoredTimeMap[parseInt(entry.tstamp)] = entry;
         }
-        var keys = Object.keys(refactoredTimeMap);
-        for (let i = 0; i <= 10; i++) {
-            console.log(`${keys[i]} :`, refactoredTimeMap[keys[i]]);
-        }
+        
         // add timemap to mei object
         mei.timeMap = refactoredTimeMap;
         
@@ -91,6 +88,6 @@ function getDanglingNotes(timeMap) {
             }
         }
     }
-    console.log(leftoverNotes);
+    // console.log(leftoverNotes);
 
 }

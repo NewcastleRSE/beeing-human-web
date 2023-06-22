@@ -19,7 +19,7 @@
 
     import {Soundfont} from 'smplr';
 
-    import { getMissingEvents } from '../utils/MIDIPlaybackHelper'
+    import { getMissingEvents, secsToMinSecs } from '../utils/MIDIPlaybackHelper'
 
     // PARAMETERS
     export let midiFile = undefined;
@@ -38,6 +38,7 @@
     let voicesDict = []
 
     let missingEvents = undefined;
+    let timers = [];
 
     const startPlay = function() {
         if (Player.isPlaying()) {
@@ -54,6 +55,9 @@
         Player.stop();
         currentTime = 0;
         dispatch('playStopped');
+        for (let timer of timers) {
+            clearTimeout(timer);
+        }
     }
 
     const stopInstruments = function() {
@@ -79,33 +83,32 @@
 
         // sets timer to dispatch events that are not played
         if (missingEvents[timeNow]) {
-            setTimeout(function () {
-                console.log(missingEvents[timeNow]);
+            let timer = setTimeout(function () {
+                // console.log(missingEvents[timeNow]);
                 dispatch('noteOn', missingEvents[timeNow]['onNotes']);
                 dispatch('noteOff', missingEvents[timeNow]['offNotes']);
             }, missingEvents[timeNow]['timerDelta']);
+            // add timeout ID to an array so that it can be cleared if the users stops or pauses playback before the timer is activated
+            // console.log(timer);
+            timers.push(timer);
         }
-        if (event.name == 'Note on' && event.velocity > 0) {
-            try {
-                dispatch('noteOn', timeMap[timeNow]['on']);
+        try {
+            // if there is a play event, dispatch both notes on and off to update the interface
+                if (event.name === 'Note on') {
+                    dispatch('noteOn', timeMap[timeNow]['on']);
+                    dispatch('noteOff', timeMap[timeNow]['off']);
+                }
             }
             catch (error) {
                 console.log(error);
                 console.log(timeNow);
                 console.log(timeMap);
             }
+        if (event.name == 'Note on' && event.velocity > 0) {
             // playable tracks start at index 1, instruments at index 0, but track 1 does not have a playable instrument -- this might need to be adjusted for the real case;
             instruments[event.track - 2].start({note: event.noteName, velocity: event.velocity});
         } else if (event.name == 'Note on' && event.velocity == 0) {
-            try {
-                dispatch('noteOff', timeMap[timeNow]['off']);
-            }
-            catch (error) {
-                console.log(error);
-                console.log(timeNow);
-                console.log(timeMap);
-            }
-            instruments[event.track -2].stop();
+            instruments[event.track -2 ].stop();
         }
     }
 
@@ -113,6 +116,9 @@
         if (Player.isPlaying()) {
             stopInstruments();
             dispatch('skipPlay');
+            for (let timer of timers) {
+                clearTimeout(timer);
+            }
             await Player.stop();
             await Player.skipToSeconds(currentTime);
             startPlay();
@@ -125,6 +131,8 @@
         // splits the index and name in the prop name of the SlideToggle
         // this.name is in the format [int]-name
         const indexName = this.name.split('-')
+
+        // There is a know bug in syncing with the SVG highlighting: if the voice that is turned off is the only one to have a playevent at a particular point, it will either not turn on or not turn off, because the MIDI player is not emitting any play events. This will remain like this for now. Two possible solutions: 1) create a list of all the note IDs that belong to a particular voice and set timers to turn them on and off; or 2) dont' deactivate the track, but simply not play the instrument if a track is !playing -- this is, obviously, the better solution, but it is a little hacky.
 
         if (!voicesDict[parseInt(indexName[0])]['playing']) {
             instruments[parseInt(indexName[0])].stop();
@@ -162,22 +170,28 @@
             'PrimusTenor': 'cello',
             'SecundusTenor': 'flute',
             'Bassus': 'contrabass',
+            'default': 'acoustic_grand_piano'
         }
         
         // Gets voices names from event list, initialises the instrument sample, builds the data object for voices
         for (let i = 1; i < eventList.length; i++) {
+            let voice = 'default';
             if (eventList[i][0]['name'] === 'Sequence/Track Name') {
-                let instrument = await new Soundfont(context, {
-                    instrument: instrumentsChosen[eventList[i][0]['string']]
+                // if there is a sequence/track name
+                if (Object.keys(instrumentsChosen).includes(eventList[i][0]['string'])) {
+                    voice = eventList[i][0]['string'];
+                }
+            }
+            let instrument = await new Soundfont(context, {
+                    instrument: instrumentsChosen[voice]
                 }).loaded();
-                instruments.push(instrument);
-                voicesDict.push({
-                    name: eventList[i][0]['string'],
+            instruments.push(instrument);
+            voicesDict.push({
+                    name: voice,
                     instrumentTrack: i-1,
-                    chosenInstrument: instrumentsChosen[eventList[i][0]['string']],
+                    chosenInstrument: instrumentsChosen[voice],
                     playing: true
                 })
-            }
         }
         
         // # update current play time
@@ -188,21 +202,12 @@
         }, 1000)
 
         missingEvents = getMissingEvents(eventList, timeMap, Player.division);
-        console.log(missingEvents);
+        // console.log(missingEvents);
 
         // # Finish loading
         loaded = true;
     });
-
-    // Utility functions (might be separated into a different module later)
-    function secsToMinSecs(time) {
-        // converts total time in seconds into a minutes:seconds string
-        let minutes = Math.floor(time / 60);
-        let seconds = Math.floor(time - minutes *60);
-        minutes = minutes.toString().padStart(2, '0');
-        seconds = seconds.toString().padStart(2, '0');
-        return `${minutes}:${seconds}`
-    }
+    
 
 </script>
 
