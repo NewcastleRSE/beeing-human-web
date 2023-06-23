@@ -29,7 +29,7 @@
             let element = document.getElementById(event.detail[i])
             if (!element) {
                 // if the element does not exist in the currently displayed SVG, it looks for the page that has it and displays that page.
-                for (page in meiSvg) {
+                for (let page in meiSvg) {
                     if (meiSvg[page].includes(`id="${event.detail[i]}"`)) {
                         goToPage(page);
                     }
