@@ -156,7 +156,12 @@
         totalTime = Player.getSongTime();
         
         // # create audio context
-        context = new AudioContext();
+        try {
+            context = new AudioContext();
+        } catch (error) {
+            console.log(error);
+            context = '';
+        }
 
         // # Find voices list and load instruments
         

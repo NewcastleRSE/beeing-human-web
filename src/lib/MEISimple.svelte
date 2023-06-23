@@ -21,7 +21,7 @@
     export let timeMap = undefined;
 
     let goToPage;
-
+    
     const noteOn = function (event) {
         // when a note is played, add a custom class to the element with the corresponding note id
         // console.log('Notes on: ', event.detail);
@@ -70,12 +70,18 @@
 
 <!-- <MidiPlayerSimple midiFile = {meiMidi}/> -->
 <!-- MIDIPlayer currently emits two custom events, one with a note being played (noteOn) and one when a note stops playing (noteOff) -->
-<MIDIPlayer midiFile = {meiMidi} timeMap = {timeMap} on:noteOn={noteOn} on:noteOff={noteOff} on:playStopped={allNotesOff} on:skipPlay={allNotesOff}/>
+{#if !meiMidi || !timeMap}
+    <p class="error">Playback is not available</p>
+{:else}
+    <MIDIPlayer midiFile = {meiMidi} timeMap = {timeMap} on:noteOn={noteOn} on:noteOff={noteOff} on:playStopped={allNotesOff} on:skipPlay={allNotesOff}/>
+{/if}
 <div id="MEI-container">
     {#if meiSvg.length > 1}
         <Paginator data = {meiSvg} raw=true bind:goToPage={goToPage}/>
-    {:else}
+    {:else if meiSvg.length === 1}
         {@html meiSvg[0]}
+    {:else if meiSvg.length === 0 || !meiSvg}
+        <p class="error">Could not engrave the MEI file.</p>
     {/if}
 </div>
 

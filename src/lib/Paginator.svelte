@@ -29,7 +29,7 @@
     }
 </script>
 
-<div id="page">
+<div id="page" data-testid='paginator'>
     <div class="left">
         {#if currentPage > 0}
             <button type="button" class="btn variant-filled" on:click={prevPage}>&lt;</button>
