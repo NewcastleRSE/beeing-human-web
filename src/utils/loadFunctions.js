@@ -73,21 +73,23 @@ export async function loadMei(meiString, arrBuff = false) {
     }
 }
 
-function getDanglingNotes(timeMap) {
-    // Function looks through the timemap to find notes that are turned on but never turned off
-    let leftoverNotes = []
-    for (let entry of timeMap) {
-        if (entry.on) {
-            for (let note of entry.on) {
-                leftoverNotes.push(note);
-            }
-        }
-        if (entry.off) {
-            for (let note of entry.off) {
-                leftoverNotes = leftoverNotes.filter(e => e !== note);
-            }
-        }
-    }
-    // console.log(leftoverNotes);
 
-}
+// This function ended up not being used
+// function getDanglingNotes(timeMap) {
+//     // Function looks through the timemap to find notes that are turned on but never turned off
+//     let leftoverNotes = []
+//     for (let entry of timeMap) {
+//         if (entry.on) {
+//             for (let note of entry.on) {
+//                 leftoverNotes.push(note);
+//             }
+//         }
+//         if (entry.off) {
+//             for (let note of entry.off) {
+//                 leftoverNotes = leftoverNotes.filter(e => e !== note);
+//             }
+//         }
+//     }
+//     // console.log(leftoverNotes);
+
+// }
