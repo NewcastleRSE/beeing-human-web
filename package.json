@@ -33,6 +33,7 @@
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.1",
     "smplr": "^0.6.0",
+    "standardized-audio-context-mock": "^9.6.24",
     "svelte": "^3.59.1",
     "svelte-htm": "^1.2.0",
     "svelte-preprocess": "^5.0.4",

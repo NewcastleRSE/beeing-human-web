@@ -1,4 +1,4 @@
-import { act, cleanup, render, screen } from "@testing-library/svelte";
+import { cleanup, render, screen } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "vitest";
 
 import Paginator from '../../src/lib/Paginator.svelte';

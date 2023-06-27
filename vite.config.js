@@ -9,5 +9,6 @@ export default defineConfig({
     alias: [
       { find: /^svelte$/, replacement: "svelte/internal" }
     ],
+    hookTimeout: 15000,
   },
 });
