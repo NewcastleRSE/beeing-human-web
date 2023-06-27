@@ -32,19 +32,19 @@
 <div id="page" data-testid='paginator'>
     <div class="left">
         {#if currentPage > 0}
-            <button type="button" class="btn variant-filled" on:click={prevPage}>&lt;</button>
+            <button type="button" class="btn variant-filled" on:click={prevPage} data-testid='btn-prev'>&lt;</button>
         {/if}
     </div>
     <div id="content">
         {#if raw}
             {@html data[currentPage]}
         {:else}
-            data[currentPage];
+            {data[currentPage]};
         {/if}
     </div>
     <div class="right">
         {#if currentPage < data.length - 1}
-            <button type="button" class="btn variant-filled" on:click={nextPage}>&gt;</button>
+            <button type="button" class="btn variant-filled" on:click={nextPage} data-testid='btn-nxt'>&gt;</button>
         {/if}
     </div>
 </div>
