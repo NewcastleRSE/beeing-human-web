@@ -48,7 +48,7 @@ test('Expect Paginator to have been created', async({page}) => {
 test('Next button should exist', async({page}) => {
     await page.goto('/content/music');
     const nxtButton = page.getByTestId('btn-nxt');
-    expect(nxtButton).toBeVisible();
+    await expect(nxtButton).toBeVisible();
 });
 
 test('The previous button should not exist on the first page', async({page}) => {
