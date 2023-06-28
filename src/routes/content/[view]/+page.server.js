@@ -1,6 +1,8 @@
 import { views } from "../data.js";
 import { error } from "@sveltejs/kit";
 import parseMD from "parse-md";
+import { loadMei } from "../../../utils/loadFunctions.js";
+
 
 export async function load({ fetch, params }) {
   let view = views.find((view) => view.slug === params.view);
@@ -67,6 +69,24 @@ export async function load({ fetch, params }) {
   //   tei = transformTEI(teiString);
 
   // }
+
+  // Load MEI if in the music view
+  if (view.slug === 'music') {
+    // fetch MEI file, convert to string;
+    let meiString = await fetch('music/data/CRIM_Model_0001.mei')
+    .then(function(response) {
+        if (response.ok) {
+        return response.text();
+        };
+    });
+    // load mei into verovio, generate SVG and MIDI
+    let mei = await loadMei(meiString);
+
+    // if the transformation was successful, add mei to data.view
+    if (mei) {
+      view["mei"] = {...mei};
+    }
+  }
 
   return {
     view /*, tei, teiString */
