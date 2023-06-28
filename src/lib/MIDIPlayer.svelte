@@ -199,7 +199,7 @@
                     playing: true
                 })
         }
-        
+
         // # update current play time
         setInterval(function () {
             if (Player.isPlaying()) {
