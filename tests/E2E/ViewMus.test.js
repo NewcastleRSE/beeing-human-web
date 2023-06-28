@@ -42,7 +42,7 @@ test('Expect music view to have an SVG element', async({page}) => {
 test('Expect Paginator to have been created', async({page}) => {
     await page.goto('/content/music');
     const paginator = page.getByTestId('paginator');
-    expect(paginator).toBeVisible();
+    await expect(paginator).toBeVisible();
 });
 
 test('Next button should exist', async({page}) => {
@@ -62,7 +62,7 @@ test('Pressing the next button should change the page and make the previous butt
     const nxtButton = page.getByTestId('btn-nxt');
     await nxtButton.click();
     const prevButton = page.getByTestId('btn-prev');
-    expect(prevButton).toBeVisible();
+    await expect(prevButton).toBeVisible();
 });
 
 test('Pressing the prev button should send you back to the first page', async({page}) => {
