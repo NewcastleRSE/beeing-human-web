@@ -6,7 +6,7 @@ const config = {
   },
   testDir: "tests",
   testMatch: /(.+\.)?(test|spec)\.[jt]s/,
-  testIgnore: '/components/*',
+  testIgnore: ['/components/*', '/unit/*'],
   // Run all tests in parallel.
   fullyParallel: true,
   // Reporter to use
