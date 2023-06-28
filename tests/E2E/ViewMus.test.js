@@ -54,7 +54,7 @@ test('Next button should exist', async({page}) => {
 test('The previous button should not exist on the first page', async({page}) => {
     await page.goto('/content/music');
     const prevButton = page.getByTestId('btn-prev');
-    expect(prevButton).not.toBeVisible();
+    await expect(prevButton).not.toBeVisible();
 });
 
 test('Pressing the next button should change the page and make the previous button visible', async({page}) => {
