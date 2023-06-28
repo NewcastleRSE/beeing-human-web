@@ -46,7 +46,9 @@
   "dependencies": {
     "CETEIcean": "^1.8.0",
     "jsdom": "^22.1.0",
+    "midi-player-js": "^2.0.16",
     "parse-md": "^3.0.3",
-    "svelte-markdown": "^0.2.3"
+    "svelte-markdown": "^0.2.3",
+    "verovio": "^3.15.0"
   }
 }
