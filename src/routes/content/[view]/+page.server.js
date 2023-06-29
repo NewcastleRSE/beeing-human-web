@@ -89,6 +89,17 @@ export async function load({ fetch, params }) {
     }
   }
 
+  if (view.slug === 'connections') {
+    // load the buzzword mds
+    let listBuzzWords = import.meta.glob('/static/content/connections/buzzwords/*.md', {as: 'raw', eager: true});
+    let buzzwords = []
+    for (const buzz in listBuzzWords) {
+      const {metadata, content} = parseMD(listBuzzWords[buzz]);
+       buzzwords.push({...metadata, content: content});
+    }
+    view['buzzwords'] = buzzwords;
+  }
+
   return {
     view /*, tei, teiString */
   };

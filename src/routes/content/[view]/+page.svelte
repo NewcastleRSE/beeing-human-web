@@ -5,6 +5,9 @@
   import { base } from "$app/paths";
   import AudioPlayer from "../../../lib/AudioPlayer.svelte";
   import MeiSimple from "../../../lib/MEISimple.svelte";
+  import Buzzwords from "../../../lib/Buzzwords.svelte";
+
+  console.log(data.view.buzzwords);
 
 </script>
 
@@ -28,4 +31,6 @@
   {#if 'mei' in data.view}
     <MeiSimple meiSvg = {data.view.mei.svg} meiMidi = {data.view.mei.midi} timeMap = {data.view.mei.timeMap}></MeiSimple>
   {/if}
+{:else if data.view.slug === 'connections'}
+  <Buzzwords buzzwords={data.view.buzzwords}/>
 {/if}
