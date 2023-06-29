@@ -4,15 +4,7 @@
 
   onMount(async () => {
     // Your selected Skeleton theme:
-    if ($view === "literature") {
-      await import("@skeletonlabs/skeleton/themes/theme-skeleton.css");
-    } else if ($view === "science") {
-      await import("@skeletonlabs/skeleton/themes/theme-modern.css");
-    } else if ($view === "music") {
-      await import("@skeletonlabs/skeleton/themes/theme-rocket.css");
-    } else if ($view === "interdisciplinarity") {
-      await import("@skeletonlabs/skeleton/themes/theme-seasonal.css");
-    }
+    await import("@skeletonlabs/skeleton/themes/theme-skeleton.css");
   });
 
   // This contains the bulk of Skeletons required styles:

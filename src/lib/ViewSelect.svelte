@@ -1,6 +1,5 @@
 <script>
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
-  import { createEventDispatcher } from "svelte";
 
   import { view } from "../stores/viewChoice";
 </script>
@@ -18,7 +17,7 @@
   <RadioItem
     bind:group={$view}
     name="viewGroup"
-    value={"interdisciplinarity"}
-    on:click>Interdisciplinarity</RadioItem
+    value={"connections"}
+    on:click>Connections</RadioItem
   >
 </RadioGroup>

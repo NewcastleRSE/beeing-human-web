@@ -34,10 +34,10 @@ describe('View Select radio button tests', ()=> {
         await user.click(musButton);
         expect(get(view)).toBe('music');
 
-        // Choose interdisciplinarity
-        const intButton = screen.getByText('Interdisciplinarity');
+        // Choose connections
+        const intButton = screen.getByText('Connections');
         await user.click(intButton);
-        expect(get(view)).toBe('interdisciplinarity');
+        expect(get(view)).toBe('connections');
 
     });
 
