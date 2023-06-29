@@ -33,9 +33,9 @@ export const views = [
     },
   },
   {
-    slug: "interdisciplinarity",
-    title: "Interdisciplinarity test",
-    content: "This will be a test of interdisciplinarity.",
+    slug: "connections",
+    title: "Connections test",
+    content: "This will be a test of connections.",
     sections: {
       intro: {
         type: "md",

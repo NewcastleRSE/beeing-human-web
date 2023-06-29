@@ -13,6 +13,7 @@ export async function load({ fetch, params }) {
   // get list of sections
   // import.meta.glob does not allow for dynamic variables in the search path, so it needs a switch statement to adjust based on the selected view
   // will need to be adapted if different/more views are necessary
+  console.log(view.slug);
   switch (view.slug) {
     case "literature":
       listSections = import.meta.glob("/static/content/literature/*.md", {
@@ -32,9 +33,9 @@ export async function load({ fetch, params }) {
         eager: true,
       });
       break;
-    case "interdisciplinarity":
+    case "connections":
       listSections = import.meta.glob(
-        "/static/content/interdisciplinarity/*.md",
+        "/static/content/connections/*.md",
         { as: "raw", eager: true }
       );
       break;
