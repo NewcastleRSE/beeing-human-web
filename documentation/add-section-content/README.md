@@ -25,7 +25,7 @@ This short tutorial will guide you through the steps necessary to add new conten
 
   - Press the return key (Enter) or select 'Create branch'
 
-- Navigate to `static`, then `content` in the project files. You should see four folders: `literature`, `music`, `science`, `interdisciplinarity`. These folders correspond to each of the views on the website: adding content to one of these folders will create it in the corresponding view. Choose the folder corresponding to the view you want to add to or edit.
+- Navigate to `static`, then `content` in the project files. You should see four folders: `literature`, `music`, `science`, `connections`. These folders correspond to each of the views on the website: adding content to one of these folders will create it in the corresponding view. Choose the folder corresponding to the view you want to add to or edit.
 - Choose one `.md` file to edit, or create a new one:
 
   - On the top right of the screen, below the repository header, click the 'Add file' button
