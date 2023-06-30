@@ -4,6 +4,26 @@
 
     export let buzzwords;
 
+    const daysOfTheWeek = ['Sunday',
+                        'Monday',
+                        'Tuesday',
+                        'Wednesday',
+                        'Thursday',
+                        'Friday',
+                        'Saturday'];
+    const monthsOfTheYear = ['January',
+                            'February',
+                            'March',
+                            'April',
+                            'May',
+                            'June',
+                            'July',
+                            'August',
+                            'September',
+                            'October',
+                            'November',
+                            'December'];
+
     function shuffle(array) {
         // randomize order of the array
         let currentIndex = array.length,  randomIndex;
@@ -27,8 +47,18 @@
 
 <div class="card-collection">
     {#each buzzwords as buzzword}
-        <div class="card p-4 variant-glass-primary">
-            <InjectMd content = {buzzword.content}/>
+        <div class="card">
+            <header class="card-header">
+                {#if buzzword.date}
+                    <p class="date">{daysOfTheWeek[buzzword.date.getDay()]}, {buzzword.date.getDate()} of {monthsOfTheYear[buzzword.date.getMonth()]} {buzzword.date.getFullYear()}</p>
+                {/if}
+            </header>
+            <section class="p-4"><InjectMd content = {buzzword.content}/></section>
+            <footer class="card-footer">
+                {#if buzzword.author}
+                    <p class="byline">by {buzzword.author}</p>
+                {/if}
+            </footer>
         </div>
     {/each}
 </div>
@@ -44,5 +74,13 @@
     .card {
         max-width: 22%;
         height: fit-content;
+    }
+
+    .date {
+        font-size: smaller;
+    }
+
+    .byline {
+        font-size: small;
     }
 </style>

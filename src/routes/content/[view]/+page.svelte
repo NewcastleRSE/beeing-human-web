@@ -32,5 +32,6 @@
     <MeiSimple meiSvg = {data.view.mei.svg} meiMidi = {data.view.mei.midi} timeMap = {data.view.mei.timeMap}></MeiSimple>
   {/if}
 {:else if data.view.slug === 'connections'}
+  <h3>Buzzwords</h3>
   <Buzzwords buzzwords={data.view.buzzwords}/>
 {/if}
