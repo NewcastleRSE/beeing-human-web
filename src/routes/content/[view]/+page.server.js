@@ -95,7 +95,10 @@ export async function load({ fetch, params }) {
     let buzzwords = []
     for (const buzz in listBuzzWords) {
       const {metadata, content} = parseMD(listBuzzWords[buzz]);
-       buzzwords.push({...metadata, content: content});
+      if (metadata.tags) {
+        metadata.tags = metadata.tags.split(', ');
+      }
+      buzzwords.push({...metadata, content: content});
     }
     view['buzzwords'] = buzzwords;
   }

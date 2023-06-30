@@ -58,6 +58,13 @@
                 {#if buzzword.author}
                     <p class="byline">by {buzzword.author}</p>
                 {/if}
+                {#if buzzword.tags}
+                    <div class="tags">
+                        {#each buzzword.tags as tag}
+                            <span class="chip variant-ghost">{tag}</span>
+                        {/each}
+                    </div>
+                {/if}
             </footer>
         </div>
     {/each}
@@ -82,5 +89,14 @@
 
     .byline {
         font-size: small;
+    }
+
+    .tags {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .chip {
+        font-size: x-small;
     }
 </style>
