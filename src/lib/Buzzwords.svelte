@@ -1,28 +1,9 @@
 <script>
     import { onMount } from 'svelte';
     import InjectMd from './InjectMD.svelte';
+    import {daysOfTheWeek, monthsOfTheYear} from '../utils/generalConstants'
 
     export let buzzwords;
-
-    const daysOfTheWeek = ['Sunday',
-                        'Monday',
-                        'Tuesday',
-                        'Wednesday',
-                        'Thursday',
-                        'Friday',
-                        'Saturday'];
-    const monthsOfTheYear = ['January',
-                            'February',
-                            'March',
-                            'April',
-                            'May',
-                            'June',
-                            'July',
-                            'August',
-                            'September',
-                            'October',
-                            'November',
-                            'December'];
 
     function shuffle(array) {
         // randomize order of the array
