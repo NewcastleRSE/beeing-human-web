@@ -5,6 +5,8 @@
     import {capitaliseFirstLetter} from '../utils/stringOperations';
 
     export let buzzwords;
+    export let listTags;
+    export let listAuthors;
 
     function shuffle(array) {
         // randomize order of the array
@@ -27,6 +29,14 @@
 
 </script>
 
+{#each listTags as tag}
+    <span class="chip">{tag}</span>
+{/each}
+
+{#each listAuthors as author}
+    <span class="chip variant-ghost">{author}</span>
+{/each}
+
 <div class="card-collection">
     {#each buzzwords as buzzword}
         <div class="card">
@@ -38,7 +48,7 @@
             <section class="p-4"><InjectMd content = {buzzword.content}/></section>
             <footer class="card-footer">
                 {#if buzzword.author}
-                    <p class="byline">by {buzzword.author}</p>
+                    <p class="byline">by {capitaliseFirstLetter(buzzword.author)}</p>
                 {/if}
                 {#if buzzword.tags}
                     <div class="tags">

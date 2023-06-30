@@ -7,7 +7,7 @@
   import MeiSimple from "../../../lib/MEISimple.svelte";
   import Buzzwords from "../../../lib/Buzzwords.svelte";
 
-  console.log(data.view.buzzwords);
+  // console.log(data.view.buzzwords);
 
 </script>
 
@@ -33,5 +33,5 @@
   {/if}
 {:else if data.view.slug === 'connections'}
   <h3>Buzzwords</h3>
-  <Buzzwords buzzwords={data.view.buzzwords}/>
+  <Buzzwords buzzwords={data.view.buzzwords} listTags={data.view.buzzwordTags} listAuthors={data.view.buzzwordAuthors}/>
 {/if}

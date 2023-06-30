@@ -2,6 +2,7 @@ import { views } from "../data.js";
 import { error } from "@sveltejs/kit";
 import parseMD from "parse-md";
 import { loadMei } from "../../../utils/loadFunctions.js";
+import { getListOfUniqueElements } from "../../../utils/stringOperations.js";
 
 
 export async function load({ fetch, params }) {
@@ -13,7 +14,6 @@ export async function load({ fetch, params }) {
   // get list of sections
   // import.meta.glob does not allow for dynamic variables in the search path, so it needs a switch statement to adjust based on the selected view
   // will need to be adapted if different/more views are necessary
-  console.log(view.slug);
   switch (view.slug) {
     case "literature":
       listSections = import.meta.glob("/static/content/literature/*.md", {
@@ -98,10 +98,20 @@ export async function load({ fetch, params }) {
       if (metadata.tags) {
         // splits the tags into an array, ensuring they are all lowercase
         metadata.tags = metadata.tags.toLowerCase().split(', ');
+        metadata.author = metadata.author.toLowerCase();
       }
       buzzwords.push({...metadata, content: content});
     }
+    // create list of tags for buzzwords
+    let tags = buzzwords.map(entry => entry.tags).flat();
+    // get a list of unique elements in the array and remove any undefined
+    tags = getListOfUniqueElements(tags);
     view['buzzwords'] = buzzwords;
+    view['buzzwordTags'] = tags;
+
+    // create a list of authors
+    let authors = getListOfUniqueElements(buzzwords.map(entry => entry.author));
+    view['buzzwordAuthors'] = authors;
   }
 
   return {
