@@ -1,7 +1,8 @@
 <script>
     import { onMount } from 'svelte';
     import InjectMd from './InjectMD.svelte';
-    import {daysOfTheWeek, monthsOfTheYear} from '../utils/generalConstants'
+    import {daysOfTheWeek, monthsOfTheYear} from '../utils/generalConstants';
+    import {capitaliseFirstLetter} from '../utils/stringOperations';
 
     export let buzzwords;
 
@@ -42,7 +43,7 @@
                 {#if buzzword.tags}
                     <div class="tags">
                         {#each buzzword.tags as tag}
-                            <span class="chip variant-ghost">{tag}</span>
+                            <span class="chip variant-ghost">{capitaliseFirstLetter(tag)}</span>
                         {/each}
                     </div>
                 {/if}
