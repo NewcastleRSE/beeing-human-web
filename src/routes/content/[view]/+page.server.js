@@ -96,7 +96,8 @@ export async function load({ fetch, params }) {
     for (const buzz in listBuzzWords) {
       const {metadata, content} = parseMD(listBuzzWords[buzz]);
       if (metadata.tags) {
-        metadata.tags = metadata.tags.split(', ');
+        // splits the tags into an array, ensuring they are all lowercase
+        metadata.tags = metadata.tags.toLowerCase().split(', ');
       }
       buzzwords.push({...metadata, content: content});
     }
