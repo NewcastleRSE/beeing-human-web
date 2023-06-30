@@ -4,6 +4,8 @@
     import {daysOfTheWeek, monthsOfTheYear} from '../utils/generalConstants';
     import {capitaliseFirstLetter} from '../utils/stringOperations';
 
+    import TagSelector from './TagSelector.svelte';
+
     export let buzzwords;
     export let listTags;
     export let listAuthors;
@@ -29,13 +31,11 @@
 
 </script>
 
-{#each listTags as tag}
-    <span class="chip">{tag}</span>
-{/each}
 
-{#each listAuthors as author}
-    <span class="chip variant-ghost">{author}</span>
-{/each}
+<div class="filters">
+    <TagSelector listTags = {listAuthors}/>
+    <TagSelector listTags = {listTags}/>
+</div>
 
 <div class="card-collection">
     {#each buzzwords as buzzword}
@@ -90,5 +90,11 @@
 
     .chip {
         font-size: x-small;
+    }
+
+    .filters {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 </style>
