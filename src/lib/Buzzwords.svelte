@@ -40,11 +40,22 @@
     }
 
     function filterBuzzWords(filteredBuzzwords, filterAuthors, filterTags) {
+        
+        if (filterAuthors.length === 0 && filterTags.length === 0) {
+            // if both filters are empty, simply return the entire buzzword set
+            return buzzwords
+        } else if(filterAuthors.length === 0 || filterTags.length === 0) {
+            // if either filter is empty, reset to the entire buzzword set
+            filteredBuzzwords = buzzwords;
+        }
+
         let filteredAuthors = filteredBuzzwords.filter(function(entry) {
-            if (filterAuthors.length > 0 && filterAuthors.includes(entry.author)) {
-                return entry.author;
-            } else if (filterAuthors.length === 0) {
-                return entry.author;
+            if (entry.author) {
+                if (filterAuthors.length > 0 && filterAuthors.includes(entry.author)) {
+                    return entry.author;
+                } else if (filterAuthors.length === 0) {
+                    return entry.author;
+                }
             }
         });
 
@@ -59,22 +70,17 @@
         });
 
         let bothFilters = []
-        console.log('filtered buzzwords: ', filteredBuzzwords);
         if (filteredAuthors.length < filteredBuzzwords.length && filteredTags.length < filteredBuzzwords.length) {
-            bothFilters = filterAuthors.filter(entry => filterTags.includes(entry));
+            bothFilters = filteredAuthors.filter(entry => filteredTags.includes(entry));
         } else if (filteredAuthors.length < filteredBuzzwords.length) {
-            console.log('entere here');
             bothFilters = filteredAuthors;
         } else if (filteredTags.length < filteredBuzzwords.length) {
             bothFilters = filteredTags;
         } else if (filteredAuthors.length === filteredBuzzwords.length && filteredTags.length === filteredBuzzwords.length) {
             bothFilters = filteredBuzzwords;
         }
-        console.log(filteredAuthors);
-        console.log(filteredTags);
-        console.log(bothFilters);
         
-        return filteredBuzzwords;
+        return bothFilters;
     }
 
     onMount( () => {
