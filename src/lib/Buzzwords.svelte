@@ -2,13 +2,16 @@
     import { onMount } from 'svelte';
     import InjectMd from './InjectMD.svelte';
     import {daysOfTheWeek, monthsOfTheYear} from '../utils/generalConstants';
-    import {capitaliseFirstLetter} from '../utils/stringOperations';
+    import {capitaliseFirstLetter, getListOfUniqueElements} from '../utils/stringOperations';
 
     import TagSelector from './TagSelector.svelte';
 
     export let buzzwords;
     export let listTags;
     export let listAuthors;
+
+    let reactiveListAuthors = [];
+    let reactiveListTags = [];
 
     let filterAuthors = [];
     let filterTags = [];
@@ -86,14 +89,29 @@
     onMount( () => {
         buzzwords = shuffle(buzzwords)
         filteredBuzzwords = buzzwords;
+        reactiveListAuthors = listAuthors;
+        reactiveListTags = listTags;
     })
+
+    $: {
+        if (filterTags.length === 0 && filterAuthors.length >= 1) {
+            reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
+        } else if (filterAuthors.length === 0 && filterTags.length >= 1) {
+            reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
+        } else if (filterAuthors.length >= 1) {
+            reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
+        } else {
+            reactiveListAuthors = listAuthors;
+            reactiveListTags = listTags;
+        }
+    }
 
 </script>
 
 
 <div class="filters">
-    <TagSelector listTags = {listAuthors} filter = 'authors' on:filter-changed={handleFilterChange}/>
-    <TagSelector listTags = {listTags} filter = 'tags' on:filter-changed={handleFilterChange}/>
+    <TagSelector listTags = {reactiveListAuthors} filter = 'authors' on:filter-changed={handleFilterChange}/>
+    <TagSelector listTags = {reactiveListTags} filter = 'tags' on:filter-changed={handleFilterChange}/>
 </div>
 
 <div class="card-collection">
