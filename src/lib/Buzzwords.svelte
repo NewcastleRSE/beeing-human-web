@@ -10,6 +10,11 @@
     export let listTags;
     export let listAuthors;
 
+    let filterAuthors = [];
+    let filterTags = [];
+
+    let filteredBuzzwords = [];
+
     function shuffle(array) {
         // randomize order of the array
         let currentIndex = array.length,  randomIndex;
@@ -22,23 +27,71 @@
             [array[currentIndex], array[randomIndex]] = [
             array[randomIndex], array[currentIndex]];
         }
-    return array;
+        return array;
+    }
+
+    function handleFilterChange(event) {
+        if (event.detail.filter === 'authors') {
+            filterAuthors = event.detail.selected;
+        } else if (event.detail.filter === 'tags') {
+            filterTags = event.detail.selected;
+        }
+        filteredBuzzwords = filterBuzzWords(filteredBuzzwords, filterAuthors, filterTags);
+    }
+
+    function filterBuzzWords(filteredBuzzwords, filterAuthors, filterTags) {
+        let filteredAuthors = filteredBuzzwords.filter(function(entry) {
+            if (filterAuthors.length > 0 && filterAuthors.includes(entry.author)) {
+                return entry.author;
+            } else if (filterAuthors.length === 0) {
+                return entry.author;
+            }
+        });
+
+        let filteredTags = filteredBuzzwords.filter(function(entry) {
+            if (entry.tags){
+                if (filterTags.length > 0 && entry.tags.some(tag => filterTags.includes(tag))) {
+                    return entry.tags;
+                } else if (filterTags.length === 0) {
+                    return entry.tags;
+                }
+            }
+        });
+
+        let bothFilters = []
+        console.log('filtered buzzwords: ', filteredBuzzwords);
+        if (filteredAuthors.length < filteredBuzzwords.length && filteredTags.length < filteredBuzzwords.length) {
+            bothFilters = filterAuthors.filter(entry => filterTags.includes(entry));
+        } else if (filteredAuthors.length < filteredBuzzwords.length) {
+            console.log('entere here');
+            bothFilters = filteredAuthors;
+        } else if (filteredTags.length < filteredBuzzwords.length) {
+            bothFilters = filteredTags;
+        } else if (filteredAuthors.length === filteredBuzzwords.length && filteredTags.length === filteredBuzzwords.length) {
+            bothFilters = filteredBuzzwords;
+        }
+        console.log(filteredAuthors);
+        console.log(filteredTags);
+        console.log(bothFilters);
+        
+        return filteredBuzzwords;
     }
 
     onMount( () => {
-        buzzwords = shuffle(buzzwords);
+        buzzwords = shuffle(buzzwords)
+        filteredBuzzwords = buzzwords;
     })
 
 </script>
 
 
 <div class="filters">
-    <TagSelector listTags = {listAuthors}/>
-    <TagSelector listTags = {listTags}/>
+    <TagSelector listTags = {listAuthors} filter = 'authors' on:filter-changed={handleFilterChange}/>
+    <TagSelector listTags = {listTags} filter = 'tags' on:filter-changed={handleFilterChange}/>
 </div>
 
 <div class="card-collection">
-    {#each buzzwords as buzzword}
+    {#each filteredBuzzwords as buzzword}
         <div class="card">
             <header class="card-header">
                 {#if buzzword.date}
@@ -85,6 +138,7 @@
 
     .tags {
         display: flex;
+        flex-wrap: wrap;
         gap: 0.5rem;
     }
 
