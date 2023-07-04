@@ -63,15 +63,21 @@
         });
 
         // Need to refine this -- should only show buzzwords that contain all the tags in filterTags
-        let filteredTags = filteredBuzzwords.filter(function(entry) {
-            if (entry.tags){
-                if (filterTags.length > 0 && entry.tags.some(tag => filterTags.includes(tag))) {
-                    return entry.tags;
-                } else if (filterTags.length === 0) {
-                    return entry.tags;
-                }
+        // let filteredTags = filteredBuzzwords.filter(function(entry) {
+        //     if (entry.tags){
+        //         if (filterTags.length > 0 && entry.tags.some(tag => filterTags.includes(tag))) {
+        //             return entry.tags;
+        //         } else if (filterTags.length === 0) {
+        //             return entry.tags;
+        //         }
+        //     }
+        // });
+        let filteredTags = []
+        for (let buzzword of filteredBuzzwords) {
+            if (buzzword.tags && filterTags.every(tag => buzzword.tags.includes(tag))) {
+                filteredTags.push(buzzword);
             }
-        });
+        }
 
         let bothFilters = []
         if (filteredAuthors.length < filteredBuzzwords.length && filteredTags.length < filteredBuzzwords.length) {
