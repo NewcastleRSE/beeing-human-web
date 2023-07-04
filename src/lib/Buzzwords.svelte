@@ -62,6 +62,7 @@
             }
         });
 
+        // Need to refine this -- should only show buzzwords that contain all the tags in filterTags
         let filteredTags = filteredBuzzwords.filter(function(entry) {
             if (entry.tags){
                 if (filterTags.length > 0 && entry.tags.some(tag => filterTags.includes(tag))) {
@@ -100,10 +101,15 @@
             reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
         } else if (filterAuthors.length >= 1) {
             reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
+        } else if (filterTags.length >= 1 ) {
+            reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
         } else {
             reactiveListAuthors = listAuthors;
             reactiveListTags = listTags;
         }
+        // ensures active filters are always included, even if they are note present in the filtered buzzwords
+        reactiveListAuthors = getListOfUniqueElements([...reactiveListAuthors, ...filterAuthors]);
+        reactiveListTags = getListOfUniqueElements([...reactiveListTags, ...filterTags]);
     }
 
 </script>

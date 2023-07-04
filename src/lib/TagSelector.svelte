@@ -22,13 +22,27 @@
         } else {
             selectedTags = [...selectedTags, tag];
         }
+        
+        // enable or disable reset button
+        const resetButton = document.getElementById(`${filter}-reset`);
+        if (selectedTags.length > 0) {
+            resetButton.disabled = false;
+        } else {
+            resetButton.disabled = true;
+        }
+    }
+
+    function resetFilter () {
+        selectedTags = [];
     }
 </script>
 
 <div class="tag-selector-container">
+    <h4>{filter}</h4>
     {#each listTags as tag}
-        <span class="chip {selectedTags.includes(tag) ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{tag}</span>
+        <button class="chip {selectedTags.includes(tag) ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{tag}</button>
     {/each}
+    <button id="{filter}-reset" class="chip variant-filled-surface" on:click={resetFilter} on:keypress disabled>Reset</button>
 </div>
 
 <style>
@@ -37,5 +51,9 @@
         flex-wrap: wrap;
         gap: 0.5rem;
         width: 70%;
+    }
+
+    .tag-selector-container h4 {
+        width: 100%;
     }
 </style>
