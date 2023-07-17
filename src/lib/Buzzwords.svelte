@@ -47,11 +47,12 @@
         if (filterAuthors.length === 0 && filterTags.length === 0) {
             // if both filters are empty, simply return the entire buzzword set
             return buzzwords
-        } else if(filterAuthors.length === 0 || filterTags.length === 0) {
-            // if either filter is empty, reset to the entire buzzword set
+        } else {
+            // otherwise, reset the filteredBuzzwords for the entire dataset
             filteredBuzzwords = buzzwords;
         }
 
+        // Filtering authors is additive -- i.e., the more filters you select, the more results you will get (i.e., all posts of author x plus all posts of author y)
         let filteredAuthors = filteredBuzzwords.filter(function(entry) {
             if (entry.author) {
                 if (filterAuthors.length > 0 && filterAuthors.includes(entry.author)) {
@@ -61,9 +62,8 @@
                 }
             }
         });
-
-        // Need to refine this -- should only show buzzwords that contain all the tags in filterTags
         
+        // Filtering tags is subtractive -- i.e., the more filters you select, the less results you have (i.e., i.e., all posts with tag x and tag y) -- still not sure if this is the more intuitive solution
         let filteredTags = []
         for (let buzzword of filteredBuzzwords) {
             if (buzzword.tags && filterTags.every(tag => buzzword.tags.includes(tag))) {
@@ -125,7 +125,9 @@
         if (filterTags.length === 0 && filterAuthors.length >= 1) {
             reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
         } else if (filterAuthors.length === 0 && filterTags.length >= 1) {
+            // because filtering by tags is subtractive, everytime one tag is selected, the available filters should be reduced
             reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
+            reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
         } else if (filterAuthors.length >= 1) {
             reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
         } else if (filterTags.length >= 1 ) {
