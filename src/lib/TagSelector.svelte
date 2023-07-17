@@ -23,6 +23,10 @@
             selectedTags = [...selectedTags, tag];
         }
         
+        updateResetButton();
+    }
+
+    function updateResetButton() {
         // enable or disable reset button
         const resetButton = document.getElementById(`${filter}-reset`);
         if (selectedTags.length > 0) {
@@ -34,6 +38,7 @@
 
     function resetFilter () {
         selectedTags = [];
+        updateResetButton();
     }
 </script>
 
