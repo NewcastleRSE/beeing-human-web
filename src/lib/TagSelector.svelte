@@ -1,5 +1,6 @@
 <script>
     import {createEventDispatcher} from 'svelte';
+    import { removeSpaces } from '../utils/stringOperations';
 
     const dispatch = createEventDispatcher();
 
@@ -45,7 +46,7 @@
 <div class="tag-selector-container">
     <h4>{filter}</h4>
     {#each listTags.sort() as tag}
-        <button class="chip {selectedTags.includes(tag) ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{tag}</button>
+        <button id={removeSpaces(tag)}-filter class="chip {selectedTags.includes(tag) ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{tag}</button>
     {/each}
     <button id="{filter}-reset" class="chip variant-filled-surface" on:click={resetFilter} on:keypress disabled>Reset</button>
 </div>

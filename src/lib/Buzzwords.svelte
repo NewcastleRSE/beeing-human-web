@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import InjectMd from './InjectMD.svelte';
     import {daysOfTheWeek, monthsOfTheYear} from '../utils/generalConstants';
-    import {capitaliseFirstLetter, getListOfUniqueElements} from '../utils/stringOperations';
+    import {capitaliseFirstLetter, getListOfUniqueElements, removeSpaces} from '../utils/stringOperations';
 
     import TagSelector from './TagSelector.svelte';
 
@@ -63,15 +63,7 @@
         });
 
         // Need to refine this -- should only show buzzwords that contain all the tags in filterTags
-        // let filteredTags = filteredBuzzwords.filter(function(entry) {
-        //     if (entry.tags){
-        //         if (filterTags.length > 0 && entry.tags.some(tag => filterTags.includes(tag))) {
-        //             return entry.tags;
-        //         } else if (filterTags.length === 0) {
-        //             return entry.tags;
-        //         }
-        //     }
-        // });
+        
         let filteredTags = []
         for (let buzzword of filteredBuzzwords) {
             if (buzzword.tags && filterTags.every(tag => buzzword.tags.includes(tag))) {
@@ -100,6 +92,35 @@
         reactiveListTags = listTags;
     })
 
+    function updateFilterButtons(rlistAuthors, rlistTags) {
+        // Checks whether a filter button is part of the reactive list of authors or tags (i.e., from the currently available buzzwords) -- if it isn't, it disables the button (meaning it is not available to further refine the criteria)
+        for (let author of listAuthors) {
+            try {
+                const authorFilterChip = document.getElementById(`${removeSpaces(author)}-filter`);
+                if (rlistAuthors.includes(author)) {
+                    authorFilterChip.disabled = false;
+                } else {
+                    authorFilterChip.disabled = true;
+                }
+            } catch (error) {
+                console.debug(`Component is still mounting, element with id ${removeSpaces(author)}-filter does not exist yet. {error}`);
+            }
+        }
+
+        for (let tag of listTags) {
+            try {
+                const tagFilterChip = document.getElementById(`${removeSpaces(tag)}-filter`);
+                if (rlistTags.includes(tag)) {
+                    tagFilterChip.disabled = false;
+                } else {
+                    tagFilterChip.disabled = true;
+                }
+            } catch (error) {
+                console.debug(`Component is still mounting, element with id ${removeSpaces(tag)}-filter does not exist yet. ${error}`);
+            }
+        }
+    }
+
     $: {
         if (filterTags.length === 0 && filterAuthors.length >= 1) {
             reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
@@ -116,39 +137,49 @@
         // ensures active filters are always included, even if they are note present in the filtered buzzwords
         reactiveListAuthors = getListOfUniqueElements([...reactiveListAuthors, ...filterAuthors]);
         reactiveListTags = getListOfUniqueElements([...reactiveListTags, ...filterTags]);
+
+        // activates or deactivates the filter buttons accordingly
+        updateFilterButtons(reactiveListAuthors, reactiveListTags);
+
     }
 
 </script>
 
 
 <div class="filters">
-    <TagSelector listTags = {reactiveListAuthors} filter = 'authors' on:filter-changed={handleFilterChange}/>
-    <TagSelector listTags = {reactiveListTags} filter = 'tags' on:filter-changed={handleFilterChange}/>
+    <TagSelector listTags = {listAuthors} filter = 'authors' on:filter-changed={handleFilterChange}/>
+    <TagSelector listTags = {listTags} filter = 'tags' on:filter-changed={handleFilterChange}/>
 </div>
 
 <div class="card-collection">
-    {#each filteredBuzzwords as buzzword}
-        <div class="card">
-            <header class="card-header">
-                {#if buzzword.date}
-                    <p class="date">{daysOfTheWeek[buzzword.date.getDay()]}, {buzzword.date.getDate()} of {monthsOfTheYear[buzzword.date.getMonth()]} {buzzword.date.getFullYear()}</p>
-                {/if}
-            </header>
-            <section class="p-4"><InjectMd content = {buzzword.content}/></section>
-            <footer class="card-footer">
-                {#if buzzword.author}
-                    <p class="byline">by {capitaliseFirstLetter(buzzword.author)}</p>
-                {/if}
-                {#if buzzword.tags}
-                    <div class="tags">
-                        {#each buzzword.tags as tag}
-                            <span class="chip variant-ghost">{capitaliseFirstLetter(tag)}</span>
-                        {/each}
-                    </div>
-                {/if}
-            </footer>
+    {#if filteredBuzzwords.length === 0}
+        <div class="empty-collection">
+            <p>No buzzwords match your criteria</p>
         </div>
-    {/each}
+    {:else}
+        {#each filteredBuzzwords as buzzword}
+            <div class="card">
+                <header class="card-header">
+                    {#if buzzword.date}
+                        <p class="date">{daysOfTheWeek[buzzword.date.getDay()]}, {buzzword.date.getDate()} of {monthsOfTheYear[buzzword.date.getMonth()]} {buzzword.date.getFullYear()}</p>
+                    {/if}
+                </header>
+                <section class="p-4"><InjectMd content = {buzzword.content}/></section>
+                <footer class="card-footer">
+                    {#if buzzword.author}
+                        <p class="byline">by {capitaliseFirstLetter(buzzword.author)}</p>
+                    {/if}
+                    {#if buzzword.tags}
+                        <div class="tags">
+                            {#each buzzword.tags as tag}
+                                <span class="chip variant-ghost">{capitaliseFirstLetter(tag)}</span>
+                            {/each}
+                        </div>
+                    {/if}
+                </footer>
+            </div>
+        {/each}
+    {/if}
 </div>
 
 <style>

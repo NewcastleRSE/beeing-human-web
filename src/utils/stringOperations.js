@@ -9,3 +9,12 @@ export function getListOfUniqueElements(array) {
     array = array.filter(entry => entry);
     return [... new Set(array)];
 }
+
+export function removeSpaces(string) {
+    // removes any spaces from string and replaces it with hyphen to allow for dynamic IDs in the html
+    if (string.includes(' ')) {
+        string = string.replace(' ', '-');
+    }
+    
+    return string
+}
