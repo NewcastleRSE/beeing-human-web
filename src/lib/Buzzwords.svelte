@@ -5,6 +5,7 @@
     import {capitaliseFirstLetter, getListOfUniqueElements, removeSpaces} from '../utils/stringOperations';
 
     import TagSelector from './TagSelector.svelte';
+    import SearchBar from './SearchBar.svelte';
 
     export let buzzwords;
     export let listTags;
@@ -121,6 +122,10 @@
         }
     }
 
+    function handleSearch(event) {
+        console.log(event.target.firstElementChild.value);
+    }
+
     $: {
         if (filterTags.length === 0 && filterAuthors.length >= 1) {
             reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
@@ -147,7 +152,9 @@
 
 </script>
 
-
+<div class="search">
+    <SearchBar on:submit={handleSearch}/>
+</div>
 <div class="filters">
     <TagSelector listTags = {listAuthors} filter = 'authors' on:filter-changed={handleFilterChange}/>
     <TagSelector listTags = {listTags} filter = 'tags' on:filter-changed={handleFilterChange}/>
