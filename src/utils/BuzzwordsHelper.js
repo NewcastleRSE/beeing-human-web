@@ -1,3 +1,5 @@
+import { splitStringIntoArray } from "./stringOperations";
+
 export function shuffle(array) {
     // randomize order of the array
     let currentIndex = array.length,  randomIndex;
@@ -34,4 +36,24 @@ export function checkSearchTagsAuthors(searchTerms, reactiveListAuthors, reactiv
     }
 
     return filtersToCheck
+}
+
+export function fullTextSearch(filteredBuzzwords, searchString, searchTerms) {
+    searchString = searchString.toLowerCase();
+    let fullMatch = [];
+    let partialMatch = [];
+    for (let buzzword of filteredBuzzwords) {
+        // full match search
+        if (buzzword.content.toLowerCase().includes(searchString)) {
+            fullMatch.push(buzzword);
+        }
+        // if there is no full match
+        if (splitStringIntoArray(buzzword.content.toLowerCase()).some(word => searchTerms.includes(word))) {
+            partialMatch.push(buzzword);
+        }
+    }
+
+    // if there is a full match return that, otherwise return a partial match
+    return fullMatch.length > 0 ? fullMatch : partialMatch
+    
 }

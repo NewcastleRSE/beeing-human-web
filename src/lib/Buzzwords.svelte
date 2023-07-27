@@ -4,7 +4,7 @@
     import {daysOfTheWeek, monthsOfTheYear} from '../utils/generalConstants';
     import {capitaliseFirstLetter, getListOfUniqueElements, removeSpaces} from '../utils/stringOperations';
 
-    import { checkSearchTagsAuthors, shuffle } from '../utils/BuzzwordsHelper';
+    import { checkSearchTagsAuthors, fullTextSearch, shuffle } from '../utils/BuzzwordsHelper';
 
     import TagSelector from './TagSelector.svelte';
     import SearchBar from './SearchBar.svelte';
@@ -18,6 +18,9 @@
 
     let filterAuthors = [];
     let filterTags = [];
+
+    let totalNrAuthors;
+    let totalNrTags;
 
     let filteredBuzzwords = [];
 
@@ -78,6 +81,8 @@
         filteredBuzzwords = buzzwords;
         reactiveListAuthors = listAuthors;
         reactiveListTags = listTags;
+        totalNrAuthors = listAuthors.length;
+        totalNrTags = listTags.length;
     })
 
     function updateFilterButtons(rlistAuthors, rlistTags) {
@@ -113,6 +118,11 @@
         // set terms to lower case
         const searchTerms = event.detail.searchTerms.map(e => e.toLowerCase());
 
+        // if there are no active filters, it will always search in the entire corpus
+        if (listAuthors.length === totalNrAuthors && listTags.length === totalNrTags) {
+            filteredBuzzwords = buzzwords;
+        }
+
         // establish whether the search terms are filters
         const filtersToCheck = checkSearchTagsAuthors(searchTerms, reactiveListAuthors, reactiveListTags);
 
@@ -129,7 +139,11 @@
 
             // filter the displayed buzzwords
             filteredBuzzwords = filterBuzzWords(filteredBuzzwords, listAuthors, listTerms);
-            updateFilterButtons(reactiveListAuthors, reactiveListTags);
+        }
+        // Full text search
+        let fullTextResults = fullTextSearch(filteredBuzzwords, event.detail.searchString, searchTerms);
+        if (fullTextResults.length > 0) {
+            filteredBuzzwords = fullTextResults
         }
     }
 
