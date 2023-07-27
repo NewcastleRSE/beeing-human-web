@@ -118,8 +118,8 @@
 
         // if the search terms are in either the authors or tags
         if (Object.keys(filtersToCheck).length > 0) {
-            let listAuthors = [];
-            let listTerms = [];
+            let listAuthors = [...filterAuthors];
+            let listTerms = [...filterTags];
             if (Object.keys(filtersToCheck).includes('authors')) {
                 listAuthors = filtersToCheck['authors'];
             }
@@ -150,6 +150,7 @@
         } else if (filterTags.length >= 1 ) {
             reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
         } else if (filteredBuzzwords.length < buzzwords.length) {
+            // adjusts filter availability if a search has been made
             reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
             reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
         } else {
