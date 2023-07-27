@@ -18,3 +18,7 @@ export function removeSpaces(string) {
     
     return string
 }
+
+export function splitStringIntoArray(string) {
+    return string.split(' ');
+}

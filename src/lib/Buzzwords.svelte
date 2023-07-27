@@ -4,6 +4,8 @@
     import {daysOfTheWeek, monthsOfTheYear} from '../utils/generalConstants';
     import {capitaliseFirstLetter, getListOfUniqueElements, removeSpaces} from '../utils/stringOperations';
 
+    import { checkSearchTagsAuthors, shuffle } from '../utils/BuzzwordsHelper';
+
     import TagSelector from './TagSelector.svelte';
     import SearchBar from './SearchBar.svelte';
 
@@ -18,21 +20,6 @@
     let filterTags = [];
 
     let filteredBuzzwords = [];
-
-    function shuffle(array) {
-        // randomize order of the array
-        let currentIndex = array.length,  randomIndex;
-        // While there remain elements to shuffle.
-        while (currentIndex != 0) {
-            // Pick a remaining element.
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-            // And swap it with the current element.
-            [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-        }
-        return array;
-    }
 
     function handleFilterChange(event) {
         if (event.detail.filter === 'authors') {
@@ -123,7 +110,31 @@
     }
 
     function handleSearch(event) {
-        console.log(event.target.firstElementChild.value);
+        // set terms to lower case
+        const searchTerms = event.detail.searchTerms.map(e => e.toLowerCase());
+
+        // establish whether the search terms are filters
+        const filtersToCheck = checkSearchTagsAuthors(searchTerms, reactiveListAuthors, reactiveListTags);
+
+        // if the search terms are in either the authors or tags
+        if (Object.keys(filtersToCheck).length > 0) {
+            let listAuthors = [];
+            let listTerms = [];
+            if (Object.keys(filtersToCheck).includes('authors')) {
+                listAuthors = filtersToCheck['authors'];
+            }
+            if (Object.keys(filtersToCheck).includes('terms')) {
+                listTerms = filtersToCheck['terms'];
+            }
+
+            // filter the displayed buzzwords
+            filteredBuzzwords = filterBuzzWords(filteredBuzzwords, listAuthors, listTerms);
+        }
+    }
+
+    function handleReset() {
+        // resets to show the entire dataset
+        filteredBuzzwords = filterBuzzWords(filteredBuzzwords, [], [])
     }
 
     $: {
@@ -153,7 +164,7 @@
 </script>
 
 <div class="search">
-    <SearchBar on:submit={handleSearch}/>
+    <SearchBar on:search={handleSearch} on:reset={handleReset}/>
 </div>
 <div class="filters">
     <TagSelector listTags = {listAuthors} filter = 'authors' on:filter-changed={handleFilterChange}/>
