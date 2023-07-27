@@ -129,12 +129,13 @@
 
             // filter the displayed buzzwords
             filteredBuzzwords = filterBuzzWords(filteredBuzzwords, listAuthors, listTerms);
+            updateFilterButtons(reactiveListAuthors, reactiveListTags);
         }
     }
 
     function handleReset() {
         // resets to show the entire dataset
-        filteredBuzzwords = filterBuzzWords(filteredBuzzwords, [], [])
+        filteredBuzzwords = buzzwords;
     }
 
     $: {
@@ -148,6 +149,9 @@
             reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
         } else if (filterTags.length >= 1 ) {
             reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
+        } else if (filteredBuzzwords.length < buzzwords.length) {
+            reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
+            reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
         } else {
             reactiveListAuthors = listAuthors;
             reactiveListTags = listTags;
