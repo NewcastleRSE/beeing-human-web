@@ -121,6 +121,8 @@
         // if there are no active filters, it will always search in the entire corpus
         if (listAuthors.length === totalNrAuthors && listTags.length === totalNrTags) {
             filteredBuzzwords = buzzwords;
+            reactiveListAuthors = listAuthors;
+            reactiveListTags = listTags;
         }
 
         // establish whether the search terms are filters
@@ -140,6 +142,7 @@
             // filter the displayed buzzwords
             filteredBuzzwords = filterBuzzWords(filteredBuzzwords, listAuthors, listTerms);
         }
+
         // Full text search
         let fullTextResults = fullTextSearch(filteredBuzzwords, event.detail.searchString, searchTerms);
         if (fullTextResults.length > 0) {
