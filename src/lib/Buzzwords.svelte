@@ -22,7 +22,10 @@
     let totalNrAuthors;
     let totalNrTags;
 
+    // necessary to restart the filter components
     let filteredBuzzwords = [];
+
+    let unique = {}
 
     function handleFilterChange(event) {
         if (event.detail.filter === 'authors') {
@@ -76,13 +79,24 @@
         return bothFilters;
     }
 
-    onMount( () => {
-        buzzwords = shuffle(buzzwords)
+    function init(shuffled) {
+        console.log('entered here')
+        if (shuffled) {
+            buzzwords = shuffle(buzzwords)
+        }
         filteredBuzzwords = buzzwords;
         reactiveListAuthors = listAuthors;
         reactiveListTags = listTags;
         totalNrAuthors = listAuthors.length;
         totalNrTags = listTags.length;
+
+        // necessary to restart the filter components
+        unique = {}
+
+    }
+
+    onMount( () => {
+        init(true);
     })
 
     function updateFilterButtons(rlistAuthors, rlistTags) {
@@ -112,6 +126,19 @@
                 console.debug(`Component is still mounting, element with id ${removeSpaces(tag)}-filter does not exist yet. ${error}`);
             }
         }
+
+        // Activates or deactivates the reset all button
+        try{
+            const resetAllButton = document.getElementById('resetAll');
+
+            if (rlistAuthors.length === totalNrAuthors && rlistTags.length === totalNrTags) {
+                resetAllButton.disabled = true;
+            } else {
+                resetAllButton.disabled = false;
+            }
+        } catch (error) {
+            console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
+        }
     }
 
     function handleSearch(event) {
@@ -119,7 +146,7 @@
         const searchTerms = event.detail.searchTerms.map(e => e.toLowerCase());
 
         // if there are no active filters, it will always search in the entire corpus
-        if (listAuthors.length === totalNrAuthors && listTags.length === totalNrTags) {
+        if (reactiveListAuthors.length === totalNrAuthors && reactiveListTags.length === totalNrTags) {
             filteredBuzzwords = buzzwords;
             reactiveListAuthors = listAuthors;
             reactiveListTags = listTags;
@@ -155,6 +182,10 @@
         filteredBuzzwords = buzzwords;
     }
 
+    function resetAll() {
+        init(false);
+    }
+
     $: {
         if (filterTags.length === 0 && filterAuthors.length >= 1) {
             reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
@@ -185,13 +216,19 @@
 
 </script>
 
-<div class="search">
-    <SearchBar on:search={handleSearch} on:reset={handleReset}/>
-</div>
-<div class="filters">
-    <TagSelector listTags = {listAuthors} filter = 'authors' on:filter-changed={handleFilterChange}/>
-    <TagSelector listTags = {listTags} filter = 'tags' on:filter-changed={handleFilterChange}/>
-</div>
+<!-- #key necessary to restart components -->
+{#key unique}
+    <div class="corpus-filtering">
+        <div class="search">
+            <SearchBar on:search={handleSearch} on:reset={handleReset}/>
+        </div>
+        <div class="filters">
+            <TagSelector listTags = {listAuthors} filter = 'authors' on:filter-changed={handleFilterChange}/>
+            <TagSelector listTags = {listTags} filter = 'tags' on:filter-changed={handleFilterChange}/>
+        </div>
+        <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button>
+    </div>
+{/key}
 
 <div class="card-collection">
     {#if filteredBuzzwords.length === 0}
