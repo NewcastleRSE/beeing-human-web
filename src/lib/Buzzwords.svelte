@@ -173,7 +173,7 @@
         let fullTextResults = fullTextSearch(filteredBuzzwords, event.detail.searchString, searchTerms);
         if (fullTextResults.length > 0) {
             filteredBuzzwords = fullTextResults
-        } else {
+        } else if (fullTextResults.length == 0 && Object.keys(filtersToCheck).length == 0){
             filteredBuzzwords = [];
         }
     }
