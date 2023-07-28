@@ -221,7 +221,7 @@
 {#key unique}
     <div class="corpus-filtering">
         <div class="search">
-            <SearchBar on:search={handleSearch} on:reset={handleReset}/>
+            <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={listAuthors}/>
         </div>
         <div class="filters">
             <TagSelector listTags = {listAuthors} filter = 'authors' on:filter-changed={handleFilterChange}/>
