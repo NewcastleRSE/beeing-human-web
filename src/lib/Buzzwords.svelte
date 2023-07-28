@@ -80,7 +80,6 @@
     }
 
     function init(shuffled) {
-        console.log('entered here')
         if (shuffled) {
             buzzwords = shuffle(buzzwords)
         }
@@ -174,6 +173,8 @@
         let fullTextResults = fullTextSearch(filteredBuzzwords, event.detail.searchString, searchTerms);
         if (fullTextResults.length > 0) {
             filteredBuzzwords = fullTextResults
+        } else {
+            filteredBuzzwords = [];
         }
     }
 
