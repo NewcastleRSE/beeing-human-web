@@ -145,7 +145,7 @@
         const searchTerms = event.detail.searchTerms.map(e => e.toLowerCase());
 
         // if there are no active filters, it will always search in the entire corpus
-        if (reactiveListAuthors.length === totalNrAuthors && reactiveListTags.length === totalNrTags) {
+        if (filterTags.length === 0 && filterAuthors.length === 0) {
             filteredBuzzwords = buzzwords;
             reactiveListAuthors = listAuthors;
             reactiveListTags = listTags;
@@ -221,7 +221,7 @@
 {#key unique}
     <div class="corpus-filtering">
         <div class="search">
-            <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={listAuthors}/>
+            <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={[...listAuthors, ...listTags]}/>
         </div>
         <div class="filters">
             <TagSelector listTags = {listAuthors} filter = 'authors' on:filter-changed={handleFilterChange}/>
