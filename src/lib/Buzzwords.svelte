@@ -6,12 +6,17 @@
 
     import { checkSearchTagsAuthors, fullTextSearch, shuffle } from '../utils/BuzzwordsHelper';
 
+    import { Filter } from '../classes/Filters'
+
     import TagSelector from './TagSelector.svelte';
     import SearchBar from './SearchBar.svelte';
 
     export let buzzwords;
     export let listTags;
     export let listAuthors;
+
+    // array of filter objects
+    let filters = []
 
     let reactiveListAuthors = [];
     let reactiveListTags = [];
@@ -89,6 +94,15 @@
         totalNrAuthors = listAuthors.length;
         totalNrTags = listTags.length;
 
+        for (let tag of listTags) {
+            filters.push(new Filter(tag, 'tag'))
+        }
+
+        for (let author of listAuthors) {
+            filters.push(new Filter(author, 'author'))
+        }
+
+        console.log(filters);
         // necessary to restart the filter components
         unique = {}
 
@@ -99,30 +113,17 @@
     })
 
     function updateFilterButtons(rlistAuthors, rlistTags) {
-        // Checks whether a filter button is part of the reactive list of authors or tags (i.e., from the currently available buzzwords) -- if it isn't, it disables the button (meaning it is not available to further refine the criteria)
-        for (let author of listAuthors) {
+        // Checks whether a filter button should be available or not
+        for (let filter of filters) {
             try {
-                const authorFilterChip = document.getElementById(`${removeSpaces(author)}-filter`);
-                if (rlistAuthors.includes(author)) {
-                    authorFilterChip.disabled = false;
+                const filterChip = document.getElementById(`${removeSpaces(filter.name)}-filter`)
+                if (filter.available) {
+                    filterChip.disabled = false;
                 } else {
-                    authorFilterChip.disabled = true;
+                    filterChip.disabled = true;
                 }
             } catch (error) {
-                console.debug(`Component is still mounting, element with id ${removeSpaces(author)}-filter does not exist yet. {error}`);
-            }
-        }
-
-        for (let tag of listTags) {
-            try {
-                const tagFilterChip = document.getElementById(`${removeSpaces(tag)}-filter`);
-                if (rlistTags.includes(tag)) {
-                    tagFilterChip.disabled = false;
-                } else {
-                    tagFilterChip.disabled = true;
-                }
-            } catch (error) {
-                console.debug(`Component is still mounting, element with id ${removeSpaces(tag)}-filter does not exist yet. ${error}`);
+                console.debug(`Component is still mounting, element with id ${removeSpaces(filter.name)}-filter does not exist yet. {error}`);
             }
         }
 
@@ -224,8 +225,8 @@
             <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={[...listAuthors, ...listTags]}/>
         </div>
         <div class="filters">
-            <TagSelector listTags = {listAuthors} filter = 'authors' on:filter-changed={handleFilterChange}/>
-            <TagSelector listTags = {listTags} filter = 'tags' on:filter-changed={handleFilterChange}/>
+            <TagSelector listTags = {filters.filter(el => el.type === 'author')} filter = 'authors' on:filter-changed={handleFilterChange}/>
+            <TagSelector listTags = {filters.filter(el => el.type === 'tag')} filter = 'tags' on:filter-changed={handleFilterChange}/>
         </div>
         <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button>
     </div>

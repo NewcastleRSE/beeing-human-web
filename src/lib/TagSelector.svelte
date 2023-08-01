@@ -46,8 +46,8 @@
 
 <div class="tag-selector-container">
     <h4>{filter}</h4>
-    {#each listTags.sort() as tag}
-        <button id={removeSpaces(tag)}-filter class="chip {selectedTags.includes(tag) ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{filter === 'authors' ? capitaliseFirstLetter(tag) : tag}</button>
+    {#each listTags as tag}
+        <button id={removeSpaces(tag.name)}-filter class="chip {tag.active ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{filter === 'authors' ? capitaliseFirstLetter(tag.name) : tag.name}</button>
     {/each}
     <button id="{filter}-reset" class="chip variant-filled-surface" on:click={resetFilter} on:keypress disabled>Reset</button>
 </div>
