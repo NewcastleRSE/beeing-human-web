@@ -102,7 +102,6 @@
             filters.addFilter(author, 'author');
         }
 
-        console.log(filters.getFilterList());
         // necessary to restart the filter components
         unique = {}
 

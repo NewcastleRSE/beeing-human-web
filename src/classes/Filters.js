@@ -12,6 +12,15 @@ export class Filters {
         this.filterList = [];
     }
 
+    // iterator
+    [Symbol.iterator]() {
+        let index = -1;
+        let data = this.filterList;
+        return {
+            next: () => ({value: data[++index], done: !(index in data)})
+        }
+    }
+
     addFilter(name, type) {
         let newFilter = new Filter(name, type);
         this.filterList.push(newFilter);
