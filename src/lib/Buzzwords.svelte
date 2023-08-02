@@ -102,6 +102,10 @@
             filters.addFilter(author, 'author');
         }
 
+
+        console.log(filters.getFiltersByName('tiago'));
+        filters.changeFilterAvailability('tiago', false);
+        console.log(filters.getFiltersByName('tiago'));
         // necessary to restart the filter components
         unique = {}
 
@@ -113,31 +117,31 @@
 
     function updateFilterButtons(rlistAuthors, rlistTags) {
         // Checks whether a filter button should be available or not
-        // for (let filter of filters) {
-        //     try {
-        //         const filterChip = document.getElementById(`${removeSpaces(filter.name)}-filter`)
-        //         if (filter.available) {
-        //             filterChip.disabled = false;
-        //         } else {
-        //             filterChip.disabled = true;
-        //         }
-        //     } catch (error) {
-        //         console.debug(`Component is still mounting, element with id ${removeSpaces(filter.name)}-filter does not exist yet. {error}`);
-        //     }
-        // }
+        for (let filter of filters) {
+            try {
+                const filterChip = document.getElementById(`${removeSpaces(filter.name)}-filter`)
+                if (filter.available) {
+                    filterChip.disabled = false;
+                } else {
+                    filterChip.disabled = true;
+                }
+            } catch (error) {
+                console.debug(`Component is still mounting, element with id ${removeSpaces(filter.name)}-filter does not exist yet. ${error}`);
+            }
+        }
 
-        // // Activates or deactivates the reset all button
-        // try{
-        //     const resetAllButton = document.getElementById('resetAll');
+        // Activates or deactivates the reset all button
+        try{
+            const resetAllButton = document.getElementById('resetAll');
 
-        //     if (rlistAuthors.length === totalNrAuthors && rlistTags.length === totalNrTags) {
-        //         resetAllButton.disabled = true;
-        //     } else {
-        //         resetAllButton.disabled = false;
-        //     }
-        // } catch (error) {
-        //     console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
-        // }
+            if (rlistAuthors.length === totalNrAuthors && rlistTags.length === totalNrTags) {
+                resetAllButton.disabled = true;
+            } else {
+                resetAllButton.disabled = false;
+            }
+        } catch (error) {
+            console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
+        }
     }
 
     function handleSearch(event) {

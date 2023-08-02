@@ -26,7 +26,7 @@ export class Filters {
         this.filterList.push(newFilter);
     }
 
-    getFilterList() {
+    getFilterNameList() {
         let filters = [];
         for (let filter of this.filterList) {
             filters.push(filter.name)
@@ -36,5 +36,37 @@ export class Filters {
 
     getFiltersByType(type) {
         return this.filterList.filter(el => el.type === type);
+    }
+
+    getFiltersByName(name) {
+        let foundFilter = undefined;
+        for (let f of this.filterList) {
+            if (f.name === name) {
+                foundFilter = f
+            }
+        }
+        return foundFilter
+    }
+
+    getFilterIndexByName(name) {
+        let foundFilter = undefined;
+        for (let i in this.filterList) {
+            if (this.filterList[i].name === name) {
+                foundFilter = i
+            }
+        }
+        return foundFilter;
+    }
+
+    replaceFiltersByName(name, filter) {
+        this.filterList[this.getFilterIndexByName(name)] = filter;
+        return this.filterList
+    }
+
+    changeFilterAvailability(name, availability) {
+        let filter = this.getFiltersByName(name);
+        filter.available = availability;
+        this.filterList = this.replaceFiltersByName(name, filter)
+        return this.filterList
     }
 }
