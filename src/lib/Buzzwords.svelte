@@ -6,7 +6,7 @@
 
     import { checkSearchTagsAuthors, fullTextSearch, shuffle } from '../utils/BuzzwordsHelper';
 
-    import { Filter } from '../classes/Filters'
+    import { Filters } from '../classes/Filters'
 
     import TagSelector from './TagSelector.svelte';
     import SearchBar from './SearchBar.svelte';
@@ -16,7 +16,7 @@
     export let listAuthors;
 
     // array of filter objects
-    let filters = []
+    let filters = new Filters();
 
     let reactiveListAuthors = [];
     let reactiveListTags = [];
@@ -95,14 +95,14 @@
         totalNrTags = listTags.length;
 
         for (let tag of listTags) {
-            filters.push(new Filter(tag, 'tag'))
+            filters.addFilter(tag, 'tag');
         }
 
         for (let author of listAuthors) {
-            filters.push(new Filter(author, 'author'))
+            filters.addFilter(author, 'author');
         }
 
-        console.log(filters);
+        console.log(filters.getFilterList());
         // necessary to restart the filter components
         unique = {}
 
@@ -114,31 +114,31 @@
 
     function updateFilterButtons(rlistAuthors, rlistTags) {
         // Checks whether a filter button should be available or not
-        for (let filter of filters) {
-            try {
-                const filterChip = document.getElementById(`${removeSpaces(filter.name)}-filter`)
-                if (filter.available) {
-                    filterChip.disabled = false;
-                } else {
-                    filterChip.disabled = true;
-                }
-            } catch (error) {
-                console.debug(`Component is still mounting, element with id ${removeSpaces(filter.name)}-filter does not exist yet. {error}`);
-            }
-        }
+        // for (let filter of filters) {
+        //     try {
+        //         const filterChip = document.getElementById(`${removeSpaces(filter.name)}-filter`)
+        //         if (filter.available) {
+        //             filterChip.disabled = false;
+        //         } else {
+        //             filterChip.disabled = true;
+        //         }
+        //     } catch (error) {
+        //         console.debug(`Component is still mounting, element with id ${removeSpaces(filter.name)}-filter does not exist yet. {error}`);
+        //     }
+        // }
 
-        // Activates or deactivates the reset all button
-        try{
-            const resetAllButton = document.getElementById('resetAll');
+        // // Activates or deactivates the reset all button
+        // try{
+        //     const resetAllButton = document.getElementById('resetAll');
 
-            if (rlistAuthors.length === totalNrAuthors && rlistTags.length === totalNrTags) {
-                resetAllButton.disabled = true;
-            } else {
-                resetAllButton.disabled = false;
-            }
-        } catch (error) {
-            console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
-        }
+        //     if (rlistAuthors.length === totalNrAuthors && rlistTags.length === totalNrTags) {
+        //         resetAllButton.disabled = true;
+        //     } else {
+        //         resetAllButton.disabled = false;
+        //     }
+        // } catch (error) {
+        //     console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
+        // }
     }
 
     function handleSearch(event) {
@@ -225,8 +225,8 @@
             <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={[...listAuthors, ...listTags]}/>
         </div>
         <div class="filters">
-            <TagSelector listTags = {filters.filter(el => el.type === 'author')} filter = 'authors' on:filter-changed={handleFilterChange}/>
-            <TagSelector listTags = {filters.filter(el => el.type === 'tag')} filter = 'tags' on:filter-changed={handleFilterChange}/>
+            <TagSelector listTags = {filters.getFiltersByType('author')} filter = 'authors' on:filter-changed={handleFilterChange}/>
+            <TagSelector listTags = {filters.getFiltersByType('tag')} filter = 'tags' on:filter-changed={handleFilterChange}/>
         </div>
         <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button>
     </div>
