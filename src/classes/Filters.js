@@ -1,46 +1,46 @@
-class Filter {
-    constructor(name, type) {
-        this.name = name;
-        this.type = type;
-        this.available = true,
-        this.active = false
-    }
-}
+import { writable } from 'svelte/store';
 
-export class Filters {
+export class Filters extends Array {
     constructor() {
-        this.filterList = [];
+        writable(super());
+        // initiates the class as a store, which makes it reactive in Sveltekit
+        // this.filterList = writable([]);
+    }
+
+    subscribe(run) {
+        // A subscribe method turns anything into a store, which makes it reactive
+        return this.subscribe(run);
     }
 
     // iterator
     [Symbol.iterator]() {
         let index = -1;
-        let data = this.filterList;
+        let data = this;
         return {
             next: () => ({value: data[++index], done: !(index in data)})
         }
     }
 
     addFilter(name, type) {
-        let newFilter = new Filter(name, type);
-        this.filterList.push(newFilter);
+        let newFilter = {name: name, type: type, available: true, active: false};
+        this.push(newFilter);
     }
 
     getFilterNameList() {
         let filters = [];
-        for (let filter of this.filterList) {
+        for (let filter of this) {
             filters.push(filter.name)
         }
         return filters;
     }
 
     getFiltersByType(type) {
-        return this.filterList.filter(el => el.type === type);
+        return this.filter(el => el.type === type);
     }
 
     getFiltersByName(name) {
         let foundFilter = undefined;
-        for (let f of this.filterList) {
+        for (let f of this) {
             if (f.name === name) {
                 foundFilter = f
             }
@@ -50,23 +50,31 @@ export class Filters {
 
     getFilterIndexByName(name) {
         let foundFilter = undefined;
-        for (let i in this.filterList) {
-            if (this.filterList[i].name === name) {
+        for (let i in this) {
+            if (this[i].name === name) {
                 foundFilter = i
             }
         }
         return foundFilter;
     }
 
-    replaceFiltersByName(name, filter) {
-        this.filterList[this.getFilterIndexByName(name)] = filter;
-        return this.filterList
+    changeFilterAvailability(name, availability) {
+        this[this.getFilterIndexByName(name)].available = availability;
+        return this;
     }
 
-    changeFilterAvailability(name, availability) {
-        let filter = this.getFiltersByName(name);
-        filter.available = availability;
-        this.filterList = this.replaceFiltersByName(name, filter)
-        return this.filterList
+    toggleFilterActive(filter) {
+        const i = this.getFilterIndexByName(filter.name);
+        this[i].active = !this[i].active;
+        return this;
+    }
+
+    resetFilterActiveByType(type) {
+        for (let i = 0; i < this.length; i++){
+            if (this[i].type === type){
+                this[i].active = false;
+            }
+        }
+        return this
     }
 }

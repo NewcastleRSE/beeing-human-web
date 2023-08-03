@@ -33,12 +33,13 @@
     let unique = {}
 
     function handleFilterChange(event) {
-        if (event.detail.filter === 'authors') {
-            filterAuthors = event.detail.selected;
-        } else if (event.detail.filter === 'tags') {
-            filterTags = event.detail.selected;
-        }
-        filteredBuzzwords = filterBuzzWords(filteredBuzzwords, filterAuthors, filterTags);
+        filters = filters.toggleFilterActive(event.detail.filter);
+        // filteredBuzzwords = filterBuzzWords(filteredBuzzwords, filterAuthors, filterTags);
+    }
+
+
+    function handleResetFilters(event) {
+        filters = filters.resetFilterActiveByType(event.detail.filter)
     }
 
     function filterBuzzWords(filteredBuzzwords, filterAuthors, filterTags) {
@@ -95,17 +96,14 @@
         totalNrTags = listTags.length;
 
         for (let tag of listTags) {
-            filters.addFilter(tag, 'tag');
+            filters.addFilter(tag, 'tags');
         }
 
         for (let author of listAuthors) {
-            filters.addFilter(author, 'author');
+            filters.addFilter(author, 'authors');
         }
 
 
-        console.log(filters.getFiltersByName('tiago'));
-        filters.changeFilterAvailability('tiago', false);
-        console.log(filters.getFiltersByName('tiago'));
         // necessary to restart the filter components
         unique = {}
 
@@ -215,7 +213,7 @@
         reactiveListTags = getListOfUniqueElements([...reactiveListTags, ...filterTags]);
 
         // activates or deactivates the filter buttons accordingly
-        updateFilterButtons(reactiveListAuthors, reactiveListTags);
+        // updateFilterButtons(reactiveListAuthors, reactiveListTags);
 
     }
 
@@ -228,8 +226,8 @@
             <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={[...listAuthors, ...listTags]}/>
         </div>
         <div class="filters">
-            <TagSelector listTags = {filters.getFiltersByType('author')} filter = 'authors' on:filter-changed={handleFilterChange}/>
-            <TagSelector listTags = {filters.getFiltersByType('tag')} filter = 'tags' on:filter-changed={handleFilterChange}/>
+            <TagSelector listTags = {filters.getFiltersByType('authors')} filter = 'authors' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
+            <TagSelector listTags = {filters.getFiltersByType('tags')} filter = 'tags' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
         </div>
         <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button>
     </div>

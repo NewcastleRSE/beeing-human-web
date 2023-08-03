@@ -11,13 +11,17 @@
     // Need to fire an event when the array changes, and use that to filter the buzzwords being shown in the parent component
     // $: console.log(`${filter}: ${selectedTags}`);
     $: {
-        dispatch('filter-changed', {
-            filter: filter,
-            selected: selectedTags
-        });
+        // dispatch('filter-changed', {
+        //     filter: filter,
+        //     selected: selectedTags
+        // });
     }
 
     function handleClick(tag) {
+        dispatch('filter-changed', {
+            filter: tag
+        });
+
         if (selectedTags.includes(tag)) {
             selectedTags = selectedTags.filter(entry => entry != tag);
         } else {
@@ -40,6 +44,7 @@
 
     function resetFilter () {
         selectedTags = [];
+        dispatch('reset-filters', {filter: filter});
         updateResetButton();
     }
 </script>
