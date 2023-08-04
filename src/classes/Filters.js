@@ -77,4 +77,18 @@ export class Filters extends Array {
         }
         return this
     }
+
+    allInactive() {
+        let activeFilters = this.filter(el => el.active === true);
+        if (activeFilters.length > 0) {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    getActiveFiltersByType(type) {
+        let activeFilters = this.filter(el => el.active === true && el.type === type)
+        return Array.from(activeFilters.map((el) => el.name))
+    }
 }

@@ -34,30 +34,36 @@
 
     function handleFilterChange(event) {
         filters = filters.toggleFilterActive(event.detail.filter);
-        // filteredBuzzwords = filterBuzzWords(filteredBuzzwords, filterAuthors, filterTags);
+        filteredBuzzwords = filterBuzzWords(filteredBuzzwords);
     }
 
 
     function handleResetFilters(event) {
         filters = filters.resetFilterActiveByType(event.detail.filter)
+        filteredBuzzwords = filterBuzzWords(filteredBuzzwords);
     }
 
-    function filterBuzzWords(filteredBuzzwords, filterAuthors, filterTags) {
+    function filterBuzzWords(filteredBuzzwords) {
         
-        if (filterAuthors.length === 0 && filterTags.length === 0) {
+        let listActiveFilterAuthors = []
+        let listActiveFilterTags = []
+
+        if (filters.allInactive()) {
             // if both filters are empty, simply return the entire buzzword set
             return buzzwords
         } else {
             // otherwise, reset the filteredBuzzwords for the entire dataset
+            listActiveFilterAuthors = filters.getActiveFiltersByType('authors');
+            listActiveFilterTags = filters.getActiveFiltersByType('tags')
             filteredBuzzwords = buzzwords;
         }
 
         // Filtering authors is additive -- i.e., the more filters you select, the more results you will get (i.e., all posts of author x plus all posts of author y)
         let filteredAuthors = filteredBuzzwords.filter(function(entry) {
             if (entry.author) {
-                if (filterAuthors.length > 0 && filterAuthors.includes(entry.author)) {
+                if (listActiveFilterAuthors.length > 0 && listActiveFilterAuthors.includes(entry.author)) {
                     return entry.author;
-                } else if (filterAuthors.length === 0) {
+                } else if (listActiveFilterAuthors.length === 0) {
                     return entry.author;
                 }
             }
@@ -66,7 +72,7 @@
         // Filtering tags is subtractive -- i.e., the more filters you select, the less results you have (i.e., i.e., all posts with tag x and tag y) -- still not sure if this is the more intuitive solution
         let filteredTags = []
         for (let buzzword of filteredBuzzwords) {
-            if (buzzword.tags && filterTags.every(tag => buzzword.tags.includes(tag))) {
+            if (buzzword.tags && listActiveFilterTags.every(tag => buzzword.tags.includes(tag))) {
                 filteredTags.push(buzzword);
             }
         }
