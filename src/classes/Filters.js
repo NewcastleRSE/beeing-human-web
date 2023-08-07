@@ -92,8 +92,33 @@ export class Filters extends Array {
         }
     }
 
+    anyActive() {
+        let activeFilters = this.filter(el => el.active === true)
+
+        if (activeFilters.length > 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     getActiveFiltersByType(type) {
         let activeFilters = this.filter(el => el.active === true && el.type === type)
         return Array.from(activeFilters.map((el) => el.name))
+    }
+
+    updateFilterActiveStatus(listAuthors, listTags) {
+        for (let i = 0; i < this.length; i++) {
+            if (this[i].type === 'tags') {
+                if (listTags.includes(this[i].name)) {
+                    console.log(`${this[i].name} Available`);
+                    this[i].available = true;
+                } else {
+                    console.log(`${this[i].name} not Available`);
+                    this[i].available = false;
+                }
+            }
+        }
+        return this
     }
 }
