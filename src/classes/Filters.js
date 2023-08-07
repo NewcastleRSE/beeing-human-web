@@ -34,7 +34,12 @@ export class Filters extends Array {
         return filters;
     }
 
-    getFiltersByType(type) {
+    getFiltersByType(type, order = false) {
+        if (order) {
+            let filters = this.filter(el => el.type === type)
+            // returns the filters but sorting it by name
+            return filters.sort((a, b) => (a.name > b.name) ? 1 : -1);
+        }
         return this.filter(el => el.type === type);
     }
 

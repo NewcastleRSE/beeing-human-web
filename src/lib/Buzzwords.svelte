@@ -232,8 +232,8 @@
             <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={[...listAuthors, ...listTags]}/>
         </div>
         <div class="filters">
-            <TagSelector listTags = {filters.getFiltersByType('authors')} filter = 'authors' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
-            <TagSelector listTags = {filters.getFiltersByType('tags')} filter = 'tags' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
+            <TagSelector listTags = {filters.getFiltersByType('authors', true)} filter = 'authors' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
+            <TagSelector listTags = {filters.getFiltersByType('tags', true)} filter = 'tags' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
         </div>
         <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button>
     </div>
