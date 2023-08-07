@@ -87,8 +87,43 @@
         } else if (filteredAuthors.length === filteredBuzzwords.length && filteredTags.length === filteredBuzzwords.length) {
             bothFilters = filteredBuzzwords;
         }
+
+        // Gets a list of all the authors in the filtered dataset
+        let listAuthors = getListOfUniqueElements(bothFilters.map(buzz => buzz.author));
+        // Gets a list of all the tags available in the filtered dataset
+        let listTags = getListOfUniqueElements(bothFilters.map(buzz => [...buzz.tags]).flat());
+        filters = filters.updateFilterActiveStatus(listAuthors, listTags);
         
+        updateFilterButtons();
+
         return bothFilters;
+    }
+
+    function updateFilterButtons() {
+        for (let filter of filters) {
+            try {
+                const filterChip = document.getElementById(`${removeSpaces(filter.name)}-filter`)
+                if (filter.available) {
+                    filterChip.disabled = false;
+                } else {
+                    filterChip.disabled = true;
+                }
+            } catch (error) {
+                console.debug(`Component is still mounting, element with id ${removeSpaces(filter.name)}-filter does not exist yet. ${error}`);
+            }
+        }
+
+        try {
+            const resetAllButton = document.getElementById('resetAll');
+
+            if (filters.allInactive()) {
+                resetAllButton.disabled = true;
+            } else {
+                resetAllButton.disabled = false;
+            }
+        } catch (error) {
+            console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
+        }
     }
 
     function init(shuffled) {
@@ -119,34 +154,34 @@
         init(true);
     })
 
-    function updateFilterButtons(rlistAuthors, rlistTags) {
-        // Checks whether a filter button should be available or not
-        for (let filter of filters) {
-            try {
-                const filterChip = document.getElementById(`${removeSpaces(filter.name)}-filter`)
-                if (filter.available) {
-                    filterChip.disabled = false;
-                } else {
-                    filterChip.disabled = true;
-                }
-            } catch (error) {
-                console.debug(`Component is still mounting, element with id ${removeSpaces(filter.name)}-filter does not exist yet. ${error}`);
-            }
-        }
+    // function updateFilterButtons(rlistAuthors, rlistTags) {
+    //     // Checks whether a filter button should be available or not
+    //     for (let filter of filters) {
+    //         try {
+    //             const filterChip = document.getElementById(`${removeSpaces(filter.name)}-filter`)
+    //             if (filter.available) {
+    //                 filterChip.disabled = false;
+    //             } else {
+    //                 filterChip.disabled = true;
+    //             }
+    //         } catch (error) {
+    //             console.debug(`Component is still mounting, element with id ${removeSpaces(filter.name)}-filter does not exist yet. ${error}`);
+    //         }
+    //     }
 
-        // Activates or deactivates the reset all button
-        try{
-            const resetAllButton = document.getElementById('resetAll');
+    //     // Activates or deactivates the reset all button
+    //     try{
+    //         const resetAllButton = document.getElementById('resetAll');
 
-            if (rlistAuthors.length === totalNrAuthors && rlistTags.length === totalNrTags) {
-                resetAllButton.disabled = true;
-            } else {
-                resetAllButton.disabled = false;
-            }
-        } catch (error) {
-            console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
-        }
-    }
+    //         if (rlistAuthors.length === totalNrAuthors && rlistTags.length === totalNrTags) {
+    //             resetAllButton.disabled = true;
+    //         } else {
+    //             resetAllButton.disabled = false;
+    //         }
+    //     } catch (error) {
+    //         console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
+    //     }
+    // }
 
     function handleSearch(event) {
         // set terms to lower case
@@ -195,33 +230,33 @@
         init(false);
     }
 
-    $: {
-        if (filterTags.length === 0 && filterAuthors.length >= 1) {
-            reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
-        } else if (filterAuthors.length === 0 && filterTags.length >= 1) {
-            // because filtering by tags is subtractive, everytime one tag is selected, the available filters should be reduced
-            reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
-            reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
-        } else if (filterAuthors.length >= 1) {
-            reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
-        } else if (filterTags.length >= 1 ) {
-            reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
-        } else if (filteredBuzzwords.length < buzzwords.length) {
-            // adjusts filter availability if a search has been made
-            reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
-            reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
-        } else {
-            reactiveListAuthors = listAuthors;
-            reactiveListTags = listTags;
-        }
-        // ensures active filters are always included, even if they are note present in the filtered buzzwords
-        reactiveListAuthors = getListOfUniqueElements([...reactiveListAuthors, ...filterAuthors]);
-        reactiveListTags = getListOfUniqueElements([...reactiveListTags, ...filterTags]);
+    // $: {
+    //     if (filterTags.length === 0 && filterAuthors.length >= 1) {
+    //         reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
+    //     } else if (filterAuthors.length === 0 && filterTags.length >= 1) {
+    //         // because filtering by tags is subtractive, everytime one tag is selected, the available filters should be reduced
+    //         reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
+    //         reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
+    //     } else if (filterAuthors.length >= 1) {
+    //         reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
+    //     } else if (filterTags.length >= 1 ) {
+    //         reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
+    //     } else if (filteredBuzzwords.length < buzzwords.length) {
+    //         // adjusts filter availability if a search has been made
+    //         reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
+    //         reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
+    //     } else {
+    //         reactiveListAuthors = listAuthors;
+    //         reactiveListTags = listTags;
+    //     }
+    //     // ensures active filters are always included, even if they are note present in the filtered buzzwords
+    //     reactiveListAuthors = getListOfUniqueElements([...reactiveListAuthors, ...filterAuthors]);
+    //     reactiveListTags = getListOfUniqueElements([...reactiveListTags, ...filterTags]);
 
-        // activates or deactivates the filter buttons accordingly
-        // updateFilterButtons(reactiveListAuthors, reactiveListTags);
+    //     // activates or deactivates the filter buttons accordingly
+    //     // updateFilterButtons(reactiveListAuthors, reactiveListTags);
 
-    }
+    // }
 
 </script>
 
