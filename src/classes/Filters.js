@@ -26,6 +26,13 @@ export class Filters extends Array {
         this.push(newFilter);
     }
 
+    resetFilters() {
+        for (let i = 0; i < this.length; i++) {
+            this[i].active = false;
+            this[i].available = true;
+        }
+    }
+
     getFilterNameList() {
         let filters = [];
         for (let filter of this) {
@@ -111,10 +118,8 @@ export class Filters extends Array {
         for (let i = 0; i < this.length; i++) {
             if (this[i].type === 'tags') {
                 if (listTags.includes(this[i].name)) {
-                    console.log(`${this[i].name} Available`);
                     this[i].available = true;
                 } else {
-                    console.log(`${this[i].name} not Available`);
                     this[i].available = false;
                 }
             }

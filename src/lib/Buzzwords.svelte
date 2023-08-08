@@ -136,14 +136,8 @@
         totalNrAuthors = listAuthors.length;
         totalNrTags = listTags.length;
 
-        for (let tag of listTags) {
-            filters.addFilter(tag, 'tags');
-        }
-
-        for (let author of listAuthors) {
-            filters.addFilter(author, 'authors');
-        }
-
+        // resets filter to initial state;
+        filters.resetFilters();
 
         // necessary to restart the filter components
         unique = {}
@@ -151,6 +145,13 @@
     }
 
     onMount( () => {
+        for (let tag of listTags) {
+            filters.addFilter(tag, 'tags');
+        }
+
+        for (let author of listAuthors) {
+            filters.addFilter(author, 'authors');
+        }
         init(true);
     })
 
