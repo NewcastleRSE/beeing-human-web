@@ -207,34 +207,6 @@
         init(false);
     }
 
-    // $: {
-    //     if (filterTags.length === 0 && filterAuthors.length >= 1) {
-    //         reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
-    //     } else if (filterAuthors.length === 0 && filterTags.length >= 1) {
-    //         // because filtering by tags is subtractive, everytime one tag is selected, the available filters should be reduced
-    //         reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
-    //         reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
-    //     } else if (filterAuthors.length >= 1) {
-    //         reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
-    //     } else if (filterTags.length >= 1 ) {
-    //         reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
-    //     } else if (filteredBuzzwords.length < buzzwords.length) {
-    //         // adjusts filter availability if a search has been made
-    //         reactiveListAuthors = getListOfUniqueElements(filteredBuzzwords.map(entry => entry.author));
-    //         reactiveListTags = getListOfUniqueElements(filteredBuzzwords.map(entry=>entry.tags).flat());
-    //     } else {
-    //         reactiveListAuthors = listAuthors;
-    //         reactiveListTags = listTags;
-    //     }
-    //     // ensures active filters are always included, even if they are note present in the filtered buzzwords
-    //     reactiveListAuthors = getListOfUniqueElements([...reactiveListAuthors, ...filterAuthors]);
-    //     reactiveListTags = getListOfUniqueElements([...reactiveListTags, ...filterTags]);
-
-    //     // activates or deactivates the filter buttons accordingly
-    //     // updateFilterButtons(reactiveListAuthors, reactiveListTags);
-
-    // }
-
 </script>
 
 <!-- #key necessary to restart components -->
