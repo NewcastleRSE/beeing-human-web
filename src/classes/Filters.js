@@ -33,6 +33,18 @@ export class Filters extends Array {
         }
     }
 
+    resetFiltersActiveStatus() {
+        for (let i = 0; i < this.length; i++) {
+            this[i].active = false;
+        }
+    }
+
+    resetFiltersAvailableStatus() {
+        for (let i = 0; i < this.length; i++) {
+            this[i].available = true;
+        }
+    }
+
     getFilterNameList() {
         let filters = [];
         for (let filter of this) {
@@ -114,10 +126,35 @@ export class Filters extends Array {
         return Array.from(activeFilters.map((el) => el.name))
     }
 
-    updateFilterActiveStatus(listAuthors, listTags) {
+    updateFilterAvailableStatus(listAuthors, listTags) {
+        // if only author filters have been selected, only tags should be constrained
+        // if only tag filters have been selected, tags and authors should be constrained
+        // if both filters are selected, only tags should be constrained
+
+        let typeSelected;
+        let activeAuthors = this.getActiveFiltersByType('authors');
+        let activeTags = this.getActiveFiltersByType('tags');
+        this.resetFiltersAvailableStatus();
+        if (activeAuthors.length > 0 && activeTags.length > 0) {
+            typeSelected = 'both';
+        } else if (activeAuthors.length > 0 && activeTags.length === 0) {
+            typeSelected = 'authors';
+        } else if (activeAuthors.length === 0 && activeTags.length > 0) {
+            typeSelected = 'tags';
+        }
+
         for (let i = 0; i < this.length; i++) {
+            // tags are always constrained
             if (this[i].type === 'tags') {
                 if (listTags.includes(this[i].name)) {
+                    this[i].available = true;
+                } else {
+                    this[i].available = false;
+                }
+            }
+            // authors are only constrained if only tags are selected
+            if (this[i].type === 'authors' && typeSelected === 'tags') {
+                if (listAuthors.includes(this[i].name)) {
                     this[i].available = true;
                 } else {
                     this[i].available = false;

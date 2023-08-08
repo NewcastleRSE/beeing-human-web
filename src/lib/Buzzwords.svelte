@@ -49,7 +49,12 @@
         let listActiveFilterTags = []
 
         if (filters.allInactive()) {
-            // if both filters are empty, simply return the entire buzzword set
+            // if both filters are empty:
+            // -- reset filter availability (all available)
+            filters.resetFiltersAvailableStatus();
+            // -- update the UI to reflect availability
+            updateFilterButtons();
+            // -- return the initial dataset
             return buzzwords
         } else {
             // otherwise, reset the filteredBuzzwords for the entire dataset
@@ -92,7 +97,7 @@
         let listAuthors = getListOfUniqueElements(bothFilters.map(buzz => buzz.author));
         // Gets a list of all the tags available in the filtered dataset
         let listTags = getListOfUniqueElements(bothFilters.map(buzz => [...buzz.tags]).flat());
-        filters = filters.updateFilterActiveStatus(listAuthors, listTags);
+        filters = filters.updateFilterAvailableStatus(listAuthors, listTags);
         
         updateFilterButtons();
 
@@ -154,35 +159,6 @@
         }
         init(true);
     })
-
-    // function updateFilterButtons(rlistAuthors, rlistTags) {
-    //     // Checks whether a filter button should be available or not
-    //     for (let filter of filters) {
-    //         try {
-    //             const filterChip = document.getElementById(`${removeSpaces(filter.name)}-filter`)
-    //             if (filter.available) {
-    //                 filterChip.disabled = false;
-    //             } else {
-    //                 filterChip.disabled = true;
-    //             }
-    //         } catch (error) {
-    //             console.debug(`Component is still mounting, element with id ${removeSpaces(filter.name)}-filter does not exist yet. ${error}`);
-    //         }
-    //     }
-
-    //     // Activates or deactivates the reset all button
-    //     try{
-    //         const resetAllButton = document.getElementById('resetAll');
-
-    //         if (rlistAuthors.length === totalNrAuthors && rlistTags.length === totalNrTags) {
-    //             resetAllButton.disabled = true;
-    //         } else {
-    //             resetAllButton.disabled = false;
-    //         }
-    //     } catch (error) {
-    //         console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
-    //     }
-    // }
 
     function handleSearch(event) {
         // set terms to lower case
