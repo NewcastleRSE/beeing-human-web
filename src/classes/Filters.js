@@ -126,6 +126,20 @@ export class Filters extends Array {
         return Array.from(activeFilters.map((el) => el.name))
     }
 
+    getAvailableFiltersByType(type) {
+        let availableFilters = this.filter(el => el.available === true && el.type === type)
+        return Array.from(availableFilters.map((el) => el.name))
+    }
+
+    setActiveFiltersFromList(list, newValue = true) {
+        for (let i = 0; i < this.length; i++) {
+            if (list.includes(this[i].name)) {
+                this[i].active = newValue;
+            }
+        }
+        return this
+    }
+
     updateFilterAvailableStatus(listAuthors, listTags) {
         // if only author filters have been selected, only tags should be constrained
         // if only tag filters have been selected, tags and authors should be constrained

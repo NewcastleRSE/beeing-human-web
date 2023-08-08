@@ -8,15 +8,6 @@
     export let filter;
     let selectedTags = [];
 
-    // Need to fire an event when the array changes, and use that to filter the buzzwords being shown in the parent component
-    // $: console.log(`${filter}: ${selectedTags}`);
-    $: {
-        // dispatch('filter-changed', {
-        //     filter: filter,
-        //     selected: selectedTags
-        // });
-    }
-
     function handleClick(tag) {
         dispatch('filter-changed', {
             filter: tag

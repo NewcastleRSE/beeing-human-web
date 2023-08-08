@@ -48,6 +48,8 @@
 
     function clearAll() {
         chipList = new Set();
+        const inputText = document.getElementById('search-bar')
+        inputText.value = '';
     }
 
     $: inputValue = checkForTagAuthor(inputValue);
