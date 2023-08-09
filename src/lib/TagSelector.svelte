@@ -4,20 +4,17 @@
 
     const dispatch = createEventDispatcher();
 
-    export let listTags;
-    export let filter;
+    export let listTags; // 'Filters' class
+    export let filter; // The name of the filter (for UI)
     let selectedTags = [];
 
-    // Need to fire an event when the array changes, and use that to filter the buzzwords being shown in the parent component
-    // $: console.log(`${filter}: ${selectedTags}`);
-    $: {
-        dispatch('filter-changed', {
-            filter: filter,
-            selected: selectedTags
-        });
-    }
-
     function handleClick(tag) {
+        // sends an event to the parent that a filter has been selected or deselected
+        dispatch('filter-changed', {
+            filter: tag
+        });
+
+        // Keeps a running tally of the currently selected filters -- only used for UI to enable or disable the reset button, but it may be useful later
         if (selectedTags.includes(tag)) {
             selectedTags = selectedTags.filter(entry => entry != tag);
         } else {
@@ -39,15 +36,17 @@
     }
 
     function resetFilter () {
+        // fires a reset event to be picked up by parent component
         selectedTags = [];
+        dispatch('reset-filters', {filter: filter});
         updateResetButton();
     }
 </script>
 
 <div class="tag-selector-container">
     <h4>{filter}</h4>
-    {#each listTags.sort() as tag}
-        <button id={removeSpaces(tag)}-filter class="chip {selectedTags.includes(tag) ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{filter === 'authors' ? capitaliseFirstLetter(tag) : tag}</button>
+    {#each listTags as tag}
+        <button id={removeSpaces(tag.name)}-filter class="chip {tag.active ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{filter === 'authors' ? capitaliseFirstLetter(tag.name) : tag.name}</button>
     {/each}
     <button id="{filter}-reset" class="chip variant-filled-surface" on:click={resetFilter} on:keypress disabled>Reset</button>
 </div>

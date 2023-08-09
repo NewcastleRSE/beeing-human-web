@@ -1,5 +1,7 @@
 import { splitStringIntoArray } from "./stringOperations";
 
+// Collection of helper functions for 'Buzzwords.svelte' component and its child components
+
 export function shuffle(array) {
     // randomize order of the array
     let currentIndex = array.length,  randomIndex;
@@ -15,16 +17,16 @@ export function shuffle(array) {
     return array;
 }
 
-export function checkSearchTagsAuthors(searchTerms, reactiveListAuthors, reactiveListTags) {
+export function checkSearchTagsAuthors(searchTerms, availableAuthors, availableTags) {
     // Check if it is in either authors or filters
     let filtersToCheck = {};
     let authorSearch = [];
     let termSearch = [];
     for (let term of searchTerms) {
-        if (reactiveListAuthors.includes(term)) {
+        if (availableAuthors.includes(term)) {
             authorSearch.push(term);
         }
-        if (reactiveListTags.includes(term)) {
+        if (availableTags.includes(term)) {
             termSearch.push(term);
         }
     }
@@ -32,13 +34,14 @@ export function checkSearchTagsAuthors(searchTerms, reactiveListAuthors, reactiv
         filtersToCheck['authors'] = authorSearch;
     }
     if (termSearch.length > 0) {
-        filtersToCheck['terms'] = termSearch;
+        filtersToCheck['tags'] = termSearch;
     }
 
     return filtersToCheck
 }
 
 export function fullTextSearch(filteredBuzzwords, searchString, searchTerms) {
+    // searchs the body of each buzzwords and its metadata in case it hasn't been picked up before
     searchString = searchString.toLowerCase();
     let fullMatch = [];
     let partialMatch = [];
