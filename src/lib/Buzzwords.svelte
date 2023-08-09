@@ -42,8 +42,9 @@
     }
 
     function handleReset() {
-        // resets to show the entire dataset
-        filteredBuzzwords = buzzwords;
+        // triggered by submitting an empty search
+        // resets to show the entire dataset to whatever filter selection existed before the search
+        filteredBuzzwords = filterBuzzWords(buzzwords);
     }
 
     function handleSearch(event) {
@@ -89,7 +90,7 @@
         let availableTags = getListOfUniqueElements(filteredBuzzwords.map(buzz => [...buzz.tags]).flat());
         // updates filter availability based on filtered dataset
         filters = filters.updateFilterAvailableStatus(availableAuthors, availableTags);
-        updateFilterButtons();
+        updateFilterButtons(filteredBuzzwords.length);
     }
 
     function resetAll() {
@@ -109,7 +110,7 @@
             // -- reset filter availability (all available)
             filters.resetFiltersAvailableStatus();
             // -- update the UI to reflect availability
-            updateFilterButtons();
+            updateFilterButtons(buzzwords.length);
             // -- return the initial dataset
             return buzzwords
         } else {
@@ -129,7 +130,7 @@
         
         // updates UI to show available filters on the reduced dataset
         filters = filters.updateFilterAvailableStatus(listAuthors, listTags);
-        updateFilterButtons();
+        updateFilterButtons(bothFilters.length);
 
         return bothFilters;
     }
@@ -171,8 +172,9 @@
         return bothFilters;
     }
 
-    function updateFilterButtons() {
+    function updateFilterButtons(lenNewDataset) {
         // Updates the UI to show current filter availability
+        // takes the length of the new dataset to compare it to the entire dataset and enable or disable the Reset All button
         for (let filter of filters) {
             try {
                 const filterChip = document.getElementById(`${removeSpaces(filter.name)}-filter`)
@@ -190,7 +192,7 @@
         try {
             const resetAllButton = document.getElementById('resetAll');
 
-            if (filters.allInactive() && buzzwords.length === filteredBuzzwords.length) {
+            if (filters.allInactive() && buzzwords.length === lenNewDataset) {
                 resetAllButton.disabled = true;
             } else {
                 resetAllButton.disabled = false;
