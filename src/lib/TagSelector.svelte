@@ -4,15 +4,17 @@
 
     const dispatch = createEventDispatcher();
 
-    export let listTags;
-    export let filter;
+    export let listTags; // 'Filters' class
+    export let filter; // The name of the filter (for UI)
     let selectedTags = [];
 
     function handleClick(tag) {
+        // sends an event to the parent that a filter has been selected or deselected
         dispatch('filter-changed', {
             filter: tag
         });
 
+        // Keeps a running tally of the currently selected filters -- only used for UI to enable or disable the reset button, but it may be useful later
         if (selectedTags.includes(tag)) {
             selectedTags = selectedTags.filter(entry => entry != tag);
         } else {
@@ -34,6 +36,7 @@
     }
 
     function resetFilter () {
+        // fires a reset event to be picked up by parent component
         selectedTags = [];
         dispatch('reset-filters', {filter: filter});
         updateResetButton();

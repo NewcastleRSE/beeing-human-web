@@ -18,32 +18,125 @@
     // array of filter objects
     let filters = new Filters();
 
-    let reactiveListAuthors = [];
-    let reactiveListTags = [];
-
-    let filterAuthors = [];
-    let filterTags = [];
-
-    let totalNrAuthors;
-    let totalNrTags;
-
-    // necessary to restart the filter components
+    // this is the array of buzzwords to be displayed -- it will be equal to the received buzzwords at init
     let filteredBuzzwords = [];
-
+    
+    // necessary to restart the filter components
     let unique = {}
 
+    // Event handling changes
+
     function handleFilterChange(event) {
+        // Triggers when a filter button is clicked
         filters = filters.toggleFilterActive(event.detail.filter);
+        // buzzword filtering is handled by this first level function
         filteredBuzzwords = filterBuzzWords(filteredBuzzwords);
     }
 
 
     function handleResetFilters(event) {
+        // triggers when a filter reset button is clicked
+        // resets all filter buttons of the same type and refilters the dataset
         filters = filters.resetFilterActiveByType(event.detail.filter)
         filteredBuzzwords = filterBuzzWords(filteredBuzzwords);
     }
 
+    function handleReset() {
+        // resets to show the entire dataset
+        filteredBuzzwords = buzzwords;
+    }
+
+    function handleSearch(event) {
+        // triggered when receiving a 'search' event from 'SearchBar.svelte'
+        // set terms to lower case
+        const searchTerms = event.detail.searchTerms.map(e => e.toLowerCase());
+
+        // if there are no active filters, it will always search in the entire corpus
+        if (filters.allInactive()) {
+            filteredBuzzwords = buzzwords;
+        }
+
+        // establish whether the search terms are filters
+        const filtersToCheck = checkSearchTagsAuthors(searchTerms, filters.getAvailableFiltersByType('authors'), filters.getAvailableFiltersByType('tags'));
+
+
+        // if the search terms are filters in either the authors or tags
+        if (Object.keys(filtersToCheck).length > 0) {
+            let listAuthors = [];
+            let listTags = [];
+            if (Object.keys(filtersToCheck).includes('authors')) {
+                listAuthors = filtersToCheck['authors'];
+            }
+            if (Object.keys(filtersToCheck).includes('tags')) {
+                listTags = filtersToCheck['tags'];
+            }
+
+            // filter the displayed buzzwords
+            filteredBuzzwords = reduceBuzzwordsByFilter(filteredBuzzwords, listAuthors, listTags);
+        }
+
+        // Full text search
+        let fullTextResults = fullTextSearch(filteredBuzzwords, event.detail.searchString, searchTerms);
+        if (fullTextResults.length > 0) {
+            filteredBuzzwords = fullTextResults
+        } else if (fullTextResults.length == 0 && Object.keys(filtersToCheck).length == 0){
+            filteredBuzzwords = [];
+        }
+
+        // Gets a list of all the authors in the filtered dataset
+        let availableAuthors = getListOfUniqueElements(filteredBuzzwords.map(buzz => buzz.author));
+        // Gets a list of all the tags available in the filtered dataset
+        let availableTags = getListOfUniqueElements(filteredBuzzwords.map(buzz => [...buzz.tags]).flat());
+        // updates filter availability based on filtered dataset
+        filters = filters.updateFilterAvailableStatus(availableAuthors, availableTags);
+        updateFilterButtons();
+    }
+
+    function resetAll() {
+        // resets all filters and search terms
+        init(false);
+    }
+
+    function filterBuzzWords(filteredBuzzwords) {
+        // First level function to filter buzzwords dataset
+        // This is triggered when an user clicks on one of the filter buttons
+        // The actual data filtering happens in the second level function 'reduceBuyzzwordsByFilter'
+        let listActiveFilterAuthors = []
+        let listActiveFilterTags = []
+
+        if (filters.allInactive()) {
+            // if both filters are empty:
+            // -- reset filter availability (all available)
+            filters.resetFiltersAvailableStatus();
+            // -- update the UI to reflect availability
+            updateFilterButtons();
+            // -- return the initial dataset
+            return buzzwords
+        } else {
+            // otherwise, reset the filteredBuzzwords for the entire dataset
+            listActiveFilterAuthors = filters.getActiveFiltersByType('authors');
+            listActiveFilterTags = filters.getActiveFiltersByType('tags')
+            filteredBuzzwords = buzzwords;
+        }
+
+        // Reduce the dataset based on selected filters
+        let bothFilters = reduceBuzzwordsByFilter(filteredBuzzwords, listActiveFilterAuthors, listActiveFilterTags);
+
+        // Gets a list of all the authors in the filtered dataset
+        let listAuthors = getListOfUniqueElements(bothFilters.map(buzz => buzz.author));
+        // Gets a list of all the tags available in the filtered dataset
+        let listTags = getListOfUniqueElements(bothFilters.map(buzz => [...buzz.tags]).flat());
+        
+        // updates UI to show available filters on the reduced dataset
+        filters = filters.updateFilterAvailableStatus(listAuthors, listTags);
+        updateFilterButtons();
+
+        return bothFilters;
+    }
+
     function reduceBuzzwordsByFilter(filteredBuzzwords, listActiveFilterAuthors, listActiveFilterTags) {
+        // Second level function that takes in two lists of active filters, reduces the dataset based on those filters, and returns the result
+
         // Filtering authors is additive -- i.e., the more filters you select, the more results you will get (i.e., all posts of author x plus all posts of author y)
         let filteredAuthors = filteredBuzzwords.filter(function(entry) {
             if (entry.author) {
@@ -63,6 +156,7 @@
             }
         }
 
+        // Collates the results for both filters
         let bothFilters = []
         if (filteredAuthors.length < filteredBuzzwords.length && filteredTags.length < filteredBuzzwords.length) {
             bothFilters = filteredAuthors.filter(entry => filteredTags.includes(entry));
@@ -77,40 +171,8 @@
         return bothFilters;
     }
 
-    function filterBuzzWords(filteredBuzzwords) {
-        
-        let listActiveFilterAuthors = []
-        let listActiveFilterTags = []
-
-        if (filters.allInactive()) {
-            // if both filters are empty:
-            // -- reset filter availability (all available)
-            filters.resetFiltersAvailableStatus();
-            // -- update the UI to reflect availability
-            updateFilterButtons();
-            // -- return the initial dataset
-            return buzzwords
-        } else {
-            // otherwise, reset the filteredBuzzwords for the entire dataset
-            listActiveFilterAuthors = filters.getActiveFiltersByType('authors');
-            listActiveFilterTags = filters.getActiveFiltersByType('tags')
-            filteredBuzzwords = buzzwords;
-        }
-
-        let bothFilters = reduceBuzzwordsByFilter(filteredBuzzwords, listActiveFilterAuthors, listActiveFilterTags);
-
-        // Gets a list of all the authors in the filtered dataset
-        let listAuthors = getListOfUniqueElements(bothFilters.map(buzz => buzz.author));
-        // Gets a list of all the tags available in the filtered dataset
-        let listTags = getListOfUniqueElements(bothFilters.map(buzz => [...buzz.tags]).flat());
-        filters = filters.updateFilterAvailableStatus(listAuthors, listTags);
-        
-        updateFilterButtons();
-
-        return bothFilters;
-    }
-
     function updateFilterButtons() {
+        // Updates the UI to show current filter availability
         for (let filter of filters) {
             try {
                 const filterChip = document.getElementById(`${removeSpaces(filter.name)}-filter`)
@@ -124,10 +186,11 @@
             }
         }
 
+        // Updates the UI to enable or disable the `Reset All` button
         try {
             const resetAllButton = document.getElementById('resetAll');
 
-            if (filters.allInactive()) {
+            if (filters.allInactive() && buzzwords.length === filteredBuzzwords.length) {
                 resetAllButton.disabled = true;
             } else {
                 resetAllButton.disabled = false;
@@ -137,7 +200,9 @@
         }
     }
 
-    function init(shuffled) {
+    function init(shuffled = true) {
+        // Called onMount and whenever there is a reset all
+        // Resets the dataset to the original, resets filters to their initial state, and creates a new UI for filtering and search
         if (shuffled) {
             buzzwords = shuffle(buzzwords)
         }
@@ -152,6 +217,7 @@
     }
 
     onMount( () => {
+        // Fills the filters object
         for (let tag of listTags) {
             filters.addFilter(tag, 'tags');
         }
@@ -159,63 +225,8 @@
         for (let author of listAuthors) {
             filters.addFilter(author, 'authors');
         }
-        init(true);
+        init();
     })
-
-    function handleSearch(event) {
-        // set terms to lower case
-        const searchTerms = event.detail.searchTerms.map(e => e.toLowerCase());
-
-        // if there are no active filters, it will always search in the entire corpus
-        if (filters.allInactive()) {
-            filteredBuzzwords = buzzwords;
-        }
-
-        // establish whether the search terms are filters
-        const filtersToCheck = checkSearchTagsAuthors(searchTerms, filters.getAvailableFiltersByType('authors'), filters.getAvailableFiltersByType('tags'));
-
-
-        // if the search terms are in either the authors or tags
-        if (Object.keys(filtersToCheck).length > 0) {
-            let listAuthors = [];
-            let listTags = [];
-            if (Object.keys(filtersToCheck).includes('authors')) {
-                listAuthors = filtersToCheck['authors'];
-            }
-            if (Object.keys(filtersToCheck).includes('tags')) {
-                listTags = filtersToCheck['tags'];
-            }
-
-            // filter the displayed buzzwords
-            filteredBuzzwords = reduceBuzzwordsByFilter(filteredBuzzwords, listAuthors, listTags);
-            
-            
-        }
-
-        // Full text search
-        let fullTextResults = fullTextSearch(filteredBuzzwords, event.detail.searchString, searchTerms);
-        if (fullTextResults.length > 0) {
-            filteredBuzzwords = fullTextResults
-        } else if (fullTextResults.length == 0 && Object.keys(filtersToCheck).length == 0){
-            filteredBuzzwords = [];
-        }
-
-        // Gets a list of all the authors in the filtered dataset
-        let availableAuthors = getListOfUniqueElements(filteredBuzzwords.map(buzz => buzz.author));
-        // Gets a list of all the tags available in the filtered dataset
-        let availableTags = getListOfUniqueElements(filteredBuzzwords.map(buzz => [...buzz.tags]).flat());
-        filters = filters.updateFilterAvailableStatus(availableAuthors, availableTags);
-        updateFilterButtons();
-    }
-
-    function handleReset() {
-        // resets to show the entire dataset
-        filteredBuzzwords = buzzwords;
-    }
-
-    function resetAll() {
-        init(false);
-    }
 
 </script>
 
@@ -265,6 +276,7 @@
 </div>
 
 <style>
+    /* this should be converted to Tailwind when working on the UI*/
     .card-collection {
         width: 90vw;
         display: flex;

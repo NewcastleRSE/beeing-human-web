@@ -1,15 +1,10 @@
 import { writable } from 'svelte/store';
 
+// Class that stores an array of Filter objects and tracks their state
+
 export class Filters extends Array {
     constructor() {
-        writable(super());
-        // initiates the class as a store, which makes it reactive in Sveltekit
-        // this.filterList = writable([]);
-    }
-
-    subscribe(run) {
-        // A subscribe method turns anything into a store, which makes it reactive
-        return this.subscribe(run);
+        super()
     }
 
     // iterator
@@ -21,11 +16,13 @@ export class Filters extends Array {
         }
     }
 
+    // adds and sets default properties for a filter in the array
     addFilter(name, type) {
         let newFilter = {name: name, type: type, available: true, active: false};
         this.push(newFilter);
     }
 
+    // resets each filter to its init state
     resetFilters() {
         for (let i = 0; i < this.length; i++) {
             this[i].active = false;
@@ -33,18 +30,21 @@ export class Filters extends Array {
         }
     }
 
+    // resets only the active property to its init state
     resetFiltersActiveStatus() {
         for (let i = 0; i < this.length; i++) {
             this[i].active = false;
         }
     }
 
+    // resets only the available property to its init state
     resetFiltersAvailableStatus() {
         for (let i = 0; i < this.length; i++) {
             this[i].available = true;
         }
     }
 
+    // gets a list of all filter names
     getFilterNameList() {
         let filters = [];
         for (let filter of this) {
@@ -53,6 +53,7 @@ export class Filters extends Array {
         return filters;
     }
 
+    // returns an array of all filters of a certain type
     getFiltersByType(type, order = false) {
         if (order) {
             let filters = this.filter(el => el.type === type)
@@ -62,6 +63,7 @@ export class Filters extends Array {
         return this.filter(el => el.type === type);
     }
 
+    // returns a filter object searching it by name
     getFiltersByName(name) {
         let foundFilter = undefined;
         for (let f of this) {
@@ -72,6 +74,7 @@ export class Filters extends Array {
         return foundFilter
     }
 
+    // returns the filter index of any filter by its name
     getFilterIndexByName(name) {
         let foundFilter = undefined;
         for (let i in this) {
@@ -82,17 +85,20 @@ export class Filters extends Array {
         return foundFilter;
     }
 
+    // changes filter availability directly
     changeFilterAvailability(name, availability) {
         this[this.getFilterIndexByName(name)].available = availability;
         return this;
     }
 
+    // toggles the active property of a given filter object
     toggleFilterActive(filter) {
         const i = this.getFilterIndexByName(filter.name);
         this[i].active = !this[i].active;
         return this;
     }
 
+    // resets the active propery of all filters of a given type
     resetFilterActiveByType(type) {
         for (let i = 0; i < this.length; i++){
             if (this[i].type === type){
@@ -102,6 +108,7 @@ export class Filters extends Array {
         return this
     }
 
+    // checks whether all filters are active = false
     allInactive() {
         let activeFilters = this.filter(el => el.active === true);
         if (activeFilters.length > 0) {
@@ -111,6 +118,7 @@ export class Filters extends Array {
         }
     }
 
+    // checks whether any filter has active = true
     anyActive() {
         let activeFilters = this.filter(el => el.active === true)
 
@@ -121,16 +129,19 @@ export class Filters extends Array {
         }
     }
 
+    // get an array of the names of all active filters of a certain type
     getActiveFiltersByType(type) {
         let activeFilters = this.filter(el => el.active === true && el.type === type)
         return Array.from(activeFilters.map((el) => el.name))
     }
 
+    // get an array of the names of all available filters of a certain type
     getAvailableFiltersByType(type) {
         let availableFilters = this.filter(el => el.available === true && el.type === type)
         return Array.from(availableFilters.map((el) => el.name))
     }
 
+    // sets the active property of a list of filters (from an array of names) to a certain vaule
     setActiveFiltersFromList(list, newValue = true) {
         for (let i = 0; i < this.length; i++) {
             if (list.includes(this[i].name)) {
@@ -140,6 +151,7 @@ export class Filters extends Array {
         return this
     }
 
+    // based on two lists of tages, sets the availability of the filters depending on whether they are contained on that list or not
     updateFilterAvailableStatus(listAuthors, listTags) {
         // if only author filters have been selected, only tags should be constrained
         // if only tag filters have been selected, tags and authors should be constrained
