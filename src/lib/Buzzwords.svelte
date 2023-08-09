@@ -47,6 +47,23 @@
         filteredBuzzwords = filterBuzzWords(buzzwords);
     }
 
+    function handleFilterClickBuzzword(tag) {
+        // creates a fake Filter object and sends it to handleFilterChange as if it came from the 'TagSelector' component
+
+        // finds the corresponding object in the Filters object
+        const filter = filters.getFiltersByName(tag)
+
+        // constructs the fake event object
+        const fakeEvent = {
+            detail: {
+                filter: filter
+            }
+        }
+
+        // calls the handleFilterChange function with the fake event
+        handleFilterChange(fakeEvent);
+    }
+
     function handleSearch(event) {
         // triggered when receiving a 'search' event from 'SearchBar.svelte'
         // set terms to lower case
@@ -98,6 +115,8 @@
         init(false);
     }
 
+    // First level filtering functions
+
     function filterBuzzWords(filteredBuzzwords) {
         // First level function to filter buzzwords dataset
         // This is triggered when an user clicks on one of the filter buttons
@@ -134,6 +153,8 @@
 
         return bothFilters;
     }
+
+    // second level filtering functions
 
     function reduceBuzzwordsByFilter(filteredBuzzwords, listActiveFilterAuthors, listActiveFilterTags) {
         // Second level function that takes in two lists of active filters, reduces the dataset based on those filters, and returns the result
@@ -200,7 +221,30 @@
         } catch (error) {
             console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
         }
+
+        // Updates the UI to enable or disable the `Reset` button for each filter group
+        try {
+            const resetAuthor = document.getElementById('authors-reset');
+            const resetTags = document.getElementById('tags-reset');
+
+            if (filters.getActiveFiltersByType('authors').length === 0) {
+                resetAuthor.disabled = true;
+            } else {
+                resetAuthor.disabled = false;
+            }
+
+            if (filters.getActiveFiltersByType('tags').length === 0) {
+                resetTags.disabled = true;
+            } else {
+                resetTags.disabled = false;
+            }
+
+        } catch (error) {
+            console.debug(error);
+        }
     }
+
+    // initialisation functions
 
     function init(shuffled = true) {
         // Called onMount and whenever there is a reset all
@@ -267,7 +311,7 @@
                     {#if buzzword.tags}
                         <div class="tags">
                             {#each buzzword.tags.sort() as tag}
-                                <span class="chip variant-ghost">{capitaliseFirstLetter(tag)}</span>
+                                <span class="chip variant-ghost" on:click={handleFilterClickBuzzword(tag)} on:keypress>{capitaliseFirstLetter(tag)}</span>
                             {/each}
                         </div>
                     {/if}

@@ -6,7 +6,7 @@
 
     export let listTags; // 'Filters' class
     export let filter; // The name of the filter (for UI)
-    let selectedTags = [];
+    // let selectedTags = [];
 
     function handleClick(tag) {
         // sends an event to the parent that a filter has been selected or deselected
@@ -14,32 +14,36 @@
             filter: tag
         });
 
-        // Keeps a running tally of the currently selected filters -- only used for UI to enable or disable the reset button, but it may be useful later
-        if (selectedTags.includes(tag)) {
-            selectedTags = selectedTags.filter(entry => entry != tag);
-        } else {
-            selectedTags = [...selectedTags, tag];
-        }
+        // Keeps a running tally of the currently selected filters -- leaving it here for future reference in case it's useful
+        // if (selectedTags.includes(tag)) {
+        //     selectedTags = selectedTags.filter(entry => entry != tag);
+        // } else {
+        //     selectedTags = [...selectedTags, tag];
+        // }
         
-        updateResetButton();
+        // This is now handled by the parent component
+        // updateResetButton();
 
     }
 
-    function updateResetButton() {
-        // enable or disable reset button
-        const resetButton = document.getElementById(`${filter}-reset`);
-        if (selectedTags.length > 0) {
-            resetButton.disabled = false;
-        } else {
-            resetButton.disabled = true;
-        }
-    }
+    // this is now handled by the parent component, but will leave it here in case it becomes useful in the future
+    // moving this to the parent component was the simplest solution to allow filters to be selected from the buzzword itself and keeping this functional
+    // function updateResetButton() {
+    //     // enable or disable reset button
+    //     const resetButton = document.getElementById(`${filter}-reset`);
+    //     if (selectedTags.length > 0) {
+    //         resetButton.disabled = false;
+    //     } else {
+    //         resetButton.disabled = true;
+    //     }
+    // }
 
     function resetFilter () {
         // fires a reset event to be picked up by parent component
-        selectedTags = [];
+        // selectedTags = [];
         dispatch('reset-filters', {filter: filter});
-        updateResetButton();
+        // this is now handled by the parent component
+        // updateResetButton();
     }
 </script>
 
