@@ -1,0 +1,3 @@
+[submodule "beeing-human-tei-data"]
+	path = beeing-human-tei-data
+	url = https://github.com/NewcastleRSE/beeing-human-tei-data.git
