@@ -20,7 +20,7 @@
 {#if data.view.slug === "literature"}
   <h3>Test</h3>
   <!-- <TeiDocument doc = {data.tei.content} elements = {data.tei.elements}></TeiDocument> -->
-  <TEISimple path = "{base}/content/literature/data/Coopers_hill_1655.xml"/>
+  <TEISimple path = "{base}/content/literature/data/1623.xml"/>
 {:else if data.view.slug === 'music'}
   <h3>Binaural recording test</h3>
   <AudioPlayer audioPath = "{base}/content/music/media/virtualbarbershop.mp3"/>
