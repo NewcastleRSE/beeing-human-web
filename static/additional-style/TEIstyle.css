@@ -879,6 +879,7 @@ tei-tei tei-title[level=a][prev]:before {
 tei-title[level=m] {
   font-style: italic;
 }
+
 tei-titlestmt > tei-title {
   display: block;
   font-family: Arvo, sans-serif;
@@ -909,6 +910,11 @@ tei-tei {
   margin: 3em;
   padding: 0;
 }
+
+tei-text {
+  padding: 0 20rem 0 20rem;
+}
+
 tei-container {
   margin: 0;
   padding: 0;
@@ -919,4 +925,39 @@ tei-container {
   font-size: 12pt;
   background-color: white;
   color: #292929;
+}
+
+tei-titlepart[type="main"] {
+  font-size: 4rem;
+}
+
+tei-titlepart[type="short"] {
+  font-size: 2.5rem;
+}
+
+tei-byline {
+  font-size: 2rem;
+}
+
+tei-titlepage {
+  display: block;
+  text-align: center;
+}
+
+.signature {
+  margin-top: 3rem;
+  font-size: 0.7rem;
+}
+
+tei-fw[type="header"] {
+  display: block;
+  text-align: center;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+tei-fw[type="catch"] {
+  display: block;
+  text-align: end;
+  font-size: 0.7rem;
 }
