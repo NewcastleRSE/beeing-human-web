@@ -912,7 +912,8 @@ tei-tei {
 }
 
 tei-text {
-  padding: 0 20rem 0 20rem;
+  width: 50%;
+  margin: auto;
 }
 
 tei-container {
@@ -960,4 +961,24 @@ tei-fw[type="catch"] {
   display: block;
   text-align: end;
   font-size: 0.7rem;
+}
+
+tei-note[type="authorial"] {
+  float: left;
+  padding: 0.5rem;
+  margin-left: -50%;
+  max-width: 20rem;
+}
+
+tei-note[subtype="bibliographic"] {
+  float:right;
+  margin-left: unset;
+  max-width: 20rem;
+  margin-right: -50%;
+}
+
+tei-hi[rend="drop-capital"] {
+  float: left;
+  margin: -2rem 0rem -0.5rem 0;
+  font-size:5rem;
 }

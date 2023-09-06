@@ -32,13 +32,7 @@ export let teiBehaviours = {
                     notes.appendChild(note);
                     return content;
                 }
-            ],
-            ["[type=authorial]", function(elt) {
-                elt.style.fontSize = '0.75em';
-                elt.style.left = '2rem';
-                elt.style.fontStyle = 'italic';
-                elt.style.position = 'absolute';
-            }]
+            ]
         ],
         "ptr": function(elt) {
             if (elt.getAttribute('target') === '#'){
