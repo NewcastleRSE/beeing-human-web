@@ -968,6 +968,7 @@ tei-note[type="authorial"] {
   padding: 0.5rem;
   margin-left: -50%;
   max-width: 20rem;
+  clear:both;
 }
 
 tei-note[subtype="bibliographic"] {
