@@ -965,7 +965,6 @@ tei-fw[type="catch"] {
 
 tei-note[type="authorial"] {
   float: left;
-  padding: 0.5rem;
   margin-left: -50%;
   max-width: 20rem;
   clear:both;
