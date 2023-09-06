@@ -982,3 +982,20 @@ tei-hi[rend="drop-capital"] {
   margin: -2rem 0rem -0.5rem 0;
   font-size:5rem;
 }
+
+tei-body > tei-head[type="title"] {
+  width: 100%;
+  text-align: center;
+}
+
+tei-head[type="chapter-number"] {
+  width: 100%;
+  text-align: center;
+  margin-top: 5rem;
+}
+
+tei-head[type="chapter-title"] {
+  width: 100%;
+  text-align: center;
+  font-style: italic;
+}
