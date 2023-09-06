@@ -879,6 +879,7 @@ tei-tei tei-title[level=a][prev]:before {
 tei-title[level=m] {
   font-style: italic;
 }
+
 tei-titlestmt > tei-title {
   display: block;
   font-family: Arvo, sans-serif;
@@ -909,6 +910,12 @@ tei-tei {
   margin: 3em;
   padding: 0;
 }
+
+tei-text {
+  width: 50%;
+  margin: auto;
+}
+
 tei-container {
   margin: 0;
   padding: 0;
@@ -919,4 +926,76 @@ tei-container {
   font-size: 12pt;
   background-color: white;
   color: #292929;
+}
+
+tei-titlepart[type="main"] {
+  font-size: 4rem;
+}
+
+tei-titlepart[type="short"] {
+  font-size: 2.5rem;
+}
+
+tei-byline {
+  font-size: 2rem;
+}
+
+tei-titlepage {
+  display: block;
+  text-align: center;
+}
+
+.signature {
+  margin-top: 3rem;
+  font-size: 0.7rem;
+}
+
+tei-fw[type="header"] {
+  display: block;
+  text-align: center;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+tei-fw[type="catch"] {
+  display: block;
+  text-align: end;
+  font-size: 0.7rem;
+}
+
+tei-note[type="authorial"] {
+  float: left;
+  padding: 0.5rem;
+  margin-left: -50%;
+  max-width: 20rem;
+}
+
+tei-note[subtype="bibliographic"] {
+  float:right;
+  margin-left: unset;
+  max-width: 20rem;
+  margin-right: -50%;
+}
+
+tei-hi[rend="drop-capital"] {
+  float: left;
+  margin: -2rem 0rem -0.5rem 0;
+  font-size:5rem;
+}
+
+tei-body > tei-head[type="title"] {
+  width: 100%;
+  text-align: center;
+}
+
+tei-head[type="chapter-number"] {
+  width: 100%;
+  text-align: center;
+  margin-top: 5rem;
+}
+
+tei-head[type="chapter-title"] {
+  width: 100%;
+  text-align: center;
+  font-style: italic;
 }
