@@ -37,6 +37,11 @@ export let teiBehaviours = {
         "ptr": function(elt) {
             if (elt.getAttribute('target') === '#'){
                 console.log('Ignoring empty ptrs...')
+            } else {
+                var link = document.createElement('a');
+                link.href = elt.getAttribute('target');
+                link.innerHTML = '>';
+                return link
             }
         }, 
         "ref": function(elt) {
