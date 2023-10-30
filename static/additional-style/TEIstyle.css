@@ -429,6 +429,20 @@ tei-lb:after {
   content: '\a';
   white-space: pre;
 }
+tei-lem {
+  background-color: red;
+  padding: 0.1rem;
+  border-radius: 5px;
+
+}
+tei-lem:hover {
+  background-color: white;
+  border: solid black 1px;
+  cursor: pointer;
+}
+tei-lem:hover + tei-rdg {
+  display: inline-block;
+}
 tei-lg {
   display: block;
   margin-top: 1em;
@@ -648,9 +662,18 @@ tei-quote {
 }
 
 /* r */
+/* 
 tei-app tei-rdg {
-  /*perhaps choice */
   display:none;
+} */
+tei-rdg {
+  position: absolute;
+  display: none;
+  max-width: 15rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: black solid 1px;
+  background-color: rgba(255, 255, 255, 0.95);
 }
 tei-re {
   display: block;
