@@ -435,8 +435,13 @@ tei-lem {
   border-radius: 5px;
 
 }
+tei-lem.add {
+  background-color: green;
+  color: antiquewhite;
+}
 tei-lem:hover {
   background-color: white;
+  color: unset;
   border: solid black 1px;
   cursor: pointer;
 }
