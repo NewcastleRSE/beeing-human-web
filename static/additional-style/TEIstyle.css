@@ -430,14 +430,17 @@ tei-lb:after {
   white-space: pre;
 }
 tei-lem {
-  background-color: red;
+  background-color: lightseagreen;
   padding: 0.1rem;
   border-radius: 5px;
 
 }
-tei-lem.add {
-  background-color: green;
-  color: antiquewhite;
+tei-lem.var-add {
+  background-color: lightgreen;
+}
+tei-lem.var-del {
+  font-size: smaller;
+  background-color: lightcoral;
 }
 tei-lem:hover {
   background-color: white;
@@ -679,6 +682,9 @@ tei-rdg {
   border-radius: 5px;
   border: black solid 1px;
   background-color: rgba(255, 255, 255, 0.95);
+}
+tei-rdg.var-del {
+  text-decoration: line-through;
 }
 tei-re {
   display: block;
