@@ -97,9 +97,9 @@ tei-address[data-tei-rend~="block"], addresss[data-tei-rendition~="#block"] {
 tei-adminInfo {
   display: block;
 }
-tei-app tei-note {
+/* tei-app tei-note {
   display: none;
-}
+} */
 tei-appInfo {
   display: block;
 }
@@ -429,6 +429,31 @@ tei-lb:after {
   content: '\a';
   white-space: pre;
 }
+tei-lem {
+  background-color: lightseagreen;
+  padding: 0.1rem;
+  border-radius: 5px;
+
+}
+tei-lem.var-add {
+  background-color: lightgreen;
+}
+tei-lem.var-del {
+  font-size: smaller;
+  background-color: lightcoral;
+}
+tei-lem:hover {
+  background-color: white;
+  color: unset;
+  border: solid black 1px;
+  cursor: pointer;
+}
+tei-lem:hover + tei-rdg {
+  display: inline-block;
+}
+tei-lem > * {
+  background-color: inherit;
+}
 tei-lg {
   display: block;
   margin-top: 1em;
@@ -648,9 +673,21 @@ tei-quote {
 }
 
 /* r */
+/* 
 tei-app tei-rdg {
-  /*perhaps choice */
   display:none;
+} */
+tei-rdg {
+  position: absolute;
+  display: none;
+  max-width: 30rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: black solid 1px;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+tei-rdg.var-del {
+  text-decoration: line-through;
 }
 tei-re {
   display: block;
