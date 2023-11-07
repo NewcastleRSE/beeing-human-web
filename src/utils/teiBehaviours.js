@@ -65,6 +65,22 @@ export let teiBehaviours = {
             sig.classList.add('signature')
             return sig
         },
+        "app": function(elt) {
+            // populate children with subtype
+            for (const child of elt.children) {
+                child.classList.add(`var-${elt.getAttribute('subtype')}`)
+            }
+        },
+        "rdg": function(elt){
+            if (elt.hasAttribute('data-empty')) {
+                elt.innerHTML = '[Does not exist in 1609]'
+            }
+        },
+        "lem": function(elt){
+            if (elt.hasAttribute('data-empty')) {
+                elt.innerHTML = '[+1609]'
+            }
+        },
         "fw": [
             ["[type=horizontalRule]", function(elt){
                 return document.createElement('hr')

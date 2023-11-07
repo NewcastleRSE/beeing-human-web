@@ -22,7 +22,7 @@
   <!-- <TeiDocument doc = {data.tei.content} elements = {data.tei.elements}></TeiDocument> -->
   <!-- <TEISimple path = "{base}/content/literature/data/1623.xml"/> -->
   <!-- Access TEI directly from github repo -->
-  <TEISimple path = "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/dev/1623.xml"/>
+  <TEISimple path = "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/Variation-chapter1/1623_consolidated.xml"/>
 {:else if data.view.slug === 'music'}
   <h3>Binaural recording test</h3>
   <AudioPlayer audioPath = "{base}/content/music/media/virtualbarbershop.mp3"/>
