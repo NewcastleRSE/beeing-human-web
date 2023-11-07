@@ -15,10 +15,8 @@ export async function loadMei(meiString, arrBuff = false) {
     let base64midi = '';
     
     // waits for the creation of the Verovio Module
-    let VerovioModule = await createVerovioModule();
-    
     // Start new toolkit
-    const vTk = new VerovioToolkit(VerovioModule);
+    const vTk = new VerovioToolkit(await createVerovioModule());
     
     // Set default options for the toolkit
     // console.log(vTk.getOptions()) for a full list of available options
