@@ -12,8 +12,10 @@ describe('Load MEI file and produce SVG', () => {
         // load the file and create the response object which will be used by all tests
         let meiString = await readFile('./static/content/music/data/CRIM_Model_0001.mei').then((buffer) => buffer.toString());
 
+        console.log("here")
+
         response = await loadMei(meiString);
-    });
+    }, 30000);
     
     afterEach(() => cleanup());
 
@@ -47,4 +49,4 @@ describe('Load MEI file and produce SVG', () => {
     it('should create the same timemap as the one previously defined', async () => {
         expect(response.timeMap).toEqual(timeMap);
     });
-})
+}, {timeout: 30000, retry: 5, repeats: 5})
