@@ -97,9 +97,9 @@ tei-address[data-tei-rend~="block"], addresss[data-tei-rendition~="#block"] {
 tei-adminInfo {
   display: block;
 }
-tei-app tei-note {
+/* tei-app tei-note {
   display: none;
-}
+} */
 tei-appInfo {
   display: block;
 }
@@ -451,6 +451,9 @@ tei-lem:hover {
 tei-lem:hover + tei-rdg {
   display: inline-block;
 }
+tei-lem > * {
+  background-color: inherit;
+}
 tei-lg {
   display: block;
   margin-top: 1em;
@@ -677,7 +680,7 @@ tei-app tei-rdg {
 tei-rdg {
   position: absolute;
   display: none;
-  max-width: 15rem;
+  max-width: 30rem;
   padding: 0.5rem;
   border-radius: 5px;
   border: black solid 1px;
