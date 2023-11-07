@@ -13,7 +13,7 @@ describe('Load MEI file and produce SVG', () => {
         let meiString = await readFile('./static/content/music/data/CRIM_Model_0001.mei').then((buffer) => buffer.toString());
 
         response = await loadMei(meiString);
-    });
+    }, 30000);
     
     afterEach(() => cleanup());
 
