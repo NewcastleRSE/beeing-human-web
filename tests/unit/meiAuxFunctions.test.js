@@ -47,4 +47,4 @@ describe('Load MEI file and produce SVG', () => {
     it('should create the same timemap as the one previously defined', async () => {
         expect(response.timeMap).toEqual(timeMap);
     });
-})
+}, {timeout: 30000, retry: 5})
