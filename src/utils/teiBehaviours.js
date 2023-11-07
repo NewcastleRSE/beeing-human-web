@@ -32,13 +32,59 @@ export let teiBehaviours = {
                     notes.appendChild(note);
                     return content;
                 }
-            ],
-            ["[type=side-note]", function(elt) {
-                elt.style.fontSize = '0.75em';
-                elt.style.marginLeft = '1em';
-                elt.style.fontStyle = 'italic';
-            }]
-        ]
-        
+            ]
+        ],
+        "ptr": function(elt) {
+            if (elt.getAttribute('target') === '#'){
+                console.log('Ignoring empty ptrs...')
+            } else {
+                var link = document.createElement('a');
+                link.href = elt.getAttribute('target');
+                link.innerHTML = '>';
+                return link
+            }
+        }, 
+        "ref": function(elt) {
+            if (elt.getAttribute('target') === '#') {
+                console.log('Ignoring empty refs...')
+            } else {
+                var link = document.createElement('a');
+                link.href = elt.getAttribute('target');
+                link.innerHTML = elt.innerHTML;
+                return link
+            }
+        }, 
+        "graphic": function(elt) {
+            if (elt.getAttribute('url') === '#') {
+                console.log('Ignoring non-existent graphics...')
+            }
+        },
+        "pb": function(elt){
+            var sig = document.createElement('p');
+            sig.innerHTML = elt.getAttribute('n');
+            sig.classList.add('signature')
+            return sig
+        },
+        "app": function(elt) {
+            // populate children with subtype
+            for (const child of elt.children) {
+                child.classList.add(`var-${elt.getAttribute('subtype')}`)
+            }
+        },
+        "rdg": function(elt){
+            if (elt.hasAttribute('data-empty')) {
+                elt.innerHTML = '[Does not exist in 1609]'
+            }
+        },
+        "lem": function(elt){
+            if (elt.hasAttribute('data-empty')) {
+                elt.innerHTML = '[+1609]'
+            }
+        },
+        "fw": [
+            ["[type=horizontalRule]", function(elt){
+                return document.createElement('hr')
+        }]
+    ]
     }
 }

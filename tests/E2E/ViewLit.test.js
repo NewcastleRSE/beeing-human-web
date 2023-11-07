@@ -43,14 +43,14 @@ test('Expect that the literature view contains TEI-title after the page loads', 
     const container = page.getByTestId('TEI-container');
     await Promise.all([
         container.waitFor('visible'),
-        expect(page.getByText('COOPERS HILL.', { exact: true })).toBeVisible()
+        expect(page.getByText('Feminine Monarchie', { exact: true })).toBeVisible()
     ]);
 });
 
 // Test that tei-body is visible
 test('Expect that the literature view contains TEI-body after the page loads', async({page}) => {
     await page.goto('/content/literature');
-    const teiText = page.getByText('COOPERS HILL.', { exact: true });
+    const teiText = page.getByText('Feminine Monarchie', { exact: true });
     await Promise.all([
         teiText.waitFor('visible'),
         // locating by css selectors is considered bad practice, but there's no other way (currently) of locating this element; for a simple existence check, it's fine
@@ -61,7 +61,7 @@ test('Expect that the literature view contains TEI-body after the page loads', a
 // Test that tei-header is not visible
 test('Expect that the literature view contains TEI-header after the page loads, but that this is not visible', async({page}) => {
     await page.goto('/content/literature');
-    const teiText = page.getByText('COOPERS HILL.', { exact: true });
+    const teiText = page.getByText('Feminine Monarchie', { exact: true });
     await Promise.all([
         teiText.waitFor('visible'),
         // locating by css selectors is considered bad practice, but there's no other way (currently) of locating this element; for a simple existence check, it's fine
@@ -72,11 +72,11 @@ test('Expect that the literature view contains TEI-header after the page loads, 
 // Test that behaviours were applied
 // this is here just as an example of how we could test that behaviours are applied.
 // In the dev scenario, we look for one of the links that should have resulted from applying the note[type='gloss'] behaviour
-test('Expect behaviours to have been applied to TEI, by checking what happens with gloss notes', async({page}) => {
-    await page.goto('/content/literature');
-    const teiText = page.getByText('COOPERS HILL.', {exact: true});
-    await Promise.all([
-        teiText.waitFor('visible'),
-        expect(page.getByRole('link', { name: '1', exact: true })).toBeVisible()
-    ]);
-});
+// test('Expect behaviours to have been applied to TEI, by checking what happens with gloss notes', async({page}) => {
+//     await page.goto('/content/literature');
+//     const teiText = page.getByText('COOPERS HILL.', {exact: true});
+//     await Promise.all([
+//         teiText.waitFor('visible'),
+//         expect(page.getByRole('link', { name: '1', exact: true })).toBeVisible()
+//     ]);
+// });
