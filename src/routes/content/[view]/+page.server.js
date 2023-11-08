@@ -74,7 +74,7 @@ export async function load({ fetch, params }) {
   // Load MEI if in the music view
   if (view.slug === 'music') {
     // fetch MEI file, convert to string;
-    let meiString = await fetch('music/data/CRIM_Model_0001.mei')
+    let meiString = await fetch('data/CRIM_Model_0001.mei')
     .then(function(response) {
         if (response.ok) {
         return response.text();
