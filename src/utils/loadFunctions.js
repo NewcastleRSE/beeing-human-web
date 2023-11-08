@@ -17,7 +17,6 @@ export async function loadMei(meiString, arrBuff = false) {
     try {
         // waits for the creation of the Verovio Module
         let VerovioModule = await createVerovioModule();
-        console.log(VerovioModule)
 
         // Start new toolkit
         const vTk = new VerovioToolkit(VerovioModule);
