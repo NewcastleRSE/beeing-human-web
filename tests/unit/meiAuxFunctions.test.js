@@ -10,8 +10,8 @@ describe('Load MEI file and produce SVG', () => {
     let response;
     beforeAll(async () => {
         // load the file and create the response object which will be used by all tests
-        let meiString = await readFile('static/content/music/data/CRIM_Model_0001.mei').then((buffer) => buffer.toString());
-        
+        let meiString = await readFile('./static/content/music/data/CRIM_Model_0001.mei').then((buffer) => buffer.toString());
+
         response = await loadMei(meiString);
     });
     
