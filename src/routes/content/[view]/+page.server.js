@@ -2,6 +2,7 @@ import { views } from "../data.js";
 import { error } from "@sveltejs/kit";
 import parseMD from "parse-md";
 import { loadMei } from "../../../utils/loadFunctions.js";
+import { base } from "$app/paths";
 
 
 export async function load({ fetch, params }) {
@@ -13,7 +14,6 @@ export async function load({ fetch, params }) {
   // get list of sections
   // import.meta.glob does not allow for dynamic variables in the search path, so it needs a switch statement to adjust based on the selected view
   // will need to be adapted if different/more views are necessary
-  console.log(view.slug);
   switch (view.slug) {
     case "literature":
       listSections = import.meta.glob("/static/content/literature/*.md", {
@@ -54,27 +54,12 @@ export async function load({ fetch, params }) {
   // add section metadata and data to export view
   view["sections"] = sections;
 
-  // TEST CETEICEAN
-  // This would be necessary for a more granular approach to implement CETEIcean, but is not needed for the simple approach;
-  // let tei = '';
-  // let teiString = '';
-  // if (view.slug === 'literature') {
-  //   // Get the content of the TEI file into a string
-  //   teiString = await fetch("literature/data/test2.xml")
-  //     .then(function(response) {
-  //       if (response.ok) {
-  //         return response.text();
-  //       }
-  //     });
-
-  //   tei = transformTEI(teiString);
-
-  // }
-
   // Load MEI if in the music view
   if (view.slug === 'music') {
     // fetch MEI file, convert to string;
-    let meiString = await fetch('music/data/CRIM_Model_0001.mei')
+    let url = `${base}/content/${view.slug}/data/CRIM_Model_0001.mei`;
+    console.log(url);
+    let meiString = await fetch(url)
     .then(function(response) {
         if (response.ok) {
         return response.text();

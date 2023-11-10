@@ -6,7 +6,7 @@ const config = {
   extensions: [".svelte"],
 
   paths: {
-    base: "/beeing-human-web",
+    base: process.env.NODE_ENV === 'production' ? "/beeing-human-web" : '',
   },
 
   kit: {
