@@ -9,6 +9,7 @@
   function handleClick() {
     invalidateAll();
   }
+
 </script>
 
 <h1>Bee-ing Human</h1>
@@ -50,6 +51,6 @@
 <InternalLink link="about">About</InternalLink>
 
 <ViewSelect on:click={handleClick} />
-<InternalLink link="content/{$view}/  " class="btn variant-filled"
+<InternalLink link="content/{$view}/" class="btn variant-filled"
   >Go</InternalLink
 >
