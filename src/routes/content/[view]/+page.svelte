@@ -6,6 +6,8 @@
   import AudioPlayer from "../../../lib/AudioPlayer.svelte";
   import MeiSimple from "../../../lib/MEISimple.svelte";
 
+  let audioPath = `${base}/content/music/media/virtualbarbershop.mp3`
+
 </script>
 
 <h1>View page</h1>
@@ -19,13 +21,10 @@
 
 {#if data.view.slug === "literature"}
   <h3>Test</h3>
-  <!-- <TeiDocument doc = {data.tei.content} elements = {data.tei.elements}></TeiDocument> -->
-  <!-- <TEISimple path = "{base}/content/literature/data/1623.xml"/> -->
-  <!-- Access TEI directly from github repo -->
   <TEISimple path = "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/dev/1623_consolidated.xml"/>
 {:else if data.view.slug === 'music'}
   <h3>Binaural recording test</h3>
-  <AudioPlayer audioPath = "{base}/content/music/media/virtualbarbershop.mp3"/>
+  <AudioPlayer {audioPath}/>
   <h3>MEI engraving and playback test</h3>
   {#if 'mei' in data.view}
     <MeiSimple meiSvg = {data.view.mei.svg} meiMidi = {data.view.mei.midi} timeMap = {data.view.mei.timeMap}></MeiSimple>

@@ -167,7 +167,7 @@
         
         // get list of events (one track for each voice, plus one track with playback information (eventList[0]))
         let eventList = Player.getEvents();
-        console.log(Player.division);
+        // console.log(Player.division);
 
         // initialise object with chosen samples for each voice -- this needs to be updated manually to reflect the names of each voice and the chosen instrument from https://gleitz.github.io/midi-js-soundfonts/MusyngKite/names.json
         const instrumentsChosen = {
