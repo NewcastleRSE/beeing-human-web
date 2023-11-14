@@ -15,6 +15,10 @@
     export let listTags;
     export let listAuthors;
 
+    // Does not create the template until it is loaded
+    let loaded = false;
+    let errorFlag = false;
+
     // array of filter objects
     let filters = new Filters();
 
@@ -264,62 +268,82 @@
 
     onMount( () => {
         // Fills the filters object
-        for (let tag of listTags) {
-            filters.addFilter(tag, 'tags');
+        try {
+            if(listAuthors.length == 0 || listTags.length == 0 || buzzwords.length == 0) {
+                throw new Error('No data received')
+            }
+            
+            for (let tag of listTags) {
+                filters.addFilter(tag, 'tags');
+            }
+            
+            for (let author of listAuthors) {
+                filters.addFilter(author, 'authors');
+            }
+            init();
+            loaded = true;
         }
-
-        for (let author of listAuthors) {
-            filters.addFilter(author, 'authors');
+        catch (error) {
+            console.debug(`There has been an error: ${error}`);
+            errorFlag = true
         }
-        init();
     })
 
 </script>
-
-<!-- #key necessary to restart components -->
-{#key unique}
-    <div class="corpus-filtering">
-        <div class="search">
-            <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={[...listAuthors, ...listTags]}/>
-        </div>
-        <div class="filters">
-            <TagSelector listTags = {filters.getFiltersByType('authors', true)} filter = 'authors' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
-            <TagSelector listTags = {filters.getFiltersByType('tags', true)} filter = 'tags' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
-        </div>
-        <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button>
-    </div>
-{/key}
-
-<div class="card-collection">
-    {#if filteredBuzzwords.length === 0}
-        <div class="empty-collection">
-            <p>No buzzwords match your criteria</p>
-        </div>
-    {:else}
-        {#each filteredBuzzwords as buzzword}
-            <div class="card">
-                <header class="card-header">
-                    {#if buzzword.date}
-                        <p class="date">{daysOfTheWeek[buzzword.date.getDay()]}, {buzzword.date.getDate()} of {monthsOfTheYear[buzzword.date.getMonth()]} {buzzword.date.getFullYear()}</p>
-                    {/if}
-                </header>
-                <section class="p-4"><InjectMd content = {buzzword.content}/></section>
-                <footer class="card-footer">
-                    {#if buzzword.author}
-                        <p class="byline">by {capitaliseFirstLetter(buzzword.author)}</p>
-                    {/if}
-                    {#if buzzword.tags}
-                        <div class="tags">
-                            {#each buzzword.tags.sort() as tag}
-                                <span class="chip variant-ghost" on:click={handleFilterClickBuzzword(tag)} on:keypress>{capitaliseFirstLetter(tag)}</span>
-                            {/each}
-                        </div>
-                    {/if}
-                </footer>
+{#if loaded}
+    <!-- #key necessary to restart components -->
+    {#key unique}
+        <div class="corpus-filtering">
+            <div class="search">
+                <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={[...listAuthors, ...listTags]}/>
             </div>
-        {/each}
-    {/if}
-</div>
+            <div class="filters">
+                <TagSelector listTags = {filters.getFiltersByType('authors', true)} filter = 'authors' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
+                <TagSelector listTags = {filters.getFiltersByType('tags', true)} filter = 'tags' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
+            </div>
+            <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button>
+        </div>
+    {/key}
+
+    <div class="card-collection">
+        {#if filteredBuzzwords.length === 0}
+            <div class="empty-collection">
+                <p>No buzzwords match your criteria</p>
+            </div>
+        {:else}
+            {#each filteredBuzzwords as buzzword}
+                <div class="card">
+                    <header class="card-header">
+                        {#if buzzword.date}
+                            <p class="date">{daysOfTheWeek[buzzword.date.getDay()]}, {buzzword.date.getDate()} of {monthsOfTheYear[buzzword.date.getMonth()]} {buzzword.date.getFullYear()}</p>
+                        {/if}
+                    </header>
+                    <section class="p-4"><InjectMd content = {buzzword.content}/></section>
+                    <footer class="card-footer">
+                        {#if buzzword.author}
+                            <p class="byline">by {capitaliseFirstLetter(buzzword.author)}</p>
+                        {/if}
+                        {#if buzzword.tags}
+                            <div class="tags">
+                                {#each buzzword.tags.sort() as tag}
+                                    <span class="chip variant-ghost" on:click={handleFilterClickBuzzword(tag)} on:keypress>{capitaliseFirstLetter(tag)}</span>
+                                {/each}
+                            </div>
+                        {/if}
+                    </footer>
+                </div>
+            {/each}
+        {/if}
+    </div>
+{:else if errorFlag}
+    <div>
+        <p>Error: Something went wrong.</p>
+    </div>
+{:else}
+    <div>
+        <p>Loading...</p>
+    </div>
+{/if}
 
 <style>
     /* this should be converted to Tailwind when working on the UI*/
