@@ -7,7 +7,6 @@
   import MeiSimple from "../../../lib/MEISimple.svelte";
 
   let audioPath = `${base}/content/music/media/virtualbarbershop.mp3`
-  console.log(audioPath)
 
 </script>
 
