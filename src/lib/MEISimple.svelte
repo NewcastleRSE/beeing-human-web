@@ -75,7 +75,7 @@
 {:else}
     <MIDIPlayer midiFile = {meiMidi} timeMap = {timeMap} on:noteOn={noteOn} on:noteOff={noteOff} on:playStopped={allNotesOff} on:skipPlay={allNotesOff}/>
 {/if}
-<div id="MEI-container">
+<div id="MEI-container" data-testid='MEI-container'>
     {#if meiSvg.length > 1}
         <Paginator data = {meiSvg} raw=true bind:goToPage={goToPage}/>
     {:else if meiSvg.length === 1}

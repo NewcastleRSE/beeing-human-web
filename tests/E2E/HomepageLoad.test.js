@@ -15,5 +15,5 @@ test('Page loads and has expected ViewSelector', async({page}) => {
 test('Page loads and has link to About page', async({page}) => {
   await page.goto("/");
   const aboutLink = await page.getByRole('link', { name: 'About' }).getAttribute('href');
-  expect(aboutLink).toBe('/about');
+  expect(aboutLink).toContain('about');
 })

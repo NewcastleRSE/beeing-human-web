@@ -1,7 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { view } from "../stores/viewChoice";
-
+  
   onMount(async () => {
     // Your selected Skeleton theme:
     await import("@skeletonlabs/skeleton/themes/theme-skeleton.css");
