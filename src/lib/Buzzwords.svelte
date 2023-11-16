@@ -305,7 +305,7 @@
         </div>
     {/key}
 
-    <div class="card-collection">
+    <div class="card-collection" data-testid="card-collection">
         {#if filteredBuzzwords.length === 0}
             <div class="empty-collection">
                 <p>No buzzwords match your criteria</p>

@@ -100,6 +100,8 @@ export async function load({ fetch, params }) {
     view['buzzwordAuthors'] = authors;
   }
 
+  console.log(view['buzzwordTags']);
+
   return {
     view /*, tei, teiString */
   };
