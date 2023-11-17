@@ -312,13 +312,13 @@
             </div>
         {:else}
             {#each filteredBuzzwords as buzzword}
-                <div class="card">
+                <div class="card" data-testid="buzzword-card">
                     <header class="card-header">
                         {#if buzzword.date}
                             <p class="date">{daysOfTheWeek[buzzword.date.getDay()]}, {buzzword.date.getDate()} of {monthsOfTheYear[buzzword.date.getMonth()]} {buzzword.date.getFullYear()}</p>
                         {/if}
                     </header>
-                    <section class="p-4"><InjectMd content = {buzzword.content}/></section>
+                    <section class="p-4" data-testid="buzzword-content"><InjectMd content = {buzzword.content}/></section>
                     <footer class="card-footer">
                         {#if buzzword.author}
                             <p class="byline">by {capitaliseFirstLetter(buzzword.author)}</p>

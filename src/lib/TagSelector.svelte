@@ -47,7 +47,7 @@
     }
 </script>
 
-<div class="tag-selector-container">
+<div class="tag-selector-container" data-testid="tag-selector-container">
     <h4>{filter}</h4>
     {#each listTags as tag}
         <button id={removeSpaces(tag.name)}-filter class="chip {tag.active ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{filter === 'authors' ? capitaliseFirstLetter(tag.name) : tag.name}</button>
