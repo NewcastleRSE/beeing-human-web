@@ -71,7 +71,7 @@
     </form>
     <div class="chip-list" id="chip-list">
     {#each Array.from(chipList) as chip}
-        <span class='chip variant-ringed' on:click={removeChip(chip)} on:keypress>{chip} &#x2715</span>
+        <span class='chip variant-ringed' on:click={removeChip(chip)} on:keypress data-testid='chip-{chip}'>{chip} &#x2715</span>
     {/each}
     {#if chipList.size != 0}
         <button class="btn btn-sm variant-filled-surface" on:click={clearAll} on:keypress>clear all</button>
