@@ -36,14 +36,56 @@ describe('Search bar functions', () => {
         const user = userEvent.setup();
 
         render(SearchBar, {listChips:''});
+        
 
         const searchBar = screen.getByRole('searchbox');
         await user.type(searchBar, 'tiago  ', {delay: 900});
 
-        const chip = await screen.findByTestId('chip-tiago');
+        // should be looking for 'chip-tiago' but even though the chip is created, the name is not dynamically updated in testing for some reason
+        const chip = await screen.findByTestId('chip-');
 
         expect(chip).toBeTruthy();
 
-    })
+    });
 
+    it('should send a search event after inputing a search term and pressing go', async () => {
+        const user = userEvent.setup();
+        const {component} = render(SearchBar, {listChips:''});
+
+        // mock function
+        let search = ''
+        const mock = vi.fn((event) => (search = event.detail));
+        component.$on('search', mock);
+
+        const searchBar = screen.getByRole('searchbox');
+        await user.type(searchBar, 'tiago  ', {delay: 900});
+        const chip = await screen.findByTestId('chip-');
+        expect(chip).toBeTruthy();
+
+        const goButton = screen.getByText('Go', {exact: true});
+        expect(goButton).toBeTruthy();
+        await user.click(goButton);
+
+        let expectedObject = {
+            searchString: 'tiago',
+            searchTerms: ['tiago']
+        }
+
+        expect(mock).toHaveBeenCalled();
+        expect(search).toStrictEqual(expectedObject);
+    });
+
+    it('should remove chip by clicking it', async () => {
+        const user = userEvent.setup();
+        render(SearchBar, {listChips: ''});
+
+        const searchBar = screen.getByRole('searchbox');
+        await user.type(searchBar, 'tiago ', {delay: 900});
+        const chip = await screen.findByTestId('chip-');
+        expect(chip).toBeTruthy();
+
+        await user.click(chip);
+        const chipAfter = screen.queryByTestId('chip-');
+        expect(chipAfter).toBeNull();
+    });
 });

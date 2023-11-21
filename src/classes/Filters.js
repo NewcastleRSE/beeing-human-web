@@ -79,7 +79,7 @@ export class Filters extends Array {
         let foundFilter = undefined;
         for (let i in this) {
             if (this[i].name === name) {
-                foundFilter = i
+                foundFilter = Number(i);
             }
         }
         return foundFilter;
