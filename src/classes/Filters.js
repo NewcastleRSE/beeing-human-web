@@ -53,6 +53,15 @@ export class Filters extends Array {
         return filters;
     }
 
+    // gets a list of available filter types
+    getFilterTypeList() {
+        let types = [];
+        for (let filter of this) {
+            types.push(filter.type);
+        }
+        return [... new Set(types)];
+    }
+
     // returns an array of all filters of a certain type
     getFiltersByType(type, order = false) {
         if (order) {
@@ -71,6 +80,9 @@ export class Filters extends Array {
                 foundFilter = f
             }
         }
+        if (foundFilter === undefined) {
+            throw new Error('Filter does not exist');
+        }
         return foundFilter
     }
 
@@ -81,6 +93,9 @@ export class Filters extends Array {
             if (this[i].name === name) {
                 foundFilter = Number(i);
             }
+        }
+        if (foundFilter === undefined) {
+            throw new Error('Filter does not exist');
         }
         return foundFilter;
     }
@@ -100,12 +115,16 @@ export class Filters extends Array {
 
     // resets the active propery of all filters of a given type
     resetFilterActiveByType(type) {
-        for (let i = 0; i < this.length; i++){
-            if (this[i].type === type){
-                this[i].active = false;
+        if (this.getFilterTypeList().includes(type)) {
+            for (let i = 0; i < this.length; i++){
+                if (this[i].type === type){
+                    this[i].active = false;
+                }
             }
+            return this
+        } else {
+            throw new Error('Filter type does not exist');
         }
-        return this
     }
 
     // checks whether all filters are active = false
@@ -131,14 +150,22 @@ export class Filters extends Array {
 
     // get an array of the names of all active filters of a certain type
     getActiveFiltersByType(type) {
-        let activeFilters = this.filter(el => el.active === true && el.type === type)
-        return Array.from(activeFilters.map((el) => el.name))
+        if (this.getFilterTypeList().includes(type)) {
+            let activeFilters = this.filter(el => el.active === true && el.type === type)
+            return Array.from(activeFilters.map((el) => el.name))
+        } else {
+            throw new Error('Filter type does not exist')
+        }
     }
 
     // get an array of the names of all available filters of a certain type
     getAvailableFiltersByType(type) {
-        let availableFilters = this.filter(el => el.available === true && el.type === type)
-        return Array.from(availableFilters.map((el) => el.name))
+        if (this.getFilterTypeList().includes(type)) {
+            let availableFilters = this.filter(el => el.available === true && el.type === type)
+            return Array.from(availableFilters.map((el) => el.name))
+        } else {
+            throw new Error('Filter type does not exist');
+        }
     }
 
     // sets the active property of a list of filters (from an array of names) to a certain vaule
