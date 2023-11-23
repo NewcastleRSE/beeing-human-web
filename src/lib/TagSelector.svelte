@@ -51,7 +51,7 @@
     {#if listTags && filter}
         <h4>{filter}</h4>
         {#each listTags as tag}
-            <button id={removeSpaces(tag.name)}-filter class="chip {tag.active ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{filter === 'authors' ? capitaliseFirstLetter(tag.name) : tag.name}</button>
+            <button data-testid={filter}-chip id={removeSpaces(tag.name)}-filter class="chip {tag.active ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{filter === 'authors' ? capitaliseFirstLetter(tag.name) : tag.name}</button>
         {/each}
         <button id="{filter}-reset" class="chip variant-filled-surface" on:click={resetFilter} on:keypress disabled>Reset</button>
     {:else}

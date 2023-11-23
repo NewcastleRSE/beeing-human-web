@@ -63,7 +63,7 @@
     $: inputValue = checkForTagAuthor(inputValue);
 </script>
 
-<div class='search-group max-w-md'>
+<div class='search-group max-w-md' data-testid="search-bar-container">
     <h4>Search</h4>
     <form on:submit={searchGo} id="submit-form">
         <input class="input max-w-sm p-2" type="search" name="searchBar" placeholder="Search..." id='search-bar' bind:value={inputValue} on:submit={searchGo} autocomplete="off"/>
