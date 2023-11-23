@@ -342,4 +342,62 @@ describe('filter setter operations', () => {
     });
 
     // STILL NEED TO TEST resetFilters, resetFiltersActiveStatus, resetFiltersAvailableStatus
+
+    it('should reset all filters to their initial state', () => {
+        let initialState = new Filters();
+        for (let tag of listTags) {
+            initialState.addFilter(tag, 'tags');
+        }
+
+        for (let author of listAuthors) {
+            initialState.addFilter(author, 'authors');
+        }
+
+        // change something and expect them to be different
+        filters.setActiveFiltersFromList(['tiago', 'balu']);
+        filters.toggleFilterActive(filters.getFiltersByName('jenny'));
+        expect(filters).not.toEqual(initialState);
+
+        // reset filters and expect them to be the same
+        filters.resetFilters()
+        expect(filters).toEqual(initialState);
+    });
+
+    it('should reset the available status for all filters', () => {
+        // initial state and change
+        let initialState = filters.getFiltersByName('jenny').available;
+        filters.changeFilterAvailability('jenny', false);
+        let changedState = filters.getFiltersByName('jenny').available;
+        expect(changedState).not.toEqual(initialState);
+        expect(initialState).toBeTruthy();
+        expect(changedState).toBeFalsy();
+
+        // toggling active status to ensure only available status is changed
+        filters.toggleFilterActive(filters.getFiltersByName('jenny'));
+        expect(filters.getFiltersByName('jenny').active).toBeTruthy();
+
+        // reseting filter available status
+        filters.resetFiltersAvailableStatus();
+        expect(filters.getFiltersByName('jenny').available).toBeTruthy();
+        expect(filters.getFiltersByName('jenny').active).toBeTruthy();
+    });
+
+    it('should reset the active status for all filters', () => {
+        // initial state and change
+        let initialState = filters.getFiltersByName('jenny').active;
+        filters.toggleFilterActive(filters.getFiltersByName('jenny'));
+        let changedState = filters.getFiltersByName('jenny').active;
+        expect(changedState).not.toEqual(initialState);
+        expect(initialState).toBeFalsy();
+        expect(changedState).toBeTruthy();
+
+        // toggling available status to ensure only active status is changed
+        filters.changeFilterAvailability('jenny', false);
+        expect(filters.getFiltersByName('jenny').available).toBeFalsy();
+
+        // reseting filter active status
+        filters.resetFiltersActiveStatus();
+        expect(filters.getFiltersByName('jenny').active).toBeFalsy();
+        expect(filters.getFiltersByName('jenny').available).toBeFalsy();
+    });
 })
