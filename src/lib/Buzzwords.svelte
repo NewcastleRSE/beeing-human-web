@@ -312,21 +312,21 @@
             </div>
         {:else}
             {#each filteredBuzzwords as buzzword}
-                <div class="card" data-testid="buzzword-card">
+                <div class="card" data-testid="buzzword-card" id={buzzword.id}>
                     <header class="card-header">
                         {#if buzzword.date}
-                            <p class="date">{daysOfTheWeek[buzzword.date.getDay()]}, {buzzword.date.getDate()} of {monthsOfTheYear[buzzword.date.getMonth()]} {buzzword.date.getFullYear()}</p>
+                            <p class="date" data-testid="buzzword-date">{daysOfTheWeek[buzzword.date.getDay()]}, {buzzword.date.getDate()} of {monthsOfTheYear[buzzword.date.getMonth()]} {buzzword.date.getFullYear()}</p>
                         {/if}
                     </header>
                     <section class="p-4" data-testid="buzzword-content"><InjectMd content = {buzzword.content}/></section>
                     <footer class="card-footer">
                         {#if buzzword.author}
-                            <p class="byline">by {capitaliseFirstLetter(buzzword.author)}</p>
+                            <p class="byline" data-testid="buzzword-byline">by {capitaliseFirstLetter(buzzword.author)}</p>
                         {/if}
                         {#if buzzword.tags}
                             <div class="tags">
                                 {#each buzzword.tags.sort() as tag}
-                                    <span class="chip variant-ghost" on:click={handleFilterClickBuzzword(tag)} on:keypress>{capitaliseFirstLetter(tag)}</span>
+                                    <span data-testid="chip-tag" class="chip variant-ghost" on:click={handleFilterClickBuzzword(tag)} on:keypress>{capitaliseFirstLetter(tag)}</span>
                                 {/each}
                             </div>
                         {/if}
