@@ -105,7 +105,7 @@ test.describe('Page has correct contents tests', () => {
         await expect(page).toHaveURL('/content/connections');
         const buzzCards = await page.getByTestId('buzzword-card').all();
         for (let card of buzzCards) {
-            expect(card.getByTestId('buzzword-content')).toBeVisible();
+            await expect(card.getByTestId('buzzword-content')).toBeVisible();
         }
     });
 
@@ -262,7 +262,7 @@ test.describe('Page user interactions tests', () => {
     
             await button.click();
     
-            expect(resetButton).toBeEnabled();
+            await expect(resetButton).toBeEnabled();
         });
 
         test('Clicking on one of the filter tags should activate the Reset All button', async({page}) => {
@@ -274,7 +274,7 @@ test.describe('Page user interactions tests', () => {
             const button = page.getByRole('button', { name: 'bee-keeping' });
             await button.click();
 
-            expect(resetAllButton).toBeEnabled();
+            await expect(resetAllButton).toBeEnabled();
         })
 
         test('Clicking on one of the filter tags should reduce the number of available author filters', async({page}) => {
