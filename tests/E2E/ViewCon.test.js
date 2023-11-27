@@ -2,6 +2,8 @@ import { expect, test } from "@playwright/test";
 
 import { buzzwords, listAuthors, listTags } from '../mocks/mockVarsBuzzwords'
 import { daysOfTheWeek, monthsOfTheYear } from '../../src/utils/generalConstants'
+import { get } from "svelte/store";
+import { getByTestId } from "@testing-library/svelte";
 
 test.describe('Page navigation tests', () => {
     test('Page loads and has expected option', async ({ page }) => {
@@ -304,15 +306,198 @@ test.describe('Page user interactions tests', () => {
         test('Clicking on one of the filter tags should result in displaying the expected buzzword cards', async ({page}) => {
             await expect(page).toHaveURL('/content/connections');
 
+            // gets ids for expected cards
             const buttonToPress = 'technology';
-            const expectedBuzzwords = buzzwords.filter((e) => {
+            let expectedBuzzwords = buzzwords.filter((e) => {
                 if (new Array(e.tags).flat().includes(buttonToPress)) {
                     return e;
                 };
             });
+            expectedBuzzwords = expectedBuzzwords.map((e) => (e.id));
 
-            console.log(expectedBuzzwords);
-            // NEED TO CHECK BUZZ IDS DISPLAYED ARE THE SAME AS THE ONE IN THIS VAR
-        })
+            // click button
+            const button = page.getByRole('button', { name: buttonToPress });
+            await button.click();
+            
+            // gets ids for displayed cards
+            const buzzCards = await page.getByTestId('buzzword-card').all();
+            let buzzIds = [];
+            for (let card of buzzCards) {
+                buzzIds.push(await card.getAttribute('id'));
+            }
+
+            expect(buzzIds.sort()).toEqual(expectedBuzzwords.sort());
+        });
+
+        test('Clicking on two of the filter tags should only display buzzwords that contain both tags', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            // get ids for expected cards
+            const buttonsToPress = ['technology', 'literature'];
+            let expectedBuzzwords = buzzwords.filter((e) => {
+                const array = new Array(e.tags).flat();
+                    if (array.includes(buttonsToPress[0]) && array.includes(buttonsToPress[1])) {
+                        return e;
+                    }
+                })
+            expectedBuzzwords = expectedBuzzwords.map((e) => (e.id))
+            
+            // click buttons
+            for (let b of buttonsToPress) {
+                const button = page.getByRole('button', {name: b});
+                await button.click();
+            }
+
+            // get ids for displayed cards
+            const buzzCards = await page.getByTestId('buzzword-card').all();
+            let buzzIds = [];
+            for (let card of buzzCards) {
+                buzzIds.push(await card.getAttribute('id'));
+            }
+
+            expect(expectedBuzzwords.sort()).toEqual(buzzIds.sort());
+        });
+
+        test('Clicking the same button twice should return the number of buzzwords to the initial value', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            let initialBuzzwords = await page.getByTestId('buzzword-card').all();
+
+            // First click
+            const button = page.getByRole('button', {name: 'technology'});
+            await button.click();
+
+            let currentBuzzwords = await page.getByTestId('buzzword-card').all();
+
+            expect(currentBuzzwords.length).toBeLessThan(initialBuzzwords.length);
+
+            // Second click
+            await button.click();
+
+            currentBuzzwords = await page.getByTestId('buzzword-card').all();
+
+            expect(currentBuzzwords.length).toEqual(initialBuzzwords.length);
+            
+        });
+
+        test('Clicking the same button twice should reactivate all tag buttons and deactivate the reset buttons', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            const authorChips = await page.getByTestId('authors-chip').all();
+            const tagsChips = await page.getByTestId('tags-chip').all();
+
+            let currentActive = 0;
+            for (let author of authorChips) {
+                if (author.isEnabled()) {
+                    currentActive += 1;
+                }
+            }
+            for (let tag of tagsChips) {
+                if (tag.isEnabled()) {
+                    currentActive += 1;
+                }
+            }
+
+            // count nr of active chips before action
+            const initialActive = currentActive;
+
+            // first click
+            const button = page.getByRole('button', {name: 'technology'});
+            await button.click();
+
+            // count nr of active chips after action
+            for (let author of authorChips) {
+                if (author.isDisabled()) {
+                    currentActive -= 1;
+                }
+            }
+            for (let tag of tagsChips) {
+                if (tag.isDisabled()) {
+                    currentActive -= 1;
+                }
+            };
+
+            const resetButtons = await page.getByTestId('tag-reset-button').all();
+            const resetAllButton = page.getByRole('button', {name: 'Reset all'});
+
+            expect(currentActive).toBeLessThan(initialActive);
+            
+            // check that reset button for tags is active
+            for (let b of resetButtons) {
+                if (b.getAttribute('id') === 'tags-reset') {
+                    expect(b).toBeEnabled();
+                }
+            }
+            expect(resetAllButton).toBeEnabled();
+
+            // second click
+            await button.click();
+
+            // count nr of active chips after action
+            currentActive = 0;
+            for (let author of authorChips) {
+                if (author.isEnabled()) {
+                    currentActive += 1;
+                }
+            }
+            for (let tag of tagsChips) {
+                if (tag.isEnabled()) {
+                    currentActive += 1;
+                }
+            }
+
+            expect(currentActive).toEqual(initialActive);
+            for (let b of resetButtons) {
+                expect(b).toBeDisabled();
+            }
+            expect(resetAllButton).toBeDisabled();
+            
+        });
     });
+
+    test.describe('Test interaction with author filters', async () => {
+
+        test('Clicking on one of the author tags should reduce the number of visible buzzcards', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            let buzzCards = await page.getByTestId('buzzword-card').all();
+
+            const initialCount = buzzCards.length
+            
+            const button = page.getByRole('button', {name: 'Tiago'})
+            await button.click();
+
+            buzzCards = await page.getByTestId('buzzword-card').all();
+
+            expect(buzzCards.length).toBeLessThan(initialCount);
+        });
+
+        test('Clicking on one of the author tags should reduce the number of available tag chips', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            let filterChips = await page.getByTestId('tags-chip').all();
+            let initialActive = 0;
+            for (let chip of filterChips) {
+                expect(chip).toBeEnabled();
+                if (chip.isEnabled()) {
+                    initialActive++;
+                }
+            };
+
+            // click button
+            const button = page.getByRole('button', {name: 'Tiago'})
+            await button.click();
+            
+
+            filterChips = await page.getByTestId('tags-chip').all();
+            let finalActive = 0;
+            for (let chip of filterChips) {
+                if (chip.isEnabled()) {
+                    finalActive++;
+                }
+            }
+
+            expect(finalActive).toBeLessThan(initialActive);
+        });
+    })
 });
