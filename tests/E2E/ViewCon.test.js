@@ -87,8 +87,8 @@ test.describe('Page has correct contents tests', () => {
 
     test('Page should have as many cards as there are buzzwords', async ({ page }) => {
         await expect(page).toHaveURL('/content/connections');
-        const buzzCards = await page.getByTestId('buzzword-card').all();
-        expect(buzzCards.length).toEqual(buzzwords.length);
+        const buzzCards = (await page.getByTestId('buzzword-card').all()).length;
+        expect(buzzCards).toEqual(buzzwords.length);
     });
 
     test('Page should have as many tag selectors as there are tags', async ({ page }) => {
@@ -215,10 +215,9 @@ test.describe('Page user interactions tests', () => {
     
             await button.click();
     
-            const reducedBuzzCards = await page.getByTestId('buzzword-card').all();
-            const nrReducedBuzzCards = reducedBuzzCards.length;
+            const reducedBuzzCards = (await page.getByTestId('buzzword-card').all()).length;
     
-            expect(nrBuzzCards).toBeGreaterThan(nrReducedBuzzCards);
+            expect(nrBuzzCards).toBeGreaterThan(reducedBuzzCards);
         });
     
         test('Clicking on one of the filter tags should reduce the number of available filter tags', async ({page}) => {
@@ -436,22 +435,160 @@ test.describe('Page user interactions tests', () => {
             // count nr of active chips after action
             currentActive = 0;
             for (let author of authorChips) {
-                if (author.isEnabled()) {
+                if (await author.isEnabled()) {
                     currentActive += 1;
                 }
             }
             for (let tag of tagsChips) {
-                if (tag.isEnabled()) {
+                if (await tag.isEnabled()) {
                     currentActive += 1;
                 }
             }
 
             expect(currentActive).toEqual(initialActive);
             for (let b of resetButtons) {
-                expect(b).toBeDisabled();
+                await expect(b).toBeDisabled();
             }
-            expect(resetAllButton).toBeDisabled();
+            await expect(resetAllButton).toBeDisabled();
             
+        });
+
+        test('Clicking on the reset button should return everything to its initial state', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            let initialCountAuthors = 0;
+            let initialCountTags = 0;
+            const initialBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
+
+            let authorChips = await page.getByTestId('authors-chip').all();
+            let tagsChips = await page.getByTestId('tags-chip').all();
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    initialCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    initialCountTags++;
+                }
+            }
+
+            // first click
+            await page.getByRole('button', {name: 'technology'}).click();
+            const firstCountBuzzwords = (await page.getByTestId('buzzword-card').all()).length
+
+            let firstClickAuthors = 0;
+            let firstClickTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    firstClickAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    firstClickTags++;
+                }
+            }
+
+            expect(firstCountBuzzwords).toBeLessThan(initialBuzzwords);
+            expect(firstClickAuthors).toBeLessThan(initialCountAuthors);
+            expect(firstClickTags).toBeLessThan(initialCountTags);
+
+            // reset
+            const resetButtons = await page.getByTestId('tag-reset-button').all();
+            for (let rb of resetButtons) {
+                if (await rb.getAttribute('id') === 'tags-reset') {
+                    await rb.click();
+                    break;
+                }
+            }
+
+            const finalCountBuzzwords = (await page.getByTestId('buzzword-card').all()).length
+            let finalCountAuthors = 0;
+            let finalCountTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    finalCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    finalCountTags++;
+                }
+            }
+
+            expect(finalCountBuzzwords).toEqual(initialBuzzwords);
+            expect(finalCountAuthors).toEqual(initialCountAuthors);
+            expect(finalCountTags).toEqual(initialCountTags);
+        });
+
+        test('Clicking on the reset all button should return everything to its initial state', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            let initialCountAuthors = 0;
+            let initialCountTags = 0;
+            const initialBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
+
+            let authorChips = await page.getByTestId('authors-chip').all();
+            let tagsChips = await page.getByTestId('tags-chip').all();
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    initialCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    initialCountTags++;
+                }
+            }
+
+            // first click
+            await page.getByRole('button', {name: 'technology'}).click();
+            const firstCountBuzzwords = (await page.getByTestId('buzzword-card').all()).length
+
+            let firstClickAuthors = 0;
+            let firstClickTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    firstClickAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    firstClickTags++;
+                }
+            }
+
+            expect(firstCountBuzzwords).toBeLessThan(initialBuzzwords);
+            expect(firstClickAuthors).toBeLessThan(initialCountAuthors);
+            expect(firstClickTags).toBeLessThan(initialCountTags);
+
+            // reset
+            await page.getByRole('button', {name: 'Reset all'}).click();
+
+            const finalCountBuzzwords = (await page.getByTestId('buzzword-card').all()).length
+            let finalCountAuthors = 0;
+            let finalCountTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    finalCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    finalCountTags++;
+                }
+            }
+
+            expect(finalCountBuzzwords).toEqual(initialBuzzwords);
+            expect(finalCountAuthors).toEqual(initialCountAuthors);
+            expect(finalCountTags).toEqual(initialCountTags);
         });
     });
 
@@ -485,19 +622,644 @@ test.describe('Page user interactions tests', () => {
             };
 
             // click button
-            const button = page.getByRole('button', {name: 'Tiago'})
+            const button = page.getByRole('button', {name: 'Tiago'});
             await button.click();
-            
 
-            filterChips = await page.getByTestId('tags-chip').all();
             let finalActive = 0;
             for (let chip of filterChips) {
-                if (chip.isEnabled()) {
+                if (await chip.isEnabled()) {
                     finalActive++;
                 }
             }
 
             expect(finalActive).toBeLessThan(initialActive);
         });
-    })
+
+        test('Clicking on one of the author filters should enable the reset button', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            const resetButtons = await page.getByTestId('tag-reset-button').all();
+
+            let rb;
+            for (let b of resetButtons) {
+                if (await b.getAttribute('id') === 'authors-reset') {
+                    rb = b;
+                }
+            }
+
+            // checks the button is disabled at the start
+            await expect(rb).toBeDisabled();
+
+            // get the button and press it
+            await page.getByRole('button', {name: 'tiago'}).click();
+            await expect(rb).toBeEnabled();
+        });
+
+        test('Clicking on one of the author tags should activate the Reset All button', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            let resetButton = page.getByRole('button', {name: 'Reset all'});
+            expect(resetButton).toBeDisabled();
+
+            await page.getByRole('button', {name: 'Tiago'}).click();
+            await expect(resetButton).toBeEnabled();
+        });
+
+        test('Clicking in more than one author tags should add available filter tags', async({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+            
+            // initial
+            let initialCount = 0;
+            let filterChips = await page.getByTestId('tags-chip').all();
+            for (let chip of filterChips) {
+                if(await chip.isEnabled()) {
+                    initialCount++;
+                }
+            }
+
+            // first button, should reduce nr of available tag chips
+            await page.getByRole('button', {name: 'Tiago'}).click();
+            let firstClickCount = 0;
+            for (let chip of filterChips) {
+                if (await chip.isEnabled()) {
+                    firstClickCount++;
+                }
+            }
+            expect(firstClickCount).toBeLessThan(initialCount);
+
+            // second button, should be more than firstClickCount, but less than initialCount
+            await page.getByRole('button', {name: 'Magnus'}).click();
+            let finalCount = 0;
+            for (let chip of filterChips) {
+                if (await chip.isEnabled()) {
+                    finalCount++;
+                }
+            }
+            expect(finalCount).toBeLessThan(initialCount);
+            expect(finalCount).toBeGreaterThan(firstClickCount);
+        });
+
+        test('Clicking on one of the author tags should result in the expected buzzwords beeing displayed', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            // gets ids for expected cards
+            const buttonToPress = 'tiago';
+            let expectedBuzzwords = buzzwords.filter((e) => {
+                if (e.author === buttonToPress) {
+                    return e;
+                };
+            });
+
+            expectedBuzzwords = expectedBuzzwords.map((e) => (e.id));
+
+            await page.getByRole('button', {name: buttonToPress}).click();
+
+            const pageBuzzwords = await page.getByTestId('buzzword-card').all();
+
+            const displayedBuzzwords = [];
+            for (let buzz of pageBuzzwords) {
+                displayedBuzzwords.push(await buzz.getAttribute('id'));
+            }
+
+            expect(displayedBuzzwords.sort()).toEqual(expectedBuzzwords.sort());
+        });
+
+        test('Clicking on two of the author tags should result in the expected buzzwords beeing displayed', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            // gets ids for expected cards
+            const buttonToPress = ['tiago', 'jenny'];
+            let expectedBuzzwords = buzzwords.filter((e) => {
+                if (buttonToPress.includes(e.author)) {
+                    return e;
+                };
+            });
+            expectedBuzzwords = expectedBuzzwords.map((e) => (e.id));
+
+            for (let button of buttonToPress) {
+                await page.getByRole('button', {name: button}).click();
+            }
+
+            const pageBuzzwords = await page.getByTestId('buzzword-card').all();
+
+            const displayedBuzzwords = [];
+            for (let buzz of pageBuzzwords) {
+                displayedBuzzwords.push(await buzz.getAttribute('id'));
+            }
+
+            expect(displayedBuzzwords.sort()).toEqual(expectedBuzzwords.sort());
+        })
+
+        test('Clicking the same button twice should return the number of buzzwords to the initial value', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            let initialBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
+
+            // First click
+            const button = page.getByRole('button', {name: 'tiago'});
+            await button.click();
+
+            let currentBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
+
+            expect(currentBuzzwords).toBeLessThan(initialBuzzwords);
+
+            // Second click
+            await button.click();
+
+            currentBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
+
+            expect(currentBuzzwords).toEqual(initialBuzzwords);
+            
+        });
+
+        test('Clicking the same button twice should reactivate all tag buttons and deactivate the reset buttons', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            const authorChips = await page.getByTestId('authors-chip').all();
+            const tagsChips = await page.getByTestId('tags-chip').all();
+
+            let currentActive = 0;
+            for (let author of authorChips) {
+                if (author.isEnabled()) {
+                    currentActive += 1;
+                }
+            }
+            for (let tag of tagsChips) {
+                if (tag.isEnabled()) {
+                    currentActive += 1;
+                }
+            }
+
+            // count nr of active chips before action
+            const initialActive = currentActive;
+
+            // first click
+            const button = page.getByRole('button', {name: 'tiago'});
+            await button.click();
+
+            // count nr of active chips after action
+            for (let author of authorChips) {
+                if (author.isDisabled()) {
+                    currentActive -= 1;
+                }
+            }
+            for (let tag of tagsChips) {
+                if (tag.isDisabled()) {
+                    currentActive -= 1;
+                }
+            };
+
+            const resetButtons = await page.getByTestId('tag-reset-button').all();
+            const resetAllButton = page.getByRole('button', {name: 'Reset all'});
+
+            expect(currentActive).toBeLessThan(initialActive);
+            
+            // check that reset button for tags is active
+            for (let b of resetButtons) {
+                if (b.getAttribute('id') === 'authors-reset') {
+                    expect(b).toBeEnabled();
+                }
+            }
+            expect(resetAllButton).toBeEnabled();
+
+            // second click
+            await button.click();
+
+            // count nr of active chips after action
+            currentActive = 0;
+            for (let author of authorChips) {
+                if (await author.isEnabled()) {
+                    currentActive += 1;
+                }
+            }
+            for (let tag of tagsChips) {
+                if (await tag.isEnabled()) {
+                    currentActive += 1;
+                }
+            }
+
+            expect(currentActive).toEqual(initialActive);
+            for (let b of resetButtons) {
+                await expect(b).toBeDisabled();
+            }
+            await expect(resetAllButton).toBeDisabled();
+            
+        });
+
+        test('Clicking on the reset button should return everything to its initial state', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            let initialCountAuthors = 0;
+            let initialCountTags = 0;
+            const initialBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
+
+            let authorChips = await page.getByTestId('authors-chip').all();
+            let tagsChips = await page.getByTestId('tags-chip').all();
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    initialCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    initialCountTags++;
+                }
+            }
+
+            // first click
+            await page.getByRole('button', {name: 'tiago'}).click();
+            const firstCountBuzzwords = (await page.getByTestId('buzzword-card').all()).length
+
+            let firstClickAuthors = 0;
+            let firstClickTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    firstClickAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    firstClickTags++;
+                }
+            }
+
+            expect(firstCountBuzzwords).toBeLessThan(initialBuzzwords);
+            expect(firstClickAuthors).toEqual(initialCountAuthors);
+            expect(firstClickTags).toBeLessThan(initialCountTags);
+
+            // reset
+            const resetButtons = await page.getByTestId('tag-reset-button').all();
+            for (let rb of resetButtons) {
+                if (await rb.getAttribute('id') === 'authors-reset') {
+                    await rb.click();
+                    break;
+                }
+            }
+
+            const finalCountBuzzwords = (await page.getByTestId('buzzword-card').all()).length
+            let finalCountAuthors = 0;
+            let finalCountTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    finalCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    finalCountTags++;
+                }
+            }
+
+            expect(finalCountBuzzwords).toEqual(initialBuzzwords);
+            expect(finalCountAuthors).toEqual(initialCountAuthors);
+            expect(finalCountTags).toEqual(initialCountTags);
+        });
+
+        test('Clicking on the reset all button should return everything to its initial state', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            let initialCountAuthors = 0;
+            let initialCountTags = 0;
+            const initialBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
+
+            let authorChips = await page.getByTestId('authors-chip').all();
+            let tagsChips = await page.getByTestId('tags-chip').all();
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    initialCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    initialCountTags++;
+                }
+            }
+
+            // first click
+            await page.getByRole('button', {name: 'tiago'}).click();
+            const firstCountBuzzwords = (await page.getByTestId('buzzword-card').all()).length
+
+            let firstClickAuthors = 0;
+            let firstClickTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    firstClickAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    firstClickTags++;
+                }
+            }
+
+            expect(firstCountBuzzwords).toBeLessThan(initialBuzzwords);
+            expect(firstClickAuthors).toEqual(initialCountAuthors);
+            expect(firstClickTags).toBeLessThan(initialCountTags);
+
+            // reset
+            await page.getByRole('button', {name: 'Reset all'}).click();
+
+            const finalCountBuzzwords = (await page.getByTestId('buzzword-card').all()).length
+            let finalCountAuthors = 0;
+            let finalCountTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    finalCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    finalCountTags++;
+                }
+            }
+
+            expect(finalCountBuzzwords).toEqual(initialBuzzwords);
+            expect(finalCountAuthors).toEqual(initialCountAuthors);
+            expect(finalCountTags).toEqual(initialCountTags);
+        });
+    });
+
+    test.describe('Test interaction with search bar', () => {
+        
+        test('Searching for something in the author bar should reduce the number of available buzzwords', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+            
+            const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length;
+
+            await page.getByRole('searchbox').fill('office');
+            await page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' }).click();
+
+            const finalBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length;
+
+            expect(finalBuzzwordCount).toBeLessThan(initialBuzzwordCount);
+        });
+
+        test('Searching for something in the author bar should reduce the number of available filter tags but keep the same number of filter authors', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
+
+            const authorChips = await page.getByTestId('authors-chip').all();
+            const tagsChips = await page.getByTestId('tags-chip').all();
+
+            let initialCountAuthors = 0;
+            let initialCountTags = 0;
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    initialCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    initialCountTags++;
+                }
+            }
+
+            await page.getByRole('searchbox').fill('office');
+            await page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' }).click();
+
+            const finalBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
+
+            let finalCountAuthors = 0;
+            let finalCountTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    finalCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    finalCountTags++;
+                }
+            }
+
+            expect(finalBuzzwordCount).toBeLessThan(initialBuzzwordCount);
+            expect(finalCountAuthors).toEqual(initialCountAuthors);
+            expect(finalCountTags).toBeLessThan(initialCountTags);
+
+        });
+
+        test('Searching for nothing should reset the buzzwords to their initial state', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length;
+
+            const searchBox = page.getByRole('searchbox')
+            const goButton = page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' });
+
+            await searchBox.fill('office');
+            await goButton.click();
+
+            const firstSearchBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length;
+
+            expect(firstSearchBuzzwordCount).toBeLessThan(initialBuzzwordCount);
+
+            await searchBox.fill('');
+            await goButton.click();
+
+            const finalSearchBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length;
+
+            expect(finalSearchBuzzwordCount).toBeGreaterThan(firstSearchBuzzwordCount);
+            expect(finalSearchBuzzwordCount).toEqual(initialBuzzwordCount);
+
+        });
+
+        test('Searching for nothing should reset all buttons to their initial state', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
+
+            const authorChips = await page.getByTestId('authors-chip').all();
+            const tagsChips = await page.getByTestId('tags-chip').all();
+
+            let initialCountAuthors = 0;
+            let initialCountTags = 0;
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    initialCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    initialCountTags++;
+                }
+            }
+
+
+            // first search
+            const searchBox = page.getByRole('searchbox')
+            const goButton = page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' });
+
+            await searchBox.fill('office');
+            await goButton.click();
+
+            const firstSearchBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
+
+            let firstSearchCountAuthors = 0;
+            let firstSearchCountTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    firstSearchCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    firstSearchCountTags++;
+                }
+            }
+
+            expect(firstSearchBuzzwordCount).toBeLessThan(initialBuzzwordCount);
+            expect(firstSearchCountAuthors).toEqual(initialCountAuthors);
+            expect(firstSearchCountTags).toBeLessThan(initialCountTags);
+
+            // final search
+            await searchBox.fill('');
+            await goButton.click();
+
+            const finalBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
+
+            let finalCountAuthors = 0;
+            let finalCountTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    finalCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    finalCountTags++;
+                }
+            }
+
+            expect(finalBuzzwordCount).toBeGreaterThan(firstSearchBuzzwordCount);
+            expect(finalCountAuthors).toEqual(firstSearchCountAuthors);
+            expect(finalCountTags).toBeGreaterThan(firstSearchCountTags);
+            expect(finalBuzzwordCount).toEqual(initialBuzzwordCount);
+            expect(finalCountAuthors).toEqual(initialCountAuthors);
+            expect(finalCountTags).toEqual(initialCountTags);
+        });
+
+        test('Clicking the Reset all button should reset all buttons to their initial state and clear the searchBox', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
+
+            const authorChips = await page.getByTestId('authors-chip').all();
+            const tagsChips = await page.getByTestId('tags-chip').all();
+
+            let initialCountAuthors = 0;
+            let initialCountTags = 0;
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    initialCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    initialCountTags++;
+                }
+            }
+
+
+            // first search
+            const searchBox = page.getByRole('searchbox')
+            const goButton = page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' });
+
+            await searchBox.fill('office');
+            await goButton.click();
+
+            const firstSearchBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
+
+            let firstSearchCountAuthors = 0;
+            let firstSearchCountTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    firstSearchCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    firstSearchCountTags++;
+                }
+            }
+
+            expect(firstSearchBuzzwordCount).toBeLessThan(initialBuzzwordCount);
+            expect(firstSearchCountAuthors).toEqual(initialCountAuthors);
+            expect(firstSearchCountTags).toBeLessThan(initialCountTags);
+
+            // reset all
+            await page.getByRole('button', {name: 'Reset all'}).click();
+
+            const finalBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
+
+            let finalCountAuthors = 0;
+            let finalCountTags = 0;
+
+            for (let chip of authorChips) {
+                if (await chip.isEnabled()) {
+                    finalCountAuthors++;
+                }
+            }
+            for (let chip of tagsChips) {
+                if (await chip.isEnabled()) {
+                    finalCountTags++;
+                }
+            }
+
+            expect(finalBuzzwordCount).toBeGreaterThan(firstSearchBuzzwordCount);
+            expect(finalCountAuthors).toEqual(firstSearchCountAuthors);
+            expect(finalCountTags).toBeGreaterThan(firstSearchCountTags);
+            expect(finalBuzzwordCount).toEqual(initialBuzzwordCount);
+            expect(finalCountAuthors).toEqual(initialCountAuthors);
+            expect(finalCountTags).toEqual(initialCountTags);
+            await expect(searchBox).toHaveValue('');
+        });
+
+        test('Searching for something that does not exist should display the correct error message', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            await page.getByRole('searchbox').fill('a;lskdjf;oawijef;olanw');
+            await page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' }).click();
+
+            await expect(page.getByText('No buzzwords match your criteria', {exact: false})).toBeVisible();
+        });
+
+        test('Searching for a specific search term should return the expected results', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            const searchTerm = 'office';
+            let expectedBuzzwords = buzzwords.filter((e) => {
+                if (e.content.toLowerCase().includes(searchTerm)) {
+                    return e;
+                };
+            });
+
+            expectedBuzzwords = expectedBuzzwords.map((e) => (e.id));
+
+            await page.getByRole('searchbox').fill(searchTerm);
+            await page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' }).click();
+
+            const resultBuzzwords = await page.getByTestId('buzzword-card').all();
+
+            expect(expectedBuzzwords.length).toEqual(resultBuzzwords.length);
+
+            let resultBuzzwordsIds = [];
+            for (let buzz of resultBuzzwords) {
+                resultBuzzwordsIds.push(await buzz.getAttribute('id'));
+            }
+
+            expect(resultBuzzwordsIds.sort()).toEqual(expectedBuzzwords.sort());
+        });
+        // TESTS WITH CHIPS IN SEARCH BAR
+    });
 });
