@@ -47,8 +47,8 @@ test.describe('Page content containers exist tests', () => {
 
     test('Page should have two containers of tag selectors', async ({ page }) => {
         await expect(page).toHaveURL('/content/connections');
-        const containers = await page.getByTestId('tag-selector-container').all();
-        expect(containers.length).toEqual(2);
+        const containers = (await page.getByTestId('tag-selector-container').all()).length;
+        expect(containers).toEqual(2);
     });
 
     test('Page should have two reset buttons (one per tag selector)', async ({ page }) => {
@@ -360,22 +360,22 @@ test.describe('Page user interactions tests', () => {
         test('Clicking the same button twice should return the number of buzzwords to the initial value', async ({page}) => {
             await expect(page).toHaveURL('/content/connections');
 
-            let initialBuzzwords = await page.getByTestId('buzzword-card').all();
+            let initialBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
 
             // First click
             const button = page.getByRole('button', {name: 'technology'});
             await button.click();
 
-            let currentBuzzwords = await page.getByTestId('buzzword-card').all();
+            let currentBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
 
-            expect(currentBuzzwords.length).toBeLessThan(initialBuzzwords.length);
+            expect(currentBuzzwords).toBeLessThan(initialBuzzwords);
 
             // Second click
             await button.click();
 
-            currentBuzzwords = await page.getByTestId('buzzword-card').all();
+            currentBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
 
-            expect(currentBuzzwords.length).toEqual(initialBuzzwords.length);
+            expect(currentBuzzwords).toEqual(initialBuzzwords);
             
         });
 
@@ -1260,6 +1260,111 @@ test.describe('Page user interactions tests', () => {
 
             expect(resultBuzzwordsIds.sort()).toEqual(expectedBuzzwords.sort());
         });
-        // TESTS WITH CHIPS IN SEARCH BAR
+
+        test('Searching for terms that are also filters should add them as chips to the search bar', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            await page.getByRole('searchbox').fill('tiago ');
+
+            const searchChip = page.getByTestId('chip-tiago');
+
+            await expect(searchChip).toBeVisible();
+        });
+
+        test('Searching for two terms that are also filters should add them as chips to the search bar', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            await page.getByRole('searchbox').fill('tiago technology ');
+
+            const searchChipOne = page.getByTestId('chip-tiago');
+            const searchChipTwo = page.getByTestId('chip-technology');
+
+            await expect(searchChipOne).toBeVisible();
+            await expect(searchChipTwo).toBeVisible();
+        });
+
+        test('Searching for a term that is also a filter should enable the clear all button', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+            
+            await page.getByRole('searchbox').fill('jenny ');
+
+            const clearAllButton = page.getByRole('button', {name: 'clear all'});
+
+            await expect(clearAllButton).toBeVisible();
+        });
+
+        test('Searching for a term that is also a filter then clicking that filter should remove the chip button', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            const searchTerms = ['balu ', 'vivek '];
+
+            // fill the search box
+            for (let term of searchTerms) {
+                await page.getByRole('searchbox').fill(term);
+            };
+
+            // confirm that both terms are now chips
+            for (let term of searchTerms) {
+                expect(page.getByTestId(`chip-${term.slice(0, -1)}`)).toBeVisible();
+            };
+
+            // click one of the terms
+            await page.getByTestId(`chip-${searchTerms[0].slice(0, -1)}`).click();
+
+            await expect(page.getByTestId(`chip-${searchTerms[0].slice(0, -1)}`)).toHaveCount(0);
+            await expect(page.getByTestId(`chip-${searchTerms[1].slice(0, -1)}`)).toBeVisible();
+        });
+
+        test('Searching for terms that are also filters then clicking the clear all button should remove all the chip buttons', async({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            const searchTerms = ['balu ', 'vivek ', 'technology ', 'music '];
+
+            // fill the search box
+            for (let term of searchTerms) {
+                await page.getByRole('searchbox').fill(term);
+            };
+
+            // confirm that both terms are now chips
+            for (let term of searchTerms) {
+                expect(page.getByTestId(`chip-${term.slice(0, -1)}`)).toBeVisible();
+            };
+
+            // click clear all button
+            await page.getByRole('button', {name: 'clear all'}).click();
+
+            // confirm that all chips have been removed
+            for (let term of searchTerms) {
+                await expect(page.getByTestId(`chip-${term.slice(0, -1)}`)).toHaveCount(0);
+            };
+        });
+
+        test('Searching for a term and nothing else should return only results that correspond to that filter (i.e., should work the same as a filter button)', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            await page.getByRole('searchbox').fill('tiago ');
+            await page.getByRole('button', {name: 'Go', exact: true}).click();
+
+            const buzzCards = await page.getByTestId('buzzword-card').all();
+
+            for (let card of buzzCards) {
+                const byline = await card.getByTestId('buzzword-byline').innerText();
+                expect(byline.toLowerCase()).toEqual('by tiago');
+            };
+        });
+
+        test('Searching for a term and a word should return only results from buzzwords that have that term', async ({page}) => {
+            await expect(page).toHaveURL('/content/connections');
+
+            await page.getByRole('searchbox').fill('olivia office');
+            await page.getByRole('button', {name: 'Go', exact: true}).click();
+
+            const buzzCards = await page.getByTestId('buzzword-card').all();
+
+            for (let card of buzzCards) {
+                const byline = await card.getByTestId('buzzword-byline').innerText();
+                expect(byline.toLowerCase()).toEqual('by olivia');
+            };
+        })
     });
 });
