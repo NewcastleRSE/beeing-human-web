@@ -47,12 +47,16 @@
     }
 </script>
 
-<div class="tag-selector-container">
-    <h4>{filter}</h4>
-    {#each listTags as tag}
-        <button id={removeSpaces(tag.name)}-filter class="chip {tag.active ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{filter === 'authors' ? capitaliseFirstLetter(tag.name) : tag.name}</button>
-    {/each}
-    <button id="{filter}-reset" class="chip variant-filled-surface" on:click={resetFilter} on:keypress disabled>Reset</button>
+<div class="tag-selector-container" data-testid="tag-selector-container">
+    {#if listTags && filter}
+        <h4>{filter}</h4>
+        {#each listTags as tag}
+            <button data-testid={filter}-chip id={removeSpaces(tag.name)}-filter class="chip {tag.active ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{filter === 'authors' ? capitaliseFirstLetter(tag.name) : tag.name}</button>
+        {/each}
+        <button data-testid='tag-reset-button' id="{filter}-reset" class="chip variant-filled-surface" on:click={resetFilter} on:keypress disabled>Reset</button>
+    {:else}
+        <p>Something went wrong...</p>
+    {/if}
 </div>
 
 <style>

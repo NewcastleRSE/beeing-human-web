@@ -80,13 +80,15 @@ export async function load({ fetch, params }) {
     let listBuzzWords = import.meta.glob('/static/content/connections/buzzwords/*.md', {as: 'raw', eager: true});
     let buzzwords = []
     for (const buzz in listBuzzWords) {
+      let path = JSON.stringify(buzz);
+      let id = path.slice(path.lastIndexOf('/') + 1, path.length - 4);
       const {metadata, content} = parseMD(listBuzzWords[buzz]);
       if (metadata.tags) {
         // splits the tags into an array, ensuring they are all lowercase
         metadata.tags = metadata.tags.toLowerCase().split(', ');
         metadata.author = metadata.author.toLowerCase();
       }
-      buzzwords.push({...metadata, content: content});
+      buzzwords.push({...metadata, id: id, content: content});
     }
     // create list of tags for buzzwords
     let tags = buzzwords.map(entry => entry.tags).flat();

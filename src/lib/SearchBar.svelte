@@ -63,7 +63,7 @@
     $: inputValue = checkForTagAuthor(inputValue);
 </script>
 
-<div class='search-group max-w-md'>
+<div class='search-group max-w-md' data-testid="search-bar-container">
     <h4>Search</h4>
     <form on:submit={searchGo} id="submit-form">
         <input class="input max-w-sm p-2" type="search" name="searchBar" placeholder="Search..." id='search-bar' bind:value={inputValue} on:submit={searchGo} autocomplete="off"/>
@@ -71,7 +71,7 @@
     </form>
     <div class="chip-list" id="chip-list">
     {#each Array.from(chipList) as chip}
-        <span class='chip variant-ringed' on:click={removeChip(chip)} on:keypress>{chip} &#x2715</span>
+        <span class='chip variant-ringed' on:click={removeChip(chip)} on:keypress data-testid='chip-{chip}'>{chip} &#x2715</span>
     {/each}
     {#if chipList.size != 0}
         <button class="btn btn-sm variant-filled-surface" on:click={clearAll} on:keypress>clear all</button>
