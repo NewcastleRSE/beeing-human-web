@@ -3,6 +3,7 @@ import { error } from "@sveltejs/kit";
 import parseMD from "parse-md";
 import { loadMei } from "../../../utils/loadFunctions.js";
 import { base } from "$app/paths";
+import { getListOfUniqueElements } from "../../../utils/stringOperations.js";
 
 
 export async function load({ fetch, params }) {
@@ -72,6 +73,33 @@ export async function load({ fetch, params }) {
     if (mei) {
       view["mei"] = {...mei};
     }
+  }
+
+  if (view.slug === 'connections') {
+    // load the buzzword mds
+    let listBuzzWords = import.meta.glob('/static/content/connections/buzzwords/*.md', {as: 'raw', eager: true});
+    let buzzwords = []
+    for (const buzz in listBuzzWords) {
+      let path = JSON.stringify(buzz);
+      let id = path.slice(path.lastIndexOf('/') + 1, path.length - 4);
+      const {metadata, content} = parseMD(listBuzzWords[buzz]);
+      if (metadata.tags) {
+        // splits the tags into an array, ensuring they are all lowercase
+        metadata.tags = metadata.tags.toLowerCase().split(', ');
+        metadata.author = metadata.author.toLowerCase();
+      }
+      buzzwords.push({...metadata, id: id, content: content});
+    }
+    // create list of tags for buzzwords
+    let tags = buzzwords.map(entry => entry.tags).flat();
+    // get a list of unique elements in the array and remove any undefined
+    tags = getListOfUniqueElements(tags);
+    view['buzzwords'] = buzzwords;
+    view['buzzwordTags'] = tags;
+
+    // create a list of authors
+    let authors = getListOfUniqueElements(buzzwords.map(entry => entry.author));
+    view['buzzwordAuthors'] = authors;
   }
 
   return {
