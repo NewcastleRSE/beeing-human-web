@@ -51,8 +51,10 @@ describe('test filter getter operations', () => {
             'fieldwork', 'community',
             'editing', 'politics',
             'experiment', 'butler',
-            'seventeenth-century', 'emotion-like states',
-            'results', 'edition',
+            'seventeenth-century', 'collaboration',
+            'methodology', 'buzzwords',
+            'emotion-like states', 'results',
+            'edition',
             'bennett', 'olivia',
             'jenny', 'vivek',
             'magnus', 'tiago',
@@ -84,6 +86,13 @@ describe('test filter getter operations', () => {
             { name: 'bee-keeping', type: 'tags', available: true, active: false },
             { name: 'bees', type: 'tags', available: true, active: false },
             { name: 'butler', type: 'tags', available: true, active: false },
+            { name: 'buzzwords', type: 'tags', available: true, active: false },
+            {
+                name: 'collaboration',
+                type: 'tags',
+                available: true,
+                active: false
+            },
             { name: 'community', type: 'tags', available: true, active: false },
             { name: 'connections', type: 'tags', available: true, active: false },
             {
@@ -103,6 +112,7 @@ describe('test filter getter operations', () => {
             { name: 'experiment', type: 'tags', available: true, active: false },
             { name: 'fieldwork', type: 'tags', available: true, active: false },
             { name: 'literature', type: 'tags', available: true, active: false },
+            { name: 'methodology', type: 'tags', available: true, active: false },
             { name: 'music', type: 'tags', available: true, active: false },
             { name: 'original', type: 'tags', available: true, active: false },
             { name: 'politics', type: 'tags', available: true, active: false },
@@ -174,8 +184,8 @@ describe('test filter getter operations', () => {
     it('should return a list of all active filter names of a certain type', () => {
         let expected1 = ['tiago'];
         // might fail if filters appear in a different order -- correct if it starts failing this test
-        let expected2 = [ 'jenny', 'tiago', 'balu' ];
-        
+        let expected2 = ['jenny', 'tiago', 'balu'];
+
         // toggle one filter
         filters.toggleFilterActive(filters.getFiltersByName('tiago'));
         expect(filters.getActiveFiltersByType('authors')).toEqual(expected1);
@@ -193,11 +203,11 @@ describe('test filter getter operations', () => {
     it('should return a list of names of all available filters of a certain type', () => {
         let expected1 = [
             'bennett', 'olivia',
-            'jenny',   'vivek',
-            'magnus',  'tiago',
+            'jenny', 'vivek',
+            'magnus', 'tiago',
             'balu'
-          ]
-        let expected2 = [ 'bennett', 'olivia', 'jenny', 'vivek', 'magnus', 'balu' ];
+        ]
+        let expected2 = ['bennett', 'olivia', 'jenny', 'vivek', 'magnus', 'balu'];
 
         expect(filters.getAvailableFiltersByType('authors')).toEqual(expected1)
 
@@ -305,7 +315,7 @@ describe('filter setter operations', () => {
     it('should constrain the list of available tags if only author filters have been selected', () => {
         let initialAvailableAuthors = filters.getAvailableFiltersByType('authors');
         let initialAvailableTags = filters.getAvailableFiltersByType('tags');
-        
+
         filters.setActiveFiltersFromList(['tiago']);
 
         filters.updateFilterAvailableStatus(filters.getActiveFiltersByType('authors'), filters.getActiveFiltersByType('tags'));
@@ -331,7 +341,7 @@ describe('filter setter operations', () => {
     it('should constrain the list of available tags only if both filters have been selected', () => {
         let initialAvailableAuthors = filters.getAvailableFiltersByType('authors');
         let initialAvailableTags = filters.getAvailableFiltersByType('tags');
-        
+
         filters.setActiveFiltersFromList(['tiago', 'technology']);
 
         filters.updateFilterAvailableStatus(filters.getActiveFiltersByType('authors'), filters.getActiveFiltersByType('tags'));

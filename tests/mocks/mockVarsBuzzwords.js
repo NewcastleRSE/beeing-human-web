@@ -92,6 +92,20 @@ export const buzzwords = [
     content: 'In no impression assistance contrasted. Manners she wishing justice hastily new anxious. At discovery discourse departure objection we. Few extensive add delighted tolerably sincerity her. Law ought him least enjoy decay one quick court. Expect warmly its tended garden him esteem had remove off. Effects dearest staying now sixteen nor improve. '
   },
   {
+    author: 'tiago',
+    date: '2023-12-01T00:00:00.000Z',
+    tags: [
+      'technology',
+      'connections',
+      'collaboration',
+      'methodology',
+      'buzzwords'
+    ],
+    id: 'buzz20',
+    content: 'The biggest challenge in designing the **buzzword** system (in addition to the many technical challenges of creating filtering and searching options), was to create a system that would be able to balance the (mostly static, long-term and cost-efficient) technology with ease of use. It is crucial that everyone in the team is capable of adding **buzzwords** at any time, at will; but doing so in a user-friendly manner without using expensive content management systems is tricky. The solution we have now -- github based, markdown files -- is not perfect, but it will hopefully be easy enough for everyone. Only time will tell.\n' +
+      '![my view of the buzzword system](connections/buzzwords/img/buzzword_system.png)\n'
+  },
+  {
     author: 'jenny',
     date: '2023-06-28T00:00:00.000Z',
     tags: [ 'butler', 'literature', 'editing' ],
@@ -158,14 +172,16 @@ export const listAuthors = [
   ]
 
 export const listTags = [
-    'music',               'original',
-    'contemporary',        'bees',
-    'bee-keeping',         'society',
-    'connections',         'literature',
-    'science',             'technology',
-    'fieldwork',           'community',
-    'editing',             'politics',
-    'experiment',          'butler',
-    'seventeenth-century', 'emotion-like states',
-    'results',             'edition'
-  ]
+  'music',               'original',
+  'contemporary',        'bees',
+  'bee-keeping',         'society',
+  'connections',         'literature',
+  'science',             'technology',
+  'fieldwork',           'community',
+  'editing',             'politics',
+  'experiment',          'butler',
+  'seventeenth-century', 'collaboration',
+  'methodology',         'buzzwords',
+  'emotion-like states', 'results',
+  'edition'
+]

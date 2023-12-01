@@ -74,7 +74,7 @@ describe('Load and display Buzzwords', () => {
 
     it('should contain a search bar', async() => {
         render(Buzzwords, {buzzwords: formatDate(buzzwords), listTags: listTags, listAuthors: listAuthors});
-        const searchBar = await screen.findByText('Search', {exact: false});
+        const searchBar = await screen.findByRole('searchbox');
         expect(searchBar).toBeTruthy();
     });
 
