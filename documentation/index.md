@@ -10,6 +10,7 @@
 
 ## 3. Adding or changing content
 1. [Add section content to the Bee Book](/documentation//add-section-content/README.md)
+1. [Add a buzzword to the `Connections` view](/documentation/add-buzzword/README.md)
 
 ## 4. After each change
 1. [Create a pull request](/documentation/create-new-pull-request/README.md)
