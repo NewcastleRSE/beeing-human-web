@@ -13,7 +13,7 @@ This short tutorial will guide you through the steps necessary to add new conten
 
 - Login to [GitHub](https://github.com/)
 - Navigate to the [_Bee Book_ repository](https://github.com/NewcastleRSE/beeing-human-web/)
-- Create a [**new branch**](/documentation/create-new-branch/README.md):
+- Create a [**new branch**](/documentation/create-new-branch/README.md)
 - Navigate to `static`, then `content` in the project files. You should see four folders: `literature`, `music`, `science`, `connections`. These folders correspond to each of the views on the website: adding content to one of these folders will create it in the corresponding view. Choose the folder corresponding to the view you want to add to or edit.
 - Choose one `.md` file to edit, or create a new one:
 
