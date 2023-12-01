@@ -1,7 +1,7 @@
 # How to: add a new buzzword to the _Bee Book_
 
 ## Introduction
-**Buzzwords** are the small, paragraph-long thoughts we think should be part of the project in some way, originating from our discussions in the workshops or from our own work. They're meant to be reflexions on process or subject, or only tangentially related to _Bee-ing Human_ work. Anything that is not substantial enough to be a section in the actual book, but that is interesting enough to be shared. They can be found under the _Connections_ view of the book. This short how-to will guide you through the process of creating a new buzzword. Like the reset of the book, buzzwords are written in [markdown](https://www.markdownguide.org/) and, therefore, can use most of the formatting features of markdown (including adding images).
+**Buzzwords** are the small, paragraph-long thoughts we think should be part of the project in some way, originating from our discussions in the workshops or from our own work. They're meant to be reflexions on process or subject, or only tangentially related to _Bee-ing Human_ work. Anything that is not substantial enough to be a section in the actual book, but that is interesting enough to be shared. They can be found under the _Connections_ view of the book. This short how-to will guide you through the process of creating a new buzzword. Like the rest of the book, buzzwords are written in [markdown](https://www.markdownguide.org/) and, therefore, can use most of the formatting features of markdown (including adding images).
 
 ## Requirements
 - A GitHub account. If you need help setting one up, view [this guide](../register-github/README.md)
@@ -62,10 +62,11 @@ tags: technology, connections, collaboration, methodology
 ![my view of the buzzword system](connections/buzzwords/img/buzzword_system.png)
 ```
 
- - You can use the `Preview` button to get a sense of what the finished text will look like. The header should appear as a table -- if it does, it is formattted correctly. If you have any images, they will not be visible in the preview.
+ - You can use the `Preview` button to get a sense of what the finished text will look like. The header should appear as a table -- if it does, it is formattted correctly. If you have any images, they will not be visible in the preview, but you should see a link to the image. If you don't see a link, please make sure the path to the image (the bit in parenthesis in the code above) is correct.
  ![preview](./img/04_preview.png)
 
 - Once you are happy with your buzzword click `Commit changes`
+
 ![commit changes](./img/03_commit_changes.png)
 
 - Feel free to leave all options as default, or add a more extensive description if you wish. Click `Commit changes` on the pop-up window that appeared.
