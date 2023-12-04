@@ -6,8 +6,7 @@
   import AudioPlayer from "../../../lib/AudioPlayer.svelte";
   import MeiSimple from "../../../lib/MEISimple.svelte";
   import Buzzwords from "../../../lib/Buzzwords.svelte";
-
-  // console.log(data.view.buzzwords);
+  import RawDataTable from "../../../lib/RawDataTable.svelte";
 
   let audioPath = `${base}/content/music/media/virtualbarbershop.mp3`
 
@@ -25,6 +24,10 @@
 {#if data.view.slug === "literature"}
   <h3>Test</h3>
   <TEISimple path = "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/dev/1623_consolidated.xml"/>
+{:else if data.view.slug === 'science'}
+  {#each data.view.datasets as entry}
+    <RawDataTable data={entry}/>
+  {/each}
 {:else if data.view.slug === 'music'}
   <h3>Binaural recording test</h3>
   <AudioPlayer {audioPath}/>

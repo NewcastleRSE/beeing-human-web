@@ -4,6 +4,7 @@ import parseMD from "parse-md";
 import { loadMei } from "../../../utils/loadFunctions.js";
 import { base } from "$app/paths";
 import { getListOfUniqueElements } from "../../../utils/stringOperations.js";
+import { csvParse } from 'd3'
 
 
 export async function load({ fetch, params }) {
@@ -100,6 +101,27 @@ export async function load({ fetch, params }) {
     // create a list of authors
     let authors = getListOfUniqueElements(buzzwords.map(entry => entry.author));
     view['buzzwordAuthors'] = authors;
+  }
+
+  if (view.slug === 'science') {
+    let datasets = [];
+    // this should probably be a loop if we're loading more than one dataset at the same time
+
+    // reads the csv file as a string
+    let csvString = await fetch(`${base}/content/${view.slug}/data/bee_data_demo.csv`).then( function (response) {
+      if (response.ok) {
+        return response.text()
+      }
+    });
+
+    // parses csv into JSON
+    let datasetJson = csvParse(csvString, (e) => (e))
+
+    // adds dataset to dataset array
+    datasets.push(datasetJson);
+
+    // adds dataset array to view variable
+    view['datasets'] = datasets;
   }
 
   return {
