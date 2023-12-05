@@ -6,7 +6,7 @@
   import AudioPlayer from "../../../lib/AudioPlayer.svelte";
   import MeiSimple from "../../../lib/MEISimple.svelte";
   import Buzzwords from "../../../lib/Buzzwords.svelte";
-  import RawDataTable from "../../../lib/RawDataTable.svelte";
+  import DataViewPanel from "../../../lib/DataViewPanel.svelte";
 
   let audioPath = `${base}/content/music/media/virtualbarbershop.mp3`
 </script>
@@ -25,9 +25,7 @@
   <TEISimple path = "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/dev/1623_consolidated.xml"/>
 {:else if data.view.slug === 'science'}
   {#await data.view.datasets then datasets}
-    {#each datasets as entry}
-      <RawDataTable tableObject={entry}/>
-    {/each}
+    <DataViewPanel {datasets}/>
   {/await}
 {:else if data.view.slug === 'music'}
   <h3>Binaural recording test</h3>
