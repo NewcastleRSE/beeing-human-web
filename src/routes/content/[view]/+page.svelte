@@ -25,9 +25,11 @@
   <h3>Test</h3>
   <TEISimple path = "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/dev/1623_consolidated.xml"/>
 {:else if data.view.slug === 'science'}
-  {#each data.view.datasets as entry}
-    <RawDataTable data={entry}/>
-  {/each}
+  {#await data.view.datasets then datasets}
+    {#each datasets as entry}
+      <RawDataTable tableObject={entry}/>
+    {/each}
+  {/await}
 {:else if data.view.slug === 'music'}
   <h3>Binaural recording test</h3>
   <AudioPlayer {audioPath}/>
