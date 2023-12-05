@@ -9,7 +9,6 @@
   import RawDataTable from "../../../lib/RawDataTable.svelte";
 
   let audioPath = `${base}/content/music/media/virtualbarbershop.mp3`
-
 </script>
 
 <h1>View page</h1>

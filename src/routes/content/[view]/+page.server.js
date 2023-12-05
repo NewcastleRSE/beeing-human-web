@@ -118,7 +118,8 @@ export async function load({ fetch, params }) {
     let datasetJson = csvParse(csvString, (e) => (e))
 
     // adds dataset to dataset array
-    datasets.push(datasetJson);
+    datasets.push({data: datasetJson, columns: datasetJson.columns});
+    
 
     // adds dataset array to view variable
     view['datasets'] = datasets;
