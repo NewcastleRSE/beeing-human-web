@@ -15,11 +15,11 @@
             return entire_dataset.filter((entry) => entry['Treatment group'] === selected);
         }
     }
-
+    
     onMount( async () => {
         // turn tableObject into an array of objects
         for (let [index, entry] of Object.entries(tableObject.data)) {
-            dataset.push(entry);
+            entire_dataset.push(entry);
         }
 
         for (let [index, entry] of Object.entries(tableObject.columns)) {
