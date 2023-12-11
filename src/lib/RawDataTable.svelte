@@ -33,6 +33,7 @@
     });
 
     $: dataset = filterDataset(selected)
+    $: console.log(dataset)
 
 </script>
 

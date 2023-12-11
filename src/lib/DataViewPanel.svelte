@@ -1,6 +1,7 @@
 <script>
     import RawDataTable from "./RawDataTable.svelte";
     import GroupSelector from "./GroupSelector.svelte";
+    import DataViz from "./DataViz.svelte";
     import { TabGroup, Tab } from '@skeletonlabs/skeleton'
     export let datasets
 
@@ -29,7 +30,7 @@
                 <GroupSelector groups={getGroups('Treatment group', entry.data)} name = {'Treatment group'} bind:selected/>
                 <RawDataTable tableObject={entry} {selected}/>
             {:else if tabset === 1}
-                <p>Nohting to see here</p>
+                <DataViz data={entry.data} groups={getGroups('Treatment group', entry.data)}/>
             {/if}
         </svelte:fragment>
     </TabGroup>
