@@ -11,10 +11,9 @@
         return ['All', ...result]
     }
 
-    $: console.log(selected);
 </script>
 
 {#each datasets as entry}
     <GroupSelector groups={getGroups('Treatment group', entry.data)} name = {'Treatment group'} bind:selected/>
-    <RawDataTable tableObject={entry}/>
+    <RawDataTable tableObject={entry} {selected}/>
 {/each}

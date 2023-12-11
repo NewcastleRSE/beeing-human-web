@@ -1,10 +1,20 @@
 <script>
     import { onMount } from 'svelte'
     export let tableObject;
+    export let selected;
 
-    let dataset = [];
+    let entire_dataset = [];
     let colNames = [];
     let loaded = false;
+    let dataset = []
+
+    function filterDataset(selected) {
+        if (selected === 'All') {
+            return entire_dataset
+        } else {
+            return entire_dataset.filter((entry) => entry['Treatment group'] === selected);
+        }
+    }
 
     onMount( async () => {
         // turn tableObject into an array of objects
@@ -16,9 +26,13 @@
             colNames.push(entry)
         }
 
+        dataset = filterDataset(selected);
+
         loaded = true;
 
     });
+
+    $: dataset = filterDataset(selected)
 
 </script>
 
