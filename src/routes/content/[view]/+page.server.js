@@ -2,6 +2,7 @@ import { views } from "../data.js";
 import { error } from "@sveltejs/kit";
 import parseMD from "parse-md";
 import { loadMei } from "../../../utils/loadFunctions.js";
+import {getMean, getStdDeviation, getStdError, getGroups} from '../../../utils/sciDataHelper.js'
 import { base } from "$app/paths";
 import { getListOfUniqueElements } from "../../../utils/stringOperations.js";
 import { csvParse } from 'd3'
@@ -116,9 +117,36 @@ export async function load({ fetch, params }) {
 
     // parses csv into JSON
     let datasetJson = csvParse(csvString, (e) => (e))
+    
+    let summaryData = [];
+    // build summary statistics for each treatment group/cue group pair
+        let cues = [
+            "Cue Near Positive",
+            "Cue Positive",
+            "Medium",
+            "Near Negative",
+            "Negative",
+        ];
+
+        let groups = getGroups('Treatment group', datasetJson)
+
+        for (let group of groups) {
+            if (group != 'All') {
+                let data_grouped = datasetJson.filter((entry) => entry['Treatment group'] === group)
+                for (let cue of cues) {
+                    // put this into an object, calculate mean standard deviation, standard error
+                    let dataArray = data_grouped.map((entry) => (parseInt(entry[cue])))
+                    let mean = getMean(dataArray);
+                    let stdDeviation = getStdDeviation(mean, dataArray)
+                    let stdError = getStdError(stdDeviation, dataArray);
+
+                    summaryData.push({'Treatment group': group, cue, mean, stdDeviation, stdError})
+                }   
+            }
+        }
 
     // adds dataset to dataset array
-    datasets.push({data: datasetJson, columns: datasetJson.columns});
+    datasets.push({data: datasetJson, columns: datasetJson.columns, summaryData: summaryData, summaryColumns: ['Treatment group', 'cue', 'mean', 'stdDeviation', 'stdError']});
     
 
     // adds dataset array to view variable
