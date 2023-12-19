@@ -144,11 +144,16 @@ export async function load({ fetch, params }) {
                 }   
             }
         }
-
-    // adds dataset to dataset array
-    datasets.push({data: datasetJson, columns: datasetJson.columns, summaryData: summaryData, summaryColumns: ['Treatment group', 'cue', 'mean', 'stdDeviation', 'stdError']});
-    datasets.push({data: datasetJson, columns: datasetJson.columns, summaryData: summaryData, summaryColumns: ['Treatment group', 'cue', 'mean', 'stdDeviation', 'stdError']});
     
+    // reads the .md with the experiment description
+    let desc = await fetch(`${base}/content/${view.slug}/data/bee_data_demo.md`).then( function (response) {
+      if (response.ok) {
+        return response.text()
+      }
+    });
+    desc = parseMD(desc);
+    // adds dataset to dataset array
+    datasets.push({data: datasetJson, columns: datasetJson.columns, summaryData: summaryData, summaryColumns: ['Treatment group', 'cue', 'mean', 'stdDeviation', 'stdError'], desc});    
 
     // adds dataset array to view variable
     view['datasets'] = datasets;

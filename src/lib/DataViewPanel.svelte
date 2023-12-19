@@ -3,6 +3,7 @@
     import RawDataTable from "./RawDataTable.svelte";
     import GroupSelector from "./GroupSelector.svelte";
     import DataViz from "./DataViz.svelte";
+    import InjectMD from './InjectMD.svelte';
     import { TabGroup, Tab } from '@skeletonlabs/skeleton'
     import {getGroups} from '../utils/sciDataHelper';
     export let datasets
@@ -46,9 +47,9 @@
                     <GroupSelector groups={getGroups('Treatment group', entry.data)} name = {'Treatment group'} bind:selected = {selected[index]}/>
                     <RawDataTable tableObject = {{data: entry.summaryData, columns: entry.summaryColumns}} selected = {selected[index]}/>
                 {:else if tabset[index] === 2}
-                    <DataViz/>
+                    <DataViz dataObject = {{data: entry.summaryData, labels: entry.summaryColumns}}/>
                 {:else if tabset[index] === 3}
-                    <p>TBD</p>
+                    <InjectMD content={entry.desc.content}/>
                 {/if}
             </svelte:fragment>
         </TabGroup>
