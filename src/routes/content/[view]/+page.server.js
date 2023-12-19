@@ -147,6 +147,7 @@ export async function load({ fetch, params }) {
 
     // adds dataset to dataset array
     datasets.push({data: datasetJson, columns: datasetJson.columns, summaryData: summaryData, summaryColumns: ['Treatment group', 'cue', 'mean', 'stdDeviation', 'stdError']});
+    datasets.push({data: datasetJson, columns: datasetJson.columns, summaryData: summaryData, summaryColumns: ['Treatment group', 'cue', 'mean', 'stdDeviation', 'stdError']});
     
 
     // adds dataset array to view variable
