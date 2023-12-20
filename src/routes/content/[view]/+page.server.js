@@ -4,7 +4,7 @@ import parseMD from "parse-md";
 import { loadMei } from "../../../utils/loadFunctions.js";
 import {getMean, getStdDeviation, getStdError, getGroups} from '../../../utils/sciDataHelper.js'
 import { base } from "$app/paths";
-import { getListOfUniqueElements } from "../../../utils/stringOperations.js";
+import { getFileNameFromPath, getListOfUniqueElements } from "../../../utils/stringOperations.js";
 import { csvParse } from 'd3'
 
 
@@ -61,7 +61,6 @@ export async function load({ fetch, params }) {
   if (view.slug === 'music') {
     // fetch MEI file, convert to string;
     let url = `${base}/content/${view.slug}/data/CRIM_Model_0001.mei`;
-    console.log(url);
     let meiString = await fetch(url)
     .then(function(response) {
         if (response.ok) {
@@ -108,52 +107,63 @@ export async function load({ fetch, params }) {
     let datasets = [];
     // this should probably be a loop if we're loading more than one dataset at the same time
 
-    // reads the csv file as a string
-    let csvString = await fetch(`${base}/content/${view.slug}/data/bee_data_demo.csv`).then( function (response) {
-      if (response.ok) {
-        return response.text()
-      }
+    // read all experiment descriptions
+    let expDesc = import.meta.glob("/static/content/science/data/*.md", {
+      as: "raw",
+      eager: true,
     });
 
-    // parses csv into JSON
-    let datasetJson = csvParse(csvString, (e) => (e))
-    
-    let summaryData = [];
-    // build summary statistics for each treatment group/cue group pair
-        let cues = [
-            "Cue Near Positive",
-            "Cue Positive",
-            "Medium",
-            "Near Negative",
-            "Negative",
-        ];
-
-        let groups = getGroups('Treatment group', datasetJson)
-
-        for (let group of groups) {
-            if (group != 'All') {
-                let data_grouped = datasetJson.filter((entry) => entry['Treatment group'] === group)
-                for (let cue of cues) {
-                    // put this into an object, calculate mean standard deviation, standard error
-                    let dataArray = data_grouped.map((entry) => (parseInt(entry[cue])))
-                    let mean = getMean(dataArray);
-                    let stdDeviation = getStdDeviation(mean, dataArray)
-                    let stdError = getStdError(stdDeviation, dataArray);
-
-                    summaryData.push({'Treatment group': group, cue, mean, stdDeviation, stdError})
-                }   
-            }
+    for (let experiment in expDesc) {
+      // read and parse .md
+      // reads the .md with the experiment description
+      const fileName = getFileNameFromPath(experiment)
+      let desc = await fetch(`${base}/content/${view.slug}/data/${fileName}`).then( function (response) {
+        if (response.ok) {
+          return response.text()
         }
-    
-    // reads the .md with the experiment description
-    let desc = await fetch(`${base}/content/${view.slug}/data/bee_data_demo.md`).then( function (response) {
-      if (response.ok) {
-        return response.text()
+      });
+      desc = parseMD(desc);
+
+      // reads the csv file as a string
+      let csvString = await fetch(`${base}/content/${view.slug}/data/${desc.metadata.data}`).then( function (response) {
+        if (response.ok) {
+          return response.text()
+        }
+      });
+
+      // parses csv into JSON
+      let datasetJson = csvParse(csvString, (e) => (e))
+
+      let summaryData = [];
+      // build summary statistics for each treatment group/cue group pair
+      let cues = [
+          "Cue Near Positive",
+          "Cue Positive",
+          "Medium",
+          "Near Negative",
+          "Negative",
+      ];
+
+      let groups = getGroups('Treatment group', datasetJson)
+
+      for (let group of groups) {
+          if (group != 'All') {
+              let data_grouped = datasetJson.filter((entry) => entry['Treatment group'] === group)
+              for (let cue of cues) {
+                  // put this into an object, calculate mean standard deviation, standard error
+                  let dataArray = data_grouped.map((entry) => (parseInt(entry[cue])))
+                  let mean = getMean(dataArray);
+                  let stdDeviation = getStdDeviation(mean, dataArray)
+                  let stdError = getStdError(stdDeviation, dataArray);
+
+                  summaryData.push({'Treatment group': group, cue, mean, stdDeviation, stdError})
+              }   
+          }
       }
-    });
-    desc = parseMD(desc);
-    // adds dataset to dataset array
-    datasets.push({data: datasetJson, columns: datasetJson.columns, summaryData: summaryData, summaryColumns: ['Treatment group', 'cue', 'mean', 'stdDeviation', 'stdError'], desc});    
+
+      // adds dataset to dataset array
+      datasets.push({data: datasetJson, columns: datasetJson.columns, summaryData: summaryData, summaryColumns: ['Treatment group', 'cue', 'mean', 'stdDeviation', 'stdError'], desc});
+    }    
 
     // adds dataset array to view variable
     view['datasets'] = datasets;

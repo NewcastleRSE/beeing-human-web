@@ -22,3 +22,8 @@ export function removeSpaces(string) {
 export function splitStringIntoArray(string) {
     return string.split(' ');
 }
+
+export function getFileNameFromPath(string) {
+    // returns a filename from a string path
+    return string.split('\\').pop().split('/').pop();
+}
