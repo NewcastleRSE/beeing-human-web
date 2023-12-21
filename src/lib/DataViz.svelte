@@ -14,10 +14,12 @@
 
     function addData(data) {
         // trying to plot a single group first
-        data = data.filter((entry) => (entry['Treatment group'] === 'Free-flying (control)'))
-        
-        console.log(data);
+        // data = data.filter((entry) => (entry['Treatment group'] === 'Free-flying (control)'))
 
+        let dataGroup = d3.group(data, d => d['Treatment group']);
+        
+
+        // add X axis
         let x = d3.scalePoint()
             .domain(data.map((e) => (e.cue)))
             .range([0, width]);
@@ -31,19 +33,28 @@
         svg.append("g")
             .call(d3.axisLeft(y));
 
+        // colour pallette
+        const colour = d3.scaleOrdinal()
+            .range(['#e41a1c','#377eb8','#4daf4a']);
+
         // Add the line
-        svg.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-width", 1.5)
-        .attr("d", d3.line()
-            .x(function(d) { return x(d.cue) })
-            .y(function(d) { return y(d.mean) })
-            )
+        svg.selectAll(".line")
+        .data(dataGroup)
+        .join('path')
+            .attr("fill", "none")
+            .attr("stroke", function(d) { return colour(d[0])})
+            .attr("stroke-width", 1.5)
+            .attr("d", function (d) {
+                return d3.line()
+                    .x(function(d) { return x(d.cue) })
+                    .y(function(d) { return y(d.mean) })
+                    (d[1])
+                }
+            );
+
+        let dataPoint = svg.append('g')
         // Add the points
-        svg.append("g")
-        .selectAll("dot")
+        dataPoint.selectAll("dot")
         .data(data)
         .enter()
         .append("circle")
@@ -52,8 +63,10 @@
             .attr("r", 5)
             .attr("fill", "#69b3a2")
 
-        svg.append('g')
-            .selectAll('line-error')
+        // draw error lines
+        let errorLines = dataPoint.append('g')
+        // line itself
+        errorLines.selectAll('line-error')
             .data(data)
             .attr('class', 'error')
             .enter()
@@ -62,7 +75,31 @@
                 .attr('x2', function(d) { return x(d.cue); })
                 .attr('y1', function(d) { return y(d.mean + d.stdError); })
                 .attr('y2', function(d) { return y(d.mean - d.stdError); })
+                .attr("stroke", "#69b3a2")
+
+        // bottom termination line
+        errorLines.selectAll('line-error')
+            .data(data)
+            .attr('class', 'error')
+            .enter()
+            .append('line')
+                .attr('x1', function(d) { return x(d.cue) -5; })
+                .attr('x2', function(d) { return x(d.cue) + 5; })
+                .attr('y1', function(d) { return y(d.mean - d.stdError); })
+                .attr('y2', function(d) { return y(d.mean - d.stdError); })
                 .attr("stroke", "#69b3a2");
+
+        // top termination line
+        errorLines.selectAll('line-error')
+            .data(data)
+            .attr('class', 'error')
+            .enter()
+            .append('line')
+                .attr('x1', function(d) { return x(d.cue) -5; })
+                .attr('x2', function(d) { return x(d.cue) + 5; })
+                .attr('y1', function(d) { return y(d.mean + d.stdError); })
+                .attr('y2', function(d) { return y(d.mean + d.stdError); })
+                .attr("stroke", "#69b3a2")
         
     }
 
