@@ -137,8 +137,8 @@ export async function load({ fetch, params }) {
       let summaryData = [];
       // build summary statistics for each treatment group/cue group pair
       let cues = [
-          "Cue Near Positive",
-          "Cue Positive",
+          "Positive",
+          "Near Positive",
           "Medium",
           "Near Negative",
           "Negative",
