@@ -5,8 +5,8 @@
 
     // set the dimensions and margins of the graph
     var margin = {top: 10, right: 30, bottom: 30, left: 60},
-            width = 460 - margin.left - margin.right,
-            height = 400 - margin.top - margin.bottom;
+            width = 800 - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;
     
     let svg = undefined;
 
@@ -51,6 +51,18 @@
             .attr("cy", function(d) { return y(d.mean) } )
             .attr("r", 5)
             .attr("fill", "#69b3a2")
+
+        svg.append('g')
+            .selectAll('line-error')
+            .data(data)
+            .attr('class', 'error')
+            .enter()
+            .append('line')
+                .attr('x1', function(d) { return x(d.cue); })
+                .attr('x2', function(d) { return x(d.cue); })
+                .attr('y1', function(d) { return y(d.mean + d.stdError); })
+                .attr('y2', function(d) { return y(d.mean - d.stdError); })
+                .attr("stroke", "#69b3a2");
         
     }
 
