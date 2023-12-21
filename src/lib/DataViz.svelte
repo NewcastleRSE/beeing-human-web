@@ -35,6 +35,7 @@
 
         // colour pallette
         const colour = d3.scaleOrdinal()
+            .domain(data.map((e) => (e['Treatment group'])))
             .range(['#e41a1c','#377eb8','#4daf4a']);
 
         // Add the line
@@ -53,6 +54,7 @@
             );
 
         let dataPoint = svg.append('g')
+        
         // Add the points
         dataPoint.selectAll("dot")
         .data(data)
@@ -61,7 +63,7 @@
             .attr("cx", function(d) { return x(d.cue) } )
             .attr("cy", function(d) { return y(d.mean) } )
             .attr("r", 5)
-            .attr("fill", "#69b3a2")
+            .attr("fill", function (d)  {return colour(d['Treatment group'])})
 
         // draw error lines
         let errorLines = dataPoint.append('g')
@@ -75,7 +77,7 @@
                 .attr('x2', function(d) { return x(d.cue); })
                 .attr('y1', function(d) { return y(d.mean + d.stdError); })
                 .attr('y2', function(d) { return y(d.mean - d.stdError); })
-                .attr("stroke", "#69b3a2")
+                .attr("stroke", function (d)  {return colour(d['Treatment group'])})
 
         // bottom termination line
         errorLines.selectAll('line-error')
@@ -87,7 +89,7 @@
                 .attr('x2', function(d) { return x(d.cue) + 5; })
                 .attr('y1', function(d) { return y(d.mean - d.stdError); })
                 .attr('y2', function(d) { return y(d.mean - d.stdError); })
-                .attr("stroke", "#69b3a2");
+                .attr("stroke", function (d)  {return colour(d['Treatment group'])});
 
         // top termination line
         errorLines.selectAll('line-error')
@@ -99,7 +101,28 @@
                 .attr('x2', function(d) { return x(d.cue) + 5; })
                 .attr('y1', function(d) { return y(d.mean + d.stdError); })
                 .attr('y2', function(d) { return y(d.mean + d.stdError); })
-                .attr("stroke", "#69b3a2")
+                .attr("stroke", function (d)  {return colour(d['Treatment group'])})
+
+        // Add legend
+        // Add one dot in the legend for each name.
+        svg.selectAll("dots-labels")
+        .data(new Set(data.map((e) => (e['Treatment group']))))
+        .enter()
+        .append("circle")
+            .attr("cx", width-270)
+            .attr("cy", function(d,i){ return 50 + i*30}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("r", 7)
+            .style("fill", function(d){ return colour(d)})
+        svg.selectAll('labels')
+            .data(new Set(data.map((e) => (e['Treatment group']))))
+            .enter()
+            .append('text')
+                .attr("x", width-250)
+                .attr("y", function(d,i){ return 50 + i*30}) // 100 is where the first dot appears. 25 is the distance between dots
+                .style("fill", function(d) { return colour(d)})
+                .text(function(d){ return d})
+                .attr("text-anchor", "left")
+                .style("alignment-baseline", "middle")
         
     }
 
