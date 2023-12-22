@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
     export let dataObject = undefined;
+    export let selected = undefined;
 
     // set the dimensions and margins of the graph
     var margin = {top: 10, right: 30, bottom: 30, left: 60},
@@ -9,6 +10,30 @@
             height = 600 - margin.top - margin.bottom;
     
     let svg = undefined;
+    let colour = undefined;
+    let x;
+    let y;
+
+    let loaded = false;
+
+    function update(newSelection) {
+        // to avoid clearing the graph on mounting
+        if (loaded) {
+            let filteredData = undefined;
+            // clear all previously drawn data and labels
+            svg.selectAll('.data').remove();
+
+            // filter dataset with new selection
+            if (newSelection === 'All') {
+                filteredData = dataObject.data;
+            } else {
+                filteredData = dataObject.data.filter((entry) => (entry['Treatment group'] === selected))
+            }
+            addData(filteredData)
+        }
+    }
+
+    $: update(selected);
 
     // based on this: https://d3-graph-gallery.com/graph/line_basic.html
 
@@ -17,29 +42,10 @@
         // data = data.filter((entry) => (entry['Treatment group'] === 'Free-flying (control)'))
 
         let dataGroup = d3.group(data, d => d['Treatment group']);
-        
 
-        // add X axis
-        let x = d3.scalePoint()
-            .domain(data.map((e) => (e.cue)))
-            .range([0, width]);
-        svg.append('g').attr('transform', "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
-
-        // Add Y axis
-        let y = d3.scaleLinear()
-            .domain([0, d3.max(data.map((e) => (e.mean)))])
-            .range([ height, 0 ]);
-        svg.append("g")
-            .call(d3.axisLeft(y));
-
-        // colour pallette
-        const colour = d3.scaleOrdinal()
-            .domain(data.map((e) => (e['Treatment group'])))
-            .range(['#e41a1c','#377eb8','#4daf4a']);
-
+        let lineData = svg.append('g').attr('class', 'line-data data');
         // Add the line
-        svg.selectAll(".line")
+        lineData.selectAll(".line-data")
         .data(dataGroup)
         .join('path')
             .attr("fill", "none")
@@ -51,9 +57,9 @@
                     .y(function(d) { return y(d.mean) })
                     (d[1])
                 }
-            );
+            )
 
-        let dataPoint = svg.append('g')
+        let dataPoint = svg.append('g').attr('class', 'point-data data');
         
         // Add the points
         dataPoint.selectAll("dot")
@@ -66,7 +72,7 @@
             .attr("fill", function (d)  {return colour(d['Treatment group'])})
 
         // draw error lines
-        let errorLines = dataPoint.append('g')
+        let errorLines = dataPoint.append('g').attr('class', 'error-data data');
         // line itself
         errorLines.selectAll('line-error')
             .data(data)
@@ -105,7 +111,8 @@
 
         // Add legend
         // Add one dot in the legend for each name.
-        svg.selectAll("dots-labels")
+        let labels = svg.append('g').attr('class', 'labels-data data');
+        labels.selectAll("dots-labels")
         .data(new Set(data.map((e) => (e['Treatment group']))))
         .enter()
         .append("circle")
@@ -113,7 +120,7 @@
             .attr("cy", function(d,i){ return 50 + i*30}) // 100 is where the first dot appears. 25 is the distance between dots
             .attr("r", 7)
             .style("fill", function(d){ return colour(d)})
-        svg.selectAll('labels')
+        labels.selectAll('labels')
             .data(new Set(data.map((e) => (e['Treatment group']))))
             .enter()
             .append('text')
@@ -135,7 +142,28 @@
         .append("g")
             .attr("transform",
                 "translate(" + margin.left + "," + margin.top + ")");
-        addData(dataObject.data)
+        
+        // add X axis
+        x = d3.scalePoint()
+            .domain(dataObject.data.map((e) => (e.cue)))
+            .range([0, width]);
+        svg.append('g').attr('transform', "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        // Add Y axis
+        y = d3.scaleLinear()
+            .domain([0, d3.max(dataObject.data.map((e) => (e.mean)))])
+            .range([ height, 0 ]);
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+        // colour pallette
+        colour = d3.scaleOrdinal()
+            .domain(dataObject.data.map((e) => (e['Treatment group'])))
+            .range(['#e41a1c','#377eb8','#4daf4a']);
+
+        addData(dataObject.data);
+        loaded = true;
     })
 
 </script>
