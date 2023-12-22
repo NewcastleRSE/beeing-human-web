@@ -2,37 +2,13 @@
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
     export let dataObject = undefined;
-    export let selected;
-
-    let data = undefined;
-    let svg = undefined;
-    let x = undefined;
-    let y = undefined;
-    let colour = undefined;
-    let line = undefined;
-    let dataPoint = undefined;
-
-    function update(selected) {
-        let dataFilter = data;
-        line = undefined;
-        dataPoint = undefined;
-        if (selected === 'All') {
-            dataFilter = data;
-        } else {
-            dataFilter = data.filter((entry) => entry['Treatment group'] === selected);
-        }
-        
-        if (dataFilter != undefined) {
-            addData(dataFilter);
-        }
-    }
-
-    $: update(selected)
 
     // set the dimensions and margins of the graph
     var margin = {top: 10, right: 30, bottom: 30, left: 60},
             width = 800 - margin.left - margin.right,
             height = 600 - margin.top - margin.bottom;
+    
+    let svg = undefined;
 
     // based on this: https://d3-graph-gallery.com/graph/line_basic.html
 
@@ -41,23 +17,43 @@
         // data = data.filter((entry) => (entry['Treatment group'] === 'Free-flying (control)'))
 
         let dataGroup = d3.group(data, d => d['Treatment group']);
+        
+
+        // add X axis
+        let x = d3.scalePoint()
+            .domain(data.map((e) => (e.cue)))
+            .range([0, width]);
+        svg.append('g').attr('transform', "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        // Add Y axis
+        let y = d3.scaleLinear()
+            .domain([0, d3.max(data.map((e) => (e.mean)))])
+            .range([ height, 0 ]);
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+        // colour pallette
+        const colour = d3.scaleOrdinal()
+            .domain(data.map((e) => (e['Treatment group'])))
+            .range(['#e41a1c','#377eb8','#4daf4a']);
 
         // Add the line
-        line = svg.selectAll(".line")
-            .data(dataGroup)
-            .join('path')
-                .attr("fill", "none")
-                .attr("stroke", function(d) { return colour(d[0])})
-                .attr("stroke-width", 1.5)
-                .attr("d", function (d) {
-                    return d3.line()
-                        .x(function(d) { return x(d.cue) })
-                        .y(function(d) { return y(d.mean) })
-                        (d[1])
-                    }
-                );
+        svg.selectAll(".line")
+        .data(dataGroup)
+        .join('path')
+            .attr("fill", "none")
+            .attr("stroke", function(d) { return colour(d[0])})
+            .attr("stroke-width", 1.5)
+            .attr("d", function (d) {
+                return d3.line()
+                    .x(function(d) { return x(d.cue) })
+                    .y(function(d) { return y(d.mean) })
+                    (d[1])
+                }
+            );
 
-        dataPoint = svg.append('g')
+        let dataPoint = svg.append('g')
         
         // Add the points
         dataPoint.selectAll("dot")
@@ -132,7 +128,6 @@
 
     onMount(async () => {
         // append the svg object to the body of the page
-        data = dataObject.data
         svg = d3.select("#line-graph")
         .append("svg")
             .attr("width", width + margin.left + margin.right)
@@ -140,26 +135,7 @@
         .append("g")
             .attr("transform",
                 "translate(" + margin.left + "," + margin.top + ")");
-        // add X axis
-        x = d3.scalePoint()
-            .domain(data.map((e) => (e.cue)))
-            .range([0, width]);
-        svg.append('g').attr('transform', "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
-
-        // Add Y axis
-        y = d3.scaleLinear()
-            .domain([0, d3.max(data.map((e) => (e.mean)))])
-            .range([ height, 0 ]);
-        svg.append("g")
-            .call(d3.axisLeft(y));
-
-        // colour pallette
-        colour = d3.scaleOrdinal()
-            .domain(data.map((e) => (e['Treatment group'])))
-            .range(['#e41a1c','#377eb8','#4daf4a']);
-
-        addData(data)
+        addData(dataObject.data)
     })
 
 </script>
