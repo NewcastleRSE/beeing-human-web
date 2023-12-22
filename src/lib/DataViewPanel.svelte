@@ -25,6 +25,7 @@
 
 {#if loaded}
     {#each datasets as entry, index}
+        <h2>{entry.desc.metadata.title}</h2>
         <TabGroup>
             <Tab bind:group={tabset[index]} name='tab1' value={0}>
                 <span>Data table</span>

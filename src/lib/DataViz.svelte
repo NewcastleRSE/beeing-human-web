@@ -165,8 +165,8 @@
             .domain(dataObject.data.map((e) => (e['Treatment group'])))
             .range(['#e41a1c','#377eb8','#4daf4a']);
 
-        addData(dataObject.data);
         loaded = true;
+        update(selected);
     })
 
 </script>
