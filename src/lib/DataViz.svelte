@@ -15,9 +15,9 @@
     let colour = undefined;
     let x;
     let y;
+    let tooltip;
 
     let loaded = false;
-    console.log(name)
 
     function update(newSelection) {
         // to avoid clearing the graph on mounting
@@ -34,6 +34,28 @@
             }
             addData(filteredData)
         }
+    }
+
+    // hovering functions
+    var mouseover = function(event, d) {
+        tooltip.style("opacity", 1)
+        d3.select(this)
+            .style("stroke", "black")
+            .style("opacity", 1)
+    }
+
+    let mousemove = function(event, d) {
+        tooltip.html("Mean: " + d.mean)
+            .style("left", (event.pageX+70) + "px")
+            .style("top", (event.pageY) + "px")
+    }
+
+    let mouseleave = function(event, d) {
+        tooltip
+            .style("opacity", 0)
+        d3.select(this)
+            .style("stroke", "none")
+            .style("opacity", 0.8)
     }
 
     $: update(selected);
@@ -73,6 +95,9 @@
             .attr("cy", function(d) { return y(d.mean) } )
             .attr("r", 5)
             .attr("fill", function (d)  {return colour(d['Treatment group'])})
+        .on('mouseover', mouseover)
+        .on('mousemove', mousemove)
+        .on('mouseleave', mouseleave)
 
         // draw error lines
         let errorLines = dataPoint.append('g').attr('class', 'error-data data');
@@ -145,6 +170,18 @@
         .append("g")
             .attr("transform",
                 "translate(" + margin.left + "," + margin.top + ")");
+
+        // create a tooltip
+        tooltip = d3.select(`#tooltip-${removeSpaces(name)}`)
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "2px")
+            .style("border-radius", "5px")
+            .style("padding", "5px")
+            .style("position", 'absolute')
         
         // add X axis
         x = d3.scalePoint()
@@ -174,5 +211,7 @@
 {#if dataObject.data == undefined || dataObject.labels == undefined}
     <p>No data passed</p>
 {:else}
-    <div id="line-graph-{removeSpaces(name)}"/>
+    <div id="line-graph-{removeSpaces(name)}">
+        <div id="tooltip-{removeSpaces(name)}"></div>
+    </div>
 {/if}
