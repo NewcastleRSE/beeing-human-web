@@ -1,6 +1,6 @@
 ---
 # other metadata can be associated here
-title: Bee data demo
+title: Bee data demo 2
 data: bee_data_demo.csv
 date: 2023-07-31
 ---

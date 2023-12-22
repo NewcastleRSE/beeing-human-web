@@ -13,7 +13,7 @@ export function getListOfUniqueElements(array) {
 export function removeSpaces(string) {
     // removes any spaces from string and replaces it with hyphen to allow for dynamic IDs in the html
     if (string.includes(' ')) {
-        string = string.replace(' ', '-');
+        string = string.replace(/ /g, '-');
     }
     
     return string

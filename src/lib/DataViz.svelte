@@ -1,8 +1,10 @@
 <script>
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
+    import {removeSpaces} from '../utils/stringOperations';
     export let dataObject = undefined;
     export let selected = undefined;
+    export let name;
 
     // set the dimensions and margins of the graph
     var margin = {top: 10, right: 30, bottom: 30, left: 60},
@@ -15,6 +17,7 @@
     let y;
 
     let loaded = false;
+    console.log(name)
 
     function update(newSelection) {
         // to avoid clearing the graph on mounting
@@ -135,7 +138,7 @@
 
     onMount(async () => {
         // append the svg object to the body of the page
-        svg = d3.select("#line-graph")
+        svg = d3.select(`#line-graph-${removeSpaces(name)}`)
         .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -171,5 +174,5 @@
 {#if dataObject.data == undefined || dataObject.labels == undefined}
     <p>No data passed</p>
 {:else}
-    <div id="line-graph"/>
+    <div id="line-graph-{removeSpaces(name)}"/>
 {/if}
