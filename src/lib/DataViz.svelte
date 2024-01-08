@@ -36,7 +36,7 @@
         }
     }
 
-    // hovering functions
+    // hovering functions -- data points
     var mouseover = function(event, d) {
         tooltip.style("opacity", 1)
         d3.select(this)
@@ -45,7 +45,10 @@
     }
 
     let mousemove = function(event, d) {
-        tooltip.html("Mean: " + d.mean)
+        let tip = `<p><span class="tooltip-label font-medium">Mean:</span> <span class="tooltip-value font-light">${d.mean}</span></p>
+            <p><span class="tooltip-label font-medium">Standard Deviation:</span> <span class="tooltip-value font-light">${d.stdDeviation}</span></p>
+            <p><span class="tooltip-label font-medium">Standard Error:</span> <span class="tooltip-value font-light">${d.stdError}</span></p>`
+        tooltip.html(tip)
             .style("left", (event.pageX+70) + "px")
             .style("top", (event.pageY) + "px")
     }
@@ -212,6 +215,6 @@
     <p>No data passed</p>
 {:else}
     <div id="line-graph-{removeSpaces(name)}">
-        <div id="tooltip-{removeSpaces(name)}"></div>
+        <div id="tooltip-{removeSpaces(name)}" class="text-sm"></div>
     </div>
 {/if}
