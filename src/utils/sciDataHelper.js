@@ -18,3 +18,9 @@ export function getGroups(group, dataset) {
     let result = new Set(dataset.map(entry => entry[group]))
     return ['All', ...result]
 }
+
+export function getExperimentBees(rawData, tGroup, cue) {
+    // for a particular data point, retrieve a list of bees
+    let fData = rawData.filter((entry) => (entry['Treatment group'] === tGroup && entry[cue] === '1'));
+    return fData.map((e) => e['Bee Id']);
+}

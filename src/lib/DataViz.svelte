@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
     import {removeSpaces} from '../utils/stringOperations';
+    import {getExperimentBees} from '../utils/sciDataHelper'
     export let dataObject = undefined;
     export let selected = undefined;
     export let name;
@@ -46,7 +47,7 @@
     }
 
     let mousemove = function(event, d) {
-        let beeList = getExperimentBees(d['Treatment group'], d.cue);
+        let beeList = getExperimentBees(rawData, d['Treatment group'], d.cue);
         let beeListUl =''
         for (let bee of beeList) {
             beeListUl += `<li>${bee}</li>`
@@ -69,12 +70,6 @@
         d3.select(this)
             .style("stroke", "none")
             .style("opacity", 0.8)
-    }
-
-    function getExperimentBees(tGroup, cue) {
-        // for a particular data point, retrieve a list of bees
-        let fData = rawData.filter((entry) => (entry['Treatment group'] === tGroup && entry[cue] === '1'));
-        return fData.map((e) => e['Bee Id']);
     }
 
     $: update(selected);
