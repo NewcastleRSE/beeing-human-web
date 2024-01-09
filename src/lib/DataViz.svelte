@@ -74,6 +74,8 @@
 
     // hovering functions -- labels
     let labelMouseover = function (event, d) {
+        let labels = d3.select('g.labels-data')
+        labels.selectAll('text').style('font-weight', 'lighter');
         d3.select(this)
             .style('font-weight', 'bold')
         let paths = d3.selectAll('path.line-data');
@@ -87,14 +89,40 @@
     }
 
     let labelMouseleave = function (event, d) {
+        let labels = d3.select('g.labels-data')
+        labels.selectAll('text').style('font-weight', 'normal');
         d3.select(this)
             .style('font-weight', 'normal')
         let paths = d3.selectAll('path.line-data');
         paths.attr('stroke-width', 1.5);
     }
 
+    // clicking functions -- labels
     let labelClick = function (event, d) {
         selected = d;
+    }
+
+    // hovering functions -- lines
+    let lineMouseover = function (event, d) {
+        labelMouseover(event, d[0]);
+        d3.selectAll('text')
+            .filter(function(){ 
+                return d3.select(this).text() == d[0]
+        })
+        .style("font-weight", "bold");
+    }
+
+    let lineMousemove = function (event, d) {
+        labelMousemove(event, d[0]);
+    }
+
+    let lineMouseleave = function (event, d) {
+        d3.selectAll('text').attr('font-weight', 'normal');
+        labelMouseleave(event, d[0]);
+    }
+
+    let lineClick = function (event, d) {
+        labelClick(event, d[0]);
     }
 
     $: update(selected);
@@ -112,6 +140,10 @@
         lineData.selectAll(".line-data")
         .data(dataGroup)
         .join('path')
+        .on('mouseover', lineMouseover)
+        .on('mousemove', lineMousemove)
+        .on('mouseleave', lineMouseleave)
+        .on('click', lineClick)
             .attr("fill", "none")
             .attr("stroke", function(d) { return colour(d[0])})
             .attr("stroke-width", 1.5)
