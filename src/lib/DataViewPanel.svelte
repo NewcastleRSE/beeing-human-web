@@ -49,7 +49,7 @@
                     <RawDataTable tableObject = {{data: entry.summaryData, columns: entry.summaryColumns}} selected = {selected[index]}/>
                 {:else if tabset[index] === 2}
                     <GroupSelector groups={getGroups('Treatment group', entry.data)} name = {'Treatment group'} bind:selected = {selected[index]}/>
-                    <DataViz dataObject = {{data: entry.summaryData, labels: entry.summaryColumns}} selected = {selected[index]} name = {entry.desc.metadata.title}/>
+                    <DataViz dataObject = {{data: entry.summaryData, labels: entry.summaryColumns}} selected = {selected[index]} name = {entry.desc.metadata.title} rawData = {entry.data}/>
                 {:else if tabset[index] === 3}
                     <InjectMD content={entry.desc.content}/>
                 {/if}

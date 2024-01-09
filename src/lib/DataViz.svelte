@@ -5,6 +5,7 @@
     export let dataObject = undefined;
     export let selected = undefined;
     export let name;
+    export let rawData = undefined;
 
     // set the dimensions and margins of the graph
     var margin = {top: 10, right: 30, bottom: 30, left: 60},
@@ -45,20 +46,35 @@
     }
 
     let mousemove = function(event, d) {
+        let beeList = getExperimentBees(d['Treatment group'], d.cue);
+        let beeListUl =''
+        for (let bee of beeList) {
+            beeListUl += `<li>${bee}</li>`
+        }
         let tip = `<p><span class="tooltip-label font-medium">Mean:</span> <span class="tooltip-value font-light">${d.mean}</span></p>
             <p><span class="tooltip-label font-medium">Standard Deviation:</span> <span class="tooltip-value font-light">${d.stdDeviation}</span></p>
-            <p><span class="tooltip-label font-medium">Standard Error:</span> <span class="tooltip-value font-light">${d.stdError}</span></p>`
+            <p><span class="tooltip-label font-medium">Standard Error:</span> <span class="tooltip-value font-light">${d.stdError}</span></p>
+            <hr/>
+            <p><span class="tooltip-label font-medium">Bees: </span>
+                <ul class="indent-2">${beeListUl}</ul>
+            </p>`
         tooltip.html(tip)
             .style("left", (event.pageX+70) + "px")
             .style("top", (event.pageY) + "px")
     }
 
     let mouseleave = function(event, d) {
-        tooltip
+        tooltip.html('')
             .style("opacity", 0)
         d3.select(this)
             .style("stroke", "none")
             .style("opacity", 0.8)
+    }
+
+    function getExperimentBees(tGroup, cue) {
+        // for a particular data point, retrieve a list of bees
+        let fData = rawData.filter((entry) => (entry['Treatment group'] === tGroup && entry[cue] === '1'));
+        return fData.map((e) => e['Bee Id']);
     }
 
     $: update(selected);
