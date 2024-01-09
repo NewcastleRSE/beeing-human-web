@@ -93,6 +93,10 @@
         paths.attr('stroke-width', 1.5);
     }
 
+    let labelClick = function (event, d) {
+        selected = d;
+    }
+
     $: update(selected);
 
     // based on this: https://d3-graph-gallery.com/graph/line_basic.html
@@ -198,6 +202,7 @@
             .on('mouseover', labelMouseover)
             .on('mousemove', labelMousemove)
             .on('mouseleave', labelMouseleave)
+            .on('click', labelClick)
         
     }
 
