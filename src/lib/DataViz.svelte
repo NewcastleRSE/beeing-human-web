@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
-    import {removeSpaces} from '../utils/stringOperations';
+    import {makeHtmlId} from '../utils/stringOperations';
     import {getExperimentBees} from '../utils/sciDataHelper'
     export let dataObject = undefined;
     export let selected = undefined;
@@ -72,6 +72,27 @@
             .style("opacity", 0.8)
     }
 
+    // hovering functions -- labels
+    let labelMouseover = function (event, d) {
+        d3.select(this)
+            .style('font-weight', 'bold')
+        let paths = d3.selectAll('path.line-data');
+        paths.attr('stroke-width', 0.5);
+    }
+    
+    let labelMousemove = function (event, d) {
+        let pathsGroup = d3.selectAll('g.line-data');
+        let pathId = `path#${makeHtmlId(d)}-path`;
+        pathsGroup.selectAll(pathId).attr('stroke-width', 2.5);
+    }
+
+    let labelMouseleave = function (event, d) {
+        d3.select(this)
+            .style('font-weight', 'normal')
+        let paths = d3.selectAll('path.line-data');
+        paths.attr('stroke-width', 1.5);
+    }
+
     $: update(selected);
 
     // based on this: https://d3-graph-gallery.com/graph/line_basic.html
@@ -90,6 +111,8 @@
             .attr("fill", "none")
             .attr("stroke", function(d) { return colour(d[0])})
             .attr("stroke-width", 1.5)
+            .attr('id', function(d) {return `${makeHtmlId(d[0])}-path`})
+            .attr('class', 'line-data')
             .attr("d", function (d) {
                 return d3.line()
                     .x(function(d) { return x(d.cue) })
@@ -172,12 +195,15 @@
                 .text(function(d){ return d})
                 .attr("text-anchor", "left")
                 .style("alignment-baseline", "middle")
+            .on('mouseover', labelMouseover)
+            .on('mousemove', labelMousemove)
+            .on('mouseleave', labelMouseleave)
         
     }
 
     onMount(async () => {
         // append the svg object to the body of the page
-        svg = d3.select(`#line-graph-${removeSpaces(name)}`)
+        svg = d3.select(`#line-graph-${makeHtmlId(name)}`)
         .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -186,7 +212,7 @@
                 "translate(" + margin.left + "," + margin.top + ")");
 
         // create a tooltip
-        tooltip = d3.select(`#tooltip-${removeSpaces(name)}`)
+        tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`)
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
@@ -225,7 +251,7 @@
 {#if dataObject.data == undefined || dataObject.labels == undefined}
     <p>No data passed</p>
 {:else}
-    <div id="line-graph-{removeSpaces(name)}">
-        <div id="tooltip-{removeSpaces(name)}" class="text-sm"></div>
+    <div id="line-graph-{makeHtmlId(name)}">
+        <div id="tooltip-{makeHtmlId(name)}" class="text-sm"></div>
     </div>
 {/if}

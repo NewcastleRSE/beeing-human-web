@@ -27,3 +27,17 @@ export function getFileNameFromPath(string) {
     // returns a filename from a string path
     return string.split('\\').pop().split('/').pop();
 }
+
+export function makeHtmlId(string) {
+    // removes any characters that cannot be in an HTML id, removes spaces, and turns everything to lowercase;
+    let forbbidenChars = ['(', ')']
+    string = string.toLowerCase();
+    string = removeSpaces(string);
+    for (let char of forbbidenChars) {
+        if (string.includes(char)) {
+            string = string.replace(char, '')
+        }
+    }
+    return string;
+
+}
