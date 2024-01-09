@@ -39,14 +39,14 @@
     }
 
     // hovering functions -- data points
-    var mouseover = function(event, d) {
+    var dpMouseover = function(event, d) {
         tooltip.style("opacity", 1)
         d3.select(this)
             .style("stroke", "black")
             .style("opacity", 1)
     }
 
-    let mousemove = function(event, d) {
+    let dpMousemove = function(event, d) {
         let beeList = getExperimentBees(rawData, d['Treatment group'], d.cue);
         let beeListUl =''
         for (let bee of beeList) {
@@ -64,7 +64,7 @@
             .style("top", (event.pageY) + "px")
     }
 
-    let mouseleave = function(event, d) {
+    let dpMouseleave = function(event, d) {
         tooltip.html('')
             .style("opacity", 0)
         d3.select(this)
@@ -109,9 +109,9 @@
             .attr("cy", function(d) { return y(d.mean) } )
             .attr("r", 5)
             .attr("fill", function (d)  {return colour(d['Treatment group'])})
-        .on('mouseover', mouseover)
-        .on('mousemove', mousemove)
-        .on('mouseleave', mouseleave)
+        .on('mouseover', dpMouseover)
+        .on('mousemove', dpMousemove)
+        .on('mouseleave', dpMouseleave)
 
         // draw error lines
         let errorLines = dataPoint.append('g').attr('class', 'error-data data');
