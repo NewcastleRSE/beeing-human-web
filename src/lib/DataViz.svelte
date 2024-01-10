@@ -74,48 +74,55 @@
 
     // hovering functions -- labels
     let labelMouseover = function (event, d) {
+        // context
+        let context = d3.select(`div#line-graph-${makeHtmlId(name)}`);
+
         // labels
-        let labels = d3.select('g.labels-data')
+        let labels = context.select('g.labels-data')
         labels.selectAll('text').style('font-weight', 'lighter');
         d3.select(this)
             .style('font-weight', 'bold')
         
         // paths
-        let paths = d3.selectAll('path.line-data');
+        let paths = context.selectAll('path.line-data');
         paths.attr('stroke-width', 0.5);
 
         // error bars
-        let errorBars = d3.selectAll('.error-data')
+        let errorBars = context.selectAll('.error-data')
         errorBars.selectAll('line').attr('stroke-width', 0.5);
-        console.log(errorBars)
     }
     
     let labelMousemove = function (event, d) {
+        // context
+        let context = d3.select(`div#line-graph-${makeHtmlId(name)}`);
+
         // paths
-        let pathsGroup = d3.selectAll('g.line-data');
+        let pathsGroup = context.selectAll('g.line-data');
         let pathId = `path#${makeHtmlId(d)}-path`;
         pathsGroup.selectAll(pathId).attr('stroke-width', 2.5);
 
         // error bars
-        let errorBars = d3.selectAll('.error-data');
+        let errorBars = context.selectAll('.error-data');
         errorBars.selectAll(`.${makeHtmlId(d)}`).attr('stroke-width', 2);
     }
 
     let labelMouseleave = function (event, d) {
+        // context
+        let context = d3.select(`div#line-graph-${makeHtmlId(name)}`);
+
         // labels
-        let labels = d3.select('g.labels-data')
+        let labels = context.select('g.labels-data')
         labels.selectAll('text').style('font-weight', 'normal');
         d3.select(this)
             .style('font-weight', 'normal')
 
         // paths
-        let paths = d3.selectAll('path.line-data');
+        let paths = context.selectAll('path.line-data');
         paths.attr('stroke-width', 1.5);
 
         // error bars
-        let errorBars = d3.selectAll('.error-data')
+        let errorBars = context.selectAll('.error-data')
         errorBars.selectAll('line').attr('stroke-width', 1);
-        console.log(errorBars)
     }
 
     // clicking functions -- labels
@@ -126,7 +133,11 @@
     // hovering functions -- lines
     let lineMouseover = function (event, d) {
         labelMouseover(event, d[0]);
-        d3.selectAll('text')
+        
+        // context
+        let context = d3.select(`div#line-graph-${makeHtmlId(name)}`);
+        
+        context.selectAll('text')
             .filter(function(){ 
                 return d3.select(this).text() == d[0]
         })
@@ -138,7 +149,10 @@
     }
 
     let lineMouseleave = function (event, d) {
-        d3.selectAll('text').attr('font-weight', 'normal');
+        // context
+        let context = d3.select(`div#line-graph-${makeHtmlId(name)}`);
+
+        context.selectAll('text').attr('font-weight', 'normal');
         labelMouseleave(event, d[0]);
     }
 
