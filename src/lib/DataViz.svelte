@@ -74,27 +74,48 @@
 
     // hovering functions -- labels
     let labelMouseover = function (event, d) {
+        // labels
         let labels = d3.select('g.labels-data')
         labels.selectAll('text').style('font-weight', 'lighter');
         d3.select(this)
             .style('font-weight', 'bold')
+        
+        // paths
         let paths = d3.selectAll('path.line-data');
         paths.attr('stroke-width', 0.5);
+
+        // error bars
+        let errorBars = d3.selectAll('.error-data')
+        errorBars.selectAll('line').attr('stroke-width', 0.5);
+        console.log(errorBars)
     }
     
     let labelMousemove = function (event, d) {
+        // paths
         let pathsGroup = d3.selectAll('g.line-data');
         let pathId = `path#${makeHtmlId(d)}-path`;
         pathsGroup.selectAll(pathId).attr('stroke-width', 2.5);
+
+        // error bars
+        let errorBars = d3.selectAll('.error-data');
+        errorBars.selectAll(`.${makeHtmlId(d)}`).attr('stroke-width', 2);
     }
 
     let labelMouseleave = function (event, d) {
+        // labels
         let labels = d3.select('g.labels-data')
         labels.selectAll('text').style('font-weight', 'normal');
         d3.select(this)
             .style('font-weight', 'normal')
+
+        // paths
         let paths = d3.selectAll('path.line-data');
         paths.attr('stroke-width', 1.5);
+
+        // error bars
+        let errorBars = d3.selectAll('.error-data')
+        errorBars.selectAll('line').attr('stroke-width', 1);
+        console.log(errorBars)
     }
 
     // clicking functions -- labels
@@ -185,6 +206,7 @@
                 .attr('y1', function(d) { return y(d.mean + d.stdError); })
                 .attr('y2', function(d) { return y(d.mean - d.stdError); })
                 .attr("stroke", function (d)  {return colour(d['Treatment group'])})
+                .attr('class', function(d) {return makeHtmlId(d['Treatment group'])})
 
         // bottom termination line
         errorLines.selectAll('line-error')
@@ -196,7 +218,8 @@
                 .attr('x2', function(d) { return x(d.cue) + 5; })
                 .attr('y1', function(d) { return y(d.mean - d.stdError); })
                 .attr('y2', function(d) { return y(d.mean - d.stdError); })
-                .attr("stroke", function (d)  {return colour(d['Treatment group'])});
+                .attr("stroke", function (d)  {return colour(d['Treatment group'])})
+                .attr('class', function(d) {return makeHtmlId(d['Treatment group'])});
 
         // top termination line
         errorLines.selectAll('line-error')
@@ -209,6 +232,7 @@
                 .attr('y1', function(d) { return y(d.mean + d.stdError); })
                 .attr('y2', function(d) { return y(d.mean + d.stdError); })
                 .attr("stroke", function (d)  {return colour(d['Treatment group'])})
+                .attr('class', function(d) {return makeHtmlId(d['Treatment group'])});
 
         // Add legend
         // Add one dot in the legend for each name.
