@@ -3,6 +3,8 @@
     import * as d3 from 'd3';
     import {makeHtmlId} from '../utils/stringOperations';
     import {getExperimentBees} from '../utils/sciDataHelper'
+    import { SlideToggle } from '@skeletonlabs/skeleton';
+
     export let dataObject = undefined;
     export let selected = undefined;
     export let name;
@@ -18,6 +20,7 @@
     let x;
     let y;
     let tooltip;
+    let showErrorBars = true;
 
     let loaded = false;
 
@@ -161,6 +164,7 @@
     }
 
     $: update(selected);
+    $: toggleErrorBars(showErrorBars);
 
     // based on this: https://d3-graph-gallery.com/graph/line_basic.html
 
@@ -276,6 +280,16 @@
         
     }
 
+    function toggleErrorBars(showErrorBars) {
+        let context = d3.select(`div#line-graph-${makeHtmlId(name)}`);
+        let errorBars = context.selectAll('.error-data')
+        if (showErrorBars) {
+            errorBars.selectAll('line').attr('opacity', 1);
+        } else {
+            errorBars.selectAll('line').attr('opacity', 0);
+        }
+    }
+
     onMount(async () => {
         // append the svg object to the body of the page
         svg = d3.select(`#line-graph-${makeHtmlId(name)}`)
@@ -327,6 +341,7 @@
     <p>No data passed</p>
 {:else}
     <div id="line-graph-{makeHtmlId(name)}">
+        <SlideToggle name="error-bar-show" size="sm" bind:checked={showErrorBars}>Error bars</SlideToggle>
         <div id="tooltip-{makeHtmlId(name)}" class="text-sm"></div>
     </div>
 {/if}
