@@ -52,8 +52,40 @@ describe ('Load and display data view panel', () => {
     })
 });
 
+describe('Interaction with the data viz panel', () => {
+    afterEach(() => cleanup());
+
+    it('should have the first tab selected as default', async () => {
+        render(DataViewPanel, {datasets: datasets});
+        const tabGroups = await screen.findAllByTestId('tab-group');
+        for (let group of tabGroups) {
+            let renderedTabs = await within(group).findAllByTestId('tab');
+            for (let [index, rTab] of renderedTabs.entries()) {
+                if (index === 0) {
+                    expect(rTab.getAttribute('tabindex')).toEqual('0');
+                    expect(rTab.getAttribute('aria-selected')).toEqual('true');
+                } else {
+                    expect(rTab.getAttribute('tabindex')).toEqual('-1');
+                    expect(rTab.getAttribute('aria-selected')).toEqual('false');
+                }
+            }
+        }
+    });
+
+    it('First tab should display the expected content', async() => {
+        render(DataViewPanel, {datasets: datasets});
+        const tabPanels = await screen.findAllByRole('tabpanel');
+        for (const panel of tabPanels) {
+            // contains the correct component (raw data table)
+            let dataPanel = await within(panel).findByTestId('raw-data-table');
+            expect(dataPanel).toBeTruthy();
+            
+            // the contents of the component are correct
+        }
+    })
+})
+
 // Interactivity
-    // First tab should be selected
     // First tab should show expected table
     // Clicking on a different tab should replace content
     // Each tab should display expected content (including presence or absence of selector)
