@@ -75,18 +75,22 @@ describe('Interaction with the data viz panel', () => {
     it('First tab should display the expected content', async() => {
         render(DataViewPanel, {datasets: datasets});
         const tabPanels = await screen.findAllByRole('tabpanel');
-        for (const panel of tabPanels) {
+        for (const [index, panel] of tabPanels.entries()) {
             // contains the correct component (raw data table)
             let dataPanel = await within(panel).findByTestId('raw-data-table');
             expect(dataPanel).toBeTruthy();
             
             // the contents of the component are correct
+            for (const column of datasets[index].columns) {
+                // must be find all because 'Treatment group' appears in other elements as well, which throws out an error
+                const columnRendered = await within(panel).findAllByText(column, {exact: false})
+                expect(columnRendered).toBeTruthy();
+            }
         }
     })
 })
 
 // Interactivity
-    // First tab should show expected table
     // Clicking on a different tab should replace content
     // Each tab should display expected content (including presence or absence of selector)
     // Changing the selector in one tab should propagate to other tabs
