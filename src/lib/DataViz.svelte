@@ -355,7 +355,7 @@
 {#if dataObject.data == undefined || dataObject.labels == undefined}
     <p>No data passed</p>
 {:else}
-    <div id="line-graph-{makeHtmlId(name)}">
+    <div id="line-graph-{makeHtmlId(name)}" data-testid="line-graph">
         <SlideToggle name="error-bar-show" size="sm" bind:checked={showErrorBars}>Error bars</SlideToggle>
         <div id="tooltip-{makeHtmlId(name)}" class="text-sm"></div>
     </div>
