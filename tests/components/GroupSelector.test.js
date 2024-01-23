@@ -62,8 +62,12 @@ describe('Interaction with the group selector works as expected', () => {
         expect(selectedElement.selected).toBe(true);
 
         // click on a different option
-        // this one is a bit of a mess, correct this test
-        await userEvent.selectOptions(await screen.findByRole('option', testGroups[1]));
+        let selectOption = await screen.findByRole('combobox');
+        await userEvent.selectOptions(selectOption, testGroups[1]);
 
+        // test the change
+        let newSelection = await screen.findByRole('option', {name: testGroups[1]});
+        expect(selectedElement.selected).toBe(false);
+        expect(newSelection.selected).toBe(true);
     })
 })
