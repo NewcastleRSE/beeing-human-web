@@ -23,21 +23,32 @@
     let showErrorBars = true;
 
     let loaded = false;
+    // Error codes
+    // 0 = All good
+    // 1 = Error in update()
+    // 2 = Error in toggleErrorBars();
+    // 3 = Error in onMount();
+    let errorCode = 0;
 
     function update(newSelection) {
         // to avoid clearing the graph on mounting
-        if (loaded) {
-            let filteredData = undefined;
-            // clear all previously drawn data and labels
-            svg.selectAll('.data').remove();
+        try {
+            if (loaded) {
+                let filteredData = undefined;
+                // clear all previously drawn data and labels
+                svg.selectAll('.data').remove();
 
-            // filter dataset with new selection
-            if (newSelection === 'All') {
-                filteredData = dataObject.data;
-            } else {
-                filteredData = dataObject.data.filter((entry) => (entry['Treatment group'] === selected))
+                // filter dataset with new selection
+                if (newSelection === 'All') {
+                    filteredData = dataObject.data;
+                } else {
+                    filteredData = dataObject.data.filter((entry) => (entry['Treatment group'] === selected))
+                }
+                addData(filteredData)
             }
-            addData(filteredData)
+        } catch(err) {
+            // console.log('Update error: \n', err);
+            errorCode = 1;
         }
     }
 
@@ -169,8 +180,6 @@
     // based on this: https://d3-graph-gallery.com/graph/line_basic.html
 
     function addData(data) {
-        // trying to plot a single group first
-        // data = data.filter((entry) => (entry['Treatment group'] === 'Free-flying (control)'))
 
         let dataGroup = d3.group(data, d => d['Treatment group']);
 
@@ -280,81 +289,94 @@
         
     }
 
-    function toggleErrorBars(showErrorBars) {
-        let context = d3.select(`div#line-graph-${makeHtmlId(name)}`);
-        let errorBars = context.selectAll('.error-data')
-        if (showErrorBars) {
-            errorBars.selectAll('line').attr('opacity', 1);
-        } else {
-            errorBars.selectAll('line').attr('opacity', 0);
+    function toggleErrorBars(showErrorBars) { 
+        try {
+            let context = d3.select(`div#line-graph-${makeHtmlId(name)}`);
+            let errorBars = context.selectAll('.error-data')
+            if (showErrorBars) {
+                errorBars.selectAll('line').attr('opacity', 1);
+            } else {
+                errorBars.selectAll('line').attr('opacity', 0);
+            }
+        } catch(err) {
+            // console.log('Toggle error bars error: \n', err);
+            errorCode = 2
         }
-    }
+    }   
 
     onMount(async () => {
-        // append the svg object to the body of the page
-        svg = d3.select(`#line-graph-${makeHtmlId(name)}`)
-        .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-            .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
+        try {
+            // append the svg object to the body of the page
+            svg = d3.select(`#line-graph-${makeHtmlId(name)}`)
+            .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+            
+            // create a tooltip
+            tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`)
+                .append("div")
+                .style("opacity", 0)
+                .attr("class", "tooltip")
+                .style("background-color", "white")
+                .style("border", "solid")
+                .style("border-width", "2px")
+                .style("border-radius", "5px")
+                .style("padding", "5px")
+                .style("position", 'absolute')
+            
+            // add X axis
+            x = d3.scalePoint()
+                .domain(dataObject.data.map((e) => (e.cue)))
+                .range([0, width]);
+            svg.append('g').attr('transform', "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
 
-        // create a tooltip
-        tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`)
-            .append("div")
-            .style("opacity", 0)
-            .attr("class", "tooltip")
-            .style("background-color", "white")
-            .style("border", "solid")
-            .style("border-width", "2px")
-            .style("border-radius", "5px")
-            .style("padding", "5px")
-            .style("position", 'absolute')
-        
-        // add X axis
-        x = d3.scalePoint()
-            .domain(dataObject.data.map((e) => (e.cue)))
-            .range([0, width]);
-        svg.append('g').attr('transform', "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+            // Add the text label for the x axis
+            svg.append("text")
+                .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom) + ")")
+                .style("text-anchor", "middle")
+                .text("Cue");
 
-         // Add the text label for the x axis
-        svg.append("text")
-            .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom) + ")")
-            .style("text-anchor", "middle")
-            .text("Cue");
+            // Add Y axis
+            y = d3.scaleLinear()
+                .domain([0, d3.max(dataObject.data.map((e) => (e.mean)))])
+                .range([ height, 0 ]);
+            svg.append("g")
+                .call(d3.axisLeft(y));
 
-        // Add Y axis
-        y = d3.scaleLinear()
-            .domain([0, d3.max(dataObject.data.map((e) => (e.mean)))])
-            .range([ height, 0 ]);
-        svg.append("g")
-            .call(d3.axisLeft(y));
+            // Add the text label for the Y axis
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 - margin.left)
+                .attr("x",0 - (height / 2))
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text("Mean");
 
-        // Add the text label for the Y axis
-        svg.append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 0 - margin.left)
-            .attr("x",0 - (height / 2))
-            .attr("dy", "1em")
-            .style("text-anchor", "middle")
-            .text("Mean");
-
-        // colour pallette
-        colour = d3.scaleOrdinal()
-            .domain(dataObject.data.map((e) => (e['Treatment group'])))
-            .range(['#e41a1c','#377eb8','#4daf4a']);
+            // colour pallette
+            colour = d3.scaleOrdinal()
+                .domain(dataObject.data.map((e) => (e['Treatment group'])))
+                .range(['#e41a1c','#377eb8','#4daf4a']);
+            
+            loaded = true
+            
+            update(selected);
+        } catch (err) {
+            // console.log('On mount error\n', err)
+            errorCode = 3
+        }        
 
         loaded = true;
-        update(selected);
     })
 
 </script>
 
-{#if dataObject.data == undefined || dataObject.labels == undefined}
-    <p>No data passed</p>
-{:else}
+{#if errorCode > 0}
+    <p class="error-message">Error: No data passed</p>
+{:else if errorCode == 0 && loaded}
     <div id="line-graph-{makeHtmlId(name)}" data-testid="line-graph">
         <SlideToggle name="error-bar-show" size="sm" bind:checked={showErrorBars}>Error bars</SlideToggle>
         <div id="tooltip-{makeHtmlId(name)}" class="text-sm"></div>

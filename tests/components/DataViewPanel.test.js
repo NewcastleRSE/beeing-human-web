@@ -1,4 +1,4 @@
-import {cleanup, prettyDOM, render, screen, within} from '@testing-library/svelte';
+import {cleanup, render, screen, within} from '@testing-library/svelte';
 import { afterEach, describe, expect, it } from 'vitest';
 import userEvent from '@testing-library/user-event';
 
