@@ -317,7 +317,7 @@
                 errorBars.selectAll('line').attr('opacity', 0);
             }
         } catch(err) {
-            // console.log('Toggle error bars error: \n', err);
+            console.log('Toggle error bars error: \n', err);
             errorCode = 2
         }
     }   
@@ -395,11 +395,15 @@
 
 </script>
 
-<div id="line-graph-{makeHtmlId(name)}" data-testid="line-graph">
-    {#if errorCode > 0}
-        <p class="error-message">Error: No data passed (Error code: {errorCode})</p>
-    {:else if errorCode == 0 && loaded}
-        <SlideToggle name="error-bar-show" size="sm" bind:checked={showErrorBars}>Error bars</SlideToggle>
-        <div id="tooltip-{makeHtmlId(name)}" class="text-sm"></div>
-    {/if}
-</div>
+{#if !name}
+    <p class="error-message">Error: No name given (Error code: {errorCode})</p>
+{:else}
+    <div id="line-graph-{makeHtmlId(name)}" data-testid="line-graph">
+        {#if errorCode > 0}
+            <p class="error-message">Error: No data passed (Error code: {errorCode})</p>
+        {:else if errorCode == 0 && loaded}
+            <SlideToggle name="error-bar-show" size="sm" bind:checked={showErrorBars}>Error bars</SlideToggle>
+            <div id="tooltip-{makeHtmlId(name)}" class="text-sm" data-testid="tooltip-{makeHtmlId(name)}"></div>
+        {/if}
+    </div>
+{/if}

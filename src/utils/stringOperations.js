@@ -31,13 +31,17 @@ export function getFileNameFromPath(string) {
 export function makeHtmlId(string) {
     // removes any characters that cannot be in an HTML id, removes spaces, and turns everything to lowercase;
     let forbbidenChars = ['(', ')']
-    string = string.toLowerCase();
-    string = removeSpaces(string);
-    for (let char of forbbidenChars) {
-        if (string.includes(char)) {
-            string = string.replace(char, '')
+    try {
+        string = string.toLowerCase();
+        string = removeSpaces(string);
+        for (let char of forbbidenChars) {
+            if (string.includes(char)) {
+                string = string.replaceAll(char, '')
+            }
         }
+    } catch (err) {
+        console.log(err)
+        throw err
     }
     return string;
-
 }
