@@ -28,6 +28,7 @@
     // 1 = Error in update()
     // 2 = Error in toggleErrorBars();
     // 3 = Error in onMount();
+    // 4 = Error in addData();
     let errorCode = 0;
 
     function update(newSelection) {
@@ -45,9 +46,10 @@
                     filteredData = dataObject.data.filter((entry) => (entry['Treatment group'] === selected))
                 }
                 addData(filteredData)
+
             }
         } catch(err) {
-            // console.log('Update error: \n', err);
+            console.log('Update error: \n', err);
             errorCode = 1;
         }
     }
@@ -183,109 +185,125 @@
 
         let dataGroup = d3.group(data, d => d['Treatment group']);
 
-        let lineData = svg.append('g').attr('class', 'line-data data');
-        // Add the line
-        lineData.selectAll(".line-data")
-        .data(dataGroup)
-        .join('path')
-        .on('mouseover', lineMouseover)
-        .on('mousemove', lineMousemove)
-        .on('mouseleave', lineMouseleave)
-        .on('click', lineClick)
-            .attr("fill", "none")
-            .attr("stroke", function(d) { return colour(d[0])})
-            .attr("stroke-width", 1.5)
-            .attr('id', function(d) {return `${makeHtmlId(d[0])}-path`})
-            .attr('class', 'line-data')
-            .attr("d", function (d) {
-                return d3.line()
-                    .x(function(d) { return x(d.cue) })
-                    .y(function(d) { return y(d.mean) })
-                    (d[1])
-                }
-            )
+        try {
+            let lineData = svg.append('g').attr('class', 'line-data data');
+            // Add the line
+            lineData.selectAll(".line-data")
+            .data(dataGroup)
+            .join('path')
+            .on('mouseover', lineMouseover)
+            .on('mousemove', lineMousemove)
+            .on('mouseleave', lineMouseleave)
+            .on('click', lineClick)
+                .attr("fill", "none")
+                .attr("stroke", function(d) { return colour(d[0])})
+                .attr("stroke-width", 1.5)
+                .attr('id', function(d) {return `${makeHtmlId(d[0])}-path`})
+                .attr('class', 'line-data')
+                .attr("d", function (d) {
+                    return d3.line()
+                        .x(function(d) { return x(d.cue) })
+                        .y(function(d) { return y(d.mean) })
+                        (d[1])
+                    }
+                )   
+        } catch (err) {
+            errorCode = 4;
+            console.log(err);
+        }
 
-        let dataPoint = svg.append('g').attr('class', 'point-data data');
+        try {
+            let dataPoint = svg.append('g').attr('class', 'point-data data');
         
-        // Add the points
-        dataPoint.selectAll("dot")
-        .data(data)
-        .enter()
-        .append("circle")
-            .attr("cx", function(d) { return x(d.cue) } )
-            .attr("cy", function(d) { return y(d.mean) } )
-            .attr("r", 5)
-            .attr("fill", function (d)  {return colour(d['Treatment group'])})
-        .on('mouseover', dpMouseover)
-        .on('mousemove', dpMousemove)
-        .on('mouseleave', dpMouseleave)
-
-        // draw error lines
-        let errorLines = dataPoint.append('g').attr('class', 'error-data data');
-        // line itself
-        errorLines.selectAll('line-error')
+            // Add the points
+            dataPoint.selectAll("dot")
             .data(data)
-            .attr('class', 'error')
             .enter()
-            .append('line')
-                .attr('x1', function(d) { return x(d.cue); })
-                .attr('x2', function(d) { return x(d.cue); })
-                .attr('y1', function(d) { return y(d.mean + d.stdError); })
-                .attr('y2', function(d) { return y(d.mean - d.stdError); })
-                .attr("stroke", function (d)  {return colour(d['Treatment group'])})
-                .attr('class', function(d) {return makeHtmlId(d['Treatment group'])})
+            .append("circle")
+                .attr("cx", function(d) { return x(d.cue) } )
+                .attr("cy", function(d) { return y(d.mean) } )
+                .attr("r", 5)
+                .attr("fill", function (d)  {return colour(d['Treatment group'])})
+            .on('mouseover', dpMouseover)
+            .on('mousemove', dpMousemove)
+            .on('mouseleave', dpMouseleave)
 
-        // bottom termination line
-        errorLines.selectAll('line-error')
-            .data(data)
-            .attr('class', 'error')
-            .enter()
-            .append('line')
-                .attr('x1', function(d) { return x(d.cue) -5; })
-                .attr('x2', function(d) { return x(d.cue) + 5; })
-                .attr('y1', function(d) { return y(d.mean - d.stdError); })
-                .attr('y2', function(d) { return y(d.mean - d.stdError); })
-                .attr("stroke", function (d)  {return colour(d['Treatment group'])})
-                .attr('class', function(d) {return makeHtmlId(d['Treatment group'])});
+            // draw error lines
+            let errorLines = dataPoint.append('g').attr('class', 'error-data data');
+            // line itself
+            errorLines.selectAll('line-error')
+                .data(data)
+                .attr('class', 'error')
+                .enter()
+                .append('line')
+                    .attr('x1', function(d) { return x(d.cue); })
+                    .attr('x2', function(d) { return x(d.cue); })
+                    .attr('y1', function(d) { return y(d.mean + d.stdError); })
+                    .attr('y2', function(d) { return y(d.mean - d.stdError); })
+                    .attr("stroke", function (d)  {return colour(d['Treatment group'])})
+                    .attr('class', function(d) {return makeHtmlId(d['Treatment group'])})
 
-        // top termination line
-        errorLines.selectAll('line-error')
-            .data(data)
-            .attr('class', 'error')
-            .enter()
-            .append('line')
-                .attr('x1', function(d) { return x(d.cue) -5; })
-                .attr('x2', function(d) { return x(d.cue) + 5; })
-                .attr('y1', function(d) { return y(d.mean + d.stdError); })
-                .attr('y2', function(d) { return y(d.mean + d.stdError); })
-                .attr("stroke", function (d)  {return colour(d['Treatment group'])})
-                .attr('class', function(d) {return makeHtmlId(d['Treatment group'])});
+            // bottom termination line
+            errorLines.selectAll('line-error')
+                .data(data)
+                .attr('class', 'error')
+                .enter()
+                .append('line')
+                    .attr('x1', function(d) { return x(d.cue) -5; })
+                    .attr('x2', function(d) { return x(d.cue) + 5; })
+                    .attr('y1', function(d) { return y(d.mean - d.stdError); })
+                    .attr('y2', function(d) { return y(d.mean - d.stdError); })
+                    .attr("stroke", function (d)  {return colour(d['Treatment group'])})
+                    .attr('class', function(d) {return makeHtmlId(d['Treatment group'])});
+
+            // top termination line
+            errorLines.selectAll('line-error')
+                .data(data)
+                .attr('class', 'error')
+                .enter()
+                .append('line')
+                    .attr('x1', function(d) { return x(d.cue) -5; })
+                    .attr('x2', function(d) { return x(d.cue) + 5; })
+                    .attr('y1', function(d) { return y(d.mean + d.stdError); })
+                    .attr('y2', function(d) { return y(d.mean + d.stdError); })
+                    .attr("stroke", function (d)  {return colour(d['Treatment group'])})
+                    .attr('class', function(d) {return makeHtmlId(d['Treatment group'])});
+        } catch (err) {
+            errorCode = 4
+            console.log(err);
+        }
 
         // Add legend
         // Add one dot in the legend for each name.
-        let labels = svg.append('g').attr('class', 'labels-data data');
-        labels.selectAll("dots-labels")
-        .data(new Set(data.map((e) => (e['Treatment group']))))
-        .enter()
-        .append("circle")
-            .attr("cx", width-270)
-            .attr("cy", function(d,i){ return 50 + i*30}) // 100 is where the first dot appears. 25 is the distance between dots
-            .attr("r", 7)
-            .style("fill", function(d){ return colour(d)})
-        labels.selectAll('labels')
+        try {
+            let labels = svg.append('g').attr('class', 'labels-data data');
+            labels.selectAll("dots-labels")
             .data(new Set(data.map((e) => (e['Treatment group']))))
             .enter()
-            .append('text')
-                .attr("x", width-250)
-                .attr("y", function(d,i){ return 50 + i*30}) // 100 is where the first dot appears. 25 is the distance between dots
-                .style("fill", function(d) { return colour(d)})
-                .text(function(d){ return d})
-                .attr("text-anchor", "left")
-                .style("alignment-baseline", "middle")
-            .on('mouseover', labelMouseover)
-            .on('mousemove', labelMousemove)
-            .on('mouseleave', labelMouseleave)
-            .on('click', labelClick)
+            .append("circle")
+                .attr("cx", width-270)
+                .attr("cy", function(d,i){ return 50 + i*30}) // 100 is where the first dot appears. 25 is the distance between dots
+                .attr("r", 7)
+                .style("fill", function(d){ return colour(d)})
+            labels.selectAll('labels')
+                .data(new Set(data.map((e) => (e['Treatment group']))))
+                .enter()
+                .append('text')
+                    .attr("x", width-250)
+                    .attr("y", function(d,i){ return 50 + i*30}) // 100 is where the first dot appears. 25 is the distance between dots
+                    .style("fill", function(d) { return colour(d)})
+                    .text(function(d){ return d})
+                    .attr("text-anchor", "left")
+                    .style("alignment-baseline", "middle")
+                .on('mouseover', labelMouseover)
+                .on('mousemove', labelMousemove)
+                .on('mouseleave', labelMouseleave)
+                .on('click', labelClick)
+        } catch (err) {
+            console.log(err);
+            errorCode = 4;
+        }
+        
         
     }
 
@@ -314,6 +332,10 @@
             .append("g")
                 .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
+            
+            if (svg.empty()) {
+                throw new ReferenceError(`Could not create the svg, div with id ${makeHtmlId(name)} does not exist on mount.`)
+            }
             
             // create a tooltip
             tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`)
@@ -362,11 +384,10 @@
                 .range(['#e41a1c','#377eb8','#4daf4a']);
             
             loaded = true
-            
             update(selected);
         } catch (err) {
-            // console.log('On mount error\n', err)
             errorCode = 3
+            console.log(err);
         }        
 
         loaded = true;
@@ -374,11 +395,11 @@
 
 </script>
 
-{#if errorCode > 0}
-    <p class="error-message">Error: No data passed</p>
-{:else if errorCode == 0 && loaded}
-    <div id="line-graph-{makeHtmlId(name)}" data-testid="line-graph">
+<div id="line-graph-{makeHtmlId(name)}" data-testid="line-graph">
+    {#if errorCode > 0}
+        <p class="error-message">Error: No data passed (Error code: {errorCode})</p>
+    {:else if errorCode == 0 && loaded}
         <SlideToggle name="error-bar-show" size="sm" bind:checked={showErrorBars}>Error bars</SlideToggle>
         <div id="tooltip-{makeHtmlId(name)}" class="text-sm"></div>
-    </div>
-{/if}
+    {/if}
+</div>
