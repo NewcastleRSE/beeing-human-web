@@ -57,14 +57,15 @@
     // hovering functions -- data points
     var dpMouseover = function(event, d) {
         tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`)
-        tooltip.style("opacity", 1)
+        tooltip.classed("opacity-0", false);
         d3.select(this)
-            .classed("border-black", true)
-            .classed("opacity-0", false)
+            .classed("stroke-black", true)
+            .classed("opacity-100", true)
+            .classed("opacity-75", false);
     }
 
     let dpMousemove = function(event, d) {
-        tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`) 
+        tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`)
         let beeList = getExperimentBees(rawData, d['Treatment group'], d.cue);
         let beeListUl =''
         for (let bee of beeList) {
@@ -77,19 +78,18 @@
             <p><span class="tooltip-label font-medium">Bees: </span>
                 <ul class="indent-2">${beeListUl}</ul>
             </p>`
-        tooltip.html(tip)
-        d3.select(this)
-            .classed(`left-${event.pageX+70}`, true)
-            .classed(`top-${event.pageY}`)
+        tooltip.html(tip).classed(`left-${event.pageX+70}`, true)
+            .classed(`top-${event.pageY}`, true)
     }
 
     let dpMouseleave = function(event, d) {
         tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`)
         tooltip.html('')
-            .style("opacity", 0)
+            .classed("opacity-0", true)
         d3.select(this)
-            .style("stroke", "none")
-            .style("opacity", 0.8)
+            .classed("stroke-black", false)
+            .classed("opacity-100", false)
+            .classed("opacity-75", true)
     }
 
     // hovering functions -- labels
@@ -230,6 +230,7 @@
                 .attr("cy", function(d) { return y(d.mean) } )
                 .attr("r", 5)
                 .attr("fill", function (d)  {return colour(d['Treatment group'])})
+                .classed('opacity-75', true)
             .on('mouseover', dpMouseover)
             .on('mousemove', dpMousemove)
             .on('mouseleave', dpMouseleave)
@@ -412,7 +413,7 @@
             <p class="error-message">Error: No data passed (Error code: {errorCode})</p>
         {:else if errorCode == 0 && loaded}
             <SlideToggle name="error-bar-show" size="sm" bind:checked={showErrorBars}>Error bars</SlideToggle>
-            <div id="tooltip-{makeHtmlId(name)}" class="text-sm opacity-0 bg-white border-solid border-rounded border-2 p-1 absolute" data-testid="tooltip-{makeHtmlId(name)}"></div>
+            <div id="tooltip-{makeHtmlId(name)}" data-testid="tooltip-{makeHtmlId(name)}"></div>
         {/if}
     </div>
 {/if}
