@@ -33,7 +33,6 @@
         loaded = true;
     })
 </script>
-<DataViz/>
 {#if loaded}
     {#if error == 0}
         {#each datasets as entry, index}

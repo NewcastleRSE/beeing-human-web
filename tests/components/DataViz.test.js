@@ -5,6 +5,7 @@ import DataViz from "../../src/lib/DataViz.svelte";
 
 import { datasets } from "../mocks/mockVarsDataView";
 import { makeHtmlId } from "../../src/utils/stringOperations";
+import { getGroups } from "../../src/utils/sciDataHelper";
 
 describe('Load and display data viz component', () => {
     afterEach(() => cleanup());
@@ -44,9 +45,87 @@ describe('Load and display data viz component', () => {
         expect(tooltipEl).toBeTruthy();
     });
 
-    it('tooltip should start with opacity at 0', async () => {
+    it('tooltip should not be visible at the start', async () => {
         render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
         const tooltipEl = await screen.findByTestId(`tooltip-${makeHtmlId(datasets[0].desc.metadata.title)}`);
-        // check if tooltip is visible
-    })
+        let elRect = tooltipEl.getBoundingClientRect();
+        expect(elRect.width).toEqual(0);
+        expect(elRect.height).toEqual(0);
+    });
+
+    it('should have an svg if it was mounted correctly', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+        const svg = await screen.findByTestId('svg-line-graph')
+        expect(svg).toBeTruthy();
+    });
+
+    it('should contain line data', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+        const lineData = await screen.findByTestId('line-data')
+        expect(lineData).toBeTruthy();
+    });
+
+    it('should contain point data', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+        const pointData = await screen.findByTestId('point-data')
+        expect(pointData).toBeTruthy();
+    });
+
+    it('should contain error lines data', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+        const errorLineData = await screen.findByTestId('error-lines')
+        expect(errorLineData).toBeTruthy();
+    });
+
+    it('should contain labels data', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+        const labelsData = await screen.findByTestId('labels-data')
+        expect(labelsData).toBeTruthy();
+    });
+
+    it('should contain as many lines as there are treatment groups', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+        const lineData = (await screen.findByTestId('line-data')).children
+        expect(lineData.length).toEqual(getGroups('Treatment group', datasets[0].data).length - 1);
+    });
+
+    it('should contain as many data points as there are entries in the data', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+        let pointData = Array.from((await screen.findByTestId('point-data')).children)
+        // include only circles
+        pointData = pointData.filter((e) => (e.tagName === 'circle'));
+        expect(pointData.length).toEqual(datasets[0].summaryData.length);
+     });
+
+     it('should contain as many labels as there are treatment groups', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+        let labelsData = Array.from((await screen.findByTestId('labels-data')).children);
+        labelsData = labelsData.filter((e) => (e.tagName === 'text'))
+        expect(labelsData.length).toEqual(getGroups('Treatment group', datasets[0].data).length - 1);
+    });
+
+    it('Labels should correspond to treatment groups', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+        let labelsData = Array.from((await screen.findByTestId('labels-data')).children);
+        labelsData = labelsData.filter((e) => (e.tagName === 'text'))
+        labelsData = Array.from(labelsData.map((e) => (e.textContent)))
+        
+        let expectedLabels = getGroups('Treatment group', datasets[0].data).filter((e) => (e != 'All'));
+        
+        expect(labelsData.sort()).toEqual(expectedLabels.sort());
+    });
+});
+
+describe('Interactions with the DataViz component', () => {
+    afterEach(() => cleanup());
+
+    it('should display tooltip when hovering over a data point', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+
+        let pointData = (await screen.findByTestId('point-data')).children;
+
+        
+                
+    });
+
 })

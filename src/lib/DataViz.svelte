@@ -56,13 +56,15 @@
 
     // hovering functions -- data points
     var dpMouseover = function(event, d) {
+        tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`)
         tooltip.style("opacity", 1)
         d3.select(this)
-            .style("stroke", "black")
-            .style("opacity", 1)
+            .classed("border-black", true)
+            .classed("opacity-0", false)
     }
 
     let dpMousemove = function(event, d) {
+        tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`) 
         let beeList = getExperimentBees(rawData, d['Treatment group'], d.cue);
         let beeListUl =''
         for (let bee of beeList) {
@@ -76,11 +78,13 @@
                 <ul class="indent-2">${beeListUl}</ul>
             </p>`
         tooltip.html(tip)
-            .style("left", (event.pageX+70) + "px")
-            .style("top", (event.pageY) + "px")
+        d3.select(this)
+            .classed(`left-${event.pageX+70}`, true)
+            .classed(`top-${event.pageY}`)
     }
 
     let dpMouseleave = function(event, d) {
+        tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`)
         tooltip.html('')
             .style("opacity", 0)
         d3.select(this)
@@ -187,6 +191,7 @@
 
         try {
             let lineData = svg.append('g').attr('class', 'line-data data');
+            lineData.attr('data-testid', 'line-data')
             // Add the line
             lineData.selectAll(".line-data")
             .data(dataGroup)
@@ -214,6 +219,7 @@
 
         try {
             let dataPoint = svg.append('g').attr('class', 'point-data data');
+            dataPoint.attr('data-testid', 'point-data');
         
             // Add the points
             dataPoint.selectAll("dot")
@@ -230,6 +236,7 @@
 
             // draw error lines
             let errorLines = dataPoint.append('g').attr('class', 'error-data data');
+            errorLines.attr('data-testid', 'error-lines')
             // line itself
             errorLines.selectAll('line-error')
                 .data(data)
@@ -277,6 +284,7 @@
         // Add one dot in the legend for each name.
         try {
             let labels = svg.append('g').attr('class', 'labels-data data');
+            labels.attr('data-testid', 'labels-data')
             labels.selectAll("dots-labels")
             .data(new Set(data.map((e) => (e['Treatment group']))))
             .enter()
@@ -329,6 +337,7 @@
             .append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
+                .attr("data-testid", 'svg-line-graph')
             .append("g")
                 .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
@@ -337,17 +346,17 @@
                 throw new ReferenceError(`Could not create the svg, div with id ${makeHtmlId(name)} does not exist on mount.`)
             }
             
-            // create a tooltip
-            tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`)
-                .append("div")
-                .style("opacity", 0)
-                .attr("class", "tooltip")
-                .style("background-color", "white")
-                .style("border", "solid")
-                .style("border-width", "2px")
-                .style("border-radius", "5px")
-                .style("padding", "5px")
-                .style("position", 'absolute')
+            // // create a tooltip
+            // tooltip = d3.select(`#tooltip-${makeHtmlId(name)}`)
+            //     .append("div")
+            //     .style("opacity", 0)
+            //     .attr("class", "tooltip")
+            //     .style("background-color", "white")
+            //     .style("border", "solid")
+            //     .style("border-width", "2px")
+            //     .style("border-radius", "5px")
+            //     .style("padding", "5px")
+            //     .style("position", 'absolute')
             
             // add X axis
             x = d3.scalePoint()
@@ -403,7 +412,7 @@
             <p class="error-message">Error: No data passed (Error code: {errorCode})</p>
         {:else if errorCode == 0 && loaded}
             <SlideToggle name="error-bar-show" size="sm" bind:checked={showErrorBars}>Error bars</SlideToggle>
-            <div id="tooltip-{makeHtmlId(name)}" class="text-sm" data-testid="tooltip-{makeHtmlId(name)}"></div>
+            <div id="tooltip-{makeHtmlId(name)}" class="text-sm opacity-0 bg-white border-solid border-rounded border-2 p-1 absolute" data-testid="tooltip-{makeHtmlId(name)}"></div>
         {/if}
     </div>
 {/if}
