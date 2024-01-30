@@ -43,18 +43,20 @@ describe('test filter getter operations', () => {
 
     it('should be able to get a list of all filter names', () => {
         let expected = [
-            'music', 'original',
-            'contemporary', 'bees',
-            'bee-keeping', 'society',
-            'connections', 'literature',
-            'science', 'technology',
-            'fieldwork', 'community',
-            'editing', 'politics',
-            'experiment', 'butler',
+            'music',               'original',
+            'contemporary',        'bees',
+            'bee-keeping',         'society',
+            'connections',         'literature',
+            'science',             'technology',
+            'fieldwork',           'community',
+            'editing',             'politics',
+            'experiment',          'butler',
             'seventeenth-century', 'collaboration',
-            'methodology', 'buzzwords',
+            'methodology',         'buzzwords',
             'emotion-like states', 'results',
-            'edition',
+            'edition',             'text',
+            'interdisciplinarity', 'play',
+            'pleasure',
             'bennett', 'olivia',
             'jenny', 'vivek',
             'magnus', 'tiago',
@@ -88,46 +90,55 @@ describe('test filter getter operations', () => {
             { name: 'butler', type: 'tags', available: true, active: false },
             { name: 'buzzwords', type: 'tags', available: true, active: false },
             {
-                name: 'collaboration',
-                type: 'tags',
-                available: true,
-                active: false
+              name: 'collaboration',
+              type: 'tags',
+              available: true,
+              active: false
             },
             { name: 'community', type: 'tags', available: true, active: false },
             { name: 'connections', type: 'tags', available: true, active: false },
             {
-                name: 'contemporary',
-                type: 'tags',
-                available: true,
-                active: false
+              name: 'contemporary',
+              type: 'tags',
+              available: true,
+              active: false
             },
             { name: 'editing', type: 'tags', available: true, active: false },
             { name: 'edition', type: 'tags', available: true, active: false },
             {
-                name: 'emotion-like states',
-                type: 'tags',
-                available: true,
-                active: false
+              name: 'emotion-like states',
+              type: 'tags',
+              available: true,
+              active: false
             },
             { name: 'experiment', type: 'tags', available: true, active: false },
             { name: 'fieldwork', type: 'tags', available: true, active: false },
+            {
+              name: 'interdisciplinarity',
+              type: 'tags',
+              available: true,
+              active: false
+            },
             { name: 'literature', type: 'tags', available: true, active: false },
             { name: 'methodology', type: 'tags', available: true, active: false },
             { name: 'music', type: 'tags', available: true, active: false },
             { name: 'original', type: 'tags', available: true, active: false },
+            { name: 'play', type: 'tags', available: true, active: false },
+            { name: 'pleasure', type: 'tags', available: true, active: false },
             { name: 'politics', type: 'tags', available: true, active: false },
             { name: 'results', type: 'tags', available: true, active: false },
             { name: 'science', type: 'tags', available: true, active: false },
             {
-                name: 'seventeenth-century',
-                type: 'tags',
-                available: true,
-                active: false
+              name: 'seventeenth-century',
+              type: 'tags',
+              available: true,
+              active: false
             },
             { name: 'society', type: 'tags', available: true, active: false },
-            { name: 'technology', type: 'tags', available: true, active: false }
-        ]
-        expect(filters.getFiltersByType('tags', true)).toEqual(expected);
+            { name: 'technology', type: 'tags', available: true, active: false },
+            { name: 'text', type: 'tags', available: true, active: false }
+          ]
+        expect(filters.getFiltersByType('tags', true).sort()).toEqual(expected.sort());
     });
 
     it('should return an empty list if the type of filter requested does not exist', () => {
