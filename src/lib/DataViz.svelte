@@ -19,7 +19,7 @@
     let colour = undefined;
     let x;
     let y;
-    let tooltip;
+    let tooltip = undefined;
     let showErrorBars = true;
 
     let loaded = false;
@@ -78,8 +78,9 @@
             <p><span class="tooltip-label font-medium">Bees: </span>
                 <ul class="indent-2">${beeListUl}</ul>
             </p>`
-        tooltip.html(tip).classed(`left-${event.pageX+70}`, true)
-            .classed(`top-${event.pageY}`, true)
+        tooltip.style("left", (event.pageX+70) + "px")
+            .style("top", (event.pageY) + "px")
+        tooltip.html(tip)
     }
 
     let dpMouseleave = function(event, d) {
@@ -413,7 +414,7 @@
             <p class="error-message">Error: No data passed (Error code: {errorCode})</p>
         {:else if errorCode == 0 && loaded}
             <SlideToggle name="error-bar-show" size="sm" bind:checked={showErrorBars}>Error bars</SlideToggle>
-            <div id="tooltip-{makeHtmlId(name)}" data-testid="tooltip-{makeHtmlId(name)}"></div>
+            <div id="tooltip-{makeHtmlId(name)}" data-testid="tooltip-{makeHtmlId(name)}" class="opacity-0 bg-white border-black border-solid border-2 rounded p-1 absolute"></div>
         {/if}
     </div>
 {/if}
