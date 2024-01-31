@@ -1,5 +1,6 @@
 import { cleanup, render, screen, within } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "vitest";
+import userEvent from "@testing-library/user-event";
 
 import DataViz from "../../src/lib/DataViz.svelte";
 
@@ -122,10 +123,42 @@ describe('Interactions with the DataViz component', () => {
     it('should display tooltip when hovering over a data point', async () => {
         render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
 
+        const user = userEvent.setup();
+
         let pointData = (await screen.findByTestId('point-data')).children;
 
+        let point = pointData[0]
         
-                
+        await user.hover(point);
+
+        const tooltip = await screen.findByTestId(`tooltip-${makeHtmlId(datasets[0].desc.metadata.title)}`)
+
+        const tooltipClasses = Array.from(tooltip.classList);
+
+        // test visibility
+        expect(tooltipClasses).not.toContain('opacity-0');
+
+        // test data content
+        let tpMean = await within(tooltip).findByTestId('tp-mean');
+        expect(tpMean).toBeTruthy();
+        let tpMeanData = await within(tpMean).findByText(point.__data__.mean)
+        expect(tpMeanData).toBeTruthy();
+
+        let tpStdDev = await within(tooltip).findByTestId('tp-stdDev');
+        expect(tpStdDev).toBeTruthy();
+        let tpStdDevData = await within(tpStdDev).findByText(point.__data__.stdDeviation)
+        expect(tpStdDevData).toBeTruthy();
+
+        let tpStdErr = await within(tooltip).findByTestId('tp-stdErr');
+        expect(tpStdErr).toBeTruthy();
+        let tpStdErrData = await within(tpStdErr).findByText(point.__data__.stdError)
+        expect(tpStdErrData).toBeTruthy();
+
+        let tpBeeList = await within(tooltip).findByTestId('tp-bee-list');
+        expect(tpBeeList).toBeTruthy();
     });
+
+    // test graphical changes when hovering
+    // test tooltip disappears when hovering away
 
 })

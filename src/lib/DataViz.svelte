@@ -71,11 +71,11 @@
         for (let bee of beeList) {
             beeListUl += `<li>${bee}</li>`
         }
-        let tip = `<p><span class="tooltip-label font-medium">Mean:</span> <span class="tooltip-value font-light">${d.mean}</span></p>
-            <p><span class="tooltip-label font-medium">Standard Deviation:</span> <span class="tooltip-value font-light">${d.stdDeviation}</span></p>
-            <p><span class="tooltip-label font-medium">Standard Error:</span> <span class="tooltip-value font-light">${d.stdError}</span></p>
+        let tip = `<p data-testid="tp-mean"><span class="tooltip-label font-medium">Mean:</span> <span class="tooltip-value font-light">${d.mean}</span></p>
+            <p data-testid="tp-stdDev"><span class="tooltip-label font-medium">Standard Deviation:</span> <span class="tooltip-value font-light">${d.stdDeviation}</span></p>
+            <p data-testid="tp-stdErr"><span class="tooltip-label font-medium">Standard Error:</span> <span class="tooltip-value font-light">${d.stdError}</span></p>
             <hr/>
-            <p><span class="tooltip-label font-medium">Bees: </span>
+            <p data-testid="tp-bee-list"><span class="tooltip-label font-medium">Bees: </span>
                 <ul class="indent-2">${beeListUl}</ul>
             </p>`
         tooltip.style("left", (event.pageX+30) + "px")
