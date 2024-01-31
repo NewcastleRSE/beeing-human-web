@@ -78,7 +78,7 @@
             <p><span class="tooltip-label font-medium">Bees: </span>
                 <ul class="indent-2">${beeListUl}</ul>
             </p>`
-        tooltip.style("left", (event.pageX+70) + "px")
+        tooltip.style("left", (event.pageX+30) + "px")
             .style("top", (event.pageY) + "px")
         tooltip.html(tip)
     }
