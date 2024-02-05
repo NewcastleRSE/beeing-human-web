@@ -244,6 +244,87 @@ describe('Interactions with the DataViz component', () => {
         // that line should have the same id as the one clicked
         expect(remainingLines[0].getAttribute('id')).toEqual(testLine.getAttribute('id'));
     });
-    // hover over labels
 
+    it('should highlight the label and lines when hovering over a label', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+
+        const user = userEvent.setup();
+
+        // get only text labels
+        let labelsData = (await screen.findByTestId('labels-data')).children
+        labelsData = Array.from(labelsData).filter((e) => e.tagName === 'text')
+        
+        await user.hover(labelsData[0]);
+
+        // check labels focus
+        for (const label of labelsData) {
+            if (label.innerHTML === labelsData[0].innerHTML) {
+                expect(Array.from(label.classList)).toContain('font-bold');
+            } else {
+                expect(Array.from(label.classList)).toContain('font-light');
+            }
+        }
+
+        // check lines focus
+        let linesData = (await screen.findByTestId('line-data')).children
+        for (const line of linesData) {
+            if (line.getAttribute('id') === `${makeHtmlId(labelsData[0].innerHTML)}-path`) {
+                expect(line.getAttribute('stroke-width')).toEqual('2.5');
+            } else {
+                expect(line.getAttribute('stroke-width')).toEqual('0.5');
+            }
+        }
+
+        // hovering away should remove focus from labels and lines
+        await user.unhover(labelsData[0]);
+
+        // check labels
+        for (const label of  labelsData) {
+            expect(Array.from(label.classList)).not.toContain('font-bold');
+            expect(Array.from(label.classList)).not.toContain('font-light');
+        }
+
+        // check lines
+        for (const line of linesData) {
+            expect(line.getAttribute('stroke-width')).toEqual('1.5');
+        }
+
+    });
+
+    it('clicking on a label should redraw the graph with only the expected line', async() => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+
+        const user = userEvent.setup();
+
+        // get only text labels
+        let labelsData = (await screen.findByTestId('labels-data')).children
+        labelsData = Array.from(labelsData).filter((e) => e.tagName === 'text')
+
+        await user.click(labelsData[0]);
+
+        const resultingLineData = (await screen.findByTestId('line-data')).children
+        // should only have one line now
+        expect(resultingLineData.length).toEqual(1);
+        // the id of that line should be the same as the label clicked
+        expect(resultingLineData[0].getAttribute('id')).toEqual(`${makeHtmlId(labelsData[0].innerHTML)}-path`);
+        // there should be two elements in labels-data (the text and the circle)
+        expect(((await screen.findByTestId('labels-data')).children).length).toEqual(2);
+    });
+    
+    it('clicking on the error bars switch should toggle the error bars on and off', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+
+        const user = userEvent.setup();
+        
+        const errorBarSwitch = await screen.findByRole('switch', {name: 'Error bars'});
+
+        let errorBars = (await screen.findByTestId('error-lines')).children
+        expect(errorBars.length).toBeGreaterThan(0);
+        
+        for (const errB of errorBars) {
+            console.log(errB.getAttributeNames())
+        }
+
+        await user.click(errorBarSwitch);
+    })
 })

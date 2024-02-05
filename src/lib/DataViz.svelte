@@ -100,9 +100,10 @@
 
         // labels
         let labels = context.select('g.labels-data')
-        labels.selectAll('text').style('font-weight', 'lighter');
+        labels.selectAll('text').classed('font-light', true);
         d3.select(this)
-            .style('font-weight', 'bold')
+            .classed('font-bold', true)
+            .classed('font-light', false)
         
         // paths
         let paths = context.selectAll('path.line-data');
@@ -133,9 +134,9 @@
 
         // labels
         let labels = context.select('g.labels-data')
-        labels.selectAll('text').style('font-weight', 'normal');
+        labels.selectAll('text').classed('font-light', false);
         d3.select(this)
-            .style('font-weight', 'normal')
+            .classed('font-bold', false);
 
         // paths
         let paths = context.selectAll('path.line-data');
@@ -162,7 +163,7 @@
             .filter(function(){ 
                 return d3.select(this).text() == d[0]
         })
-        .style("font-weight", "bold");
+        .classed("font-bold", true).classed('font-light', false);
     }
 
     let lineMousemove = function (event, d) {
@@ -173,7 +174,7 @@
         // context
         let context = d3.select(`div#line-graph-${makeHtmlId(name)}`);
 
-        context.selectAll('text').attr('font-weight', 'normal');
+        context.selectAll('text').classed('font-bold', false).classed('font-light', false);
         labelMouseleave(event, d[0]);
     }
 
