@@ -157,8 +157,93 @@ describe('Interactions with the DataViz component', () => {
         let tpBeeList = await within(tooltip).findByTestId('tp-bee-list');
         expect(tpBeeList).toBeTruthy();
     });
+    
+    it('should draw an outline when hovering over a data point', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
 
-    // test graphical changes when hovering
-    // test tooltip disappears when hovering away
+        const resultingStyles = ['stroke-black', 'opacity-100']
+
+        const user = userEvent.setup();
+
+        let pointData = (await screen.findByTestId('point-data')).children;
+
+        let point = pointData[0]
+        
+        await user.hover(point);
+
+        for (let style of resultingStyles) {
+            expect(Array.from(point.classList)).toContain(style)
+        }        
+    });
+
+    it('should render the tooltip invisible when the mouse moves away', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+
+        const user = userEvent.setup();
+
+        let pointData = (await screen.findByTestId('point-data')).children;
+
+        let point = pointData[0]
+        
+        await user.hover(point);
+
+        const tooltip = await screen.findByTestId(`tooltip-${makeHtmlId(datasets[0].desc.metadata.title)}`)
+
+        expect(Array.from(tooltip.classList)).not.toContain('opacity-0');
+
+        await user.unhover(point);
+
+        expect(Array.from(tooltip.classList)).toContain('opacity-0');
+    });
+
+    // hover over paths
+    it('hovering over lines should highlight that line and group', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+
+        const user = userEvent.setup();
+
+        const lineData = (await screen.findByTestId('line-data')).children
+
+        let testLine = lineData[0];
+
+        await user.hover(testLine);
+
+        // test that the selected line is thicker than the others
+        for (const line of lineData) {
+            if (line.getAttribute('id') === testLine.getAttribute('id')) {
+                expect(line.getAttribute('stroke-width')).toEqual('2.5');
+            } else {
+                expect(line.getAttribute('stroke-width')).toEqual('0.5');
+            }
+        }
+
+        // hovering away should return lines to normal
+
+        await user.unhover(testLine);
+
+        for (const line of lineData) {
+            expect(line.getAttribute('stroke-width')).toEqual('1.5');
+        }
+        
+    });
+
+    // Clicking on a line should select only that group
+    it('should redraw the graph when clicking on a data line', async () => {
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+
+        const user = userEvent.setup();
+
+        const testLine = (await screen.findByTestId('line-data')).children[0]
+
+        await user.click(testLine);
+
+        const remainingLines = (await screen.findByTestId('line-data')).children;
+
+        // there should only be one remaining line visible
+        expect(remainingLines.length).toBe(1);
+        // that line should have the same id as the one clicked
+        expect(remainingLines[0].getAttribute('id')).toEqual(testLine.getAttribute('id'));
+    });
+    // hover over labels
 
 })
