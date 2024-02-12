@@ -252,6 +252,8 @@
                     .attr('y2', function(d) { return y(d.mean - d.stdError); })
                     .attr("stroke", function (d)  {return colour(d['Treatment group'])})
                     .attr('class', function(d) {return makeHtmlId(d['Treatment group'])})
+                    .classed('opacity-100', true);
+
 
             // bottom termination line
             errorLines.selectAll('line-error')
@@ -264,7 +266,9 @@
                     .attr('y1', function(d) { return y(d.mean - d.stdError); })
                     .attr('y2', function(d) { return y(d.mean - d.stdError); })
                     .attr("stroke", function (d)  {return colour(d['Treatment group'])})
-                    .attr('class', function(d) {return makeHtmlId(d['Treatment group'])});
+                    .attr('class', function(d) {return makeHtmlId(d['Treatment group'])})
+                    .classed('opacity-100', true);
+
 
             // top termination line
             errorLines.selectAll('line-error')
@@ -277,7 +281,9 @@
                     .attr('y1', function(d) { return y(d.mean + d.stdError); })
                     .attr('y2', function(d) { return y(d.mean + d.stdError); })
                     .attr("stroke", function (d)  {return colour(d['Treatment group'])})
-                    .attr('class', function(d) {return makeHtmlId(d['Treatment group'])});
+                    .attr('class', function(d) {return makeHtmlId(d['Treatment group'])})
+                    .classed('opacity-100', true);
+                    
         } catch (err) {
             errorCode = 4
             console.log(err);
@@ -323,9 +329,11 @@
             let context = d3.select(`div#line-graph-${makeHtmlId(name)}`);
             let errorBars = context.selectAll('.error-data')
             if (showErrorBars) {
-                errorBars.selectAll('line').attr('opacity', 1);
+                errorBars.selectAll('line').classed('opacity-100', true);
+                errorBars.selectAll('line').classed('opacity-0', false);
             } else {
-                errorBars.selectAll('line').attr('opacity', 0);
+                errorBars.selectAll('line').classed('opacity-100', false);
+                errorBars.selectAll('line').classed('opacity-0', true);
             }
         } catch(err) {
             console.log('Toggle error bars error: \n', err);

@@ -316,15 +316,27 @@ describe('Interactions with the DataViz component', () => {
 
         const user = userEvent.setup();
         
-        const errorBarSwitch = await screen.findByRole('switch', {name: 'Error bars'});
+        // Finding the toggle switch by role finds it ok, but the click has no effect -- must select inside the div with the 'switch' role
+        const errorBarSwitch = await screen.findByLabelText('Error bars');
 
         let errorBars = (await screen.findByTestId('error-lines')).children
         expect(errorBars.length).toBeGreaterThan(0);
         
+        // should start visible
         for (const errB of errorBars) {
-            console.log(errB.getAttributeNames())
+            expect(Array.from(errB.classList)).toContain('opacity-100');
         }
 
+        // clicking should hide the error bars
         await user.click(errorBarSwitch);
+        for (const errB of errorBars) {
+            expect(Array.from(errB.classList)).toContain('opacity-0');
+        }
+
+        // clicking again should show the error bars
+        await user.click(errorBarSwitch);
+        for (const errB of errorBars) {
+            expect(Array.from(errB.classList)).toContain('opacity-100');
+        }
     })
 })
