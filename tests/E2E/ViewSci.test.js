@@ -46,19 +46,46 @@ test.describe('Data visualisation tests', () => {
             const containers = await page.getByTestId('tab-group').all();
 
             for (const container of containers) {
-                const tabs = await container.getByRole('tablist').all();
-                for (const t of tabs) {
-                    console.log(await t.allInnerTexts());
-                }
+                const tabs = await container.getByRole('tablist').locator('label').count();
+                expect(tabs).toEqual(4);
             }
         });
 
         test('Each tab should have the expected titles', async ({page}) => {
-            await expect(page).toHaveURL('/content/science');
-            const container = page.getByTestId('tab-group').first();
+            const expectedLabels = ['Data table', 'Summary Data', 'Visualisation', 'Experimental Details'];
 
-            const tabs = container.getByTestId('tablist').all();
+            await expect(page).toHaveURL('/content/science');
             
+            const containers = await page.getByTestId('tab-group').all();
+
+            for (const container of containers) {
+                const labels = await container.getByRole('tablist').locator('label').all();
+                labels.forEach((label, i) => expect(label).toContainText(expectedLabels[i]));
+            }
+        });
+
+        test('Each data view panel should contain a tab panel', async ({page}) => {
+            await expect(page).toHaveURL('/content/science');
+
+            const containers = await page.getByTestId('tab-group').count();
+            const tabPanels = await page.getByRole('tabpanel').count();
+            expect(containers).toEqual(tabPanels);
+        });
+
+        test('Each panel should contain a treatment group selector', async ({page}) => {
+            await expect(page).toHaveURL('/content/science');
+
+            const tabPanels = await page.getByRole('tabpanel').all();
+
+            for (const panel of tabPanels) {
+                expect(panel.locator('label', {hasText: 'Treatment group'})).toBeTruthy();
+            }
+        });
+
+        test('Each panel should contain a raw data table', async({page}) => {
+            await expect(page).toHaveURL('/content/science');
+
+            const tabPanels = await page.getByRole('tabpanel').all();
         })
     })
 })
