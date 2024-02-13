@@ -86,6 +86,47 @@ test.describe('Data visualisation tests', () => {
             await expect(page).toHaveURL('/content/science');
 
             const tabPanels = await page.getByRole('tabpanel').all();
+
+            for (const panel of tabPanels) {
+                const dataTable = panel.getByTestId('raw-data-table');
+                expect(dataTable).toBeTruthy();
+                expect(dataTable).toBeVisible();
+            }
+        });
+    });
+
+    test.describe('Data view panel interaction tests', () => {
+        test.beforeEach('Open start URL', async({page}, testInfo) => {
+            console.log(`Running ${testInfo.title}`);
+            await page.goto('/content/science');
+        });
+
+        test('Clicking on a tab should change the content of the tab panel', async({page}) => {
+            await expect(page).toHaveURL('/content/science');
+
+            const tabPanel = page.getByRole('tabpanel').first();
+
+            expect(tabPanel.getByTestId('raw-data-table')).toBeVisible();
+
+            const tabButton = page.locator('label').filter({ hasText: 'Visualisation' }).first();
+
+            await tabButton.click();
+
+            expect(tabPanel.getByTestId('raw-data-table')).not.toBeVisible();
+            expect(tabPanel.getByTestId('svg-line-graph')).toBeVisible();
+        });
+
+        test('Clicking on each tab should replace the content of the tab panel', async({page}) => {
+            await expect(page).toHaveURL('/content/science');
+
+            const tabPanel = page.getByRole('tabpanel').first();
+
+            expect(tabPanel.getByTestId('raw-data-table')).toBeVisible();
+
+            const labels = await page.getByText('Data table Summary Data Visualisation Experimental Details').first().locator('label').all();
+
+            // having trouble going through each label, clicking it and verifying datapanel content -- async and awaits are messing up the order of stuff.
+
         })
-    })
-})
+    });
+});
