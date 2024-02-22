@@ -125,7 +125,68 @@ test.describe('Data visualisation tests', () => {
 
             const labels = await page.getByText('Data table Summary Data Visualisation Experimental Details').first().locator('label').all();
 
-            // having trouble going through each label, clicking it and verifying datapanel content -- async and awaits are messing up the order of stuff.
+            for (const label of labels) {
+                await label.click();
+
+                if (await label.innerText() == 'Data table') {
+                    expect(tabPanel.getByTestId('raw-data-table')).toBeVisible();
+                } else if (await label.innerText() == 'Summary Data') {
+                    expect(tabPanel.getByTestId('raw-data-table')).toBeVisible();
+                } else if (await label.innerText() == 'Visualisation') {
+                    expect(tabPanel.getByTestId('line-graph')).toBeVisible();
+                } else if (await label.innerText() == 'Experimental Details') {
+                    expect(tabPanel.getByRole('list')).toBeVisible()
+                }
+            }
+        });
+
+        test('Clicking on a tab in one instance should not replace the content of the tab panel in the other instance', async({page}) => {
+            await expect(page).toHaveURL('/content/science');
+
+            const tabPanels = await page.getByRole('tabpanel').all();
+
+            for (const tabPanel of tabPanels) {
+                expect(tabPanel.getByTestId('raw-data-table')).toBeVisible();
+            }
+
+            const labelToPress = page.getByText('Data table Summary Data Visualisation Experimental Details').first().locator('label').filter({ hasText: 'Visualisation' }).first()
+
+            await labelToPress.click();
+
+            expect(tabPanels[0].getByTestId('line-graph')).toBeVisible();
+            expect(tabPanels[1].getByTestId('raw-data-table')).toBeVisible();
+            console.log(await labelToPress.innerText());
+        });
+
+        test('Changing the selected treatment group should change the content of the raw data table', async({page}) => {
+            await expect(page).toHaveURL('/content/science');
+            const tabPanel = page.getByRole('tabpanel').first();
+
+            // BEFORE: Expect a certain number of lines in the table
+            const nrRowsBefore = await tabPanel.getByRole('row').count();
+            const selectDropdown = tabPanel.getByLabel('Treatment group');
+            await selectDropdown.selectOption('Stressed');
+            const nrRowsAfter = await tabPanel.getByRole('row').count();
+
+            expect(nrRowsAfter).toBeLessThan(nrRowsBefore);
+        });
+
+        test('Changing the selected treatment group in one instance should not change the selected treatment group in the other', async({page}) => {
+            await expect(page).toHaveURL('/content/science');
+            const dropDowns = await page.getByLabel('Treatment group').all();
+            console.log(dropDowns.length);
+            const selectDropdownTop = dropDowns[0];
+            const selectDropdownBottom = dropDowns[1];
+
+            console.log(await selectDropdownBottom.inputValue());
+
+            expect(selectDropdownTop).toHaveValue('All');
+            expect(selectDropdownBottom).toHaveValue('All');
+
+            await selectDropdownTop.selectOption('Stressed');
+
+            expect(selectDropdownTop).toHaveValue('Stressed');
+            expect(selectDropdownBottom).toHaveValue('All');
 
         })
     });
