@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-
+import {makeHtmlId} from '../../src/utils/stringOperations';
 
 test.describe('Page navigation tests', () => {
     test('Page loads and has expected option', async({page}) => {
@@ -243,8 +243,82 @@ test.describe('Data visualisation tests', () => {
 
             await errorBarToggle.click();
 
-            for (const line of svg.getByTestId('error-lines'))
-            expect(svg.getByTestId('error-lines')).toHaveClass(/opacity-0/);
-        })
+            for (const line of await svg.getByTestId('error-line').all()) {
+                expect(line).toHaveClass(/opacity-0/);
+            }
+        });
+
+        test('Labels in the legend should correspond to treatment groups', async ({page}) => {
+            await expect(page).toHaveURL('/content/science');
+            const tabGroup = page.getByTestId('tab-group').first();
+            const vizTabButton = tabGroup.locator('label').filter({ hasText: 'Visualisation' });
+            await vizTabButton.click();
+
+            const svg = tabGroup.getByTestId('line-graph');
+
+            let expectedLabels = await tabGroup.getByLabel('Treatment group').allInnerTexts();
+            // removes the 'All' option
+            expectedLabels = expectedLabels[0].split('\n').filter((e) => (e !== 'All'));
+
+            // checks each of the specified labels exist
+            for (const label of expectedLabels) {
+                expect(svg.getByTestId('labels-data').getByText(label, {exact: true})).toBeVisible();
+            }
+        });
+
+        test('Clicking on one of the labels should display only the corresponding data', async({page}) => {
+            const testLabel = 'Stressed'
+            await expect(page).toHaveURL('/content/science');
+            const tabGroup = page.getByTestId('tab-group').first();
+            const vizTabButton = tabGroup.locator('label').filter({ hasText: 'Visualisation' });
+            await vizTabButton.click();
+
+            const svg = tabGroup.getByTestId('line-graph');
+            expect(await svg.getByTestId('individual-line').count()).toEqual(3);
+
+            const labelToPress = svg.getByTestId('labels-data').getByText(testLabel, {exact: true});
+            await labelToPress.click()
+
+            expect(await svg.getByTestId('individual-line').count()).toEqual(1);
+            expect(await svg.getByTestId('individual-line').getAttribute('id')).toEqual(`${makeHtmlId(testLabel)}-path`)
+        });
+
+        // this test is currently not working, but it is not crucial that it does at this moment
+        // test('Clicking on a line should display only the selected data', async({page}) => {
+        //     const testLabel = 'Stressed'
+        //     await expect(page).toHaveURL('/content/science');
+        //     const tabGroup = page.getByTestId('tab-group').first();
+        //     const vizTabButton = tabGroup.locator('label').filter({ hasText: 'Visualisation' });
+        //     await vizTabButton.click();
+
+        //     const svg = tabGroup.getByTestId('line-graph');
+        //     expect(await svg.getByTestId('individual-line').count()).toEqual(3);
+        //     expect(await svg.getByTestId('text-label').count()).toEqual(3);
+
+        //     const lines = await svg.getByTestId('individual-line').all();
+        //     let lineToClick = undefined
+        //     for (const line of lines) {
+        //         if (await line.getAttribute('id') == `${makeHtmlId(testLabel)}-path`) {
+        //             lineToClick = line;
+        //         }
+        //     }
+        //     console.log(lineToClick);
+        //     await lineToClick.click();
+        // })
+
+        // like the previous one, this test seems to not be working -- something about the action being intercepted. Leaving as it is for now
+
+        // test('Hovering over a data point should show the tooltip with the corresponding data', async ({page}) => {
+        //     await expect(page).toHaveURL('/content/science');
+        //     const tabGroup = page.getByTestId('tab-group').first();
+        //     const vizTabButton = tabGroup.locator('label').filter({ hasText: 'Visualisation' });
+        //     await vizTabButton.click();
+        //     const svg = tabGroup.getByTestId('line-graph');
+            
+        //     const points = svg.getByTestId('point-data');
+        //     await points.locator('circle:nth-child(3)').hover({force: true});
+
+        //     expect(svg.getByTestId('tooltip-bee-data-demo')).toHaveClass(/opacity-100/);
+        // });
     })  
 });

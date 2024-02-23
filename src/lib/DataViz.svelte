@@ -207,6 +207,7 @@
                 .attr("stroke-width", 1.5)
                 .attr('id', function(d) {return `${makeHtmlId(d[0])}-path`})
                 .attr('class', 'line-data')
+                .attr('data-testid', 'individual-line')
                 .attr("d", function (d) {
                     return d3.line()
                         .x(function(d) { return x(d.cue) })
@@ -252,7 +253,7 @@
                     .attr('y2', function(d) { return y(d.mean - d.stdError); })
                     .attr("stroke", function (d)  {return colour(d['Treatment group'])})
                     .attr('class', function(d) {return makeHtmlId(d['Treatment group'])})
-                    .classed('error-line', true)
+                    .attr('data-testid', 'error-line')
                     .classed('opacity-100', true);
 
 
@@ -302,6 +303,7 @@
                 .attr("cx", width-270)
                 .attr("cy", function(d,i){ return 50 + i*30}) // 100 is where the first dot appears. 25 is the distance between dots
                 .attr("r", 7)
+                .attr("data-testid", 'circle-label')
                 .style("fill", function(d){ return colour(d)})
             labels.selectAll('labels')
                 .data(new Set(data.map((e) => (e['Treatment group']))))
@@ -312,6 +314,7 @@
                     .style("fill", function(d) { return colour(d)})
                     .text(function(d){ return d})
                     .attr("text-anchor", "left")
+                    .attr("data-testid", 'text-label')
                     .style("alignment-baseline", "middle")
                 .on('mouseover', labelMouseover)
                 .on('mousemove', labelMousemove)
