@@ -252,6 +252,7 @@
                     .attr('y2', function(d) { return y(d.mean - d.stdError); })
                     .attr("stroke", function (d)  {return colour(d['Treatment group'])})
                     .attr('class', function(d) {return makeHtmlId(d['Treatment group'])})
+                    .classed('error-line', true)
                     .classed('opacity-100', true);
 
 

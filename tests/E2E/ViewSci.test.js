@@ -173,12 +173,13 @@ test.describe('Data visualisation tests', () => {
 
         test('Changing the selected treatment group in one instance should not change the selected treatment group in the other', async({page}) => {
             await expect(page).toHaveURL('/content/science');
-            const dropDowns = await page.getByLabel('Treatment group').all();
-            console.log(dropDowns.length);
-            const selectDropdownTop = dropDowns[0];
-            const selectDropdownBottom = dropDowns[1];
 
-            console.log(await selectDropdownBottom.inputValue());
+            const tabPanels = await page.getByRole('tabpanel').all();
+            console.log(tabPanels.length)
+
+            const selectDropdownTop = tabPanels[0].getByLabel('Treatment group');
+            // For some reason, selecting the other dropdown listbox using the same method does not work -- this selects the box correctly, even if it is a little unreadable
+            const selectDropdownBottom = page.locator('[id="Treatment\\ group"]').nth(1)
 
             expect(selectDropdownTop).toHaveValue('All');
             expect(selectDropdownBottom).toHaveValue('All');
@@ -188,6 +189,62 @@ test.describe('Data visualisation tests', () => {
             expect(selectDropdownTop).toHaveValue('Stressed');
             expect(selectDropdownBottom).toHaveValue('All');
 
-        })
+        });
     });
+
+    test.describe('Graph interaction', () => {
+        test.beforeEach('Open start URL', async({page}, testInfo) => {
+            console.log(`Running ${testInfo.title}`);
+            await page.goto('/content/science');
+        })
+
+        test('Can switch to the visualisation panel' , async ({page}) => {
+            await expect(page).toHaveURL('/content/science');
+            const tabGroup = page.getByTestId('tab-group').first();
+            const vizTabButton = tabGroup.locator('label').filter({ hasText: 'Visualisation' });
+
+            await vizTabButton.click();
+
+            expect(tabGroup.getByTestId('line-graph')).toBeVisible();
+        });
+
+        test('Line graph should contain all the expected elements', async ({page}) => {
+            await expect(page).toHaveURL('/content/science');
+            const tabGroup = page.getByTestId('tab-group').first();
+            const vizTabButton = tabGroup.locator('label').filter({ hasText: 'Visualisation' });
+            await vizTabButton.click();
+
+            const svg = tabGroup.getByTestId('line-graph');
+
+            // should have labels
+            expect(svg.getByTestId('labels-data')).toBeVisible();
+            // should have points
+            expect(svg.getByTestId('point-data')).toBeVisible();
+            // should have line data
+            expect(svg.getByTestId('line-data')).toBeVisible();
+            // should have error lines
+            expect(svg.getByTestId('error-lines')).toBeVisible();
+            // should have error lines toggle
+            expect(svg.getByTestId('slide-toggle')).toBeVisible();
+            // tootltip should not be visible (needs to be exact match or a regular expresssion)
+            expect(svg.getByTestId('tooltip-bee-data-demo')).toHaveClass(/opacity-0/);
+        });
+
+        test('Clicking the error bars toggle should hide the error bars', async ({page}) => {
+            await expect(page).toHaveURL('/content/science');
+            const tabGroup = page.getByTestId('tab-group').first();
+            const vizTabButton = tabGroup.locator('label').filter({ hasText: 'Visualisation' });
+            await vizTabButton.click();
+
+            const svg = tabGroup.getByTestId('line-graph');
+            const errorBarToggle = svg.getByTestId('slide-toggle');
+
+            expect(svg.getByTestId('error-lines')).toBeVisible();
+
+            await errorBarToggle.click();
+
+            for (const line of svg.getByTestId('error-lines'))
+            expect(svg.getByTestId('error-lines')).toHaveClass(/opacity-0/);
+        })
+    })  
 });
