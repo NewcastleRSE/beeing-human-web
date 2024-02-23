@@ -10,7 +10,7 @@ const config = {
   // Run all tests in parallel.
   fullyParallel: true,
   // Reporter to use
-  reporter: 'html',
+  reporter: process.env.CI ? 'html' : 'list',
   retries: 1,
   use: {
     trace: 'on-first-retry',
