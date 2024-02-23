@@ -13,7 +13,7 @@ export function getListOfUniqueElements(array) {
 export function removeSpaces(string) {
     // removes any spaces from string and replaces it with hyphen to allow for dynamic IDs in the html
     if (string.includes(' ')) {
-        string = string.replace(' ', '-');
+        string = string.replace(/ /g, '-');
     }
     
     return string
@@ -21,4 +21,27 @@ export function removeSpaces(string) {
 
 export function splitStringIntoArray(string) {
     return string.split(' ');
+}
+
+export function getFileNameFromPath(string) {
+    // returns a filename from a string path
+    return string.split('\\').pop().split('/').pop();
+}
+
+export function makeHtmlId(string) {
+    // removes any characters that cannot be in an HTML id, removes spaces, and turns everything to lowercase;
+    let forbbidenChars = ['(', ')']
+    try {
+        string = string.toLowerCase();
+        string = removeSpaces(string);
+        for (let char of forbbidenChars) {
+            if (string.includes(char)) {
+                string = string.replaceAll(char, '')
+            }
+        }
+    } catch (err) {
+        console.log(err)
+        throw err
+    }
+    return string;
 }
