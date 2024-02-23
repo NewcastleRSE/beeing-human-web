@@ -1,0 +1,30 @@
+Bee Id,Treatment group,Positive,Near Positive,Medium,Near Negative,Negative
+Blue 16,Free-flying (control),1,1,1,0,0
+Yellow ab2,Free-flying (control),1,1,0,0,0
+Green ab1,Free-flying (control),1,1,1,0,0
+White t1,Free-flying (control),1,1,1,1,0
+Yellow white 2,Free-flying (control),1,1,0,0,0
+White ab2,Free-flying (control),1,1,1,1,0
+Yellow ab5,Free-flying (control),1,1,1,1,0
+White t3,Free-flying (control),1,1,1,0,0
+White t4,Free-flying (control),1,1,1,0,0
+White ab4,Free-flying (control),1,1,1,0,0
+Yellow 38,Free-flying (control),1,1,1,0,0
+Yellow 47,Free-flying (control),1,1,0,0,0
+Yellow ab1,Interaction with stressed bee,1,1,1,0,0
+White ab1,Interaction with stressed bee,1,1,1,0,0
+Yellow ab3,Interaction with stressed bee,1,1,1,1,0
+White Yellow1,Interaction with stressed bee,1,1,0,0,0
+Yellow ab4,Interaction with stressed bee,1,1,1,1,0
+Yellow White1,Interaction with stressed bee,1,1,0,0,0
+White t2,Interaction with stressed bee,1,1,0,0,0
+White White1,Interaction with stressed bee,1,1,1,1,0
+White ab3,Interaction with stressed bee,1,1,1,1,0
+White White2,Interaction with stressed bee,1,1,1,0,0
+White t5,Interaction with stressed bee,1,1,0,0,0
+White t6,Interaction with stressed bee,1,1,1,0,0
+White t5,Stressed,1,1,1,0,0
+Blue t2,Stressed,1,1,0,0,0
+Blue t3,Stressed,1,1,0,0,0
+Blue t4,Stressed,1,1,0,1,0
+White t6,Stressed,1,1,1,0,0
