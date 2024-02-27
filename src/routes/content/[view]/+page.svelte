@@ -7,7 +7,7 @@
   import MeiSimple from "../../../lib/MEISimple.svelte";
   import Buzzwords from "../../../lib/Buzzwords.svelte";
   import DataViewPanel from "../../../lib/DataViewPanel.svelte";
-  import PortalOrigin from "../../../lib/PortalOrigin.svelte";
+  import Portal from "../../../lib/Portal.svelte";
 
   let audioPath = `${base}/content/music/media/virtualbarbershop.mp3`
 </script>
@@ -21,8 +21,9 @@
   {/if}
 {/each}
 
-<PortalOrigin content='test 1'>This is a test portal</PortalOrigin>
-<PortalOrigin content='test 2'>This is a second test portal</PortalOrigin>
+<Portal content='test 1'>This is a test portal</Portal>
+<Portal content='test 2'>This is a second test portal</Portal>
+<Portal type='destination'>This is a destination portal</Portal>
 
 {#if data.view.slug === "literature"}
   <h3>Test</h3>
