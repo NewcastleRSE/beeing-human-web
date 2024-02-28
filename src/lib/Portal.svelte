@@ -6,7 +6,7 @@
     import {v4 as uuidv4} from 'uuid'
 
     let showSidePanel = false;
-    export let content;
+    export let destination;
     // origin, destination, both -> default both
     export let type = 'both';
     export let id = undefined;
@@ -51,7 +51,7 @@
     <span class="text-amber-600 bg-slate-300 rounded-md border-[1px] border-slate-600 px-1 hover:bg-slate-200 hover:text-amber-800 hover:font-semibold hover:cursor-pointer" on:mouseenter={showPopup} on:mouseleave={hidePopup} on:click={toggleSidePanel} on:keydown={toggleSidePanel} id={id}><slot/></span>
 
     {#if showSidePanel}
-        <PortalPanel on:close={toggleSidePanel} content={content}/>
+        <PortalPanel on:close={toggleSidePanel} destination={destination}/>
     {/if}
 {:else if type == 'destination'}
     <span id={id}><slot/></span>

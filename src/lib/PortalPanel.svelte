@@ -7,8 +7,7 @@
 
     const dispatch = createEventDispatcher();
 
-    export let content = undefined;
-    export let destinations = [
+    export let destination = [
         {
             section: 'literature',
             content: 'this is one example',
@@ -86,8 +85,7 @@
                 </div>
               </div>
               <div class="relative mt-6 flex-1 px-4 sm:px-6">
-                {content}
-                {#each destinations as {section, content, link}}
+                {#each destination as {section, content, link}}
                     <PortalDestinationListCard {section} {content} {link}/>
                 {/each}
               </div>

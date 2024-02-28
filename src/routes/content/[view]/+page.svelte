@@ -26,9 +26,10 @@
 <Portal type='destination' id='destination-test'>This is a destination portal</Portal>
 
 {#if data.view.slug === "literature"}
-  <h3>Test</h3>
+  <h3><Portal type=destination id='p-lit-test'>Test</Portal></h3>
   <TEISimple path = "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/dev/1623_consolidated.xml"/>
 {:else if data.view.slug === 'science'}
+  <Portal type='origin' destination={[{section: 'literature', content: 'fetched automatically', link: 'p-lit-test'}]}>This is a test portal</Portal>
   {#await data.view.datasets then datasets}
     <DataViewPanel {datasets}/>
   {/await}
