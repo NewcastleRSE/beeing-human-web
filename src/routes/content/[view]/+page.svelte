@@ -21,9 +21,9 @@
   {/if}
 {/each}
 
-<Portal content='test 1'>This is a test portal</Portal>
-<Portal content='test 2'>This is a second test portal</Portal>
-<Portal type='destination'>This is a destination portal</Portal>
+<Portal content='test 1' type='origin'>This is a test portal</Portal>
+<Portal content='test 2' type='both' id='both-test'>This is a second test portal</Portal>
+<Portal type='destination' id='destination-test'>This is a destination portal</Portal>
 
 {#if data.view.slug === "literature"}
   <h3>Test</h3>
