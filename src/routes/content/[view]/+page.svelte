@@ -22,7 +22,7 @@
 
 {#if data.view.slug === "literature"}
   <h3>Test</h3>
-  <TEISimple path = "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/dev/1623_consolidated.xml"/>
+  <TEISimple path = "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/Variation-ch3/1623_consolidated.xml"/>
 {:else if data.view.slug === 'science'}
   {#await data.view.datasets then datasets}
     <DataViewPanel {datasets}/>
