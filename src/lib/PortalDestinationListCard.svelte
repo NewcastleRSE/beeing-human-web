@@ -1,10 +1,18 @@
 <script>
+    import {base} from '$app/paths'
+    import { onMount } from 'svelte';
+
     export let section;
     export let content;
     export let link;
-    import {base} from '$app/paths'
 
     let linkString = `${base}/content/${section}#${link}`
+
+    onMount(async () => {
+        console.log('writing on mount');
+        const response = await fetch(linkString);
+        console.log(response);
+    })
 </script>
 
 <div class="card">
