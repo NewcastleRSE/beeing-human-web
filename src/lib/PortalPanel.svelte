@@ -8,31 +8,10 @@
     const dispatch = createEventDispatcher();
 
     export let destination = [
-        {
-            section: 'literature',
-            content: 'this is one example',
-            link: '#'
-        },
-        {
-            section: 'literature',
-            content: 'this is another example',
-            link: '#'
-        },
-        {
-            section: 'science',
-            content: 'this is a third example',
-            link: '#'
-        },
-        {
-            section: 'connections',
-            content: 'this is one more example',
-            link: '#'
-        },
-        {
-            section: 'music',
-            content: 'this is the final example',
-            link: '#'
-        }
+       'literature#p-lit-test',
+       'music#p-music-test',
+       'science#',
+       'connections#'
     ]
     let width;
 
@@ -85,8 +64,8 @@
                 </div>
               </div>
               <div class="relative mt-6 flex-1 px-4 sm:px-6">
-                {#each destination as {section, content, link}}
-                    <PortalDestinationListCard {section} {content} {link}/>
+                {#each destination as link}
+                    <PortalDestinationListCard {link}/>
                 {/each}
               </div>
             </div>

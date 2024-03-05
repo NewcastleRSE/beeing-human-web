@@ -26,15 +26,16 @@
 <Portal type='destination' id='destination-test'>This is a destination portal</Portal>
 
 {#if data.view.slug === "literature"}
-  <h3><Portal type=destination id='p-lit-test'>Test</Portal></h3>
+  <h3><Portal type='destination' id='p-lit-test'>Test</Portal></h3>
   <TEISimple path = "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/dev/1623_consolidated.xml"/>
 {:else if data.view.slug === 'science'}
-  <Portal type='origin' destination={[{section: 'literature', content: 'fetched automatically', link: 'p-lit-test'}]}>This is a test portal</Portal>
+  <Portal type='origin' destination={['literature#p-lit-test', 'music#p-music-test']}>This is a test portal</Portal>
   {#await data.view.datasets then datasets}
     <DataViewPanel {datasets}/>
   {/await}
 {:else if data.view.slug === 'music'}
   <h3>Binaural recording test</h3>
+  <Portal type = 'destination' id = 'p-music-test'>This is a second portal to test whether things work out as they <em>should</em>.</Portal>
   <AudioPlayer {audioPath}/>
   <h3>MEI engraving and playback test</h3>
   {#if 'mei' in data.view}
