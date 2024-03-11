@@ -1004,6 +1004,14 @@ tei-fw[type="catch"] {
   font-size: 0.7rem;
 }
 
+tei-note {
+  float: left;
+  margin-left: -50%;
+  max-width: 20rem;
+  clear: both;
+  font-size: small;
+}
+
 tei-note[type="authorial"] {
   float: left;
   margin-left: -50%;
