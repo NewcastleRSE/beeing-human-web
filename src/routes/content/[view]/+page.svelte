@@ -9,6 +9,8 @@
   import DataViewPanel from "../../../lib/DataViewPanel.svelte";
   import Portal from "../../../lib/Portal.svelte";
 
+  import TestPortal from '../music/02_testportal.md'
+
   let audioPath = `${base}/content/music/media/virtualbarbershop.mp3`
 </script>
 
@@ -37,6 +39,7 @@
   <h3>Binaural recording test</h3>
   <Portal type = 'destination' id = 'p-music-test'>This is a second portal to test whether things work out as they <em>should</em>.</Portal>
   <AudioPlayer {audioPath}/>
+  <TestPortal/>
   <h3>MEI engraving and playback test</h3>
   {#if 'mei' in data.view}
     <MeiSimple meiSvg = {data.view.mei.svg} meiMidi = {data.view.mei.midi} timeMap = {data.view.mei.timeMap}></MeiSimple>
