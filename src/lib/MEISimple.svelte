@@ -3,12 +3,15 @@
     This is a naive implementation of Verovio to engrave MEI data into an SVG and pass the generated MIDI file to the player. The transformation happens server side, at build time, and the component expects the result in page.data. The component runs through each SVG page in the array and displays it -- later development can introduce pagination to this.
     props:
         `meiSvg`: an array of SVGs (one per page) to be rendered;
+
         `meiMidi`: a base64 string representing a MIDI file;
+        
         `timeMap`: a JSON object callable by time in miliseconds, timeMap[{time}][on] returns an array of notes being played and timeMap[{time}][off] returns an array of notes that should stop playing
     usage:
-        ```
+        
+    ```
         <MEISimple meiSvg = {data.view.mei.svg} meiMidi = {data.view.mei.midi} timeMap = {data.view.mei.timeMap}/>
-        ```
+    ```
     
 -->
 

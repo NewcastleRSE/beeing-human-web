@@ -1,4 +1,14 @@
-<!-- Wrapper element that identifies a span of text as being an entry portal -->
+<!--
+    @component
+         
+    Wrapper element that identifies a span of text as being either an origin portal, a destination, or both. If the Portal is a destination or both, the wrapped content is rendered for preview wherever this portal is linked from. The component contains three properties:
+
+    `type`: `origin | destination | both` -- defines whether the type of portal. Default is `both`.
+
+    `destination`: an array of ids of the portals that will be linked to. Required if type == `origin` or `both`. Links should be in the format `section#id`.
+
+    `id`: a unique identifier for the portal. Required if type == `destination` or `both`. Testing should ensure that portal ids are unique.
+-->
 
 <script>
     import PortalPanel from "./PortalPanel.svelte";

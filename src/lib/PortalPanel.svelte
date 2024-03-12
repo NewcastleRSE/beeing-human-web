@@ -1,4 +1,10 @@
-<!-- Modal side panel that opens when PortalOrigin is clicked -->
+<!-- 
+  @component
+
+  Modal side panel that opens when an `origin` or `both` Portal is clicked. Takes one parameter (from the clicked Portal):
+
+  `destination`: an array of strings containing ids for destinations in the format `section#id`.
+ -->
 
 <script>
     import { createEventDispatcher } from "svelte";

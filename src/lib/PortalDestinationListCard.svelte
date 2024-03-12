@@ -1,3 +1,12 @@
+<!--
+    @component
+    
+    Card to be displayed in the PortalPanel modal. Expects a single link from which it creates a clickable button, fetches and displays a snippet of the destination Portal. Requires a single property:
+
+    `link`: a string in the format `section#id`;
+    
+-->
+
 <script>
     import {base} from '$app/paths'
     import { onMount } from 'svelte';
