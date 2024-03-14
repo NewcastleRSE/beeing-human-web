@@ -51,6 +51,6 @@
 <InternalLink link="about">About</InternalLink>
 
 <ViewSelect on:click={handleClick} />
-<InternalLink link="content/{$view}/" class="btn variant-filled"
+<InternalLink link="{$view}/" class="btn variant-filled"
   >Go</InternalLink
 >
