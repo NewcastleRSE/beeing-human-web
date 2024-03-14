@@ -22,7 +22,7 @@ Aliquam lacus metus, suscipit quis lacinia quis, laoreet sed lorem. Ut placerat 
 
 ## MEI engraving and playback test
 
-Morbi nec magna et tellus tincidunt elementum. Suspendisse eu tincidunt est. Integer fermentum viverra metus quis ultricies. Proin eget est rutrum lacus vestibulum posuere. In hac habitasse platea dictumst. Fusce quis mollis purus, a efficitur sem.
+Morbi nec magna et tellus tincidunt elementum. Suspendisse eu tincidunt est. Integer fermentum viverra metus quis ultricies. <Portal type="destination" id="mus1">Proin eget est rutrum lacus vestibulum posuere. In hac habitasse platea dictumst. Fusce quis mollis purus, a efficitur sem.</Portal>
 
 
 {#if 'mei' in data}

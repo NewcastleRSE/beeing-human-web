@@ -21,7 +21,7 @@
     onMount(async () => {
         section = link.split('#')[0];
         link = link.split('#')[1];
-        linkString = `${base}/content/${section}#${link}`
+        linkString = `${base}/${section}#${link}`
 
         console.log(`fetching from: ${linkString}`);
         const response = await fetch(linkString);
