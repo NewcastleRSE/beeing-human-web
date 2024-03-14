@@ -5,6 +5,12 @@ import {mdsvex} from 'mdsvex'
 
 const mdsvexOptions = {
   extensions: ['.md'],
+  smartypants: {
+    quotes: false,
+    ellipses: true,
+    backticks: true,
+    dashes: true
+  }
 }
 
 /** @type {import('@sveltejs/kit').Config} */
