@@ -24,6 +24,8 @@ Aliquam lacus metus, suscipit quis lacinia quis, laoreet sed lorem. Ut placerat 
 
 Morbi nec magna et tellus tincidunt elementum. Suspendisse eu tincidunt est. Integer fermentum viverra metus quis ultricies. <Portal type="destination" id="mus1">Proin eget est rutrum lacus vestibulum posuere. In hac habitasse platea dictumst. Fusce quis mollis purus, a efficitur sem.</Portal>
 
+Sed purus nisl, bibendum non elit a, semper porttitor sapien. Phasellus semper erat ac est placerat, quis sagittis est vehicula. <Portal type="both" id="mus2" destination={['literature#lit1', 'connections#con1']}>Sed hendrerit rhoncus scelerisque. Donec sit amet dictum arcu.</Portal> Ut volutpat est turpis, id rhoncus metus eleifend et. In porta eu elit vel placerat. Vestibulum pretium erat ipsum, et interdum est dictum sed.
+
 
 {#if 'mei' in data}
     <MeiSimple meiSvg = {data.mei.svg} meiMidi = {data.mei.midi} timeMap = {data.mei.timeMap}></MeiSimple>

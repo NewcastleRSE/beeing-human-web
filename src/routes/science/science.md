@@ -1,6 +1,7 @@
 <script>
     export let data
     import DataViewPanel from '$lib/DataViewPanel.svelte'
+    import Portal from '$lib/Portal.svelte'
 
 </script>
 
@@ -8,7 +9,7 @@
 
 ## Introduction
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse magna sem, tincidunt nec facilisis vitae, semper sed lorem. Sed scelerisque erat leo, vitae bibendum purus laoreet eget. Donec luctus lectus quis odio iaculis, sit amet elementum augue scelerisque. Sed a pretium ex, et imperdiet metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Phasellus volutpat cursus lacus, eu pretium dui suscipit non. Vestibulum eget purus quis nibh lacinia blandit quis eget neque. Donec in ligula maximus, pellentesque lacus non, commodo lorem.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse magna sem, tincidunt nec facilisis vitae, semper sed lorem. Sed scelerisque erat leo, vitae bibendum purus laoreet eget. Donec luctus lectus quis odio iaculis, sit amet elementum augue scelerisque. Sed a pretium ex, et imperdiet metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; <Portal type="destination" id="sci1">Phasellus volutpat cursus lacus</Portal>, eu pretium dui suscipit non. Vestibulum eget purus quis nibh lacinia blandit quis eget neque. Donec in ligula maximus, pellentesque lacus non, commodo lorem.
 
 ## First dataset
 
