@@ -17,7 +17,7 @@ test.describe('Page navigation tests', () => {
         await expect(page.getByText('Connections')).toBeChecked();
         await page.getByRole('link', { name: 'Go' }).click();
         await page.waitForURL('**/connections');
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
     });
 })
 
@@ -25,52 +25,52 @@ test.describe('Page content containers exist tests', () => {
 
     test.beforeEach('Open start URL', async ({ page }, testInfo) => {
         console.log(`Running ${testInfo.title}`);
-        await page.goto('/content/connections');
+        await page.goto('/connections');
     })
 
     test('Connections content page should have a header containing Connections', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
-        await expect(page.getByRole("heading", { name: 'Connections Test' })).toBeVisible();
+        await expect(page).toHaveURL('/connections');
+        await expect(page.getByRole("heading", { name: 'Connections' })).toBeVisible();
     });
 
     test('Expect content page to have several sections', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const headings = await page.getByRole('heading').allInnerTexts();
         expect(headings.length).toBeGreaterThan(1);
     });
 
     test('Page should have a container of buzzwords', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const container = page.getByTestId('card-collection');
         await expect(container).toBeVisible();
     });
 
     test('Page should have two containers of tag selectors', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const containers = (await page.getByTestId('tag-selector-container').all()).length;
         expect(containers).toEqual(2);
     });
 
     test('Page should have two reset buttons (one per tag selector)', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const resetButtons = await page.getByTestId('tag-reset-button').all();
         expect(resetButtons.length).toEqual(2);
     });
 
     test('Page should have one search bar', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const container = page.getByTestId('search-bar-container');
         await expect(container).toBeVisible();
     });
 
     test('Page should have one go button for the search bar', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const resetButton = page.getByText('Go', { exact: true });
         await expect(resetButton).toBeVisible();
     });
 
     test('Page should have one reset all button', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const resetAllButton = page.getByText('Reset all', { exact: true });
         await expect(resetAllButton).toBeVisible();
     });
@@ -79,32 +79,32 @@ test.describe('Page content containers exist tests', () => {
 test.describe('Page has correct contents tests', () => {
     test.beforeEach('Open start URL and load data from files', async ({ page }, testInfo) => {
         console.log(`Running ${testInfo.title}`);
-        await page.goto('/content/connections');
+        await page.goto('/connections');
 
         // loading data should really be replicated here rather than read from a static mock variable, but it is proving to be a little too complex to do. Just using the static mock for now, might need to create a few scripts to automatically update it
 
     })
 
     test('Page should have as many cards as there are buzzwords', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const buzzCards = (await page.getByTestId('buzzword-card').all()).length;
         expect(buzzCards).toEqual(buzzwords.length);
     });
 
     test('Page should have as many tag selectors as there are tags', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const tagChips = await page.getByTestId('tags-chip').all();
         expect(tagChips.length).toEqual(listTags.length);
     });
 
     test('Page should have as many author selectors as there are authors', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const authorChips = await page.getByTestId('authors-chip').all();
         expect(authorChips.length).toEqual(listAuthors.length);
     });
 
     test('Each buzzword-card should contain at least a buzzword-content', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const buzzCards = await page.getByTestId('buzzword-card').all();
         for (let card of buzzCards) {
             await expect(card.getByTestId('buzzword-content')).toBeVisible();
@@ -112,7 +112,7 @@ test.describe('Page has correct contents tests', () => {
     });
 
     test('Each buzzword-card should contain the correct tags', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const buzzCards = await page.getByTestId('buzzword-card').all();
         for (let card of buzzCards) {
             let id = await card.getAttribute('id');
@@ -129,7 +129,7 @@ test.describe('Page has correct contents tests', () => {
     });
 
     test('Each buzzword-card should contain the correct date', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const buzzCards = await page.getByTestId('buzzword-card').all();
         for (let card of buzzCards) {
             let id = await card.getAttribute('id');
@@ -146,7 +146,7 @@ test.describe('Page has correct contents tests', () => {
     });
 
     test('Each buzzword-card should contain the correct author', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         const buzzCards = await page.getByTestId('buzzword-card').all();
         for (let card of buzzCards) {
             let id = await card.getAttribute('id');
@@ -161,7 +161,7 @@ test.describe('Page has correct contents tests', () => {
     });
 
     test('Each buzzword that contains an image has the image displayed', async ({ page }) => {
-        await expect(page).toHaveURL('/content/connections');
+        await expect(page).toHaveURL('/connections');
         // regex to find md image insertion
         const regex = /(?<alt>!\[[^\]]*\])\((?<filename>.*?)(?=\"|\))\)/
         let buzzImage = buzzwords.filter((buzz) => buzz.content.match(regex));
@@ -199,7 +199,7 @@ test.describe('Page has correct contents tests', () => {
 test.describe('Page user interactions tests', () => {
     test.beforeEach('Open start URL and load data from files', async ({ page }, testInfo) => {
         console.log(`Running ${testInfo.title}`);
-        await page.goto('/content/connections');
+        await page.goto('/connections');
 
         // loading data should really be replicated here rather than read from a static mock variable, but it is proving to be a little too complex to do. Just using the static mock for now, might need to create a few scripts to automatically update it
 
@@ -207,7 +207,7 @@ test.describe('Page user interactions tests', () => {
 
     test.describe('Test interaction with tags filter', () => {
         test('Clicking one of the filter tags should reduce the number of visible buzzword cards', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
             const buzzCards = await page.getByTestId('buzzword-card').all();
             const nrBuzzCards = buzzCards.length;
     
@@ -221,7 +221,7 @@ test.describe('Page user interactions tests', () => {
         });
     
         test('Clicking on one of the filter tags should reduce the number of available filter tags', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
     
             const buttons = await page.getByTestId('tags-chip').all()
             let nrStartingDisabledButtons = 0;
@@ -248,7 +248,7 @@ test.describe('Page user interactions tests', () => {
         });
     
         test('Clicking on one of the filter tags should activate the Reset button', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
             const resetButtons = await page.getByTestId('tag-reset-button').all();
             let resetButton;
             for (let rb of resetButtons) {
@@ -267,7 +267,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking on one of the filter tags should activate the Reset All button', async({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
             const resetAllButton = await page.getByRole('button', {name: 'Reset all'});
 
             expect(resetAllButton).toBeDisabled();
@@ -279,7 +279,7 @@ test.describe('Page user interactions tests', () => {
         })
 
         test('Clicking on one of the filter tags should reduce the number of available author filters', async({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
             const authorFilters = await page.getByTestId('authors-chip').all()
             let nrStartingAuthorFiltersActive = 0;
 
@@ -303,7 +303,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking on one of the filter tags should result in displaying the expected buzzword cards', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             // gets ids for expected cards
             const buttonToPress = 'technology';
@@ -329,7 +329,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking on two of the filter tags should only display buzzwords that contain both tags', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             // get ids for expected cards
             const buttonsToPress = ['technology', 'literature'];
@@ -358,7 +358,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking the same button twice should return the number of buzzwords to the initial value', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             let initialBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
 
@@ -380,7 +380,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking the same button twice should reactivate all tag buttons and deactivate the reset buttons', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             const authorChips = await page.getByTestId('authors-chip').all();
             const tagsChips = await page.getByTestId('tags-chip').all();
@@ -454,7 +454,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking on the reset button should return everything to its initial state', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             let initialCountAuthors = 0;
             let initialCountTags = 0;
@@ -526,7 +526,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking on the reset all button should return everything to its initial state', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             let initialCountAuthors = 0;
             let initialCountTags = 0;
@@ -595,7 +595,7 @@ test.describe('Page user interactions tests', () => {
     test.describe('Test interaction with author filters', async () => {
 
         test('Clicking on one of the author tags should reduce the number of visible buzzcards', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             let buzzCards = await page.getByTestId('buzzword-card').all();
 
@@ -610,7 +610,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking on one of the author tags should reduce the number of available tag chips', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             let filterChips = await page.getByTestId('tags-chip').all();
             let initialActive = 0;
@@ -636,7 +636,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking on one of the author filters should enable the reset button', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             const resetButtons = await page.getByTestId('tag-reset-button').all();
 
@@ -656,7 +656,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking on one of the author tags should activate the Reset All button', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             let resetButton = page.getByRole('button', {name: 'Reset all'});
             expect(resetButton).toBeDisabled();
@@ -666,7 +666,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking in more than one author tags should add available filter tags', async({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
             
             // initial
             let initialCount = 0;
@@ -700,7 +700,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking on one of the author tags should result in the expected buzzwords beeing displayed', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             // gets ids for expected cards
             const buttonToPress = 'tiago';
@@ -725,7 +725,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking on two of the author tags should result in the expected buzzwords beeing displayed', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             // gets ids for expected cards
             const buttonToPress = ['tiago', 'jenny'];
@@ -751,7 +751,7 @@ test.describe('Page user interactions tests', () => {
         })
 
         test('Clicking the same button twice should return the number of buzzwords to the initial value', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             let initialBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
 
@@ -773,7 +773,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking the same button twice should reactivate all tag buttons and deactivate the reset buttons', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             const authorChips = await page.getByTestId('authors-chip').all();
             const tagsChips = await page.getByTestId('tags-chip').all();
@@ -847,7 +847,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking on the reset button should return everything to its initial state', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             let initialCountAuthors = 0;
             let initialCountTags = 0;
@@ -919,7 +919,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking on the reset all button should return everything to its initial state', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             let initialCountAuthors = 0;
             let initialCountTags = 0;
@@ -988,7 +988,7 @@ test.describe('Page user interactions tests', () => {
     test.describe('Test interaction with search bar', () => {
         
         test('Searching for something in the author bar should reduce the number of available buzzwords', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
             
             const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length;
 
@@ -1001,7 +1001,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Searching for something in the author bar should reduce the number of available filter tags but keep the same number of filter authors', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
 
@@ -1047,7 +1047,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Searching for nothing should reset the buzzwords to their initial state', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length;
 
@@ -1072,7 +1072,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Searching for nothing should reset all buttons to their initial state', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
 
@@ -1149,7 +1149,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Clicking the Reset all button should reset all buttons to their initial state and clear the searchBox', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
 
@@ -1226,7 +1226,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Searching for something that does not exist should display the correct error message', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             await page.getByRole('searchbox').fill('a;lskdjf;oawijef;olanw');
             await page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' }).click();
@@ -1235,7 +1235,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Searching for a specific search term should return the expected results', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             const searchTerm = 'office';
             let expectedBuzzwords = buzzwords.filter((e) => {
@@ -1262,7 +1262,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Searching for terms that are also filters should add them as chips to the search bar', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             await page.getByRole('searchbox').fill('tiago ');
 
@@ -1272,7 +1272,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Searching for two terms that are also filters should add them as chips to the search bar', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             await page.getByRole('searchbox').fill('tiago technology ');
 
@@ -1284,7 +1284,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Searching for a term that is also a filter should enable the clear all button', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
             
             await page.getByRole('searchbox').fill('jenny ');
 
@@ -1294,7 +1294,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Searching for a term that is also a filter then clicking that filter should remove the chip button', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             const searchTerms = ['balu ', 'vivek '];
 
@@ -1316,7 +1316,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Searching for terms that are also filters then clicking the clear all button should remove all the chip buttons', async({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             const searchTerms = ['balu ', 'vivek ', 'technology ', 'music '];
 
@@ -1340,7 +1340,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Searching for a term and nothing else should return only results that correspond to that filter (i.e., should work the same as a filter button)', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             await page.getByRole('searchbox').fill('tiago ');
             await page.getByRole('button', {name: 'Go', exact: true}).click();
@@ -1354,7 +1354,7 @@ test.describe('Page user interactions tests', () => {
         });
 
         test('Searching for a term and a word should return only results from buzzwords that have that term', async ({page}) => {
-            await expect(page).toHaveURL('/content/connections');
+            await expect(page).toHaveURL('/connections');
 
             await page.getByRole('searchbox').fill('olivia office');
             await page.getByRole('button', {name: 'Go', exact: true}).click();

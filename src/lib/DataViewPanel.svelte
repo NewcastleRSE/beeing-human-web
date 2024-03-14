@@ -1,3 +1,12 @@
+<!--@component
+    Component to display datasets in various forms, including a complete data table, a table with summary data, visualisation(s), and a narrative description of the experimental details.
+
+    properties:
+
+    `datasets`: an **array** of datasets in json format.
+
+ -->
+
 <script>
     import { onMount } from "svelte";
     import RawDataTable from "./RawDataTable.svelte";
