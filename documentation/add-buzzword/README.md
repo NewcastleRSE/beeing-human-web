@@ -54,12 +54,12 @@ tags: technology, connections, collaboration, methodology
 - If you want to add an image, put the file in the `img` folder inside the `buzzwords` folder, then add the following code to your buzzword markdown file:
 
 ```
-![DESCRIPTION OF THE IMAGE](content/connections/buzzwords/img/FILENAME.PNG)
+![DESCRIPTION OF THE IMAGE](../content/connections/buzzwords/img/FILENAME.PNG)
 ```
 
 - For my test buzzword, I have the following:
 ```
-![my view of the buzzword system](content/connections/buzzwords/img/buzzword_system.png)
+![my view of the buzzword system](../content/connections/buzzwords/img/buzzword_system.png)
 ```
 
  - You can use the `Preview` button to get a sense of what the finished text will look like. The header should appear as a table -- if it does, it is formattted correctly. If you have any images, they will not be visible in the preview, but you should see a link to the image. If you don't see a link, please make sure the path to the image (the bit in parenthesis in the code above) is correct.

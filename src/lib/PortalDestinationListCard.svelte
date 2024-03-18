@@ -23,14 +23,31 @@
         link = link.split('#')[1];
         linkString = `${base}/${section}#${link}`
 
+        let htmlString = undefined;
+        let fetchedHtml = undefined;
+
         console.log(`fetching from: ${linkString}`);
-        const response = await fetch(linkString);
-        const htmlString = await response.text();
+        try {
+            const response = await fetch(linkString);
+            htmlString = await response.text();
+        } catch (e) {
+            console.error(`Could not fetch the preview from ${linkString}: ${e}`)
+        }
 
-        let domParser = new DOMParser();
-        const fetchedHtml = domParser.parseFromString(htmlString, "text/html");
+        if (htmlString != undefined) {
+            try {
+                let domParser = new DOMParser();
+                fetchedHtml = domParser.parseFromString(htmlString, "text/html");
+            } catch (e) {
+                console.error(`Could not parse the preview for  ${linkString}: ${e}`)
+            }
+        }
 
-        portalDestinationElement = DOMPurify.sanitize(fetchedHtml.getElementById(link).innerHTML)
+        if (fetchedHtml != undefined) {
+            portalDestinationElement = DOMPurify.sanitize(fetchedHtml.getElementById(link).innerHTML)
+        } else {
+            portalDestinationElement = '<p>Could not fecth preview</p>';
+        }
     })
 </script>
 
