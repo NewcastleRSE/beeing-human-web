@@ -2,12 +2,8 @@
     import TEISimple from '$lib/TEISimple.svelte'
     import Portal from '$lib/Portal.svelte'
 
-    import InjectMD from '$lib/InjectMD.svelte'
-
     let dest = ['music#mus1']
 </script>
-
-<InjectMD/>
 
 # Literature
 

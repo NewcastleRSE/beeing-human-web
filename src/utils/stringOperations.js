@@ -28,6 +28,16 @@ export function getFileNameFromPath(string) {
     return string.split('\\').pop().split('/').pop();
 }
 
+export function getFileNameFromPathWithoutExtension(string) {
+    // returns a filename from a path without the extension
+
+    // get filename with extension
+    let filename = getFileNameFromPath(string);
+
+    // split the string by dot and return just the name
+    return filename.split('.')[0]
+}
+
 export function makeHtmlId(string) {
     // removes any characters that cannot be in an HTML id, removes spaces, and turns everything to lowercase;
     let forbbidenChars = ['(', ')']

@@ -1,6 +1,5 @@
 <script>
     import { onMount } from 'svelte';
-    import InjectMd from './InjectMD.svelte';
     import {daysOfTheWeek, monthsOfTheYear} from '../utils/generalConstants';
     import {capitaliseFirstLetter, getListOfUniqueElements, removeSpaces} from '../utils/stringOperations';
 
@@ -8,6 +7,7 @@
 
     import { Filters } from '../classes/Filters'
 
+    import InjectBuzzword from './InjectBuzzword.svelte';
     import TagSelector from './TagSelector.svelte';
     import SearchBar from './SearchBar.svelte';
 
@@ -318,7 +318,7 @@
                             <p class="date" data-testid="buzzword-date">{daysOfTheWeek[buzzword.date.getDay()]}, {buzzword.date.getDate()} of {monthsOfTheYear[buzzword.date.getMonth()]} {buzzword.date.getFullYear()}</p>
                         {/if}
                     </header>
-                    <section class="p-4" data-testid="buzzword-content"><InjectMd content = {buzzword.content}/></section>
+                    <section class="p-4" data-testid="buzzword-content"><InjectBuzzword buzzName={buzzword.id}/></section>
                     <footer class="card-footer">
                         {#if buzzword.author}
                             <p class="byline" data-testid="buzzword-byline">by {capitaliseFirstLetter(buzzword.author)}</p>

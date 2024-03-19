@@ -1,18 +1,8 @@
 <script>
-  import { onMount } from "svelte";
+  import { ProgressRadial } from "@skeletonlabs/skeleton";
+  import SvelteMarkdown from "svelte-markdown";
 
-  export let link = 'buzz1';
-  let test = undefined;
-
-  onMount(async ()=> {
-      try {
-        test = await import (`../routes/connections/buzzwords/${link}.md`);
-        console.log(test)
-      } catch (e) {
-        console.log(e)
-    }
-  });
-
+  export let content = undefined;
   
 </script>
 
@@ -25,13 +15,9 @@
   <InjectMD content = 'This string contains **markdown** syntax'/>
   ```
 -->
-{#if test != undefined}
-  <svelte:component this={test.default}/>
-{/if}
-
-<!-- 
+<!-- <svelte:component this={}/> -->
 {#if content === undefined}
   <ProgressRadial value={undefined} />
 {:else}
   <SvelteMarkdown source={content} />
-{/if} -->
+{/if}
