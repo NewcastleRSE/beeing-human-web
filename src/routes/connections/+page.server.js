@@ -10,13 +10,14 @@ export async function load({}) {
     for (const buzz in listBuzzWords) {
       let path = JSON.stringify(buzz);
       let id = getFileNameFromPathWithoutExtension(path);
-      const {metadata, } = parseMD(listBuzzWords[buzz]);
+      // still need to get the content here, despite not using it for display, so that the searchbar functions can work;
+      const {metadata, content} = parseMD(listBuzzWords[buzz]);
       if (metadata.tags) {
         // splits the tags into an array, ensuring they are all lowercase
         metadata.tags = metadata.tags.toLowerCase().split(', ');
         metadata.author = metadata.author.toLowerCase();
       }
-      buzzwords.push({...metadata, id: id});
+      buzzwords.push({...metadata, id: id, content:content});
     }
 
     // create list of tags for buzzwords
