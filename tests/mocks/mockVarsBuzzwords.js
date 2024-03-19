@@ -103,7 +103,7 @@ export const buzzwords = [
     ],
     id: 'buzz20',
     content: 'The biggest challenge in designing the **buzzword** system (in addition to the many technical challenges of creating filtering and searching options), was to create a system that would be able to balance the (mostly static, long-term and cost-efficient) technology with ease of use. It is crucial that everyone in the team is capable of adding **buzzwords** at any time, at will; but doing so in a user-friendly manner without using expensive content management systems is tricky. The solution we have now -- github based, markdown files -- is not perfect, but it will hopefully be easy enough for everyone. Only time will tell.\n' +
-      '![my view of the buzzword system](content/connections/buzzwords/img/buzzword_system.png)\n'
+      '![my view of the buzzword system](/content/connections/buzzwords/img/buzzword_system.png)\n'
   },
   {
     author: 'jenny',
@@ -160,7 +160,7 @@ export const buzzwords = [
     id: 'buzz9',
     content: '\n' +
       'Demesne far hearted suppose venture excited see had has. Dependent on so extremely delivered by. Yet no jokes worse her why. Bed one supposing breakfast day fulfilled off depending questions. Whatever boy her exertion his extended. Ecstatic followed handsome drawings entirely mrs one yet outweigh. Of acceptance insipidity remarkably is invitation.\n' +
-      '![A picture of a bee](content/connections/buzzwords/img/Apis_mellifera_Western_honey_bee.jpg)'
+      '![A bee](/content/connections/buzzwords/img/Apis_mellifera_Western_honey_bee.jpg)'
   },
   {
     author: 'olivia',
