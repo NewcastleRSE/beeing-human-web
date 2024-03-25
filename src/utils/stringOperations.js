@@ -50,7 +50,6 @@ export function makeHtmlId(string) {
             }
         }
     } catch (err) {
-        console.log(err)
         throw err
     }
     return string;
