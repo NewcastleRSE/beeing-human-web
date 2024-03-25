@@ -15,7 +15,7 @@
 
 - Create a [**new branch**](/documentation/create-new-branch/README.md)
 
-- - Navigate to `static`, then `content` in the project files. You should see four folders: `literature`, `music`, `science`, `connections`. Select `connections`, then `buzzwords`.
+- - Navigate to `src`, then `routes` in the project files. You should see these four folders: `literature`, `music`, `science`, `connections` (as well as some others). Select `connections`, then `buzzwords`.
 
 - On the top right of the screen, select `Add file`, then `Create new file` if you want to work from the browser, or upload file if you prefer to work locally.
 
@@ -51,15 +51,15 @@ tags: technology, connections, collaboration, methodology
 
 ![writing content](./img/02_write_content.png)
 
-- If you want to add an image, put the file in the `img` folder inside the `buzzwords` folder, then add the following code to your buzzword markdown file:
+- If you want to add an image, the file must be uploaded to a different location. From the root of the repository([https://github.com/NewcastleRSE/beeing-human-web/](https://github.com/NewcastleRSE/beeing-human-web/)), navigate to `static`, then `content`, then `connections`, then `buzzwords`, then `img`. Upload your image to that folder. Finally, add the following code to your buzzword markdown file:
 
 ```
-![DESCRIPTION OF THE IMAGE](../content/connections/buzzwords/img/FILENAME.PNG)
+![DESCRIPTION OF THE IMAGE](/content/connections/buzzwords/img/FILENAME.PNG)
 ```
 
 - For my test buzzword, I have the following:
 ```
-![my view of the buzzword system](../content/connections/buzzwords/img/buzzword_system.png)
+![my view of the buzzword system](/content/connections/buzzwords/img/buzzword_system.png)
 ```
 
  - You can use the `Preview` button to get a sense of what the finished text will look like. The header should appear as a table -- if it does, it is formattted correctly. If you have any images, they will not be visible in the preview, but you should see a link to the image. If you don't see a link, please make sure the path to the image (the bit in parenthesis in the code above) is correct.

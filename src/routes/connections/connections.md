@@ -3,6 +3,7 @@
 
     import Buzzwords from '$lib/Buzzwords.svelte'
     import Portal from '$lib/Portal.svelte'
+
 </script>
 
 # Connections
