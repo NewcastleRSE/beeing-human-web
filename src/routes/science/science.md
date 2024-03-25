@@ -13,7 +13,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse magna sem, 
 
 ## First dataset
 
-In hac habitasse platea dictumst. Duis ligula nulla, rhoncus sed enim et, gravida consectetur mi. Pellentesque consequat orci in dui consectetur ultrices. Sed commodo arcu ac erat viverra bibendum sit amet sed nunc. Quisque cursus neque id sem semper, a tempor turpis tempor. Nam condimentum magna a libero laoreet, eget cursus eros tristique. Etiam rutrum, odio eu volutpat auctor, erat enim imperdiet tellus, in ultrices sapien elit in eros. Maecenas nibh nulla, vestibulum non lorem eu, egestas lobortis dui. Vivamus a nisi nec erat egestas vulputate pellentesque a ex. Curabitur sagittis turpis in dui elementum tempor.
+In hac habitasse platea dictumst. Duis ligula nulla, rhoncus sed enim et, gravida consectetur mi. Pellentesque consequat orci in dui consectetur ultrices. Sed commodo arcu ac erat viverra bibendum sit amet sed nunc. Quisque cursus neque id sem semper, a tempor turpis tempor. Nam condimentum magna a libero laoreet, eget cursus eros tristique. Etiam rutrum, odio eu volutpat auctor, erat enim imperdiet tellus, in ultrices sapien elit in eros. <Portal type="both" id="sci2" destination={['connections#buzz17Portal1']}>Maecenas nibh nulla, vestibulum non lorem eu, egestas lobortis dui.</Portal> Vivamus a nisi nec erat egestas vulputate pellentesque a ex. Curabitur sagittis turpis in dui elementum tempor.
 
 {#await data.datasets then datasets}
     <DataViewPanel datasets = {[datasets[0]]}/>

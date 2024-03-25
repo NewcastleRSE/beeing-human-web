@@ -38,12 +38,14 @@
             try {
                 let domParser = new DOMParser();
                 fetchedHtml = domParser.parseFromString(htmlString, "text/html");
+                console.log(fetchedHtml);
             } catch (e) {
                 console.error(`Could not parse the preview for  ${linkString}: ${e}`)
             }
         }
 
         if (fetchedHtml != undefined) {
+            console.log(fetchedHtml.innerHTML)
             portalDestinationElement = DOMPurify.sanitize(fetchedHtml.getElementById(link).innerHTML)
         } else {
             portalDestinationElement = '<p>Could not fecth preview</p>';
