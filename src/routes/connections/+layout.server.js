@@ -2,6 +2,7 @@ import parseMD from 'parse-md';
 import { getListOfUniqueElements, getFileNameFromPathWithoutExtension } from '../../utils/stringOperations.js';
 
 export async function load({}) {
+    // This load function needs to be in the +layout.server.js so that the data is also available to /buzzwords
     // load the buzzword mds
     let listBuzzWords = import.meta.glob('./buzzwords/*.md', {as: 'raw', eager: true});
     let buzzwords = []
