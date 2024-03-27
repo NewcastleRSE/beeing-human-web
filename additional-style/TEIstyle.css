@@ -1026,6 +1026,14 @@ tei-note[subtype="bibliographic"] {
   margin-right: -50%;
 }
 
+tei-hi {
+  font-style: italic;
+}
+
+tei-hi[rend="bold"] {
+  font-weight: bold;
+}
+
 tei-hi[rend="drop-capital"] {
   float: left;
   margin: -2rem 0rem -0.5rem 0;
