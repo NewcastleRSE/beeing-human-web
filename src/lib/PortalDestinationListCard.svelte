@@ -26,6 +26,11 @@
         let htmlString = undefined;
         let fetchedHtml = undefined;
 
+        if (section === 'buzzwords') {
+            const response = await fetch('/connections/buzzwords')
+            console.log(await response.json())
+        }
+
         console.log(`fetching from: ${linkString}`);
         try {
             const response = await fetch(linkString);
