@@ -27,16 +27,31 @@
         let fetchedHtml = undefined;
 
         if (section === 'buzzwords') {
-            const response = await fetch('/connections/buzzwords')
-            console.log(await response.json())
-        }
+            const response = await fetch('/api/portals/buzzwords')
+            const portalsBuzzwords = await response.json();
+            try {
+                const portalContent = portalsBuzzwords[link].content;
+                fetchedHtml = new DocumentFragment();
+                let paragraph = document.createElement('p');
+                paragraph.innerHTML = portalContent;
+                paragraph.id = link;
+                fetchedHtml.appendChild(paragraph);
 
-        console.log(`fetching from: ${linkString}`);
-        try {
-            const response = await fetch(linkString);
-            htmlString = await response.text();
-        } catch (e) {
-            console.error(`Could not fetch the preview from ${linkString}: ${e}`)
+                // adjust the link
+                linkString = `${base}/connections#${link}`
+                // adjust section title
+                section = `Buzzwords -- ${portalsBuzzwords[link].buzzID}`
+            } catch (e) {
+                console.error(`Could not find portal with ID ${link}, ${e}`)
+            }
+        } else {
+            console.log(`fetching from: ${linkString}`);
+            try {
+                const response = await fetch(linkString);
+                htmlString = await response.text();
+            } catch (e) {
+                console.error(`Could not fetch the preview from ${linkString}: ${e}`)
+            }
         }
 
         if (htmlString != undefined) {
@@ -53,7 +68,7 @@
             console.log(fetchedHtml.innerHTML)
             portalDestinationElement = DOMPurify.sanitize(fetchedHtml.getElementById(link).innerHTML)
         } else {
-            portalDestinationElement = '<p>Could not fecth preview</p>';
+            portalDestinationElement = '<p>Could not fetch preview</p>';
         }
     })
 </script>
