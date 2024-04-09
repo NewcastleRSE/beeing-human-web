@@ -12,6 +12,8 @@
     import { onMount } from 'svelte';
     import DOMPurify from 'dompurify'
 
+    import {capitaliseFirstLetter} from '../utils/stringOperations'
+
     export let link;
 
     let portalDestinationElement = undefined;
@@ -19,14 +21,16 @@
     let linkString = undefined;
 
     onMount(async () => {
-        section = link.split('#')[0];
+        section = link.split('#')[0].toLowerCase();
         link = link.split('#')[1];
         linkString = `${base}/${section}#${link}`
 
         let htmlString = undefined;
         let fetchedHtml = undefined;
+        section = capitaliseFirstLetter(section);
 
-        if (section === 'buzzwords') {
+        // If the Portal link is to a buzzword,  use the portals/buzzwords api
+        if (section.toLowerCase() === 'buzzwords') {
             const response = await fetch('/api/portals/buzzwords')
             const portalsBuzzwords = await response.json();
             try {
@@ -45,7 +49,7 @@
                 console.error(`Could not find portal with ID ${link}, ${e}`)
             }
         } else {
-            console.log(`fetching from: ${linkString}`);
+            // if it is to a regular page, fetch the page and render html
             try {
                 const response = await fetch(linkString);
                 htmlString = await response.text();
@@ -58,14 +62,12 @@
             try {
                 let domParser = new DOMParser();
                 fetchedHtml = domParser.parseFromString(htmlString, "text/html");
-                console.log(fetchedHtml);
             } catch (e) {
                 console.error(`Could not parse the preview for  ${linkString}: ${e}`)
             }
         }
 
         if (fetchedHtml != undefined) {
-            console.log(fetchedHtml.innerHTML)
             portalDestinationElement = DOMPurify.sanitize(fetchedHtml.getElementById(link).innerHTML)
         } else {
             portalDestinationElement = '<p>Could not fetch preview</p>';
