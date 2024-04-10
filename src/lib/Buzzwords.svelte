@@ -5,6 +5,8 @@
 
     import { checkSearchTagsAuthors, fullTextSearch, shuffle } from '../utils/BuzzwordsHelper';
 
+    import {elementReady} from '../utils/generalHelpers'
+
     import { Filters } from '../classes/Filters'
 
     import InjectBuzzword from './InjectBuzzword.svelte';
@@ -287,7 +289,13 @@
             console.debug(`There has been an error: ${error}`);
             errorFlag = true
         }
-    })
+
+        if (window.location.hash) {
+            elementReady(window.location.hash).then(() => {
+                document.getElementById(window.location.hash.substring(1)).scrollIntoView()
+            });
+        }
+    });
 
 </script>
 {#if loaded}
