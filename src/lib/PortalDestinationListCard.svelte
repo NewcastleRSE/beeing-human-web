@@ -25,47 +25,53 @@
         link = link.split('#')[1];
         linkString = `${base}/${section}#${link}`
 
-        let htmlString = undefined;
+        // Only used with DOMParser
+        // let htmlString = undefined;
+        
         let fetchedHtml = undefined;
+        let portals = undefined;
         section = capitaliseFirstLetter(section);
 
-        // If the Portal link is to a buzzword,  use the portals/buzzwords api
-        if (section.toLowerCase() === 'buzzwords') {
-            const response = await fetch('/api/portals/buzzwords')
-            const portalsBuzzwords = await response.json();
-            try {
-                const portalContent = portalsBuzzwords[link].content;
-                fetchedHtml = new DocumentFragment();
-                let paragraph = document.createElement('p');
-                paragraph.innerHTML = portalContent;
-                paragraph.id = link;
-                fetchedHtml.appendChild(paragraph);
+        try {
+            const response = await fetch(`${base}/api/portals/${section.toLowerCase()   }`)
+            portals = await response.json();
+        } catch (e) {
+            console.error('Could not fetch API')
+        }
+        try {
+            const portalContent = portals[link].content;
+            fetchedHtml = new DocumentFragment();
+            let paragraph = document.createElement('p');
+            paragraph.innerHTML = portalContent;
+            paragraph.id = link;
+            fetchedHtml.appendChild(paragraph);
 
-                // adjust the link
+            // adjust the link and section title for buzzwords
+            if (section.toLowerCase() === 'buzzwords') {
                 linkString = `${base}/connections#${link}`
                 // adjust section title
-                section = `Buzzwords -- ${portalsBuzzwords[link].id}`
-            } catch (e) {
-                console.error(`Could not find portal with ID ${link}, ${e}`)
+                section = `Buzzwords -- ${portals[link].id}`    
             }
-        } else {
-            // if it is to a regular page, fetch the page and render html
-            try {
-                const response = await fetch(linkString);
-                htmlString = await response.text();
-            } catch (e) {
-                console.error(`Could not fetch the preview from ${linkString}: ${e}`)
-            }
+        } catch (e) {
+            console.error(`Could not find portal with ID ${link}, ${e}`)
         }
 
-        if (htmlString != undefined) {
-            try {
-                let domParser = new DOMParser();
-                fetchedHtml = domParser.parseFromString(htmlString, "text/html");
-            } catch (e) {
-                console.error(`Could not parse the preview for  ${linkString}: ${e}`)
-            }
-        }
+        // if it is to a regular page, fetch the page and render html
+        // No longer in use -- previews are fetched through the APIs, but left here in case the entire page needs to be fetched and parsed in the browser
+        // try {
+        //     const response = await fetch(linkString);
+        //     htmlString = await response.text();
+        // } catch (e) {
+        //     console.error(`Could not fetch the preview from ${linkString}: ${e}`)
+        // }
+        // if (htmlString != undefined) {
+        //     try {
+        //         let domParser = new DOMParser();
+        //         fetchedHtml = domParser.parseFromString(htmlString, "text/html");
+        //     } catch (e) {
+        //         console.error(`Could not parse the preview for  ${linkString}: ${e}`)
+        //     }
+        // }
 
         if (fetchedHtml != undefined) {
             portalDestinationElement = DOMPurify.sanitize(fetchedHtml.getElementById(link).innerHTML)
