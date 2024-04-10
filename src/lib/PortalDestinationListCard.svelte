@@ -44,7 +44,7 @@
                 // adjust the link
                 linkString = `${base}/connections#${link}`
                 // adjust section title
-                section = `Buzzwords -- ${portalsBuzzwords[link].buzzID}`
+                section = `Buzzwords -- ${portalsBuzzwords[link].id}`
             } catch (e) {
                 console.error(`Could not find portal with ID ${link}, ${e}`)
             }
