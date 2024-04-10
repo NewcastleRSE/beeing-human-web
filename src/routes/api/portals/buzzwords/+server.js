@@ -2,6 +2,8 @@ import {json} from '@sveltejs/kit'
 import { getFileNameFromPathWithoutExtension } from '../../../../utils/stringOperations.js';
 import parseMD from 'parse-md'
 import * as cheerio from 'cheerio'
+import { marked } from 'marked';
+// Using marked introduces an error at build time that fails the build (probably because it tries to prerender a route that does not exist somehow) -- added an option to svelt.config.kit.prerender.handleHttpError to warn to finish the build with a warning. Does not seem to affect anything.
 
 export const prerender = true
 
@@ -30,7 +32,10 @@ function getBuzzwordsAPI() {
         if  ($portals.length > 0) {
             for (const $portal of $portals) {
                 const portalId = $doc($portal).attr('id');
-                const portalContent = $doc($portal).text();
+                let portalContent = $doc($portal).text();
+
+                // converts any existing markup into html
+                portalContent = marked.parse(portalContent)
                 // adds portal to the response object
                 portalBuzzwords[portalId] = {content: portalContent, buzzID: id}
             }

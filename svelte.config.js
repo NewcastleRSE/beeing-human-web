@@ -30,6 +30,9 @@ const config = {
       assets: '',
       relative: true,
     },
+    prerender: {
+      handleHttpError: 'warn',
+    }
   },
 
   preprocess: [preprocess(), mdsvex(mdsvexOptions)],
