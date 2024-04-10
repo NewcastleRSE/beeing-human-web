@@ -57,7 +57,7 @@
             <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
               <div class="px-4 sm:px-6">
                 <div class="flex items-start justify-between">
-                  <h2 class="text-base font-semibold leading-6 text-gray-900" id="slide-over-title">Panel title</h2>
+                  <h2 class="text-base font-semibold leading-6 text-gray-900" id="slide-over-title">Portals</h2>
                   <div class="ml-3 flex h-7 items-center">
                     <button type="button" class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" on:click={closePanel} on:keydown={closePanel}>
                       <span class="absolute -inset-2.5"></span>
