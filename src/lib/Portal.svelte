@@ -16,6 +16,7 @@
     import {v4 as uuidv4} from 'uuid'
 
     let showSidePanel = false;
+    let highlight = '';
     export let destination;
     // origin, destination, both -> default both
     export let type = 'both';
@@ -54,16 +55,20 @@
         if (id === undefined) {
             id = uuidv4();
         }
+
+        if (window.location.hash) {
+            highlight = "underline"
+        }
     })
 </script>
 
 {#if type == 'origin' || type == 'both'}
-    <span class="text-amber-600 bg-slate-300 rounded-md border-[1px] border-slate-600 px-1 hover:bg-slate-200 hover:text-amber-800 hover:font-semibold hover:cursor-pointer" on:mouseenter={showPopup} on:mouseleave={hidePopup} on:click={toggleSidePanel} on:keydown={toggleSidePanel} id={id}><slot/></span>
+    <span class="{highlight} text-amber-600 bg-slate-300 rounded-md border-[1px] border-slate-600 px-1 hover:bg-slate-200 hover:text-amber-800 hover:font-semibold hover:cursor-pointer" on:mouseenter={showPopup} on:mouseleave={hidePopup} on:click={toggleSidePanel} on:keydown={toggleSidePanel} id={id}><slot/></span>
 
     {#if showSidePanel}
         <PortalPanel on:close={toggleSidePanel} destination={destination}/>
     {/if}
 {:else if type == 'destination'}
-    <span id={id}><slot/></span>
+    <span id={id} class="{highlight}"><slot/></span>
 {/if}
 
