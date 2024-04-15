@@ -56,7 +56,7 @@
             id = uuidv4();
         }
 
-        if (window.location.hash) {
+        if (window.location.hash.substring(1) === id) {
             highlight = "underline"
         }
     })
