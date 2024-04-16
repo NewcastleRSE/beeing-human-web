@@ -33,7 +33,9 @@ describe('Test getPortalsAPI function', () => {
     it('should return an object with an error key if it contains malformed XML', () => {
         const fakePathObject = {
             '/good/path.md': 'This is a correct <Portal id="goodPortal">portal</Portal>',
-            '/bad/path.md': 'This <Portal>Portal never closes and is incorrect'
+            '/bad/path.md': 'This <Portal>Portal never closes and is incorrect',
+            '/mixed/path.md': 'This <Portal id="wellFormed">Portal</Portal> contains a mix of well and <Portal>badly formed portals',
+            '/another/mixed/path': 'This <Portal id="openPortal">document contains a good <Portal id="closedPortal">portal</Portal> inside a bad portal'
         }
 
         const result = getPortalsAPI(fakePathObject);

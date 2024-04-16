@@ -40,18 +40,47 @@ export function getPortalsAPI(listPaths) {
         // loads content as a cheerio object
         let $doc = undefined
         try {
-            // seems to be next to impossible to force an error on loading xml
-            $doc = cheerio.load(`<root>${content}</root>`);
+            // catches any errors loading xml (though it seems next to impossible to create one)
+            $doc = cheerio.load(`<root>${content}</root>`, {xml: {withEndIndices: true}});
         } catch(e) {
-            console.log(e);
+            if (portals.errors) {
+                portals.errors.push({[entryPath]: e});
+            } else {
+                portals.errors = [{[entryPath]: e}];
+            }
+            continue
+        }
+
+        // if it couldn't load xml but didn't produce an error
+        if ($doc === undefined) {
+            if (portals.errors) {
+                portals.errors.push({[entryPath]: e});
+            } else {
+                portals.errors = [{[entryPath]: e}];
+            }
+            continue
         }
 
         // gets any Portal elements
-        const $portals = $doc('Portal')
+        let $portals = undefined
+        try {
+            $portals = $doc('Portal')
+        } catch (e){
+            console.log(e);
+        }
 
         // If Portals exist, iterate through them 
         if  ($portals.length > 0) {
             for (const $portal of $portals) {
+                if ($portal.endIndex >= $portal.parent.endIndex) {
+                    // if end index of the portal is the same or bigger than their parent, the tag is likely malformed or not closed at all
+                    if (portals.errors) {
+                        portals.errors.push({[entryPath]: 'Portal tag is malformed'});
+                    } else {
+                        portals.errors = [{[entryPath]: 'Portal tag is malformed'}];
+                    }
+                    continue
+                }
                 const portalId = $doc($portal).attr('id');
                 let portalContent = $doc($portal).text();
 
