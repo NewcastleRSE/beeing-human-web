@@ -66,12 +66,18 @@ export function getPortalsAPI(listPaths) {
         try {
             $portals = $doc('Portal')
         } catch (e){
-            console.log(e);
+            if (portals.errors) {
+                portals.errors.push({[entryPath]: e});
+            } else {
+                portals.errors = [{[entryPath]: e}];
+            }
+            continue
         }
 
         // If Portals exist, iterate through them 
         if  ($portals.length > 0) {
             for (const $portal of $portals) {
+                
                 if ($portal.endIndex >= $portal.parent.endIndex) {
                     // if end index of the portal is the same or bigger than their parent, the tag is likely malformed or not closed at all
                     if (portals.errors) {
@@ -81,7 +87,13 @@ export function getPortalsAPI(listPaths) {
                     }
                     continue
                 }
-                const portalId = $doc($portal).attr('id');
+
+                let portalId = undefined;
+                portalId = $doc($portal).attr('id');
+                if (!portalId) {
+                    portalId = `undefined-${$portal.endIndex}`
+                }
+
                 let portalContent = $doc($portal).text();
 
                 // converts any existing markup into html
