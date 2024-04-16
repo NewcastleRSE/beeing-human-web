@@ -1,8 +1,7 @@
 <script>
-  import { view } from "../../stores/viewChoice";
-  import InjectMd from "../../lib/InjectMD.svelte";
+  import TeiSimple from "../../lib/TEISimple.svelte";
 </script>
 
-<h1>{$view}</h1>
+<h1>1609 display version</h1>
 
-<InjectMd chosenView={$view} section="intro" />
+<TeiSimple path="https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/dev/1609.xml"/>
