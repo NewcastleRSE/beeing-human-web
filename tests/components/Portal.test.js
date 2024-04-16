@@ -45,7 +45,7 @@ describe('Portal mounting tests', () => {
 describe('Portal interaction tests', () => {
     afterEach(() => cleanup());
 
-    it('should open a Portal panel if the portal is clicked', async () => {
+    it('should call function toggleSidePanel if the Portal is clicked', async () => {
         const toggleSidePanel = vi.fn();
         const user = userEvent.setup()
 
