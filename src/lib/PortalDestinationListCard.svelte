@@ -82,7 +82,7 @@
 </script>
 
 <div class="card">
-    <header class="card-header">
+    <header class="card-header" data-testid="card-header">
         {#await section}
             Loading...
         {:then section}
