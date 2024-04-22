@@ -33,7 +33,7 @@
         section = capitaliseFirstLetter(section);
 
         try {
-            const response = await fetch(`${base}/api/portals/${section.toLowerCase()   }`)
+            const response = await fetch(`${base}/api/portals/${section.toLowerCase()}`)
             portals = await response.json();
         } catch (e) {
             console.error('Could not fetch API')
