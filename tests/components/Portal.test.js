@@ -56,26 +56,5 @@ describe('Portal interaction tests', () => {
         expect(toggleSidePanel).toHaveBeenCalledOnce();
 
     });
-
-    it('should open and close the modal on clicking the portal', async() => {
-        const user = userEvent.setup()
-
-        render(Portal, {id:'openPortalTest', destination:['test#test']});
-
-        const portal = await screen.findByTestId('both-portal-openPortalTest')
-
-        await user.click(portal);
-
-        let modal = await screen.findByRole('dialog');
-
-        expect(modal).toBeTruthy();
-
-        const closeButton = await screen.findByRole('button');
-        await user.click(closeButton);
-        
-        modal = screen.getByRole('dialog');
-
-
-    })
     // Whether the modal opens or not should be and E2E test -- here we are just concerned with the correct function firing
 })
