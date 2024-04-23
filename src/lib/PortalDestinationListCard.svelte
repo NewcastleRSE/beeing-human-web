@@ -77,6 +77,7 @@
             portalDestinationElement = DOMPurify.sanitize(fetchedHtml.getElementById(link).innerHTML)
         } else {
             portalDestinationElement = '<p>Could not fetch preview</p>';
+            linkString = undefined;
         }
     })
 </script>
@@ -98,9 +99,13 @@
     </section>
     <footer class="card-footer">
         {#await linkString}
-            <p>Loading...</p>
-        {:then linkString} 
-            <a href={linkString}>&#11157</a>
+            <p>...</p>
+        {:then linkString}
+            {#if linkString}
+                <a href={linkString}>&#11157</a>
+            {:else}
+                <span data-testid="no-link">&#8655</span>
+            {/if}
         {/await}
     </footer>
 </div>
