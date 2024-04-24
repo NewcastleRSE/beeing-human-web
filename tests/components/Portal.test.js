@@ -15,16 +15,16 @@ describe('Portal mounting tests', () => {
     // testing slots at component level is discouraged (https://testing-library.com/docs/svelte-testing-library/example/#slots) -- leaving slot testing for E2E
 
     it('should have the appropriate class list if it is an "origin" or "both" portal', async () => {
-        const expectedClassList = "text-amber-600 bg-slate-300 rounded-md border-[1px] border-slate-600 px-1 hover:bg-slate-200 hover:text-amber-800 hover:font-semibold hover:cursor-pointer".split(' ')
+        const expectedClassList = "text-amber-600 bg-slate-300 rounded-md border-[1px] border-slate-600 px-1 hover:bg-slate-200 hover:text-amber-800 hover:font-semibold hover:cursor-pointer portal".split(' ')
         
         render(Portal, {id: 'originPortal', type: 'origin'})
         render(Portal, {id: 'bothPortal', type: 'both'})
 
         const originPortal = await screen.findByTestId('origin-portal-originPortal');
-        expect(Array.from(originPortal.classList)).toEqual(expectedClassList);
+        expect(Array.from(originPortal.classList).sort()).toEqual(expectedClassList.sort());
 
         const bothPortal = await screen.findByTestId('origin-portal-originPortal');
-        expect(Array.from(bothPortal.classList)).toEqual(expectedClassList);
+        expect(Array.from(bothPortal.classList).sort()).toEqual(expectedClassList.sort());
 
     });
 
@@ -33,7 +33,7 @@ describe('Portal mounting tests', () => {
 
         const destPortal = await screen.findByTestId('destination-portal-emptyPortal');
 
-        expect(Array.from(destPortal.classList).length).toEqual(0);
+        expect(Array.from(destPortal.classList).length).toEqual(1);
     });
 
     it('should throw an error if the portal is created with an invalid id', () => {
