@@ -27,7 +27,7 @@
 
 </script>
 
-<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true" data-testid="portal-panel">
     <!--
       Background backdrop, show/hide based on slide-over state.
   

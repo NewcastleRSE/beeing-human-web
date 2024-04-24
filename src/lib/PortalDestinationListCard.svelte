@@ -82,7 +82,7 @@
     })
 </script>
 
-<div class="card">
+<div class="card" data-testid="portal-panel-card">
     <header class="card-header" data-testid="card-header">
         {#await section}
             Loading...
@@ -90,14 +90,14 @@
             {section}
         {/await}
     </header>
-    <section class="p-4" id="{link}-loaded-content">
+    <section class="p-4" id="{link}-loaded-content" data-testid="card-section">
         {#if portalDestinationElement != undefined}
             {@html portalDestinationElement}
         {:else}
             <p>Loading...</p>
         {/if}
     </section>
-    <footer class="card-footer">
+    <footer class="card-footer" data-testid="card-footer">
         {#await linkString}
             <p>...</p>
         {:then linkString}
