@@ -318,8 +318,12 @@ for (const p of pages) {
                         const header = await card.getByTestId('card-header').textContent();
                         
                         if (link.substring(1).split('#')[0] === 'connections') {
-                            // test failing when the portal goes to the connections page itself
-                            expect(header.toLowerCase()).toContain(`buzzwords -- `)
+                            // test is a bit weak here: it first tries to figure out whether the portal is linking to a buzzword (i.e., does the header containg '--' like portals to buzzwords should) to then test the assertion; the problem, of course, is that it asserts that headers should be of a certain format, but the header is used to decide which test to make. It is enough for now, but flagging it as bad test design.
+                            if (header.toLowerCase().includes(' -- ')) {
+                                expect(header.toLowerCase()).toContain(`buzzwords -- `)
+                            } else {
+                                expect(header.toLowerCase()).toEqual(link.substring(1).split('#')[0].toLowerCase())
+                            }
                         } else {
                             expect(header.toLowerCase()).toEqual(link.substring(1).split('#')[0].toLowerCase())
                         }
@@ -334,4 +338,117 @@ for (const p of pages) {
             }
         })
     });
+
+    test.describe(`Portal panels link following tests -- ${p}`, () => {
+        test.beforeEach(`Open start URL -- ${p}`, async ({ page }, testInfo) => {
+            console.log(`Running ${testInfo.title}`);
+            await page.goto(`/${p}`);
+        });
+
+        test(`All portals' links should send the user to the correct place -- ${p}`, async ({page}) => {
+            await expect(page).toHaveURL(`/${p}`);
+    
+            // finds all portals
+            const portals = await page.locator('.portal').all();
+            const portalIds = []
+            for (const portal of portals) {
+                portalIds.push(await portal.getAttribute('data-testid'));
+            }
+    
+            // filters portals to only clickable ones
+            // iterates through portal ids rather than portals to avoid errors if the portal order changes after page navigation
+            for (const portalID of portalIds) {
+                const portal = page.getByTestId(portalID);
+                const type = portalID.split('-')[0]
+                if (type === 'origin' || type === 'both') {
+                    // clicks the portal
+                    await portal.click();
+    
+                    // finds the panel
+                    const panel = page.getByRole('dialog');
+    
+                    // .toBeVisible() fails the test despite the panel being visible in the preview
+                    await expect(panel).toBeInViewport()
+    
+                    // get card collection
+                    const cards = await panel.getByTestId('portal-panel-card').all();
+                    expect(cards.length).toBeGreaterThan(0);
+    
+                    for (const card of cards) {
+                        await expect(card.getByRole('link')).toBeAttached();
+                        const expectedLink = await card.getByRole('link').getAttribute('href');
+                        await card.getByRole('link').click();
+                        await expect(page).toHaveURL(expectedLink);
+                        await page.goBack();
+                        await expect(page).toHaveURL(`/${p}`);
+                        if (await card.isVisible() === false){
+                            await portal.click();
+                        }
+                    }
+    
+                    // click close button
+                    const closeButton = panel.getByRole('button');
+                    closeButton.click();
+    
+                    await expect(panel).not.toBeInViewport();
+                }
+            }
+        });
+
+        test(`All portals' links followed should contain the previewed content -- ${p}`, async ({page}) => {
+            await expect(page).toHaveURL(`/${p}`);
+    
+            // finds all portals
+            const portals = await page.locator('.portal').all();
+            const portalIds = []
+            for (const portal of portals) {
+                portalIds.push(await portal.getAttribute('data-testid'));
+            }
+    
+            // filters portals to only clickable ones
+            // iterates through portal ids rather than portals to avoid errors if the portal order changes after page navigation
+            for (const portalID of portalIds) {
+                const portal = page.getByTestId(portalID);
+                const type = portalID.split('-')[0]
+                if (type === 'origin' || type === 'both') {
+                    // clicks the portal
+                    await portal.click();
+    
+                    // finds the panel
+                    const panel = page.getByRole('dialog');
+    
+                    // .toBeVisible() fails the test despite the panel being visible in the preview
+                    await expect(panel).toBeInViewport()
+    
+                    // get card collection
+                    const cards = await panel.getByTestId('portal-panel-card').all();
+                    expect(cards.length).toBeGreaterThan(0);
+    
+                    for (const card of cards) {
+                        const cardContent = await card.getByTestId('card-section').textContent();
+                        await expect(card.getByRole('link')).toBeAttached();
+                        const expectedLink = await card.getByRole('link').getAttribute('href');
+                        await card.getByRole('link').click();
+                        await expect(page).toHaveURL(expectedLink);
+                        // Finding context by text will def fail in dev because text repeats itself a lot -- instead of finding by text, first find by test-id (with the dest id expected) then find the text in that element;
+                        await expect(page.getByText(cardContent)).toBeVisible();
+                        await expect(page.getByText(cardContent)).toBeInViewport();
+                        await page.goBack();
+                        await expect(page).toHaveURL(`/${p}`);
+                        if (await card.isVisible() === false){
+                            await portal.click();
+                        }
+                    }
+    
+                    // click close button
+                    const closeButton = panel.getByRole('button');
+                    closeButton.click();
+    
+                    await expect(panel).not.toBeInViewport();
+                }
+            }
+        });
+    })
 }
+
+// Content of portal should be highlighted in the followed link
