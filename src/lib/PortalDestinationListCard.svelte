@@ -33,7 +33,7 @@
         section = capitaliseFirstLetter(section);
 
         try {
-            const response = await fetch(`${base}/api/portals/${section.toLowerCase()   }`)
+            const response = await fetch(`${base}/api/portals/${section.toLowerCase()}`)
             portals = await response.json();
         } catch (e) {
             console.error('Could not fetch API')
@@ -77,30 +77,35 @@
             portalDestinationElement = DOMPurify.sanitize(fetchedHtml.getElementById(link).innerHTML)
         } else {
             portalDestinationElement = '<p>Could not fetch preview</p>';
+            linkString = undefined;
         }
     })
 </script>
 
-<div class="card">
-    <header class="card-header">
+<div class="card" data-testid="portal-panel-card">
+    <header class="card-header" data-testid="card-header">
         {#await section}
             Loading...
         {:then section}
             {section}
         {/await}
     </header>
-    <section class="p-4" id="{link}-loaded-content">
+    <section class="p-4" id="{link}-loaded-content" data-testid="card-section">
         {#if portalDestinationElement != undefined}
             {@html portalDestinationElement}
         {:else}
             <p>Loading...</p>
         {/if}
     </section>
-    <footer class="card-footer">
+    <footer class="card-footer" data-testid="card-footer">
         {#await linkString}
-            <p>Loading...</p>
-        {:then linkString} 
-            <a href={linkString}>&#11157</a>
+            <p>...</p>
+        {:then linkString}
+            {#if linkString}
+                <a href={linkString}>&#11157</a>
+            {:else}
+                <span data-testid="no-link">&#8655</span>
+            {/if}
         {/await}
     </footer>
 </div>

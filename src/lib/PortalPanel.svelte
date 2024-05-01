@@ -27,7 +27,7 @@
 
 </script>
 
-<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true" data-testid="portal-panel">
     <!--
       Background backdrop, show/hide based on slide-over state.
   
@@ -69,7 +69,7 @@
                   </div>
                 </div>
               </div>
-              <div class="relative mt-6 flex-1 px-4 sm:px-6">
+              <div class="relative mt-6 flex-1 px-4 sm:px-6" data-testid="portal-panel-card-list-div">
                 {#each destination as link}
                     <PortalDestinationListCard {link}/>
                 {/each}
