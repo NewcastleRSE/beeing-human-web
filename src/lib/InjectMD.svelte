@@ -3,7 +3,6 @@
   import SvelteMarkdown from "svelte-markdown";
 
   export let content = undefined;
-
   
 </script>
 
@@ -16,7 +15,7 @@
   <InjectMD content = 'This string contains **markdown** syntax'/>
   ```
 -->
-
+<!-- <svelte:component this={}/> -->
 {#if content === undefined}
   <ProgressRadial value={undefined} />
 {:else}

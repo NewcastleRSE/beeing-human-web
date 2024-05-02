@@ -1,9 +1,21 @@
 import preprocess from "svelte-preprocess";
 import adapter from "@sveltejs/adapter-static";
 
+import {mdsvex} from 'mdsvex'
+
+const mdsvexOptions = {
+  extensions: ['.md'],
+  smartypants: {
+    quotes: false,
+    ellipses: true,
+    backticks: true,
+    dashes: true
+  }
+}
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  extensions: [".svelte"],
+  extensions: [".svelte", '.md'],
 
   kit: {
     // adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
@@ -18,9 +30,12 @@ const config = {
       assets: '',
       relative: true,
     },
+    prerender: {
+      handleHttpError: 'warn',
+    }
   },
 
-  preprocess: [preprocess()],
+  preprocess: [preprocess(), mdsvex(mdsvexOptions)],
 };
 
 export default config;
