@@ -13,7 +13,7 @@
   -->
 
 <script>
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
 
   export let buzzName = undefined;
   let buzzword = undefined;
@@ -34,7 +34,12 @@
         errorCode = 2
       }
     }
+    console.log(`Mounting buzz with id ${buzzName}`)
   });
+
+  onDestroy(async () => {
+    console.log(`Destroying buzz with id ${buzzName}`);
+  })
 </script>
 
 {#if buzzword != undefined && errorCode == 0 }
