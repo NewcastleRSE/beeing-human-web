@@ -319,7 +319,7 @@
                 <p>No buzzwords match your criteria</p>
             </div>
         {:else}
-            {#each filteredBuzzwords as buzzword}
+            {#each filteredBuzzwords as buzzword (buzzword.id)}
                 <div class="card" data-testid="buzzword-card" id={buzzword.id}>
                     <header class="card-header">
                         {#if buzzword.date}
