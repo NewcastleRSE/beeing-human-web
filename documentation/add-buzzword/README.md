@@ -51,20 +51,39 @@ tags: technology, connections, collaboration, methodology
 
 ![writing content](./img/02_write_content.png)
 
-- If you want to add an image, the file must be uploaded to a different location. From the root of the repository([https://github.com/NewcastleRSE/beeing-human-web/](https://github.com/NewcastleRSE/beeing-human-web/)), navigate to `static`, then `content`, then `connections`, then `buzzwords`, then `img`. Upload your image to that folder. Finally, add the following code to your buzzword markdown file:
+- If you want to add an image, the file must be uploaded to a different location. From the root of the repository([https://github.com/NewcastleRSE/beeing-human-web/](https://github.com/NewcastleRSE/beeing-human-web/)), navigate to `static`, then `content`, then `connections`, then `buzzwords`, then `img`. Upload your image to that folder. Immediately below the header of your markdown file, add the following:
+```js
+<script>
+    import { base } from "$app/paths";
+</script>
+```
+ Finally, add the following code to your buzzword markdown file:
 
 ```
-![DESCRIPTION OF THE IMAGE](/content/connections/buzzwords/img/FILENAME.PNG)
+![DESCRIPTION OF THE IMAGE]({base}/content/connections/buzzwords/img/FILENAME.PNG)
 ```
 
 - For my test buzzword, I have the following:
 ```
-![my view of the buzzword system](/content/connections/buzzwords/img/buzzword_system.png)
+![my view of the buzzword system]({base}/content/connections/buzzwords/img/buzzword_system.png)
 ```
 
  - You can use the `Preview` button to get a sense of what the finished text will look like. The header should appear as a table -- if it does, it is formattted correctly. If you have any images, they will not be visible in the preview, but you should see a link to the image. If you don't see a link, please make sure the path to the image (the bit in parenthesis in the code above) is correct.
  ![preview](./img/04_preview.png)
 
+- The entire contents of my test buzzwords are as follows:
+```md
+---
+author: Tiago
+date: 2023-12-01
+tags: technology, connections, collaboration, methodology, buzzwords
+---
+<script>
+    import { base } from "$app/paths";
+</script>
+The biggest challenge in designing the **buzzword** system (in addition to the many technical challenges of creating filtering and searching options), was to create a system that would be able to balance the (mostly static, long-term and cost-efficient) technology with ease of use. It is crucial that everyone in the team is capable of adding **buzzwords** at any time, at will; but doing so in a user-friendly manner without using expensive content management systems is tricky. The solution we have now -- github based, markdown files -- is not perfect, but it will hopefully be easy enough for everyone. Only time will tell.
+![my view of the buzzword system]({base}/content/connections/buzzwords/img/buzzword_system.png)
+```
 - Once you are happy with your buzzword click `Commit changes`
 
 ![commit changes](./img/03_commit_changes.png)
