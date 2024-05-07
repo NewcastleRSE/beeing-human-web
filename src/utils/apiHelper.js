@@ -1,7 +1,8 @@
-import { getFileNameFromPathWithoutExtension } from './stringOperations'
+import { getFileNameFromPathWithoutExtension, getListOfUniqueElements } from './stringOperations'
 import parseMD from 'parse-md'
 import * as cheerio from 'cheerio'
 import { marked } from 'marked';
+
 // Using marked introduces an error at build time that fails the build (probably because it tries to prerender a route that does not exist somehow) -- added an option to svelt.config.kit.prerender.handleHttpError to warn to finish the build with a warning. Does not seem to affect anything.
 
 export function getPortalsAPI(listPaths) {
@@ -105,4 +106,34 @@ export function getPortalsAPI(listPaths) {
     }
 
     return portals
+}
+
+export function getBuzzwordsObject(listPaths) {
+    let buzzwords = []
+    let buzzwordTags = []
+    let buzzwordAuthors = []
+    for (const buzz in listPaths) {
+      let path = JSON.stringify(buzz);
+      let id = getFileNameFromPathWithoutExtension(path);
+      // still need to get the content here, despite not using it for display, so that the searchbar functions can work;
+      const {metadata, content} = parseMD(listPaths[buzz]);
+      if (metadata.tags) {
+        // splits the tags into an array, ensuring they are all lowercase
+        metadata.tags = metadata.tags.toLowerCase().split(', ');
+        metadata.author = metadata.author.toLowerCase();
+      }
+      metadata.date = new Date(metadata.date)
+      buzzwords.push({...metadata, id: id, content:content});
+    }
+
+    // create list of tags for buzzwords
+    let tags = buzzwords.map(entry => entry.tags).flat();
+    
+    // get a list of unique elements in the array and remove any undefined
+    buzzwordTags = getListOfUniqueElements(tags);
+
+    // create a list of authors
+    buzzwordAuthors = getListOfUniqueElements(buzzwords.map(entry => entry.author));
+
+    return {buzzwords, buzzwordTags, buzzwordAuthors}
 }
