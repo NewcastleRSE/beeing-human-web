@@ -5,3 +5,5 @@ https://medium.com/mkdir-awesome/a-piece-of-cake-deploying-sveltekit-on-github-p
 # Setting up internal routing in gh-pages
 
 https://javascript.plainenglish.io/sveltekit-github-pages-4fe2844773de
+
+<!-- just adding a pointless change to test git commits on new laptop -->
