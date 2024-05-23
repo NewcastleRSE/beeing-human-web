@@ -318,6 +318,9 @@ tei-figure {
   margin-left: auto;
   margin-right: auto;
 }
+tei-foreign {
+  font-style: italic;
+}
 /* g */
 tei-gap[data-tei-reason='lost']:before {
   content:'[';
