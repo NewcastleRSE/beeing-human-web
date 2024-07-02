@@ -65,6 +65,16 @@ export let teiBehaviours = {
             if (elt.getAttribute('target') === '#') {
                 console.log('Ignoring empty refs...')
             } else {
+                let indexOfAlpha = []
+                let indexOfDigit = []
+                for (let index = 0; index < elt.innerText.lenght; index++) {
+                    if (!parseInt(elt.innerText[index])) {
+                        indexOfAlpha.push(index)
+                    } else {
+                        indexOfDigit.push(index)
+                    }
+                }
+                console.log(indexOfAlpha, indexOfDigit)
                 var link = document.createElement('a');
                 link.href = elt.getAttribute('target');
                 link.innerHTML = elt.innerHTML;
