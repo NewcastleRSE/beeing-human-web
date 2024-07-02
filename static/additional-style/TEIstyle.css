@@ -1059,3 +1059,13 @@ tei-head[type="chapter-title"] {
   text-align: center;
   font-style: italic;
 }
+
+/* Additional classes */
+
+.form-italics {
+  font-style: italic;
+}
+
+tei-hi[rend="opposite"] {
+  font-style: normal;
+}

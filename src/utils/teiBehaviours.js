@@ -36,8 +36,18 @@ export let teiBehaviours = {
 
             ["[subtype=summary]",
                 function (elt) {
-                    console.log(elt.innerText);
-                    // find the break point between ". " wrap each side in a span, use a class to italicise one half and not the other
+                    const content = elt.innerText.split('. ');
+                    elt.innerText = `${content[0]}. `
+                    const itSpan = document.createElement('span');
+                    if (content.lenght <= 2) {
+                        itSpan.innerText = content[1];
+                    } else {
+                        const italics = content.slice(1);
+                        itSpan.innerText = italics.join(". ");
+
+                    }
+                    itSpan.classList.add('form-italics');
+                    elt.appendChild(itSpan);
                 }
             ]
         ],
