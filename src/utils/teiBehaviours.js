@@ -6,9 +6,9 @@
 export let teiBehaviours = {
     "tei": {
         "note": [
-            ["[type=gloss]", 
-                function(elt) {
-                    if (!this.noteIndex){
+            ["[type=gloss]",
+                function (elt) {
+                    if (!this.noteIndex) {
                         this["noteIndex"] = 1;
                     } else {
                         this.noteIndex++;
@@ -34,8 +34,8 @@ export let teiBehaviours = {
                 }
             ]
         ],
-        "ptr": function(elt) {
-            if (elt.getAttribute('target') === '#'){
+        "ptr": function (elt) {
+            if (elt.getAttribute('target') === '#') {
                 console.log('Ignoring empty ptrs...')
             } else {
                 var link = document.createElement('a');
@@ -43,8 +43,8 @@ export let teiBehaviours = {
                 link.innerHTML = '>';
                 return link
             }
-        }, 
-        "ref": function(elt) {
+        },
+        "ref": function (elt) {
             if (elt.getAttribute('target') === '#') {
                 console.log('Ignoring empty refs...')
             } else {
@@ -53,38 +53,38 @@ export let teiBehaviours = {
                 link.innerHTML = elt.innerHTML;
                 return link
             }
-        }, 
-        "graphic": function(elt) {
+        },
+        "graphic": function (elt) {
             if (elt.getAttribute('url') === '#') {
                 console.log('Ignoring non-existent graphics...')
             }
         },
-        "pb": function(elt){
+        "pb": function (elt) {
             var sig = document.createElement('p');
             sig.innerHTML = elt.getAttribute('n');
             sig.classList.add('signature')
             return sig
         },
-        "app": function(elt) {
+        "app": function (elt) {
             // populate children with subtype
             for (const child of elt.children) {
                 child.classList.add(`var-${elt.getAttribute('subtype')}`)
             }
         },
-        "rdg": function(elt){
+        "rdg": function (elt) {
             if (elt.hasAttribute('data-empty')) {
                 elt.innerHTML = '[Does not exist in 1609]'
             }
         },
-        "lem": function(elt){
+        "lem": function (elt) {
             if (elt.hasAttribute('data-empty')) {
                 elt.innerHTML = '[+1609]'
             }
         },
         "fw": [
-            ["[type=horizontalRule]", function(elt){
+            ["[type=horizontalRule]", function (elt) {
                 return document.createElement('hr')
-        }]
-    ]
+            }]
+        ]
     }
 }
