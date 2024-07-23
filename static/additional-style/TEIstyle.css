@@ -1090,3 +1090,12 @@ tei-fw[type="header"] {
 tei-note[type="editorial"] {
   visibility: hidden;
 }
+
+/* terms / foreign inside notes */
+tei-seg[rend="italic"] > tei-term ,
+tei-note[subtype="summary"] > tei-term,
+tei-seg[rend="italic"] > tei-persname,
+tei-note > tei-foreign,
+tei-seg[rend="italic"] > tei-foreign {
+  font-style: normal;
+}
