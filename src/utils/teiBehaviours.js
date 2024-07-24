@@ -45,12 +45,27 @@ export let teiBehaviours = {
             }
         },
         "ref": function (elt) {
+            let sup = false
+            if (elt.getAttribute('rend') === 'superscript') {
+                sup = true
+            }
             if (elt.getAttribute('target') === '#') {
                 console.log('Ignoring empty refs...')
+                if (sup) {
+                    const supEl = document.createElement('sup');
+                    supEl.append(elt)
+                    return sup
+                }
             } else {
                 var link = document.createElement('a');
                 link.href = elt.getAttribute('target');
-                link.innerHTML = elt.innerHTML;
+                if (sup) {
+                    const supEl = document.createElement('sup');
+                    supEl.innerHTML = elt.innerHTML;
+                    link.append(supEl);
+                } else {
+                    link.innerHTML = elt.innerHTML;
+                }
                 return link
             }
         },
@@ -85,6 +100,9 @@ export let teiBehaviours = {
             ["[type=horizontalRule]", function (elt) {
                 return document.createElement('hr')
             }]
+        ],
+        "hi": [
+            ["[rend=superscript]", ["<sup>", "</sup>"]]
         ]
     }
 }

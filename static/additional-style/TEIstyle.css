@@ -145,6 +145,9 @@ tei-bibl[data-tei-rend~="block"], bibl[data-tei-rendition~="#block"] {
   padding-left: 2em;
   text-indent: -2em;
 }
+tei-quote tei-bibl {
+  font-style: normal;
+}
 tei-biblFull {
   display: block;
 }
@@ -1022,6 +1025,13 @@ tei-note[type="authorial"] {
   clear:both;
 }
 
+tei-note[place="inline"] {
+  float:unset;
+  margin-left: unset;
+  max-width: unset;
+  clear: unset;
+}
+
 tei-note[subtype="bibliographic"] {
   float:right;
   margin-left: unset;
@@ -1062,11 +1072,30 @@ tei-head[type="chapter-title"] {
 
 /* Additional classes */
 
-tei-hi[rend="opposite"] {
+tei-hi[rend="opposite"], tei-seg[rend="normal"] {
   font-style: normal;
 }
 
 /* for form italics in marginal notes and refs */
 tei-seg[rend="italic"] {
   font-style: italic;
+}
+
+/* running headers */
+tei-fw[type="header"] {
+  font-style: italic;
+}
+
+/* hide editorial notes at this stage */
+tei-note[type="editorial"] {
+  visibility: hidden;
+}
+
+/* terms / foreign inside notes */
+tei-seg[rend="italic"] > tei-term ,
+tei-note[subtype="summary"] > tei-term,
+tei-seg[rend="italic"] > tei-persname,
+tei-note > tei-foreign,
+tei-seg[rend="italic"] > tei-foreign {
+  font-style: normal;
 }
