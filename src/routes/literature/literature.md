@@ -1,6 +1,7 @@
 <script>
     import TEISimple from '$lib/TEISimple.svelte'
     import Portal from '$lib/Portal.svelte'
+    import IiifViewer from '$lib/IIIFViewer.svelte'
 
     let dest = ['music#mus1']
 </script>
@@ -16,5 +17,7 @@ Donec faucibus iaculis nunc, dapibus egestas quam. Proin eget ultricies augue. I
 
 ## Writing a new section
 This is how you would add a new section to the website. Here's some extra dummy text to fill up the paragraph: sed viverra orci. Donec fermentum eleifend neque sed tempus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam sit amet purus consequat, hendrerit enim non, efficitur massa. Sed vitae finibus metus. Cras eleifend vestibulum luctus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent laoreet nibh nunc, vel ultrices lorem aliquam vel. Nam quis sodales tellus. Cras consectetur nibh non ante dictum, ut dignissim massa imperdiet. Donec porta enim nunc, sit amet condimentum augue ullamcorper eget.
+
+<IiifViewer/>
 
 <TEISimple path="https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/dev/1623_consolidated.xml"/>
