@@ -18,6 +18,8 @@
     import { base } from "$app/paths";
     import {teiBehaviours} from '../utils/teiBehaviours';
 
+    import IiifViewer from './IIIFViewer.svelte';
+
     let loaded = false;
     let error = undefined;
     export let path = '';
@@ -44,6 +46,8 @@
 <svelte:head>
     <link rel="stylesheet" type="text/css" href="{base}/additional-style/TEIstyle.css"/>
 </svelte:head>
+
+<IiifViewer/>
 
 <div id='TEI-container' data-testid="TEI-container">
     {#if !loaded}
