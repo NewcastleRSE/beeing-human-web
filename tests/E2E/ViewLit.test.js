@@ -83,5 +83,13 @@ test.describe('Page has TEI content', () => {
     //         expect(page.getByRole('link', { name: '1', exact: true })).toBeVisible()
     //     ]);
     // });
+});
+
+test.describe('Page has IIIF viewer content', () => {
+    test('Expect that page contains the IIIF viewer', async ({page}) => {
+        await page.goto('/literature');
+        const iiifViewer = page.getByTestId('iiif-viewer');
+        await expect(iiifViewer).toBeVisible();
+    })
 })
 
