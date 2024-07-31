@@ -9,8 +9,13 @@
 
     let iiif = undefined;
     let loaded = false;
-    export let manifest =
-        "https://iiif.archive.org/iiif/catalogueofbirds1623butl/manifest.json";
+    // export let manifest =
+    //     "https://iiif.archive.org/iiif/catalogueofbirds1623butl/manifest.json";
+
+    // alternative manifest
+    export let manifest = "https://iiif.archive.org/iiif/RAM2023-1081/manifest.json"
+
+    export let startPage = 5;
 
     onMount(async () => {
         if (browser) {
@@ -29,7 +34,10 @@
 
         iiif.ready.then( () => {
             // sets the starting page
-            iiif.setPage([21]);
+            // iiif.setPage([21]);
+
+            // for alternative manifest
+            iiif.setPage([startPage])
             
             // Remove the header -- some of this functionality might need to be moved somewhere else
             // const tifyHeader = document.getElementsByClassName('tify-header')[0]
