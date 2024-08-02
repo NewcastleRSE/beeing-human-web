@@ -34,6 +34,10 @@
         if (iiif) {
             iiif.ready.then(() => {
                 iiif.setPage([parseInt(startPage)]);
+                const iiifTitleHeader = document.getElementsByClassName('tify-header-title')[0];
+                if (iiifTitleHeader) {
+                    iiifTitleHeader.remove();
+                }
             })
         }
     });
