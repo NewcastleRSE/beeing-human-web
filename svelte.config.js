@@ -2,6 +2,8 @@ import preprocess from "svelte-preprocess";
 import adapter from "@sveltejs/adapter-static";
 
 import {mdsvex} from 'mdsvex'
+import rehypeClassNames from 'rehype-class-names'
+import { typography } from "./skeleton-typography.js";
 
 const mdsvexOptions = {
   extensions: ['.md'],
@@ -10,7 +12,10 @@ const mdsvexOptions = {
     ellipses: true,
     backticks: true,
     dashes: true
-  }
+  },
+  rehypePlugins: [
+    [rehypeClassNames, typography]
+  ]
 }
 
 /** @type {import('@sveltejs/kit').Config} */

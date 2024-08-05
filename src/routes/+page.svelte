@@ -12,19 +12,19 @@
 
 </script>
 
-<h1>Bee-ing Human</h1>
+<h1 class='h1'>Bee-ing Human</h1>
 <p>
   The web portal is in active development and in its initial stages. It is being
-  developed in <a href="https://svelte.dev/">Svelte</a> and is hosted on <InternalLink
+  developed in <a class="anchor" href="https://svelte.dev/">Svelte</a> and is hosted on <InternalLink
     link="">Github Pages</InternalLink
-  >. It uses the <a href="https://www.skeleton.dev">Skeleton</a> component
+  >. It uses the <a class="anchor" href="https://www.skeleton.dev">Skeleton</a> component
   library and
-  <a href="https://www.npmjs.com/package/svelte-markdown?activeTab=readme"
+  <a class="anchor" href="https://www.npmjs.com/package/svelte-markdown?activeTab=readme"
     >Svelte-Markdown</a
   > to render .md files into HTML.
 </p>
 
-<h2>New update</h2>
+<h2 class="h2">New update</h2>
 <ul>
   <li>
     Page loading is now automatically done by simply creating a new md file in
@@ -38,7 +38,7 @@
   <li>Render markdown according to each view</li>
   <li>Making sure the .nojekyll file becomes persistent.</li>
 </ul>
-<h3>Todos at this stage</h3>
+<h3 class="h3">Todos at this stage</h3>
 <ul>
   <li>Change theme based on selected view</li>
   <li>Error catching:</li>

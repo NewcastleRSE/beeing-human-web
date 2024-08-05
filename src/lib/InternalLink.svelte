@@ -23,4 +23,4 @@
       Will be the same as any other element with class 'btn'
 -->
 
-<a href="{base}/{link}" class={$$restProps.class || ""}><slot /></a>
+<a href="{base}/{link}" class={$$restProps.class || "anchor"}><slot /></a>
