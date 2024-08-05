@@ -1,3 +1,5 @@
+// Necessary for typographical conventions used by Skeleton.dev
+
 export const typography = {
     h1: 'h1',
     h2: 'h2',

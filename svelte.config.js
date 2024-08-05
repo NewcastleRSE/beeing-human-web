@@ -5,6 +5,7 @@ import {mdsvex} from 'mdsvex'
 import rehypeClassNames from 'rehype-class-names'
 import { typography } from "./skeleton-typography.js";
 
+// rehype plugin adds the class name necessary for Skeleton typography
 const mdsvexOptions = {
   extensions: ['.md'],
   smartypants: {
