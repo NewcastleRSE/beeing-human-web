@@ -35,14 +35,14 @@
     <!-- Main section -->
     <div class="clip-path-hexagonBorder w-[137px] h-[123px] bg-primary-600 relative">
         <InternalLink {link} class=group>
-            <div class="clip-path-hexagon absolute w-[124px] h-[110px] top-[7px] left-[7px]  bg-black/50 bg-[url('{backgroundImage}')] bg-blend-multiply group-hover:bg-black/75 transition-all ease-in-out duration-300 motion-reduce:transition-none flex justify-center items-center">
+            <div style="background-image: url({backgroundImage})" class="clip-path-hexagon absolute w-[124px] h-[110px] top-[7px] left-[7px]  bg-black/50 bg-blend-multiply group-hover:bg-black/75 transition-all ease-in-out duration-300 motion-reduce:transition-none flex justify-center items-center">
                 <p class="size-fit text-white md:text-xl">{capitaliseFirstLetter(link)}</p>
             </div>
         </InternalLink>
     </div>
 {:else if type === 'article'}
     <!-- Direct links -->
-    <div class="clip-path-hexagonBorder w-[137px] h-[123px] bg-secondary-50/75 bg-[url('https://picsum.photos/200')] bg-blend-overlay group hover:bg-secondary-900/75 transition-all ease-in-out duration-300 motion-reduce:transition-none">
+    <div style="background-image: url({backgroundImage})" class="clip-path-hexagonBorder w-[137px] h-[123px] bg-secondary-50/75 bg-blend-overlay group hover:bg-secondary-900/75 transition-all ease-in-out duration-300 motion-reduce:transition-none">
         <InternalLink {link} class="invisible group-hover:visible">
             <p class="size-fit no-underline text-white text-xs text-center">{text}</p>
         </InternalLink>

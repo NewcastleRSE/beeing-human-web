@@ -33,7 +33,6 @@ const config = {
     },
     paths: {
       base: process.argv.includes('dev') ? '' : process.env.BASE_PATH,
-      assets: '',
       relative: true,
     },
     prerender: {

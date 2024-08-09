@@ -1,9 +1,11 @@
 <script>
     import Cell from "./Cell.svelte";
+    import { base } from "$app/paths";
+
 </script>
 
 <div class="hidden md:block w-full mx-auto">
-    <div class="grid grid-cols-5 max-w-fit -space-x-4 mx-auto">
+    <div class="grid grid-cols-5 max-w-fit -space-x-6 mx-auto">
       <Cell type="empty" />
       <Cell
         type="article"
@@ -21,19 +23,19 @@
       <Cell type="empty" />
     </div>
   
-    <div class="grid grid-cols-5 max-w-fit -mt-14 -space-x-4 mx-auto">
+    <div class="grid grid-cols-5 max-w-fit -mt-14 -space-x-6 mx-auto">
       <Cell type="empty" />
       <Cell type="empty" />
       <Cell
         type="section"
         link="connections"
-        backgroundImage="https://picsum.photos/200"
+        backgroundImage="assets/galina-nelyubova-5RHW2DSBx3o-unsplash.jpg?url"
       />
       <Cell type="empty" />
       <Cell type="empty" />
     </div>
   
-    <div class="grid grid-cols-5 max-w-fit -mt-14 -space-x-4 mx-auto">
+    <div class="grid grid-cols-5 max-w-fit -mt-14 -space-x-6 mx-auto">
       <Cell type="empty" />
       <Cell
         type="article"
@@ -51,17 +53,22 @@
       <Cell type="empty" />
     </div>
 
-    <div class="grid grid-cols-5 max-w-fit -mt-14 -space-x-10 mx-auto">
-        <Cell type="section" link="science" backgroundImage="https://picsum.photos/200" />
-        <Cell type="empty" />
-        <Cell type="empty" />
-        <Cell type="empty" />
+    <div class="grid grid-cols-5 max-w-fit -mt-14 -space-x-16 mx-auto">
+      <Cell
+        type="article"
+        link="literature"
+        backgroundImage="https://picsum.photos/200"
+        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget metus turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;"
+      />
+        <Cell type="empty"/>
+        <Cell type="empty"/>
+        <Cell type="empty"/>
         <Cell type="section" link="music" backgroundImage="https://picsum.photos/200" />
       </div>
    
-    <div class="grid grid-cols-5 max-w-fit -mt-14 -space-x-4 mx-auto">
+    <div class="grid grid-cols-5 max-w-fit -mt-14 -space-x-6 mx-auto">
       <Cell type="empty" />
-      <Cell type="empty" />
+      <Cell type="section" link="science" backgroundImage="https://picsum.photos/200" />
       <Cell type="empty" />
       <Cell
         type="article"
@@ -72,7 +79,7 @@
       <Cell type="empty" />
     </div>
   
-    <div class="grid grid-cols-5 max-w-fit -mt-14 -space-x-4 mx-auto">
+    <div class="grid grid-cols-5 max-w-fit -mt-14 -space-x-6 mx-auto">
       <Cell type="empty" />
       <Cell type="empty" />
       <Cell type="empty" />
@@ -85,7 +92,7 @@
       />
     </div>
   
-    <div class="grid grid-cols-5 max-w-fit -mt-14 -space-x-4 mx-auto">
+    <div class="grid grid-cols-5 max-w-fit -mt-14 -space-x-6 mx-auto">
       <Cell type="empty" />
       <Cell type="empty" />
       <Cell type="empty" />
