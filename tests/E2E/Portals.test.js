@@ -76,7 +76,8 @@ for (const p of pages) {
             await relevantPortals[0].click();
 
             // finds the panel
-            const panel = page.getByRole('dialog');
+            const panel = page.getByTestId('portal-panel-visible');
+            console.log(panel);
 
             // .toBeVisible() fails the test despite the panel being visible in the preview
             await expect(panel).toBeInViewport();
@@ -101,7 +102,7 @@ for (const p of pages) {
             await relevantPortals[0].click();
 
             // finds the panel
-            const panel = page.getByRole('dialog');
+            const panel = page.getByTestId('portal-panel-visible');
 
             // .toBeVisible() fails the test despite the panel being visible in the preview
             await expect(panel).toBeInViewport()
@@ -127,7 +128,7 @@ for (const p of pages) {
                     await portal.click();
 
                     // finds the panel
-                    const panel = page.getByRole('dialog');
+                    const panel = page.getByTestId('portal-panel-visible');
 
                     // .toBeVisible() fails the test despite the panel being visible in the preview
                     await expect(panel).toBeInViewport()
@@ -148,7 +149,7 @@ for (const p of pages) {
             await page.goto(`/${p}`);
         });
 
-        test(`All clickable portal panels should contain one or more cars -- ${p}`, async({page}) => {
+        test(`All clickable portal panels should contain one or more cards -- ${p}`, async({page}) => {
             await expect(page).toHaveURL(`/${p}`);
 
             // finds all portals
@@ -162,7 +163,7 @@ for (const p of pages) {
                     await portal.click();
 
                     // finds the panel
-                    const panel = page.getByRole('dialog');
+                    const panel = page.getByTestId('portal-panel-visible');
 
                     // .toBeVisible() fails the test despite the panel being visible in the preview
                     await expect(panel).toBeInViewport()
@@ -194,7 +195,7 @@ for (const p of pages) {
                     await portal.click();
 
                     // finds the panel
-                    const panel = page.getByRole('dialog');
+                    const panel = page.getByTestId('portal-panel-visible');
 
                     // .toBeVisible() fails the test despite the panel being visible in the preview
                     await expect(panel).toBeInViewport()
@@ -230,7 +231,7 @@ for (const p of pages) {
                     await portal.click();
 
                     // finds the panel
-                    const panel = page.getByRole('dialog');
+                    const panel = page.getByTestId('portal-panel-visible');
 
                     // .toBeVisible() fails the test despite the panel being visible in the preview
                     await expect(panel).toBeInViewport()
@@ -268,7 +269,7 @@ for (const p of pages) {
                     await portal.click();
 
                     // finds the panel
-                    const panel = page.getByRole('dialog');
+                    const panel = page.getByTestId('portal-panel-visible');
 
                     // .toBeVisible() fails the test despite the panel being visible in the preview
                     await expect(panel).toBeInViewport()
@@ -304,7 +305,7 @@ for (const p of pages) {
                     await portal.click();
 
                     // finds the panel
-                    const panel = page.getByRole('dialog');
+                    const panel = page.getByTestId('portal-panel-visible');
 
                     // .toBeVisible() fails the test despite the panel being visible in the preview
                     await expect(panel).toBeInViewport()
@@ -365,7 +366,7 @@ for (const p of pages) {
                     await portal.click();
     
                     // finds the panel
-                    const panel = page.getByRole('dialog');
+                    const panel = page.getByTestId('portal-panel-visible');
     
                     // .toBeVisible() fails the test despite the panel being visible in the preview
                     await expect(panel).toBeInViewport()
@@ -415,7 +416,7 @@ for (const p of pages) {
                     await portal.click();
     
                     // finds the panel
-                    const panel = page.getByRole('dialog');
+                    const panel = page.getByTestId('portal-panel-visible');
     
                     // .toBeVisible() fails the test despite the panel being visible in the preview
                     await expect(panel).toBeInViewport()
@@ -481,7 +482,7 @@ for (const p of pages) {
                     await portal.click();
     
                     // finds the panel
-                    const panel = page.getByRole('dialog');
+                    const panel = page.getByTestId('portal-panel-visible');
     
                     // .toBeVisible() fails the test despite the panel being visible in the preview
                     await expect(panel).toBeInViewport()

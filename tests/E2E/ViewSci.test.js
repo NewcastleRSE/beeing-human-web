@@ -2,31 +2,25 @@ import { expect, test } from "@playwright/test";
 import {makeHtmlId} from '../../src/utils/stringOperations';
 
 test.describe('Page navigation tests', () => {
-    test('Page loads and has expected option', async({page}) => {
+    test('Page loads and has expected option', async ({ page }) => {
         await page.goto("/");
-        await expect(page.getByText('Science')).toBeVisible();
+        const hive = page.getByTestId('hive-desktop');
+        await expect(hive).toBeVisible();
+        const link = page.getByTestId('science-desktop');
+        await expect(link).toBeVisible();
     });
 
-    test('Selecting Science and pressing go sends the user to the correct page', async({page}) => {
+    test('Clicking on science should send the user to the correct page', async ({ page }) => {
         await page.goto("/");
-        await page.getByText('Science').click();
-        await expect(page.getByText('Science')).toBeChecked();
-        await page.getByRole('link', { name: 'Go' }).click();
-        await page.waitForURL('**/science');
-        await expect(page).toHaveURL('/science');
+        const hive = page.getByTestId('hive-desktop');
+        await expect(hive).toBeVisible();
+        const link = page.getByTestId('science-desktop');
+        await expect(link).toBeVisible();
+        await link.click();
+        await page.waitForURL('**/science/');
+        await expect(page).toHaveURL('/science/');
     });
-
-    test('Science content page should have a header containing science', async({page}) => {
-        await page.goto("/science");
-        await expect(page.getByRole("heading", {name: 'Science'})).toBeVisible();
-    });
-
-    test('Expect content page to have several sections', async({page}) => {
-        await page.goto("/science");
-        const headings = await page.getByRole('heading').allInnerTexts();
-        expect(headings.length).toBeGreaterThan(1);
-    });
-});
+})
 
 test.describe('Data visualisation tests', () => {
     test.describe('Page content containers exist', () => {

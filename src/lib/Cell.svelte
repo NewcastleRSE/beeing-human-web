@@ -7,6 +7,7 @@
     export let link = undefined;
     export let text = undefined;
     export let backgroundImage = undefined;
+    export let testid = undefined;
 
     onMount(async () => {
         if (!type) {
@@ -35,7 +36,7 @@
     <!-- Main section -->
     <div
         class="clip-path-hexagonBorder w-[137px] h-[123px] bg-primary-600 relative"
-    >
+    data-testid = {testid}>
         <InternalLink {link} class="group">
             <div
                 style="background-image: url({backgroundImage}); background-position: center;"
@@ -49,7 +50,7 @@
     </div>
 {:else if type === "article"}
     <!-- Direct links -->
-    <div class="">
+    <div class="" data-testid = {testid}>
         <InternalLink {link} class="group">
         <div
             style="background-image: url({backgroundImage}); background-position: center;"
@@ -61,5 +62,5 @@
         </InternalLink>
     </div>
 {:else if type === "empty"}
-    <div class="" />
+    <div class=""  data-testid = {testid}/>
 {/if}

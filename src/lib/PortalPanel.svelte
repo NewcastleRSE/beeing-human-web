@@ -54,7 +54,7 @@
               To: "translate-x-full"
           -->
           <div class="pointer-events-auto w-screen max-w-md">
-            <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+            <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl" data-testid="portal-panel-visible">
               <div class="px-4 sm:px-6">
                 <div class="flex items-start justify-between">
                   <h2 class="text-base font-semibold leading-6 text-gray-900" id="slide-over-title">Portals</h2>
