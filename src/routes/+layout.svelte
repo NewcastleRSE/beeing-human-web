@@ -1,20 +1,14 @@
 <script>
-  import { onMount } from "svelte";
-  
-  onMount(async () => {
-    // Your selected Skeleton theme:
-    await import("@skeletonlabs/skeleton/themes/theme-skeleton.css");
-  });
-
-  // This contains the bulk of Skeletons required styles:
-  import "@skeletonlabs/skeleton/styles/all.css";
-
-  // Finally, your application's global stylesheet (sometimes labeled 'app.css')
   import "../app.postcss";
 
-  import { LightSwitch } from "@skeletonlabs/skeleton";
+  import LogoLandingPage from "../lib/LogoLandingPage.svelte";
 </script>
 
-<LightSwitch />
+<header class="flex flex-col w-full items-center shrink mb-6 md:mb-32">
+  <LogoLandingPage />
+  <p class="font-serif text-center md:w-max md:text-lg">
+    An exploration of Charles Butler’s <em>The Feminine Monarchie</em>
+  </p>
+</header>
 
 <slot />

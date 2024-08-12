@@ -67,7 +67,8 @@ describe('Markdown formatting tests', () => {
 
         const paragraph = (await screen.findByText('At the end of chapter one,', {exact: false})).parentElement;
 
-        expect(paragraph.innerHTML).toContain('<blockquote>');
+        // expect(paragraph.innerHTML).toContain('<blockquote>');
+        expect(paragraph.parentElement.innerHTML).toContain("<blockquote");
     });
 
 })

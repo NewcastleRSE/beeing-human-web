@@ -2,7 +2,10 @@ import preprocess from "svelte-preprocess";
 import adapter from "@sveltejs/adapter-static";
 
 import {mdsvex} from 'mdsvex'
+import rehypeClassNames from 'rehype-class-names'
+import { typography } from "./skeleton-typography.js";
 
+// rehype plugin adds the class name necessary for Skeleton typography
 const mdsvexOptions = {
   extensions: ['.md'],
   smartypants: {
@@ -10,7 +13,10 @@ const mdsvexOptions = {
     ellipses: true,
     backticks: true,
     dashes: true
-  }
+  },
+  rehypePlugins: [
+    [rehypeClassNames, typography]
+  ]
 }
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -27,7 +33,6 @@ const config = {
     },
     paths: {
       base: process.argv.includes('dev') ? '' : process.env.BASE_PATH,
-      assets: '',
       relative: true,
     },
     prerender: {

@@ -4,16 +4,21 @@ import { daysOfTheWeek, monthsOfTheYear } from '../../src/utils/generalConstants
 test.describe('Page navigation tests', () => {
     test('Page loads and has expected option', async ({ page }) => {
         await page.goto("/");
-        await expect(page.getByText('Connections')).toBeVisible();
+        const hive = page.getByTestId('hive-desktop');
+        await expect(hive).toBeVisible();
+        const link = page.getByTestId('connections-desktop');
+        await expect(link).toBeVisible();
     });
 
-    test('Selecting Connections and pressing go sends the user to the correct page', async ({ page }) => {
+    test('Clicking on connections should send the user to the correct page', async ({ page }) => {
         await page.goto("/");
-        await page.getByText('Connections').click();
-        await expect(page.getByText('Connections')).toBeChecked();
-        await page.getByRole('link', { name: 'Go' }).click();
-        await page.waitForURL('**/connections');
-        await expect(page).toHaveURL('/connections');
+        const hive = page.getByTestId('hive-desktop');
+        await expect(hive).toBeVisible();
+        const link = page.getByTestId('connections-desktop');
+        await expect(link).toBeVisible();
+        await link.click();
+        await page.waitForURL('**/connections/');
+        await expect(page).toHaveURL('/connections/');
     });
 })
 
