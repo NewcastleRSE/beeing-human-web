@@ -1,8 +1,8 @@
-import { getFileNameFromPath } from '../../utils/stringOperations.js';
+import { getFileNameFromPath } from '../../../utils/stringOperations.js';
 import { base } from '$app/paths';
 import parseMD from 'parse-md';
 import { csvParse } from 'd3';
-import {getMean, getStdDeviation, getStdError, getGroups} from '../../utils/sciDataHelper.js'
+import {getMean, getStdDeviation, getStdError, getGroups} from '../../../utils/sciDataHelper.js'
 
 
 export async function load({ fetch }) {
