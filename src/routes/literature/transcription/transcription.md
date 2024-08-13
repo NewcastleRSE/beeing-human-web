@@ -1,6 +1,7 @@
 ---
 title: The Feminine Monarchie - transcription
-description: /transcription
+id: transcription
+lionk: /transcription
 leadText: 'Something about what this section is, to show up in the card; potentially could be carved out of some other part in the file'
 bannerImg: 'someImgFile.jpg'
 ---

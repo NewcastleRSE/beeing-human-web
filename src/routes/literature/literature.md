@@ -1,8 +1,9 @@
 <script>
     import TranscriptionViewer from '$lib/TranscriptionViewer.svelte'
     import Portal from '$lib/Portal.svelte'
-
+    
     let dest = ['music#mus1']
+
 </script>
 
 # Literature
