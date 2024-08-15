@@ -1,10 +1,16 @@
 <script>
     import TranscriptionViewer from '$lib/TranscriptionViewer.svelte'
     import Portal from '$lib/Portal.svelte'
+    import SectionHero from '$lib/SectionHero.svelte'
     
     let dest = ['music#mus1']
 
 </script>
+
+<SectionHero title='Literature'>
+    Lorem Isntesque consequat orci in dui consectetur ultrices. Sed commodo arcu ac erat viverra bibendum sit amet sed nunc. Quisque cursus neque id sem semper, a tempor turpis tempor. Nam condimentum magna a libero laoreet, eget cursus eros
+</SectionHero>
+
 
 # Literature
 
