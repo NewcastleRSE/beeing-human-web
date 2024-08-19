@@ -58,7 +58,7 @@
       />
       <SectionSelector {section} />
     </div>
-    <Breadcrumbs {path} class="relative -left-4 md:left-0" />
+    <Breadcrumbs {path} class="md:left-0" />
   </header>
 </div>
 
