@@ -137,3 +137,13 @@ export function getBuzzwordsObject(listPaths) {
 
     return {buzzwords, buzzwordTags, buzzwordAuthors}
 }
+
+export function getArticleMetadata(listArticles) {
+    const articles = {};
+    for (const path in listArticles) {
+        let id = getFileNameFromPathWithoutExtension(path);
+        const {metadata, _} = parseMD(listArticles[path]);
+        articles[id] = {...metadata}
+    }
+    return articles
+}

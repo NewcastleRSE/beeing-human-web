@@ -1,9 +1,10 @@
 ---
 title: The Feminine Monarchie - transcription
 id: transcription
-lionk: /transcription
-leadText: 'Something about what this section is, to show up in the card; potentially could be carved out of some other part in the file'
-bannerImg: 'someImgFile.jpg'
+parent: literature
+link: /transcription
+lead: 'Something about what this section is, to show up in the card; potentially could be carved out of some other part in the file'
+img: 'someImgFile.jpg'
 ---
 <script>
     import TranscriptionViewer from '$lib/TranscriptionViewer.svelte'

@@ -1,0 +1,28 @@
+{
+    "literature": {
+        "title": "Literature",
+        "type": "section",
+        "lead": "Eventually, printing enabled other forms of publishing besides books. The history of newspaper publishing began in Germany in 1609, with the publishing of magazines following in 1663."
+    },
+    "music": {
+        "title": "Music",
+        "type": "section",
+        "lead": "Where a piece cannot readily be broken into sectional units (though it might borrow some form from a poem, story or programme), it is said to be through-composed. Such is often the case with a fantasia, prelude, rhapsody, etude (or study), symphonic poem, Bagatelle, impromptu or similar composition."
+    },
+    "science": {
+        "title": "Science",
+        "type": "section",
+        "lead": "Most scientific journals cover a single scientific field and publish the research within that field; the research is normally expressed in the form of a scientific paper. Science has become so pervasive in modern societies that it is considered necessary to communicate the achievements, news, and ambitions of scientists to a wider population."
+    },
+    "connections": {
+        "title": "Connections",
+        "type": "section",
+        "lead": "Etiam vitae posuere elit. Maecenas sit amet eros vitae ipsum gravida commodo id et tortor. Praesent suscipit neque ac sodales lobortis. Duis iaculis fermentum elementum. Ut pharetra velit nec fermentum tempor."
+    },
+    "transcription": {
+        "title": "Transcription",
+        "type": "article",
+        "lead": "This is a transcription",
+        "img": "https://picsum.photos/800/600"
+    }
+}

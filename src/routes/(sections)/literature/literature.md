@@ -7,10 +7,6 @@
 
 </script>
 
-<SectionHero title='Literature'>
-    Lorem Isntesque consequat orci in dui consectetur ultrices. Sed commodo arcu ac erat viverra bibendum sit amet sed nunc. Quisque cursus neque id sem semper, a tempor turpis tempor. Nam condimentum magna a libero laoreet, eget cursus eros
-</SectionHero>
-
 
 # Literature
 
