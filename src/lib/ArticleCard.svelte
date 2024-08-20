@@ -1,5 +1,16 @@
 <script>
     export let cardObject;
+
+    const typeColours = {
+      'article': {
+        'background': 'bg-primary-300',
+        'text': 'text-primary-800'
+      },
+      'data': {
+        'background': 'bg-secondary-300',
+        'text': 'text-secondary-800'
+      }
+    }
 </script>
 
 <article class="flex flex-col items-start justify-between">
@@ -10,10 +21,11 @@
     <div class="max-w-xl">
 
         <!-- DATE / TAG Info -->
-      <!-- <div class="mt-8 flex items-center gap-x-4 text-xs">
-        <time datetime="2020-03-16" class="text-gray-500">Mar 16, 2020</time>
-        <a href="#" class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</a>
-      </div> -->
+      {#if cardObject.type}
+        <div class="mt-8 flex items-center gap-x-4 text-xs">
+          <div class="relative z-10 rounded-full {typeColours[cardObject.type]['background']} px-3 py-1.5 font-medium {typeColours[cardObject.type]['text']}">{cardObject.type}</div>
+        </div>
+      {/if}
       <div class="group relative">
         <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
           <a href="{cardObject.link}">
@@ -40,3 +52,23 @@
 
     </div>
   </article>
+
+
+  <!-- IF WE WANT HEXAGON CARDS, THIS IS WHAT IT WOULD BE -->
+  <!-- <article class="flex flex-col place-items-center justify-between">
+    <div style="background-image: url({cardObject.img}); background-size: cover;" class="w-64 h-60 clip-path-hexagonLarge">
+    </div>
+    <div class="max-w-64">
+
+      <div class="group relative">
+        <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600 text-center">
+          <a href="{cardObject.link}">
+            <span class="absolute inset-0"></span>
+            {cardObject.title}
+          </a>
+        </h3>
+        <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{cardObject.lead}</p>
+      </div>
+
+    </div>
+  </article> -->
