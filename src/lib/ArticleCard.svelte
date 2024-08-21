@@ -2,20 +2,24 @@
     export let cardObject;
 
     const typeColours = {
-      'article': {
+      'experience': {
         'background': 'bg-primary-300',
         'text': 'text-primary-800'
       },
       'data': {
         'background': 'bg-secondary-300',
         'text': 'text-secondary-800'
+      },
+      'article': {
+        'background': 'bg-tertiary-300',
+        'text': 'text-tertiary-800'
       }
     }
 </script>
 
 <article class="flex flex-col items-start justify-between">
     <div class="relative w-full">
-      <img src="{cardObject.img}" alt="" class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]">
+      <img src="{cardObject.img}" alt="{cardObject.imgAlt}" class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]">
       <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
     </div>
     <div class="max-w-xl">
@@ -23,7 +27,9 @@
         <!-- DATE / TAG Info -->
       {#if cardObject.type}
         <div class="mt-8 flex items-center gap-x-4 text-xs">
-          <div class="relative z-10 rounded-full {typeColours[cardObject.type]['background']} px-3 py-1.5 font-medium {typeColours[cardObject.type]['text']}">{cardObject.type}</div>
+          {#each cardObject.type as typeChip}
+            <div class="relative z-10 rounded-full {typeColours[typeChip]['background']} px-3 py-1.5 font-medium {typeColours[typeChip]['text']}">{typeChip}</div>
+          {/each}
         </div>
       {/if}
       <div class="group relative">

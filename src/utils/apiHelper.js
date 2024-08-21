@@ -144,6 +144,11 @@ export function getArticleMetadata(listArticles) {
         let id = getFileNameFromPathWithoutExtension(path);
         const {metadata, _} = parseMD(listArticles[path]);
         articles[id] = {...metadata}
+        if (articles[id].type && typeof(articles[id].type) === 'string') {
+            articles[id].type = articles[id].type.split(", ")
+        } else if (articles[id].type === undefined){
+        articles[id].type = ['none']
+        }
     }
     return articles
 }
