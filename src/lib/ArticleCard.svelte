@@ -1,23 +1,10 @@
 <script>
-    export let cardObject;
-
-    const typeColours = {
-      'experience': {
-        'background': 'bg-primary-300',
-        'text': 'text-primary-800'
-      },
-      'data': {
-        'background': 'bg-secondary-300',
-        'text': 'text-secondary-800'
-      },
-      'article': {
-        'background': 'bg-tertiary-300',
-        'text': 'text-tertiary-800'
-      }
-    }
+  import  {typeColours} from '../utils/typeColours'
+  export let cardObject;
 </script>
 
-<article class="flex flex-col items-start justify-between">
+<article class="flex flex-col items-start justify-between rounded-lg group hover:ring-8 hover:ring-primary-300 ring-offset-8 ring-primary-300/25 transition-all transition-c duration-500 motion-reduce:transition-none">
+  <a href="{cardObject.link}">
     <div class="relative w-full">
       <img src="{cardObject.img}" alt="{cardObject.imgAlt}" class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]">
       <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
@@ -28,18 +15,16 @@
       {#if cardObject.type}
         <div class="mt-8 flex items-center gap-x-4 text-xs">
           {#each cardObject.type as typeChip}
-            <div class="relative z-10 rounded-full {typeColours[typeChip]['background']} px-3 py-1.5 font-medium {typeColours[typeChip]['text']}">{typeChip}</div>
+            <div class="relative z-10 rounded-full {typeColours[typeChip]['background']} px-3 py-1.5 font-normal {typeColours[typeChip]['text']}">{typeChip}</div>
           {/each}
         </div>
       {/if}
       <div class="group relative">
-        <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-          <a href="{cardObject.link}">
+        <h3 class="mt-3 text-lg font-semibold leading-6 group-hover:text-primary-600 group-hover:font-black transition-colours ease-in-out duration-150 motion-reduce:transition-none">
             <span class="absolute inset-0"></span>
             {cardObject.title}
-          </a>
         </h3>
-        <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{cardObject.lead}</p>
+        <p class="mt-5 line-clamp-3 text-sm leading-6 text-secondary-600">{cardObject.lead}</p>
       </div>
 
       <!-- IF WE WANT AUTHOR INFO -->
@@ -57,6 +42,7 @@
       </div> -->
 
     </div>
+  </a>
   </article>
 
 
