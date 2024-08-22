@@ -1,10 +1,10 @@
 ---
-title: Article 2
-id: test-article-2
+title: Article 5
+id: test-article-5
 parent: literature
-link: literature/article2
+link: literature/article5
 lead: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed egestas sapien, convallis commodo mi. Nulla eu ipsum magna. Integer sed turpis vel dolor rhoncus accumsan a sit amet metus. Curabitur sollicitudin nulla a varius rhoncus. Quisque semper ac enim mollis consequat. Maecenas cursus eu turpis ut congue. Ut ornare tortor eget urna blandit, in volutpat dui viverra."
-img: '/assets/tonmoy-iftekhar-fk22mBeBsxc-unsplash.jpg'
+img: '/assets/greg-rakozy-oMpAz-DN-9I-unsplash.jpg'
 imgAlt: 'a random illustration'
 type: article
 layout: article

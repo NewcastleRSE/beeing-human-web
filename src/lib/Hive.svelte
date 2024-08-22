@@ -24,15 +24,15 @@
         <Cell
           type="article"
           link="{spotlightArray[0]["link"]}"
-          backgroundImage="{spotlightArray[0]["image"]}"
-          text="{spotlightArray[0]["text"]}"
+          backgroundImage="{spotlightArray[0]["img"]}"
+          text="{spotlightArray[0]["lead"]}"
         />
         <Cell type="empty" />
         <Cell
           type="article"
           link="{spotlightArray[1]["link"]}"
-          backgroundImage="{spotlightArray[1]["image"]}"
-          text="{spotlightArray[1]["text"]}"
+          backgroundImage="{spotlightArray[1]["img"]}"
+          text="{spotlightArray[1]["lead"]}"
         />
         <Cell type="empty" />
       </div>
@@ -54,15 +54,15 @@
         <Cell
           type="article"
           link="{spotlightArray[2]["link"]}"
-          backgroundImage="{spotlightArray[2]["image"]}"
-          text="{spotlightArray[2]["text"]}"
+          backgroundImage="{spotlightArray[2]["img"]}"
+          text="{spotlightArray[2]["lead"]}"
         />
         <Cell type="empty" />
         <Cell
         type="article"
         link="{spotlightArray[3]["link"]}"
-        backgroundImage="{spotlightArray[3]["image"]}"
-        text="{spotlightArray[3]["text"]}"
+        backgroundImage="{spotlightArray[3]["img"]}"
+        text="{spotlightArray[3]["lead"]}"
         />
         <Cell type="empty" />
       </div>
@@ -71,8 +71,8 @@
         <Cell
         type="article"
         link="{spotlightArray[4]["link"]}"
-        backgroundImage="{spotlightArray[4]["image"]}"
-        text="{spotlightArray[4]["text"]}"
+        backgroundImage="{spotlightArray[4]["img"]}"
+        text="{spotlightArray[4]["lead"]}"
         />
           <Cell type="empty"/>
           <Cell type="empty"/>
@@ -87,8 +87,8 @@
         <Cell
         type="article"
         link="{spotlightArray[5]["link"]}"
-        backgroundImage="{spotlightArray[5]["image"]}"
-        text="{spotlightArray[5]["text"]}"
+        backgroundImage="{spotlightArray[5]["img"]}"
+        text="{spotlightArray[5]["lead"]}"
         />
         <Cell type="empty" />
       </div>
@@ -101,8 +101,8 @@
         <Cell
         type="article"
         link="{spotlightArray[6]["link"]}"
-        backgroundImage="{spotlightArray[6]["image"]}"
-        text="{spotlightArray[6]["text"]}"
+        backgroundImage="{spotlightArray[6]["img"]}"
+        text="{spotlightArray[6]["lead"]}"
         />
       </div>
     
@@ -126,8 +126,8 @@
           <Cell
             type="article"
             link={spotlightArray[0].link}
-            backgroundImage={spotlightArray[0].image}
-            text={spotlightArray[0].text}
+            backgroundImage={spotlightArray[0].img}
+            text={spotlightArray[0].lead}
           />
         </div>
       
@@ -180,8 +180,8 @@
           <Cell
             type="article"
             link={spotlightArray[1].link}
-            backgroundImage={spotlightArray[1].image}
-            text={spotlightArray[1].text}
+            backgroundImage={spotlightArray[1].img}
+            text={spotlightArray[1].lead}
           />
         </div>
   </div>

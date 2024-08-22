@@ -1,10 +1,10 @@
 ---
-title: Article 1
-id: test-article-1
+title: Article 3
+id: test-article-3
 parent: literature
-link: literature/article1
+link: literature/article3
 lead: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable."
-img: '/assets/carson-arias-7Z03R1wOdmI-unsplash.jpg'
+img: '/assets/felipe-santana--e_njRV9hRE-unsplash.jpg'
 imgAlt: 'a random illustration'
 type: article
 layout: article

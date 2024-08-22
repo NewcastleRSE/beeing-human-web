@@ -35,9 +35,14 @@
   $: getHeroSection(path);
 
   function getHeroSection(path) {
-    console.log(path);
     if (!isSection(path)) {
-      heroKey = path[3];
+      const route = path.slice(2).join('/')
+      for (const key of Object.keys(data)) {
+        if (data[key]['link'] === route) {
+          heroKey = key;
+          break;
+        }
+      }
     } else {
       heroKey = section;
 
@@ -47,6 +52,7 @@
         }
       }
     }
+
 
     try {
       heroObject = heros[heroKey];

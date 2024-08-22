@@ -1,4 +1,4 @@
-import { loadMei } from "../../../utils/loadFunctions.js";
+import { loadMei } from "../../../../utils/loadFunctions.js";
 import { base } from "$app/paths";
 
 

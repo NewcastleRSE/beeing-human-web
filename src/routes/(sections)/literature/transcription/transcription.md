@@ -2,7 +2,7 @@
 title: The Feminine Monarchie - transcription
 id: transcription
 parent: literature
-link: /literature/transcription
+link: literature/transcription
 lead: 'Something about what this section is, to show up in the card; potentially could be carved out of some other part in the file'
 img: '/assets/andrew-seaman--m88z7ily-w-unsplash.jpg'
 imgAlt: 'a picture of a typewriter'

@@ -71,13 +71,21 @@
     }
 </script>
 
-<!-- <MidiPlayerSimple midiFile = {meiMidi}/> -->
-<!-- MIDIPlayer currently emits two custom events, one with a note being played (noteOn) and one when a note stops playing (noteOff) -->
+<!-- 
+
+    Deactivating MIDI playback for now
+
+<MidiPlayerSimple midiFile = {meiMidi}/>
+ MIDIPlayer currently emits two custom events, one with a note being played (noteOn) and one when a note stops playing (noteOff)
+
 {#if !meiMidi || !timeMap}
     <p class="error">Playback is not available</p>
 {:else}
     <MIDIPlayer midiFile = {meiMidi} timeMap = {timeMap} on:noteOn={noteOn} on:noteOff={noteOff} on:playStopped={allNotesOff} on:skipPlay={allNotesOff}/>
 {/if}
+
+-->
+
 <div id="MEI-container" data-testid='MEI-container'>
     {#if meiSvg.length > 1}
         <Paginator data = {meiSvg} raw=true bind:goToPage={goToPage}/>

@@ -2,6 +2,7 @@
   import Hive from "$lib/Hive.svelte";
   import LogoLandingPage from "$lib/LogoLandingPage.svelte";
   export let data;
+
 </script>
 
 <div class="w-4/5 mx-auto my-6">

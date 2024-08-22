@@ -141,8 +141,8 @@ export function getBuzzwordsObject(listPaths) {
 export function getArticleMetadata(listArticles) {
     const articles = {};
     for (const path in listArticles) {
-        let id = getFileNameFromPathWithoutExtension(path);
         const {metadata, _} = parseMD(listArticles[path]);
+        const id = metadata.id
         articles[id] = {...metadata}
         if (articles[id].type && typeof(articles[id].type) === 'string') {
             articles[id].type = articles[id].type.split(", ")
