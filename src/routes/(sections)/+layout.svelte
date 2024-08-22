@@ -3,7 +3,7 @@
   import SectionSelector from "$lib/SectionSelector.svelte";
   import Breadcrumbs from "$lib/Breadcrumbs.svelte";
 
-  import ArticleCollection from "$lib/ArticleCollection.svelte"
+  import ArticleCollection from "$lib/ArticleCollection.svelte";
 
   import { page } from "$app/stores";
   import SectionHero from "../../lib/SectionHero.svelte";
@@ -12,29 +12,38 @@
 
   let path = $page.route.id.split("/");
   let section = $page.route.id.split("/")[2];
-  
-  const isSection = path.length <= 3 ? true : false;
+
+  function isSection(path) {
+    if (path.length <= 3) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   export let data;
 
   let heroObject = undefined;
+  let heroKey = undefined;
   let subsectionMetada = {};
 
   onMount(() => {
-    for (const key of Object.keys(data)) {
-      heros[key] = data[key];
-    }
-    
-    let heroKey = undefined;
+    init(path);
+  });
 
-    if (!isSection) {
+  $: path = $page.route.id.split("/");
+  $: getHeroSection(path);
+
+  function getHeroSection(path) {
+    console.log(path);
+    if (!isSection(path)) {
       heroKey = path[3];
     } else {
       heroKey = section;
 
       for (const key of Object.keys(data)) {
-        if (data[key]['parent'] === section) {
-          subsectionMetada[key] = data[key]
+        if (data[key]["parent"] === section) {
+          subsectionMetada[key] = data[key];
         }
       }
     }
@@ -44,7 +53,15 @@
     } catch (e) {
       console.error(`No data found for hero. Looking for ${heroKey} : ${e}`);
     }
-  });
+  }
+
+  function init(path) {
+    for (const key of Object.keys(data)) {
+      heros[key] = data[key];
+    }
+
+    getHeroSection(path);
+  }
 </script>
 
 <div class="w-4/5 mx-auto my-6">
@@ -74,7 +91,7 @@
 
 <div class="w-4/5 mx-auto my-6">
   <slot />
-  {#if isSection}
-    <ArticleCollection data={subsectionMetada}/>
+  {#if isSection(path)}
+    <ArticleCollection data={subsectionMetada} />
   {/if}
 </div>
