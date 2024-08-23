@@ -1,10 +1,19 @@
+---
+title: Introduction
+id: connections-introduction
+parent: connections
+link: connections/introduction
+lead: "In mathematics, connectedness[1] is used to refer to various properties meaning, in some sense, \"all one piece\". When a mathematical object has such a property, we say it is connected; otherwise it is disconnected. When a disconnected object can be split naturally into connected pieces, each piece is usually called a component (or connected component)."
+img: '/assets/pexels-tomas-anunziata-129267-695207.jpg'
+imgAlt: 'random'
+type: article
+layout: article
+---
 <script>
-    export let data
-
-    import Buzzwords from '$lib/Buzzwords.svelte'
     import Portal from '$lib/Portal.svelte'
-
 </script>
+
+
 
 # Connections
 
@@ -15,5 +24,3 @@ In hac habitasse platea dictumst. Duis ligula nulla, rhoncus sed enim et, gravid
 
 Donec faucibus iaculis nunc, dapibus egestas quam. Proin eget ultricies augue. Integer est libero, egestas at felis eu, commodo pellentesque risus. Integer mauris neque, suscipit in aliquet a, egestas vel nisi. Quisque porttitor vestibulum felis vel varius. Sed pharetra sodales felis non mollis. <Portal type="both" id="con1" destination={['science#sci1', 'music#mus2']}>Integer lorem nisi, commodo consectetur condimentum vitae, efficitur nec lacus. Vivamus nec vulputate felis.</Portal> Fusce accumsan sapien sed nisl bibendum, sed efficitur nibh vehicula. Integer ultrices eros et erat aliquet auctor non quis quam. Etiam vitae posuere elit. Maecenas sit amet eros vitae ipsum gravida commodo id et tortor. Praesent suscipit neque ac sodales lobortis. Duis iaculis fermentum elementum. Ut pharetra velit nec fermentum tempor. In congue interdum bibendum.
 
-## Buzzwords
-<Buzzwords buzzwords={data.buzzwords} listTags={data.buzzwordTags} listAuthors={data.buzzwordAuthors}/>
