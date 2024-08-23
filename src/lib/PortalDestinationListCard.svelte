@@ -18,12 +18,14 @@
 
     let portalDestinationElement = undefined;
     let section = undefined;
+    let pageLink = undefined;
     let linkString = undefined;
 
     onMount(async () => {
-        section = link.split('#')[0].toLowerCase();
+        pageLink = link.split('#')[0].toLowerCase();
+        section = pageLink.split('/')[0].toLowerCase()
         link = link.split('#')[1];
-        linkString = `${base}/${section}#${link}`
+        linkString = `${base}/${pageLink}#${link}`
 
         // Only used with DOMParser
         // let htmlString = undefined;
