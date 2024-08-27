@@ -7,6 +7,8 @@ for (const p of pages) {
         test.beforeEach(`Open start URL -- ${p}`, async ({ page }, testInfo) => {
             console.log(`Running ${testInfo.title}`);
             await page.goto(`/${p}`);
+            const articles = await page.getByRole('article').all();
+            console.log(articles);
         })
 
         test(`Page should contain Portals -- ${p}`, async ({ page }) => {

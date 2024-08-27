@@ -23,11 +23,15 @@
     let linkString = undefined;
 
     onMount(async () => {
-        pageLink = link.split('#')[0].toLowerCase();
-        section = pageLink.split('/')[0].toLowerCase();
-        article = pageLink.split('/')[1].toLowerCase();
-        link = link.split('#')[1];
-        linkString = `${base}/${pageLink}#${link}`
+        try {
+            pageLink = link.split('#')[0].toLowerCase();
+            section = pageLink.split('/')[0].toLowerCase();
+            article = pageLink.split('/')[1].toLowerCase();
+            link = link.split('#')[1];
+            linkString = `${base}/${pageLink}#${link}`;
+        } catch (e) {
+            console.error('Link is malformed, could not fetch API')
+        }
 
         // Only used with DOMParser
         // let htmlString = undefined;
