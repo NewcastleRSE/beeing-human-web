@@ -18,12 +18,14 @@
 
     let portalDestinationElement = undefined;
     let section = undefined;
+    let article = undefined;
     let pageLink = undefined;
     let linkString = undefined;
 
     onMount(async () => {
         pageLink = link.split('#')[0].toLowerCase();
-        section = pageLink.split('/')[0].toLowerCase()
+        section = pageLink.split('/')[0].toLowerCase();
+        article = pageLink.split('/')[1].toLowerCase();
         link = link.split('#')[1];
         linkString = `${base}/${pageLink}#${link}`
 
@@ -34,8 +36,13 @@
         let portals = undefined;
         section = capitaliseFirstLetter(section);
 
+
         try {
-            const response = await fetch(`${base}/api/portals/${section.toLowerCase()}`)
+            let apiEndpoint = section;
+            if (article === 'buzzwords-feed') {
+                apiEndpoint = 'buzzwords'
+            }
+            const response = await fetch(`${base}/api/portals/${apiEndpoint.toLowerCase()}`)
             portals = await response.json();
         } catch (e) {
             console.error('Could not fetch API')
@@ -49,8 +56,7 @@
             fetchedHtml.appendChild(paragraph);
 
             // adjust the link and section title for buzzwords
-            if (section.toLowerCase() === 'buzzwords') {
-                linkString = `${base}/connections#${link}`
+            if (article.toLowerCase() === 'buzzwords-feed') {
                 // adjust section title
                 section = `Buzzwords -- ${portals[link].id}`    
             }
