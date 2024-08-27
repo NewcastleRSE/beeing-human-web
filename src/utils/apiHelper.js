@@ -23,7 +23,7 @@ export function getPortalsAPI(listPaths) {
             continue
         }
         let path = JSON.stringify(entryPath);
-        let id = getFileNameFromPathWithoutExtension(path);
+        let article = getFileNameFromPathWithoutExtension(path);
         const {_, content} = parseMD(listPaths[entryPath]);
 
         if (!content) {
@@ -100,7 +100,7 @@ export function getPortalsAPI(listPaths) {
                 // converts any existing markup into html
                 portalContent = marked.parse(portalContent)
                 // adds portal to the response object
-                portals[portalId] = {content: portalContent, id: id}
+                portals[portalId] = {content: portalContent, id: portalId, article: article}
             }
         }
     }
