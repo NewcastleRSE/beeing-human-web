@@ -4,7 +4,7 @@ id: music-binaural-recording
 parent: music
 link: music/binaural-recording
 lead: "Binaural recording is a method of recording sound that uses two microphones, arranged with the intent to create a 3D stereo sound sensation for the listener of actually being in the room with the performers or instruments. This effect is often created using a technique known as dummy head recording, wherein a mannequin head is fitted with a microphone in each ear."
-img: '/assets/c-d-x-PDX_a_82obo-unsplash.jpg'
+img: 'assets/c-d-x-PDX_a_82obo-unsplash.jpg'
 imgAlt: 'over-the-ear headphones on a yellow background'
 type: experience
 layout: article

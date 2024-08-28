@@ -4,7 +4,7 @@ id: music-transcription
 parent: music
 link: music/music-transcription
 lead: "In music, transcription is the practice of notating a piece or a sound which was previously unnotated and/or unpopular as a written music, for example, a jazz improvisation or a video game soundtrack."
-img: '/assets/marius-masalar-rPOmLGwai2w-unsplash.jpg'
+img: 'assets/marius-masalar-rPOmLGwai2w-unsplash.jpg'
 imgAlt: 'musical notation with handwritten notes'
 type: experience, data
 layout: false
