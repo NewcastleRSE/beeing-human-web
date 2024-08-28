@@ -2,6 +2,7 @@
     import Cell from "./Cell.svelte";
     import { shuffle } from "../utils/BuzzwordsHelper";
     import { onMount } from "svelte";
+    import { base } from "$app/paths";
 
     export let data;
     
@@ -24,14 +25,14 @@
         <Cell
           type="article"
           link="{spotlightArray[0]["link"]}"
-          backgroundImage="{spotlightArray[0]["img"]}"
+          backgroundImage="{base}/{spotlightArray[0]["img"]}"
           text="{spotlightArray[0]["lead"]}"
         />
         <Cell type="empty" />
         <Cell
           type="article"
           link="{spotlightArray[1]["link"]}"
-          backgroundImage="{spotlightArray[1]["img"]}"
+          backgroundImage="{base}/{spotlightArray[1]["img"]}"
           text="{spotlightArray[1]["lead"]}"
         />
         <Cell type="empty" />
@@ -54,14 +55,14 @@
         <Cell
           type="article"
           link="{spotlightArray[2]["link"]}"
-          backgroundImage="{spotlightArray[2]["img"]}"
+          backgroundImage="{base}/{spotlightArray[2]['img']}"
           text="{spotlightArray[2]["lead"]}"
         />
         <Cell type="empty" />
         <Cell
         type="article"
         link="{spotlightArray[3]["link"]}"
-        backgroundImage="{spotlightArray[3]["img"]}"
+        backgroundImage="{base}/{spotlightArray[3]['img']}"
         text="{spotlightArray[3]["lead"]}"
         />
         <Cell type="empty" />
@@ -71,7 +72,7 @@
         <Cell
         type="article"
         link="{spotlightArray[4]["link"]}"
-        backgroundImage="{spotlightArray[4]["img"]}"
+        backgroundImage="{base}/{spotlightArray[4]['img']}"
         text="{spotlightArray[4]["lead"]}"
         />
           <Cell type="empty"/>
@@ -87,7 +88,7 @@
         <Cell
         type="article"
         link="{spotlightArray[5]["link"]}"
-        backgroundImage="{spotlightArray[5]["img"]}"
+        backgroundImage="{base}/{spotlightArray[5]['img']}"
         text="{spotlightArray[5]["lead"]}"
         />
         <Cell type="empty" />
@@ -101,7 +102,7 @@
         <Cell
         type="article"
         link="{spotlightArray[6]["link"]}"
-        backgroundImage="{spotlightArray[6]["img"]}"
+        backgroundImage="{base}/{spotlightArray[6]['img']}"
         text="{spotlightArray[6]["lead"]}"
         />
       </div>
@@ -126,7 +127,7 @@
           <Cell
             type="article"
             link={spotlightArray[0].link}
-            backgroundImage={spotlightArray[0].img}
+            backgroundImage="{base}/{spotlightArray[0].img}"
             text={spotlightArray[0].lead}
           />
         </div>
@@ -180,7 +181,7 @@
           <Cell
             type="article"
             link={spotlightArray[1].link}
-            backgroundImage={spotlightArray[1].img}
+            backgroundImage="{base}/{spotlightArray[1].img}"
             text={spotlightArray[1].lead}
           />
         </div>

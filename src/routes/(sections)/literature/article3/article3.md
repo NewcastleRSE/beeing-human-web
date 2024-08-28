@@ -4,7 +4,7 @@ id: test-article-3
 parent: literature
 link: literature/article3
 lead: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable."
-img: '/assets/felipe-santana--e_njRV9hRE-unsplash.jpg'
+img: 'assets/felipe-santana--e_njRV9hRE-unsplash.jpg'
 imgAlt: 'a random illustration'
 type: article
 layout: article

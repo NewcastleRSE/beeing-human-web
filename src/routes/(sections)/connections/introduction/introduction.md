@@ -4,7 +4,7 @@ id: connections-introduction
 parent: connections
 link: connections/introduction
 lead: "In mathematics, connectedness[1] is used to refer to various properties meaning, in some sense, \"all one piece\". When a mathematical object has such a property, we say it is connected; otherwise it is disconnected. When a disconnected object can be split naturally into connected pieces, each piece is usually called a component (or connected component)."
-img: '/assets/pexels-tomas-anunziata-129267-695207.jpg'
+img: 'assets/pexels-tomas-anunziata-129267-695207.jpg'
 imgAlt: 'random'
 type: article
 layout: article

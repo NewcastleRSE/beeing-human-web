@@ -4,7 +4,7 @@ id: music-introduction
 parent: music
 link: music/introduction
 lead: "Music is the arrangement of sound to create some combination of form, harmony, melody, rhythm, or otherwise expressive content."
-img: '/assets/jason-rosewell-ASKeuOZqhYU-unsplash.jpg'
+img: 'assets/jason-rosewell-ASKeuOZqhYU-unsplash.jpg'
 imgAlt: 'a child singing into the microphone with their eyes closed seen from the side'
 type: article
 layout: article

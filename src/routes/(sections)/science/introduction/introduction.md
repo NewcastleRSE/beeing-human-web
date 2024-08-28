@@ -4,7 +4,7 @@ id: science-introduction
 parent: science
 link: science/introduction
 lead: "Science is a strict systematic discipline that builds and organises knowledge in the form of testable hypotheses and predictions about the world. Modern science is typically divided into three major branches: the natural sciences (e.g., physics, chemistry, and biology), which study the physical world; the social sciences (e.g., economics, psychology, and sociology), which study individuals and societies; and the formal sciences (e.g., logic, mathematics, and theoretical computer science), which study formal systems, governed by axioms and rules."
-img: '/assets/pexels-karolina-grabowska-4016579.jpg'
+img: 'assets/pexels-karolina-grabowska-4016579.jpg'
 imgAlt: 'sweets'
 type: article
 layout: article
