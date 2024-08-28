@@ -8,6 +8,7 @@
     "preview": "vite preview",
     "test": "playwright test --ui",
     "test:cli": "playwright test",
+    "test:single-worker": "playwright test --workers=1",
     "test:unit": "vitest --ui",
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "format": "prettier --plugin-search-dir . --write .",

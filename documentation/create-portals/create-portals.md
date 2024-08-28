@@ -44,12 +44,12 @@ This is sample text that <Portal type="origin" id="test1">contains a portal</Por
 ```HTML
 This sample text appears in music.md, and contains a <Portal type="destination" id="mus1">portion of text</Portal> that is linked to in our test.
 ```
-6. Now that we have our destination, we can add it to our origin portal. The formatting for destinations is a little complex, but not impossible to understand. It should follow this structure: `destination={['VIEW#DESTINATION-PORTAL-ID1']}`, where the segments in capital letters are the ones that should change. `VIEW` refers to the section the destination appears in: so one of `literature`, `science`, `music`, `connections`, or `buzzwords`; `DESTINATION-PORTAL-ID1` is the id of the portal we want to link to. In the case of our test, it will be:
+1. Now that we have our destination, we can add it to our origin portal. The formatting for destinations is a little complex, but not impossible to understand. It should follow this structure: `destination={['VIEW/ARTICLE#DESTINATION-PORTAL-ID1']}`, where the segments in capital letters are the ones that should change. `VIEW` refers to the section the destination appears in: so one of `literature`, `science`, `music`, `connections`; `ARTICLE` is the subsection of the view where the portal is and should correspond to the name of the file (i.e., `article1`); `DESTINATION-PORTAL-ID1` is the id of the portal we want to link to. In the case of our test, it will be:
 ```HTML
-This is sample text that <Portal type="origin" id="test1" destination={['music#mus1']}>contains a portal</Portal> within it.
+This is sample text that <Portal type="origin" id="test1" destination={['music/introduction#mus1']}>contains a portal</Portal> within it.
 ```
-7. If the portal contains more than one possible destinations, you add them inside of the `{[]}`, separating different destination portals with a `,`, in the following format: `destination={['VIEW#DESTINATION-PORTAL-ID1', 'VIEW#DESTINATION-PORTAL-ID2']}`. If our portal also linked to another portal in the `connections` view with an id of `con2`, we would have the following:
+1. If the portal contains more than one possible destinations, you add them inside of the `{[]}`, separating different destination portals with a `,`, in the following format: `destination={['VIEW/ARTICLE#DESTINATION-PORTAL-ID1', 'VIEW/ARTICLE#DESTINATION-PORTAL-ID2']}`. If our portal also linked to another portal in the `connections` view with an id of `con2`, we would have the following:
 ```HTML
-This is sample text that <Portal type="origin" id="test1" destination={['music#mus1', 'connections#con2']}>contains a portal</Portal> within it.
+This is sample text that <Portal type="origin" id="test1" destination={['music#mus1', 'connections/introduction#con2']}>contains a portal</Portal> within it.
 ```
-8. That's it. When clicking on our test portal, we should see a preview of what appears inside the `mus1` portal (`portion of text`) with a link to it as well as whatever appears inside the `con2` portal.
+1. That's it. When clicking on our test portal, we should see a preview of what appears inside the `mus1` portal (`portion of text`) with a link to it as well as whatever appears inside the `con2` portal.

@@ -23,7 +23,7 @@ export function getPortalsAPI(listPaths) {
             continue
         }
         let path = JSON.stringify(entryPath);
-        let id = getFileNameFromPathWithoutExtension(path);
+        let article = getFileNameFromPathWithoutExtension(path);
         const {_, content} = parseMD(listPaths[entryPath]);
 
         if (!content) {
@@ -100,7 +100,7 @@ export function getPortalsAPI(listPaths) {
                 // converts any existing markup into html
                 portalContent = marked.parse(portalContent)
                 // adds portal to the response object
-                portals[portalId] = {content: portalContent, id: id}
+                portals[portalId] = {content: portalContent, id: portalId, article: article}
             }
         }
     }
@@ -136,4 +136,19 @@ export function getBuzzwordsObject(listPaths) {
     buzzwordAuthors = getListOfUniqueElements(buzzwords.map(entry => entry.author));
 
     return {buzzwords, buzzwordTags, buzzwordAuthors}
+}
+
+export function getArticleMetadata(listArticles) {
+    const articles = {};
+    for (const path in listArticles) {
+        const {metadata, _} = parseMD(listArticles[path]);
+        const id = metadata.id
+        articles[id] = {...metadata}
+        if (articles[id].type && typeof(articles[id].type) === 'string') {
+            articles[id].type = articles[id].type.split(", ")
+        } else if (articles[id].type === undefined){
+        articles[id].type = ['none']
+        }
+    }
+    return articles
 }

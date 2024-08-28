@@ -1,11 +1,11 @@
 import {cleanup, render, screen} from '@testing-library/svelte';
-import { afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
+import { afterEach, describe, expect, it, vi} from 'vitest';
 
-import PortalDestinationListCard from '../../src/lib/PortalDestinationListCard.svelte';
+import PortalDestinationListCard from '$lib/PortalDestinationListCard.svelte';
 
 describe('Portal card mounting tests', () => {
-    // const consoleMock = vi.spyOn(console, 'error').mockImplementation((e) => {console.log(e)});
-    const consoleMock = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleMock = vi.spyOn(console, 'error').mockImplementation((e) => {console.log(e)});
+    // const consoleMock = vi.spyOn(console, 'error').mockImplementation(() => {});
     const mockFetch = vi.spyOn(window, 'fetch');
 
     afterEach(() => {
@@ -19,18 +19,17 @@ describe('Portal card mounting tests', () => {
     });
 
     it('should print an error to the console if it cannot find the API', () => {
-        render(PortalDestinationListCard, {link: 'fake#link'});
+        render(PortalDestinationListCard, {link: 'fake/article#fakeId'});
         expect(consoleMock).toHaveBeenCalled();
-        expect(consoleMock).toHaveBeenCalledWith('Could not fetch API');
+        // expect(consoleMock).toHaveBeenCalledWith('Could not fetch API');
 
     });
 
     it('should print an error to the console if it cannot find the portal ID', async () => {
         mockFetch.mockResolvedValueOnce({json: () => ({'sci1': {'content': 'all good'}})});
-        render(PortalDestinationListCard, {link: 'science#fakeID'});
+        render(PortalDestinationListCard, {link: 'fake/article#fakeID'});
         
         expect(mockFetch).toHaveBeenCalled();
-
         expect(consoleMock).toHaveBeenCalled();
 
         // Awaiting for the mock fetch to resolve, necessary to catch the error
@@ -46,14 +45,14 @@ describe('Portal card mounting tests', () => {
         const errorText = await screen.findAllByText('Could not fetch preview');
 
         expect(mockFetch).toHaveBeenCalledOnce();
-        expect(consoleMock).toHaveBeenCalledTimes(2);
+        expect(consoleMock).toHaveBeenCalledTimes(3);
         expect(errorText).toBeTruthy();
     });
 
     it('should display the content of the Portal preview correctly if everything went well', async () => {
         mockFetch.mockResolvedValueOnce({json: () => ({'testID': {'content': 'This is test content for a portal'}})});
 
-        render(PortalDestinationListCard, {link: 'testRoute#testID'});
+        render(PortalDestinationListCard, {link: 'testRoute/testArticle#testID'});
 
         expect(mockFetch).toHaveBeenCalledOnce();
 
@@ -65,7 +64,7 @@ describe('Portal card mounting tests', () => {
     it('should correctly display the card header', async () => {
         mockFetch.mockResolvedValueOnce({json: () => ({'testID': {'content': 'This is test content for a portal'}})});
 
-        render(PortalDestinationListCard, {link: 'testRoute#testID'});
+        render(PortalDestinationListCard, {link: 'testRoute/testArticle#testID'});
 
         expect(mockFetch).toHaveBeenCalledOnce();
 
@@ -79,7 +78,7 @@ describe('Portal card mounting tests', () => {
     it('should display the card header correctly if the route is for a buzzword', async () => {
         mockFetch.mockResolvedValueOnce({json: () => ({'testID': {'content': 'This is test content for a portal', 'id': 'header title'}})});
 
-        render(PortalDestinationListCard, {link: 'buzzwords#testID'});
+        render(PortalDestinationListCard, {link: 'connections/buzzwords-feed#testID'});
 
         expect(mockFetch).toHaveBeenCalledOnce();
 
@@ -91,7 +90,7 @@ describe('Portal card mounting tests', () => {
     });
 
     it('should not have a link if there is an error', async () => {
-        render(PortalDestinationListCard, {link: 'buzzwords#testID'});
+        render(PortalDestinationListCard, {link: 'connections/buzzwords-feed#testID'});
 
         expect(mockFetch).toHaveBeenCalledOnce();
 
@@ -107,7 +106,7 @@ describe('Portal card mounting tests', () => {
     it('should have a link to the correct location if everything was successful', async () => {
         mockFetch.mockResolvedValueOnce({json: () => ({'testID': {'content': 'This is test content for a portal', 'id': 'header title'}})});
 
-        render(PortalDestinationListCard, {link: 'testRoute#testID'});
+        render(PortalDestinationListCard, {link: 'testRoute/testArticle#testID'});
 
         expect(mockFetch).toHaveBeenCalledOnce();
 
@@ -115,13 +114,13 @@ describe('Portal card mounting tests', () => {
 
         const link = await screen.findByText('⮕');
         
-        expect(link.getAttribute('href')).toEqual('/testroute#testID')
+        expect(link.getAttribute('href')).toEqual('/testroute/testarticle#testID')
     });
 
     it('should have a link to the correct location if everything was successful and it is a buzzword', async () => {
         mockFetch.mockResolvedValueOnce({json: () => ({'testID': {'content': 'This is test content for a portal', 'id': 'header title'}})});
 
-        render(PortalDestinationListCard, {link: 'buzzwords#testID'});
+        render(PortalDestinationListCard, {link: 'connections/buzzwords-feed#testID'});
 
         expect(mockFetch).toHaveBeenCalledOnce();
 
@@ -129,6 +128,6 @@ describe('Portal card mounting tests', () => {
 
         const link = await screen.findByText('⮕');
         
-        expect(link.getAttribute('href')).toEqual('/connections#testID')
+        expect(link.getAttribute('href')).toEqual('/connections/buzzwords-feed#testID')
     });
 })

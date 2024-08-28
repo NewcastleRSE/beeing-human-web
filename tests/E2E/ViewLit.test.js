@@ -16,15 +16,39 @@ test.describe('Page navigation tests', () => {
         const link = page.getByTestId('literature-desktop');
         await expect(link).toBeVisible();
         await link.click();
-        await page.waitForURL('**/literature/');
-        await expect(page).toHaveURL('/literature/');
+        await expect(page).toHaveURL('/literature');
     });
+});
+
+test.describe('Page content containers exist tests', () => {
+
+    test.beforeEach('Open start URL', async ({ page }, testInfo) => {
+        console.log(`Running ${testInfo.title}`);
+        await page.goto('/literature');
+    })
+
+    test('Literature content page should have a header containing Literature', async ({ page }) => {
+        await expect(page).toHaveURL('/literature');
+        await expect(page.getByRole("heading", { name: 'Literature' })).toBeVisible();
+    });
+
+    test('Expect content page to have several articles', async ({ page }) => {
+        await expect(page).toHaveURL('/literature');
+        const articles = await page.getByRole('article').all();
+        expect(articles.length).toBeGreaterThan(0);
+    });    
 })
 
-test.describe('Page has TEI content', () => {
+test.describe('Transcription page has TEI content', () => {
+
+    test.beforeEach('Open start URL', async ({ page }, testInfo) => {
+        console.log(`Running ${testInfo.title}`);
+        await page.goto('/literature/transcription');
+    });
+
     // Test that page has tei-container
     test('Expect that the literature view contains a TEI-container element', async ({ page }) => {
-        await page.goto("/literature");
+        await expect(page).toHaveURL('/literature/transcription');
         const container = page.getByTestId('TEI-container');
         // this waits until both promises are resolved before timing out -- if the expect was outside the await block, it would return immediately and the test would be flaky.
         await Promise.all([
@@ -36,7 +60,7 @@ test.describe('Page has TEI content', () => {
     // Test that tei-title is visible
     // this test will need to be changed to the correct title expected, Coopers Hill is just for testing/dev
     test('Expect that the literature view contains TEI-title after the page loads', async ({ page }) => {
-        await page.goto('/literature');
+        await expect(page).toHaveURL('/literature/transcription');
         const container = page.getByTestId('TEI-container');
         await Promise.all([
             container.waitFor('visible'),
@@ -46,7 +70,7 @@ test.describe('Page has TEI content', () => {
 
     // Test that tei-body is visible
     test('Expect that the literature view contains TEI-body after the page loads', async ({ page }) => {
-        await page.goto('/literature');
+        await expect(page).toHaveURL('/literature/transcription');
         const teiText = page.getByText('Feminine Monarchie', { exact: true });
         await Promise.all([
             teiText.waitFor('visible'),
@@ -57,7 +81,7 @@ test.describe('Page has TEI content', () => {
 
     // Test that tei-header is not visible
     test('Expect that the literature view contains TEI-header after the page loads, but that this is not visible', async ({ page }) => {
-        await page.goto('/literature');
+        await expect(page).toHaveURL('/literature/transcription');
         const teiText = page.getByText('Feminine Monarchie', { exact: true });
         await Promise.all([
             teiText.waitFor('visible'),
@@ -80,8 +104,13 @@ test.describe('Page has TEI content', () => {
 });
 
 test.describe('Page has IIIF viewer content', () => {
+    test.beforeEach('Open start URL', async ({ page }, testInfo) => {
+        console.log(`Running ${testInfo.title}`);
+        await page.goto('/literature/transcription');
+    });
+    
     test('Expect that page contains the IIIF viewer', async ({page}) => {
-        await page.goto('/literature');
+        await expect(page).toHaveURL('/literature/transcription');
         const iiifViewer = page.getByTestId('iiif-viewer');
         await expect(iiifViewer).toBeVisible();
     })

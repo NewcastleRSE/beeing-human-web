@@ -8,6 +8,9 @@ import { typography } from "./skeleton-typography.js";
 // rehype plugin adds the class name necessary for Skeleton typography
 const mdsvexOptions = {
   extensions: ['.md'],
+  layout: {
+    article: './src/lib/ArticleLayout.svelte'
+  },
   smartypants: {
     quotes: false,
     ellipses: true,

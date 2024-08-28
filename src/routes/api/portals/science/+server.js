@@ -4,7 +4,7 @@ import { getPortalsAPI } from '../../../../utils/apiHelper.js';
 export const prerender = true
 
 export async function GET(event) {
-    let listMds = import.meta.glob('./../../../science/*.md', {as: 'raw', eager: true});
+    let listMds = import.meta.glob('/src/routes/\*\/science/\*\/*.md', {as: 'raw', eager: true});
     const sciencePortals = getPortalsAPI(listMds);
     return json(sciencePortals);
 }

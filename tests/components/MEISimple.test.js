@@ -13,11 +13,12 @@ describe('Transform and display MEI file', () => {
         expect(container).toBeTruthy();
     });
 
-    it('should display an error message if no midi file or no timeMap is passed', async () => {
-        render(MEISimple, {meiSvg: '', meiMidi: '', timeMap: ''}); 
-        const errorMessage = await screen.findByText('Playback is not available', {exact: false});
-        expect(errorMessage).toBeTruthy();
-    });
+    // MIDI playback is currently not deployed
+    // it('should display an error message if no midi file or no timeMap is passed', async () => {
+    //     render(MEISimple, {meiSvg: '', meiMidi: '', timeMap: ''}); 
+    //     const errorMessage = await screen.findByText('Playback is not available', {exact: false});
+    //     expect(errorMessage).toBeTruthy();
+    // });
 
     it('should display an error message if no SVG file is passed', async () => {
         render(MEISimple, {meiSvg: '', meiMidi: '', timeMap: ''});
@@ -49,17 +50,19 @@ describe('Transform and display MEI file', () => {
         expect(paginator).toBeTruthy();
     });
 
-    it('should not create a MIDIPlayer with a midi file but without a timemap', async () => {
-        render(MEISimple, {meiSvg: meiSvg, meiMidi: meiMidi, timeMap: ''});
-        const error = await screen.findByText('Playback is not available');
-        expect(error).toBeTruthy();
-    });
+    // MIDI playback is currently not deployed
 
-    it('should not create a MIDIPlayer without a midi file but with a timemap', async () => {
-        render(MEISimple, {meiSvg: meiSvg, meiMidi: '', timeMap: timeMap});
-        const error = await screen.findByText('Playback is not available');
-        expect(error).toBeTruthy();
-    });
+    // it('should not create a MIDIPlayer with a midi file but without a timemap', async () => {
+    //     render(MEISimple, {meiSvg: meiSvg, meiMidi: meiMidi, timeMap: ''});
+    //     const error = await screen.findByText('Playback is not available');
+    //     expect(error).toBeTruthy();
+    // });
+
+    // it('should not create a MIDIPlayer without a midi file but with a timemap', async () => {
+    //     render(MEISimple, {meiSvg: meiSvg, meiMidi: '', timeMap: timeMap});
+    //     const error = await screen.findByText('Playback is not available');
+    //     expect(error).toBeTruthy();
+    // });
 
     // This test fails because it needs to mock an audio context -- probably easier to do it in E2E, rather than component testing
     /*
