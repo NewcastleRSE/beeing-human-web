@@ -18,11 +18,5 @@
         "title": "Connections",
         "type": "section",
         "lead": "Etiam vitae posuere elit. Maecenas sit amet eros vitae ipsum gravida commodo id et tortor. Praesent suscipit neque ac sodales lobortis. Duis iaculis fermentum elementum. Ut pharetra velit nec fermentum tempor."
-    },
-    "transcription": {
-        "title": "Transcription",
-        "type": "article",
-        "lead": "This is a transcription",
-        "img": "https://picsum.photos/800/600"
     }
 }
