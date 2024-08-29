@@ -312,7 +312,7 @@
         </div>
     {/key}
 
-    <div class="card-collection" data-testid="card-collection">
+    <div class="card-collection flex flex-col max-w-4xl gap-8" data-testid="card-collection">
         {#if filteredBuzzwords.length === 0}
             <div class="empty-collection">
                 <p>No buzzwords match your criteria</p>

@@ -40,7 +40,7 @@
     <section class="p-4" data-testid="buzzword-content"><InjectBuzzword buzzName={buzzword.id}/></section>
     <footer class="card-footer">
         {#if buzzword.tags}
-            <div class="tags flex gap-1.5">
+            <div class="tags flex gap-1.5 flex-wrap">
                 {#each buzzword.tags.sort() as tag}
                     <span data-testid="chip-tag" class="chip variant-filled-surface hover:variant-ghost-surface" on:click={handleFilterClickBuzzword(tag)} on:keypress>{capitaliseFirstLetter(tag)}</span>
                 {/each}
