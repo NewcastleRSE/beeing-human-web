@@ -1,0 +1,30 @@
+{
+    "jenny": {
+        "name": "Jenny Richards",
+        "img": "assets/people/jenny_avatar.png"
+    },
+    "olivia": {
+        "name": "Olivia Smith",
+        "img": "assets/people/olivia_avatar.png"
+    },
+    "bennett": {
+        "name": "Bennett Hogg",
+        "img": "assets/people/bennett_avatar.png"
+    },
+    "magnus": {
+        "name": "Magnus Williamson",
+        "img": "assets/people/magnus_avatar.png"
+    },
+    "tiago": {
+        "name": "Tiago Sousa Garcia",
+        "img": "assets/people/tsg.png"
+    },
+    "balu": {
+        "name": "Balu GS",
+        "img": "assets/people/balu_avatar.png"
+    },
+    "vivek": {
+        "name": "Vivek Nityananda",
+        "img": "assets/people/vivek_avatar.png"
+    }
+}
