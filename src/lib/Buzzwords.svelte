@@ -11,6 +11,7 @@
     import TagSelector from './TagSelector.svelte';
     import SearchBar from './SearchBar.svelte';
     import BuzzwordCard from './BuzzwordCard.svelte';
+    import TextDivider from '$lib/TextDivider.svelte'
 
     export let buzzwords;
     export let listTags;
@@ -299,35 +300,41 @@
 </script>
 {#if loaded}
     <!-- #key necessary to restart components -->
-    {#key unique}
-        <div class="corpus-filtering">
-            <div class="search">
-                <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={[...listAuthors, ...listTags]}/>
+     <div class="flex flex-col md:flex-row gap-10">
+        {#key unique}
+            <div class="flex flex-col md:basis-1/3 gap-8 items-center">
+                <div class="search">
+                    <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={[...listAuthors, ...listTags]}/>
+                </div>
+                <TextDivider class="hidden md:block md:max-w-md"/>
+                <div class="filters flex flex-col gap-4">
+                    <h3 class="h3 font-medium">Filters</h3>
+                    <TagSelector listTags = {filters.getFiltersByType('authors', true)} filter = 'authors' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
+                    <TagSelector listTags = {filters.getFiltersByType('tags', true)} filter = 'tags' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
+                </div>
+                <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button>
             </div>
-            <div class="filters">
-                <TagSelector listTags = {filters.getFiltersByType('authors', true)} filter = 'authors' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
-                <TagSelector listTags = {filters.getFiltersByType('tags', true)} filter = 'tags' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
-            </div>
-            <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button>
-        </div>
-    {/key}
+        {/key}
 
-    <div class="card-collection flex flex-col max-w-4xl gap-8" data-testid="card-collection">
-        {#if filteredBuzzwords.length === 0}
-            <div class="empty-collection">
-                <p>No buzzwords match your criteria</p>
-            </div>
-        {:else}
-            {#each filteredBuzzwords as buzzword (buzzword.id)}
-                <BuzzwordCard {buzzword} on:filterClicked={handleFilterClickBuzzword}/>
-            {/each}
-        {/if}
+        <div class="w-full">
+            <div class="card-collection flex flex-col max-w-4xl gap-8 m-auto" data-testid="card-collection">
+            {#if filteredBuzzwords.length === 0}
+                <div class="empty-collection">
+                    <p>No buzzwords match your criteria</p>
+                </div>
+            {:else}
+                {#each filteredBuzzwords as buzzword (buzzword.id)}
+                    <BuzzwordCard {buzzword} on:filterClicked={handleFilterClickBuzzword}/>
+                {/each}
+            {/if}
+        </div>
+    </div>
     </div>
 {:else if errorFlag}
     <div>
         <p>Error: Something went wrong.</p>
     </div>
-{:else}
+{:else} 
     <div>
         <p>Loading...</p>
     </div>
