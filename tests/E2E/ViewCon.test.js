@@ -159,7 +159,7 @@ test.describe('Page has correct contents tests - buzzwords', () => {
             if (originalData.date) {
                 let displayDate = await card.getByTestId('buzzword-date').textContent();
                 let expectedDate = new Date(originalData.date);
-                let expectedDateString = `${daysOfTheWeek[expectedDate.getDay()]}, ${expectedDate.getDate()} of ${monthsOfTheYear[expectedDate.getMonth()]} ${expectedDate.getFullYear()}`
+                let expectedDateString = expectedDate.toLocaleDateString('en-GB')
                 expect(displayDate).toEqual(expectedDateString);
             } else {
                 await expect(card.getByTestId('buzzword-date')).toHaveCount(0);
@@ -175,7 +175,7 @@ test.describe('Page has correct contents tests - buzzwords', () => {
             let originalData = buzzwords.find((buzz) => buzz.id === id);
             if (originalData.author) {
                 let displayAuthor = await card.getByTestId('buzzword-byline').textContent();
-                expect(displayAuthor.toLowerCase()).toMatch(`by ${originalData.author}`);
+                expect(displayAuthor.toLowerCase()).toMatch(originalData.author);
             } else {
                 await expect(card.getByTestId('buzzword-byline')).toHaveCount(0);
             }
@@ -1383,7 +1383,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
 
             for (let card of buzzCards) {
                 const byline = await card.getByTestId('buzzword-byline').innerText();
-                expect(byline.toLowerCase()).toEqual('by tiago');
+                expect(byline.toLowerCase()).toEqual('tiago');
             };
         });
 
@@ -1397,7 +1397,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
 
             for (let card of buzzCards) {
                 const byline = await card.getByTestId('buzzword-byline').innerText();
-                expect(byline.toLowerCase()).toEqual('by olivia');
+                expect(byline.toLowerCase()).toEqual('olivia');
             };
         })
     });
