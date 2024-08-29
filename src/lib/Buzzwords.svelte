@@ -1,7 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import {daysOfTheWeek, monthsOfTheYear} from '../utils/generalConstants';
-    import {capitaliseFirstLetter, getListOfUniqueElements, removeSpaces} from '../utils/stringOperations';
+    import {getListOfUniqueElements, removeSpaces} from '../utils/stringOperations';
 
     import { checkSearchTagsAuthors, fullTextSearch, shuffle } from '../utils/BuzzwordsHelper';
 
@@ -9,9 +8,9 @@
 
     import { Filters } from '../classes/Filters'
 
-    import InjectBuzzword from './InjectBuzzword.svelte';
     import TagSelector from './TagSelector.svelte';
     import SearchBar from './SearchBar.svelte';
+    import BuzzwordCard from './BuzzwordCard.svelte';
 
     export let buzzwords;
     export let listTags;
@@ -53,11 +52,11 @@
         filteredBuzzwords = filterBuzzWords(buzzwords);
     }
 
-    function handleFilterClickBuzzword(tag) {
+    function handleFilterClickBuzzword(event) {
         // creates a fake Filter object and sends it to handleFilterChange as if it came from the 'TagSelector' component
 
         // finds the corresponding object in the Filters object
-        const filter = filters.getFiltersByName(tag)
+        const filter = filters.getFiltersByName(event.detail.filter)
 
         // constructs the fake event object
         const fakeEvent = {
@@ -313,33 +312,14 @@
         </div>
     {/key}
 
-    <div class="card-collection" data-testid="card-collection">
+    <div class="card-collection flex flex-col max-w-4xl gap-8" data-testid="card-collection">
         {#if filteredBuzzwords.length === 0}
             <div class="empty-collection">
                 <p>No buzzwords match your criteria</p>
             </div>
         {:else}
             {#each filteredBuzzwords as buzzword (buzzword.id)}
-                <div class="card" data-testid="buzzword-card" id={buzzword.id}>
-                    <header class="card-header">
-                        {#if buzzword.date}
-                            <p class="date" data-testid="buzzword-date">{daysOfTheWeek[buzzword.date.getDay()]}, {buzzword.date.getDate()} of {monthsOfTheYear[buzzword.date.getMonth()]} {buzzword.date.getFullYear()}</p>
-                        {/if}
-                    </header>
-                    <section class="p-4" data-testid="buzzword-content"><InjectBuzzword buzzName={buzzword.id}/></section>
-                    <footer class="card-footer">
-                        {#if buzzword.author}
-                            <p class="byline" data-testid="buzzword-byline">by {capitaliseFirstLetter(buzzword.author)}</p>
-                        {/if}
-                        {#if buzzword.tags}
-                            <div class="tags">
-                                {#each buzzword.tags.sort() as tag}
-                                    <span data-testid="chip-tag" class="chip variant-ghost" on:click={handleFilterClickBuzzword(tag)} on:keypress>{capitaliseFirstLetter(tag)}</span>
-                                {/each}
-                            </div>
-                        {/if}
-                    </footer>
-                </div>
+                <BuzzwordCard {buzzword} on:filterClicked={handleFilterClickBuzzword}/>
             {/each}
         {/if}
     </div>
@@ -352,42 +332,3 @@
         <p>Loading...</p>
     </div>
 {/if}
-
-<style>
-    /* this should be converted to Tailwind when working on the UI*/
-    .card-collection {
-        width: 90vw;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-
-    .card {
-        max-width: 22%;
-        height: fit-content;
-    }
-
-    .date {
-        font-size: smaller;
-    }
-
-    .byline {
-        font-size: small;
-    }
-
-    .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-
-    .chip {
-        font-size: x-small;
-    }
-
-    .filters {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-</style>

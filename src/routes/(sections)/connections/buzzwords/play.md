@@ -2,6 +2,7 @@
 author: Olivia
 date: 2024-01-29
 tags: text, connections, interdisciplinarity, Butler, play, pleasure
+title: 'Play'
 ---
 
 >*Sometimes as well in Summer as Winter the Bees take pleasure to play abroad before the Hive, specially those that are in good plight, flying in and out, and about, so thicke, and so earnestly, as if they were swarming or fighting: when indeed it is onely to solace themselves:*
