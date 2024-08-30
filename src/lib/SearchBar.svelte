@@ -1,6 +1,7 @@
 <script>
     import {createEventDispatcher} from 'svelte';
     import { splitStringIntoArray } from '../utils/stringOperations';
+    import SearchIcon from '$lib/icons/SearchIcon.svelte';
 
     const dispatch = createEventDispatcher();
 
@@ -10,8 +11,9 @@
     let chipList = new Set();
 
     function searchGo(event) {
+        event.preventDefault();
         // analyses the input and fires a search event to be picked up by the parent component
-        const searchString = event.target.firstElementChild.value;
+        const searchString = document.getElementById('search-bar').value
         let searchTerms = splitStringIntoArray(searchString);
         searchTerms = [...searchTerms, ...Array.from(chipList)]
         // removes empty spaces
@@ -63,19 +65,20 @@
     $: inputValue = checkForTagAuthor(inputValue);
 </script>
 
-<div class='search-group max-w-md' data-testid="search-bar-container">
-    <h4>Search</h4>
+<div class='search-group max-w-full' data-testid="search-bar-container">
     <form on:submit={searchGo} id="submit-form">
-        <input class="input max-w-sm p-2" type="search" name="searchBar" placeholder="Search..." id='search-bar' bind:value={inputValue} on:submit={searchGo} autocomplete="off"/>
-        <button type="submit" class="btn variant-filled">Go</button>
+        <div class="input-group input-group-divider grid-cols-[auto_1fr_auto] bg-tertiary-200 border-tertiary-800 focus-within:outline-2 focus-within:outline focus-within:outline-primary-500">
+            <input class="input p-2 placeholder:text-tertiary-700" type="search" name="searchBar" placeholder="Search..." id='search-bar' bind:value={inputValue} on:submit={searchGo} autocomplete="off"/>
+            <button type="submit" class="text-secondary-500 focus:bg-secondary-500 focus:text-white" data-testid="search-button"><SearchIcon/></button>
+        </div>
     </form>
     <div class="chip-list" id="chip-list">
     {#each Array.from(chipList) as chip}
         <span class='chip variant-ringed' on:click={removeChip(chip)} on:keypress data-testid='chip-{chip}'>{chip} &#x2715</span>
     {/each}
-    {#if chipList.size != 0}
+    <!-- {#if chipList.size != 0}
         <button class="btn btn-sm variant-filled-surface" on:click={clearAll} on:keypress>clear all</button>
-    {/if}
+    {/if} -->
     </div>
 </div>
 

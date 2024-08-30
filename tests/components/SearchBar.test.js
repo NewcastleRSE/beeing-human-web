@@ -26,7 +26,7 @@ describe('Search bar functions', () => {
         const mock = vi.fn();
         component.$on('reset', mock);
 
-        const button = screen.getByText('Go', {exact: true});
+        const button = screen.getByTestId('search-button', {exact: true});
         await user.click(button);
 
         expect(mock).toHaveBeenCalled();
@@ -62,7 +62,7 @@ describe('Search bar functions', () => {
         const chip = await screen.findByTestId('chip-');
         expect(chip).toBeTruthy();
 
-        const goButton = screen.getByText('Go', {exact: true});
+        const goButton = screen.getByTestId('search-button', {exact: true});
         expect(goButton).toBeTruthy();
         await user.click(goButton);
 

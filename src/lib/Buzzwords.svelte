@@ -215,39 +215,40 @@
             }
         }
 
-        // Updates the UI to enable or disable the `Reset All` button
-        try {
-            const resetAllButton = document.getElementById('resetAll');
+        // RESET BUTTONS HAVE BEEN DISABLED
+        // // Updates the UI to enable or disable the `Reset All` button
+        // try {
+        //     const resetAllButton = document.getElementById('resetAll');
 
-            if (filters.allInactive() && buzzwords.length === lenNewDataset) {
-                resetAllButton.disabled = true;
-            } else {
-                resetAllButton.disabled = false;
-            }
-        } catch (error) {
-            console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
-        }
+        //     if (filters.allInactive() && buzzwords.length === lenNewDataset) {
+        //         resetAllButton.disabled = true;
+        //     } else {
+        //         resetAllButton.disabled = false;
+        //     }
+        // } catch (error) {
+        //     console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
+        // }
 
-        // Updates the UI to enable or disable the `Reset` button for each filter group
-        try {
-            const resetAuthor = document.getElementById('authors-reset');
-            const resetTags = document.getElementById('tags-reset');
+        // // Updates the UI to enable or disable the `Reset` button for each filter group
+        // try {
+        //     const resetAuthor = document.getElementById('authors-reset');
+        //     const resetTags = document.getElementById('tags-reset');
 
-            if (filters.getActiveFiltersByType('authors').length === 0) {
-                resetAuthor.disabled = true;
-            } else {
-                resetAuthor.disabled = false;
-            }
+        //     if (filters.getActiveFiltersByType('authors').length === 0) {
+        //         resetAuthor.disabled = true;
+        //     } else {
+        //         resetAuthor.disabled = false;
+        //     }
 
-            if (filters.getActiveFiltersByType('tags').length === 0) {
-                resetTags.disabled = true;
-            } else {
-                resetTags.disabled = false;
-            }
+        //     if (filters.getActiveFiltersByType('tags').length === 0) {
+        //         resetTags.disabled = true;
+        //     } else {
+        //         resetTags.disabled = false;
+        //     }
 
-        } catch (error) {
-            console.debug(error);
-        }
+        // } catch (error) {
+        //     console.debug(error);
+        // }
     }
 
     // initialisation functions
@@ -302,7 +303,7 @@
     <!-- #key necessary to restart components -->
      <div class="flex flex-col md:flex-row gap-10">
         {#key unique}
-            <div class="flex flex-col md:basis-1/3 gap-8 items-center">
+            <div class="flex flex-col md:basis-1/4 gap-8 items-center">
                 <div class="search">
                     <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={[...listAuthors, ...listTags]}/>
                 </div>
@@ -312,7 +313,7 @@
                     <TagSelector listTags = {filters.getFiltersByType('authors', true)} filter = 'authors' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
                     <TagSelector listTags = {filters.getFiltersByType('tags', true)} filter = 'tags' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
                 </div>
-                <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button>
+                <!-- <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button> -->
             </div>
         {/key}
 
