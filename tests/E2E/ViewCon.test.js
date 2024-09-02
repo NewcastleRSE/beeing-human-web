@@ -1035,7 +1035,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
             const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length;
 
             await page.getByRole('searchbox').fill('office');
-            await page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' }).click();
+            await page.getByTestId('search-bar-container').getByRole('button').click();
 
             const finalBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length;
 
@@ -1064,7 +1064,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
             }
 
             await page.getByRole('searchbox').fill('office');
-            await page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' }).click();
+            await page.getByTestId('search-bar-container').getByRole('button').click();
 
             const finalBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
 
@@ -1094,7 +1094,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
             const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length;
 
             const searchBox = page.getByRole('searchbox')
-            const goButton = page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' });
+            const goButton = page.getByTestId('search-bar-container').getByRole('button');
 
             await searchBox.fill('office');
             await goButton.click();
@@ -1137,7 +1137,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
 
             // first search
             const searchBox = page.getByRole('searchbox')
-            const goButton = page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' });
+            const goButton = page.getByTestId('search-bar-container').getByRole('button');
 
             await searchBox.fill('office');
             await goButton.click();
@@ -1190,88 +1190,89 @@ test.describe('Page user interactions tests - buzzwords', () => {
             expect(finalCountTags).toEqual(initialCountTags);
         });
 
-        test('Clicking the Reset all button should reset all buttons to their initial state and clear the searchBox', async ({page}) => {
-            await expect(page).toHaveURL('/connections/buzzwords-feed');
+        // RESET BUTTONS HAVE BEEN DEPRECATED
+        // test('Clicking the Reset all button should reset all buttons to their initial state and clear the searchBox', async ({page}) => {
+        //     await expect(page).toHaveURL('/connections/buzzwords-feed');
 
-            const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
+        //     const initialBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
 
-            const authorChips = await page.getByTestId('authors-chip').all();
-            const tagsChips = await page.getByTestId('tags-chip').all();
+        //     const authorChips = await page.getByTestId('authors-chip').all();
+        //     const tagsChips = await page.getByTestId('tags-chip').all();
 
-            let initialCountAuthors = 0;
-            let initialCountTags = 0;
-            for (let chip of authorChips) {
-                if (await chip.isEnabled()) {
-                    initialCountAuthors++;
-                }
-            }
-            for (let chip of tagsChips) {
-                if (await chip.isEnabled()) {
-                    initialCountTags++;
-                }
-            }
+        //     let initialCountAuthors = 0;
+        //     let initialCountTags = 0;
+        //     for (let chip of authorChips) {
+        //         if (await chip.isEnabled()) {
+        //             initialCountAuthors++;
+        //         }
+        //     }
+        //     for (let chip of tagsChips) {
+        //         if (await chip.isEnabled()) {
+        //             initialCountTags++;
+        //         }
+        //     }
 
 
-            // first search
-            const searchBox = page.getByRole('searchbox')
-            const goButton = page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' });
+        //     // first search
+        //     const searchBox = page.getByRole('searchbox')
+        //     const goButton = page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' });
 
-            await searchBox.fill('office');
-            await goButton.click();
+        //     await searchBox.fill('office');
+        //     await goButton.click();
 
-            const firstSearchBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
+        //     const firstSearchBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
 
-            let firstSearchCountAuthors = 0;
-            let firstSearchCountTags = 0;
+        //     let firstSearchCountAuthors = 0;
+        //     let firstSearchCountTags = 0;
 
-            for (let chip of authorChips) {
-                if (await chip.isEnabled()) {
-                    firstSearchCountAuthors++;
-                }
-            }
-            for (let chip of tagsChips) {
-                if (await chip.isEnabled()) {
-                    firstSearchCountTags++;
-                }
-            }
+        //     for (let chip of authorChips) {
+        //         if (await chip.isEnabled()) {
+        //             firstSearchCountAuthors++;
+        //         }
+        //     }
+        //     for (let chip of tagsChips) {
+        //         if (await chip.isEnabled()) {
+        //             firstSearchCountTags++;
+        //         }
+        //     }
 
-            expect(firstSearchBuzzwordCount).toBeLessThan(initialBuzzwordCount);
-            expect(firstSearchCountAuthors).toEqual(initialCountAuthors);
-            expect(firstSearchCountTags).toBeLessThan(initialCountTags);
+        //     expect(firstSearchBuzzwordCount).toBeLessThan(initialBuzzwordCount);
+        //     expect(firstSearchCountAuthors).toEqual(initialCountAuthors);
+        //     expect(firstSearchCountTags).toBeLessThan(initialCountTags);
 
-            // reset all
-            await page.getByRole('button', {name: 'Reset all'}).click();
+        //     // reset all
+        //     await page.getByRole('button', {name: 'Reset all'}).click();
 
-            const finalBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
+        //     const finalBuzzwordCount = (await page.getByTestId('buzzword-card').all()).length
 
-            let finalCountAuthors = 0;
-            let finalCountTags = 0;
+        //     let finalCountAuthors = 0;
+        //     let finalCountTags = 0;
 
-            for (let chip of authorChips) {
-                if (await chip.isEnabled()) {
-                    finalCountAuthors++;
-                }
-            }
-            for (let chip of tagsChips) {
-                if (await chip.isEnabled()) {
-                    finalCountTags++;
-                }
-            }
+        //     for (let chip of authorChips) {
+        //         if (await chip.isEnabled()) {
+        //             finalCountAuthors++;
+        //         }
+        //     }
+        //     for (let chip of tagsChips) {
+        //         if (await chip.isEnabled()) {
+        //             finalCountTags++;
+        //         }
+        //     }
 
-            expect(finalBuzzwordCount).toBeGreaterThan(firstSearchBuzzwordCount);
-            expect(finalCountAuthors).toEqual(firstSearchCountAuthors);
-            expect(finalCountTags).toBeGreaterThan(firstSearchCountTags);
-            expect(finalBuzzwordCount).toEqual(initialBuzzwordCount);
-            expect(finalCountAuthors).toEqual(initialCountAuthors);
-            expect(finalCountTags).toEqual(initialCountTags);
-            await expect(searchBox).toHaveValue('');
-        });
+        //     expect(finalBuzzwordCount).toBeGreaterThan(firstSearchBuzzwordCount);
+        //     expect(finalCountAuthors).toEqual(firstSearchCountAuthors);
+        //     expect(finalCountTags).toBeGreaterThan(firstSearchCountTags);
+        //     expect(finalBuzzwordCount).toEqual(initialBuzzwordCount);
+        //     expect(finalCountAuthors).toEqual(initialCountAuthors);
+        //     expect(finalCountTags).toEqual(initialCountTags);
+        //     await expect(searchBox).toHaveValue('');
+        // });
 
         test('Searching for something that does not exist should display the correct error message', async ({page}) => {
             await expect(page).toHaveURL('/connections/buzzwords-feed');
 
             await page.getByRole('searchbox').fill('a;lskdjf;oawijef;olanw');
-            await page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' }).click();
+            await page.getByTestId('search-bar-container').getByRole('button').click();
 
             await expect(page.getByText('No buzzwords match your criteria', {exact: false})).toBeVisible();
         });
@@ -1289,7 +1290,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
             expectedBuzzwords = expectedBuzzwords.map((e) => (e.id));
 
             await page.getByRole('searchbox').fill(searchTerm);
-            await page.getByTestId('search-bar-container').getByRole('button', { name: 'Go' }).click();
+            await page.getByTestId('search-bar-container').getByRole('button').click();
 
             const resultBuzzwords = await page.getByTestId('buzzword-card').all();
 
@@ -1325,15 +1326,16 @@ test.describe('Page user interactions tests - buzzwords', () => {
             await expect(searchChipTwo).toBeVisible();
         });
 
-        test('Searching for a term that is also a filter should enable the clear all button', async ({page}) => {
-            await expect(page).toHaveURL('/connections/buzzwords-feed');
+        // RESET BUTTONS HAVE BEEN DEPRECATED
+        // test('Searching for a term that is also a filter should enable the clear all button', async ({page}) => {
+        //     await expect(page).toHaveURL('/connections/buzzwords-feed');
             
-            await page.getByRole('searchbox').fill('jenny ');
+        //     await page.getByRole('searchbox').fill('jenny ');
 
-            const clearAllButton = page.getByRole('button', {name: 'clear all'});
+        //     const clearAllButton = page.getByRole('button', {name: 'clear all'});
 
-            await expect(clearAllButton).toBeVisible();
-        });
+        //     await expect(clearAllButton).toBeVisible();
+        // });
 
         test('Searching for a term that is also a filter then clicking that filter should remove the chip button', async ({page}) => {
             await expect(page).toHaveURL('/connections/buzzwords-feed');
@@ -1357,35 +1359,36 @@ test.describe('Page user interactions tests - buzzwords', () => {
             await expect(page.getByTestId(`chip-${searchTerms[1].slice(0, -1)}`)).toBeVisible();
         });
 
-        test('Searching for terms that are also filters then clicking the clear all button should remove all the chip buttons', async({page}) => {
-            await expect(page).toHaveURL('/connections/buzzwords-feed');
+        // RESET BUTTONS HAVE BEEN DEPRECATED
+        // test('Searching for terms that are also filters then clicking the clear all button should remove all the chip buttons', async({page}) => {
+        //     await expect(page).toHaveURL('/connections/buzzwords-feed');
 
-            const searchTerms = ['balu ', 'vivek ', 'technology ', 'music '];
+        //     const searchTerms = ['balu ', 'vivek ', 'technology ', 'music '];
 
-            // fill the search box
-            for (let term of searchTerms) {
-                await page.getByRole('searchbox').fill(term);
-            };
+        //     // fill the search box
+        //     for (let term of searchTerms) {
+        //         await page.getByRole('searchbox').fill(term);
+        //     };
 
-            // confirm that both terms are now chips
-            for (let term of searchTerms) {
-                expect(page.getByTestId(`chip-${term.slice(0, -1)}`)).toBeVisible();
-            };
+        //     // confirm that both terms are now chips
+        //     for (let term of searchTerms) {
+        //         expect(page.getByTestId(`chip-${term.slice(0, -1)}`)).toBeVisible();
+        //     };
 
-            // click clear all button
-            await page.getByRole('button', {name: 'clear all'}).click();
+        //     // click clear all button
+        //     await page.getByRole('button', {name: 'clear all'}).click();
 
-            // confirm that all chips have been removed
-            for (let term of searchTerms) {
-                await expect(page.getByTestId(`chip-${term.slice(0, -1)}`)).toHaveCount(0);
-            };
-        });
+        //     // confirm that all chips have been removed
+        //     for (let term of searchTerms) {
+        //         await expect(page.getByTestId(`chip-${term.slice(0, -1)}`)).toHaveCount(0);
+        //     };
+        // });
 
         test('Searching for a term and nothing else should return only results that correspond to that filter (i.e., should work the same as a filter button)', async ({page}) => {
             await expect(page).toHaveURL('/connections/buzzwords-feed');
 
             await page.getByRole('searchbox').fill('tiago ');
-            await page.getByRole('button', {name: 'Go', exact: true}).click();
+            await page.getByTestId('search-button').click();
 
             const buzzCards = await page.getByTestId('buzzword-card').all();
 
@@ -1399,7 +1402,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
             await expect(page).toHaveURL('/connections/buzzwords-feed');
 
             await page.getByRole('searchbox').fill('olivia office');
-            await page.getByRole('button', {name: 'Go', exact: true}).click();
+            await page.getByTestId('search-button').click();
 
             const buzzCards = await page.getByTestId('buzzword-card').all();
 
