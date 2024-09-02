@@ -65,21 +65,23 @@
     $: inputValue = checkForTagAuthor(inputValue);
 </script>
 
-<div class='search-group max-w-full' data-testid="search-bar-container">
+<div class='search-group max-w-full max-h-fit relative' data-testid="search-bar-container">
     <form on:submit={searchGo} id="submit-form">
         <div class="input-group input-group-divider grid-cols-[auto_1fr_auto] bg-tertiary-200 border-tertiary-800 focus-within:outline-2 focus-within:outline focus-within:outline-primary-500">
             <input class="input p-2 placeholder:text-tertiary-700" type="search" name="searchBar" placeholder="Search..." id='search-bar' bind:value={inputValue} on:submit={searchGo} autocomplete="off"/>
             <button type="submit" class="text-secondary-500 focus:bg-secondary-500 focus:text-white" data-testid="search-button"><SearchIcon/></button>
         </div>
     </form>
-    <div class="chip-list" id="chip-list">
-    {#each Array.from(chipList) as chip}
-        <span class='chip variant-ringed' on:click={removeChip(chip)} on:keypress data-testid='chip-{chip}'>{chip} &#x2715</span>
-    {/each}
+    {#if chipList.size > 0}
+        <div class="absolute w-full mt-1 flex flex-wrap gap-x-1 gap-y-2 min-h-2 p-4 bg-surface-50/[.90] rounded-lg" id="chip-list">
+        {#each Array.from(chipList) as chip}
+            <span class='chip variant-ringed' on:click={removeChip(chip)} on:keypress data-testid='chip-{chip}'>{chip} &#x2715</span>
+        {/each}
+        </div>
+    {/if}
     <!-- {#if chipList.size != 0}
         <button class="btn btn-sm variant-filled-surface" on:click={clearAll} on:keypress>clear all</button>
     {/if} -->
-    </div>
 </div>
 
 <style>
