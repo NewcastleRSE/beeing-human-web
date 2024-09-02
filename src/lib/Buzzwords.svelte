@@ -269,6 +269,12 @@
 
     }
 
+    let filterMenuShow = false
+
+    function toggleFilterMenu() {
+        filterMenuShow = !filterMenuShow;
+    }
+
     onMount( () => {
         // Fills the filters object
         try {
@@ -303,16 +309,15 @@
     <!-- #key necessary to restart components -->
      <div class="flex flex-col md:flex-row gap-10">
         {#key unique}
-            <div class="flex flex-col md:basis-1/4 gap-8 items-center">
-                <div class="search">
+            <div class="flex flex-col md:basis-1/4 justify-between gap-4 md:gap-8 items-center">
+                <div class="search full">
                     <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={[...listAuthors, ...listTags]}/>
                 </div>
                 <TextDivider class="hidden md:block md:max-w-md"/>
-                <div class="filters flex flex-col gap-4">
-                    <h3 class="h3 font-medium">Filters</h3>
-                    <TagSelector listTags = {filters.getFiltersByType('authors', true)} filter = 'authors' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
-                    <TagSelector listTags = {filters.getFiltersByType('tags', true)} filter = 'tags' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
-                </div>
+                <div class="filters flex flex-col gap-4 items-center">
+                    <h3 class="h3 font-medium" on:click={toggleFilterMenu} on:keydown>Filters {#if !filterMenuShow}+{:else}-{/if}</h3>
+                    <TagSelector class="{filterMenuShow ? '' : 'hidden'} md: block" listTags = {filters.getFiltersByType('authors', true)} filter = 'authors' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
+                    <TagSelector class="{filterMenuShow ? '' : 'hidden'} md: block" listTags = {filters.getFiltersByType('tags', true)} filter = 'tags' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/></div>
                 <!-- <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button> -->
             </div>
         {/key}

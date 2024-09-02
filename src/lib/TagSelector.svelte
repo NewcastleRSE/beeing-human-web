@@ -47,7 +47,7 @@
     }
 </script>
 
-<div class="flex flex-col gap-2" data-testid="tag-selector-container">
+<div class={$$restProps.class || "flex flex-col gap-2"} data-testid="tag-selector-container">
     {#if listTags && filter}
         <h4 class="h4 font-light text-lg">{capitaliseFirstLetter(filter)}</h4>
         <div class="flex flex-row flex-wrap gap-x-1 gap-y-2">
