@@ -402,7 +402,7 @@
                 <TextDivider class="hidden md:block md:max-w-md" />
                 <div class="filters flex flex-col gap-4 items-center">
                     <h3
-                        class="h3 font-medium"
+                        class="h3 font-medium cursor-pointer md:cursor-auto"
                         on:click={toggleFilterMenu}
                         on:keydown
                     >
