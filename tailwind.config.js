@@ -3,6 +3,7 @@ import { join } from 'path';
 
 // 1. Import the Skeleton plugin
 import { skeleton } from '@skeletonlabs/tw-plugin';
+import forms from '@tailwindcss/forms';
 
 import { beeTheme } from './bee-theme';
 
@@ -33,6 +34,7 @@ export default {
 		},
 	},
 	plugins: [
+		forms,
 		require('tailwind-clip-path'),
 		// 4. Append the Skeleton plugin (after other plugins)
 		skeleton({

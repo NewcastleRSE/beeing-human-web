@@ -47,27 +47,16 @@
     }
 </script>
 
-<div class="tag-selector-container" data-testid="tag-selector-container">
+<div class={$$restProps.class || "flex flex-col gap-2"} data-testid="tag-selector-container">
     {#if listTags && filter}
-        <h4>{filter}</h4>
-        {#each listTags as tag}
-            <button data-testid={filter}-chip id={removeSpaces(tag.name)}-filter class="chip {tag.active ? 'variant-filled' : 'variant-soft'}" on:click={handleClick(tag)} on:keypress>{filter === 'authors' ? capitaliseFirstLetter(tag.name) : tag.name}</button>
-        {/each}
-        <button data-testid='tag-reset-button' id="{filter}-reset" class="chip variant-filled-surface" on:click={resetFilter} on:keypress disabled>Reset</button>
+        <h4 class="h4 font-light text-lg">{capitaliseFirstLetter(filter)}</h4>
+        <div class="flex flex-row flex-wrap gap-x-1 gap-y-2">
+            {#each listTags as tag}
+                <button data-testid={filter}-chip id={removeSpaces(tag.name)}-filter class="chip {tag.active ? 'variant-filled' : 'variant-filled-surface'}" on:click={handleClick(tag)} on:keypress>{filter === 'authors' ? capitaliseFirstLetter(tag.name) : tag.name}</button>
+            {/each}
+        </div>
+        <!-- <button data-testid='tag-reset-button' id="{filter}-reset" class="btn btn-sm max-w-fit variant-filled-tertiary self-end" on:click={resetFilter} on:keypress disabled>Reset</button> -->
     {:else}
         <p>Something went wrong...</p>
     {/if}
 </div>
-
-<style>
-    .tag-selector-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        width: 70%;
-    }
-
-    .tag-selector-container h4 {
-        width: 100%;
-    }
-</style>

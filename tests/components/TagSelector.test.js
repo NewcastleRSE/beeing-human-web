@@ -41,8 +41,7 @@ describe('Load and display tags in the TagSelector', () => {
         let filters = initFilters(listAuthors);
         render(TagSelector, {listTags: filters, filter: 'authors'});
         const buttons = await screen.findAllByRole('button');
-        // There should be one more button than there are filters (the reset button)
-        expect(buttons.length).toEqual(filters.length + 1);
+        expect(buttons.length).toEqual(filters.length);
     });
 
     it('should create one button for each filter, and their name should match after transformation', async () => {
@@ -58,12 +57,13 @@ describe('Load and display tags in the TagSelector', () => {
 describe('Tag operations', () => {
     afterEach(() => cleanup());
     
-    it('reset button should be disabled by default', async () => {
-        let filters = initFilters(listAuthors);
-        render(TagSelector, {listTags: filters, filter: 'authors'});
-        const resetButton = await screen.findByText('Reset', {exact: false});
-        expect(resetButton).toHaveProperty('disabled');
-    });
+    // Removed reset buttons
+    // it('reset button should be disabled by default', async () => {
+    //     let filters = initFilters(listAuthors);
+    //     render(TagSelector, {listTags: filters, filter: 'authors'});
+    //     const resetButton = await screen.findByText('Reset', {exact: false});
+    //     expect(resetButton).toHaveProperty('disabled');
+    // });
 
     // Enabling the reset button happens in the parent component
     
