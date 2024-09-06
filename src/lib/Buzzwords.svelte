@@ -1,17 +1,24 @@
 <script>
-    import { onMount } from 'svelte';
-    import {getListOfUniqueElements, removeSpaces} from '../utils/stringOperations';
+    import { onMount } from "svelte";
+    import {
+        getListOfUniqueElements,
+        removeSpaces,
+    } from "../utils/stringOperations";
 
-    import { checkSearchTagsAuthors, fullTextSearch, shuffle } from '../utils/BuzzwordsHelper';
+    import {
+        checkSearchTagsAuthors,
+        fullTextSearch,
+        shuffle,
+    } from "../utils/BuzzwordsHelper";
 
-    import {elementReady} from '../utils/generalHelpers'
+    import { elementReady } from "../utils/generalHelpers";
 
-    import { Filters } from '../classes/Filters'
+    import { Filters } from "../classes/Filters";
 
-    import TagSelector from './TagSelector.svelte';
-    import SearchBar from './SearchBar.svelte';
-    import BuzzwordCard from './BuzzwordCard.svelte';
-    import TextDivider from '$lib/TextDivider.svelte'
+    import TagSelector from "./TagSelector.svelte";
+    import SearchBar from "./SearchBar.svelte";
+    import BuzzwordCard from "./BuzzwordCard.svelte";
+    import TextDivider from "$lib/TextDivider.svelte";
 
     export let buzzwords;
     export let listTags;
@@ -26,9 +33,9 @@
 
     // this is the array of buzzwords to be displayed -- it will be equal to the received buzzwords at init
     let filteredBuzzwords = [];
-    
+
     // necessary to restart the filter components
-    let unique = {}
+    let unique = {};
 
     // Event handling changes
 
@@ -39,11 +46,10 @@
         filteredBuzzwords = filterBuzzWords(filteredBuzzwords);
     }
 
-
     function handleResetFilters(event) {
         // triggers when a filter reset button is clicked
         // resets all filter buttons of the same type and refilters the dataset
-        filters = filters.resetFilterActiveByType(event.detail.filter)
+        filters = filters.resetFilterActiveByType(event.detail.filter);
         filteredBuzzwords = filterBuzzWords(filteredBuzzwords);
     }
 
@@ -57,14 +63,14 @@
         // creates a fake Filter object and sends it to handleFilterChange as if it came from the 'TagSelector' component
 
         // finds the corresponding object in the Filters object
-        const filter = filters.getFiltersByName(event.detail.filter)
+        const filter = filters.getFiltersByName(event.detail.filter);
 
         // constructs the fake event object
         const fakeEvent = {
             detail: {
-                filter: filter
-            }
-        }
+                filter: filter,
+            },
+        };
 
         // calls the handleFilterChange function with the fake event
         handleFilterChange(fakeEvent);
@@ -73,7 +79,9 @@
     function handleSearch(event) {
         // triggered when receiving a 'search' event from 'SearchBar.svelte'
         // set terms to lower case
-        const searchTerms = event.detail.searchTerms.map(e => e.toLowerCase());
+        const searchTerms = event.detail.searchTerms.map((e) =>
+            e.toLowerCase()
+        );
 
         // if there are no active filters, it will always search in the entire corpus
         if (filters.allInactive()) {
@@ -81,38 +89,59 @@
         }
 
         // establish whether the search terms are filters
-        const filtersToCheck = checkSearchTagsAuthors(searchTerms, filters.getAvailableFiltersByType('authors'), filters.getAvailableFiltersByType('tags'));
-
+        const filtersToCheck = checkSearchTagsAuthors(
+            searchTerms,
+            filters.getAvailableFiltersByType("authors"),
+            filters.getAvailableFiltersByType("tags")
+        );
 
         // if the search terms are filters in either the authors or tags
         if (Object.keys(filtersToCheck).length > 0) {
             let listAuthors = [];
             let listTags = [];
-            if (Object.keys(filtersToCheck).includes('authors')) {
-                listAuthors = filtersToCheck['authors'];
+            if (Object.keys(filtersToCheck).includes("authors")) {
+                listAuthors = filtersToCheck["authors"];
             }
-            if (Object.keys(filtersToCheck).includes('tags')) {
-                listTags = filtersToCheck['tags'];
+            if (Object.keys(filtersToCheck).includes("tags")) {
+                listTags = filtersToCheck["tags"];
             }
 
             // filter the displayed buzzwords
-            filteredBuzzwords = reduceBuzzwordsByFilter(filteredBuzzwords, listAuthors, listTags);
+            filteredBuzzwords = reduceBuzzwordsByFilter(
+                filteredBuzzwords,
+                listAuthors,
+                listTags
+            );
         }
 
         // Full text search
-        let fullTextResults = fullTextSearch(filteredBuzzwords, event.detail.searchString, searchTerms);
+        let fullTextResults = fullTextSearch(
+            filteredBuzzwords,
+            event.detail.searchString,
+            searchTerms
+        );
         if (fullTextResults.length > 0) {
-            filteredBuzzwords = fullTextResults
-        } else if (fullTextResults.length == 0 && Object.keys(filtersToCheck).length == 0){
+            filteredBuzzwords = fullTextResults;
+        } else if (
+            fullTextResults.length == 0 &&
+            Object.keys(filtersToCheck).length == 0
+        ) {
             filteredBuzzwords = [];
         }
 
         // Gets a list of all the authors in the filtered dataset
-        let availableAuthors = getListOfUniqueElements(filteredBuzzwords.map(buzz => buzz.author));
+        let availableAuthors = getListOfUniqueElements(
+            filteredBuzzwords.map((buzz) => buzz.author)
+        );
         // Gets a list of all the tags available in the filtered dataset
-        let availableTags = getListOfUniqueElements(filteredBuzzwords.map(buzz => [...buzz.tags]).flat());
+        let availableTags = getListOfUniqueElements(
+            filteredBuzzwords.map((buzz) => [...buzz.tags]).flat()
+        );
         // updates filter availability based on filtered dataset
-        filters = filters.updateFilterAvailableStatus(availableAuthors, availableTags);
+        filters = filters.updateFilterAvailableStatus(
+            availableAuthors,
+            availableTags
+        );
         updateFilterButtons(filteredBuzzwords.length);
     }
 
@@ -127,8 +156,8 @@
         // First level function to filter buzzwords dataset
         // This is triggered when an user clicks on one of the filter buttons
         // The actual data filtering happens in the second level function 'reduceBuyzzwordsByFilter'
-        let listActiveFilterAuthors = []
-        let listActiveFilterTags = []
+        let listActiveFilterAuthors = [];
+        let listActiveFilterTags = [];
 
         if (filters.allInactive()) {
             // if both filters are empty:
@@ -137,22 +166,30 @@
             // -- update the UI to reflect availability
             updateFilterButtons(buzzwords.length);
             // -- return the initial dataset
-            return buzzwords
+            return buzzwords;
         } else {
             // otherwise, reset the filteredBuzzwords for the entire dataset
-            listActiveFilterAuthors = filters.getActiveFiltersByType('authors');
-            listActiveFilterTags = filters.getActiveFiltersByType('tags')
+            listActiveFilterAuthors = filters.getActiveFiltersByType("authors");
+            listActiveFilterTags = filters.getActiveFiltersByType("tags");
             filteredBuzzwords = buzzwords;
         }
 
         // Reduce the dataset based on selected filters
-        let bothFilters = reduceBuzzwordsByFilter(filteredBuzzwords, listActiveFilterAuthors, listActiveFilterTags);
+        let bothFilters = reduceBuzzwordsByFilter(
+            filteredBuzzwords,
+            listActiveFilterAuthors,
+            listActiveFilterTags
+        );
 
         // Gets a list of all the authors in the filtered dataset
-        let listAuthors = getListOfUniqueElements(bothFilters.map(buzz => buzz.author));
+        let listAuthors = getListOfUniqueElements(
+            bothFilters.map((buzz) => buzz.author)
+        );
         // Gets a list of all the tags available in the filtered dataset
-        let listTags = getListOfUniqueElements(bothFilters.map(buzz => [...buzz.tags]).flat());
-        
+        let listTags = getListOfUniqueElements(
+            bothFilters.map((buzz) => [...buzz.tags]).flat()
+        );
+
         // updates UI to show available filters on the reduced dataset
         filters = filters.updateFilterAvailableStatus(listAuthors, listTags);
         updateFilterButtons(bothFilters.length);
@@ -162,37 +199,55 @@
 
     // second level filtering functions
 
-    function reduceBuzzwordsByFilter(filteredBuzzwords, listActiveFilterAuthors, listActiveFilterTags) {
+    function reduceBuzzwordsByFilter(
+        filteredBuzzwords,
+        listActiveFilterAuthors,
+        listActiveFilterTags
+    ) {
         // Second level function that takes in two lists of active filters, reduces the dataset based on those filters, and returns the result
 
         // Filtering authors is additive -- i.e., the more filters you select, the more results you will get (i.e., all posts of author x plus all posts of author y)
-        let filteredAuthors = filteredBuzzwords.filter(function(entry) {
+        let filteredAuthors = filteredBuzzwords.filter(function (entry) {
             if (entry.author) {
-                if (listActiveFilterAuthors.length > 0 && listActiveFilterAuthors.includes(entry.author)) {
+                if (
+                    listActiveFilterAuthors.length > 0 &&
+                    listActiveFilterAuthors.includes(entry.author)
+                ) {
                     return entry.author;
                 } else if (listActiveFilterAuthors.length === 0) {
                     return entry.author;
                 }
             }
         });
-        
+
         // Filtering tags is subtractive -- i.e., the more filters you select, the less results you have (i.e., i.e., all posts with tag x and tag y) -- still not sure if this is the more intuitive solution
-        let filteredTags = []
+        let filteredTags = [];
         for (let buzzword of filteredBuzzwords) {
-            if (buzzword.tags && listActiveFilterTags.every(tag => buzzword.tags.includes(tag))) {
+            if (
+                buzzword.tags &&
+                listActiveFilterTags.every((tag) => buzzword.tags.includes(tag))
+            ) {
                 filteredTags.push(buzzword);
             }
         }
 
         // Collates the results for both filters
-        let bothFilters = []
-        if (filteredAuthors.length < filteredBuzzwords.length && filteredTags.length < filteredBuzzwords.length) {
-            bothFilters = filteredAuthors.filter(entry => filteredTags.includes(entry));
+        let bothFilters = [];
+        if (
+            filteredAuthors.length < filteredBuzzwords.length &&
+            filteredTags.length < filteredBuzzwords.length
+        ) {
+            bothFilters = filteredAuthors.filter((entry) =>
+                filteredTags.includes(entry)
+            );
         } else if (filteredAuthors.length < filteredBuzzwords.length) {
             bothFilters = filteredAuthors;
         } else if (filteredTags.length < filteredBuzzwords.length) {
             bothFilters = filteredTags;
-        } else if (filteredAuthors.length === filteredBuzzwords.length && filteredTags.length === filteredBuzzwords.length) {
+        } else if (
+            filteredAuthors.length === filteredBuzzwords.length &&
+            filteredTags.length === filteredBuzzwords.length
+        ) {
             bothFilters = filteredBuzzwords;
         }
 
@@ -204,14 +259,20 @@
         // takes the length of the new dataset to compare it to the entire dataset and enable or disable the Reset All button
         for (let filter of filters) {
             try {
-                const filterChip = document.getElementById(`${removeSpaces(filter.name)}-filter`)
+                const filterChip = document.getElementById(
+                    `${removeSpaces(filter.name)}-filter`
+                );
                 if (filter.available) {
                     filterChip.disabled = false;
                 } else {
                     filterChip.disabled = true;
                 }
             } catch (error) {
-                console.debug(`Component is still mounting, element with id ${removeSpaces(filter.name)}-filter does not exist yet. ${error}`);
+                console.debug(
+                    `Component is still mounting, element with id ${removeSpaces(
+                        filter.name
+                    )}-filter does not exist yet. ${error}`
+                );
             }
         }
 
@@ -257,7 +318,7 @@
         // Called onMount and whenever there is a reset all
         // Resets the dataset to the original, resets filters to their initial state, and creates a new UI for filtering and search
         if (shuffled) {
-            buzzwords = shuffle(buzzwords)
+            buzzwords = shuffle(buzzwords);
         }
         filteredBuzzwords = buzzwords;
 
@@ -265,82 +326,130 @@
         filters.resetFilters();
 
         // necessary to restart the filter components
-        unique = {}
-
+        unique = {};
     }
 
-    let filterMenuShow = false
+    let filterMenuShow = false;
 
     function toggleFilterMenu() {
-        filterMenuShow = !filterMenuShow;
+        if (windowWidth <= 756) {
+            filterMenuShow = !filterMenuShow;
+        }
     }
 
-    onMount( () => {
+    onMount(() => {
         // Fills the filters object
         try {
-            if(listAuthors.length == 0 || listTags.length == 0 || buzzwords.length == 0) {
-                throw new Error('No data received')
+            if (
+                listAuthors.length == 0 ||
+                listTags.length == 0 ||
+                buzzwords.length == 0
+            ) {
+                throw new Error("No data received");
             }
-            
+
             for (let tag of listTags) {
-                filters.addFilter(tag, 'tags');
+                filters.addFilter(tag, "tags");
             }
-            
+
             for (let author of listAuthors) {
-                filters.addFilter(author, 'authors');
+                filters.addFilter(author, "authors");
             }
             init();
             loaded = true;
-        }
-        catch (error) {
+        } catch (error) {
             console.debug(`There has been an error: ${error}`);
-            errorFlag = true
+            errorFlag = true;
         }
 
         if (window.location.hash) {
             elementReady(window.location.hash).then(() => {
-                document.getElementById(window.location.hash.substring(1)).scrollIntoView()
+                document
+                    .getElementById(window.location.hash.substring(1))
+                    .scrollIntoView();
             });
         }
     });
 
+    let windowWidth = 0
+    
+    $: if (windowWidth > 756) {
+        console.log(windowWidth)
+        filterMenuShow = true;
+    }
 </script>
+
+<svelte:window bind:innerWidth={windowWidth} />
+
 {#if loaded}
     <!-- #key necessary to restart components -->
-     <div class="flex flex-col md:flex-row gap-10">
+    <div class="flex flex-col md:flex-row gap-10">
         {#key unique}
-            <div class="flex flex-col md:basis-1/4 justify-between gap-4 md:gap-8 items-center">
+            <div
+                class="flex flex-col md:basis-1/4 justify-between gap-4 md:gap-8 md:justify-start items-center"
+            >
                 <div class="search full">
-                    <SearchBar on:search={handleSearch} on:reset={handleReset} listChips={[...listAuthors, ...listTags]}/>
+                    <SearchBar
+                        on:search={handleSearch}
+                        on:reset={handleReset}
+                        listChips={[...listAuthors, ...listTags]}
+                    />
                 </div>
-                <TextDivider class="hidden md:block md:max-w-md"/>
+                <TextDivider class="hidden md:block md:max-w-md" />
                 <div class="filters flex flex-col gap-4 items-center">
-                    <h3 class="h3 font-medium" on:click={toggleFilterMenu} on:keydown>Filters {#if !filterMenuShow}+{:else}-{/if}</h3>
-                    <TagSelector class="{filterMenuShow ? '' : 'hidden'} md: block" listTags = {filters.getFiltersByType('authors', true)} filter = 'authors' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/>
-                    <TagSelector class="{filterMenuShow ? '' : 'hidden'} md: block" listTags = {filters.getFiltersByType('tags', true)} filter = 'tags' on:filter-changed={handleFilterChange} on:reset-filters={handleResetFilters}/></div>
+                    <h3
+                        class="h3 font-medium"
+                        on:click={toggleFilterMenu}
+                        on:keydown
+                    >
+                        Filters <span class="md:hidden"
+                            >{#if !filterMenuShow}+{:else}-{/if}</span
+                        >
+                    </h3>
+                    <TagSelector
+                        class="{filterMenuShow ? '' : 'hidden'} md: block"
+                        listTags={filters.getFiltersByType("authors", true)}
+                        filter="authors"
+                        on:filter-changed={handleFilterChange}
+                        on:reset-filters={handleResetFilters}
+                    />
+                    <TagSelector
+                        class="{filterMenuShow ? '' : 'hidden'} md: block"
+                        listTags={filters.getFiltersByType("tags", true)}
+                        filter="tags"
+                        on:filter-changed={handleFilterChange}
+                        on:reset-filters={handleResetFilters}
+                    />
+                </div>
                 <!-- <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button> -->
             </div>
         {/key}
 
         <div class="w-full">
-            <div class="card-collection flex flex-col max-w-4xl gap-8 m-auto" data-testid="card-collection">
-            {#if filteredBuzzwords.length === 0}
-                <div class="empty-collection">
-                    <p>No buzzwords match your criteria</p>
-                </div>
-            {:else}
-                {#each filteredBuzzwords as buzzword (buzzword.id)}
-                    <BuzzwordCard {buzzword} on:filterClicked={handleFilterClickBuzzword}/>
-                {/each}
-            {/if}
+            <div
+                class="card-collection flex flex-col max-w-4xl gap-8 m-auto"
+                data-testid="card-collection"
+            >
+                {#if filteredBuzzwords.length === 0}
+                    <div class="empty-collection">
+                        <p>No buzzwords match your criteria</p>
+                    </div>
+                {:else}
+                    {#each filteredBuzzwords as buzzword (buzzword.id)}
+                        <BuzzwordCard
+                            {buzzword}
+                            on:filterClicked={handleFilterClickBuzzword}
+                        />
+                    {/each}
+                {/if}
+            </div>
         </div>
-    </div>
     </div>
 {:else if errorFlag}
     <div>
         <p>Error: Something went wrong.</p>
     </div>
-{:else} 
+{:else}
     <div>
         <p>Loading...</p>
     </div>
