@@ -19,6 +19,9 @@
     import SearchBar from "./SearchBar.svelte";
     import BuzzwordCard from "./BuzzwordCard.svelte";
     import TextDivider from "$lib/TextDivider.svelte";
+    
+    import { slide } from "svelte/transition";
+    import { expoInOut } from 'svelte/easing';
 
     export let buzzwords;
     export let listTags;
@@ -371,12 +374,13 @@
         }
     });
 
-    let windowWidth = 0
-    
+    let windowWidth = 0;
+
     $: if (windowWidth > 756) {
-        console.log(windowWidth)
         filterMenuShow = true;
     }
+
+    
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />
@@ -406,20 +410,22 @@
                             >{#if !filterMenuShow}+{:else}-{/if}</span
                         >
                     </h3>
-                    <TagSelector
-                        class="{filterMenuShow ? '' : 'hidden'} md: block"
-                        listTags={filters.getFiltersByType("authors", true)}
-                        filter="authors"
-                        on:filter-changed={handleFilterChange}
-                        on:reset-filters={handleResetFilters}
-                    />
-                    <TagSelector
-                        class="{filterMenuShow ? '' : 'hidden'} md: block"
-                        listTags={filters.getFiltersByType("tags", true)}
-                        filter="tags"
-                        on:filter-changed={handleFilterChange}
-                        on:reset-filters={handleResetFilters}
-                    />
+                    {#if filterMenuShow}
+                        <div class="flex flex-col gap-4" transition:slide={{ duration: 800, easing:expoInOut}}>
+                            <TagSelector
+                                listTags={filters.getFiltersByType("authors", true)}
+                                filter="authors"
+                                on:filter-changed={handleFilterChange}
+                                on:reset-filters={handleResetFilters}
+                            />
+                            <TagSelector
+                                listTags={filters.getFiltersByType("tags", true)}
+                                filter="tags"
+                                on:filter-changed={handleFilterChange}
+                                on:reset-filters={handleResetFilters}
+                            />
+                        </div>
+                    {/if}
                 </div>
                 <!-- <button id="resetAll" class="btn variant-filled" on:click={resetAll} disabled>Reset all</button> -->
             </div>
@@ -454,3 +460,15 @@
         <p>Loading...</p>
     </div>
 {/if}
+
+<style>
+    /* deactivates svelte's animations for users that have prefers reduced motion active */
+    @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      animation-delay: 0.01ms !important;
+    }
+  }
+</style>
