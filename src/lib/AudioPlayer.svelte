@@ -8,6 +8,8 @@
     import ForwardIcon from "./icons/ForwardIcon.svelte";
     import BackwardIcon from "./icons/BackwardIcon.svelte";
 
+    import { secsToMinSecs } from "../utils/MIDIPlaybackHelper";
+
     export let audioPath;
 
     let duration = undefined;
@@ -74,6 +76,9 @@
             max={duration}
             on:click={seek(currentPlace)}
         />
+        <div class="text-xs font-light max-w-fit place-self-end">
+            <p>{secsToMinSecs(currentPlace)} / {secsToMinSecs(duration)}</p>
+        </div>
     {/if}
 
     <div class="flex justify-center">
