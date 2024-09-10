@@ -83,14 +83,3 @@
         <button class="btn btn-sm variant-filled-surface" on:click={clearAll} on:keypress>clear all</button>
     {/if} -->
 </div>
-
-<style>
-    .chip-list {
-        margin: 0.5rem 0 0.5rem 1rem;
-        min-height: 2rem;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-</style>
