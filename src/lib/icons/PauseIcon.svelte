@@ -3,7 +3,7 @@
 <script>
     export let size = 6;
 
-    let sizeString = `size-${size}`;
+    let sizeString = `w-${size}`;
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class={sizeString}>
