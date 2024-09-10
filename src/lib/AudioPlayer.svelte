@@ -64,12 +64,19 @@
 </script>
 
 <div
-    class="w-4/5 m-auto min-h-64 flex flex-col justify-center bg-secondary-50 px-6 gap-2 rounded-lg shadow"
+    class="w-2/3 m-auto min-h-64 flex flex-col justify-center bg-secondary-50 p-6 gap-2 rounded-lg shadow"
 >
     <audio id="audioPlayer">
         <source src={audioPath} type="audio/mpeg" />
     </audio>
 
+    <div class="flex max-w-fit m-auto gap-4 text-secondary-900">
+        <img class="size-28 rounded-lg border-4 border-primary-800" src="https://picsum.photos/200" alt="random things"/>
+        <div class="flex flex-col h-fit max-w-40 place-self-center text-center">
+            <p class="text-sm italic font-light">Charles Butler</p>
+            <p class="text-lg">Melissomelos, or the Bees Madrigal</p>
+        </div>
+    </div>
     {#if duration != undefined}
         <RangeSlider
             bind:value={currentPlace}
