@@ -14,7 +14,7 @@
                 break;
             }
         }
-        return pathString
+        return base + pathString;
     }
 
     let findPageTitle = (path, page) => {
