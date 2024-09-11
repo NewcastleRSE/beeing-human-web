@@ -64,39 +64,42 @@
 </script>
 
 <div
-    class="w-2/3 m-auto min-h-64 flex flex-col justify-center bg-secondary-50 p-6 gap-2 rounded-lg shadow"
+    class="w-full md:w-2/3 m-auto md:min-h-64 flex flex-col justify-center bg-secondary-50 p-6 rounded-lg shadow"
 >
     <audio id="audioPlayer">
         <source src={audioPath} type="audio/mpeg" />
     </audio>
 
-    <div class="flex max-w-fit m-auto gap-4 text-secondary-900">
-        <img class="size-28 rounded-lg border-4 border-primary-800" src="https://picsum.photos/200" alt="random things"/>
-        <div class="flex flex-col h-fit max-w-40 place-self-center text-center">
-            <p class="text-sm italic font-light">Charles Butler</p>
-            <p class="text-lg">Melissomelos, or the Bees Madrigal</p>
+    <div class="flex max-w-fit mb-4 md:mb-6 m-auto gap-2 md:gap-4 text-secondary-900">
+        <img class="size-20 md:size-28 rounded-lg border-2 md:border-4 border-primary-800" src="https://picsum.photos/200" alt="random things"/>
+        <div class="flex flex-col h-fit md:max-w-40 place-self-center text-center">
+            <p class="text-xs md:text-sm italic font-light">Charles Butler</p>
+            <p class="md:text-lg">Melissomelos, or the Bees Madrigal</p>
         </div>
     </div>
     {#if duration != undefined}
-        <RangeSlider
-            bind:value={currentPlace}
-            max={duration}
-            on:click={seek(currentPlace)}
-        />
-        <div class="text-xs font-light max-w-fit place-self-end">
-            <p>{secsToMinSecs(currentPlace)} / {secsToMinSecs(duration)}</p>
+        <div class="flex flex-col md:mb-2">
+            <RangeSlider
+                bind:value={currentPlace}
+                max={duration}
+                on:click={seek(currentPlace)}
+                accent="accent-primary-500"
+            />
+            <div class="text-xs font-light max-w-fit place-self-end">
+                <p>{secsToMinSecs(currentPlace)} / {secsToMinSecs(duration)}</p>
+            </div>
         </div>
     {/if}
 
     <div class="flex justify-center">
-        <button class="btn" on:click={skipBack}><BackwardIcon size="6" /></button>
+        <button class="btn" on:click={skipBack}><BackwardIcon class="size-6 fill-secondary-500 stroke-secondary-700 hover:fill-secondary-400 hover:stroke-0 transition-all ease-in-out duration-300 motion-reduce:transition-none"/></button>
         <button class="btn" on:click={playPause}>
             {#if !playing}
-                <PlayIcon size="12" />
+                <PlayIcon class="size-12 fill-secondary-500 stroke-secondary-700 hover:fill-secondary-400 transition-all ease-in-out duration-300 motion-reduce:transition-none" />
             {:else}
-                <PauseIcon size="12" />
+                <PauseIcon class="size-12 fill-secondary-500 stroke-secondary-700 hover:fill-secondary-400 transition-all ease-in-out duration-300 motion-reduce:transition-none" />
             {/if}
         </button>
-        <button class="btn" on:click={skipFwd}><ForwardIcon size="6" /></button>
+        <button class="btn" on:click={skipFwd}><ForwardIcon class="size-6 fill-secondary-500 stroke-secondary-700 hover:fill-secondary-400 hover:stroke-0 transition-all ease-in-out duration-300 motion-reduce:transition-none" /></button>
     </div>
 </div>
