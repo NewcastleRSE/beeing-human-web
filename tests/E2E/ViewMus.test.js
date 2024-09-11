@@ -47,10 +47,8 @@ test.describe('Page content tests - binaural playback', () => {
 
     test('Expect music view to have a media player element', async ({ page }) => {
         await expect(page).toHaveURL('/music/binaural-recording');
-        await Promise.all([
-            page.locator('audio').waitFor('visible'),
-            expect(page.locator('audio')).toBeVisible()
-        ]);
+        const audioPlayer = page.getByTestId('audio-player')
+        expect(audioPlayer).toBeAttached();
     });
 });
 
