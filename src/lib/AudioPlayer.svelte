@@ -64,7 +64,7 @@
 </script>
 
 <div
-    class="w-full md:w-2/3 m-auto md:min-h-64 flex flex-col justify-center bg-secondary-50 p-6 rounded-lg shadow"
+    class="w-full md:w-2/3 m-auto md:min-h-64 flex flex-col justify-center bg-secondary-50 p-6 rounded-lg shadow" data-testid = "audio-player"
 >
     <audio id="audioPlayer">
         <source src={audioPath} type="audio/mpeg" />
