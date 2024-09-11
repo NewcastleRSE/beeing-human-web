@@ -9,6 +9,7 @@
   import SectionHero from "../../lib/SectionHero.svelte";
   import heros from "./heros.json";
   import { onMount } from "svelte";
+    import DataSelector from "../../lib/DataSelector.svelte";
 
   let path = $page.route.id.split("/");
   let section = $page.route.id.split("/")[2];
@@ -68,6 +69,7 @@
 
     getHeroSection(path);
   }
+
 </script>
 
 <div class="w-4/5 mx-auto my-6">
@@ -86,13 +88,17 @@
 </div>
 
 {#if heroObject != undefined}
-  <SectionHero
-    title={heroObject.title}
-    img={heroObject.img ? heroObject.img : undefined}
-    type={heroObject.type}
-  >
-    {heroObject.lead}
-  </SectionHero>
+  {#if "dataSelector" in heroObject && heroObject.dataSelector}
+    <DataSelector/>
+  {:else}
+    <SectionHero
+      title={heroObject.title}
+      img={heroObject.img ? heroObject.img : undefined}
+      type={heroObject.type}
+    >
+      {heroObject.lead}
+    </SectionHero>
+  {/if}
 {/if}
 
 <div class="w-4/5 mx-auto my-6">
