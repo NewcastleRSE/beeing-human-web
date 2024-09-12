@@ -2,6 +2,49 @@
     import { RadioGroup, RadioItem, SlideToggle } from "@skeletonlabs/skeleton";
     let radioValue = 0;
     let slideValue = false;
+
+    export let controlsArray = [
+        {
+            dataSource: true,
+            type: "select",
+            label: undefined,
+            values: {
+                "1623": "linkto1623",
+                "1609": "link to 1609",
+                "1634": "link to 1634",
+            },
+        },
+        {
+            dataSource: false,
+            type: "radioGroup",
+            label: "view",
+            values: {
+                'facsimile': 0,
+                'both': 1,
+                'transcription': 2,
+            },
+        },
+        {
+            dataSource: false,
+            type: "radioGroup",
+            label: "variation",
+            values: {
+                'no variation': 0,
+                'Major Changes': 1,
+                'All Changes': 2,
+            },
+        },
+        {
+            dataSource: false,
+            type: "toggle",
+            label: "editorial notes",
+            values: {
+                default: false,
+            },
+        },
+    ];
+
+    console.log(controlsArray);
 </script>
 
 <form
@@ -41,9 +84,16 @@
             </RadioGroup>
         </div>
 
-        <div class="flex flex-col gap-2 font-light text-sm min-w-32 justify-center">
+        <div
+            class="flex flex-col gap-2 font-light text-sm min-w-32 justify-center"
+        >
             <label for="slide" class="font-light text-sm pl-2">Label</label>
-            <SlideToggle name="slide" bind:checked={slideValue} size="lg" background="bg-secondary-500" active="bg-secondary-100"
+            <SlideToggle
+                name="slide"
+                bind:checked={slideValue}
+                size="lg"
+                background="bg-secondary-500"
+                active="bg-secondary-100"
                 >{!slideValue ? "off" : "on"}</SlideToggle
             >
         </div>
