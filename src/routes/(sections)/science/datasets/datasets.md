@@ -7,6 +7,47 @@ lead: "A data set (or dataset) is a collection of data. In the case of tabular d
 img: 'assets/pexels-murillohm-10854279.jpg'
 imgAlt: 'a neatly arranged pile of wood'
 type: data
+dataSelector: true
+dataSelectorControls: [{
+            dataSource: true,
+            type: "select",
+            label: 'dataSource',
+            default: "Dataset 1",
+            values: {
+                "Dataset 1": "link to dataset1",
+                "Dataset 2": "link to dataset2",
+            },
+        },
+        {
+            dataSource: false,
+            type: "radioGroup",
+            label: "view",
+            defaultValue: 'both',
+            values: {
+                facsimile: 'facsimile',
+                both: 'both',
+                transcription: 'transcription',
+            },
+        },
+        {
+            dataSource: false,
+            type: "radioGroup",
+            label: "variation",
+            defaultValue: 'Major Changes',
+            values: {
+                "no variation": 'no variation',
+                "Major Changes": 'Major Changes',
+                "All Changes": 'All Changes',
+            },
+        },
+        {
+            dataSource: false,
+            type: "toggle",
+            label: "editorial notes",
+            values: {
+                default: false,
+            },
+        }]
 layout: false
 ---
 
