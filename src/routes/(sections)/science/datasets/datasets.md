@@ -22,30 +22,12 @@ dataSelectorControls: [{
             dataSource: false,
             type: "radioGroup",
             label: "view",
-            defaultValue: 'both',
+            defaultValue: 'details',
             values: {
-                facsimile: 'facsimile',
-                both: 'both',
-                transcription: 'transcription',
-            },
-        },
-        {
-            dataSource: false,
-            type: "radioGroup",
-            label: "variation",
-            defaultValue: 'Major Changes',
-            values: {
-                "no variation": 'no variation',
-                "Major Changes": 'Major Changes',
-                "All Changes": 'All Changes',
-            },
-        },
-        {
-            dataSource: false,
-            type: "toggle",
-            label: "editorial notes",
-            values: {
-                default: false,
+                details: 'details',
+                visualisation: 'visualisation',
+                summary: 'summary',
+                data: 'data'
             },
         }]
 layout: false
