@@ -1,3 +1,12 @@
+<!--
+    @component
+    - Creates the options bar that goes above any direct exploration of data;
+    - generates the controls from a JSON object called `controlsArray`, see default object for the structure;
+    -forwards an event called `valueChange` everytime one of those controls changes
+    
+    @param controlsArray {array} - An array of objects containig options for each control to be added
+  -->
+
 <script>
     import DataSourceControl from "$lib/DataSelectorControls/DataSourceControl.svelte";
     import DataRadioGroupControl from "$lib/DataSelectorControls/DataRadioGroupControl.svelte";
@@ -55,7 +64,7 @@
     <!-- Data source selector goes here -->
      {#each controlsArray as controlOptions}
         {#if (controlOptions.dataSource)}
-            <DataSourceControl options = {controlOptions} on:valueChange={(e) => {console.log(e.detail)}}/>
+            <DataSourceControl options = {controlOptions} on:valueChange/>
         {/if}
      {/each}
     <div class="flex gap-10 content-center gap-32">
@@ -63,9 +72,9 @@
          {#each controlsArray as controlOptions}
             {#if (!controlOptions.dataSource)}
                 {#if (controlOptions.type === "radioGroup")}
-                    <DataRadioGroupControl options={controlOptions} on:valueChange={(e) => {console.log(e.detail)}}/>
+                    <DataRadioGroupControl options={controlOptions} on:valueChange/>
                 {:else if (controlOptions.type === "toggle")}
-                    <DataSlideToggle options = {controlOptions} on:valueChange={(e) => {console.log(e.detail)}}/>
+                    <DataSlideToggle options = {controlOptions} on:valueChange/>
                 {/if}
             {/if}
             

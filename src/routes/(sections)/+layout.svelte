@@ -89,7 +89,7 @@
 
 {#if heroObject != undefined}
   {#if "dataSelector" in heroObject && heroObject.dataSelector}
-    <DataSelector/>
+    <DataSelector on:valueChange={(e) => {console.log(e.detail)}}/>
   {:else}
     <SectionHero
       title={heroObject.title}
