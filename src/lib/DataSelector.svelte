@@ -7,7 +7,7 @@
         {
             dataSource: true,
             type: "select",
-            label: undefined,
+            label: 'dataSource',
             default: "1623",
             values: {
                 "1623": "link to 1623",
@@ -47,7 +47,6 @@
         },
     ];
 
-    console.log(controlsArray);
 </script>
 
 <form
@@ -56,7 +55,7 @@
     <!-- Data source selector goes here -->
      {#each controlsArray as controlOptions}
         {#if (controlOptions.dataSource)}
-            <DataSourceControl options = {controlOptions}/>
+            <DataSourceControl options = {controlOptions} on:valueChange={(e) => {console.log(e.detail)}}/>
         {/if}
      {/each}
     <div class="flex gap-10 content-center gap-32">
@@ -64,9 +63,9 @@
          {#each controlsArray as controlOptions}
             {#if (!controlOptions.dataSource)}
                 {#if (controlOptions.type === "radioGroup")}
-                    <DataRadioGroupControl options={controlOptions}/>
+                    <DataRadioGroupControl options={controlOptions} on:valueChange={(e) => {console.log(e.detail)}}/>
                 {:else if (controlOptions.type === "toggle")}
-                    <DataSlideToggle options = {controlOptions}/>
+                    <DataSlideToggle options = {controlOptions} on:valueChange={(e) => {console.log(e.detail)}}/>
                 {/if}
             {/if}
             

@@ -1,8 +1,19 @@
 <script>
     import {RadioGroup, RadioItem} from '@skeletonlabs/skeleton';
+    import {createEventDispatcher} from 'svelte';
+
+    const dispatch = createEventDispatcher();
+
     export let options;
     let radioValue = options.defaultValue;
+    
 
+    function handleClick() {
+        dispatch('valueChange', {
+            origin: options.label,
+            newValue: radioValue
+        })
+    }
 </script>
 
 
@@ -18,7 +29,7 @@
         name="radio-group"
     >
         {#each Object.entries(options.values) as [label, value]}
-            <RadioItem bind:group={radioValue} name={label} value={value}
+            <RadioItem bind:group={radioValue} name={label} value={value} on:change={handleClick}
                             >{label.toLowerCase()}</RadioItem
                         >
         {/each}
