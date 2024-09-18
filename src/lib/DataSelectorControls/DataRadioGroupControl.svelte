@@ -19,7 +19,7 @@
     >
         {#each Object.entries(options.values) as [label, value]}
             <RadioItem bind:group={radioValue} name={label} value={value}
-                            >{label}</RadioItem
+                            >{label.toLowerCase()}</RadioItem
                         >
         {/each}
     </RadioGroup>

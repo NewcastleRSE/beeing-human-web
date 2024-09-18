@@ -1,11 +1,7 @@
 <script>
-    import { SlideToggle } from "@skeletonlabs/skeleton";
-
-    import DataSourceControl from "$lib/DataSourceControl.svelte";
-    import DataRadioGroupControl from "$lib/DataRadioGroupControl.svelte";
-
-    let radioValue = 0;
-    let slideValue = false;
+    import DataSourceControl from "$lib/DataSelectorControls/DataSourceControl.svelte";
+    import DataRadioGroupControl from "$lib/DataSelectorControls/DataRadioGroupControl.svelte";
+    import DataSlideToggle from "$lib/DataSelectorControls/DataSlideToggle.svelte";
 
     export let controlsArray = [
         {
@@ -23,20 +19,22 @@
             dataSource: false,
             type: "radioGroup",
             label: "view",
+            defaultValue: 'both',
             values: {
-                'facsimile': 0,
-                'both': 1,
-                'transcription': 2,
+                facsimile: 'facsimile',
+                both: 'both',
+                transcription: 'transcription',
             },
         },
         {
             dataSource: false,
             type: "radioGroup",
             label: "variation",
+            defaultValue: 'Major Changes',
             values: {
-                'no variation': 0,
-                'Major Changes': 1,
-                'All Changes': 2,
+                "no variation": 'no variation',
+                "Major Changes": 'Major Changes',
+                "All Changes": 'All Changes',
             },
         },
         {
@@ -55,37 +53,23 @@
 <form
     class="flex flex-row w-full bg-primary-400 justify-between content-center px-12 py-10"
 >
-    <DataSourceControl options={{
-        "1623": "link to 1623",
-        "1609": "link to 1609",
-        "1634": "link to 1634",
-    }} defaultValue="1623"/>
+    <!-- Data source selector goes here -->
+     {#each controlsArray as controlOptions}
+        {#if (controlOptions.dataSource)}
+            <DataSourceControl options = {controlOptions}/>
+        {/if}
+     {/each}
     <div class="flex gap-10 content-center gap-32">
-        
-        <DataRadioGroupControl options={{
-            dataSource: false,
-            type: "radioGroup",
-            label: "view",
-            defaultValue: 'both',
-            values: {
-                'facsimile': 'facsimile',
-                'both': 'both',
-                'transcription': 'transcription',
-            },
-        }}/>
-
-        <div
-            class="flex flex-col gap-2 font-light text-sm min-w-32 justify-center"
-        >
-            <label for="slide" class="font-light text-sm pl-2">Label</label>
-            <SlideToggle
-                name="slide"
-                bind:checked={slideValue}
-                size="lg"
-                background="bg-secondary-500"
-                active="bg-secondary-100"
-                >{!slideValue ? "off" : "on"}</SlideToggle
-            >
-        </div>
+        <!-- Other controls go here -->
+         {#each controlsArray as controlOptions}
+            {#if (!controlOptions.dataSource)}
+                {#if (controlOptions.type === "radioGroup")}
+                    <DataRadioGroupControl options={controlOptions}/>
+                {:else if (controlOptions.type === "toggle")}
+                    <DataSlideToggle options = {controlOptions}/>
+                {/if}
+            {/if}
+            
+         {/each}
     </div>
 </form>
