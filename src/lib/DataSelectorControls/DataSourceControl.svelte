@@ -1,3 +1,12 @@
+<!--
+    @component
+    - Creates the dropdown that switches between data sources;
+    - generates the options from an object called `options`;
+    - sends an event called `valueChange` everytime one of those controls changes
+    
+    @param options {object} - An object containing at least an object of options and their values and the value of the default value;
+  -->
+
 <script>
     import {createEventDispatcher} from 'svelte';
 

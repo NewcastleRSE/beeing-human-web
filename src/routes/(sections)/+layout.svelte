@@ -9,7 +9,7 @@
   import SectionHero from "../../lib/SectionHero.svelte";
   import heros from "./heros.json";
   import { onMount } from "svelte";
-    import DataSelector from "../../lib/DataSelector.svelte";
+  import DataSelector from "$lib/DataSelector.svelte";
 
   let path = $page.route.id.split("/");
   let section = $page.route.id.split("/")[2];

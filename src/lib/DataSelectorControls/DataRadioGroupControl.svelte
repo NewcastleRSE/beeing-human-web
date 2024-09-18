@@ -1,3 +1,11 @@
+<!--
+    @component
+    - Creates the radio group that switches between different possible but contradictory options;
+    - generates the options from an object called `options`;
+    - sends an event called `valueChange` everytime one of those controls changes
+    
+    @param options {object} - An object containing at least an object of options and their values and the value of the default value;
+  -->
 <script>
     import {RadioGroup, RadioItem} from '@skeletonlabs/skeleton';
     import {createEventDispatcher} from 'svelte';
