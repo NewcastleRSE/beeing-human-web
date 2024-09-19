@@ -12,6 +12,8 @@
     import DataRadioGroupControl from "$lib/DataSelectorControls/DataRadioGroupControl.svelte";
     import DataSlideToggle from "$lib/DataSelectorControls/DataSlideToggle.svelte";
 
+    import { activeDataset, activeView } from '../stores/dataViewer'
+
     export let controlsArray = [
         {
             dataSource: true,
@@ -56,6 +58,16 @@
         },
     ];
 
+    function updateDataSource(e) {
+        activeDataset.update(() => (parseInt(e.detail.newValue)))
+    }
+
+    function updateOtherFilters(e) {
+        if (e.detail.origin === 'view') {
+            activeView.update(() => (e.detail.newValue))
+        }
+    }
+
 </script>
 
 <form
@@ -64,7 +76,7 @@
     <!-- Data source selector goes here -->
      {#each controlsArray as controlOptions}
         {#if (controlOptions.dataSource)}
-            <DataSourceControl options = {controlOptions} on:valueChange/>
+            <DataSourceControl options = {controlOptions} on:valueChange={updateDataSource}/>
         {/if}
      {/each}
     <div class="flex gap-10 content-center gap-32">
@@ -72,7 +84,7 @@
          {#each controlsArray as controlOptions}
             {#if (!controlOptions.dataSource)}
                 {#if (controlOptions.type === "radioGroup")}
-                    <DataRadioGroupControl options={controlOptions} on:valueChange/>
+                    <DataRadioGroupControl options={controlOptions} on:valueChange={updateOtherFilters}/>
                 {:else if (controlOptions.type === "toggle")}
                     <DataSlideToggle options = {controlOptions} on:valueChange/>
                 {/if}
