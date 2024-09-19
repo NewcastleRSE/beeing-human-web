@@ -37,6 +37,7 @@ layout: false
 
     import DataViewPanel from '$lib/DataViewPanel.svelte'
     import Portal from '$lib/Portal.svelte'
+    import TypographyLead from '$lib/TypographyLead.svelte'
     import { onMount } from 'svelte'
     import {elementReady} from '../../../../utils/generalHelpers.js'
     import { activeDataset, activeView } from '../../../../stores/dataViewer.js'
@@ -48,7 +49,7 @@ layout: false
             }
             for (let i = 0; i < data.datasets.length; i++) {
                 let option = document.createElement('option');
-                option.text = `Dataset ${i+1}`
+                option.text = data.datasets[i].desc.metadata.title
                 option.value = i
                 e.add(option)
             }
@@ -58,10 +59,9 @@ layout: false
 
 </script>
 
-
-# First dataset
-
-In hac habitasse platea dictumst. Duis ligula nulla, rhoncus sed enim et, gravida consectetur mi. Pellentesque consequat orci in dui consectetur ultrices. Sed commodo arcu ac erat viverra bibendum sit amet sed nunc. Quisque cursus neque id sem semper, a tempor turpis tempor. Nam condimentum magna a libero laoreet, eget cursus eros tristique. Etiam rutrum, odio eu volutpat auctor, erat enim imperdiet tellus, in ultrices sapien elit in eros. <Portal type="both" id="sci2" destination={['connections/buzzwords-feed#buzz17Portal1']}>Maecenas nibh nulla, vestibulum non lorem eu, egestas lobortis dui.</Portal> Vivamus a nisi nec erat egestas vulputate pellentesque a ex. Curabitur sagittis turpis in dui elementum tempor.
+<TypographyLead>
+    Some short copy about the experiment. Not the experimental details. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lacus ipsum, faucibus ut metus sed, iaculis posuere mi. Vestibulum rutrum in nisl id elementum.
+</TypographyLead>
 
 {#await data.datasets then datasets}
     <DataViewPanel datasets = {[datasets[$activeDataset]]}/>
