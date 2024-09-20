@@ -18,10 +18,9 @@
     import { activeView } from "../stores/dataViewer";
     import GraphControls from "./GraphControls.svelte";
 
-    export let datasets;
+    export let dataset;
 
     let selected = "All";
-    let entry = undefined;
     let loaded = false;
 
     // Error codes
@@ -29,66 +28,55 @@
     // 1 = No data received
     let error = 0;
 
-    onMount(async () => {
-        // initialise an array of selected filters and tabsets
-        // Necessary to have independent navigation of each dataset
-        if (datasets.length > 0 && datasets.length < 2) {
-            entry = datasets[0];
-        } else {
-            error = 1;
-        }
-        loaded = true;
-    });
+    $:console.log(dataset)
 </script>
 
 <div class="w-2/3 m-auto">
-    {#if loaded}
-        {#if error == 0}
-            {#if $activeView === "data"}
-                <GraphControls
-                >
-                    <GroupSelector
-                        groups={getGroups("Treatment group", entry.data)}
-                        name={"Treatment group"}
-                        bind:selected
-                    />
-                </GraphControls>
-
-                <RawDataTable
-                    tableObject={{ data: entry.data, columns: entry.columns }}
-                    {selected}
-                />
-            {:else if $activeView === "summary"}
-                <GraphControls>
-                    <GroupSelector
-                    groups={getGroups("Treatment group", entry.data)}
+    {#if error == 0}
+        {#if $activeView === "data"}
+            <GraphControls
+            >
+                <GroupSelector
+                    groups={getGroups("Treatment group", dataset.data)}
                     name={"Treatment group"}
                     bind:selected
-                    />
-                </GraphControls>
-                <RawDataTable
-                    tableObject={{
-                        data: entry.summaryData,
-                        columns: entry.summaryColumns,
-                    }}
-                    {selected}
                 />
-            {:else if $activeView === "visualisation"}
-                <DataViz
-                    dataObject={{
-                        data: entry.summaryData,
-                        labels: entry.summaryColumns,
-                    }}
-                    bind:selected
-                    name={entry.desc.metadata.title}
-                    rawData={entry.data}
-                    groups={getGroups("Treatment group", entry.data)}
+            </GraphControls>
+
+            <RawDataTable
+                tableObject={{ data: dataset.data, columns: dataset.columns }}
+                {selected}
+            />
+        {:else if $activeView === "summary"}
+            <GraphControls>
+                <GroupSelector
+                groups={getGroups("Treatment group", dataset.data)}
+                name={"Treatment group"}
+                bind:selected
                 />
-            {:else if $activeView === "details"}
-                <InjectMD content={entry.desc.content} />
-            {/if}
-        {:else if error == 1}
-            <p class="error-message">Error: no data available</p>
+            </GraphControls>
+            <RawDataTable
+                tableObject={{
+                    data: dataset.summaryData,
+                    columns: dataset.summaryColumns,
+                }}
+                {selected}
+            />
+        {:else if $activeView === "visualisation"}
+            <DataViz
+                dataObject={{
+                    data: dataset.summaryData,
+                    labels: dataset.summaryColumns,
+                }}
+                bind:selected
+                name={dataset.desc.metadata.title}
+                rawData={dataset.data}
+                groups={getGroups("Treatment group", dataset.data)}
+            />
+        {:else if $activeView === "details"}
+            <InjectMD content={dataset.desc.content} />
         {/if}
+    {:else if error == 1}
+        <p class="error-message">Error: no data available</p>
     {/if}
 </div>
