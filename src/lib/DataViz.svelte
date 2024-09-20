@@ -15,9 +15,36 @@
 
     // set the dimensions and margins of the graph
     var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-        width = 800 - margin.left - margin.right,
-        height = 600 - margin.top - margin.bottom;
+        defaultWidth = 800 - margin.left - margin.right,
+        defaultHeight = 600 - margin.top - margin.bottom,
+        defaultRatio = defaultWidth / defaultHeight,
+        width = defaultWidth,
+        height = defaultHeight
 
+    function setSize() {
+        let currentWidth = window.innerWidth;
+        let currentHeight = window.innerHeight;
+        let currentRatio = currentWidth / currentHeight
+
+        let h;
+        let w;
+
+        if (currentRatio > defaultRatio) {
+            h = defaultHeight;
+            w = defaultWidth;
+        } else {
+            margin.left = 20;
+            w = currentWidth;
+            h = w / defaultRatio;
+        }
+
+        width = w-50-margin.right;
+        height = h-margin.top-margin.bottom
+
+    };
+
+    setSize();
+    
     let svg = undefined;
     let colour = undefined;
     let x;
