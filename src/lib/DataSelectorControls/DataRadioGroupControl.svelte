@@ -31,8 +31,8 @@
 </script>
 
 
-<div class="flex flex-col gap-2 font-light text-sm">
-    <label for="radio-group" class="font-light text-sm pl-4"
+<div class="flex flex-col gap-2 font-light text-xs md:text-sm">
+    <label for="radio-group" class="hidden md:block font-light text-sm pl-4"
         >{options.label}</label
     >
     <RadioGroup

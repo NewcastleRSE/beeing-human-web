@@ -71,7 +71,7 @@
 </script>
 
 <form
-    class="flex flex-row w-full bg-primary-400 justify-between content-center px-12 py-10"
+    class="flex flex-col md:flex-row w-full bg-primary-400 items-center md:justify-between md:content-center md:px-12 py-10 gap-2"
 >
     <!-- Data source selector goes here -->
      {#each controlsArray as controlOptions}
