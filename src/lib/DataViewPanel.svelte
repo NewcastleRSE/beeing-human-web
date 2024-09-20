@@ -28,7 +28,6 @@
     // 1 = No data received
     let error = 0;
 
-    $:console.log(dataset)
 </script>
 
 <div class="w-2/3 m-auto">
