@@ -28,10 +28,17 @@
     // 1 = No data received
     let error = 0;
 
+    onMount(() => {
+        if (!dataset) {
+            error = 1;
+        }
+        loaded = true;
+    })
+
 </script>
 
-<div class="md:w-2/3 m-auto">
-    {#if error == 0}
+{#if error == 0 && loaded}
+    <div class="md:w-2/3 m-auto" data-testid="data-content-div">
         {#if $activeView === "data"}
             <GraphControls
             >
@@ -75,7 +82,7 @@
         {:else if $activeView === "details"}
             <InjectMD content={dataset.desc.content} />
         {/if}
-    {:else if error == 1}
-        <p class="error-message">Error: no data available</p>
-    {/if}
-</div>
+    </div>
+{:else if error == 1 && loaded}
+    <p class="error-message">Error: no data available</p>
+{/if}

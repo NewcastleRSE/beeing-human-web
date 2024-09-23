@@ -84,7 +84,7 @@
          {#each controlsArray as controlOptions}
             {#if (!controlOptions.dataSource)}
                 {#if (controlOptions.type === "radioGroup")}
-                    <DataRadioGroupControl options={controlOptions} on:valueChange={updateOtherFilters}/>
+                    <DataRadioGroupControl options={controlOptions} on:valueChange={updateOtherFilters} />
                 {:else if (controlOptions.type === "toggle")}
                     <DataSlideToggle options = {controlOptions} on:valueChange/>
                 {/if}

@@ -31,7 +31,7 @@
 </script>
 
 
-<div class="flex flex-col gap-2 font-light text-xs md:text-sm">
+<div class="flex flex-col gap-2 font-light text-xs md:text-sm" data-testid="radio-group-{options.label}">
     <label for="radio-group" class="hidden md:block font-light text-sm pl-4"
         >{options.label}</label
     >
