@@ -15,35 +15,10 @@
 
     // set the dimensions and margins of the graph
     var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-        defaultWidth = 800 - margin.left - margin.right,
-        defaultHeight = 600 - margin.top - margin.bottom,
-        defaultRatio = defaultWidth / defaultHeight,
-        width = defaultWidth,
-        height = defaultHeight
+        width = 800 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom
+        
 
-    function setSize() {
-        let currentWidth = window.innerWidth;
-        let currentHeight = window.innerHeight;
-        let currentRatio = currentWidth / currentHeight
-
-        let h;
-        let w;
-
-        if (currentRatio > defaultRatio) {
-            h = defaultHeight;
-            w = defaultWidth;
-        } else {
-            margin.left = 20;
-            w = currentWidth;
-            h = w / defaultRatio;
-        }
-
-        width = w-50-margin.right;
-        height = h-margin.top-margin.bottom
-
-    };
-
-    setSize();
     
     let svg = undefined;
     let colour = undefined;
@@ -449,10 +424,11 @@
             svg = d3
                 .select(`#line-graph-${makeHtmlId(name)}`)
                 .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
+                // .attr("width", width + margin.left + margin.right)
+                // .attr("height", height + margin.top + margin.bottom)
+                .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
                 .attr("data-testid", "svg-line-graph")
-                .attr("class", "m-auto")
+                .attr("class", "m-auto w-4/5")
                 .append("g")
                 .attr(
                     "transform",
@@ -530,6 +506,8 @@
             console.log(err);
         }
 
+        window.addEventListener('resize', reSize)
+
         loaded = true;
     });
 </script>
@@ -542,9 +520,9 @@
         >
             <GroupSelector {groups} name={"Treatment group"} bind:selected />
             <div
-                class="flex flex-col gap-2 font-light text-sm min-w-32 justify-center"
+                class="flex flex-col gap-2 font-light text-xs min-w-32 justify-center"
             >
-                <label for="slide" class="font-normal text-base pl-2"
+                <label for="slide" class="font-normal md:text-base pl-2"
                     >Error bars</label
                 >
                 <SlideToggle
@@ -552,8 +530,9 @@
                     bind:checked={showErrorBars}
                     size="lg"
                     background="bg-secondary-500"
+                    hover="hover:bg-secondary-400 transition-all ease-in-out duration-300 motion-reduce:transition-none"
                     active="bg-secondary-100"
-                    >{!showErrorBars ? "off" : "on"}</SlideToggle
+                    ><span class="hidden md:block">{!showErrorBars ? "off" : "on"}</span></SlideToggle
                 >
             </div>
         </GraphControls>

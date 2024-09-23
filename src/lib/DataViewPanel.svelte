@@ -30,7 +30,7 @@
 
 </script>
 
-<div class="w-2/3 m-auto">
+<div class="md:w-2/3 m-auto">
     {#if error == 0}
         {#if $activeView === "data"}
             <GraphControls
