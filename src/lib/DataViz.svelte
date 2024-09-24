@@ -218,9 +218,8 @@
                 .attr("id", function (d) {
                     return `${makeHtmlId(d[0])}-path`;
                 })
-                .attr("class", "line-data")
+                .attr("class", "line-data hover:cursor-pointer")
                 .attr("data-testid", "individual-line")
-                .attr('class', 'hover:cursor-pointer')
                 .attr("d", function (d) {
                     return d3
                         .line()
@@ -505,8 +504,6 @@
             errorCode = 3;
             console.log(err);
         }
-
-        window.addEventListener('resize', reSize)
 
         loaded = true;
     });
