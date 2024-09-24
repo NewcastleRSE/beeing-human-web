@@ -28,21 +28,14 @@ test.describe('Data visualisation tests', () => {
             console.log(`Running ${testInfo.title}`);
             await page.goto('/science/datasets');
         });
-        
-        test('Page should have two containers with data visualisation', async ({page}) => {
-            await expect(page).toHaveURL('/science/datasets');
-            const containers = await page.getByTestId('tab-group').all();
-            expect(containers.length).toEqual(2);
-        });
 
-        test('Each data viz container should have four tabs', async ({page}) => {
+        test('The data viz container should have four views tabs', async ({page}) => {
             await expect(page).toHaveURL('/science/datasets');
-            const containers = await page.getByTestId('tab-group').all();
+            const viewButtonGroup = page.getByTestId('radio-group');
 
-            for (const container of containers) {
-                const tabs = await container.getByRole('tablist').locator('label').count();
-                expect(tabs).toEqual(4);
-            }
+            const views = await page.getByRole('radio').all()
+            console.log(views.length);
+            expect(views).toEqual(4);
         });
 
         test('Each tab should have the expected titles', async ({page}) => {
