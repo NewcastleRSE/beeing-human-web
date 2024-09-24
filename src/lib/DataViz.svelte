@@ -519,10 +519,11 @@
             <div
                 class="flex flex-col gap-2 font-light text-xs min-w-32 justify-center"
             >
-                <label for="slide" class="font-normal md:text-base pl-2"
+                <label for="error-bar-show" class="font-normal md:text-base pl-2"
                     >Error bars</label
                 >
                 <SlideToggle
+                    id="error-bar-show"
                     name="error-bar-show"
                     bind:checked={showErrorBars}
                     size="lg"
