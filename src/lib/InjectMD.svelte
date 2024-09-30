@@ -1,6 +1,7 @@
 <script>
   import { ProgressRadial } from "@skeletonlabs/skeleton";
   import SvelteMarkdown from "svelte-markdown";
+  import ArticleLayout from "./ArticleLayout.svelte";
 
   export let content = undefined;
   
@@ -19,5 +20,7 @@
 {#if content === undefined}
   <ProgressRadial value={undefined} />
 {:else}
-  <SvelteMarkdown source={content} />
+  <ArticleLayout>
+    <SvelteMarkdown source={content} />
+  </ArticleLayout>
 {/if}

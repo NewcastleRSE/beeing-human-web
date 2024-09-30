@@ -26,7 +26,7 @@
 <select
     name="data-source"
     id="data-source-select"
-    class="select text-3xl bg-transparent border-none rounded-lg pr-16 max-w-fit font-pfdisplay hover:font-bold hover:cursor-pointer transition-all ease-in-out duration-200 motion-reduce:transition-none" on:change={handleClick}
+    class="select text-lg md:text-3xl bg-transparent border-none rounded-lg pr-10 md:pr-16 max-w-fit font-pfdisplay hover:font-bold hover:cursor-pointer transition-all ease-in-out duration-200 motion-reduce:transition-none" on:change={handleClick}
 >
     {#each Object.entries(options.values) as [label, value]}
 

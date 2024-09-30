@@ -29,14 +29,14 @@ describe('Load and display data viz component', () => {
     });
 
     it('should mount the component if all the data has been passed correctly', async () => {
-        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data, groups: getGroups("Treatment group", datasets[0].data)});
         const svgContainer = await screen.findByTestId('line-graph');
         expect(svgContainer).toBeTruthy();
     });
 
     it('should include a slide toggle if it mounts successfully', async () => {
-        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
-        const slideToggle = await screen.findByRole('switch', {name: 'Error bars'});
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data, groups: getGroups("Treatment group", datasets[0].data)});
+        const slideToggle = screen.getByTestId('slide-toggle');
         expect(slideToggle).toBeTruthy();
     });
 
@@ -198,7 +198,7 @@ describe('Interactions with the DataViz component', () => {
 
     // hover over paths
     it('hovering over lines should highlight that line and group', async () => {
-        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data});
+        render(DataViz, {dataObject: {data: datasets[0].summaryData, labels: datasets[0].summaryColumns}, selected: 'All', name: datasets[0].desc.metadata.title, rawData: datasets[0].data, groups: getGroups("Treatment group", datasets[0].data)});
 
         const user = userEvent.setup();
 

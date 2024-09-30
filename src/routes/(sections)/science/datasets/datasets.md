@@ -7,31 +7,63 @@ lead: "A data set (or dataset) is a collection of data. In the case of tabular d
 img: 'assets/pexels-murillohm-10854279.jpg'
 imgAlt: 'a neatly arranged pile of wood'
 type: data
+dataSelector: true
+dataSelectorControls: [{
+            dataSource: true,
+            type: "select",
+            label: 'dataSource',
+            default: "Dataset 1",
+            values: {
+                "Dataset 1": "link to dataset1",
+            },
+        },
+        {
+            dataSource: false,
+            type: "radioGroup",
+            label: "view",
+            defaultValue: 'details',
+            values: {
+                details: 'details',
+                visualisation: 'visualisation',
+                summary: 'summary',
+                data: 'data'
+            },
+        }]
 layout: false
 ---
 
 <script>
     export let data
+
     import DataViewPanel from '$lib/DataViewPanel.svelte'
     import Portal from '$lib/Portal.svelte'
+    import TypographyLead from '$lib/TypographyLead.svelte'
+    import { onMount } from 'svelte'
+    import {elementReady} from '../../../../utils/generalHelpers.js'
+    import { activeDataset, activeView } from '../../../../stores/dataViewer.js'
+
+    onMount( () => {
+        elementReady('#data-source-select').then((e) => {
+            while (e.firstChild) {
+                e.removeChild(e.firstChild);
+            }
+            for (let i = 0; i < data.datasets.length; i++) {
+                let option = document.createElement('option');
+                option.text = data.datasets[i].desc.metadata.title
+                option.value = i
+                e.add(option)
+            }
+
+        })
+    })
 
 </script>
 
-
-# First dataset
-
-In hac habitasse platea dictumst. Duis ligula nulla, rhoncus sed enim et, gravida consectetur mi. Pellentesque consequat orci in dui consectetur ultrices. Sed commodo arcu ac erat viverra bibendum sit amet sed nunc. Quisque cursus neque id sem semper, a tempor turpis tempor. Nam condimentum magna a libero laoreet, eget cursus eros tristique. Etiam rutrum, odio eu volutpat auctor, erat enim imperdiet tellus, in ultrices sapien elit in eros. <Portal type="both" id="sci2" destination={['connections/buzzwords-feed#buzz17Portal1']}>Maecenas nibh nulla, vestibulum non lorem eu, egestas lobortis dui.</Portal> Vivamus a nisi nec erat egestas vulputate pellentesque a ex. Curabitur sagittis turpis in dui elementum tempor.
-
-{#await data.datasets then datasets}
-    <DataViewPanel datasets = {[datasets[0]]}/>
-{/await}
-
-
-## Second dataset
-
-Donec faucibus iaculis nunc, dapibus egestas quam. Proin eget ultricies augue. Integer est libero, egestas at felis eu, commodo pellentesque risus. Integer mauris neque, suscipit in aliquet a, egestas vel nisi. Quisque porttitor vestibulum felis vel varius. Sed pharetra sodales felis non mollis. Integer lorem nisi, commodo consectetur condimentum vitae, efficitur nec lacus. Vivamus nec vulputate felis. Fusce accumsan sapien sed nisl bibendum, sed efficitur nibh vehicula. Integer ultrices eros et erat aliquet auctor non quis quam. Etiam vitae posuere elit. Maecenas sit amet eros vitae ipsum gravida commodo id et tortor. Praesent suscipit neque ac sodales lobortis. Duis iaculis fermentum elementum. Ut pharetra velit nec fermentum tempor. In congue interdum bibendum.
+<TypographyLead>
+    Some short copy about the experiment. Not the experimental details. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lacus ipsum, faucibus ut metus sed, iaculis posuere mi. Vestibulum rutrum in nisl id elementum.
+</TypographyLead>
 
 {#await data.datasets then datasets}
-    <DataViewPanel datasets = {[datasets[1]]}/>
+    <DataViewPanel dataset = {datasets[$activeDataset]}/>
 {/await}
 

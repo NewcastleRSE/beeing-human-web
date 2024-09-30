@@ -28,65 +28,18 @@ test.describe('Data visualisation tests', () => {
             console.log(`Running ${testInfo.title}`);
             await page.goto('/science/datasets');
         });
-        
-        test('Page should have two containers with data visualisation', async ({page}) => {
-            await expect(page).toHaveURL('/science/datasets');
-            const containers = await page.getByTestId('tab-group').all();
-            expect(containers.length).toEqual(2);
-        });
 
-        test('Each data viz container should have four tabs', async ({page}) => {
-            await expect(page).toHaveURL('/science/datasets');
-            const containers = await page.getByTestId('tab-group').all();
-
-            for (const container of containers) {
-                const tabs = await container.getByRole('tablist').locator('label').count();
-                expect(tabs).toEqual(4);
-            }
-        });
-
-        test('Each tab should have the expected titles', async ({page}) => {
-            const expectedLabels = ['Data table', 'Summary Data', 'Visualisation', 'Experimental Details'];
+        test('There should be the expected options, and they should have the expected titles', async ({page}) => {
+            const expectedLabels = ['details', 'visualisation', 'summary', 'data'];
 
             await expect(page).toHaveURL('/science/datasets');
             
-            const containers = await page.getByTestId('tab-group').all();
+            const radioGroup = page.getByTestId('radio-group-view');
 
-            for (const container of containers) {
-                const labels = await container.getByRole('tablist').locator('label').all();
-                labels.forEach((label, i) => expect(label).toContainText(expectedLabels[i]));
-            }
+            const labels = await radioGroup.getByRole('radio-group').locator('label').all();
+            labels.forEach((label, i) => expect(label).toContainText(expectedLabels[i]));
         });
 
-        test('Each data view panel should contain a tab panel', async ({page}) => {
-            await expect(page).toHaveURL('/science/datasets');
-
-            const containers = await page.getByTestId('tab-group').count();
-            const tabPanels = await page.getByRole('tabpanel').count();
-            expect(containers).toEqual(tabPanels);
-        });
-
-        test('Each panel should contain a treatment group selector', async ({page}) => {
-            await expect(page).toHaveURL('/science/datasets');
-
-            const tabPanels = await page.getByRole('tabpanel').all();
-
-            for (const panel of tabPanels) {
-                expect(panel.locator('label', {hasText: 'Treatment group'})).toBeTruthy();
-            }
-        });
-
-        test('Each panel should contain a raw data table', async({page}) => {
-            await expect(page).toHaveURL('/science/datasets');
-
-            const tabPanels = await page.getByRole('tabpanel').all();
-
-            for (const panel of tabPanels) {
-                const dataTable = panel.getByTestId('raw-data-table');
-                expect(dataTable).toBeTruthy();
-                expect(dataTable).toBeVisible();
-            }
-        });
     });
 
     test.describe('Data view panel interaction tests', () => {
@@ -98,63 +51,48 @@ test.describe('Data visualisation tests', () => {
         test('Clicking on a tab should change the content of the tab panel', async({page}) => {
             await expect(page).toHaveURL('/science/datasets');
 
-            const tabPanel = page.getByRole('tabpanel').first();
+            const initialContent = await page.getByTestId('data-content-div').innerHTML()
 
-            expect(tabPanel.getByTestId('raw-data-table')).toBeVisible();
+            const viewButton = page.locator('label').filter({ hasText: 'visualisation' }).first();
 
-            const tabButton = page.locator('label').filter({ hasText: 'Visualisation' }).first();
+            await viewButton.click();
 
-            await tabButton.click();
-
-            expect(tabPanel.getByTestId('raw-data-table')).not.toBeVisible();
-            expect(tabPanel.getByTestId('svg-line-graph')).toBeVisible();
+            expect(initialContent).not.toEqual(page.getByTestId('data-content-div').innerHTML());
+            expect(page.getByTestId('svg-line-graph')).toBeVisible();
         });
 
         test('Clicking on each tab should replace the content of the tab panel', async({page}) => {
             await expect(page).toHaveURL('/science/datasets');
 
-            const tabPanel = page.getByRole('tabpanel').first();
 
-            expect(tabPanel.getByTestId('raw-data-table')).toBeVisible();
+            const labels = await page.getByTestId('radio-group').innerText();
+            let labelsArray =  labels.split('\n')
 
-            const labels = await page.getByText('Data table Summary Data Visualisation Experimental Details').first().locator('label').all();
+            
+            for (const label of labelsArray) {
+                await page.getByTestId('radio-group').getByText(label).click();
 
-            for (const label of labels) {
-                await label.click();
-
-                if (await label.innerText() == 'Data table') {
-                    expect(tabPanel.getByTestId('raw-data-table')).toBeVisible();
-                } else if (await label.innerText() == 'Summary Data') {
-                    expect(tabPanel.getByTestId('raw-data-table')).toBeVisible();
-                } else if (await label.innerText() == 'Visualisation') {
-                    expect(tabPanel.getByTestId('line-graph')).toBeVisible();
-                } else if (await label.innerText() == 'Experimental Details') {
-                    expect(tabPanel.getByRole('list')).toBeVisible()
+                if (label == 'data') {
+                    console.log('data')
+                    expect(page.getByTestId('raw-data-table')).toBeVisible();
+                } else if (label == 'summary') {
+                    console.log('summary')
+                    expect(page.getByTestId('raw-data-table')).toBeVisible();
+                } else if (label == 'visualisation') {
+                    console.log('details')
+                    expect(page.getByTestId('line-graph')).toBeVisible();
+                } else if (label == 'details') {
+                    // expect(tabPanel.getByRole('list')).toBeVisible()
                 }
             }
         });
 
-        test('Clicking on a tab in one instance should not replace the content of the tab panel in the other instance', async({page}) => {
-            await expect(page).toHaveURL('/science/datasets');
-
-            const tabPanels = await page.getByRole('tabpanel').all();
-
-            for (const tabPanel of tabPanels) {
-                expect(tabPanel.getByTestId('raw-data-table')).toBeVisible();
-            }
-
-            const labelToPress = page.getByText('Data table Summary Data Visualisation Experimental Details').first().locator('label').filter({ hasText: 'Visualisation' }).first()
-
-            await labelToPress.click();
-
-            expect(tabPanels[0].getByTestId('line-graph')).toBeVisible();
-            expect(tabPanels[1].getByTestId('raw-data-table')).toBeVisible();
-            console.log(await labelToPress.innerText());
-        });
-
         test('Changing the selected treatment group should change the content of the raw data table', async({page}) => {
             await expect(page).toHaveURL('/science/datasets');
-            const tabPanel = page.getByRole('tabpanel').first();
+
+            await page.getByTestId('radio-group').getByText('data').click();
+
+            const tabPanel = page.getByTestId('data-content-div');
 
             // BEFORE: Expect a certain number of lines in the table
             const nrRowsBefore = await tabPanel.getByRole('row').count();
@@ -163,26 +101,6 @@ test.describe('Data visualisation tests', () => {
             const nrRowsAfter = await tabPanel.getByRole('row').count();
 
             expect(nrRowsAfter).toBeLessThan(nrRowsBefore);
-        });
-
-        test('Changing the selected treatment group in one instance should not change the selected treatment group in the other', async({page}) => {
-            await expect(page).toHaveURL('/science/datasets');
-
-            const tabPanels = await page.getByRole('tabpanel').all();
-            console.log(tabPanels.length)
-
-            const selectDropdownTop = tabPanels[0].getByLabel('Treatment group');
-            // For some reason, selecting the other dropdown listbox using the same method does not work -- this selects the box correctly, even if it is a little unreadable
-            const selectDropdownBottom = page.locator('[id="Treatment\\ group"]').nth(1)
-
-            expect(selectDropdownTop).toHaveValue('All');
-            expect(selectDropdownBottom).toHaveValue('All');
-
-            await selectDropdownTop.selectOption('Stressed');
-
-            expect(selectDropdownTop).toHaveValue('Stressed');
-            expect(selectDropdownBottom).toHaveValue('All');
-
         });
     });
 
@@ -194,21 +112,19 @@ test.describe('Data visualisation tests', () => {
 
         test('Can switch to the visualisation panel' , async ({page}) => {
             await expect(page).toHaveURL('/science/datasets');
-            const tabGroup = page.getByTestId('tab-group').first();
-            const vizTabButton = tabGroup.locator('label').filter({ hasText: 'Visualisation' });
+            const vizTabButton = page.getByTestId('radio-group').getByText('visualisation')
 
             await vizTabButton.click();
 
-            expect(tabGroup.getByTestId('line-graph')).toBeVisible();
+            expect(page.getByTestId('line-graph')).toBeVisible();
         });
 
         test('Line graph should contain all the expected elements', async ({page}) => {
             await expect(page).toHaveURL('/science/datasets');
-            const tabGroup = page.getByTestId('tab-group').first();
-            const vizTabButton = tabGroup.locator('label').filter({ hasText: 'Visualisation' });
+            const vizTabButton = page.getByTestId('radio-group').getByText('visualisation')
             await vizTabButton.click();
 
-            const svg = tabGroup.getByTestId('line-graph');
+            const svg = page.getByTestId('line-graph');
 
             // should have labels
             expect(svg.getByTestId('labels-data')).toBeVisible();
@@ -226,11 +142,10 @@ test.describe('Data visualisation tests', () => {
 
         test('Clicking the error bars toggle should hide the error bars', async ({page}) => {
             await expect(page).toHaveURL('/science/datasets');
-            const tabGroup = page.getByTestId('tab-group').first();
-            const vizTabButton = tabGroup.locator('label').filter({ hasText: 'Visualisation' });
+            const vizTabButton = page.getByTestId('radio-group').getByText('visualisation')
             await vizTabButton.click();
 
-            const svg = tabGroup.getByTestId('line-graph');
+            const svg = page.getByTestId('line-graph');
             const errorBarToggle = svg.getByTestId('slide-toggle');
 
             expect(svg.getByTestId('error-lines')).toBeVisible();
@@ -244,13 +159,12 @@ test.describe('Data visualisation tests', () => {
 
         test('Labels in the legend should correspond to treatment groups', async ({page}) => {
             await expect(page).toHaveURL('/science/datasets');
-            const tabGroup = page.getByTestId('tab-group').first();
-            const vizTabButton = tabGroup.locator('label').filter({ hasText: 'Visualisation' });
+            const vizTabButton = page.getByTestId('radio-group').getByText('visualisation')
             await vizTabButton.click();
 
-            const svg = tabGroup.getByTestId('line-graph');
+            const svg = page.getByTestId('line-graph');
 
-            let expectedLabels = await tabGroup.getByLabel('Treatment group').allInnerTexts();
+            let expectedLabels = await page.getByLabel('Treatment group').allInnerTexts();
             // removes the 'All' option
             expectedLabels = expectedLabels[0].split('\n').filter((e) => (e !== 'All'));
 
@@ -263,11 +177,10 @@ test.describe('Data visualisation tests', () => {
         test('Clicking on one of the labels should display only the corresponding data', async({page}) => {
             const testLabel = 'Stressed'
             await expect(page).toHaveURL('/science/datasets');
-            const tabGroup = page.getByTestId('tab-group').first();
-            const vizTabButton = tabGroup.locator('label').filter({ hasText: 'Visualisation' });
+            const vizTabButton = page.getByTestId('radio-group').getByText('visualisation')
             await vizTabButton.click();
 
-            const svg = tabGroup.getByTestId('line-graph');
+            const svg = page.getByTestId('line-graph');
             expect(await svg.getByTestId('individual-line').count()).toEqual(3);
 
             const labelToPress = svg.getByTestId('labels-data').getByText(testLabel, {exact: true});

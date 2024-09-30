@@ -9,11 +9,17 @@
 <script>
     import {RadioGroup, RadioItem} from '@skeletonlabs/skeleton';
     import {createEventDispatcher} from 'svelte';
+    import {activeView} from '../../stores/dataViewer'
 
     const dispatch = createEventDispatcher();
 
     export let options;
     let radioValue = options.defaultValue;
+    
+    // updates the store with the default value
+    if(options.label === 'view') {
+        activeView.update(() => (options.defaultValue))
+    }
     
 
     function handleClick() {
@@ -25,8 +31,8 @@
 </script>
 
 
-<div class="flex flex-col gap-2 font-light text-sm">
-    <label for="radio-group" class="font-light text-sm pl-4"
+<div class="flex flex-col gap-2 font-light text-xs md:text-sm" data-testid="radio-group-{options.label}">
+    <label for="radio-group" class="hidden md:block font-light text-sm pl-4"
         >{options.label}</label
     >
     <RadioGroup
