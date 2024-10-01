@@ -2,8 +2,6 @@
     import TeiSimple from "./TEISimple.svelte";
     import IiifViewer from "./IIIFViewer.svelte";
 
-    export let startPage;
-
     import {activeDataset, activeView} from '../stores/dataViewer'
     import { onMount } from "svelte";
 
@@ -24,14 +22,17 @@
 
 {#if ready}
     <div class="md:flex w-full mx-auto md:p-8 max-h-screen">
-        <div class="md:flex-1 md:w-full md:w-1/2 md:max-h-full" data-testid="iiif-viewer">
-            <IiifViewer manifest = {transcriptionData[$activeDataset].iiifManifest} startPage= {transcriptionData[$activeDataset].manifestStartPage}/>
-        </div>
-        <div class="md:flex w-full md:w-1/2 md:overflow-auto" data-testid="transcription">
-            
-            <TeiSimple
-                path={transcriptionData[$activeDataset].teiURL}
-            />
-        </div>
+        {#if $activeView === 'both' || $activeView === 'facsimile'}
+            <div class="md:flex-1 md:{$activeView == 'both' ? 'w-1/2' : 'w-full'} md:max-h-full" data-testid="iiif-viewer">
+                <IiifViewer manifest = {transcriptionData[$activeDataset].iiifManifest} startPage= {transcriptionData[$activeDataset].manifestStartPage}/>
+            </div>
+        {/if}
+        {#if $activeView === 'both' || $activeView === 'transcription'}
+            <div class="md:flex w-full md:{$activeView == 'both' ? 'w-1/2' : 'w-full'} md:overflow-auto" data-testid="transcription">
+                <TeiSimple
+                    path={transcriptionData[$activeDataset].teiURL}
+                />
+            </div>
+        {/if}
     </div>
 {/if}
