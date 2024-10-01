@@ -13,8 +13,8 @@ dataSelectorControls: [{
             label: 'dataSource',
             default: "1623",
             values: {
-                "1623": "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/refs/heads/dev/1623_consolidated.xml",
-                "1609": "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/refs/heads/dev/1609.xml"
+                "1623": "1623",
+                "1609": "1609"
             },
         },
         {
@@ -54,4 +54,4 @@ type: [data, experience]
     import TranscriptionViewer from '$lib/TranscriptionViewer.svelte'
 </script>
 
-<TranscriptionViewer teiPath = 'https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/dev/1623_consolidated.xml' iiifManifest = 'https://iiif.archive.org/iiif/RAM2023-1081/manifest.json' startPage=5/>
+<TranscriptionViewer/>

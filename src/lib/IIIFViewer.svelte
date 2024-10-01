@@ -13,18 +13,33 @@
     export let manifest = undefined;
     export let startPage = undefined;
 
+    function buildIIIFY(manifest) {
+        iiif = new Tify({
+            container: "#facsimile-viewer",
+            manifestUrl: manifest,
+        });
+    }
+
+    function removeHeader() {
+        iiif.ready.then(() => {
+                iiif.setPage([parseInt(startPage)]);
+                const iiifTitleHeader = document.getElementsByClassName('tify-header-title')[0];
+                if (iiifTitleHeader) {
+                    iiifTitleHeader.remove();
+                }
+            })
+    }
+
     onMount(async () => {
         if (browser) {
             try {
                 // import tify and create a new instance
                 await import("tify").then(() => {
                     if (manifest && startPage) {
-                        iiif = new Tify({
-                            container: "#facsimile-viewer",
-                            manifestUrl: manifest,
-                        });
+                        buildIIIFY(manifest)
                     }
                 });
+                loaded = true
             } catch (e) {
                 console.error(e);
             }
@@ -32,13 +47,7 @@
         loaded = true;
 
         if (iiif) {
-            iiif.ready.then(() => {
-                iiif.setPage([parseInt(startPage)]);
-                const iiifTitleHeader = document.getElementsByClassName('tify-header-title')[0];
-                if (iiifTitleHeader) {
-                    iiifTitleHeader.remove();
-                }
-            })
+            removeHeader()
         }
     });
 
@@ -47,6 +56,13 @@
             iiif.destroy();
         }
     });
+
+    $: if (iiif && loaded && manifest) {
+        iiif.destroy();
+        iiif = undefined;
+        buildIIIFY(manifest);
+        removeHeader();
+    }
 </script>
 
 <div id="facsimile-viewer"></div>
