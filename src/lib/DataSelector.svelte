@@ -13,6 +13,8 @@
     import DataSlideToggle from "$lib/DataSelectorControls/DataSlideToggle.svelte";
 
     import { activeDataset, activeView } from '../stores/dataViewer'
+    import { parse } from "svelte/compiler";
+    import { compute_rest_props } from "svelte/internal";
 
     export let controlsArray = [
         {
@@ -59,7 +61,13 @@
     ];
 
     function updateDataSource(e) {
-        activeDataset.update(() => (parseInt(e.detail.newValue)))
+        let returnValue = e.detail.newValue
+        
+        if (!isNaN(e.detail.newValue)){
+            returnValue = parseInt(e.detail.newValue)
+        }
+        
+        activeDataset.update(() => (returnValue))
     }
 
     function updateOtherFilters(e) {
