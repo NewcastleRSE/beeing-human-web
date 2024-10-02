@@ -22,9 +22,11 @@
     let loaded = false;
     let error = undefined;
     export let path = '';
+    let mountedPath = '';
 
     function loadTei(path) {
         
+        console.log('adding tei')
         const parent = document.getElementById('TEI-container');
         
         // cleans the parent container, in case it has any previous content
@@ -38,6 +40,7 @@
             cetei.getHTML5(path, function(data) {
                 parent.appendChild(data);
         });
+        mountedPath = path
     }
 
     onMount(async () => {
@@ -55,7 +58,7 @@
     })
 
     // loads the new TEI if the path has been changed
-    $: if (path && loaded) {
+    $: if (path && loaded && path != mountedPath) {
         loadTei(path);
     }
 </script>

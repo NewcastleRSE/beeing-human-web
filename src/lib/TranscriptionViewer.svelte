@@ -23,12 +23,12 @@
 {#if ready}
     <div class="md:flex w-full mx-auto md:p-8 max-h-screen">
         {#if $activeView === 'both' || $activeView === 'facsimile'}
-            <div class="md:flex-1 md:{$activeView == 'both' ? 'w-1/2' : 'w-full'} md:max-h-full" data-testid="iiif-viewer">
+            <div class="md:flex-1 w-full {$activeView == 'both' ? 'md:w-1/2' : ''} md:max-h-full" data-testid="iiif-viewer">
                 <IiifViewer manifest = {transcriptionData[$activeDataset].iiifManifest} startPage= {transcriptionData[$activeDataset].manifestStartPage}/>
             </div>
         {/if}
         {#if $activeView === 'both' || $activeView === 'transcription'}
-            <div class="md:flex w-full md:{$activeView == 'both' ? 'w-1/2' : 'w-full'} md:overflow-auto" data-testid="transcription">
+            <div class="md:flex w-full {$activeView == 'both' ? 'md:w-1/2' : ''} md:overflow-auto" data-testid="transcription">
                 <TeiSimple
                     path={transcriptionData[$activeDataset].teiURL}
                 />
