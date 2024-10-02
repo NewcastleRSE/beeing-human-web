@@ -12,7 +12,7 @@
 -->
 
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, createEventDispatcher } from 'svelte';
     import CETEI from 'CETEIcean';
     import { ProgressRadial } from '@skeletonlabs/skeleton';
     import { base } from "$app/paths";
@@ -23,6 +23,8 @@
     let error = undefined;
     export let path = '';
     let mountedPath = '';
+
+    const dispatch = createEventDispatcher();
 
     function loadTei(path) {
         
@@ -50,6 +52,9 @@
             }
             loadTei(path)
             loaded = true;
+            dispatch('status', {
+                loaded: loaded
+            });
         } catch (err) {
             error = err.toString();
             loaded = true;

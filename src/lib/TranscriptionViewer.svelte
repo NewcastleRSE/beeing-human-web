@@ -6,7 +6,47 @@
     import { onMount } from "svelte";
 
     import transcriptionData from '../routes/(sections)/literature/transcription/transcriptionData.json'
-    import { elasticIn } from "svelte/easing";
+
+
+    function cleanVariationStyles(el) {
+        el.classList = '';
+        // removes the default background colour for elements in apps
+        el.classList.add('bg-transparent');
+
+        // removes unnecesary textual content
+        if (el.innerHTML === '[+1609]' || el.innerHTML === '[Does not exist in 1609]') {
+            el.textContent = ''
+        }
+}
+
+    function applyVariationStyles(app) {
+        for (const child of app.children) {
+            // removes any previous styling for the element
+            cleanVariationStyles(child);
+
+            // restores baseline styling for elements inside apps
+            child.classList = ''
+            child.classList.add(`var-${app.getAttribute('subtype')}`);
+
+            // adds messages for empty elements
+            if (child.tagName === 'TEI-LEM') {
+                if (child.hasAttribute('data-empty')) {
+                    child.innerHTML = '[+1609]'
+                }
+                child.classList.add('hover')
+            } else if (child.tagName === 'TEI-RDG') {
+                if (child.hasAttribute('data-empty')) {
+                    child.innerHTML = '[Does not exist in 1609]'
+                }
+            }
+        }
+    }
+
+    function handleStatus(e) {
+        if (e.detail.loaded) {
+            changeVariationDetail($variationDetail);
+        }
+    }
 
     let ready = false;
 
@@ -14,25 +54,37 @@
         if ($activeDataset === 0) {
             $activeDataset = "1623";
         }
+        if (!(['no variation', 'major changes', 'all changes'].includes($variationDetail))) {
+            $variationDetail = 'no variation';
+        }
+        changeVariationDetail($variationDetail);
         ready = true;
     })
 
     function changeVariationDetail($variationDetail) {
+        const apps = document.getElementsByTagName('tei-app');
         if ($variationDetail === 'no variation') {
-            const apps = document.getElementsByTagName('tei-app');
+            // takes away any existing styling for apps
             for (const app of apps) {
                 for (const el of app.children) {
-                    el.classList = '';
-                    el.classList.add('bg-transparent');
-                    if (el.innerHTML === '[+1609]' || el.innerHTML === '[Does not exist in 1609]') {
-                        el.textContent = ''
-                    }
+                    cleanVariationStyles(el)
                 }
             }
         } else if ($variationDetail === 'major changes') {
-            console.log('just major changes');
+            for (const app of apps) {
+                if(app.getAttribute('type') === 'major') {
+                    applyVariationStyles(app);
+                } else {
+                    // ensures minor apps are not styled (i.e., if the user comes from all changes rather than from no variation)
+                    for (const child of app.children) {
+                        cleanVariationStyles(child);
+                    }
+                }
+            }
         } else if ($variationDetail === 'all changes') {
-            console.log('everyting');
+            for (const app of apps) {
+                applyVariationStyles(app);
+            }
         }
     }
 
@@ -52,7 +104,7 @@
         {#if $activeView === 'both' || $activeView === 'transcription'}
             <div class="md:flex w-full {$activeView == 'both' ? 'md:w-1/2' : ''} md:overflow-auto" data-testid="transcription">
                 <TeiSimple
-                    path={transcriptionData[$activeDataset].teiURL}
+                    path={transcriptionData[$activeDataset].teiURL} on:status={handleStatus}
                 />
             </div>
         {/if}
