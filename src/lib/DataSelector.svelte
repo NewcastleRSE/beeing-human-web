@@ -12,9 +12,7 @@
     import DataRadioGroupControl from "$lib/DataSelectorControls/DataRadioGroupControl.svelte";
     import DataSlideToggle from "$lib/DataSelectorControls/DataSlideToggle.svelte";
 
-    import { activeDataset, activeView } from '../stores/dataViewer'
-    import { parse } from "svelte/compiler";
-    import { compute_rest_props } from "svelte/internal";
+    import { activeDataset, activeView, variationDetail, editorialNotes } from '../stores/dataViewer'
 
     export let controlsArray = [
         {
@@ -74,6 +72,14 @@
         if (e.detail.origin === 'view') {
             activeView.update(() => (e.detail.newValue))
         }
+
+        if (e.detail.origin === 'variation') {
+            variationDetail.update(() => (e.detail.newValue))
+        }
+
+        if (e.detail.origin === 'editorial notes') {
+            editorialNotes.update(() => (e.detail.newValue));
+        }
     }
 
 </script>
@@ -94,7 +100,7 @@
                 {#if (controlOptions.type === "radioGroup")}
                     <DataRadioGroupControl options={controlOptions} on:valueChange={updateOtherFilters} />
                 {:else if (controlOptions.type === "toggle")}
-                    <DataSlideToggle options = {controlOptions} on:valueChange/>
+                    <DataSlideToggle options = {controlOptions} on:valueChange={updateOtherFilters}/>
                 {/if}
             {/if}
             

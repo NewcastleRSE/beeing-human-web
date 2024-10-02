@@ -2,10 +2,11 @@
     import TeiSimple from "./TEISimple.svelte";
     import IiifViewer from "./IIIFViewer.svelte";
 
-    import {activeDataset, activeView} from '../stores/dataViewer'
+    import {activeDataset, activeView, editorialNotes, variationDetail} from '../stores/dataViewer'
     import { onMount } from "svelte";
 
     import transcriptionData from '../routes/(sections)/literature/transcription/transcriptionData.json'
+    import { elasticIn } from "svelte/easing";
 
     let ready = false;
 
@@ -16,7 +17,28 @@
         ready = true;
     })
 
-    $: console.log($activeDataset, $activeView)
+    function changeVariationDetail($variationDetail) {
+        if ($variationDetail === 'no variation') {
+            const apps = document.getElementsByTagName('tei-app');
+            for (const app of apps) {
+                for (const el of app.children) {
+                    el.classList = '';
+                    el.classList.add('bg-transparent');
+                    if (el.innerHTML === '[+1609]' || el.innerHTML === '[Does not exist in 1609]') {
+                        el.textContent = ''
+                    }
+                }
+            }
+        } else if ($variationDetail === 'major changes') {
+            console.log('just major changes');
+        } else if ($variationDetail === 'all changes') {
+            console.log('everyting');
+        }
+    }
+
+    $: if (ready && $variationDetail) {
+        changeVariationDetail($variationDetail);
+    }
 
 </script>
 

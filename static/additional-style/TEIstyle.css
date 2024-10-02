@@ -448,13 +448,13 @@ tei-lem.var-del {
   font-size: smaller;
   background-color: lightcoral;
 }
-tei-lem:hover {
+tei-lem.hover:hover {
   background-color: white;
   color: unset;
   border: solid black 1px;
   cursor: pointer;
 }
-tei-lem:hover + tei-rdg {
+tei-lem.hover:hover + tei-rdg {
   display: inline-block;
 }
 tei-lem > * {
