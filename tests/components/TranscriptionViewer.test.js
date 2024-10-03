@@ -3,6 +3,8 @@ import { afterEach, describe, expect, it } from 'vitest';
 
 import TranscriptionViewer from '../../src/lib/TranscriptionViewer.svelte'
 
+
+
 describe('Transcription Viewer mounting tests', () => {
     afterEach(() => cleanup());
 

@@ -448,13 +448,13 @@ tei-lem.var-del {
   font-size: smaller;
   background-color: lightcoral;
 }
-tei-lem:hover {
+tei-lem.hover:hover {
   background-color: white;
   color: unset;
   border: solid black 1px;
   cursor: pointer;
 }
-tei-lem:hover + tei-rdg {
+tei-lem.hover:hover + tei-rdg {
   display: inline-block;
 }
 tei-lem > * {
@@ -1085,11 +1085,6 @@ tei-seg[rend="italic"] {
 /* running headers */
 tei-fw[type="header"] {
   font-style: italic;
-}
-
-/* hide editorial notes at this stage */
-tei-note[type="editorial"] {
-  visibility: hidden;
 }
 
 /* terms / foreign inside notes */

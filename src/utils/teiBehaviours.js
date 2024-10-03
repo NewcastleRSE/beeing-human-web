@@ -95,6 +95,7 @@ export let teiBehaviours = {
             if (elt.hasAttribute('data-empty')) {
                 elt.innerHTML = '[+1609]'
             }
+            elt.classList.add('hover')
         },
         "fw": [
             ["[type=horizontalRule]", function (elt) {

@@ -13,32 +13,46 @@
     export let manifest = undefined;
     export let startPage = undefined;
 
-    onMount(async () => {
-        if (browser) {
-            try {
-                // import tify and create a new instance
-                await import("tify").then(() => {
-                    if (manifest && startPage) {
-                        iiif = new Tify({
-                            container: "#facsimile-viewer",
-                            manifestUrl: manifest,
-                        });
-                    }
-                });
-            } catch (e) {
-                console.error(e);
-            }
-        }
-        loaded = true;
+    function buildIIIFY(manifest) {
+        iiif = new Tify({
+            container: "#facsimile-viewer",
+            manifestUrl: manifest,
+        });
+        removeHeader()
+    }
 
-        if (iiif) {
-            iiif.ready.then(() => {
+    async function removeHeader() {
+        try {
+            await iiif.ready.then(() => {
                 iiif.setPage([parseInt(startPage)]);
                 const iiifTitleHeader = document.getElementsByClassName('tify-header-title')[0];
                 if (iiifTitleHeader) {
                     iiifTitleHeader.remove();
                 }
             })
+        } catch (e) {
+            console.warn('tify is not ready')
+        }
+    }
+
+    onMount(async () => {
+        if (browser) {
+            try {
+                // import tify and create a new instance
+                await import("tify").then(() => {
+                    if (manifest && startPage) {
+                        buildIIIFY(manifest)
+                    }
+                });
+                loaded = true
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        loaded = true;
+
+        if (iiif && loaded) {
+            
         }
     });
 
@@ -47,11 +61,13 @@
             iiif.destroy();
         }
     });
+
+    $: if (iiif && loaded && manifest) {
+        iiif.destroy();
+        iiif = undefined;
+        buildIIIFY(manifest);
+    }
 </script>
 
-<div id="facsimile-viewer"></div>
-<style>
-    #facsimile-viewer {
-        height: 100vh;
-    }
-</style>
+<div id="facsimile-viewer" class="h-full"></div>
+

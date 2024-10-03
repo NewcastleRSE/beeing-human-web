@@ -12,7 +12,7 @@
     import DataRadioGroupControl from "$lib/DataSelectorControls/DataRadioGroupControl.svelte";
     import DataSlideToggle from "$lib/DataSelectorControls/DataSlideToggle.svelte";
 
-    import { activeDataset, activeView } from '../stores/dataViewer'
+    import { activeDataset, activeView, variationDetail, editorialNotes } from '../stores/dataViewer'
 
     export let controlsArray = [
         {
@@ -59,12 +59,26 @@
     ];
 
     function updateDataSource(e) {
-        activeDataset.update(() => (parseInt(e.detail.newValue)))
+        let returnValue = e.detail.newValue
+        
+        if (!isNaN(e.detail.newValue)){
+            returnValue = parseInt(e.detail.newValue)
+        }
+        
+        activeDataset.update(() => (returnValue))
     }
 
     function updateOtherFilters(e) {
         if (e.detail.origin === 'view') {
             activeView.update(() => (e.detail.newValue))
+        }
+
+        if (e.detail.origin === 'variation') {
+            variationDetail.update(() => (e.detail.newValue))
+        }
+
+        if (e.detail.origin === 'editorial notes') {
+            editorialNotes.update(() => (e.detail.newValue));
         }
     }
 
@@ -79,14 +93,14 @@
             <DataSourceControl options = {controlOptions} on:valueChange={updateDataSource}/>
         {/if}
      {/each}
-    <div class="flex gap-10 content-center gap-32">
+    <div class="flex flex-col md:flex-row items-center md:content-center gap-4 md:gap-32">
         <!-- Other controls go here -->
          {#each controlsArray as controlOptions}
             {#if (!controlOptions.dataSource)}
                 {#if (controlOptions.type === "radioGroup")}
                     <DataRadioGroupControl options={controlOptions} on:valueChange={updateOtherFilters} />
                 {:else if (controlOptions.type === "toggle")}
-                    <DataSlideToggle options = {controlOptions} on:valueChange/>
+                    <DataSlideToggle options = {controlOptions} on:valueChange={updateOtherFilters}/>
                 {/if}
             {/if}
             

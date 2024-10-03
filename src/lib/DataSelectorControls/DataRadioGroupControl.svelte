@@ -11,6 +11,8 @@
     import {createEventDispatcher} from 'svelte';
     import {activeView} from '../../stores/dataViewer'
 
+    import {makeHtmlId} from '../../utils/stringOperations'
+
     const dispatch = createEventDispatcher();
 
     export let options;
@@ -32,7 +34,7 @@
 
 
 <div class="flex flex-col gap-2 font-light text-xs md:text-sm" data-testid="radio-group-{options.label}">
-    <label for="radio-group" class="hidden md:block font-light text-sm pl-4"
+    <label for="radio-group-{options.label}" class="hidden md:block font-light text-sm pl-4"
         >{options.label}</label
     >
     <RadioGroup
@@ -40,10 +42,10 @@
         background="bg-secondary-500"
         active="bg-secondary-100 text-black"
         hover="hover:bg-secondary-400 transition-all ease-in-out duration-300 motion-reduce:transition-none"
-        name="radio-group"
+        name="radio-group-{options.label}"
     >
         {#each Object.entries(options.values) as [label, value]}
-            <RadioItem bind:group={radioValue} name={label} value={value} on:change={handleClick}
+            <RadioItem bind:group={radioValue} name={label} value={value} on:change={handleClick} id="{makeHtmlId(options.label)}-{makeHtmlId(value)}-button"
                             >{label.toLowerCase()}</RadioItem
                         >
         {/each}

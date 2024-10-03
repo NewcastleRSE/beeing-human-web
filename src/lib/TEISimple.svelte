@@ -12,46 +12,73 @@
 -->
 
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, createEventDispatcher } from 'svelte';
     import CETEI from 'CETEIcean';
-    import { ProgressRadial } from '@skeletonlabs/skeleton';
     import { base } from "$app/paths";
     import {teiBehaviours} from '../utils/teiBehaviours';
 
-    import IiifViewer from './IIIFViewer.svelte';
 
     let loaded = false;
     let error = undefined;
     export let path = '';
+    let mountedPath = '';
+
+    const dispatch = createEventDispatcher();
+
+    async function loadTei(path) {
+        
+        console.log('adding tei')
+        loaded = false
+        const parent = document.getElementById('TEI-container');
+        
+        // cleans the parent container, in case it has any previous content
+        while (parent.firstChild) {
+            parent.removeChild(parent.lastChild);
+        }
+
+        // inserts TEI content
+        var cetei = new CETEI();
+        cetei.addBehaviors(teiBehaviours);
+        await cetei.getHTML5(path, function(data) {
+                parent.appendChild(data);
+        }).then(() => {
+            console.log('finished')
+            mountedPath = path;
+            loaded = true;
+            dispatch('status', {
+                loaded: loaded
+            });
+        });
+    }
 
     onMount(async () => {
         try {
             if (path === '') {
                 throw 'No path specified';
             }
-            var cetei = new CETEI();
-            cetei.addBehaviors(teiBehaviours);
-            cetei.getHTML5(path, function(data) {
-                document.getElementById('TEI-container').appendChild(data);
-            });
-            loaded = true;
+            loadTei(path)
         } catch (err) {
             error = err.toString();
-            loaded = true;
+            loaded = false;
             return
         }
     })
+
+    // loads the new TEI if the path has been changed
+    $: if (path && loaded && path != mountedPath) {
+        loadTei(path);
+        loaded = true;
+    }
 </script>
 
 <svelte:head>
     <link rel="stylesheet" type="text/css" href="{base}/additional-style/TEIstyle.css"/>
 </svelte:head>
 
-<IiifViewer/>
 
 <div id='TEI-container' data-testid="TEI-container">
     {#if !loaded}
-        <ProgressRadial/>
+        <p id='loading-message'>Loading...</p>
     {/if}
     {#if error}
         <p data-testid="error-message">{error}</p>
