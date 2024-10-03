@@ -2,6 +2,13 @@
     import TeiSimple from "./TEISimple.svelte";
     import IiifViewer from "./IIIFViewer.svelte";
 
+    const mdBreakPoint = 768
+
+    let windowSize = 800
+    let smallScreen = function(windowSize) {
+        return windowSize < mdBreakPoint
+    };
+
     import {
         activeDataset,
         activeView,
@@ -52,26 +59,10 @@
     function handleStatus(e) {
         if (e.detail.loaded) {
             changeVariationDetail($variationDetail);
-            changeEditorialNoteVisibility($editorialNotes)
+            changeEditorialNoteVisibility($editorialNotes);
+            toggleBothViewOption(windowSize);
         }
     }
-
-    let ready = false;
-
-    onMount(() => {
-        if ($activeDataset === 0) {
-            $activeDataset = "1623";
-        }
-        
-        if (!["no variation", "major changes", "all changes"].includes($variationDetail)) {
-            $variationDetail = "no variation";
-        }
-
-        if (![true, false].includes($editorialNotes)) {
-            $editorialNotes = false;
-        }
-        ready = true;
-    });
 
     function changeVariationDetail($variationDetail) {
         const apps = document.getElementsByTagName("tei-app");
@@ -115,7 +106,26 @@
                 }
             }
         } catch (e) {
-            console.log('not ready')
+            console.warn('Document is not ready, could not change visibility of editorial notes')
+        }
+    }
+
+    function toggleBothViewOption(windowSize) {
+        if (ready) {
+            try {
+                const button = document.getElementById('view-both-button').closest('label');
+                if (smallScreen(windowSize)) {
+                    if ($activeView == 'both') {
+                        $activeView = 'transcription'
+                        document.getElementById('view-transcription-button').click();
+                    }
+                    button.classList.add('hidden');
+                } else {
+                    button.classList.remove('hidden')
+                }
+            } catch (e) {
+                console.log('window is not ready, could not adjust button visibility')
+            }
         }
     }
 
@@ -123,16 +133,45 @@
         changeVariationDetail($variationDetail);
     }
 
-    $: changeEditorialNoteVisibility($editorialNotes)
+    $: changeEditorialNoteVisibility($editorialNotes);
+
+    $: if (ready && windowSize) {
+        toggleBothViewOption(windowSize);
+    }
+
+    let ready = false;
+
+    onMount(() => {
+        if ($activeDataset === 0) {
+            $activeDataset = "1623";
+        }
+
+        if (!["facsimile", "transcription", "both"].includes($activeView)) {
+            $activeView = "both";
+        }
+        
+        if (!["no variation", "major changes", "all changes"].includes($variationDetail)) {
+            $variationDetail = "no variation";
+        }
+
+        if (![true, false].includes($editorialNotes)) {
+            $editorialNotes = false;
+        }
+        ready = true;
+    });
+    
+
 </script>
 
+<svelte:window bind:innerWidth={windowSize}/>
+
 {#if ready}
-    <div class="md:flex w-full mx-auto md:p-8 max-h-screen">
+    <div class="md:flex w-full mx-auto md:p-8 md:max-h-screen">
         {#if $activeView === "both" || $activeView === "facsimile"}
             <div
                 class="md:flex-1 w-full {$activeView == 'both'
                     ? 'md:w-1/2'
-                    : ''} md:max-h-full"
+                    : ''} h-dvh"
                 data-testid="iiif-viewer"
             >
                 <IiifViewer
@@ -146,7 +185,7 @@
             <div
                 class="md:flex w-full {$activeView == 'both'
                     ? 'md:w-1/2'
-                    : ''} md:overflow-auto"
+                    : ''} md:overflow-auto overflow-x-clip"
                 data-testid="transcription"
             >
                 <TeiSimple

@@ -21,9 +21,9 @@
         removeHeader()
     }
 
-    function removeHeader() {
+    async function removeHeader() {
         try {
-            iiif.ready.then(() => {
+            await iiif.ready.then(() => {
                 iiif.setPage([parseInt(startPage)]);
                 const iiifTitleHeader = document.getElementsByClassName('tify-header-title')[0];
                 if (iiifTitleHeader) {
@@ -31,7 +31,7 @@
                 }
             })
         } catch (e) {
-            console.warn('iiify is not ready')
+            console.warn('tify is not ready')
         }
     }
 
@@ -69,9 +69,5 @@
     }
 </script>
 
-<div id="facsimile-viewer"></div>
-<style>
-    #facsimile-viewer {
-        height: 100vh;
-    }
-</style>
+<div id="facsimile-viewer" class="h-full"></div>
+

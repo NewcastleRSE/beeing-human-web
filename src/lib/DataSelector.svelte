@@ -93,7 +93,7 @@
             <DataSourceControl options = {controlOptions} on:valueChange={updateDataSource}/>
         {/if}
      {/each}
-    <div class="flex gap-10 content-center gap-32">
+    <div class="flex flex-col md:flex-row items-center md:content-center gap-4 md:gap-32">
         <!-- Other controls go here -->
          {#each controlsArray as controlOptions}
             {#if (!controlOptions.dataSource)}
