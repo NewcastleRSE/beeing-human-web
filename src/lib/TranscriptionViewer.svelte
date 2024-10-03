@@ -2,22 +2,29 @@
     import TeiSimple from "./TEISimple.svelte";
     import IiifViewer from "./IIIFViewer.svelte";
 
-    import {activeDataset, activeView, editorialNotes, variationDetail} from '../stores/dataViewer'
+    import {
+        activeDataset,
+        activeView,
+        editorialNotes,
+        variationDetail,
+    } from "../stores/dataViewer";
     import { onMount } from "svelte";
 
-    import transcriptionData from '../routes/(sections)/literature/transcription/transcriptionData.json'
-
+    import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
 
     function cleanVariationStyles(el) {
-        el.classList = '';
+        el.classList = "";
         // removes the default background colour for elements in apps
-        el.classList.add('bg-transparent');
+        el.classList.add("bg-transparent");
 
         // removes unnecesary textual content
-        if (el.innerHTML === '[+1609]' || el.innerHTML === '[Does not exist in 1609]') {
-            el.textContent = ''
+        if (
+            el.innerHTML === "[+1609]" ||
+            el.innerHTML === "[Does not exist in 1609]"
+        ) {
+            el.textContent = "";
         }
-}
+    }
 
     function applyVariationStyles(app) {
         for (const child of app.children) {
@@ -25,18 +32,18 @@
             cleanVariationStyles(child);
 
             // restores baseline styling for elements inside apps
-            child.classList = ''
-            child.classList.add(`var-${app.getAttribute('subtype')}`);
+            child.classList = "";
+            child.classList.add(`var-${app.getAttribute("subtype")}`);
 
             // adds messages for empty elements
-            if (child.tagName === 'TEI-LEM') {
-                if (child.hasAttribute('data-empty')) {
-                    child.innerHTML = '[+1609]'
+            if (child.tagName === "TEI-LEM") {
+                if (child.hasAttribute("data-empty")) {
+                    child.innerHTML = "[+1609]";
                 }
-                child.classList.add('hover')
-            } else if (child.tagName === 'TEI-RDG') {
-                if (child.hasAttribute('data-empty')) {
-                    child.innerHTML = '[Does not exist in 1609]'
+                child.classList.add("hover");
+            } else if (child.tagName === "TEI-RDG") {
+                if (child.hasAttribute("data-empty")) {
+                    child.innerHTML = "[Does not exist in 1609]";
                 }
             }
         }
@@ -50,29 +57,33 @@
 
     let ready = false;
 
-    onMount (() => {
+    onMount(() => {
         if ($activeDataset === 0) {
             $activeDataset = "1623";
         }
-        if (!(['no variation', 'major changes', 'all changes'].includes($variationDetail))) {
-            $variationDetail = 'no variation';
+        if (
+            !["no variation", "major changes", "all changes"].includes(
+                $variationDetail
+            )
+        ) {
+            $variationDetail = "no variation";
         }
         changeVariationDetail($variationDetail);
         ready = true;
-    })
+    });
 
     function changeVariationDetail($variationDetail) {
-        const apps = document.getElementsByTagName('tei-app');
-        if ($variationDetail === 'no variation') {
+        const apps = document.getElementsByTagName("tei-app");
+        if ($variationDetail === "no variation") {
             // takes away any existing styling for apps
             for (const app of apps) {
                 for (const el of app.children) {
-                    cleanVariationStyles(el)
+                    cleanVariationStyles(el);
                 }
             }
-        } else if ($variationDetail === 'major changes') {
+        } else if ($variationDetail === "major changes") {
             for (const app of apps) {
-                if(app.getAttribute('type') === 'major') {
+                if (app.getAttribute("type") === "major") {
                     applyVariationStyles(app);
                 } else {
                     // ensures minor apps are not styled (i.e., if the user comes from all changes rather than from no variation)
@@ -81,7 +92,7 @@
                     }
                 }
             }
-        } else if ($variationDetail === 'all changes') {
+        } else if ($variationDetail === "all changes") {
             for (const app of apps) {
                 applyVariationStyles(app);
             }
@@ -91,20 +102,34 @@
     $: if (ready && $variationDetail) {
         changeVariationDetail($variationDetail);
     }
-
 </script>
 
 {#if ready}
     <div class="md:flex w-full mx-auto md:p-8 max-h-screen">
-        {#if $activeView === 'both' || $activeView === 'facsimile'}
-            <div class="md:flex-1 w-full {$activeView == 'both' ? 'md:w-1/2' : ''} md:max-h-full" data-testid="iiif-viewer">
-                <IiifViewer manifest = {transcriptionData[$activeDataset].iiifManifest} startPage= {transcriptionData[$activeDataset].manifestStartPage}/>
+        {#if $activeView === "both" || $activeView === "facsimile"}
+            <div
+                class="md:flex-1 w-full {$activeView == 'both'
+                    ? 'md:w-1/2'
+                    : ''} md:max-h-full"
+                data-testid="iiif-viewer"
+            >
+                <IiifViewer
+                    manifest={transcriptionData[$activeDataset].iiifManifest}
+                    startPage={transcriptionData[$activeDataset]
+                        .manifestStartPage}
+                />
             </div>
         {/if}
-        {#if $activeView === 'both' || $activeView === 'transcription'}
-            <div class="md:flex w-full {$activeView == 'both' ? 'md:w-1/2' : ''} md:overflow-auto" data-testid="transcription">
+        {#if $activeView === "both" || $activeView === "transcription"}
+            <div
+                class="md:flex w-full {$activeView == 'both'
+                    ? 'md:w-1/2'
+                    : ''} md:overflow-auto"
+                data-testid="transcription"
+            >
                 <TeiSimple
-                    path={transcriptionData[$activeDataset].teiURL} on:status={handleStatus}
+                    path={transcriptionData[$activeDataset].teiURL}
+                    on:status={handleStatus}
                 />
             </div>
         {/if}

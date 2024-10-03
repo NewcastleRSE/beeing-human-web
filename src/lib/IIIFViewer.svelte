@@ -18,16 +18,21 @@
             container: "#facsimile-viewer",
             manifestUrl: manifest,
         });
+        removeHeader()
     }
 
     function removeHeader() {
-        iiif.ready.then(() => {
+        try {
+            iiif.ready.then(() => {
                 iiif.setPage([parseInt(startPage)]);
                 const iiifTitleHeader = document.getElementsByClassName('tify-header-title')[0];
                 if (iiifTitleHeader) {
                     iiifTitleHeader.remove();
                 }
             })
+        } catch (e) {
+            console.warn('iiify is not ready')
+        }
     }
 
     onMount(async () => {
@@ -46,8 +51,8 @@
         }
         loaded = true;
 
-        if (iiif) {
-            removeHeader()
+        if (iiif && loaded) {
+            
         }
     });
 
@@ -61,7 +66,6 @@
         iiif.destroy();
         iiif = undefined;
         buildIIIFY(manifest);
-        removeHeader();
     }
 </script>
 

@@ -14,7 +14,6 @@
 <script>
     import { onMount, createEventDispatcher } from 'svelte';
     import CETEI from 'CETEIcean';
-    import { ProgressRadial } from '@skeletonlabs/skeleton';
     import { base } from "$app/paths";
     import {teiBehaviours} from '../utils/teiBehaviours';
 
@@ -26,9 +25,10 @@
 
     const dispatch = createEventDispatcher();
 
-    function loadTei(path) {
+    async function loadTei(path) {
         
         console.log('adding tei')
+        loaded = false
         const parent = document.getElementById('TEI-container');
         
         // cleans the parent container, in case it has any previous content
@@ -38,11 +38,17 @@
 
         // inserts TEI content
         var cetei = new CETEI();
-            cetei.addBehaviors(teiBehaviours);
-            cetei.getHTML5(path, function(data) {
+        cetei.addBehaviors(teiBehaviours);
+        await cetei.getHTML5(path, function(data) {
                 parent.appendChild(data);
+        }).then(() => {
+            console.log('finished')
+            mountedPath = path;
+            loaded = true;
+            dispatch('status', {
+                loaded: loaded
+            });
         });
-        mountedPath = path
     }
 
     onMount(async () => {
@@ -51,13 +57,9 @@
                 throw 'No path specified';
             }
             loadTei(path)
-            loaded = true;
-            dispatch('status', {
-                loaded: loaded
-            });
         } catch (err) {
             error = err.toString();
-            loaded = true;
+            loaded = false;
             return
         }
     })
@@ -65,6 +67,7 @@
     // loads the new TEI if the path has been changed
     $: if (path && loaded && path != mountedPath) {
         loadTei(path);
+        loaded = true;
     }
 </script>
 
@@ -75,7 +78,7 @@
 
 <div id='TEI-container' data-testid="TEI-container">
     {#if !loaded}
-        <ProgressRadial/>
+        <p id='loading-message'>Loading...</p>
     {/if}
     {#if error}
         <p data-testid="error-message">{error}</p>
