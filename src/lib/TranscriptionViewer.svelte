@@ -52,6 +52,7 @@
     function handleStatus(e) {
         if (e.detail.loaded) {
             changeVariationDetail($variationDetail);
+            changeEditorialNoteVisibility($editorialNotes)
         }
     }
 
@@ -61,14 +62,14 @@
         if ($activeDataset === 0) {
             $activeDataset = "1623";
         }
-        if (
-            !["no variation", "major changes", "all changes"].includes(
-                $variationDetail
-            )
-        ) {
+        
+        if (!["no variation", "major changes", "all changes"].includes($variationDetail)) {
             $variationDetail = "no variation";
         }
-        changeVariationDetail($variationDetail);
+
+        if (![true, false].includes($editorialNotes)) {
+            $editorialNotes = false;
+        }
         ready = true;
     });
 
@@ -99,9 +100,30 @@
         }
     }
 
+    function changeEditorialNoteVisibility($editorialNotes) {
+        try {
+            const notesElements = document.querySelectorAll('tei-note[type="editorial"]')
+            if (!$editorialNotes) {
+                for (const note of notesElements) {
+                    note.classList = ''
+                    note.classList.add('hidden');
+                }
+            } else {
+                for (const note of notesElements) {
+                    note.classList = ''
+                    note.classList = 'block'
+                }
+            }
+        } catch (e) {
+            console.log('not ready')
+        }
+    }
+
     $: if (ready && $variationDetail) {
         changeVariationDetail($variationDetail);
     }
+
+    $: changeEditorialNoteVisibility($editorialNotes)
 </script>
 
 {#if ready}

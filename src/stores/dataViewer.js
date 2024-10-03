@@ -10,4 +10,4 @@ export const activeView = writable('details')
 
 export const variationDetail = writable('no variation')
 
-export const editorialNotes = writable(false);
+export const editorialNotes = writable('false');

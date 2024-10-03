@@ -1087,11 +1087,6 @@ tei-fw[type="header"] {
   font-style: italic;
 }
 
-/* hide editorial notes at this stage */
-tei-note[type="editorial"] {
-  visibility: hidden;
-}
-
 /* terms / foreign inside notes */
 tei-seg[rend="italic"] > tei-term ,
 tei-note[subtype="summary"] > tei-term,
