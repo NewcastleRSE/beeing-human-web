@@ -5,6 +5,18 @@
 // just left it here as an example of how to select between elements with different attributes.
 export let teiBehaviours = {
     "tei": {
+        "text": function(e) {
+            // main container
+        },
+        "div":[
+            ["[type=chapter]", function(e) {
+                const tailwindClasses = ['grid', 'grid-cols-2']
+                e.classList.add(...tailwindClasses)
+                // for (const child of e.children) {
+                //     child.classList.add('col-start-1')
+                // }
+            }]
+        ], 
         "note": [
             ["[type=gloss]",
                 function (elt) {
@@ -32,6 +44,10 @@ export let teiBehaviours = {
                     notes.appendChild(note);
                     return content;
                 }
+            ],
+            ["[subtype=summary]", function(elt) {
+                elt.classList.add('col-start-2')
+            }
             ]
         ],
         "ptr": function (elt) {

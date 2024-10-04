@@ -183,7 +183,7 @@
         {/if}
         {#if $activeView === "both" || $activeView === "transcription"}
             <div
-                class="md:flex w-full {$activeView == 'both'
+                class="md:flex w-full md:h-dvh {$activeView == 'both'
                     ? 'md:w-1/2'
                     : ''} md:overflow-auto overflow-x-clip"
                 data-testid="transcription"

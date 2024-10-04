@@ -71,9 +71,9 @@
     }
 </script>
 
-<svelte:head>
+<!-- <svelte:head>
     <link rel="stylesheet" type="text/css" href="{base}/additional-style/TEIstyle.css"/>
-</svelte:head>
+</svelte:head> -->
 
 
 <div id='TEI-container' data-testid="TEI-container">
