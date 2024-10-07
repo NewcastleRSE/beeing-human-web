@@ -12,13 +12,21 @@ export let teiBehaviours = {
             ["[type=chapter]", function(e) {
                 const tailwindClasses = ['grid', 'grid-cols-2']
                 e.classList.add(...tailwindClasses)
-                // for (const child of e.children) {
-                //     child.classList.add('col-start-1')
-                // }
+                let chapterId = e.getAttribute('id');
+                for (const child of e.children) {
+                    if (!this.rowIndex) {
+                        this[chapterId] =  {'rowIndex': 1}
+                    } else {
+                        this[chapterId].rowIndex++;
+                    }
+                    child.classList.add('col-start-1')
+                    child.classList.add(`row-${this[chapterId]['rowIndex']}`)
+                }
+                console.log(this);
             }]
         ], 
         "note": [
-            ["[type=gloss]",
+            ["[subtype=summary]",
                 function (elt) {
                     if (!this.noteIndex) {
                         this["noteIndex"] = 1;
@@ -32,23 +40,19 @@ export let teiBehaviours = {
                     link.innerHTML = this.noteIndex;
                     let content = document.createElement("sup");
                     content.appendChild(link);
-                    let notes = this.dom.querySelector("ol.notes");
-                    if (!notes) {
-                        notes = document.createElement("ol");
-                        notes.setAttribute("class", "notes");
-                        this.dom.appendChild(notes);
-                    }
-                    let note = document.createElement("li");
+                    let chapterDiv = elt.closest("tei-div[type='chapter'");
+                    let note = document.createElement("p");
+                    note.classList.add('col-start-2', 'row-start-1')
                     note.id = id;
                     note.innerHTML = "<a href=\"#src" + id + "\">^</a> " + elt.innerHTML
-                    notes.appendChild(note);
+                    chapterDiv.appendChild(note);
                     return content;
                 }
             ],
-            ["[subtype=summary]", function(elt) {
-                elt.classList.add('col-start-2')
-            }
-            ]
+            // ["[subtype=summary]", function(elt) {
+            //     elt.classList.add('col-start-2')
+            // }
+            // ]
         ],
         "ptr": function (elt) {
             if (elt.getAttribute('target') === '#') {
