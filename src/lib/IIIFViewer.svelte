@@ -1,7 +1,6 @@
 <script>
     import { onDestroy, onMount } from "svelte";
     import { browser } from "$app/environment";
-    import { ProgressRadial } from "@skeletonlabs/skeleton";
 
     // This needs to be imported only on the browser, otherwise it will generate an error
     // import "tify";

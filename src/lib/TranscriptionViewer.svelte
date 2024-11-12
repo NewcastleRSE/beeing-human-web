@@ -2,12 +2,17 @@
     import TeiSimple from "./TEISimple.svelte";
     import IiifViewer from "./IIIFViewer.svelte";
 
+    import PdfViewer from 'svelte-pdf'
+
     const mdBreakPoint = 768
 
     let windowSize = 800
     let smallScreen = function(windowSize) {
         return windowSize < mdBreakPoint
     };
+
+    // If TRUE, loads the PDF, rather than IIIF
+    let fallback = true;
 
     import {
         activeDataset,
@@ -174,11 +179,19 @@
                     : ''} h-dvh"
                 data-testid="iiif-viewer"
             >
+            {#if !fallback}
                 <IiifViewer
                     manifest={transcriptionData[$activeDataset].iiifManifest}
                     startPage={transcriptionData[$activeDataset]
                         .manifestStartPage}
                 />
+            {:else}
+                {#key $activeDataset}
+                <PdfViewer url={transcriptionData[$activeDataset]
+                        .pdfFallback} pageNum={transcriptionData[$activeDataset]
+                            .pdfFallbackStartPage} showButtons={["navigation", "zoom"]} scale={1.25} showBorder={false}/>
+                {/key}
+            {/if}
             </div>
         {/if}
         {#if $activeView === "both" || $activeView === "transcription"}
