@@ -1,4 +1,4 @@
-import{c as li}from"./TranscriptionViewer.d19f9182.js";function Gr(t,n){for(var e=0;e<n.length;e++){const i=n[e];if(typeof i!="string"&&!Array.isArray(i)){for(const o in i)if(o!=="default"&&!(o in t)){const r=Object.getOwnPropertyDescriptor(i,o);r&&Object.defineProperty(t,o,r.get?r:{enumerable:!0,get:()=>i[o]})}}}return Object.freeze(Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}))}var Hn={};/*!
+import{c as li}from"./TranscriptionViewer.ec910896.js";function Gr(t,n){for(var e=0;e<n.length;e++){const i=n[e];if(typeof i!="string"&&!Array.isArray(i)){for(const o in i)if(o!=="default"&&!(o in t)){const r=Object.getOwnPropertyDescriptor(i,o);r&&Object.defineProperty(t,o,r.get?r:{enumerable:!0,get:()=>i[o]})}}}return Object.freeze(Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}))}var Hn={};/*!
 TIFY v0.31.0
 (c) 2017-2024 Göttingen State and University Library (https://www.sub.uni-goettingen.de/)
 AGPL-3.0
