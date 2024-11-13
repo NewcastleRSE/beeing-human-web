@@ -905,6 +905,15 @@ tei-textdesc {
 tei-term {
   font-style: italic;
 }
+
+tei-placename {
+  font-style: italic;
+}
+
+tei-persname {
+  font-style: italic;
+}
+
 /* title */
 tei-tei tei-title {
   display: inline;
@@ -1091,6 +1100,7 @@ tei-fw[type="header"] {
 tei-seg[rend="italic"] > tei-term ,
 tei-note[subtype="summary"] > tei-term,
 tei-seg[rend="italic"] > tei-persname,
+tei-seg[rend="italic"] > tei-placename,
 tei-note > tei-foreign,
 tei-seg[rend="italic"] > tei-foreign {
   font-style: normal;
