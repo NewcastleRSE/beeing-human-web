@@ -59,7 +59,6 @@
     "midi-player-js": "^2.0.16",
     "parse-md": "^3.0.3",
     "svelte-markdown": "^0.2.3",
-    "svelte-pdf": "^1.0.20",
     "tify": "^0.31.0",
     "uuid": "^9.0.1",
     "verovio": "^3.16.0"
