@@ -42,7 +42,7 @@
   
     <div class="fixed inset-0 overflow-hidden">
       <div class="absolute inset-0 overflow-hidden">
-        <div bind:clientWidth={width} transition:fly={{x: width}} class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+        <div bind:clientWidth={width} transition:fly|global={{x: width}} class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
           <!--
             Slide-over panel, show/hide based on slide-over state.
   

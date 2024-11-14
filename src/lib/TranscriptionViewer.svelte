@@ -2,8 +2,6 @@
     import TeiSimple from "./TEISimple.svelte";
     import IiifViewer from "./IIIFViewer.svelte";
 
-    import PdfViewer from 'svelte-pdf'
-
     const mdBreakPoint = 768
 
     let windowSize = 800
@@ -12,7 +10,7 @@
     };
 
     // If TRUE, loads the PDF, rather than IIIF
-    let fallback = true;
+    let fallback = false;
 
     import {
         activeDataset,
@@ -187,9 +185,9 @@
                 />
             {:else}
                 {#key $activeDataset}
-                <PdfViewer url={transcriptionData[$activeDataset]
+                <!-- <PdfViewer url={transcriptionData[$activeDataset]
                         .pdfFallback} pageNum={transcriptionData[$activeDataset]
-                            .pdfFallbackStartPage} showButtons={["navigation", "zoom"]} scale={1.25} showBorder={false}/>
+                            .pdfFallbackStartPage} showButtons={["navigation", "zoom"]} scale={1.25} showBorder={false}/> -->
                 {/key}
             {/if}
             </div>
