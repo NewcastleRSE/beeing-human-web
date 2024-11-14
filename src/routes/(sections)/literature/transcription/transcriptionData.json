@@ -4,13 +4,15 @@
         "iiifManifest": "https://iiif.archive.org/iiif/bim_early-english-books-1475-1640_the-feminine-monarchie-_butler-charles_1609/manifest.json",
         "manifestStartPage": "1",
         "pdfFallback": "./bim_early-english-books-1475-1640_the-feminine-monarchie-_butler-charles_1609.pdf",
-        "pdfFallbackStartPage": 1
+        "pdfFallbackStartPage": 1,
+        "title": "1609 facsimile"
     },
     "1623": {
         "teiURL": "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/dev/1623_consolidated.xml",
         "iiifManifest": "https://iiif.archive.org/iiif/RAM2023-1081/manifest.json",
         "manifestStartPage": "5",
         "pdfFallback": "./2023-1081_text.pdf",
-        "pdfFallbackStartPage": 5
+        "pdfFallbackStartPage": 5,
+        "title": "1623 facsimile"
     }
 }
