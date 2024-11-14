@@ -18,8 +18,12 @@ describe('Portal card mounting tests', () => {
         expect(container).toBeTruthy();
     });
 
-    it('should print an error to the console if it cannot find the API', () => {
+    it('should print an error to the console if it cannot find the API', async () => {
         render(PortalDestinationListCard, {link: 'fake/article#fakeId'});
+        
+        // Awaiting for the mock fetch to resolve, necessary to catch the error
+        await screen.findByText('Could not fetch preview');
+
         expect(consoleMock).toHaveBeenCalled();
         // expect(consoleMock).toHaveBeenCalledWith('Could not fetch API');
 
@@ -28,12 +32,12 @@ describe('Portal card mounting tests', () => {
     it('should print an error to the console if it cannot find the portal ID', async () => {
         mockFetch.mockResolvedValueOnce({json: () => ({'sci1': {'content': 'all good'}})});
         render(PortalDestinationListCard, {link: 'fake/article#fakeID'});
-        
-        expect(mockFetch).toHaveBeenCalled();
-        expect(consoleMock).toHaveBeenCalled();
 
         // Awaiting for the mock fetch to resolve, necessary to catch the error
         await screen.findByText('Could not fetch preview');
+        
+        expect(mockFetch).toHaveBeenCalled();
+        expect(consoleMock).toHaveBeenCalled();
         
         expect(consoleMock).toHaveBeenCalledWith('Could not find portal with ID fakeID, TypeError: Cannot read properties of undefined (reading \'content\')');
 
