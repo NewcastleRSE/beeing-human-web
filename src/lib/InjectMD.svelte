@@ -1,6 +1,8 @@
 <script>
   import { ProgressRadial } from "@skeletonlabs/skeleton";
-  import SvelteMarkdown from "svelte-markdown";
+  // import SvelteMarkdown from "svelte-markdown";
+  import { marked } from 'marked';
+  import DOMPurify from 'dompurify'
   import ArticleLayout from "./ArticleLayout.svelte";
 
   export let content = undefined;
@@ -21,6 +23,7 @@
   <ProgressRadial value={undefined} />
 {:else}
   <ArticleLayout>
-    <SvelteMarkdown source={content} />
+    <!-- <SvelteMarkdown source={content} /> -->
+     {@html DOMPurify.sanitize(marked.parse(content))}
   </ArticleLayout>
 {/if}
