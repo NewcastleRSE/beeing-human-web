@@ -1,11 +1,10 @@
 <script>
   import { ProgressRadial } from "@skeletonlabs/skeleton";
-  // import SvelteMarkdown from "svelte-markdown";
   import { marked } from 'marked';
   import DOMPurify from 'dompurify'
   import ArticleLayout from "./ArticleLayout.svelte";
 
-  export let content = undefined;
+  let { content = undefined } = $props();
   
 </script>
 

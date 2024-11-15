@@ -10,12 +10,12 @@
 
     import { secsToMinSecs } from "../utils/MIDIPlaybackHelper";
 
-    export let audioPath;
+    let { audioPath } = $props();
 
-    let duration = undefined;
-    let currentPlace = undefined;
+    let duration = $state(undefined);
+    let currentPlace = $state(undefined);
     let audioElement = undefined;
-    let playing = false;
+    let playing = $state(false);
 
     const playPause = () => {
         if (!playing) {
@@ -92,14 +92,14 @@
     {/if}
 
     <div class="flex justify-center">
-        <button class="btn" on:click={skipBack}><BackwardIcon class="size-6 fill-secondary-500 stroke-secondary-700 hover:fill-secondary-400 hover:stroke-0 transition-all ease-in-out duration-300 motion-reduce:transition-none"/></button>
-        <button class="btn" on:click={playPause}>
+        <button class="btn" onclick={skipBack}><BackwardIcon class="size-6 fill-secondary-500 stroke-secondary-700 hover:fill-secondary-400 hover:stroke-0 transition-all ease-in-out duration-300 motion-reduce:transition-none"/></button>
+        <button class="btn" onclick={playPause}>
             {#if !playing}
                 <PlayIcon class="size-12 fill-secondary-500 stroke-secondary-700 hover:fill-secondary-400 transition-all ease-in-out duration-300 motion-reduce:transition-none" />
             {:else}
                 <PauseIcon class="size-12 fill-secondary-500 stroke-secondary-700 hover:fill-secondary-400 transition-all ease-in-out duration-300 motion-reduce:transition-none" />
             {/if}
         </button>
-        <button class="btn" on:click={skipFwd}><ForwardIcon class="size-6 fill-secondary-500 stroke-secondary-700 hover:fill-secondary-400 hover:stroke-0 transition-all ease-in-out duration-300 motion-reduce:transition-none" /></button>
+        <button class="btn" onclick={skipFwd}><ForwardIcon class="size-6 fill-secondary-500 stroke-secondary-700 hover:fill-secondary-400 hover:stroke-0 transition-all ease-in-out duration-300 motion-reduce:transition-none" /></button>
     </div>
 </div>
