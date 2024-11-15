@@ -1,7 +1,7 @@
 <script>
   import  {typeColours} from '../utils/typeColours'
   import InternalLink from '$lib/InternalLink.svelte';
-  export let cardObject;
+  let { cardObject } = $props();
 </script>
 
 <article class="flex flex-col items-start justify-between rounded-lg group hover:ring-8 hover:ring-primary-300 ring-offset-8 ring-primary-300/25 transition-all transition-c duration-500 motion-reduce:transition-none">
