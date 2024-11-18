@@ -401,15 +401,25 @@
                 </div>
                 <TextDivider class="hidden md:block md:max-w-md" />
                 <div class="filters flex flex-col gap-4 items-center">
-                    <h3
+                    {#if windowWidth <= 756}
+                        <button
+                            class="h3 font-medium cursor-pointer md:cursor-auto"
+                            on:click={toggleFilterMenu}
+                            on:keydown
+                        >
+                            Filters <span class="md:hidden"
+                                >{#if !filterMenuShow}+{:else}-{/if}</span
+                            >
+                        </button>
+                    {:else}
+                        <h3
                         class="h3 font-medium cursor-pointer md:cursor-auto"
-                        on:click={toggleFilterMenu}
-                        on:keydown
                     >
                         Filters <span class="md:hidden"
                             >{#if !filterMenuShow}+{:else}-{/if}</span
                         >
                     </h3>
+                    {/if}
                     {#if filterMenuShow}
                         <div class="flex flex-col gap-4" transition:slide|global={{ duration: 800, easing:expoInOut}}>
                             <TagSelector
