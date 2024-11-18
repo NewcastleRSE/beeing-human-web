@@ -62,5 +62,5 @@
         </InternalLink>
     </div>
 {:else if type === "empty"}
-    <div class=""  data-testid = {testid}/>
+    <div class=""  data-testid = {testid}></div>
 {/if}
