@@ -11,8 +11,8 @@
   import { onMount } from "svelte";
   import DataSelector from "$lib/DataSelector.svelte";
 
-  let path = $page.route.id.split("/");
-  let section = $page.route.id.split("/")[2];
+  let path = $derived($page.route.id.split("/"));
+  let section = $derived($page.route.id.split("/")[2]);
 
   function isSection(path) {
     if (path.length <= 3) {
@@ -22,20 +22,17 @@
     }
   }
 
-  export let data;
+  let { data, children } = $props();
 
-  let heroObject = undefined;
-  let heroKey = undefined;
-  let subsectionMetada = {};
+  let {heroObject, subsectionMetada} = $derived(getHeroSection());
 
   onMount(() => {
     init(path);
   });
 
-  $: path = $page.route.id.split("/");
-  $: getHeroSection(path);
-
-  function getHeroSection(path) {
+  function getHeroSection() {
+    let heroKey = undefined;
+    let subsectionMetada = {};
     if (!isSection(path)) {
       const route = path.slice(2).join('/')
       for (const key of Object.keys(data)) {
@@ -56,7 +53,7 @@
 
 
     try {
-      heroObject = heros[heroKey];
+      return {heroObject: heros[heroKey], subsectionMetada: subsectionMetada};
     } catch (e) {
       console.error(`No data found for hero. Looking for ${heroKey} : ${e}`);
     }
@@ -80,7 +77,7 @@
       <LogoLandingPage class="max-h-8 md:max-h-28" />
       <div
         class="w-1/2 border-t md:w-0 md:self-center md:h-28 md:border-l md:border-t-0 border-surface-500 self-end justify-self-end"
-      />
+      ></div>
       <SectionSelector {section} />
     </div>
     <Breadcrumbs {path} {data} class="md:left-0" />
@@ -102,7 +99,7 @@
 {/if}
 
 <div class="w-4/5 mx-auto my-6">
-  <slot />
+  {@render children()}
   {#if isSection(path)}
     <ArticleCollection data={subsectionMetada} />
   {/if}
