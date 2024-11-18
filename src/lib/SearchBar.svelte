@@ -75,7 +75,7 @@
     {#if chipList.size > 0}
         <div class="absolute w-full mt-1 flex flex-wrap gap-x-1 gap-y-2 min-h-2 p-4 bg-surface-50/[.90] rounded-lg" id="chip-list">
         {#each Array.from(chipList) as chip}
-            <span class='chip variant-ringed' on:click={removeChip(chip)} on:keypress data-testid='chip-{chip}'>{chip} &#x2715</span>
+            <button class='chip variant-ringed' on:click={removeChip(chip)} on:keypress data-testid='chip-{chip}'>{chip} &#x2715</button>
         {/each}
         </div>
     {/if}
