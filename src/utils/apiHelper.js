@@ -24,7 +24,7 @@ export function getPortalsAPI(listPaths) {
         }
         let path = JSON.stringify(entryPath);
         let article = getFileNameFromPathWithoutExtension(path);
-        const {_, content} = parseMD(listPaths[entryPath]);
+        const {_, content} = parseMD(listPaths[entryPath].default);
 
         if (!content) {
             // if couldn't extract content, moves on
@@ -116,7 +116,7 @@ export function getBuzzwordsObject(listPaths) {
       let path = JSON.stringify(buzz);
       let id = getFileNameFromPathWithoutExtension(path);
       // still need to get the content here, despite not using it for display, so that the searchbar functions can work;
-      const {metadata, content} = parseMD(listPaths[buzz]);
+      const {metadata, content} = parseMD(listPaths[buzz].default);
       if (metadata.tags) {
         // splits the tags into an array, ensuring they are all lowercase
         metadata.tags = metadata.tags.toLowerCase().split(', ');
@@ -141,7 +141,7 @@ export function getBuzzwordsObject(listPaths) {
 export function getArticleMetadata(listArticles) {
     const articles = {};
     for (const path in listArticles) {
-        const {metadata, _} = parseMD(listArticles[path]);
+        const {metadata, _} = parseMD(listArticles[path].default);
         const id = metadata.id
         articles[id] = {...metadata}
         if (articles[id].type && typeof(articles[id].type) === 'string') {

@@ -22,14 +22,6 @@
     export let type = 'both';
     export let id = undefined;
 
-    function showPopup() {
-        console.log('Hovering!');
-    }
-
-    function hidePopup() {
-        console.log('Not hovering!')
-    }
-
     export let toggleSidePanel = () =>  {
         showSidePanel = !showSidePanel
     }
@@ -63,7 +55,7 @@
 </script>
 
 {#if type == 'origin' || type == 'both'}
-    <span class="{highlight} text-amber-600 bg-slate-300 rounded-md border-[1px] border-slate-600 px-1 hover:bg-slate-200 hover:text-amber-800 hover:font-semibold hover:cursor-pointer portal" on:mouseenter={showPopup} on:mouseleave={hidePopup} on:click={toggleSidePanel} on:keydown={toggleSidePanel} id={id} data-testid="{type}-portal-{id}"><slot/></span>
+    <button class="{highlight} text-amber-600 bg-slate-300 rounded-md border-[1px] border-slate-600 px-1 hover:bg-slate-200 hover:text-amber-800 hover:font-semibold hover:cursor-pointer portal" on:click={toggleSidePanel} on:keydown={toggleSidePanel} id={id} data-testid="{type}-portal-{id}"><slot/></button>
 
     {#if showSidePanel}
         <PortalPanel on:close={toggleSidePanel} destination={destination}/>
