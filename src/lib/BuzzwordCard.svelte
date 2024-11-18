@@ -42,7 +42,7 @@
         {#if buzzword.tags}
             <div class="tags flex gap-1.5 flex-wrap">
                 {#each buzzword.tags.sort() as tag}
-                    <span data-testid="chip-tag" class="chip variant-filled-surface hover:variant-ghost-surface" on:click={handleFilterClickBuzzword(tag)} on:keypress>{capitaliseFirstLetter(tag)}</span>
+                    <button data-testid="chip-tag" class="chip variant-filled-surface hover:variant-ghost-surface" on:click={handleFilterClickBuzzword(tag)} on:keypress>{capitaliseFirstLetter(tag)}</button>
                 {/each}
             </div>
         {/if}
