@@ -543,7 +543,7 @@
                 id="tooltip-{makeHtmlId(name)}"
                 data-testid="tooltip-{makeHtmlId(name)}"
                 class="opacity-0 bg-white border-black border-solid border-2 rounded p-1 absolute"
-            />
+            ></div>
         {/if}
     </div>
 {/if}
