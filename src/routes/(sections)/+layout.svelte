@@ -7,9 +7,8 @@
 
   import { page } from "$app/stores";
   import SectionHero from "../../lib/SectionHero.svelte";
-  import heros from "./heros.json";
-  import { onMount } from "svelte";
   import DataSelector from "$lib/DataSelector.svelte";
+  import heros from "./heros.json";
 
   let path = $derived($page.route.id.split("/"));
   let section = $derived($page.route.id.split("/")[2]);
@@ -24,51 +23,36 @@
 
   let { data, children } = $props();
 
-  let {heroObject, subsectionMetada} = $derived(getHeroSection());
-
-  onMount(() => {
-    init(path);
+  let { heroObject, subsectionMetada } = $derived.by(() => {
+    let subsectionMetada = undefined;
+    let heroObject = undefined;
+    if (data) {
+      if (isSection(path)) {
+        for (const key of Object.keys(data)) {
+          if (data[key].parent === section) {
+            if (subsectionMetada === undefined) {
+              subsectionMetada = {};
+            }
+            subsectionMetada[key] = data[key];
+            heroObject = heros[section];
+          }
+        }
+      } else {
+        const route = path.slice(2).join("/");
+        for (const key of Object.keys(data)) {
+          if (data[key].link === route) {
+            heroObject = data[key];
+            break;
+          }
+        }
+      }
+    }
+    return { heroObject, subsectionMetada };
   });
-
-  function getHeroSection() {
-    let heroKey = undefined;
-    let subsectionMetada = {};
-    if (!isSection(path)) {
-      const route = path.slice(2).join('/')
-      for (const key of Object.keys(data)) {
-        if (data[key]['link'] === route) {
-          heroKey = key;
-          break;
-        }
-      }
-    } else {
-      heroKey = section;
-
-      for (const key of Object.keys(data)) {
-        if (data[key]["parent"] === section) {
-          subsectionMetada[key] = data[key];
-        }
-      }
-    }
-
-
-    try {
-      return {heroObject: heros[heroKey], subsectionMetada: subsectionMetada};
-    } catch (e) {
-      console.error(`No data found for hero. Looking for ${heroKey} : ${e}`);
-    }
-  }
-
-  function init(path) {
-    for (const key of Object.keys(data)) {
-      heros[key] = data[key];
-    }
-
-    getHeroSection(path);
-  }
 
 </script>
 
+{#key path}
 <div class="w-4/5 mx-auto my-6">
   <header class="w-full my-6 md:my-20">
     <div
@@ -84,18 +68,21 @@
   </header>
 </div>
 
-{#if heroObject != undefined}
-  {#if "dataSelector" in heroObject && heroObject.dataSelector}
-    <DataSelector controlsArray={heroObject.dataSelectorControls} on:valueChange={(e) => {console.log(e.detail)}}/>
-  {:else}
-    <SectionHero
-      title={heroObject.title}
-      img={heroObject.img ? heroObject.img : undefined}
-      type={heroObject.type}
-    >
-      {heroObject.lead}
-    </SectionHero>
-  {/if}
+{#if "dataSelector" in heroObject && heroObject.dataSelector}
+  <DataSelector
+    controlsArray={heroObject.dataSelectorControls}
+    on:valueChange={(e) => {
+      console.log(e.detail);
+    }}
+  />
+{:else}
+  <SectionHero
+    title={heroObject.title}
+    img={heroObject.img ? heroObject.img : undefined}
+    type={heroObject.type}
+  >
+    {heroObject.lead}
+  </SectionHero>
 {/if}
 
 <div class="w-4/5 mx-auto my-6">
@@ -103,4 +90,6 @@
   {#if isSection(path)}
     <ArticleCollection data={subsectionMetada} />
   {/if}
-</div>
+</div>  
+{/key}
+
