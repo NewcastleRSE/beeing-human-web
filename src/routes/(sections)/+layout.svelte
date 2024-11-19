@@ -24,9 +24,13 @@
   let { data, children } = $props();
 
   let { heroObject, subsectionMetada } = $derived.by(() => {
+    // collects data for cards if the page is a section;
     let subsectionMetada = undefined;
+    // defines what should be in the hero section
     let heroObject = undefined;
+    // waits until data exists
     if (data) {
+      // if it is a section, needs to collect the articles that correspond to that subsection
       if (isSection(path)) {
         for (const key of Object.keys(data)) {
           if (data[key].parent === section) {
@@ -34,10 +38,12 @@
               subsectionMetada = {};
             }
             subsectionMetada[key] = data[key];
+            // if it is a section, the data for the hero are in heros.json
             heroObject = heros[section];
           }
         }
       } else {
+        // if it isn't a section (i.e., its an article), collects the data for the hero from 'data'
         const route = path.slice(2).join("/");
         for (const key of Object.keys(data)) {
           if (data[key].link === route) {
@@ -52,7 +58,6 @@
 
 </script>
 
-{#key path}
 <div class="w-4/5 mx-auto my-6">
   <header class="w-full my-6 md:my-20">
     <div
@@ -91,5 +96,4 @@
     <ArticleCollection data={subsectionMetada} />
   {/if}
 </div>  
-{/key}
 
