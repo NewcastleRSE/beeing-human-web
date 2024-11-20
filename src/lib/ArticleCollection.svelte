@@ -1,6 +1,6 @@
 <script>
     import ArticleCard from "$lib/ArticleCard.svelte";
-    export let data;
+    let { data } = $props();
 </script>
 
 <div class="py-24 sm:py-32">
