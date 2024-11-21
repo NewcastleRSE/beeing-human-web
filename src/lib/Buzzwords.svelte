@@ -12,7 +12,7 @@
 
     import { elementReady } from "../utils/generalHelpers";
 
-    import { Filters } from "../classes/Filters";
+    import { Filters } from "../classes/Filters.svelte";
 
     import TagSelector from "./TagSelector.svelte";
     import SearchBar from "./SearchBar.svelte";
@@ -22,22 +22,18 @@
     import { slide } from "svelte/transition";
     import { expoInOut } from 'svelte/easing';
 
-    export let buzzwords;
-    export let listTags;
-    export let listAuthors;
+    let {buzzwords, listTags, listAuthors} = $props();
 
     // Does not create the template until it is loaded
-    let loaded = false;
-    let errorFlag = false;
+    let loaded = $state(false);
+    let errorFlag = $state(false);
 
     // array of filter objects
-    let filters = new Filters();
+    let filters = $state(new Filters());
 
     // this is the array of buzzwords to be displayed -- it will be equal to the received buzzwords at init
-    let filteredBuzzwords = [];
+    let filteredBuzzwords = $state([]);
 
-    // necessary to restart the filter components
-    let unique = {};
 
     // Event handling changes
 
@@ -61,10 +57,11 @@
         filteredBuzzwords = filterBuzzWords(buzzwords);
     }
 
-    function handleSearch(event) {
+    function handleSearch(searchObject) {
+
         // triggered when receiving a 'search' event from 'SearchBar.svelte'
         // set terms to lower case
-        const searchTerms = event.detail.searchTerms.map((e) =>
+        const searchTerms = searchObject.searchTerms.map((e) =>
             e.toLowerCase()
         );
 
@@ -102,7 +99,7 @@
         // Full text search
         let fullTextResults = fullTextSearch(
             filteredBuzzwords,
-            event.detail.searchString,
+            searchObject.searchString,
             searchTerms
         );
         if (fullTextResults.length > 0) {
@@ -127,12 +124,6 @@
             availableAuthors,
             availableTags
         );
-        updateFilterButtons(filteredBuzzwords.length);
-    }
-
-    function resetAll() {
-        // resets all filters and search terms
-        init(false);
     }
 
     // First level filtering functions
@@ -251,10 +242,8 @@
         filters.resetFilters();
 
         // necessary to restart the filter components
-        unique = {};
     }
 
-    let filterMenuShow = false;
 
     function toggleFilterMenu() {
         if (windowWidth <= 756) {
@@ -296,13 +285,15 @@
         }
     });
 
-    let windowWidth = 0;
+    let windowWidth = $state(0);
+    let filterMenuShow = $derived(() => {
+        if (windowWidth > 756) {
+            return true;
+        } else {
+            return false;
+        }
+    })
 
-    $: if (windowWidth > 756) {
-        filterMenuShow = true;
-    }
-
-    
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />
@@ -310,14 +301,14 @@
 {#if loaded}
     <!-- #key necessary to restart components -->
     <div class="flex flex-col md:flex-row gap-10">
-        {#key unique}
+        {#key filters}
             <div
                 class="flex flex-col md:basis-1/4 justify-between gap-4 md:gap-8 md:justify-start items-center"
             >
                 <div class="search full">
                     <SearchBar
-                        on:search={handleSearch}
-                        on:reset={handleReset}
+                        search={(searchObject) => handleSearch(searchObject)}
+                        reset={() => handleReset()}
                         listChips={[...listAuthors, ...listTags]}
                     />
                 </div>
@@ -326,8 +317,7 @@
                     {#if windowWidth <= 756}
                         <button
                             class="h3 font-medium cursor-pointer md:cursor-auto"
-                            on:click={toggleFilterMenu}
-                            on:keydown
+                            onclick={toggleFilterMenu}
                         >
                             Filters <span class="md:hidden"
                                 >{#if !filterMenuShow}+{:else}-{/if}</span
