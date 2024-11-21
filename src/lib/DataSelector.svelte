@@ -12,7 +12,7 @@
     import DataRadioGroupControl from "$lib/DataSelectorControls/DataRadioGroupControl.svelte";
     import DataSlideToggle from "$lib/DataSelectorControls/DataSlideToggle.svelte";
 
-    import { activeDataset, activeView, variationDetail, editorialNotes } from '../stores/dataViewer'
+    import { dataViewerState } from '../stores/dataViewer.svelte'
 
   let { controlsArray = [
         {
@@ -65,20 +65,20 @@
             returnValue = parseInt(changeObject.newValue)
         }
         
-        activeDataset.update(() => (returnValue))
+        dataViewerState.activeDataset = returnValue;
     }
 
     function updateOtherFilters(changeObject) {
         if (changeObject.origin === 'view') {
-            activeView.update(() => (changeObject.newValue))
+            dataViewerState.activeView = changeObject.newValue;
         }
 
         if (changeObject.origin === 'variation') {
-            variationDetail.update(() => (changeObject.newValue))
+            dataViewerState.variationDetail = changeObject.newValue;
         }
 
         if (changeObject.origin === 'editorial notes') {
-            editorialNotes.update(() => (changeObject.newValue));
+            dataViewerState.editorialNotes = changeObject.newValue;
         }
     }
 

@@ -12,18 +12,18 @@
 -->
 
 <script>
-    import { onMount, createEventDispatcher } from 'svelte';
+    import { onMount } from 'svelte';
     import CETEI from 'CETEIcean';
     import { base } from "$app/paths";
     import {teiBehaviours} from '../utils/teiBehaviours';
 
 
-    let loaded = false;
-    let error = undefined;
-    export let path = '';
-    let mountedPath = '';
+    let { path = '', statusCheck} = $props();
 
-    const dispatch = createEventDispatcher();
+    let loaded = $state(false);
+    let error = $state(undefined);
+    let mountedPath = $derived.by((path) => loadTei(path));
+
 
     async function loadTei(path) {
         
@@ -43,11 +43,9 @@
                 parent.appendChild(data);
         }).then(() => {
             console.log('finished')
-            mountedPath = path;
             loaded = true;
-            dispatch('status', {
-                loaded: loaded
-            });
+            statusCheck({loaded: 'loaded'})
+            return path;
         });
     }
 
@@ -64,11 +62,11 @@
         }
     })
 
-    // loads the new TEI if the path has been changed
-    $: if (path && loaded && path != mountedPath) {
-        loadTei(path);
-        loaded = true;
-    }
+    // // loads the new TEI if the path has been changed
+    // $: if (path && loaded && path != mountedPath) {
+    //     loadTei(path);
+    //     loaded = true;
+    // }
 </script>
 
 <!-- <svelte:head>
