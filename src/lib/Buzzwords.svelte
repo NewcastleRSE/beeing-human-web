@@ -2,7 +2,6 @@
     import { onMount } from "svelte";
     import {
         getListOfUniqueElements,
-        removeSpaces,
     } from "../utils/stringOperations";
 
     import {
@@ -42,11 +41,11 @@
 
     // Event handling changes
 
-    function handleFilterChange(event) {
+    function handleFilterChange(tag) {
         // Triggers when a filter button is clicked
-        filters = filters.toggleFilterActive(event.detail.filter);
+        filters = filters.toggleFilterActive(tag);
         // buzzword filtering is handled by this first level function
-        filteredBuzzwords = filterBuzzWords(filteredBuzzwords);
+        filteredBuzzwords = filterBuzzWords(tag);
     }
 
     function handleResetFilters(event) {
@@ -60,23 +59,6 @@
         // triggered by submitting an empty search
         // resets to show the entire dataset to whatever filter selection existed before the search
         filteredBuzzwords = filterBuzzWords(buzzwords);
-    }
-
-    function handleFilterClickBuzzword(tag) {
-        // creates a fake Filter object and sends it to handleFilterChange as if it came from the 'TagSelector' component
-
-        // finds the corresponding object in the Filters object
-        const filter = filters.getFiltersByName(tag);
-
-        // constructs the fake event object
-        const fakeEvent = {
-            detail: {
-                filter: filter,
-            },
-        };
-
-        // calls the handleFilterChange function with the fake event
-        handleFilterChange(fakeEvent);
     }
 
     function handleSearch(event) {
@@ -166,8 +148,6 @@
             // if both filters are empty:
             // -- reset filter availability (all available)
             filters.resetFiltersAvailableStatus();
-            // -- update the UI to reflect availability
-            updateFilterButtons(buzzwords.length);
             // -- return the initial dataset
             return buzzwords;
         } else {
@@ -195,7 +175,6 @@
 
         // updates UI to show available filters on the reduced dataset
         filters = filters.updateFilterAvailableStatus(listAuthors, listTags);
-        updateFilterButtons(bothFilters.length);
 
         return bothFilters;
     }
@@ -257,63 +236,6 @@
         return bothFilters;
     }
 
-    function updateFilterButtons(lenNewDataset) {
-        // Updates the UI to show current filter availability
-        // takes the length of the new dataset to compare it to the entire dataset and enable or disable the Reset All button
-        for (let filter of filters) {
-            try {
-                const filterChip = document.getElementById(
-                    `${removeSpaces(filter.name)}-filter`
-                );
-                if (filter.available) {
-                    filterChip.disabled = false;
-                } else {
-                    filterChip.disabled = true;
-                }
-            } catch (error) {
-                console.debug(
-                    `Component is still mounting, element with id ${removeSpaces(
-                        filter.name
-                    )}-filter does not exist yet. ${error}`
-                );
-            }
-        }
-
-        // RESET BUTTONS HAVE BEEN DISABLED
-        // // Updates the UI to enable or disable the `Reset All` button
-        // try {
-        //     const resetAllButton = document.getElementById('resetAll');
-
-        //     if (filters.allInactive() && buzzwords.length === lenNewDataset) {
-        //         resetAllButton.disabled = true;
-        //     } else {
-        //         resetAllButton.disabled = false;
-        //     }
-        // } catch (error) {
-        //     console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
-        // }
-
-        // // Updates the UI to enable or disable the `Reset` button for each filter group
-        // try {
-        //     const resetAuthor = document.getElementById('authors-reset');
-        //     const resetTags = document.getElementById('tags-reset');
-
-        //     if (filters.getActiveFiltersByType('authors').length === 0) {
-        //         resetAuthor.disabled = true;
-        //     } else {
-        //         resetAuthor.disabled = false;
-        //     }
-
-        //     if (filters.getActiveFiltersByType('tags').length === 0) {
-        //         resetTags.disabled = true;
-        //     } else {
-        //         resetTags.disabled = false;
-        //     }
-
-        // } catch (error) {
-        //     console.debug(error);
-        // }
-    }
 
     // initialisation functions
 
@@ -425,13 +347,13 @@
                             <TagSelector
                                 listTags={filters.getFiltersByType("authors", true)}
                                 filter="authors"
-                                on:filter-changed={handleFilterChange}
+                                handleClick={(tag) => {handleFilterChange(tag)}}
                                 on:reset-filters={handleResetFilters}
                             />
                             <TagSelector
                                 listTags={filters.getFiltersByType("tags", true)}
                                 filter="tags"
-                                on:filter-changed={handleFilterChange}
+                                handleClick={(tag) => handleFilterChange(tag)}
                                 on:reset-filters={handleResetFilters}
                             />
                         </div>
@@ -454,7 +376,7 @@
                     {#each filteredBuzzwords as buzzword (buzzword.id)}
                         <BuzzwordCard
                             {buzzword}
-                            handleFilterClickBuzzword={(tag) => handleFilterClickBuzzword(tag)}
+                            handleFilterClickBuzzword={(tag) => handleFilterChange(filters.getFiltersByName(tag))}
                         />
                     {/each}
                 {/if}
