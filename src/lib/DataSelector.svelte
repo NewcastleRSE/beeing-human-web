@@ -14,7 +14,7 @@
 
     import { activeDataset, activeView, variationDetail, editorialNotes } from '../stores/dataViewer'
 
-    export let controlsArray = [
+  let { controlsArray = [
         {
             dataSource: true,
             type: "select",
@@ -56,29 +56,29 @@
                 default: false,
             },
         },
-    ];
+    ] } = $props();
 
-    function updateDataSource(e) {
-        let returnValue = e.detail.newValue
+    function updateDataSource(changeObject) {
+        let returnValue = changeObject.newValue
         
-        if (!isNaN(e.detail.newValue)){
-            returnValue = parseInt(e.detail.newValue)
+        if (!isNaN(changeObject.newValue)){
+            returnValue = parseInt(changeObject.newValue)
         }
         
         activeDataset.update(() => (returnValue))
     }
 
-    function updateOtherFilters(e) {
-        if (e.detail.origin === 'view') {
-            activeView.update(() => (e.detail.newValue))
+    function updateOtherFilters(changeObject) {
+        if (changeObject.origin === 'view') {
+            activeView.update(() => (changeObject.newValue))
         }
 
-        if (e.detail.origin === 'variation') {
-            variationDetail.update(() => (e.detail.newValue))
+        if (changeObject.origin === 'variation') {
+            variationDetail.update(() => (changeObject.newValue))
         }
 
-        if (e.detail.origin === 'editorial notes') {
-            editorialNotes.update(() => (e.detail.newValue));
+        if (changeObject.origin === 'editorial notes') {
+            editorialNotes.update(() => (changeObject.newValue));
         }
     }
 
@@ -90,7 +90,7 @@
     <!-- Data source selector goes here -->
      {#each controlsArray as controlOptions}
         {#if (controlOptions.dataSource)}
-            <DataSourceControl options = {controlOptions} on:valueChange={updateDataSource}/>
+            <DataSourceControl options = {controlOptions} valueChange={(changeObject) => updateDataSource(changeObject)}/>
         {/if}
      {/each}
     <div class="flex flex-col md:flex-row items-center md:content-center gap-4 md:gap-32">
@@ -98,9 +98,9 @@
          {#each controlsArray as controlOptions}
             {#if (!controlOptions.dataSource)}
                 {#if (controlOptions.type === "radioGroup")}
-                    <DataRadioGroupControl options={controlOptions} on:valueChange={updateOtherFilters} />
+                    <DataRadioGroupControl options={controlOptions} valueChange={(changeObject) => updateOtherFilters(changeObject)} />
                 {:else if (controlOptions.type === "toggle")}
-                    <DataSlideToggle options = {controlOptions} on:valueChange={updateOtherFilters}/>
+                    <DataSlideToggle options = {controlOptions} valueChange={(changeObject) => updateOtherFilters(changeObject)}/>
                 {/if}
             {/if}
             
