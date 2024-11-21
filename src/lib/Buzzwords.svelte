@@ -333,7 +333,7 @@
                     </h3>
                     {/if}
                     {#if filterMenuShow}
-                        <div class="flex flex-col gap-4" transition:slide|global={{ duration: 800, easing:expoInOut}}>
+                        <div class="flex flex-col gap-4" transition:slide={{ duration: 800, easing:expoInOut}}>
                             <TagSelector
                                 listTags={filters.getFiltersByType("authors", true)}
                                 filter="authors"
