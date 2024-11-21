@@ -5,7 +5,6 @@
     // const dispatch = createEventDispatcher();
 
     let {listTags, filter, handleClick} = $props()
-
 </script>
 
 <div class="flex flex-col gap-2" data-testid="tag-selector-container">

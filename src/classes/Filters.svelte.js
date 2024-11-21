@@ -18,7 +18,7 @@ export class Filters extends Array {
 
     // adds and sets default properties for a filter in the array
     addFilter(name, type) {
-        let newFilter = {name: name, type: type, available: true, active: false};
+        let newFilter = $state({name: name, type: type, available: true, active: false});
         this.push(newFilter);
     }
 
