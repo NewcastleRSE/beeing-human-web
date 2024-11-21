@@ -8,15 +8,13 @@
   -->
 <script>
     import {RadioGroup, RadioItem} from '@skeletonlabs/skeleton';
-    import {createEventDispatcher} from 'svelte';
     import {activeView} from '../../stores/dataViewer'
 
     import {makeHtmlId} from '../../utils/stringOperations'
 
-    const dispatch = createEventDispatcher();
 
-    export let options;
-    let radioValue = options.defaultValue;
+    let {options, valueChange} = $props();
+    let radioValue = $state(options.defaultValue);
     
     // updates the store with the default value
     if(options.label === 'view') {
@@ -24,12 +22,6 @@
     }
     
 
-    function handleClick() {
-        dispatch('valueChange', {
-            origin: options.label,
-            newValue: radioValue
-        })
-    }
 </script>
 
 
@@ -45,7 +37,7 @@
         name="radio-group-{options.label}"
     >
         {#each Object.entries(options.values) as [label, value]}
-            <RadioItem bind:group={radioValue} name={label} value={value} on:change={handleClick} id="{makeHtmlId(options.label)}-{makeHtmlId(value)}-button"
+            <RadioItem bind:group={radioValue} name={label} value={value} onchange={() => valueChange({origin: options.label, newValue: radioValue})} id="{makeHtmlId(options.label)}-{makeHtmlId(value)}-button"
                             >{label.toLowerCase()}</RadioItem
                         >
         {/each}
