@@ -62,11 +62,11 @@
         filteredBuzzwords = filterBuzzWords(buzzwords);
     }
 
-    function handleFilterClickBuzzword(event) {
+    function handleFilterClickBuzzword(tag) {
         // creates a fake Filter object and sends it to handleFilterChange as if it came from the 'TagSelector' component
 
         // finds the corresponding object in the Filters object
-        const filter = filters.getFiltersByName(event.detail.filter);
+        const filter = filters.getFiltersByName(tag);
 
         // constructs the fake event object
         const fakeEvent = {
@@ -454,7 +454,7 @@
                     {#each filteredBuzzwords as buzzword (buzzword.id)}
                         <BuzzwordCard
                             {buzzword}
-                            on:filterClicked={handleFilterClickBuzzword}
+                            handleFilterClickBuzzword={(tag) => handleFilterClickBuzzword(tag)}
                         />
                     {/each}
                 {/if}

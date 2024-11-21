@@ -1,8 +1,7 @@
 <script>
     import {base} from '$app/paths'
-    export let path = undefined;
 
-    export let data;
+  let { path = undefined, data, ...rest } = $props();
 
     let buildPath = (path, target) => {
         let pathString = ''
@@ -27,13 +26,13 @@
         }
       }
       if (id === undefined) {
-        return page.toLowerCase()
+        return page.toLowerCase();
       }
-    }
+    };
 
 </script>
 
-<nav class={$$restProps.class || "flex"} aria-label="Breadcrumb">
+<nav class={rest.class || "flex"} aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2">
         {#each path as page}
             {#if page == ''}
@@ -47,7 +46,7 @@
                   </a>
                 </div>
               </li>
-              {:else if page != '(sections)' }
+              {:else if page != '(sections)'}
               <li>
                 <div class="flex items-center">
                   <svg class="h-5 w-5 flex-shrink-0 text-secondary-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
