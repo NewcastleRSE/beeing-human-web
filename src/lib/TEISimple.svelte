@@ -22,7 +22,6 @@
 
     let loaded = $state(false);
     let error = $state(undefined);
-    let mountedPath = $derived.by((path) => loadTei(path));
 
 
     async function loadTei(path) {
@@ -62,11 +61,6 @@
         }
     })
 
-    // // loads the new TEI if the path has been changed
-    // $: if (path && loaded && path != mountedPath) {
-    //     loadTei(path);
-    //     loaded = true;
-    // }
 </script>
 
 <!-- <svelte:head>
