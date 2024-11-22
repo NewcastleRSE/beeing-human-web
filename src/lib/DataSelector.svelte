@@ -28,6 +28,7 @@
     }
 
     function updateOtherFilters(changeObject) {
+        console.log('updating')
         if (changeObject.origin === "view") {
             dataViewerState.activeView = changeObject.newValue;
         }
