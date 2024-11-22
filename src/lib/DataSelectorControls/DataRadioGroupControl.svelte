@@ -8,19 +8,12 @@
   -->
 <script>
     import {RadioGroup, RadioItem} from '@skeletonlabs/skeleton';
-    import {dataViewerState} from '../../stores/dataViewer.svelte'
 
     import {makeHtmlId} from '../../utils/stringOperations'
 
 
     let {options, valueChange} = $props();
     let radioValue = $state(options.defaultValue);
-    
-    // updates the store with the default value
-    if(options.label === 'view') {
-        dataViewerState.activeView = options.defaultValue
-    }
-    
 
 </script>
 

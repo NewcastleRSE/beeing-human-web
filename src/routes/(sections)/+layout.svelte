@@ -76,9 +76,6 @@
 {#if "dataSelector" in heroObject && heroObject.dataSelector}
   <DataSelector
     controlsArray={heroObject.dataSelectorControls}
-    on:valueChange={(e) => {
-      console.log(e.detail);
-    }}
   />
 {:else}
   <SectionHero

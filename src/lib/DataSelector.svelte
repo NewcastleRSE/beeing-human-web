@@ -12,98 +12,79 @@
     import DataRadioGroupControl from "$lib/DataSelectorControls/DataRadioGroupControl.svelte";
     import DataSlideToggle from "$lib/DataSelectorControls/DataSlideToggle.svelte";
 
-    import { dataViewerState } from '../stores/dataViewer.svelte'
+    import { dataViewerState } from "../stores/dataViewer.svelte";
+    import { onMount } from "svelte";
 
-  let { controlsArray = [
-        {
-            dataSource: true,
-            type: "select",
-            label: 'dataSource',
-            default: "1623",
-            values: {
-                "1623": "link to 1623",
-                "1609": "link to 1609",
-                "1634": "link to 1634",
-            },
-        },
-        {
-            dataSource: false,
-            type: "radioGroup",
-            label: "view",
-            defaultValue: 'both',
-            values: {
-                facsimile: 'facsimile',
-                both: 'both',
-                transcription: 'transcription',
-            },
-        },
-        {
-            dataSource: false,
-            type: "radioGroup",
-            label: "variation",
-            defaultValue: 'Major Changes',
-            values: {
-                "no variation": 'no variation',
-                "Major Changes": 'Major Changes',
-                "All Changes": 'All Changes',
-            },
-        },
-        {
-            dataSource: false,
-            type: "toggle",
-            label: "editorial notes",
-            values: {
-                default: false,
-            },
-        },
-    ] } = $props();
+    let { controlsArray } = $props();
 
     function updateDataSource(changeObject) {
-        let returnValue = changeObject.newValue
-        
-        if (!isNaN(changeObject.newValue)){
-            returnValue = parseInt(changeObject.newValue)
+        let returnValue = changeObject.newValue;
+
+        if (!isNaN(changeObject.newValue)) {
+            returnValue = parseInt(changeObject.newValue);
         }
-        
+
         dataViewerState.activeDataset = returnValue;
     }
 
     function updateOtherFilters(changeObject) {
-        if (changeObject.origin === 'view') {
+        if (changeObject.origin === "view") {
             dataViewerState.activeView = changeObject.newValue;
         }
 
-        if (changeObject.origin === 'variation') {
+        if (changeObject.origin === "variation") {
             dataViewerState.variationDetail = changeObject.newValue;
         }
 
-        if (changeObject.origin === 'editorial notes') {
+        if (changeObject.origin === "editorial notes") {
             dataViewerState.editorialNotes = changeObject.newValue;
         }
     }
 
+    onMount(() => {
+        // reset state to defaults:
+        dataViewerState.activeDataset = 0;
+        dataViewerState.activeView = "details";
+        dataViewerState.variationDetail = "no variation";
+        dataViewerState.editorialNotes = false;
+    });
 </script>
 
+{#key dataViewerState}
 <form
     class="flex flex-col md:flex-row w-full bg-primary-400 items-center md:justify-between md:content-center md:px-12 py-10 gap-2"
 >
+{console.log(controlsArray)}
     <!-- Data source selector goes here -->
-     {#each controlsArray as controlOptions}
-        {#if (controlOptions.dataSource)}
-            <DataSourceControl options = {controlOptions} valueChange={(changeObject) => updateDataSource(changeObject)}/>
+    {#each controlsArray as controlOptions}
+        {#if controlOptions.dataSource}
+            <DataSourceControl
+                options={controlOptions}
+                valueChange={(changeObject) => updateDataSource(changeObject)}
+            />
         {/if}
-     {/each}
-    <div class="flex flex-col md:flex-row items-center md:content-center gap-4 md:gap-32">
+    {/each}
+    <div
+        class="flex flex-col md:flex-row items-center md:content-center gap-4 md:gap-32"
+    >
         <!-- Other controls go here -->
-         {#each controlsArray as controlOptions}
-            {#if (!controlOptions.dataSource)}
-                {#if (controlOptions.type === "radioGroup")}
-                    <DataRadioGroupControl options={controlOptions} valueChange={(changeObject) => updateOtherFilters(changeObject)} />
-                {:else if (controlOptions.type === "toggle")}
-                    <DataSlideToggle options = {controlOptions} valueChange={(changeObject) => updateOtherFilters(changeObject)}/>
+        {#each controlsArray as controlOptions}
+            {#if !controlOptions.dataSource}
+                {#if controlOptions.type === "radioGroup"}
+                    <DataRadioGroupControl
+                        options={controlOptions}
+                        valueChange={(changeObject) =>
+                            updateOtherFilters(changeObject)}
+                    />
+                {:else if controlOptions.type === "toggle"}
+                    <DataSlideToggle
+                        options={controlOptions}
+                        valueChange={(changeObject) =>
+                            updateOtherFilters(changeObject)}
+                    />
                 {/if}
             {/if}
-            
-         {/each}
+        {/each}
     </div>
 </form>
+{/key}

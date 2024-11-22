@@ -13,12 +13,20 @@
     // If TRUE, loads the PDF, rather than IIIF
     let fallback = true;
 
+    let ready = $state(false);
+
     import {
         dataViewerState
     } from "../stores/dataViewer.svelte";
     import { onMount } from "svelte";
 
     $inspect(dataViewerState)
+
+    $effect(() => {
+        changeVariationDetail(dataViewerState.variationDetail);
+        changeEditorialNoteVisibility(dataViewerState.editorialNotes);
+        toggleBothViewOption(smallScreen);
+    })
 
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
 
@@ -61,9 +69,10 @@
 
     function handleStatus(status) {
         if (status.loaded) {
+            ready = true;
             changeVariationDetail(dataViewerState.variationDetail);
             changeEditorialNoteVisibility(dataViewerState.editorialNotes);
-            toggleBothViewOption(windowSize);
+            toggleBothViewOption(smallScreen);
         }
     }
 
@@ -113,11 +122,11 @@
         }
     }
 
-    function toggleBothViewOption(windowSize) {
+    function toggleBothViewOption(smallScreen) {
         if (ready) {
             try {
                 const button = document.getElementById('view-both-button').closest('label');
-                if (smallScreen(windowSize)) {
+                if (smallScreen) {
                     if (dataViewerState.activeView == 'both') {
                         dataViewerState.activeView = 'transcription'
                         document.getElementById('view-transcription-button').click();
@@ -131,18 +140,6 @@
             }
         }
     }
-
-    // $: if (ready && $variationDetail) {
-    //     changeVariationDetail($variationDetail);
-    // }
-
-    // $: changeEditorialNoteVisibility($editorialNotes);
-
-    // $: if (ready && windowSize) {
-    //     toggleBothViewOption(windowSize);
-    // }
-
-    let ready = $state(false);
 
     onMount(() => {
         if (dataViewerState.activeDataset === 0) {
@@ -169,6 +166,7 @@
 <svelte:window bind:innerWidth={windowSize}/>
 
 {#if ready}
+    {#key dataViewerState.activeDataset}
     <div class="md:flex w-full mx-auto md:p-8 md:max-h-screen">
         {#if dataViewerState.activeView === "both" || dataViewerState.activeView === "facsimile"}
             <div
@@ -206,4 +204,5 @@
             </div>
         {/if}
     </div>
+    {/key}
 {/if}
