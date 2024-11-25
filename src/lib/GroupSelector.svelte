@@ -1,7 +1,5 @@
 <script>
-    export let groups;
-    export let selected;
-    export let name
+    let { groups, selected = $bindable(), name } = $props();
     
 </script>
 
@@ -9,9 +7,11 @@
     <div class="md:col-start-2 flex flex-col my-auto w-24 md:w-fit text-xs md:text-base gap-2">
         <label for={name}>{name}</label>
         <select id={name} bind:value={selected} class="rounded-lg text-xs md:text-base">
+            {#key groups}
             {#each groups as group}
                 <option value={group}>{group}</option>
             {/each}
+            {/key}
         </select>
     </div>
 {:else}
