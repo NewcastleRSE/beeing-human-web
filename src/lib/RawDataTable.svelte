@@ -1,22 +1,23 @@
 <script>
+
     import { onMount } from 'svelte'
-    export let tableObject;
-    export let selected;
+    let { tableObject, selected } = $props();
 
     let entire_dataset = [];
     let colNames = [];
-    let loaded = false;
-    let dataset = []
-    let errorCode = 0;
-
-    function filterDataset(selected) {
+    let loaded = $state(false);
+    
+    let dataset = $derived.by(() => {
         if (selected === 'All') {
             return entire_dataset
         } else {
             return entire_dataset.filter((entry) => entry['Treatment group'] === selected);
         }
-    }
+    });
+
     
+    let errorCode = $state(0);
+
     onMount( async () => {
         // turn tableObject into an array of objects
         try {
@@ -27,8 +28,6 @@
             for (let [index, entry] of Object.entries(tableObject.columns)) {
                 colNames.push(entry)
             }
-
-            dataset = filterDataset(selected);
         } catch (error) {
             // if the object is empty or undefined
             if (error.name === 'TypeError') {
@@ -44,9 +43,6 @@
         loaded = true;
 
     });
-
-    $: dataset = filterDataset(selected)
-
 </script>
 
 {#if loaded}
