@@ -15,9 +15,9 @@
 <script>
   import { onMount } from "svelte";
 
-  export let buzzName = undefined;
-  let buzzword = undefined;
-  let errorCode = 0
+  let { buzzName = undefined } = $props();
+  let buzzword = $state(undefined);
+  let errorCode = $state(0)
   // 1 -> no buzzword passed
   // 2 -> couldn't find buzzword
 
@@ -38,17 +38,10 @@
 
 </script>
 
-{#if buzzword != undefined && errorCode == 0 }
-  <svelte:component this={buzzword.default} />
+{#if buzzword != undefined && errorCode == 0}
+  <buzzword.default />
 {:else if errorCode == 1}
   <p class="error-code" data-testid="error-message">You need to pass a buzzword file name</p>
 {:else if errorCode == 2}
   <p class="error-code" data-testid="error-message">Could not load buzzword '{buzzName}'</p>
 {/if}
-
-<!-- 
-  {#if content === undefined}
-    <ProgressRadial value={undefined} />
-  {:else}
-    <SvelteMarkdown source={content} />
-  {/if} -->
