@@ -11,14 +11,7 @@
 
     let {options, valueChange} = $props();
 
-    let slideValue = $state(options.values.default)
-
-    function handleClick(e) {
-        dispatch('valueChange', {
-            origin: options.label,
-            newValue: slideValue
-        })
-    }
+    let slideValue = $state(options.values.default);
 
 </script>
 
