@@ -15,18 +15,18 @@
     import InjectMD from "./InjectMD.svelte";
     import { getGroups } from "../utils/sciDataHelper";
 
-    import { activeView } from "../stores/dataViewer";
+    import {dataViewerState} from "../stores/dataViewer.svelte";
     import GraphControls from "./GraphControls.svelte";
 
-    export let dataset;
+    let {dataset} = $props();
 
-    let selected = "All";
-    let loaded = false;
+    let selected = $state("All");
+    let loaded = $state(false);
 
     // Error codes
     // 0 = all good
     // 1 = No data received
-    let error = 0;
+    let error = $state(0);
 
     onMount(() => {
         if (!dataset) {
@@ -39,7 +39,7 @@
 
 {#if error == 0 && loaded}
     <div class="md:w-2/3 m-auto" data-testid="data-content-div">
-        {#if $activeView === "data"}
+        {#if dataViewerState.activeView === "data"}
             <GraphControls
             >
                 <GroupSelector
@@ -53,7 +53,7 @@
                 tableObject={{ data: dataset.data, columns: dataset.columns }}
                 {selected}
             />
-        {:else if $activeView === "summary"}
+        {:else if dataViewerState.activeView === "summary"}
             <GraphControls>
                 <GroupSelector
                 groups={getGroups("Treatment group", dataset.data)}
@@ -68,7 +68,7 @@
                 }}
                 {selected}
             />
-        {:else if $activeView === "visualisation"}
+        {:else if dataViewerState.activeView === "visualisation"}
             <DataViz
                 dataObject={{
                     data: dataset.summaryData,
@@ -79,7 +79,7 @@
                 rawData={dataset.data}
                 groups={getGroups("Treatment group", dataset.data)}
             />
-        {:else if $activeView === "details"}
+        {:else if dataViewerState.activeView === "details"}
             <InjectMD content={dataset.desc.content} />
         {/if}
     </div>

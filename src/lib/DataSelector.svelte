@@ -13,7 +13,6 @@
     import DataSlideToggle from "$lib/DataSelectorControls/DataSlideToggle.svelte";
 
     import { dataViewerState } from "../stores/dataViewer.svelte";
-    import { onMount } from "svelte";
 
     let { controlsArray } = $props();
 
@@ -41,21 +40,12 @@
             dataViewerState.editorialNotes = changeObject.newValue;
         }
     }
-
-    onMount(() => {
-        // reset state to defaults:
-        dataViewerState.activeDataset = 0;
-        dataViewerState.activeView = "details";
-        dataViewerState.variationDetail = "no variation";
-        dataViewerState.editorialNotes = false;
-    });
 </script>
 
 {#key dataViewerState}
 <form
     class="flex flex-col md:flex-row w-full bg-primary-400 items-center md:justify-between md:content-center md:px-12 py-10 gap-2"
 >
-{console.log(controlsArray)}
     <!-- Data source selector goes here -->
     {#each controlsArray as controlOptions}
         {#if controlOptions.dataSource}
