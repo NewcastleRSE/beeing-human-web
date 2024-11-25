@@ -1,16 +1,18 @@
 <script>
+    import { run } from 'svelte/legacy';
+
     import { onDestroy, onMount } from "svelte";
     import { browser } from "$app/environment";
 
     // This needs to be imported only on the browser, otherwise it will generate an error
     // import "tify";
     import "tify/dist/tify.css";
+    import { derived } from 'svelte/store';
 
-    let loaded = false;
-    let iiif = undefined;
+    let loaded = $state(false);
+    let iiif = $state(undefined);
 
-    export let manifest = undefined;
-    export let startPage = undefined;
+    let { manifest = undefined, startPage = undefined } = $props();
 
     function buildIIIFY(manifest) {
         iiif = new Tify({
@@ -49,10 +51,6 @@
             }
         }
         loaded = true;
-
-        if (iiif && loaded) {
-            
-        }
     });
 
     onDestroy(() => {
@@ -61,12 +59,19 @@
         }
     });
 
-    $: if (iiif && loaded && manifest) {
-        iiif.destroy();
-        iiif = undefined;
-        buildIIIFY(manifest);
-    }
+
+    $effect(() => {
+        if (iiif && loaded && manifest) {
+            iiif.destroy();
+            iiif = undefined;
+            buildIIIFY(manifest);
+            return true
+        } else {
+            return false
+        }
+    });
 </script>
 
-<div id="facsimile-viewer" class="h-full"></div>
+<div id="facsimile-viewer" class="h-full">
+</div>
 
