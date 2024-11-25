@@ -1,5 +1,5 @@
 import { cleanup, render, screen, within } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 import DataViz from "../../src/lib/DataViz.svelte";
@@ -7,6 +7,23 @@ import DataViz from "../../src/lib/DataViz.svelte";
 import { datasets } from "../mocks/mockVarsDataView";
 import { makeHtmlId } from "../../src/utils/stringOperations";
 import { getGroups } from "../../src/utils/sciDataHelper";
+
+vi.hoisted(() => {
+    Object.defineProperty(window, "matchMedia", {
+        writable: true,
+        enumerable: true,
+        value: vi.fn().mockImplementation((query) => ({
+            matches: false,
+            media: query,
+            onchange: null,
+            addListener: vi.fn(), // deprecated
+            removeListener: vi.fn(), // deprecated
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
+            dispatchEvent: vi.fn(),
+        })),
+    });
+});
 
 describe('Load and display data viz component', () => {
     afterEach(() => cleanup());

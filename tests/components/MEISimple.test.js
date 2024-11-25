@@ -1,9 +1,26 @@
 import { cleanup, render, screen } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import MEISimple from '../../src/lib/MEISimple.svelte'
 
 import { meiSvg, singleMeiSvg, meiMidi, timeMap } from "../mocks/mockVarsMEI";
+
+vi.hoisted(() => {
+    Object.defineProperty(window, "matchMedia", {
+        writable: true,
+        enumerable: true,
+        value: vi.fn().mockImplementation((query) => ({
+            matches: false,
+            media: query,
+            onchange: null,
+            addListener: vi.fn(), // deprecated
+            removeListener: vi.fn(), // deprecated
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
+            dispatchEvent: vi.fn(),
+        })),
+    });
+});
 
 describe('Transform and display MEI file', () => {
     afterEach(() => cleanup());

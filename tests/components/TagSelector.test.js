@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 
 import TagSelector from '../../src/lib/TagSelector.svelte';
-import { Filters } from '../../src/classes/Filters';
+import { Filters } from '../../src/classes/Filters.svelte';
 import { capitaliseFirstLetter } from '../../src/utils/stringOperations';
 
 import { listAuthors } from '../mocks/mockVarsBuzzwords';
