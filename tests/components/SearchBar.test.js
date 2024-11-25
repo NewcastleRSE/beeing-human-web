@@ -19,12 +19,10 @@ describe('Search bar functions', () => {
     it('should fire a reset event if the go button is triggered without anything on the search bar', async () => {
         // an error is logged in the console, but it doesn't affect the outcomes of the result (the virtual dom is trying to submit a form event, but that is not implemented in JSDOM)
         const user = userEvent.setup();
-
-        const { component } = render(SearchBar, {listChips:''});
-
-        // mock function
         const mock = vi.fn();
-        component.$on('reset', mock);
+
+
+        const { component } = render(SearchBar, {listChips:'', reset: mock});
 
         const button = screen.getByTestId('search-button', {exact: true});
         await user.click(button);
@@ -49,13 +47,11 @@ describe('Search bar functions', () => {
     });
 
     it('should send a search event after inputing a search term and pressing go', async () => {
+        const mock = vi.fn((event) => (search = event));
         const user = userEvent.setup();
-        const {component} = render(SearchBar, {listChips:''});
+        render(SearchBar, {listChips:'', search: mock});
 
-        // mock function
         let search = ''
-        const mock = vi.fn((event) => (search = event.detail));
-        component.$on('search', mock);
 
         const searchBar = screen.getByRole('searchbox');
         await user.type(searchBar, 'tiago  ', {delay: 900});

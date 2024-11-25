@@ -20,7 +20,6 @@
     } from "../stores/dataViewer.svelte";
     import { onMount } from "svelte";
 
-    $inspect(dataViewerState)
 
     $effect(() => {
         changeVariationDetail(dataViewerState.variationDetail);

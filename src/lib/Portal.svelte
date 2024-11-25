@@ -15,16 +15,29 @@
     import { onMount } from "svelte";
     import {v4 as uuidv4} from 'uuid'
 
-    let showSidePanel = false;
-    let highlight = '';
-    export let destination = undefined;
-    // origin, destination, both -> default both
-    export let type = 'both';
-    export let id = undefined;
+    let showSidePanel = $state(false);
+    let highlight = $state('');
+    
 
-    export let toggleSidePanel = () =>  {
+    /**
+     * @typedef {Object} Props
+     * @property {any} [destination]
+     * @property {string} [type] - origin, destination, both -> default both
+     * @property {any} [id]
+     * @property {any} [toggleSidePanel]
+     * @property {import('svelte').Snippet} [children]
+     */
+
+    /** @type {Props} */
+    let {
+        destination = undefined,
+        type = ('both'),
+        id = (undefined),
+        toggleSidePanel = () =>  {
         showSidePanel = !showSidePanel
-    }
+    },
+        children
+    } = $props();
 
     onMount(async () => {
         const legalTypes = ['origin', 'destination', 'both']
@@ -55,14 +68,14 @@
 </script>
 
 {#if type == 'origin' || type == 'both'}
-    <button class="{highlight} text-amber-600 bg-slate-300 rounded-md border-[1px] border-slate-600 px-1 hover:bg-slate-200 hover:text-amber-800 hover:font-semibold hover:cursor-pointer portal" on:click={toggleSidePanel} on:keydown={toggleSidePanel} id={id} data-testid="{type}-portal-{id}"><slot/></button>
+    <button class="{highlight} text-amber-600 bg-slate-300 rounded-md border-[1px] border-slate-600 px-1 hover:bg-slate-200 hover:text-amber-800 hover:font-semibold hover:cursor-pointer portal" onclick={toggleSidePanel} onkeydown={toggleSidePanel} id={id} data-testid="{type}-portal-{id}">{@render children?.()}</button>
 
     {#if showSidePanel}
-        <PortalPanel on:close={toggleSidePanel} destination={destination}/>
+        <PortalPanel closePanel={toggleSidePanel} destination={destination}/>
     {/if}
 {:else if type == 'destination'}
-    <span id={id} class="{highlight} portal" data-testid="{type}-portal-{id}"><slot/></span>
+    <span id={id} class="{highlight} portal" data-testid="{type}-portal-{id}">{@render children?.()}</span>
 {:else}
-    <slot/>
+    {@render children?.()}
 {/if}
 
