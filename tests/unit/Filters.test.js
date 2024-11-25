@@ -2,7 +2,7 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { cleanup } from "@testing-library/svelte";
 
 import { listAuthors, listTags } from "../mocks/mockVarsBuzzwords";
-import { Filters } from "../../src/classes/Filters";
+import { Filters } from "../../src/classes/Filters.svelte";
 
 describe('test filter class creation', () => {
     afterEach(() => cleanup())
