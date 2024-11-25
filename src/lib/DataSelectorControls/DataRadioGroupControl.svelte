@@ -15,7 +15,6 @@
     let {options, valueChange} = $props();
     let radioValue = $state(options.defaultValue);
 
-    $inspect(options.label, radioValue, options.defaultValue)
 
 </script>
 
@@ -33,7 +32,7 @@
     >
         {#key options}
         {#each Object.entries(options.values) as [label, value]}
-            <RadioItem bind:group={radioValue} name={label} value={value} onchange={() => valueChange({origin: options.label, newValue: radioValue})} id="{makeHtmlId(options.label)}-{makeHtmlId(value)}-button"
+            <RadioItem bind:group={radioValue} name={label} value={value} onchange={() => valueChange({origin: options.label, newValue: value})} id="{makeHtmlId(options.label)}-{makeHtmlId(value)}-button"
                             >{label.toLowerCase()}</RadioItem
                         >
         {/each}
