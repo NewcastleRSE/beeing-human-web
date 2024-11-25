@@ -16,59 +16,61 @@
 -->
 
 <script>
-    import MIDIPlayer from "./MIDIPlayer.svelte";
+    // import MIDIPlayer from "./MIDIPlayer.svelte";
     import Paginator from "./Paginator.svelte";
 
-    export let meiSvg = undefined;
-    export let meiMidi = undefined;
-    export let timeMap = undefined;
+    let {meiSvg = undefined} = $props();
+    // export let meiMidi = undefined;
+    // export let timeMap = undefined;
 
-    let goToPage;
+    let goToPage = $state();
+
+    // used for play along, which is currently deactivated
     
-    const noteOn = function (event) {
-        // when a note is played, add a custom class to the element with the corresponding note id
-        // console.log('Notes on: ', event.detail);
-        for (let i in event.detail) {
-            let element = document.getElementById(event.detail[i])
-            if (!element) {
-                // if the element does not exist in the currently displayed SVG, it looks for the page that has it and displays that page.
-                for (let page in meiSvg) {
-                    if (meiSvg[page].includes(`id="${event.detail[i]}"`)) {
-                        goToPage(page);
-                    }
-                }
-            }
-            if (element) {
-                element.classList.add('note-playing');
-            }
-        }
-    }
+    // const noteOn = function (event) {
+    //     // when a note is played, add a custom class to the element with the corresponding note id
+    //     // console.log('Notes on: ', event.detail);
+    //     for (let i in event.detail) {
+    //         let element = document.getElementById(event.detail[i])
+    //         if (!element) {
+    //             // if the element does not exist in the currently displayed SVG, it looks for the page that has it and displays that page.
+    //             for (let page in meiSvg) {
+    //                 if (meiSvg[page].includes(`id="${event.detail[i]}"`)) {
+    //                     goToPage(page);
+    //                 }
+    //             }
+    //         }
+    //         if (element) {
+    //             element.classList.add('note-playing');
+    //         }
+    //     }
+    // }
 
-    const noteOff = function (event) {
-        // when a note stops playing, removes the custom class to the element with the corresponding note id
-        // console.log('Notes off: ', event.detail);
-        for (let i in event.detail) {
-            let element = document.getElementById(event.detail[i])
-            if(element) {
-                // Only removes the class if the element is currently visible (if it isn't, it won't have the class anyway)
-                element.classList.remove('note-playing');
-            }
-        }
-    }
+    // const noteOff = function (event) {
+    //     // when a note stops playing, removes the custom class to the element with the corresponding note id
+    //     // console.log('Notes off: ', event.detail);
+    //     for (let i in event.detail) {
+    //         let element = document.getElementById(event.detail[i])
+    //         if(element) {
+    //             // Only removes the class if the element is currently visible (if it isn't, it won't have the class anyway)
+    //             element.classList.remove('note-playing');
+    //         }
+    //     }
+    // }
 
-    const allNotesOff = function (event) {
-        // removes the 'note-playing' class from all notes
-        const collection = document.getElementsByClassName('note-playing');
-        let ids = []
-        // Because getElementsByClassName, this loop should only get the ids of elements to be updated -- changing the class list on the HTMLCollection loop leads to unpredictable results
-        for (let element of collection) {
-            ids.push(element.id);
-        }
-        for (let id of ids) {
-            let el = document.getElementById(id);
-            el.classList.remove('note-playing');
-        }
-    }
+    // const allNotesOff = function (event) {
+    //     // removes the 'note-playing' class from all notes
+    //     const collection = document.getElementsByClassName('note-playing');
+    //     let ids = []
+    //     // Because getElementsByClassName, this loop should only get the ids of elements to be updated -- changing the class list on the HTMLCollection loop leads to unpredictable results
+    //     for (let element of collection) {
+    //         ids.push(element.id);
+    //     }
+    //     for (let id of ids) {
+    //         let el = document.getElementById(id);
+    //         el.classList.remove('note-playing');
+    //     }
+    // }
 </script>
 
 <!-- 
@@ -96,10 +98,10 @@
     {/if}
 </div>
 
-<style>
+<!-- <style>
     /* Style to fill in notes currently being played */
     :global(.note-playing) {
         fill: red;
         color: red;
     }
-</style>
+</style> -->

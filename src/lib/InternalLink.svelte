@@ -1,6 +1,6 @@
 <script>
   import { base } from "$app/paths";
-  export let link;
+  let { link, children, ...rest } = $props();
 </script>
 
 <!-- 
@@ -23,4 +23,4 @@
       Will be the same as any other element with class 'btn'
 -->
 
-<a href="{base}/{link}" class={$$restProps.class || "anchor"}><slot /></a>
+<a href="{base}/{link}" class={rest.class || "anchor"}>{@render children?.()}</a>
