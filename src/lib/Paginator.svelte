@@ -11,10 +11,9 @@
 -->
 
 <script>
-    export let data = undefined;
-    export let raw = undefined;
+    let { data = undefined, raw = undefined } = $props();
 
-    let currentPage = 0;
+    let currentPage = $state(0);
     
     export function nextPage() {
         currentPage++;
@@ -32,7 +31,7 @@
 <div id="page" data-testid='paginator'>
     <div class="left">
         {#if currentPage > 0}
-            <button type="button" class="btn variant-filled" on:click={prevPage} data-testid='btn-prev'>&lt;</button>
+            <button type="button" class="btn variant-filled" onclick={prevPage} data-testid='btn-prev'>&lt;</button>
         {/if}
     </div>
     <div id="content">
@@ -44,7 +43,7 @@
     </div>
     <div class="right">
         {#if currentPage < data.length - 1}
-            <button type="button" class="btn variant-filled" on:click={nextPage} data-testid='btn-nxt'>&gt;</button>
+            <button type="button" class="btn variant-filled" onclick={nextPage} data-testid='btn-nxt'>&gt;</button>
         {/if}
     </div>
 </div>

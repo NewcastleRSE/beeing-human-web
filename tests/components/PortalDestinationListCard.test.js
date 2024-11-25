@@ -4,6 +4,17 @@ import { afterEach, describe, expect, it, vi} from 'vitest';
 import PortalDestinationListCard from '$lib/PortalDestinationListCard.svelte';
 
 describe('Portal card mounting tests', () => {
+
+    // Mock the ResizeObserver
+    const ResizeObserverMock = vi.fn(() => ({
+        observe: vi.fn(),
+        unobserve: vi.fn(),
+        disconnect: vi.fn(),
+    }));
+    
+    // Stub the global ResizeObserver
+    vi.stubGlobal('ResizeObserver', ResizeObserverMock);
+
     const consoleMock = vi.spyOn(console, 'error').mockImplementation((e) => {console.log(e)});
     // const consoleMock = vi.spyOn(console, 'error').mockImplementation(() => {});
     const mockFetch = vi.spyOn(window, 'fetch');

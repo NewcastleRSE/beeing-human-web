@@ -23,8 +23,6 @@
     // export let meiMidi = undefined;
     // export let timeMap = undefined;
 
-    let goToPage = $state();
-
     // used for play along, which is currently deactivated
     
     // const noteOn = function (event) {
@@ -90,7 +88,7 @@
 
 <div id="MEI-container" data-testid='MEI-container'>
     {#if meiSvg.length > 1}
-        <Paginator data = {meiSvg} raw=true bind:goToPage={goToPage}/>
+        <Paginator data = {meiSvg} raw=true/>
     {:else if meiSvg.length === 1}
         {@html meiSvg[0]}
     {:else if meiSvg.length === 0 || !meiSvg}

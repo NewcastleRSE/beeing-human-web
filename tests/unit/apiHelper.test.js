@@ -18,10 +18,10 @@ describe('Test getPortalsAPI function', () => {
 
     it('should return an object with an error key if the path is not well formed', () => {
         const fakePathObject = {
-            'not a path': 'not content',
-            '/wellFormedPath.md': 'this is content but without a portal',
-            '/wellFormedPath2.md': 'this is content and contains a <Portal id="fakePortal">Portal</Portal>.',
-            'another bad path': 'also not content'
+            'not a path': {'default': 'not content'},
+            '/wellFormedPath.md': {'default': 'this is content but without a portal'},
+            '/wellFormedPath2.md': {'default': 'this is content and contains a <Portal id="fakePortal">Portal</Portal>.'},
+            'another bad path': {'default': 'also not content'}
         }
         const result = getPortalsAPI(fakePathObject);
         expect(Object.keys(result).includes('errors'));
@@ -31,11 +31,11 @@ describe('Test getPortalsAPI function', () => {
 
     it('should return an object with an error key if it contains malformed XML', () => {
         const fakePathObject = {
-            '/good/path.md': 'This is a correct <Portal id="goodPortal">portal</Portal>',
-            '/bad/path.md': 'This <Portal>Portal never closes and is incorrect',
-            '/mixed/path.md': 'This <Portal id="wellFormed">Portal</Portal> contains a mix of well and <Portal>badly formed portals',
-            '/another/mixed/path.md': 'This <Portal id="openPortal">document contains a good <Portal id="closedPortal">portal</Portal> inside a bad portal',
-            '/no/portals.md': 'This entry contains no portals and should not produce any errors'
+            '/good/path.md': {'default': 'This is a correct <Portal id="goodPortal">portal</Portal>'},
+            '/bad/path.md': {'default': 'This <Portal>Portal never closes and is incorrect'},
+            '/mixed/path.md': {'default': 'This <Portal id="wellFormed">Portal</Portal> contains a mix of well and <Portal>badly formed portals'},
+            '/another/mixed/path.md': {'default': 'This <Portal id="openPortal">document contains a good <Portal id="closedPortal">portal</Portal> inside a bad portal'},
+            '/no/portals.md': {'default': 'This entry contains no portals and should not produce any errors'}
         }
 
         const result = getPortalsAPI(fakePathObject);
@@ -49,8 +49,8 @@ describe('Test getPortalsAPI function', () => {
 
     it('should create an id for the portal based on its end index if none is found', () => {
         const fakePathObject = {
-            '/portal/with/id.md': 'This <Portal id="hasOne">portal</Portal> has an id',
-            '/portal/withoutid.md': 'This portal <Portal>does not have an id</Portal>'
+            '/portal/with/id.md': {'default': 'This <Portal id="hasOne">portal</Portal> has an id'},
+            '/portal/withoutid.md': {'default': 'This portal <Portal>does not have an id</Portal>'}
         }
 
         const result = getPortalsAPI(fakePathObject);
@@ -61,8 +61,8 @@ describe('Test getPortalsAPI function', () => {
 
     it('should transform any markdown into html', () => {
         const fakePathObject = {
-            '/portal/with/italics.md': 'This <Portal id="italics">*portal is in italics*.</Portal>',
-            '/portal/with/bold.md': 'This <Portal id="bold">**portal is in italics**.</Portal>'
+            '/portal/with/italics.md': {'default': 'This <Portal id="italics">*portal is in italics*.</Portal>'},
+            '/portal/with/bold.md': {'default': 'This <Portal id="bold">**portal is in italics**.</Portal>'}
             // can add more md, but these are the most likely
         }
 
