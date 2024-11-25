@@ -8,8 +8,6 @@
   -->
 
 <script>
-    import { dataViewerState } from "../../stores/dataViewer.svelte";
-
     let {options, valueChange} = $props();
 
     let selected = $state(options.default);
