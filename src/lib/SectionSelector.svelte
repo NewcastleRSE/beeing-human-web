@@ -1,8 +1,9 @@
 <script>
-    export let section;
+    let {section} = $props();
+
     import SectionSelectDropdown from '$lib/SectionSelectDropdown.svelte';
     
-    let popup = false;
+    let popup = $state(false);
     
     let toggleMenu = () => {
         popup = !popup
@@ -15,13 +16,13 @@
 
     let handleClickOutside = (event) => {
         console.log(event.target)
-        if (event.target != document.getElementById('section-selector')) {
+        if (event.target != document.getElementById('section-selector') && !document.getElementById('section-selector-button').contains(event.target)) {
             toggleMenu();
         }
     };
 </script>
 
-<button class="flex group gap-2 md:gap-2 p-2 pl-0 md:min-w-80" on:click|stopPropagation={toggleMenu}>
+<button id="section-selector-button" class="flex group gap-2 md:gap-2 p-2 pl-0 md:min-w-80" onclick={toggleMenu}>
     <svg class="w-10 md:w-14 self-start md:self-center stroke-secondary-500 group-hover:stroke-2  transition-all ease-in-out duration-300 motion-reduce:transition-none" viewBox="0 0 53 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M22.3545 20.7991L30.645 20.7991L34.7903 27.9444L30.646 35.088L22.3555 35.088L18.2103 27.9426L22.3545 20.7991Z" stroke="#264653"/>
         <path d="M36.5439 13.1497L44.8345 13.1497L48.9797 20.295L44.8355 27.4386L36.545 27.4386L32.3997 20.2932L36.5439 13.1497Z" stroke="#264653"/>
