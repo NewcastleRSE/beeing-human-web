@@ -2,8 +2,8 @@
     import { onMount } from "svelte";
     import { base } from '$app/paths'
 
-    let sections = ["connections", "literature", "music", "science"];
-    export let section = undefined;
+    let sections = $state(["connections", "literature", "music", "science"]);
+    let { section = undefined } = $props();
 
     onMount( () => {
         if (section) {
