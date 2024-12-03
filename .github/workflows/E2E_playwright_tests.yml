@@ -6,13 +6,13 @@ on:
     branches: [dev]
 jobs:
   E2E-playwright-test-suite:
-    timeout-minutes: 60
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.16.0
+          node-version: 20.13.1
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
@@ -24,4 +24,4 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 30
+          retention-days: 15
