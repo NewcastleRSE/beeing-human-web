@@ -1,6 +1,6 @@
 <script>
     import BuzzPage from './buzzwords.md'
-    export let data;
+    let { data } = $props();
 </script>
 
 <BuzzPage {data}/>
