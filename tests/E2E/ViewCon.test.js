@@ -247,7 +247,8 @@ test.describe('Page user interactions tests - buzzwords', () => {
             const buzzCards = await page.getByTestId('buzzword-card').all();
             const nrBuzzCards = buzzCards.length;
     
-            const button = page.getByRole('button', { name: 'bee-keeping' });
+            const filterMenu = page.getByTestId('tag-selector-container');
+            const button = filterMenu.getByRole('button', { name: 'bee-keeping' });
     
             await button.click();
     
@@ -267,7 +268,8 @@ test.describe('Page user interactions tests - buzzwords', () => {
                 }
             }
     
-            const button = page.getByRole('button', { name: 'bee-keeping' });
+            const filterMenu = page.getByTestId('tag-selector-container');
+            const button = filterMenu.getByRole('button', { name: 'bee-keeping' });
     
             await button.click();
     
@@ -327,7 +329,8 @@ test.describe('Page user interactions tests - buzzwords', () => {
                 }
             }
 
-            const button = page.getByRole('button', { name: 'technology' });
+            const filterMenu = page.getByTestId('tag-selector-container');
+            const button = filterMenu.getByRole('button', { name: 'technology' });
             await button.click();
             
             let nrEndingAuthorFiltersActive = 0;
@@ -353,7 +356,8 @@ test.describe('Page user interactions tests - buzzwords', () => {
             expectedBuzzwords = expectedBuzzwords.map((e) => (e.id));
 
             // click button
-            const button = page.getByRole('button', { name: buttonToPress });
+            const filterMenu = page.getByTestId('tag-selector-container');
+            const button = filterMenu.getByRole('button', { name: buttonToPress });
             await button.click();
             
             // gets ids for displayed cards
@@ -381,7 +385,8 @@ test.describe('Page user interactions tests - buzzwords', () => {
             
             // click buttons
             for (let b of buttonsToPress) {
-                const button = page.getByRole('button', {name: b});
+                const filterMenu = page.getByTestId('tag-selector-container');
+                const button = filterMenu.getByRole('button', {name: b});
                 await button.click();
             }
 
@@ -401,7 +406,8 @@ test.describe('Page user interactions tests - buzzwords', () => {
             let initialBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
 
             // First click
-            const button = page.getByRole('button', {name: 'technology'});
+            const filterMenu = page.getByTestId('tag-selector-container');
+            const button = filterMenu.getByRole('button', {name: 'technology'});
             await button.click();
 
             let currentBuzzwords = (await page.getByTestId('buzzword-card').all()).length;
@@ -439,7 +445,8 @@ test.describe('Page user interactions tests - buzzwords', () => {
             const initialActive = currentActive;
 
             // first click
-            const button = page.getByRole('button', {name: 'technology'});
+            const filterMenu = page.getByTestId('tag-selector-container');
+            const button = filterMenu.getByRole('button', {name: 'technology'});
             await button.click();
 
             // count nr of active chips after action

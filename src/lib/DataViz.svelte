@@ -1,4 +1,6 @@
 <script>
+    import { run } from 'svelte/legacy';
+
     import { onMount } from "svelte";
     import * as d3 from "d3";
     import { makeHtmlId } from "../utils/stringOperations";
@@ -7,11 +9,13 @@
     import GroupSelector from "$lib/GroupSelector.svelte";
     import GraphControls from "./GraphControls.svelte";
 
-    export let dataObject = undefined;
-    export let selected = undefined;
-    export let name;
-    export let rawData = undefined;
-    export let groups;
+    let {
+        dataObject = undefined,
+        selected = $bindable(undefined),
+        name,
+        rawData = undefined,
+        groups
+    } = $props();
 
     // set the dimensions and margins of the graph
     var margin = { top: 10, right: 30, bottom: 30, left: 60 },
@@ -25,16 +29,16 @@
     let x;
     let y;
     let tooltip = undefined;
-    let showErrorBars = true;
+    let showErrorBars = $state(true);
 
-    let loaded = false;
+    let loaded = $state(false);
     // Error codes
     // 0 = All good
     // 1 = Error in update()
     // 2 = Error in toggleErrorBars();
     // 3 = Error in onMount();
     // 4 = Error in addData();
-    let errorCode = 0;
+    let errorCode = $state(0);
 
     function update(newSelection) {
         // to avoid clearing the graph on mounting
@@ -190,8 +194,6 @@
         labelClick(event, d[0]);
     };
 
-    $: update(selected);
-    $: toggleErrorBars(showErrorBars);
 
     // based on this: https://d3-graph-gallery.com/graph/line_basic.html
 
@@ -507,6 +509,15 @@
 
         loaded = true;
     });
+
+    $effect(() => {
+        update(selected)
+    })
+
+    $effect(() => {
+        toggleErrorBars(showErrorBars);
+    })
+
 </script>
 
 {#if !name}
@@ -543,7 +554,7 @@
                 id="tooltip-{makeHtmlId(name)}"
                 data-testid="tooltip-{makeHtmlId(name)}"
                 class="opacity-0 bg-white border-black border-solid border-2 rounded p-1 absolute"
-            />
+            ></div>
         {/if}
     </div>
 {/if}

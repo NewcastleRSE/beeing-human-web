@@ -21,9 +21,15 @@
 
     import { getMissingEvents, secsToMinSecs } from '../utils/MIDIPlaybackHelper'
 
-    // PARAMETERS
-    export let midiFile = undefined;
-    export let timeMap = undefined;
+    
+    /**
+     * @typedef {Object} Props
+     * @property {any} [midiFile] - PARAMETERS
+     * @property {any} [timeMap]
+     */
+
+    /** @type {Props} */
+    let { midiFile = undefined, timeMap = undefined } = $props();
 
     // Event dispatcher
     const dispatch = createEventDispatcher();
@@ -31,11 +37,11 @@
     let Player = undefined;
     let context = undefined;
     let instruments = [];
-    let totalTime = 0;
-    let currentTime = 0;
-    let loaded = false;
+    let totalTime = $state(0);
+    let currentTime = $state(0);
+    let loaded = $state(false);
     // initialise data object for voices
-    let voicesDict = []
+    let voicesDict = $state([])
 
     let missingEvents = undefined;
     let timers = [];
@@ -217,8 +223,8 @@
 
 </script>
 
-<button id="playMIDI" on:click={startPlay}><Icon icon="material-symbols:play-pause"/></button>
-<button id="stopMIDI" on:click={stopPlay}><Icon icon="material-symbols:stop"/></button>
+<button id="playMIDI" onclick={startPlay}><Icon icon="material-symbols:play-pause"/></button>
+<button id="stopMIDI" onclick={stopPlay}><Icon icon="material-symbols:stop"/></button>
 <span>
     {#if !loaded}
         <ProgressRadial/>
@@ -228,7 +234,7 @@
         {secsToMinSecs(totalTime)}
         {#each voicesDict as voice}
             <br/>
-            <span>{voice.name}</span><SlideToggle name={voice.instrumentTrack}-{voice.name} bind:checked={voice.playing} on:change={toggleVoice}/>
+            <span>{voice.name}</span><SlideToggle name="{voice.instrumentTrack}-{voice.name}" bind:checked={voice.playing} on:change={toggleVoice}/>
         {/each}
     {/if}
 </span>

@@ -12,12 +12,12 @@
     import Icon from '@iconify/svelte';
     import { onMount } from 'svelte';
     import { RangeSlider } from '@skeletonlabs/skeleton';
-    export let midiFile = undefined;
+    let { midiFile = undefined } = $props();
 
     let playEvent = undefined;
     let pause = false;
-    let totalTime = 0;
-    let currentTime = 0;
+    let totalTime = $state(0);
+    let currentTime = $state(0);
 
     const startPlay = function() {
         console.log(playEvent);
@@ -62,8 +62,8 @@
     <script src="https://www.midijs.net/lib/midi.js"></script>
 </svelte:head>
 
-<button id="playMIDI" on:click={startPlay}><Icon icon="material-symbols:play-pause"/></button>
-<button id="stopMIDI" on:click={stopPlay}><Icon icon="material-symbols:stop"/></button>
+<button id="playMIDI" onclick={startPlay}><Icon icon="material-symbols:play-pause"/></button>
+<button id="stopMIDI" onclick={stopPlay}><Icon icon="material-symbols:stop"/></button>
 <span>
     {secsToMinSecs(currentTime)}
     <RangeSlider bind:value={currentTime} bind:max={totalTime} step={0.2}/>

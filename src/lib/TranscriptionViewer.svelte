@@ -5,21 +5,27 @@
 
     const mdBreakPoint = 768
 
-    let windowSize = 800
-    let smallScreen = function(windowSize) {
+    let windowSize = $state(0)
+    let smallScreen = $derived.by(() => {
         return windowSize < mdBreakPoint
-    };
+    });
 
     // If TRUE, loads the PDF, rather than IIIF
     let fallback = true;
 
+    let ready = $state(false);
+
     import {
-        activeDataset,
-        activeView,
-        editorialNotes,
-        variationDetail,
-    } from "../stores/dataViewer";
+        dataViewerState
+    } from "../stores/dataViewer.svelte";
     import { onMount } from "svelte";
+
+
+    $effect(() => {
+        changeVariationDetail(dataViewerState.variationDetail);
+        changeEditorialNoteVisibility(dataViewerState.editorialNotes);
+        toggleBothViewOption(smallScreen);
+    })
 
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
 
@@ -60,24 +66,25 @@
         }
     }
 
-    function handleStatus(e) {
-        if (e.detail.loaded) {
-            changeVariationDetail($variationDetail);
-            changeEditorialNoteVisibility($editorialNotes);
-            toggleBothViewOption(windowSize);
+    function handleStatus(status) {
+        if (status.loaded) {
+            ready = true;
+            changeVariationDetail(dataViewerState.variationDetail);
+            changeEditorialNoteVisibility(dataViewerState.editorialNotes);
+            toggleBothViewOption(smallScreen);
         }
     }
 
-    function changeVariationDetail($variationDetail) {
+    function changeVariationDetail(variationDetail) {
         const apps = document.getElementsByTagName("tei-app");
-        if ($variationDetail === "no variation") {
+        if (variationDetail === "no variation") {
             // takes away any existing styling for apps
             for (const app of apps) {
                 for (const el of app.children) {
                     cleanVariationStyles(el);
                 }
             }
-        } else if ($variationDetail === "major changes") {
+        } else if (variationDetail === "major changes") {
             for (const app of apps) {
                 if (app.getAttribute("type") === "major") {
                     applyVariationStyles(app);
@@ -88,17 +95,17 @@
                     }
                 }
             }
-        } else if ($variationDetail === "all changes") {
+        } else if (variationDetail === "all changes") {
             for (const app of apps) {
                 applyVariationStyles(app);
             }
         }
     }
 
-    function changeEditorialNoteVisibility($editorialNotes) {
+    function changeEditorialNoteVisibility(editorialNotes) {
         try {
             const notesElements = document.querySelectorAll('tei-note[type="editorial"]')
-            if (!$editorialNotes) {
+            if (!editorialNotes) {
                 for (const note of notesElements) {
                     note.classList = ''
                     note.classList.add('hidden');
@@ -114,13 +121,13 @@
         }
     }
 
-    function toggleBothViewOption(windowSize) {
+    function toggleBothViewOption(smallScreen) {
         if (ready) {
             try {
                 const button = document.getElementById('view-both-button').closest('label');
-                if (smallScreen(windowSize)) {
-                    if ($activeView == 'both') {
-                        $activeView = 'transcription'
+                if (smallScreen) {
+                    if (dataViewerState.activeView == 'both') {
+                        dataViewerState.activeView = 'transcription'
                         document.getElementById('view-transcription-button').click();
                     }
                     button.classList.add('hidden');
@@ -133,33 +140,21 @@
         }
     }
 
-    $: if (ready && $variationDetail) {
-        changeVariationDetail($variationDetail);
-    }
-
-    $: changeEditorialNoteVisibility($editorialNotes);
-
-    $: if (ready && windowSize) {
-        toggleBothViewOption(windowSize);
-    }
-
-    let ready = false;
-
     onMount(() => {
-        if ($activeDataset === 0) {
-            $activeDataset = "1623";
+        if (dataViewerState.activeDataset === 0) {
+            dataViewerState.activeDataset = "1623";
         }
 
-        if (!["facsimile", "transcription", "both"].includes($activeView)) {
-            $activeView = "both";
+        if (!["facsimile", "transcription", "both"].includes(dataViewerState.activeView)) {
+            dataViewerState.activeView = "both";
         }
         
-        if (!["no variation", "major changes", "all changes"].includes($variationDetail)) {
-            $variationDetail = "no variation";
+        if (!["no variation", "major changes", "all changes"].includes(dataViewerState.variationDetail)) {
+            dataViewerState.variationDetail = "no variation";
         }
 
-        if (![true, false].includes($editorialNotes)) {
-            $editorialNotes = false;
+        if (![true, false].includes(dataViewerState.editorialNotes)) {
+            dataViewerState.editorialNotes = false;
         }
         ready = true;
     });
@@ -170,42 +165,43 @@
 <svelte:window bind:innerWidth={windowSize}/>
 
 {#if ready}
+    {#key dataViewerState.activeDataset}
     <div class="md:flex w-full mx-auto md:p-8 md:max-h-screen">
-        {#if $activeView === "both" || $activeView === "facsimile"}
+        {#if dataViewerState.activeView === "both" || dataViewerState.activeView === "facsimile"}
             <div
-                class="md:flex-1 w-full {$activeView == 'both'
+                class="md:flex-1 w-full {dataViewerState.activeView == 'both'
                     ? 'md:w-1/2'
                     : ''} h-dvh"
                 data-testid="iiif-viewer"
             >
             {#if !fallback}
                 <IiifViewer
-                    manifest={transcriptionData[$activeDataset].iiifManifest}
-                    startPage={transcriptionData[$activeDataset]
+                    manifest={transcriptionData[dataViewerState.activeDataset].iiifManifest}
+                    startPage={transcriptionData[dataViewerState.activeDataset]
                         .manifestStartPage}
                 />
             {:else}
-                {#key $activeDataset}
-                <PdfViewer url={transcriptionData[$activeDataset]
-                        .pdfFallback} pageNum={transcriptionData[$activeDataset]
-                            .pdfFallbackStartPage} objectTitle={transcriptionData[$activeDataset]
-                                .title}/>
+                {#key dataViewerState.activeDataset}
+                <PdfViewer url={transcriptionData[dataViewerState.activeDataset]
+                        .pdfFallback} pageNum={transcriptionData[dataViewerState.activeDataset]
+                            .pdfFallbackStartPage} objectTitle={transcriptionData[dataViewerState.activeDataset].title}/>
                 {/key}
             {/if}
             </div>
         {/if}
-        {#if $activeView === "both" || $activeView === "transcription"}
+        {#if dataViewerState.activeView === "both" || dataViewerState.activeView === "transcription"}
             <div
-                class="md:flex w-full {$activeView == 'both'
+                class="md:flex w-full {dataViewerState.activeView == 'both'
                     ? 'md:w-1/2'
                     : ''} md:overflow-auto overflow-x-clip"
                 data-testid="transcription"
             >
                 <TeiSimple
-                    path={transcriptionData[$activeDataset].teiURL}
-                    on:status={handleStatus}
+                    path={transcriptionData[dataViewerState.activeDataset].teiURL}
+                    statusCheck={(status) => handleStatus(status)}
                 />
             </div>
         {/if}
     </div>
+    {/key}
 {/if}

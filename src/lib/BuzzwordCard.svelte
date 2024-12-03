@@ -2,18 +2,11 @@
     import { capitaliseFirstLetter } from "../utils/stringOperations";
     import people from '../routes/(sections)/people.json'
     import InjectBuzzword from "$lib/InjectBuzzword.svelte";
-    import { createEventDispatcher } from "svelte";
     import {base} from '$app/paths'
 
-    export let buzzword;
+    let {buzzword, handleFilterClickBuzzword} = $props();
 
-    const dispatch = createEventDispatcher();
-
-    function handleFilterClickBuzzword(tag) {
-        dispatch('filterClicked', {
-            filter: tag
-        });
-    }
+    let sortedBuzzword = $derived(buzzword.tags.toSorted())
 
 </script>
 
@@ -41,8 +34,8 @@
     <footer class="card-footer">
         {#if buzzword.tags}
             <div class="tags flex gap-1.5 flex-wrap">
-                {#each buzzword.tags.sort() as tag}
-                    <span data-testid="chip-tag" class="chip variant-filled-surface hover:variant-ghost-surface" on:click={handleFilterClickBuzzword(tag)} on:keypress>{capitaliseFirstLetter(tag)}</span>
+                {#each sortedBuzzword as tag}
+                    <button data-testid="chip-tag" class="chip variant-filled-surface hover:variant-ghost-surface" onclick={() => {handleFilterClickBuzzword(tag)}}>{capitaliseFirstLetter(tag)}</button>
                 {/each}
             </div>
         {/if}

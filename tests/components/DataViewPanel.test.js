@@ -1,10 +1,27 @@
-import {cleanup, render, screen, within} from '@testing-library/svelte';
-import { afterEach, describe, expect, it } from 'vitest';
+import {cleanup, render, screen} from '@testing-library/svelte';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 
 import DataViewPanel from '../../src/lib/DataViewPanel.svelte'
 
-import { datasets, tabs } from '../mocks/mockVarsDataView';
+import { datasets } from '../mocks/mockVarsDataView';
+
+vi.hoisted(() => {
+    Object.defineProperty(window, "matchMedia", {
+        writable: true,
+        enumerable: true,
+        value: vi.fn().mockImplementation((query) => ({
+            matches: false,
+            media: query,
+            onchange: null,
+            addListener: vi.fn(), // deprecated
+            removeListener: vi.fn(), // deprecated
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
+            dispatchEvent: vi.fn(),
+        })),
+    });
+});
 
 describe ('Load and display data view panel', () => {
     afterEach(() => cleanup());

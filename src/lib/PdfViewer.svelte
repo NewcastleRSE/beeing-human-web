@@ -1,10 +1,8 @@
 <script>
-    export let url;
-    export let pageNum;
-    export let objectTitle
+    let { url, pageNum, objectTitle } = $props();
 
-    let width;
-    let height;
+    let width = $state();
+    let height = $state();
 
 </script>
 

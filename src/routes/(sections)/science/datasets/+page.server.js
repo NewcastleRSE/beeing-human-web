@@ -11,7 +11,7 @@ export async function load({ fetch }) {
 
     // read all experiment descriptions
     let expDesc = import.meta.glob("/static/content/science/data/*.md", {
-        as: "raw",
+        query: "?raw",
         eager: true,
     });
 

@@ -7,23 +7,16 @@
  -->
 
 <script>
-    import { createEventDispatcher } from "svelte";
     import { fly } from 'svelte/transition';
     import PortalDestinationListCard from "./PortalDestinationListCard.svelte";
 
-    const dispatch = createEventDispatcher();
-
-    export let destination = [
+    let { destination = [
        'literature#p-lit-test',
        'music#p-music-test',
        'science#',
        'connections#'
-    ]
-    let width;
-
-    function closePanel() {
-        dispatch('close');
-    }
+    ], closePanel } = $props()
+    let width = $state();
 
 </script>
 
@@ -42,7 +35,7 @@
   
     <div class="fixed inset-0 overflow-hidden">
       <div class="absolute inset-0 overflow-hidden">
-        <div bind:clientWidth={width} transition:fly|global={{x: width}} class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+        <div bind:clientWidth={width} transition:fly={{x: width}} class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
           <!--
             Slide-over panel, show/hide based on slide-over state.
   
@@ -59,7 +52,7 @@
                 <div class="flex items-start justify-between">
                   <h2 class="text-base font-semibold leading-6 text-gray-900" id="slide-over-title">Portals</h2>
                   <div class="ml-3 flex h-7 items-center">
-                    <button type="button" class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" on:click={closePanel} on:keydown={closePanel}>
+                    <button type="button" class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" onclick={closePanel} onkeydown={closePanel}>
                       <span class="absolute -inset-2.5"></span>
                       <span class="sr-only">Close panel</span>
                       <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">

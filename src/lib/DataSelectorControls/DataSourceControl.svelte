@@ -8,33 +8,29 @@
   -->
 
 <script>
-    import {createEventDispatcher} from 'svelte';
+    let {options, valueChange} = $props();
 
-    const dispatch = createEventDispatcher();
+    let selected = $state(options.default);
 
-    export let options;
-
-    function handleClick() {
+    function handleClick(valueChange) {
         let newValue = document.getElementById('data-source-select').value
-        dispatch('valueChange', {
+        valueChange({
             origin: options.label,
             newValue: newValue
-        })
+        });
     }
+
+
 </script>
 
 <select
     name="data-source"
     id="data-source-select"
-    class="select text-lg md:text-3xl bg-transparent border-none rounded-lg pr-10 md:pr-16 max-w-fit font-pfdisplay hover:font-bold hover:cursor-pointer transition-all ease-in-out duration-200 motion-reduce:transition-none" on:change={handleClick}
+    class="select text-lg md:text-3xl bg-transparent border-none rounded-lg pr-10 md:pr-16 max-w-fit font-pfdisplay hover:font-bold hover:cursor-pointer transition-all ease-in-out duration-200 motion-reduce:transition-none" bind:value={selected} onchange={() => handleClick(valueChange)}
 >
+    {#key options.values}
     {#each Object.entries(options.values) as [label, value]}
-
-        {#if (label === options.default)}
-            <option value={value} selected>{label}</option>
-        {:else}
-            <option value={value}>{label}</option>
-        {/if}
-        
+        <option value={value}>{label}</option>
     {/each}
+    {/key}
 </select>

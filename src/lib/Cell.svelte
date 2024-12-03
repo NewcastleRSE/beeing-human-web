@@ -3,11 +3,13 @@
     import InternalLink from "./InternalLink.svelte";
     import { capitaliseFirstLetter } from "../utils/stringOperations";
 
-    export let type = undefined;
-    export let link = undefined;
-    export let text = undefined;
-    export let backgroundImage = undefined;
-    export let testid = undefined;
+    let {
+        type = undefined,
+        link = undefined,
+        text = undefined,
+        backgroundImage = undefined,
+        testid = undefined
+    } = $props();
 
     onMount(async () => {
         if (!type) {
@@ -62,5 +64,5 @@
         </InternalLink>
     </div>
 {:else if type === "empty"}
-    <div class=""  data-testid = {testid}/>
+    <div class=""  data-testid = {testid}></div>
 {/if}

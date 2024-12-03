@@ -39,11 +39,10 @@ describe('User interaction tests',  () => {
 
     it('Portal panel should send an event when close button is clicked', async () => {
         const user  = userEvent.setup();
-
-        const {component} = render(PortalPanel);
-
         const mock = vi.fn();
-        component.$on('close', mock)
+
+        render(PortalPanel, {closePanel: mock});
+
 
         const button = screen.getByRole('button');
         await user.click(button);

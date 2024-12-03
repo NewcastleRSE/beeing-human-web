@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 
 import TagSelector from '../../src/lib/TagSelector.svelte';
-import { Filters } from '../../src/classes/Filters';
+import { Filters } from '../../src/classes/Filters.svelte';
 import { capitaliseFirstLetter } from '../../src/utils/stringOperations';
 
 import { listAuthors } from '../mocks/mockVarsBuzzwords';
@@ -69,14 +69,13 @@ describe('Tag operations', () => {
     
     it('fires an event when a filter button is pressed', async () => {
         const user = userEvent.setup();
+        const mock = vi.fn((event) => (filter = event))
 
         let filters = initFilters(listAuthors);
-        const { component } = render(TagSelector, {listTags: filters, filter: 'authors'});
+        render(TagSelector, {listTags: filters, filter: 'authors', handleClick: mock});
 
         // mock function
         let filter = '';
-        const mock = vi.fn((event) => (filter = event.detail.filter));
-        component.$on('filter-changed', mock);
 
         const button = screen.getByText(capitaliseFirstLetter(listAuthors[0]), {exact: true});
         await user.click(button);
@@ -94,14 +93,14 @@ describe('Tag operations', () => {
 
     it('fires an event when any filter button is pressed', async () => {
         const user = userEvent.setup();
+        const mock = vi.fn((event) => (filter = event));
+
 
         let filters = initFilters(listAuthors);
-        const { component } = render(TagSelector, {listTags: filters, filter: 'authors'});
+render(TagSelector, {listTags: filters, filter: 'authors', handleClick: mock});
 
         // mock function
         let filter = '';
-        const mock = vi.fn((event) => (filter = event.detail.filter));
-        component.$on('filter-changed', mock);
 
         for (let author of listAuthors) {
             const button = screen.getByText(capitaliseFirstLetter(author), {exact: true});

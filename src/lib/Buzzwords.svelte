@@ -2,7 +2,6 @@
     import { onMount } from "svelte";
     import {
         getListOfUniqueElements,
-        removeSpaces,
     } from "../utils/stringOperations";
 
     import {
@@ -13,7 +12,7 @@
 
     import { elementReady } from "../utils/generalHelpers";
 
-    import { Filters } from "../classes/Filters";
+    import { Filters } from "../classes/Filters.svelte";
 
     import TagSelector from "./TagSelector.svelte";
     import SearchBar from "./SearchBar.svelte";
@@ -23,30 +22,26 @@
     import { slide } from "svelte/transition";
     import { expoInOut } from 'svelte/easing';
 
-    export let buzzwords;
-    export let listTags;
-    export let listAuthors;
+    let {buzzwords, listTags, listAuthors} = $props();
 
     // Does not create the template until it is loaded
-    let loaded = false;
-    let errorFlag = false;
+    let loaded = $state(false);
+    let errorFlag = $state(false);
 
     // array of filter objects
-    let filters = new Filters();
+    let filters = $state(new Filters());
 
     // this is the array of buzzwords to be displayed -- it will be equal to the received buzzwords at init
-    let filteredBuzzwords = [];
+    let filteredBuzzwords = $state([]);
 
-    // necessary to restart the filter components
-    let unique = {};
 
     // Event handling changes
 
-    function handleFilterChange(event) {
+    function handleFilterChange(tag) {
         // Triggers when a filter button is clicked
-        filters = filters.toggleFilterActive(event.detail.filter);
+        filters = filters.toggleFilterActive(tag);
         // buzzword filtering is handled by this first level function
-        filteredBuzzwords = filterBuzzWords(filteredBuzzwords);
+        filteredBuzzwords = filterBuzzWords(tag);
     }
 
     function handleResetFilters(event) {
@@ -62,27 +57,11 @@
         filteredBuzzwords = filterBuzzWords(buzzwords);
     }
 
-    function handleFilterClickBuzzword(event) {
-        // creates a fake Filter object and sends it to handleFilterChange as if it came from the 'TagSelector' component
+    function handleSearch(searchObject) {
 
-        // finds the corresponding object in the Filters object
-        const filter = filters.getFiltersByName(event.detail.filter);
-
-        // constructs the fake event object
-        const fakeEvent = {
-            detail: {
-                filter: filter,
-            },
-        };
-
-        // calls the handleFilterChange function with the fake event
-        handleFilterChange(fakeEvent);
-    }
-
-    function handleSearch(event) {
         // triggered when receiving a 'search' event from 'SearchBar.svelte'
         // set terms to lower case
-        const searchTerms = event.detail.searchTerms.map((e) =>
+        const searchTerms = searchObject.searchTerms.map((e) =>
             e.toLowerCase()
         );
 
@@ -120,7 +99,7 @@
         // Full text search
         let fullTextResults = fullTextSearch(
             filteredBuzzwords,
-            event.detail.searchString,
+            searchObject.searchString,
             searchTerms
         );
         if (fullTextResults.length > 0) {
@@ -145,12 +124,6 @@
             availableAuthors,
             availableTags
         );
-        updateFilterButtons(filteredBuzzwords.length);
-    }
-
-    function resetAll() {
-        // resets all filters and search terms
-        init(false);
     }
 
     // First level filtering functions
@@ -166,8 +139,6 @@
             // if both filters are empty:
             // -- reset filter availability (all available)
             filters.resetFiltersAvailableStatus();
-            // -- update the UI to reflect availability
-            updateFilterButtons(buzzwords.length);
             // -- return the initial dataset
             return buzzwords;
         } else {
@@ -195,7 +166,6 @@
 
         // updates UI to show available filters on the reduced dataset
         filters = filters.updateFilterAvailableStatus(listAuthors, listTags);
-        updateFilterButtons(bothFilters.length);
 
         return bothFilters;
     }
@@ -257,63 +227,6 @@
         return bothFilters;
     }
 
-    function updateFilterButtons(lenNewDataset) {
-        // Updates the UI to show current filter availability
-        // takes the length of the new dataset to compare it to the entire dataset and enable or disable the Reset All button
-        for (let filter of filters) {
-            try {
-                const filterChip = document.getElementById(
-                    `${removeSpaces(filter.name)}-filter`
-                );
-                if (filter.available) {
-                    filterChip.disabled = false;
-                } else {
-                    filterChip.disabled = true;
-                }
-            } catch (error) {
-                console.debug(
-                    `Component is still mounting, element with id ${removeSpaces(
-                        filter.name
-                    )}-filter does not exist yet. ${error}`
-                );
-            }
-        }
-
-        // RESET BUTTONS HAVE BEEN DISABLED
-        // // Updates the UI to enable or disable the `Reset All` button
-        // try {
-        //     const resetAllButton = document.getElementById('resetAll');
-
-        //     if (filters.allInactive() && buzzwords.length === lenNewDataset) {
-        //         resetAllButton.disabled = true;
-        //     } else {
-        //         resetAllButton.disabled = false;
-        //     }
-        // } catch (error) {
-        //     console.debug(`Component is still mounting, element with id resetAll does not exist yet. ${error}`);
-        // }
-
-        // // Updates the UI to enable or disable the `Reset` button for each filter group
-        // try {
-        //     const resetAuthor = document.getElementById('authors-reset');
-        //     const resetTags = document.getElementById('tags-reset');
-
-        //     if (filters.getActiveFiltersByType('authors').length === 0) {
-        //         resetAuthor.disabled = true;
-        //     } else {
-        //         resetAuthor.disabled = false;
-        //     }
-
-        //     if (filters.getActiveFiltersByType('tags').length === 0) {
-        //         resetTags.disabled = true;
-        //     } else {
-        //         resetTags.disabled = false;
-        //     }
-
-        // } catch (error) {
-        //     console.debug(error);
-        // }
-    }
 
     // initialisation functions
 
@@ -329,10 +242,8 @@
         filters.resetFilters();
 
         // necessary to restart the filter components
-        unique = {};
     }
 
-    let filterMenuShow = false;
 
     function toggleFilterMenu() {
         if (windowWidth <= 756) {
@@ -374,13 +285,15 @@
         }
     });
 
-    let windowWidth = 0;
+    let windowWidth = $state(0);
+    let filterMenuShow = $derived(() => {
+        if (windowWidth > 756) {
+            return true;
+        } else {
+            return false;
+        }
+    })
 
-    $: if (windowWidth > 756) {
-        filterMenuShow = true;
-    }
-
-    
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />
@@ -388,40 +301,49 @@
 {#if loaded}
     <!-- #key necessary to restart components -->
     <div class="flex flex-col md:flex-row gap-10">
-        {#key unique}
+        {#key filters}
             <div
                 class="flex flex-col md:basis-1/4 justify-between gap-4 md:gap-8 md:justify-start items-center"
             >
                 <div class="search full">
                     <SearchBar
-                        on:search={handleSearch}
-                        on:reset={handleReset}
+                        search={(searchObject) => handleSearch(searchObject)}
+                        reset={() => handleReset()}
                         listChips={[...listAuthors, ...listTags]}
                     />
                 </div>
                 <TextDivider class="hidden md:block md:max-w-md" />
                 <div class="filters flex flex-col gap-4 items-center">
-                    <h3
+                    {#if windowWidth <= 756}
+                        <button
+                            class="h3 font-medium cursor-pointer md:cursor-auto"
+                            onclick={toggleFilterMenu}
+                        >
+                            Filters <span class="md:hidden"
+                                >{#if !filterMenuShow}+{:else}-{/if}</span
+                            >
+                        </button>
+                    {:else}
+                        <h3
                         class="h3 font-medium cursor-pointer md:cursor-auto"
-                        on:click={toggleFilterMenu}
-                        on:keydown
                     >
                         Filters <span class="md:hidden"
                             >{#if !filterMenuShow}+{:else}-{/if}</span
                         >
                     </h3>
+                    {/if}
                     {#if filterMenuShow}
-                        <div class="flex flex-col gap-4" transition:slide|global={{ duration: 800, easing:expoInOut}}>
+                        <div class="flex flex-col gap-4" transition:slide={{ duration: 800, easing:expoInOut}}>
                             <TagSelector
                                 listTags={filters.getFiltersByType("authors", true)}
                                 filter="authors"
-                                on:filter-changed={handleFilterChange}
+                                handleClick={(tag) => {handleFilterChange(tag)}}
                                 on:reset-filters={handleResetFilters}
                             />
                             <TagSelector
                                 listTags={filters.getFiltersByType("tags", true)}
                                 filter="tags"
-                                on:filter-changed={handleFilterChange}
+                                handleClick={(tag) => handleFilterChange(tag)}
                                 on:reset-filters={handleResetFilters}
                             />
                         </div>
@@ -444,7 +366,7 @@
                     {#each filteredBuzzwords as buzzword (buzzword.id)}
                         <BuzzwordCard
                             {buzzword}
-                            on:filterClicked={handleFilterClickBuzzword}
+                            handleFilterClickBuzzword={(tag) => handleFilterChange(filters.getFiltersByName(tag))}
                         />
                     {/each}
                 {/if}

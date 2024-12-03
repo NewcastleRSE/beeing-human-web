@@ -8,19 +8,10 @@
   -->
 <script>
     import {SlideToggle} from '@skeletonlabs/skeleton';
-    import {createEventDispatcher} from 'svelte';
 
-    export let options;
+    let {options, valueChange} = $props();
 
-    let slideValue = options.values.default
-    const dispatch = createEventDispatcher();
-
-    function handleClick(e) {
-        dispatch('valueChange', {
-            origin: options.label,
-            newValue: slideValue
-        })
-    }
+    let slideValue = $state(options.values.default);
 
 </script>
 
@@ -32,6 +23,6 @@
         bind:checked={slideValue}
         size="lg"
         background="bg-secondary-500"
-        active="bg-secondary-100" on:change={handleClick}>{!slideValue ? "off" : "on"}</SlideToggle
+        active="bg-secondary-100" onchange={() => valueChange({origin: options.label, newValue: slideValue})}>{!slideValue ? "off" : "on"}</SlideToggle
     >
 </div>
