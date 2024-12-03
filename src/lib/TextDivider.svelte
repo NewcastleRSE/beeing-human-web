@@ -1,8 +1,14 @@
 <script>
-    export let fillColour = '#5E9DB5';
+    /**
+     * @typedef {Object} Props
+     * @property {string} [fillColour]
+     */
+
+    /** @type {Props & { [key: string]: any }} */
+    let { fillColour = '#5E9DB5', ...rest } = $props();
 </script>
 
-<svg class={$$restProps.class || ""} viewBox="0 0 490 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg class={rest.class || ""} viewBox="0 0 490 30" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M259.577 9.09767L258.061 6.64065H255.03L253.514 9.09767L255.03 11.5547H258.061L259.577 9.09767ZM258.517 12.2925L260.488 9.09767L258.517 5.90283H254.575L252.604 9.09767L254.575 12.2925H258.517Z" fill="{fillColour}"/>
     <path fill-rule="evenodd" clip-rule="evenodd" d="M259.577 15.0005L258.061 12.5435H255.03L253.514 15.0005L255.03 17.4575H258.061L259.577 15.0005ZM258.517 18.1953L260.488 15.0005L258.517 11.8057H254.575L252.604 15.0005L254.575 18.1953H258.517Z" fill="{fillColour}"/>
     <path fill-rule="evenodd" clip-rule="evenodd" d="M259.577 20.9021L258.061 18.4451H255.03L253.514 20.9021L255.03 23.3591L258.061 23.3591L259.577 20.9021ZM258.517 24.0969L260.488 20.9021L258.517 17.7073H254.575L252.604 20.9021L254.575 24.0969H258.517Z" fill="{fillColour}"/>

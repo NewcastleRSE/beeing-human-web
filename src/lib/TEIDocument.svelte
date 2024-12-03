@@ -6,10 +6,16 @@
 <script>
     import { defineCustomElement } from 'CETEIcean/utilities.js';
     import TeiElement from './TEIElement.svelte';
-    // import { JSDOM } from 'jsdom'
+    
 
-    export let doc;
-    export let elements;
+    /**
+     * @typedef {Object} Props
+     * @property {any} doc - import { JSDOM } from 'jsdom'
+     * @property {any} elements
+     */
+
+    /** @type {Props} */
+    let { doc, elements } = $props();
     // export let routes = undefined;
 
     for (const el of elements) {

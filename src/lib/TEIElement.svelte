@@ -4,7 +4,14 @@
 -->
 
 <script>
-    export let element = '';
+    /**
+     * @typedef {Object} Props
+     * @property {string} [element]
+     * @property {import('svelte').Snippet} [children]
+     */
+
+    /** @type {Props} */
+    let { element = '', children } = $props();
 </script>
 
-<svelte:element this={element}><slot/></svelte:element>
+<svelte:element this={element}>{@render children?.()}</svelte:element>
