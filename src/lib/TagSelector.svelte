@@ -1,8 +1,5 @@
 <script>
-    // import {createEventDispatcher} from 'svelte';
     import { capitaliseFirstLetter, removeSpaces } from '../utils/stringOperations';
-
-    // const dispatch = createEventDispatcher();
 
     let {listTags, filter, handleClick} = $props()
 </script>
