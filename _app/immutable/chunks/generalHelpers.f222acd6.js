@@ -1,1 +1,0 @@
-function m(e){return new Promise((t,c)=>{const r=document.querySelector(e);r&&t(r),new MutationObserver((u,n)=>{Array.from(document.querySelectorAll(e)).forEach(o=>{t(o),n.disconnect()})}).observe(document.documentElement,{childList:!0,subtree:!0})})}export{m as e};

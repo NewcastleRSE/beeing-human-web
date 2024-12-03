@@ -1,0 +1,1 @@
+import{h as r,d as i,a1 as c,a2 as _,a3 as h,g as d,k,i as u,j as y,a4 as l}from"./runtime.BgiTR1sa.js";function I(f,n,t){r&&i();var e=f,s=l,a,o=c()?_:h;d(()=>{o(s,s=n())&&(a&&k(a),a=u(()=>t(e)))}),r&&(e=y)}export{I as k};
