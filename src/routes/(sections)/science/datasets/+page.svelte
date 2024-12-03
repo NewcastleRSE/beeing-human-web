@@ -1,6 +1,6 @@
 <script>
     import Datasets from './datasets.md'
-    export let data;
+    let { data } = $props();
 </script>
 
 <Datasets {data}/>

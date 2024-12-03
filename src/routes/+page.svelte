@@ -1,7 +1,7 @@
 <script>
   import Hive from "$lib/Hive.svelte";
   import LogoLandingPage from "$lib/LogoLandingPage.svelte";
-  export let data;
+  let { data } = $props();
 
 </script>
 
