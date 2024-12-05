@@ -11,7 +11,7 @@
     });
 
     // If TRUE, loads the PDF, rather than IIIF
-    let fallback = true;
+    let fallback = false;
 
     let ready = $state(false);
 

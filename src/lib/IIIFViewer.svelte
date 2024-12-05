@@ -1,5 +1,4 @@
 <script>
-    import { run } from 'svelte/legacy';
 
     import { onDestroy, onMount } from "svelte";
     import { browser } from "$app/environment";
@@ -7,7 +6,6 @@
     // This needs to be imported only on the browser, otherwise it will generate an error
     // import "tify";
     import "tify/dist/tify.css";
-    import { derived } from 'svelte/store';
 
     let loaded = $state(false);
     let iiif = $state(undefined);
@@ -59,17 +57,6 @@
         }
     });
 
-
-    $effect(() => {
-        if (iiif && loaded && manifest) {
-            iiif.destroy();
-            iiif = undefined;
-            buildIIIFY(manifest);
-            return true
-        } else {
-            return false
-        }
-    });
 </script>
 
 <div id="facsimile-viewer" class="h-full">
