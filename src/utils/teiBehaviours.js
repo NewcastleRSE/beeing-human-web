@@ -9,6 +9,8 @@ export let teiBehaviours = {
     "tei": {
         "text": function(e) {
             // main container
+            const tailwindClasses = ['flex', 'flex-col']
+            e.classList.add(...tailwindClasses)
         },
         "div":[
             ["[type=chapter]", function(e) {

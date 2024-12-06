@@ -193,7 +193,7 @@
             <div
                 class="md:flex w-full md:h-dvh {dataViewerState.activeView == 'both'
                     ? 'md:w-1/2'
-                    : ''} md:overflow-auto overflow-x-clip"
+                    : ''} md:overflow-auto overflow-x-clip md:px-16"
                 data-testid="transcription"
             >
                 <TeiSimple
