@@ -1,7 +1,9 @@
-// This has been tailored for the current example TEI file (the coopers hill edition) -- Butler's text is not meant to follow the same principles.
 // Currently there are two behaviours for the same element, depending on the `type` attribute. If:
 // type = gloss: content of the note is turned into endnote, and replaced with a numbered link
 // type = side-note: these were in the original text, so they are retained, but styled slightly differently. Later, stylings shuch as these are probably better placed in the stylesheet,
+
+import { wrapElement } from "./generalHelpers";
+
 // just left it here as an example of how to select between elements with different attributes.
 export let teiBehaviours = {
     "tei": {
@@ -10,43 +12,46 @@ export let teiBehaviours = {
         },
         "div":[
             ["[type=chapter]", function(e) {
-                const tailwindClasses = ['grid', 'grid-cols-2']
-                e.classList.add(...tailwindClasses)
-                let chapterId = e.getAttribute('id');
-                for (const child of e.children) {
-                    if (!this.rowIndex) {
-                        this[chapterId] =  {'rowIndex': 1}
-                    } else {
-                        this[chapterId].rowIndex++;
-                    }
-                    child.classList.add('col-start-1')
-                    child.classList.add(`row-${this[chapterId]['rowIndex']}`)
-                }
-                console.log(this);
+                // const tailwindClasses = ['grid', 'grid-cols-2']
+                // e.classList.add(...tailwindClasses)
+                // for (const child of e.children) {
+                //     if (!this.rowIndex) {
+                //         this.rowIndex = 1;
+                //     } else {
+                //         this.rowIndex++;
+                //     }
+                // //     if (!this.rowIndex) {
+                // //         this =  {'rowIndex': 1}
+                // //     } else {
+                // //         this.rowIndex++;
+                // //     }
+                //     child.classList.add('col-start-1')
+                //     child.classList.add(`row-${this.rowIndex}`)
+                // }
             }]
         ], 
         "note": [
             ["[subtype=summary]",
                 function (elt) {
-                    if (!this.noteIndex) {
-                        this["noteIndex"] = 1;
-                    } else {
-                        this.noteIndex++;
-                    }
-                    let id = "note" + this.noteIndex;
-                    let link = document.createElement("a");
-                    link.setAttribute("id", "src" + id);
-                    link.setAttribute("href", "#" + id);
-                    link.innerHTML = this.noteIndex;
-                    let content = document.createElement("sup");
-                    content.appendChild(link);
-                    let chapterDiv = elt.closest("tei-div[type='chapter'");
-                    let note = document.createElement("p");
-                    note.classList.add('col-start-2', 'row-start-1')
-                    note.id = id;
-                    note.innerHTML = "<a href=\"#src" + id + "\">^</a> " + elt.innerHTML
-                    chapterDiv.appendChild(note);
-                    return content;
+                    // if (!this.noteIndex) {
+                    //     this["noteIndex"] = 1;
+                    // } else {
+                    //     this.noteIndex++;
+                    // }
+                    // let id = "note" + this.noteIndex;
+                    // let link = document.createElement("a");
+                    // link.setAttribute("id", "src" + id);
+                    // link.setAttribute("href", "#" + id);
+                    // link.innerHTML = this.noteIndex;
+                    // let content = document.createElement("sup");
+                    // content.appendChild(link);
+                    // let chapterDiv = elt.closest("tei-div[type='chapter'");
+                    // let note = document.createElement("p");
+                    // note.classList.add('col-start-2', `row-start-${this.noteIndex}`)
+                    // note.id = id;
+                    // note.innerHTML = "<a href=\"#src" + id + "\">^</a> " + elt.innerHTML
+                    // chapterDiv.appendChild(note);
+                    // return content;
                 }
             ],
             // ["[subtype=summary]", function(elt) {
@@ -54,6 +59,24 @@ export let teiBehaviours = {
             // }
             // ]
         ],
+        'p': function(elt) {
+            if (elt.parentNode.getAttribute('type') == "chapter" || elt.parentNode.getAttribute('type') == "section") {
+                let parentDiv = document.createElement('div');
+                parentDiv.classList.add('grid')
+                parentDiv.classList.add('grid-cols-2')
+                wrapElement(elt, parentDiv);
+
+                let notesDiv = document.createElement('div');
+                notesDiv.classList.add('grid')
+                let childNotes = [...elt.querySelectorAll('tei-note')]
+                for (let child of childNotes) {
+                    if (child.getAttribute('type') === 'authorial') {
+                        notesDiv.appendChild(child);
+                    }
+                }
+                parentDiv.append(notesDiv);
+            }
+        },
         "ptr": function (elt) {
             if (elt.getAttribute('target') === '#') {
                 console.log('Ignoring empty ptrs...')

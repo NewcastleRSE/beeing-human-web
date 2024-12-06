@@ -26,3 +26,10 @@ export function elementReady(selector) {
         });
     });
   }
+
+export function wrapElement(elt, wrapper) {
+  if (elt && elt.parentNode) {
+    elt.parentNode.insertBefore(wrapper, elt);
+    wrapper.appendChild(elt);
+  }
+}
