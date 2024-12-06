@@ -64,8 +64,9 @@ export let teiBehaviours = {
         'p': function(elt) {
             if (elt.parentNode.getAttribute('type') == "chapter" || elt.parentNode.getAttribute('type') == "section") {
                 let parentDiv = document.createElement('div');
-                parentDiv.classList.add('grid')
-                parentDiv.classList.add('grid-cols-2')
+                const tailwindClasses = ['grid', 'grid-cols-4', 'gap-16']
+                parentDiv.classList.add(...tailwindClasses)
+                elt.classList.add('col-span-3')
                 wrapElement(elt, parentDiv);
 
                 let notesDiv = document.createElement('div');
