@@ -1,8 +1,5 @@
-// Currently there are two behaviours for the same element, depending on the `type` attribute. If:
-// type = gloss: content of the note is turned into endnote, and replaced with a numbered link
-// type = side-note: these were in the original text, so they are retained, but styled slightly differently. Later, stylings shuch as these are probably better placed in the stylesheet,
-
-import { wrapElement } from "./generalHelpers";
+import { addTailwindClasslist, wrapElement } from "./generalHelpers";
+import { teiSetBodyLayout } from "./teiBehavioursHelper";
 
 // just left it here as an example of how to select between elements with different attributes.
 export let teiBehaviours = {
@@ -10,75 +7,41 @@ export let teiBehaviours = {
         "text": function(e) {
             // main container
             const tailwindClasses = ['flex', 'flex-col']
-            e.classList.add(...tailwindClasses)
+            e.classList.add(...tailwindClasses);
+            const listSigs = [...e.getElementsByTagName('tei-pb')]; 
+            let sigsDict = {}
+            for (const [i, tag] of listSigs.entries()) {
+                if (i-1 > 0) {
+                    sigsDict[tag.getAttribute('n')] = listSigs[i-1].getAttribute('n')
+                }
+            }
+            this.sigsDict = sigsDict;
         },
-        "div":[
-            ["[type=chapter]", function(e) {
-                // const tailwindClasses = ['grid', 'grid-cols-2']
-                // e.classList.add(...tailwindClasses)
-                // for (const child of e.children) {
-                //     if (!this.rowIndex) {
-                //         this.rowIndex = 1;
-                //     } else {
-                //         this.rowIndex++;
-                //     }
-                // //     if (!this.rowIndex) {
-                // //         this =  {'rowIndex': 1}
-                // //     } else {
-                // //         this.rowIndex++;
-                // //     }
-                //     child.classList.add('col-start-1')
-                //     child.classList.add(`row-${this.rowIndex}`)
-                // }
-            }]
-        ], 
+        "foreign": function(elt) {
+            addTailwindClasslist(elt, "italic")            
+        },
+        "lg": function(elt) {
+            let tailwindString = "px-8 flex flex-col"
+            if (elt.getAttribute('lang')) {
+                tailwindString += ' italic'
+            }
+            addTailwindClasslist(elt, tailwindString)
+        },
         "note": [
             ["[subtype=summary]",
                 function (elt) {
-                    // if (!this.noteIndex) {
-                    //     this["noteIndex"] = 1;
-                    // } else {
-                    //     this.noteIndex++;
-                    // }
-                    // let id = "note" + this.noteIndex;
-                    // let link = document.createElement("a");
-                    // link.setAttribute("id", "src" + id);
-                    // link.setAttribute("href", "#" + id);
-                    // link.innerHTML = this.noteIndex;
-                    // let content = document.createElement("sup");
-                    // content.appendChild(link);
-                    // let chapterDiv = elt.closest("tei-div[type='chapter'");
-                    // let note = document.createElement("p");
-                    // note.classList.add('col-start-2', `row-start-${this.noteIndex}`)
-                    // note.id = id;
-                    // note.innerHTML = "<a href=\"#src" + id + "\">^</a> " + elt.innerHTML
-                    // chapterDiv.appendChild(note);
-                    // return content;
+                    addTailwindClasslist(elt, "text-sm, h-fit")
                 }
             ],
-            // ["[subtype=summary]", function(elt) {
-            //     elt.classList.add('col-start-2')
-            // }
-            // ]
+            ["[subtype='bibliographic']", 
+                function(elt) {
+                    addTailwindClasslist(elt, 'text-sm')
+                }
+            ]
         ],
         'p': function(elt) {
-            if (elt.parentNode.getAttribute('type') == "chapter" || elt.parentNode.getAttribute('type') == "section") {
-                let parentDiv = document.createElement('div');
-                const tailwindClasses = ['grid', 'grid-cols-4', 'gap-16']
-                parentDiv.classList.add(...tailwindClasses)
-                elt.classList.add('col-span-3')
-                wrapElement(elt, parentDiv);
-
-                let notesDiv = document.createElement('div');
-                notesDiv.classList.add('grid')
-                let childNotes = [...elt.querySelectorAll('tei-note')]
-                for (let child of childNotes) {
-                    if (child.getAttribute('type') === 'authorial') {
-                        notesDiv.appendChild(child);
-                    }
-                }
-                parentDiv.append(notesDiv);
-            }
+            teiSetBodyLayout(elt);
+            addTailwindClasslist(elt, 'indent-4 mb-2')
         },
         "ptr": function (elt) {
             if (elt.getAttribute('target') === '#') {
@@ -89,6 +52,10 @@ export let teiBehaviours = {
                 link.innerHTML = '>';
                 return link
             }
+        },
+        "quote": function(elt) {
+            teiSetBodyLayout(elt);
+
         },
         "ref": function (elt) {
             let sup = false
@@ -121,10 +88,12 @@ export let teiBehaviours = {
             }
         },
         "pb": function (elt) {
-            var sig = document.createElement('p');
-            sig.innerHTML = elt.getAttribute('n');
-            sig.classList.add('signature')
-            return sig
+            if (this.sigsDict[elt.getAttribute('n')]) {
+                var sig = document.createElement('p');
+                sig.innerHTML = this.sigsDict[elt.getAttribute('n')];
+                sig.classList.add('signature')
+                return sig
+            }
         },
         "app": function (elt) {
             // populate children with subtype
@@ -141,15 +110,76 @@ export let teiBehaviours = {
             if (elt.hasAttribute('data-empty')) {
                 elt.innerHTML = '[+1609]'
             }
-            elt.classList.add('hover')
+            elt.classList.add('hover');
         },
         "fw": [
             ["[type=horizontalRule]", function (elt) {
                 return document.createElement('hr')
+            }], 
+            ["[type=catch]", function(elt) {
+                // ensures the behaviour is only applied once
+                if (elt.parentNode.tagName != 'DIV') {
+                    const pageFooterDiv = document.createElement('div');
+                    let tailwindStringWrapper = "gap-16 mt-2 mb-16 text-sm"
+                    let tailwindStringElt = "justify-self-end"
+                    if (elt.parentNode.tagName === 'TEI-DIV') {
+                        tailwindStringWrapper += " grid grid-cols-4"
+                        tailwindStringElt += " col-start-3"
+                    } else {
+                        tailwindStringWrapper += " grid grid-cols-3";
+                    }
+                    
+                    addTailwindClasslist(pageFooterDiv, tailwindStringWrapper);
+                    addTailwindClasslist(elt, tailwindStringElt);
+                    if (elt.nextElementSibling && elt.nextElementSibling.tagName === 'TEI-PB') {
+                        addTailwindClasslist(elt.nextElementSibling, 'col-start-2 justify-self-center');
+                        pageFooterDiv.appendChild(elt.nextElementSibling);
+
+                    };
+                    wrapElement(elt, pageFooterDiv);
+                }
+            }],
+            ["[type=header]", function(elt) {
+                if (elt.parentNode.tagName != 'DIV') {
+                    const pageHeaderDiv = document.createElement('div')
+                    addTailwindClasslist(pageHeaderDiv, "grid grid-cols-4 gap-16 mb-2")
+                    wrapElement(elt, pageHeaderDiv);
+                    addTailwindClasslist(elt, 'italic text-lg justify-self-center col-span-3')
+                } else {
+                    addTailwindClasslist(elt, 'italic text-lg justify-self-center col-span-3 gap-16 mb-2 text-center')
+                }
             }]
         ],
         "hi": [
-            ["[rend=superscript]", ["<sup>", "</sup>"]]
+            ["[rend=superscript]", ["<sup>", "</sup>"]],
+            ["[rend=drop-capital]", function (elt) {
+                addTailwindClasslist(elt.parentNode, "first-letter:float-left first-letter:text-7xl first-letter:pr-4")
+                elt.parentNode.classList.remove("indent-4")
+                // only removing does not trigger an update to the element
+                elt.parentNode.classList.add("indent-0")
+            }],
+            ["[rend=italic]", function(elt) {
+                addTailwindClasslist(elt, 'italic')
+            }]
+        ],
+        "seg": [
+            ["[rend='italic']", function(elt) {
+                addTailwindClasslist(elt, "italic");
+            }]
+        ],
+        "titlePage": function(elt) {
+            addTailwindClasslist(elt, "flex flex-col")
+        },
+        "docTitle": function(elt) {
+            addTailwindClasslist(elt, "flex flex-col")
+        },
+        "titlePart": [
+            ["[type=main", function(elt) {
+                addTailwindClasslist(elt, 'flex flex-col justify-center text-4xl')
+            }],
+            ["[type=sub", function(elt) {
+                addTailwindClasslist(elt, 'flex flex-col justify-center text-xl')
+            }]
         ]
     }
 }

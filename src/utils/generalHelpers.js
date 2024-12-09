@@ -33,3 +33,8 @@ export function wrapElement(elt, wrapper) {
     wrapper.appendChild(elt);
   }
 }
+
+export function addTailwindClasslist(elt, classString) {
+  const classArray = classString.split(' ');
+  elt.classList.add(...classArray)
+}
