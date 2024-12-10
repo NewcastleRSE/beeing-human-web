@@ -54,7 +54,7 @@ export let teiBehaviours = {
             }
         },
         "quote": function(elt) {
-            teiSetBodyLayout(elt);
+            // teiSetBodyLayout(elt);
 
         },
         "ref": function (elt) {
@@ -88,7 +88,7 @@ export let teiBehaviours = {
             }
         },
         "pb": function (elt) {
-            if (this.sigsDict[elt.getAttribute('n')]) {
+            if (this.sigsDict[elt.getAttribute('n')] && elt.getAttribute('n') != '¶3r') {
                 var sig = document.createElement('p');
                 sig.innerHTML = this.sigsDict[elt.getAttribute('n')];
                 sig.classList.add('signature')
@@ -102,6 +102,7 @@ export let teiBehaviours = {
             }
         },
         "rdg": function (elt) {
+            elt.classList.add('hidden');
             if (elt.hasAttribute('data-empty')) {
                 elt.innerHTML = '[Does not exist in 1609]'
             }
@@ -109,13 +110,25 @@ export let teiBehaviours = {
         "lem": function (elt) {
             if (elt.hasAttribute('data-empty')) {
                 elt.innerHTML = '[+1609]'
+                addTailwindClasslist(elt, 'hidden')
             }
             elt.classList.add('hover');
+
+            // inherits styles from its grandparent
+            let ancestorClassList = elt.parentNode.parentNode.classList;
+            if (ancestorClassList) {
+                elt.classList.add(...ancestorClassList)
+            }
         },
         "fw": [
+            ["tei-titlePage>tei-fw[type=horizontalRule]", function() {
+                let fancyHr = document.createElement('div');
+                addTailwindClasslist(fancyHr, 'h-0.5 bg-secondary-500 w-4/5 mx-auto my-4 rounded-full');
+                return fancyHr
+            }],
             ["[type=horizontalRule]", function (elt) {
                 return document.createElement('hr')
-            }], 
+            }],
             ["[type=catch]", function(elt) {
                 // ensures the behaviour is only applied once
                 if (elt.parentNode.tagName != 'DIV') {
@@ -168,17 +181,43 @@ export let teiBehaviours = {
             }]
         ],
         "titlePage": function(elt) {
-            addTailwindClasslist(elt, "flex flex-col")
+            addTailwindClasslist(elt, "flex flex-col content-center py-32")
         },
         "docTitle": function(elt) {
             addTailwindClasslist(elt, "flex flex-col")
+
+            for (let child of elt.children) {
+                addTailwindClasslist(child, 'w-fit')
+            }
         },
         "titlePart": [
             ["[type=main", function(elt) {
-                addTailwindClasslist(elt, 'flex flex-col justify-center text-4xl')
+                addTailwindClasslist(elt, 'flex flex-col text-6xl self-center place-items-center mb-4')
             }],
             ["[type=sub", function(elt) {
-                addTailwindClasslist(elt, 'flex flex-col justify-center text-xl')
+                addTailwindClasslist(elt, 'flex flex-col text-xl self-center place-items-center mb-4')
+            }]
+        ], 
+        "byline": function(elt) {
+            addTailwindClasslist(elt, "flex flex-col self-center place-items-center text-xl")
+        },
+        "epigraph": function(elt) {
+            addTailwindClasslist(elt, "flex flex-col self-center place-items-center text-sm mb-4")
+        },
+        "docImprint": function(elt) {
+            addTailwindClasslist(elt, "text-center");
+        },
+        "head": [
+            ["tei-div[type=preface]>tei-head", function(elt) {
+                addTailwindClasslist(elt, 'text-4xl mb-16')
+            }]
+        ],
+        "div": function(elt) {
+            addTailwindClasslist(elt, 'flex flex-col')
+        },
+        "bibl": [
+            ["[rend=italic]", function (elt) {
+                addTailwindClasslist(elt, 'italic')
             }]
         ]
     }

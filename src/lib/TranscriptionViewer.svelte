@@ -69,7 +69,7 @@
     function handleStatus(status) {
         if (status.loaded) {
             ready = true;
-            changeVariationDetail(dataViewerState.variationDetail);
+            // changeVariationDetail(dataViewerState.variationDetail);
             changeEditorialNoteVisibility(dataViewerState.editorialNotes);
             toggleBothViewOption(smallScreen);
         }
