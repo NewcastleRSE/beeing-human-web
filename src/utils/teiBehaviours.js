@@ -1,5 +1,6 @@
-import { addTailwindClasslist, wrapElement } from "./generalHelpers";
+import { addTailwindClasslist, findPreviousElement, wrapElement } from "./generalHelpers";
 import { teiSetBodyLayout } from "./teiBehavioursHelper";
+import ornament from '../assets/text_divider.svg'
 
 // just left it here as an example of how to select between elements with different attributes.
 export let teiBehaviours = {
@@ -21,8 +22,8 @@ export let teiBehaviours = {
             addTailwindClasslist(elt, "italic")            
         },
         "lg": function(elt) {
-            let tailwindString = "px-8 flex flex-col"
-            if (elt.getAttribute('lang')) {
+            let tailwindString = "px-8 flex flex-col mb-4"
+            if (elt.getAttribute('lang') || elt.getAttribute('rend') === 'italic') {
                 tailwindString += ' italic'
             }
             addTailwindClasslist(elt, tailwindString)
@@ -88,7 +89,8 @@ export let teiBehaviours = {
             }
         },
         "pb": function (elt) {
-            if (this.sigsDict[elt.getAttribute('n')] && elt.getAttribute('n') != '¶3r') {
+            let emptySigs = ['¶3r', 'A3r']
+            if (this.sigsDict[elt.getAttribute('n')] && !emptySigs.includes(elt.getAttribute('n'))) {
                 var sig = document.createElement('p');
                 sig.innerHTML = this.sigsDict[elt.getAttribute('n')];
                 sig.classList.add('signature')
@@ -131,7 +133,7 @@ export let teiBehaviours = {
             }],
             ["[type=catch]", function(elt) {
                 // ensures the behaviour is only applied once
-                if (elt.parentNode.tagName != 'DIV') {
+                if (elt.parentNode && elt.parentNode.tagName != 'DIV') {
                     const pageFooterDiv = document.createElement('div');
                     let tailwindStringWrapper = "gap-16 mt-2 mb-16 text-sm"
                     let tailwindStringElt = "justify-self-end"
@@ -161,6 +163,13 @@ export let teiBehaviours = {
                 } else {
                     addTailwindClasslist(elt, 'italic text-lg justify-self-center col-span-3 gap-16 mb-2 text-center')
                 }
+            }],
+            ["[type=ornament]", function(elt) {
+                let ornamentEl = document.createElement('object');
+                ornamentEl.setAttribute('data', ornament);
+                addTailwindClasslist(elt, 'flex justify-center, my-8')
+                
+                return ornamentEl;
             }]
         ],
         "hi": [
@@ -210,14 +219,52 @@ export let teiBehaviours = {
         "head": [
             ["tei-div[type=preface]>tei-head", function(elt) {
                 addTailwindClasslist(elt, 'text-4xl mb-16')
+            }],
+            ["_", function(elt) {
+                addTailwindClasslist(elt, 'text-4xl mb-16 text-center')
             }]
         ],
-        "div": function(elt) {
-            addTailwindClasslist(elt, 'flex flex-col')
-        },
+        "div": [
+            ["[type=poem]", function(elt) {
+                addTailwindClasslist(elt, "flex flex-col mb-8")
+            }],
+            ["[type=contents-chapter]", function(elt) {
+                addTailwindClasslist(elt, "flex flex-col my-8")
+            }],
+            ["_", function(elt) {
+                addTailwindClasslist(elt, 'flex flex-col')
+            }]
+        ],
         "bibl": [
             ["[rend=italic]", function (elt) {
                 addTailwindClasslist(elt, 'italic')
+            }]
+        ],
+        "term": function (elt) {
+            addTailwindClasslist(elt, 'italic');
+        },
+        "placename": function(elt) {
+            addTailwindClasslist(elt, 'italic')
+        },
+        "signed": function(elt) {
+            addTailwindClasslist(elt, 'place-self-end');
+            teiSetBodyLayout(elt);
+        },
+        "list": [
+            ["tei-div[type=contents-chapter]>tei-list", function(elt) {
+                addTailwindClasslist(elt, 'grid grid-cols-2')
+            }],
+            ["_", function(elt) {
+                addTailwindClasslist(elt, 'flex flex-col')
+            }]
+        ],
+        "item": [
+            ["tei-div[type=contents-chapter]>tei-list>tei-item", function(elt) {
+                let previousCb = findPreviousElement(elt, 'tei-cb');
+                if (previousCb) {
+                    let col = previousCb.getAttribute('n');
+                    addTailwindClasslist(elt, `col-start-${col}`)
+                }
             }]
         ]
     }
