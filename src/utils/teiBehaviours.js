@@ -253,6 +253,22 @@ export let teiBehaviours = {
         "list": [
             ["tei-div[type=contents-chapter]>tei-list", function(elt) {
                 addTailwindClasslist(elt, 'grid grid-cols-2')
+                
+                // find page breaks
+                // can't find all because some are children of items rather than of tei-list
+                let pbs = []
+                for (let child of elt.children) {
+                    if (child.tagName.toLowerCase()=== 'tei-pb') {
+                        pbs.push(child.getAttribute('n'));
+                    }
+                }
+                let pbsH1 = document.createElement('h2');
+                if (pbs.length > 0) {
+                    pbsH1.innerHTML = pbs.join(" ");
+                } else {
+                    pbsH1.innerHTML = `No page breaks`;
+                }
+                elt.append(pbsH1)
             }],
             ["_", function(elt) {
                 addTailwindClasslist(elt, 'flex flex-col')
@@ -263,7 +279,7 @@ export let teiBehaviours = {
                 let previousCb = findPreviousElement(elt, 'tei-cb');
                 if (previousCb) {
                     let col = previousCb.getAttribute('n');
-                    addTailwindClasslist(elt, `col-start-${col}`)
+                    // addTailwindClasslist(elt, `col-start-${col}`)
                 }
             }]
         ]
