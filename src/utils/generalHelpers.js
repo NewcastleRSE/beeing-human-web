@@ -58,3 +58,14 @@ export function findPreviousElement(node, targetName) {
     return undefined;
   }
 }
+
+export function findInDescendant(node, targetName, targetList = []) {
+  for (let child of node.children) {
+    if (child.tagName.toLowerCase() === targetName) {
+      targetList.push(child);
+    } else if (child.children) {
+      targetList = findInDescendant(child, targetName, targetList)
+    }
+  }
+  return targetList
+}

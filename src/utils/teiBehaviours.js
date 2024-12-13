@@ -1,27 +1,27 @@
-import { addTailwindClasslist, findPreviousElement, wrapElement } from "./generalHelpers";
+import { addTailwindClasslist, findInDescendant, findPreviousElement, wrapElement } from "./generalHelpers";
 import { teiSetBodyLayout } from "./teiBehavioursHelper";
 import ornament from '../assets/text_divider.svg'
 
 // just left it here as an example of how to select between elements with different attributes.
 export let teiBehaviours = {
     "tei": {
-        "text": function(e) {
+        "text": function (e) {
             // main container
             const tailwindClasses = ['flex', 'flex-col']
             e.classList.add(...tailwindClasses);
-            const listSigs = [...e.getElementsByTagName('tei-pb')]; 
+            const listSigs = [...e.getElementsByTagName('tei-pb')];
             let sigsDict = {}
             for (const [i, tag] of listSigs.entries()) {
-                if (i-1 > 0) {
-                    sigsDict[tag.getAttribute('n')] = listSigs[i-1].getAttribute('n')
+                if (i - 1 > 0) {
+                    sigsDict[tag.getAttribute('n')] = listSigs[i - 1].getAttribute('n')
                 }
             }
             this.sigsDict = sigsDict;
         },
-        "foreign": function(elt) {
-            addTailwindClasslist(elt, "italic")            
+        "foreign": function (elt) {
+            addTailwindClasslist(elt, "italic")
         },
-        "lg": function(elt) {
+        "lg": function (elt) {
             let tailwindString = "px-8 flex flex-col mb-4"
             if (elt.getAttribute('lang') || elt.getAttribute('rend') === 'italic') {
                 tailwindString += ' italic'
@@ -34,13 +34,13 @@ export let teiBehaviours = {
                     addTailwindClasslist(elt, "text-sm, h-fit")
                 }
             ],
-            ["[subtype='bibliographic']", 
-                function(elt) {
+            ["[subtype='bibliographic']",
+                function (elt) {
                     addTailwindClasslist(elt, 'text-sm')
                 }
             ]
         ],
-        'p': function(elt) {
+        'p': function (elt) {
             teiSetBodyLayout(elt);
             addTailwindClasslist(elt, 'indent-4 mb-2')
         },
@@ -54,7 +54,7 @@ export let teiBehaviours = {
                 return link
             }
         },
-        "quote": function(elt) {
+        "quote": function (elt) {
             // teiSetBodyLayout(elt);
 
         },
@@ -123,7 +123,7 @@ export let teiBehaviours = {
             }
         },
         "fw": [
-            ["tei-titlePage>tei-fw[type=horizontalRule]", function() {
+            ["tei-titlePage>tei-fw[type=horizontalRule]", function () {
                 let fancyHr = document.createElement('div');
                 addTailwindClasslist(fancyHr, 'h-0.5 bg-secondary-500 w-4/5 mx-auto my-4 rounded-full');
                 return fancyHr
@@ -131,7 +131,7 @@ export let teiBehaviours = {
             ["[type=horizontalRule]", function (elt) {
                 return document.createElement('hr')
             }],
-            ["[type=catch]", function(elt) {
+            ["[type=catch]", function (elt) {
                 // ensures the behaviour is only applied once
                 if (elt.parentNode && elt.parentNode.tagName != 'DIV') {
                     const pageFooterDiv = document.createElement('div');
@@ -143,7 +143,7 @@ export let teiBehaviours = {
                     } else {
                         tailwindStringWrapper += " grid grid-cols-3";
                     }
-                    
+
                     addTailwindClasslist(pageFooterDiv, tailwindStringWrapper);
                     addTailwindClasslist(elt, tailwindStringElt);
                     if (elt.nextElementSibling && elt.nextElementSibling.tagName === 'TEI-PB') {
@@ -154,7 +154,7 @@ export let teiBehaviours = {
                     wrapElement(elt, pageFooterDiv);
                 }
             }],
-            ["[type=header]", function(elt) {
+            ["[type=header]", function (elt) {
                 if (elt.parentNode.tagName != 'DIV') {
                     const pageHeaderDiv = document.createElement('div')
                     addTailwindClasslist(pageHeaderDiv, "grid grid-cols-4 gap-16 mb-2")
@@ -164,11 +164,11 @@ export let teiBehaviours = {
                     addTailwindClasslist(elt, 'italic text-lg justify-self-center col-span-3 gap-16 mb-2 text-center')
                 }
             }],
-            ["[type=ornament]", function(elt) {
+            ["[type=ornament]", function (elt) {
                 let ornamentEl = document.createElement('object');
                 ornamentEl.setAttribute('data', ornament);
                 addTailwindClasslist(elt, 'flex justify-center, my-8')
-                
+
                 return ornamentEl;
             }]
         ],
@@ -180,19 +180,19 @@ export let teiBehaviours = {
                 // only removing does not trigger an update to the element
                 elt.parentNode.classList.add("indent-0")
             }],
-            ["[rend=italic]", function(elt) {
+            ["[rend=italic]", function (elt) {
                 addTailwindClasslist(elt, 'italic')
             }]
         ],
         "seg": [
-            ["[rend='italic']", function(elt) {
+            ["[rend='italic']", function (elt) {
                 addTailwindClasslist(elt, "italic");
             }]
         ],
-        "titlePage": function(elt) {
+        "titlePage": function (elt) {
             addTailwindClasslist(elt, "flex flex-col content-center py-32")
         },
-        "docTitle": function(elt) {
+        "docTitle": function (elt) {
             addTailwindClasslist(elt, "flex flex-col")
 
             for (let child of elt.children) {
@@ -200,38 +200,38 @@ export let teiBehaviours = {
             }
         },
         "titlePart": [
-            ["[type=main", function(elt) {
+            ["[type=main", function (elt) {
                 addTailwindClasslist(elt, 'flex flex-col text-6xl self-center place-items-center mb-4')
             }],
-            ["[type=sub", function(elt) {
+            ["[type=sub", function (elt) {
                 addTailwindClasslist(elt, 'flex flex-col text-xl self-center place-items-center mb-4')
             }]
-        ], 
-        "byline": function(elt) {
+        ],
+        "byline": function (elt) {
             addTailwindClasslist(elt, "flex flex-col self-center place-items-center text-xl")
         },
-        "epigraph": function(elt) {
+        "epigraph": function (elt) {
             addTailwindClasslist(elt, "flex flex-col self-center place-items-center text-sm mb-4")
         },
-        "docImprint": function(elt) {
+        "docImprint": function (elt) {
             addTailwindClasslist(elt, "text-center");
         },
         "head": [
-            ["tei-div[type=preface]>tei-head", function(elt) {
+            ["tei-div[type=preface]>tei-head", function (elt) {
                 addTailwindClasslist(elt, 'text-4xl mb-16')
             }],
-            ["_", function(elt) {
+            ["_", function (elt) {
                 addTailwindClasslist(elt, 'text-4xl mb-16 text-center')
             }]
         ],
         "div": [
-            ["[type=poem]", function(elt) {
+            ["[type=poem]", function (elt) {
                 addTailwindClasslist(elt, "flex flex-col mb-8")
             }],
-            ["[type=contents-chapter]", function(elt) {
+            ["[type=contents-chapter]", function (elt) {
                 addTailwindClasslist(elt, "flex flex-col my-8")
             }],
-            ["_", function(elt) {
+            ["_", function (elt) {
                 addTailwindClasslist(elt, 'flex flex-col')
             }]
         ],
@@ -243,44 +243,80 @@ export let teiBehaviours = {
         "term": function (elt) {
             addTailwindClasslist(elt, 'italic');
         },
-        "placename": function(elt) {
+        "placename": function (elt) {
             addTailwindClasslist(elt, 'italic')
         },
-        "signed": function(elt) {
+        "signed": function (elt) {
             addTailwindClasslist(elt, 'place-self-end');
             teiSetBodyLayout(elt);
         },
         "list": [
-            ["tei-div[type=contents-chapter]>tei-list", function(elt) {
-                addTailwindClasslist(elt, 'grid grid-cols-2')
+            ["tei-div[type=contents-chapter]>tei-list", function (elt) {
+                // divides the content into pages, but some items are broken by page breaks, so not really the best solution
+                // let pbs = findInDescendant(elt, 'tei-pb');
+                // if (pbs.length > 0) {
+                //     let lastItemPage = findPreviousElement(pbs[0], 'tei-item')
+                //     let page1 = document.createElement('div');
+                //     let page2 = document.createElement('div');
+                //     let before = true;
+                //     for (let child of Array.from(elt.children)) {
+                //         console.log(child.textContent);
+                //         if (before) {
+                //             page1.append(child);
+                //         } else {
+                //             page2.append(child);
+                //         }
+
+                //         if (child === lastItemPage) {
+                //             before = false;
+                //         }
+                //     }
+                //     elt.append(page1);
+                //     elt.append(page2);
+                // }
+
+                let lefties = elt.getElementsByClassName('left');
+                let righties = elt.getElementsByClassName('right');
                 
-                // find page breaks
-                // can't find all because some are children of items rather than of tei-list
-                let pbs = []
-                for (let child of elt.children) {
-                    if (child.tagName.toLowerCase()=== 'tei-pb') {
-                        pbs.push(child.getAttribute('n'));
+
+                let newCol = document.createElement('div');
+
+                let breakCondition = false;
+                let i = 0;
+                while (!breakCondition) {
+                    console.log(i);
+                    if (lefties[i]) {
+                        newCol.append(lefties[i]);
+                    } else {
+                        breakCondition = true;
                     }
+
+                    if (righties[i]) {
+                        newCol.append(righties[i]);
+                    }
+                    i += 1;
                 }
-                let pbsH1 = document.createElement('h2');
-                if (pbs.length > 0) {
-                    pbsH1.innerHTML = pbs.join(" ");
-                } else {
-                    pbsH1.innerHTML = `No page breaks`;
-                }
-                elt.append(pbsH1)
+
+                elt.append(newCol);
+
+                addTailwindClasslist(elt, 'grid grid-cols-2');
             }],
-            ["_", function(elt) {
+            ["_", function (elt) {
                 addTailwindClasslist(elt, 'flex flex-col')
             }]
         ],
         "item": [
-            ["tei-div[type=contents-chapter]>tei-list>tei-item", function(elt) {
+            ["tei-div[type=contents-chapter]>tei-list>tei-item", function (elt) {
                 let previousCb = findPreviousElement(elt, 'tei-cb');
                 if (previousCb) {
-                    let col = previousCb.getAttribute('n');
-                    // addTailwindClasslist(elt, `col-start-${col}`)
-                }
+                    let col = undefined;
+                    if (previousCb.getAttribute('n') === "1") {
+                        col = "left"
+                    } else {
+                        col = "right"
+                    }
+                elt.classList.add(col);
+            }
             }]
         ]
     }
