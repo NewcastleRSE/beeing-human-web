@@ -69,3 +69,14 @@ export function findInDescendant(node, targetName, targetList = []) {
   }
   return targetList
 }
+
+export function findIfAncestor(node, targetNode) {
+  // checks if node is a descendent of targetNode; returns false if it reaches <html>;
+  if (node.parentNode.tagName.toLowerCase() === 'html') {
+    return false;
+  } else if (node.parentNode.tagName.toLowerCase() === targetNode.toLowerCase()) {
+    return true;
+  } else {
+    return findIfAncestor(node.parentNode, targetNode);
+  }
+}

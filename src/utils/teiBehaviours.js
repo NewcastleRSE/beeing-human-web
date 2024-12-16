@@ -1,4 +1,4 @@
-import { addTailwindClasslist, findInDescendant, findPreviousElement, wrapElement } from "./generalHelpers";
+import { addTailwindClasslist, findIfAncestor, findInDescendant, findPreviousElement, wrapElement } from "./generalHelpers";
 import { teiSetBodyLayout } from "./teiBehavioursHelper";
 import ornament from '../assets/text_divider.svg'
 
@@ -144,6 +144,9 @@ export let teiBehaviours = {
                         tailwindStringWrapper += " grid grid-cols-3";
                     }
 
+                    // IF PAGE BREAK IS IN THE CONTENTS, IGNORE IT, CAUSING TOO MANY ISSUES
+                    console.log(elt, findIfAncestor(elt, 'tei-list'));
+
                     addTailwindClasslist(pageFooterDiv, tailwindStringWrapper);
                     addTailwindClasslist(elt, tailwindStringElt);
                     if (elt.nextElementSibling && elt.nextElementSibling.tagName === 'TEI-PB') {
@@ -252,53 +255,6 @@ export let teiBehaviours = {
         },
         "list": [
             ["tei-div[type=contents-chapter]>tei-list", function (elt) {
-                // divides the content into pages, but some items are broken by page breaks, so not really the best solution
-                // let pbs = findInDescendant(elt, 'tei-pb');
-                // if (pbs.length > 0) {
-                //     let lastItemPage = findPreviousElement(pbs[0], 'tei-item')
-                //     let page1 = document.createElement('div');
-                //     let page2 = document.createElement('div');
-                //     let before = true;
-                //     for (let child of Array.from(elt.children)) {
-                //         console.log(child.textContent);
-                //         if (before) {
-                //             page1.append(child);
-                //         } else {
-                //             page2.append(child);
-                //         }
-
-                //         if (child === lastItemPage) {
-                //             before = false;
-                //         }
-                //     }
-                //     elt.append(page1);
-                //     elt.append(page2);
-                // }
-
-                let lefties = elt.getElementsByClassName('left');
-                let righties = elt.getElementsByClassName('right');
-                
-
-                let newCol = document.createElement('div');
-
-                let breakCondition = false;
-                let i = 0;
-                while (!breakCondition) {
-                    console.log(i);
-                    if (lefties[i]) {
-                        newCol.append(lefties[i]);
-                    } else {
-                        breakCondition = true;
-                    }
-
-                    if (righties[i]) {
-                        newCol.append(righties[i]);
-                    }
-                    i += 1;
-                }
-
-                elt.append(newCol);
-
                 addTailwindClasslist(elt, 'grid grid-cols-2');
             }],
             ["_", function (elt) {
@@ -315,8 +271,8 @@ export let teiBehaviours = {
                     } else {
                         col = "right"
                     }
-                elt.classList.add(col);
-            }
+                    elt.classList.add(col);
+                }
             }]
         ]
     }
