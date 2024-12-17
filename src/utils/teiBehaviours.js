@@ -90,12 +90,21 @@ export let teiBehaviours = {
         },
         "pb": function (elt) {
             let emptySigs = ['¶3r', 'A3r']
-            if (this.sigsDict[elt.getAttribute('n')] && !emptySigs.includes(elt.getAttribute('n'))) {
-                var sig = document.createElement('p');
-                sig.innerHTML = this.sigsDict[elt.getAttribute('n')];
-                sig.classList.add('signature')
-                return sig
+            if (!findIfAncestor(elt, 'tei-list')) {
+                // if pb is in the contents page ignore it, causing too many issues
+                if (this.sigsDict[elt.getAttribute('n')] && !emptySigs.includes(elt.getAttribute('n'))) {
+                    var sig = document.createElement('p');
+                    sig.innerHTML = this.sigsDict[elt.getAttribute('n')];
+                    sig.classList.add('signature')
+                    return sig
+                }
+            } else {
+                addTailwindClasslist(elt, 'hidden')
             }
+        },
+        "cb": function (elt) {
+            // hides the cb, causing too many issues
+            addTailwindClasslist(elt, 'hidden')
         },
         "app": function (elt) {
             // populate children with subtype
@@ -133,7 +142,8 @@ export let teiBehaviours = {
             }],
             ["[type=catch]", function (elt) {
                 // ensures the behaviour is only applied once
-                if (elt.parentNode && elt.parentNode.tagName != 'DIV') {
+                if (elt.parentNode && elt.parentNode.tagName != 'DIV' && !findIfAncestor(elt, 'tei-list')) {
+                    // IF PAGE BREAK IS IN THE CONTENTS, IGNORE IT, CAUSING TOO MANY ISSUES
                     const pageFooterDiv = document.createElement('div');
                     let tailwindStringWrapper = "gap-16 mt-2 mb-16 text-sm"
                     let tailwindStringElt = "justify-self-end"
@@ -144,7 +154,6 @@ export let teiBehaviours = {
                         tailwindStringWrapper += " grid grid-cols-3";
                     }
 
-                    // IF PAGE BREAK IS IN THE CONTENTS, IGNORE IT, CAUSING TOO MANY ISSUES
                     console.log(elt, findIfAncestor(elt, 'tei-list'));
 
                     addTailwindClasslist(pageFooterDiv, tailwindStringWrapper);
@@ -155,6 +164,8 @@ export let teiBehaviours = {
 
                     };
                     wrapElement(elt, pageFooterDiv);
+                } else {
+                    addTailwindClasslist(elt, 'hidden');
                 }
             }],
             ["[type=header]", function (elt) {
@@ -255,7 +266,7 @@ export let teiBehaviours = {
         },
         "list": [
             ["tei-div[type=contents-chapter]>tei-list", function (elt) {
-                addTailwindClasslist(elt, 'grid grid-cols-2');
+                addTailwindClasslist(elt, 'grid grid-cols-2 gap-x-4 gap-y-1.5');
             }],
             ["_", function (elt) {
                 addTailwindClasslist(elt, 'flex flex-col')
