@@ -80,3 +80,11 @@ export function findIfAncestor(node, targetNode) {
     return findIfAncestor(node.parentNode, targetNode);
   }
 }
+
+export function wrapChildren(elt, wrapper) {
+  // wraps all children of elt in wrapper
+  while (elt.firstChild) {
+    wrapper.appendChild(elt.firstChild);
+  }
+  elt.appendChild(wrapper);
+}

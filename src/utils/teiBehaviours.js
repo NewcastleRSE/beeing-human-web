@@ -1,4 +1,4 @@
-import { addTailwindClasslist, findIfAncestor, findInDescendant, findPreviousElement, wrapElement } from "./generalHelpers";
+import { addTailwindClasslist, findIfAncestor, findInDescendant, findPreviousElement, wrapChildren, wrapElement } from "./generalHelpers";
 import { teiSetBodyLayout } from "./teiBehavioursHelper";
 import ornament from '../assets/text_divider.svg'
 
@@ -31,7 +31,7 @@ export let teiBehaviours = {
         "note": [
             ["[subtype=summary]",
                 function (elt) {
-                    addTailwindClasslist(elt, "text-sm, h-fit")
+                    addTailwindClasslist(elt, "text-sm h-fit")
                 }
             ],
             ["[subtype='bibliographic']",
@@ -48,10 +48,17 @@ export let teiBehaviours = {
             if (elt.getAttribute('target') === '#') {
                 console.log('Ignoring empty ptrs...')
             } else {
-                var link = document.createElement('a');
-                link.href = elt.getAttribute('target');
-                link.innerHTML = '>';
-                return link
+                // Previous solution
+                // var link = document.createElement('a');
+                // link.href = elt.getAttribute('target');
+                // link.innerHTML = '→';
+                // addTailwindClasslist(link, '')
+                // return link
+
+                // New solution
+                let link = document.createElement('a');
+                addTailwindClasslist(link, 'text-secondary-500 hover:text-secondary-900 hover:cursor-pointer hover:underline');
+                wrapChildren(elt.parentNode, link);
             }
         },
         "quote": function (elt) {
@@ -89,7 +96,7 @@ export let teiBehaviours = {
             }
         },
         "pb": function (elt) {
-            let emptySigs = ['¶3r', 'A3r']
+            let emptySigs = ['¶3r', 'A3r', 'B1r']
             if (!findIfAncestor(elt, 'tei-list')) {
                 // if pb is in the contents page ignore it, causing too many issues
                 if (this.sigsDict[elt.getAttribute('n')] && !emptySigs.includes(elt.getAttribute('n'))) {
@@ -142,8 +149,10 @@ export let teiBehaviours = {
             }],
             ["[type=catch]", function (elt) {
                 // ensures the behaviour is only applied once
-                if (elt.parentNode && elt.parentNode.tagName != 'DIV' && !findIfAncestor(elt, 'tei-list')) {
+                
+                if (elt.parentNode && elt.parentNode.tagName != 'DIV' && findIfAncestor(elt, 'tei-list') === false) {
                     // IF PAGE BREAK IS IN THE CONTENTS, IGNORE IT, CAUSING TOO MANY ISSUES
+
                     const pageFooterDiv = document.createElement('div');
                     let tailwindStringWrapper = "gap-16 mt-2 mb-16 text-sm"
                     let tailwindStringElt = "justify-self-end"
@@ -154,8 +163,6 @@ export let teiBehaviours = {
                         tailwindStringWrapper += " grid grid-cols-3";
                     }
 
-                    console.log(elt, findIfAncestor(elt, 'tei-list'));
-
                     addTailwindClasslist(pageFooterDiv, tailwindStringWrapper);
                     addTailwindClasslist(elt, tailwindStringElt);
                     if (elt.nextElementSibling && elt.nextElementSibling.tagName === 'TEI-PB') {
@@ -164,7 +171,7 @@ export let teiBehaviours = {
 
                     };
                     wrapElement(elt, pageFooterDiv);
-                } else {
+                } else if (findIfAncestor(elt, 'tei-list')) {
                     addTailwindClasslist(elt, 'hidden');
                 }
             }],
@@ -181,7 +188,7 @@ export let teiBehaviours = {
             ["[type=ornament]", function (elt) {
                 let ornamentEl = document.createElement('object');
                 ornamentEl.setAttribute('data', ornament);
-                addTailwindClasslist(elt, 'flex justify-center, my-8')
+                addTailwindClasslist(elt, 'flex justify-center my-8')
 
                 return ornamentEl;
             }]
@@ -234,6 +241,17 @@ export let teiBehaviours = {
             ["tei-div[type=preface]>tei-head", function (elt) {
                 addTailwindClasslist(elt, 'text-4xl mb-16')
             }],
+            ["tei-body>tei-head", function (elt) {
+                addTailwindClasslist(elt, 'text-4xl mb-16 flex flex-col items-center')
+            }],
+            ["[type=chapter-number]", function (elt) {
+                addTailwindClasslist(elt, 'text-2xl mb-2 text-center');
+            }
+            ],
+            ["[type=chapter-title]", function (elt) {
+                addTailwindClasslist(elt, 'text-2xl mb-8 italic text-center');
+            }
+            ],
             ["_", function (elt) {
                 addTailwindClasslist(elt, 'text-4xl mb-16 text-center')
             }]
@@ -267,6 +285,9 @@ export let teiBehaviours = {
         "list": [
             ["tei-div[type=contents-chapter]>tei-list", function (elt) {
                 addTailwindClasslist(elt, 'grid grid-cols-2 gap-x-4 gap-y-1.5');
+            }],
+            ["tei-div[type=contents-section]>tei-list", function (elt) {
+                addTailwindClasslist(elt, 'grid grid-cols-2 gap-x-4 gap-y-1.5 mb-20');
             }],
             ["_", function (elt) {
                 addTailwindClasslist(elt, 'flex flex-col')
