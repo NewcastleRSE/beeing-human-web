@@ -9,13 +9,18 @@ imgAlt: 'detail of the Feminine Monarchie frontespiece (1623) showing an illustr
 type: article
 layout: article
 ---
+
+<script>
+    import {base} from '$app/paths'
+</script>
+
 In 1609 Butler saw into print a new kind of bee manual, *The Feminine Monarchie, or a Treatise Concerning Bees, and the Due Ordering of them*. It was printed by the Oxford printer Joseph Barnes. Butler’s break with tradition is signalled in the sub-title on the title page: *Wherein The truth, found out by experience and diligent observation, discovereth the idle and fond conceipts, which many have written anent \[about\] this subject*. His writing may be peppered with references from classical ‘authorities’, for example, Aristotle’s *Historia Animalium* (History of Animals), Pliny the Elder’s *Naturalis Historia* (Natural History), and Virgil’s *Georgics*, but he does not always agree with them, and, in contrast to contemporaries like Edward Topsell, his knowledge of bees is informed by his fieldwork, not only by what he read.
 
 What prompted him to do things differently? Once Butler was sure of the feminine sex of the dominant bee in a honeybee hive, he realised that the understanding of bee behaviour – and the traditional patriarchal language and metaphors used to describe it – needed to change. He decided to go into the field and observe the bees, including in their hives. It is impossible to get inside an early modern [hive]() or skep without destroying it, so Butler, trained in the acoustic arts of grammar, rhetoric, and music, chose to listen instead. With a recorder he notated what he heard, and then interpreted it, attributing emotions to sounds (‘voice’) just as a [rhetorician]() does.  
 
 You can see the staves of bee piping that he included in the 1609 edition below:
 
-![Detail from 1609 F1r, a snippet of music as it appears in the first edition of the Feminine Monarchie](/assets/articles/book-hive/music-1609.jpeg)
+![Detail from 1609 F1r, a snippet of music as it appears in the first edition of the Feminine Monarchie]({base}/assets/articles/book-hive/music-1609.jpeg)
 
 For an explanation of this music, and its representation on the page, see [here](#).
 
@@ -27,4 +32,4 @@ With this change we can also both see and experience a significant shift in Butl
 
 The idea that we are entering a ‘hive’ when we open the 1623 edition is also suggested by this work’s material features, indicating Butler’s collaboration with the printer, Haviland. One of those features meets us as soon as we open the book: the new woodcut facing the titlepage (the ‘frontispiece’). This is our buzzing portal to this lively, interactive book. Surrounding this depiction of a hive are the words *Solertia et Labore* (Diligence and Hard Work). On the honeycomb inside this hive the four orders of bee society are represented: the Queen (*Princeps*), wearing her crown at the top, then two generals (*Duces*), and, at the bottom, three plebeian or worker bees (*Plebs*). Just outside the hive we see an example of the fourth sort of bee, two lazy drones (*Inertes fuci*), who are being removed from this feminine monarchy by two more worker bees. The printers’ ornaments are also well chosen: the second line of ornaments above the floral shapes (gardens?) perhaps suggests cells, while the second, inverted line under the woodcut may allude to the spherical shape of hives.
 
-![Frontespiece of the 1623 edition, showing the hive and the orders of bees.](/assets/articles/book-hive/fp-full.jpg)
+![Frontespiece of the 1623 edition, showing the hive and the orders of bees.]({base}/assets/articles/book-hive/fp-full.jpg)
