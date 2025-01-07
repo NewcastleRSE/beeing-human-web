@@ -93,11 +93,25 @@ export let teiBehaviours = {
                 link.addEventListener('mouseover', function () {
                     let target = document.querySelector(elt.getAttribute('target'));
                     if (target) {
-                        addTailwindClasslist(target, 'font-bold text-lg bg-primary-100 transition duration-200 ease-in-out');
-                        // add flash highlight
-                        setTimeout(() => {
-                            removeTailwindClasslist(target, 'bg-primary-100');
-                        }, 200);
+                        // finds the ref inside the target element
+                        let ref = findInDescendant(target, 'tei-ref', [])[0];
+                        if (ref) {
+                            ref.classList.add('font-bold', 'bg-primary-200', 'border', 'rounded', 'transition', 'duration-200',  'ease-in-out');
+                            // add flash highlight
+                            setTimeout(() => {
+                                ref.classList.remove('bg-primary-200');
+                            }, 200);
+
+                            // if there is no arrow inside the ref, add it
+                            if (!ref.querySelector('.arrow')) {
+                                // add left-pointing arrow inside the ref
+                                let arrow = document.createElement('span');
+                                arrow.innerHTML = ' ← ';
+                                arrow.classList.add('arrow', 'anchor');
+                                ref.append(arrow);
+                            }
+
+                        }
                     }
                 });
 
@@ -105,7 +119,16 @@ export let teiBehaviours = {
                 link.addEventListener('mouseleave', function () {
                     let target = document.querySelector(elt.getAttribute('target'));
                     if (target) {
-                        removeTailwindClasslist(target, 'font-bold text-lg');
+                        // finds the ref inside the target element
+                        let ref = findInDescendant(target, 'tei-ref', [])[0];
+                        if (ref) {
+                            ref.classList.remove('font-bold', 'transition', 'border', 'rounded', 'duration-200', 'ease-in-out');
+                            // if there is an arrow inside the ref, remove it
+                            let arrow = ref.querySelector('.arrow');
+                            if (arrow) {
+                                arrow.remove();
+                            }
+                        }
                     }
                 });
 
@@ -171,7 +194,7 @@ export let teiBehaviours = {
             }],
             ["[type=catch]", function (elt) {
                 // ensures the behaviour is only applied once
-                
+
                 if (elt.parentNode && elt.parentNode.tagName != 'DIV' && findIfAncestor(elt, 'tei-list') === false) {
                     // IF PAGE BREAK IS IN THE CONTENTS, IGNORE IT, CAUSING TOO MANY ISSUES
 
