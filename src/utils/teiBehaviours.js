@@ -34,6 +34,11 @@ export let teiBehaviours = {
                     addTailwindClasslist(elt, "text-sm h-fit")
                 }
             ],
+            ["[subtype=gloss]",
+                function (elt) {
+                    addTailwindClasslist(elt, "text-sm h-fit")
+                }
+            ],
             ["[subtype='bibliographic']",
                 function (elt) {
                     addTailwindClasslist(elt, 'text-sm')
@@ -93,10 +98,21 @@ export let teiBehaviours = {
                 link.addEventListener('mouseover', function () {
                     let target = document.querySelector(elt.getAttribute('target'));
                     if (target) {
-                        // finds the ref inside the target element
-                        let ref = findInDescendant(target, 'tei-ref', [])[0];
+                        // if the target attribute contains 'glo' apply the transformations to the entire element
+                        let ref = undefined;
+                        let bold = true;
+                        if (elt.getAttribute('target').includes('glo')) {
+                            ref = target;
+                            bold = false
+                        } else {
+                            // finds the ref inside the target element
+                            ref = findInDescendant(target, 'tei-ref', [])[0];
+                        }
                         if (ref) {
-                            ref.classList.add('font-bold', 'bg-primary-200', 'border', 'rounded', 'transition', 'duration-200',  'ease-in-out');
+                            ref.classList.add('bg-primary-200', 'border', 'rounded', 'transition', 'duration-200',  'ease-in-out');
+                            if (bold) {
+                                ref.classList.add('font-bold');
+                            }
                             // add flash highlight
                             setTimeout(() => {
                                 ref.classList.remove('bg-primary-200');
@@ -119,10 +135,22 @@ export let teiBehaviours = {
                 link.addEventListener('mouseleave', function () {
                     let target = document.querySelector(elt.getAttribute('target'));
                     if (target) {
-                        // finds the ref inside the target element
-                        let ref = findInDescendant(target, 'tei-ref', [])[0];
+                        
+                        // if the target attribute contains 'glo' apply the transformations to the entire element
+                        let ref = undefined;
+                        let bold = true;    
+                        if (elt.getAttribute('target').includes('glo')) {
+                            ref = target;
+                            bold = false
+                        } else {
+                            // if not, applies only to the ref element
+                            ref = findInDescendant(target, 'tei-ref', [])[0];
+                        }
                         if (ref) {
-                            ref.classList.remove('font-bold', 'transition', 'border', 'rounded', 'duration-200', 'ease-in-out');
+                            ref.classList.remove('transition', 'border', 'rounded', 'duration-200', 'ease-in-out');
+                            if (bold) {
+                                ref.classList.remove('font-bold');
+                            }
                             // if there is an arrow inside the ref, remove it
                             let arrow = ref.querySelector('.arrow');
                             if (arrow) {
