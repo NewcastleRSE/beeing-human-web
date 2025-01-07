@@ -39,6 +39,11 @@ export function addTailwindClasslist(elt, classString) {
   elt.classList.add(...classArray)
 }
 
+export function removeTailwindClasslist(elt, classString) {
+  const classArray = classString.split(' ');
+  elt.classList.remove(...classArray)
+}
+
 export function findPreviousElement(node, targetName) {
   // finds the closest element that precedes the node in the run of the document (i.e., milestone elements)
   if (node && node.parentNode) {

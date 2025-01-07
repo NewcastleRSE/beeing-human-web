@@ -1,4 +1,4 @@
-import { addTailwindClasslist, findIfAncestor, findInDescendant, findPreviousElement, wrapChildren, wrapElement } from "./generalHelpers";
+import { addTailwindClasslist, findIfAncestor, findInDescendant, findPreviousElement, removeTailwindClasslist, wrapChildren, wrapElement } from "./generalHelpers";
 import { teiSetBodyLayout } from "./teiBehavioursHelper";
 import ornament from '../assets/text_divider.svg'
 
@@ -79,6 +79,7 @@ export let teiBehaviours = {
                 }
             } else {
                 var link = document.createElement('a');
+                link.classList.add('anchor');
                 link.href = elt.getAttribute('target');
                 if (sup) {
                     const supEl = document.createElement('sup');
@@ -87,6 +88,27 @@ export let teiBehaviours = {
                 } else {
                     link.innerHTML = elt.innerHTML;
                 }
+
+                // highlights when hovered and finds the corresponding element to highlight
+                link.addEventListener('mouseover', function () {
+                    let target = document.querySelector(elt.getAttribute('target'));
+                    if (target) {
+                        addTailwindClasslist(target, 'font-bold text-lg bg-primary-100 transition duration-200 ease-in-out');
+                        // add flash highlight
+                        setTimeout(() => {
+                            removeTailwindClasslist(target, 'bg-primary-100');
+                        }, 200);
+                    }
+                });
+
+                // removes the highlight when the mouse leaves
+                link.addEventListener('mouseleave', function () {
+                    let target = document.querySelector(elt.getAttribute('target'));
+                    if (target) {
+                        removeTailwindClasslist(target, 'font-bold text-lg');
+                    }
+                });
+
                 return link
             }
         },
