@@ -30,6 +30,9 @@ export default {
 		extend: {
 			fontFamily: {
 				'pfdisplay': ['Playfair Display', 'ui-serif']
+			},
+			colors: {
+				...beeTheme.colors,
 			}
 		},
 	},

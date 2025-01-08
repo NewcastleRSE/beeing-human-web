@@ -30,9 +30,10 @@
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
 
     function cleanVariationStyles(el) {
-        el.classList = "";
-        // removes the default background colour for elements in apps
-        el.classList.add("bg-transparent");
+        // removes any bg styling for the element
+        if (el.classList.contains("bg-success-200")) {
+            el.classList.remove("bg-success-200");
+        }
 
         // removes unnecesary textual content
         if (
@@ -49,15 +50,23 @@
             cleanVariationStyles(child);
 
             // restores baseline styling for elements inside apps
-            child.classList = "";
-            child.classList.add(`var-${app.getAttribute("subtype")}`);
+            // child.classList = "";
+            if (app.getAttribute('subtype') === 'add') {
+                child.classList.add('bg-success-200')
+            } else if (app.getAttribute('subtype') === 'del') {
+                child.classList.add('bg-red-200')
+            } else {
+                child.classList.add('bg-secondary-200')
+            }
+
+            child.classList.add("px-1", "py-0.5", "rounded-md");
 
             // adds messages for empty elements
             if (child.tagName === "TEI-LEM") {
                 if (child.hasAttribute("data-empty")) {
                     child.innerHTML = "[+1609]";
+                    child.classList.remove('hidden')
                 }
-                child.classList.add("hover");
             } else if (child.tagName === "TEI-RDG") {
                 if (child.hasAttribute("data-empty")) {
                     child.innerHTML = "[Does not exist in 1609]";
@@ -69,7 +78,7 @@
     function handleStatus(status) {
         if (status.loaded) {
             ready = true;
-            // changeVariationDetail(dataViewerState.variationDetail);
+            changeVariationDetail(dataViewerState.variationDetail);
             changeEditorialNoteVisibility(dataViewerState.editorialNotes);
             toggleBothViewOption(smallScreen);
         }

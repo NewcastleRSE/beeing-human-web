@@ -53,23 +53,15 @@ export let teiBehaviours = {
             teiSetBodyLayout(elt);
             addTailwindClasslist(elt, 'indent-4 mb-2')
         },
-        "ptr": function (elt) {
-            if (elt.getAttribute('target') === '#') {
-                console.log('Ignoring empty ptrs...')
-            } else {
-                // Previous solution
-                // var link = document.createElement('a');
-                // link.href = elt.getAttribute('target');
-                // link.innerHTML = '→';
-                // addTailwindClasslist(link, '')
-                // return link
-
-                // New solution
-                let link = document.createElement('a');
-                addTailwindClasslist(link, 'text-secondary-500 hover:text-secondary-900 hover:cursor-pointer hover:underline');
-                wrapChildren(elt.parentNode, link);
-            }
-        },
+        // "ptr": function (elt) {
+        //     if (elt.getAttribute('target') === '#') {
+        //         console.log('Ignoring empty ptrs...')
+        //     } else {
+        //         let link = document.createElement('a');
+        //         link.classList.add('text-secondary-500',  'hover:text-secondary-900', 'hover:cursor-pointer', 'hover:underline');
+        //         wrapChildren(elt.parentNode, link);
+        //     }
+        // },
         "quote": function (elt) {
             // teiSetBodyLayout(elt);
 
