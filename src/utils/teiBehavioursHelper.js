@@ -9,13 +9,16 @@ export function teiSetBodyLayout(elt) {
         
         if (elt.parentNode.tagName != 'DIV') {
             let parentDiv = document.createElement('div');
-            const tailwindClasses = ['grid', 'grid-cols-4', 'gap-16', 'leading-relaxed', 'text-lg']
+            // Define a grid with 2 columns, where the first column takes 3/4 and the second column takes 1/4 of the width
+            const tailwindClasses = ['grid', 'grid-cols-[4fr_1fr]', 'md:gap-16', 'gap-4', 'leading-relaxed', 'text-lg']
             parentDiv.classList.add(...tailwindClasses)
-            elt.classList.add('col-span-3')
+            // Make the element span the first column
+            elt.classList.add('col-span-1')
             wrapElement(elt, parentDiv);
 
             let notesDiv = document.createElement('div');
-            addTailwindClasslist(notesDiv, 'grid h-full gap-4')
+            // Make the notes div span the second column
+            addTailwindClasslist(notesDiv, 'col-span-1 grid md:h-full gap-4')
             let childNotes = [...elt.querySelectorAll('tei-note')]
             for (let child of childNotes) {
                 if (child.getAttribute('type') === 'authorial') {

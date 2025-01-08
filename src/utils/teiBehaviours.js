@@ -29,6 +29,10 @@ export let teiBehaviours = {
             addTailwindClasslist(elt, tailwindString)
         },
         "note": [
+            ["[place='inline']", function (elt) {
+                addTailwindClasslist(elt, "text-sm h-fit")
+                teiSetBodyLayout(elt);
+            }],
             ["[subtype=summary]",
                 function (elt) {
                     addTailwindClasslist(elt, "text-sm h-fit")
@@ -43,7 +47,7 @@ export let teiBehaviours = {
                 function (elt) {
                     addTailwindClasslist(elt, 'text-sm')
                 }
-            ]
+            ],
         ],
         'p': function (elt) {
             teiSetBodyLayout(elt);
@@ -294,6 +298,9 @@ export let teiBehaviours = {
                     elt.classList.add('italic');
                 }
             }],
+            ["[rend='finis']", function (elt) {
+                addTailwindClasslist(elt, 'my-24')
+            }],
         ],
         "seg": [
             ["[type='special-list-ch1']", function (elt) {
@@ -399,6 +406,29 @@ export let teiBehaviours = {
                     elt.classList.add(col);
                 }
             }]
-        ]
+        ],
+        "trailer": function (elt) {
+            addTailwindClasslist(elt, 'flex flex-col text-xl my-8 items-center italic')
+            // adds the same attributes to the child quote
+            let quote = elt.querySelector('tei-quote');
+            if (quote) {
+                addTailwindClasslist(quote, 'text-center')
+            }
+            if (quote) {
+                // adds a line break after the tei-bibl
+                let br = document.createElement('br');
+                // find the bibl element
+                let bibl = elt.querySelector('tei-bibl');
+                if (bibl) {
+                    bibl.after(br);
+                    addTailwindClasslist(bibl, 'not-italic')
+                }
+                // find the emph element and remove italic
+                let emph = elt.querySelector('tei-emph');
+                if (emph) {
+                    emph.classList.add('not-italic')
+                }
+            }
+        },
     }
 }
