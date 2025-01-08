@@ -107,6 +107,10 @@ export let teiBehaviours = {
                         } else {
                             // finds the ref inside the target element
                             ref = findInDescendant(target, 'tei-ref', [])[0];
+                            // if there is no ref, applies the styles to the target element
+                            if (!ref) {
+                                ref = target;
+                            }
                         }
                         if (ref) {
                             ref.classList.add('bg-primary-200', 'border', 'rounded', 'transition', 'duration-200',  'ease-in-out');
@@ -145,6 +149,10 @@ export let teiBehaviours = {
                         } else {
                             // if not, applies only to the ref element
                             ref = findInDescendant(target, 'tei-ref', [])[0];
+                            // if there is no ref, applies the styles to the target element
+                            if (!ref) {
+                                ref = target;
+                            }
                         }
                         if (ref) {
                             ref.classList.remove('transition', 'border', 'rounded', 'duration-200', 'ease-in-out');
@@ -276,12 +284,24 @@ export let teiBehaviours = {
             }],
             ["[rend=italic]", function (elt) {
                 addTailwindClasslist(elt, 'italic')
-            }]
+            }],
+            ["[rend=opposite]", function (elt) {
+                // if parent is italic, this should not be italic
+                if (elt.parentNode.classList.contains('italic')) {
+                    elt.classList.remove('italic');
+                    elt.classList.add('not-italic');
+                } else {
+                    elt.classList.add('italic');
+                }
+            }],
         ],
         "seg": [
+            ["[type='special-list-ch1']", function (elt) {
+                addTailwindClasslist(elt, "italic flex flex-row justify-center items-center gap-8")
+            }],
             ["[rend='italic']", function (elt) {
                 addTailwindClasslist(elt, "italic");
-            }]
+            }],
         ],
         "titlePage": function (elt) {
             addTailwindClasslist(elt, "flex flex-col content-center py-32")
