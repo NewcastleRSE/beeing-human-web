@@ -3,6 +3,8 @@
     import IiifViewer from "./IIIFViewer.svelte";
     import PdfViewer from "./PdfViewer.svelte";
 
+    import NoteModal from "./NoteModal.svelte";
+
     const mdBreakPoint = 768
 
     let windowSize = $state(0)
@@ -14,6 +16,12 @@
     let fallback = false;
 
     let ready = $state(false);
+
+    // isMarked serves as a shortcut to test whether the element is currently visibly marked on the page
+    let variationCommonStyles = ["px-2", "py-1", "rounded-md",  'cursor-pointer', 'transition-colors', 'duration-300', 'ease-in-out', 'isMarked'];
+    
+    let showModal = $state(false);
+    let modalElement = $state(null);
 
     import {
         dataViewerState
@@ -30,9 +38,23 @@
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
 
     function cleanVariationStyles(el) {
-        el.classList = "";
-        // removes the default background colour for elements in apps
-        el.classList.add("bg-transparent");
+        // removes any bg styling for the element
+        if (el.classList.contains("bg-success-200")) {
+            el.classList.remove("bg-success-200", "hover:bg-success-400");
+        }
+        if (el.classList.contains("bg-error-200")) {
+            el.classList.remove("bg-error-200", "hover:bg-error-400");
+        }
+        if (el.classList.contains("bg-secondary-200")) {
+            el.classList.remove("bg-secondary-200", "hover:bg-secondary-400");
+        }
+
+        // removes any common styles from the variationCommonStyles array
+        for (const style of variationCommonStyles) {
+            if (el.classList.contains(style)) {
+                el.classList.remove(style);
+            }
+        }
 
         // removes unnecesary textual content
         if (
@@ -40,6 +62,7 @@
             el.innerHTML === "[Does not exist in 1609]"
         ) {
             el.textContent = "";
+            el.classList.add('hidden')
         }
     }
 
@@ -49,15 +72,26 @@
             cleanVariationStyles(child);
 
             // restores baseline styling for elements inside apps
-            child.classList = "";
-            child.classList.add(`var-${app.getAttribute("subtype")}`);
+            // child.classList = "";
+            if (app.getAttribute('subtype') === 'add') {
+                child.classList.add('bg-success-200', 'hover:bg-success-400',)
+            } else if (app.getAttribute('subtype') === 'del') {
+                child.classList.add('bg-error-200', 'hover:bg-error-400')
+            } else {
+                child.classList.add('bg-secondary-200', 'hover:bg-secondary-400')
+            }
+
+            // adds common styles from the variationCommonStyles array
+            for (const style of variationCommonStyles) {
+                child.classList.add(style);
+            }
 
             // adds messages for empty elements
             if (child.tagName === "TEI-LEM") {
                 if (child.hasAttribute("data-empty")) {
                     child.innerHTML = "[+1609]";
+                    child.classList.remove('hidden')
                 }
-                child.classList.add("hover");
             } else if (child.tagName === "TEI-RDG") {
                 if (child.hasAttribute("data-empty")) {
                     child.innerHTML = "[Does not exist in 1609]";
@@ -105,15 +139,27 @@
     function changeEditorialNoteVisibility(editorialNotes) {
         try {
             const notesElements = document.querySelectorAll('tei-note[type="editorial"]')
+
+            let variationCommonStyles = ["px-2", "py-1", "rounded-md",  'cursor-pointer', 'transition-colors', 'duration-300', 'ease-in-out', 'bg-warning-200', 'isMarked'];
+
             if (!editorialNotes) {
                 for (const note of notesElements) {
-                    note.classList = ''
                     note.classList.add('hidden');
+
+                    for (const style of variationCommonStyles) {
+                        note.classList.remove(style);
+                    }
+                    
                 }
+
             } else {
                 for (const note of notesElements) {
-                    note.classList = ''
-                    note.classList = 'block'
+                    note.classList.remove('hidden');
+
+                    for (const style of variationCommonStyles) {
+                        note.classList.add(style);
+                    }
+
                 }
             }
         } catch (e) {
@@ -156,6 +202,24 @@
         if (![true, false].includes(dataViewerState.editorialNotes)) {
             dataViewerState.editorialNotes = false;
         }
+        
+        // listens for event 'variationClicked' to show the variation detail
+        window.addEventListener("variationClicked", (e) => {
+            // if the element contains the class 'isMarked', show the modal
+            if (e.detail.classList.contains('isMarked')) {
+                showModal = true;
+                modalElement = e.detail;
+            }
+        });
+
+        window.addEventListener("editorialNoteClicked", (e) => {
+            // if the element contains the class 'isMarked', show the modal
+            if (e.detail.classList.contains('isMarked')) {
+                showModal = true;
+                modalElement = e.detail;
+            }
+        })
+
         ready = true;
     });
     
@@ -166,6 +230,7 @@
 
 {#if ready}
     {#key dataViewerState.activeDataset}
+    <NoteModal message={modalElement} bind:show={showModal}/>
     <div class="md:flex w-full mx-auto md:p-8 md:max-h-screen">
         {#if dataViewerState.activeView === "both" || dataViewerState.activeView === "facsimile"}
             <div
@@ -191,9 +256,9 @@
         {/if}
         {#if dataViewerState.activeView === "both" || dataViewerState.activeView === "transcription"}
             <div
-                class="md:flex w-full {dataViewerState.activeView == 'both'
+                class="md:flex w-full md:h-dvh {dataViewerState.activeView == 'both'
                     ? 'md:w-1/2'
-                    : ''} md:overflow-auto overflow-x-clip"
+                    : ''} md:overflow-auto overflow-x-clip md:px-16"
                 data-testid="transcription"
             >
                 <TeiSimple

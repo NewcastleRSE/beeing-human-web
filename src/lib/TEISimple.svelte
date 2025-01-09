@@ -14,8 +14,8 @@
 <script>
     import { onMount } from 'svelte';
     import CETEI from 'CETEIcean';
-    import { base } from "$app/paths";
     import {teiBehaviours} from '../utils/teiBehaviours';
+    
 
 
     let { path = '', statusCheck} = $props();
@@ -62,10 +62,6 @@
     })
 
 </script>
-
-<svelte:head>
-    <link rel="stylesheet" type="text/css" href="{base}/additional-style/TEIstyle.css"/>
-</svelte:head>
 
 
 <div id='TEI-container' data-testid="TEI-container">
