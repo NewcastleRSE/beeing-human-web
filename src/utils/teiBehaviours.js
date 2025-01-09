@@ -53,28 +53,16 @@ export let teiBehaviours = {
             teiSetBodyLayout(elt);
             addTailwindClasslist(elt, 'indent-4 mb-2')
         },
-        "ptr": function (elt) {
-            if (elt.getAttribute('target') === '#') {
-                console.log('Ignoring empty ptrs...')
-            } else {
+        "ptr": [
+            ["tei-item>tei-ptr", function (elt) {
                 let link = document.createElement('a');
                 link.classList.add('text-secondary-500', 'hover:text-secondary-900', 'hover:cursor-pointer', 'hover:underline');
 
-                // Prevents the link from being wrapped multiple times leading to a recursion error on hot-reload
-                if (!elt.parentNode.hasAttribute('data-wrapped')) {
-                    // wraps all children of elt in wrapper
-                    while (elt.firstChild) {
-                        link.appendChild(elt.firstChild);
-                    }
-                    elt.appendChild(link);
-                    elt.setAttribute('data-wrapped', 'true');
-                }
-            }
-        },
-        "quote": function (elt) {
-            // teiSetBodyLayout(elt);
+                link.href = elt.getAttribute('target');
 
-        },
+                wrapChildren(elt.parentElement, link);
+            }]
+        ],
         "ref": function (elt) {
             let sup = false
             if (elt.getAttribute('rend') === 'superscript') {
@@ -172,7 +160,7 @@ export let teiBehaviours = {
                         }
                     }
                 });
-
+                elt.setAttribute('data-wrapped', 'true');
                 return link
             }
         },

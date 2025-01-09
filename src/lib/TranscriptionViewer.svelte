@@ -21,6 +21,7 @@
     let variationCommonStyles = ["px-2", "py-1", "rounded-md",  'cursor-pointer', 'transition-colors', 'duration-300', 'ease-in-out', 'isMarked'];
     
     let showModal = $state(false);
+    let modalElement = $state(null);
 
     import {
         dataViewerState
@@ -193,9 +194,9 @@
         // listens for event 'variationClicked' to show the variation detail
         window.addEventListener("variationClicked", (e) => {
             // if the element contains the class 'isMarked', show the modal
-            console.log(e.detail)
             if (e.detail.classList.contains('isMarked')) {
                 showModal = true;
+                modalElement = e.detail;
             }
         });
 
@@ -209,7 +210,7 @@
 
 {#if ready}
     {#key dataViewerState.activeDataset}
-    <NoteModal message="this is something else!" bind:show={showModal}/>
+    <NoteModal message={modalElement} bind:show={showModal}/>
     <div class="md:flex w-full mx-auto md:p-8 md:max-h-screen">
         {#if dataViewerState.activeView === "both" || dataViewerState.activeView === "facsimile"}
             <div

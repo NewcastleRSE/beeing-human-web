@@ -1,9 +1,9 @@
 <script>
     import { onMount } from "svelte";
+    import { fade, fly } from "svelte/transition";
 
-    let { message = "hello!", show = $bindable(false) } = $props();
+    let { message, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
-    
 
     function buttonClickedHandler() {
         buttonClicked = true;
@@ -20,11 +20,89 @@
 
         if (isBrowser) {
             window.addEventListener("click", (event) => {
-                if (event.target.closest(".fixed")  && !buttonClicked) {
-                    close();
+                // define whether the user clicked inside the '#modal-screen' element
+                if (show) {
+                    let modalScreen = document.getElementById("modal-screen");
+                    let clickInside = modalScreen.contains(event.target);
+
+                    if (
+                        event.target.closest(".fixed") &&
+                        !buttonClicked &&
+                        !clickInside
+                    ) {
+                        close();
+                    }
+                    buttonClicked = false;
                 }
-                buttonClicked = false;
             });
+        }
+    });
+
+    // find the siblings of the message element
+    let parentElement = $derived.by(() => {
+        if (message) {
+            return message.parentElement;
+        } else {
+            return undefined;
+        }
+    });
+
+    let bgColour = $derived.by(() => {
+        if (parentElement) {
+            if (parentElement.getAttribute("subtype") == "change") {
+                return "bg-secondary-100";
+            } else if (parentElement.getAttribute("subtype") == "add") {
+                return "bg-success-100";
+            } else if (parentElement.getAttribute("subtype") == "del") {
+                return "bg-error-100";
+            } else {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    });
+
+    let accentColour = $derived.by(() => {
+        if (parentElement) {
+            if (parentElement.getAttribute("subtype") == "change") {
+                return "bg-secondary-500";
+            } else if (parentElement.getAttribute("subtype") == "add") {
+                return "bg-success-500";
+            } else if (parentElement.getAttribute("subtype") == "del") {
+                return "bg-error-500";
+            } else {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    });
+
+    let type = $derived.by(() => {
+        if (parentElement) {
+            let type = {
+                change: "change",
+                add: "addition",
+                del: "deletion",
+            };
+            return type[parentElement.getAttribute("subtype")];
+        } else {
+            return "";
+        }
+    });
+
+    let altReadings = $derived.by(() => {
+        let altReadings = [];
+        if (parentElement) {
+            // create a list of all tei-rdg siblings of the message element
+            let siblings = parentElement.querySelectorAll("tei-rdg");
+            siblings.forEach((sibling) => {
+                altReadings.push(sibling);
+            });
+            return altReadings;
+        } else {
+            return undefined;
         }
     });
 </script>
@@ -49,6 +127,8 @@
         <div
             class="fixed inset-0 bg-gray-500/75 transition-opacity"
             aria-hidden="true"
+            transition:fade={{ duration: 300 }}
+            id="backdrop"
         ></div>
 
         <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
@@ -66,23 +146,29 @@
             To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         -->
                 <div
-                    class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+                    class="relative transform overflow-hidden rounded-lg {bgColour} px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+                    transition:fly={{ y: 20, duration: 300 }}
+                    id="modal-screen"
                 >
+                    <div class="flex justify-end">
+                        <button
+                            type="button"
+                            class="text-xl hover:font-bold"
+                            onclick={buttonClickedHandler}>&#x2715;</button
+                        >
+                    </div>
                     <div class="sm:flex sm:items-start">
                         <div
                             class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left"
                         >
+                            <div class="flex gap-2 items-center"><h3 class="h4  w-fit">{type} </h3>
+                            <span class="h-1 w-full {accentColour} my-2"></span></div>
                             <div class="mt-2">
-                                <p class="text-gray-500">{message}</p>
+                                {#each altReadings as reading}
+                                    {@html reading.innerHTML}
+                                {/each}
                             </div>
                         </div>
-                    </div>
-                    <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                        <button
-                            type="button"
-                            class="mt-3 inline-flex w-full justify-center rounded-md px-3 py-2 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                            onclick={buttonClickedHandler}>Back</button
-                        >
                     </div>
                 </div>
             </div>
