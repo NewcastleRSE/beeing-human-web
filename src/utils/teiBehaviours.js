@@ -58,11 +58,16 @@ export let teiBehaviours = {
                 console.log('Ignoring empty ptrs...')
             } else {
                 let link = document.createElement('a');
-                link.classList.add('text-secondary-500',  'hover:text-secondary-900', 'hover:cursor-pointer', 'hover:underline');
-                
+                link.classList.add('text-secondary-500', 'hover:text-secondary-900', 'hover:cursor-pointer', 'hover:underline');
+
                 // Prevents the link from being wrapped multiple times leading to a recursion error on hot-reload
-                if(!elt.parentNode.hasAttribute('data-wrapped')) {
-                    wrapChildren(elt.parentNode, link); 
+                if (!elt.parentNode.hasAttribute('data-wrapped')) {
+                    // wraps all children of elt in wrapper
+                    while (elt.firstChild) {
+                        link.appendChild(elt.firstChild);
+                    }
+                    elt.appendChild(link);
+                    elt.setAttribute('data-wrapped', 'true');
                 }
             }
         },
@@ -113,7 +118,7 @@ export let teiBehaviours = {
                             }
                         }
                         if (ref) {
-                            ref.classList.add('bg-primary-200', 'border', 'rounded', 'transition', 'duration-200',  'ease-in-out');
+                            ref.classList.add('bg-primary-200', 'border', 'rounded', 'transition', 'duration-200', 'ease-in-out');
                             if (bold) {
                                 ref.classList.add('font-bold');
                             }
@@ -139,10 +144,10 @@ export let teiBehaviours = {
                 link.addEventListener('mouseleave', function () {
                     let target = document.querySelector(elt.getAttribute('target'));
                     if (target) {
-                        
+
                         // if the target attribute contains 'glo' apply the transformations to the entire element
                         let ref = undefined;
-                        let bold = true;    
+                        let bold = true;
                         if (elt.getAttribute('target').includes('glo')) {
                             ref = target;
                             bold = false
