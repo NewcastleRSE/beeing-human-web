@@ -48,6 +48,13 @@ export let teiBehaviours = {
                     addTailwindClasslist(elt, 'text-sm')
                 }
             ],
+            ["[type='editorial']", function(elt) {
+                let event = new CustomEvent('editorialNoteClicked', { detail: elt });
+
+                elt.onclick = function () {
+                    window.dispatchEvent(event);
+                }
+            }]
         ],
         'p': function (elt) {
             teiSetBodyLayout(elt);

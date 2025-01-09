@@ -139,15 +139,27 @@
     function changeEditorialNoteVisibility(editorialNotes) {
         try {
             const notesElements = document.querySelectorAll('tei-note[type="editorial"]')
+
+            let variationCommonStyles = ["px-2", "py-1", "rounded-md",  'cursor-pointer', 'transition-colors', 'duration-300', 'ease-in-out', 'bg-warning-200', 'isMarked'];
+
             if (!editorialNotes) {
                 for (const note of notesElements) {
-                    note.classList = ''
                     note.classList.add('hidden');
+
+                    for (const style of variationCommonStyles) {
+                        note.classList.remove(style);
+                    }
+                    
                 }
+
             } else {
                 for (const note of notesElements) {
-                    note.classList = ''
-                    note.classList = 'block'
+                    note.classList.remove('hidden');
+
+                    for (const style of variationCommonStyles) {
+                        note.classList.add(style);
+                    }
+
                 }
             }
         } catch (e) {
@@ -199,6 +211,14 @@
                 modalElement = e.detail;
             }
         });
+
+        window.addEventListener("editorialNoteClicked", (e) => {
+            // if the element contains the class 'isMarked', show the modal
+            if (e.detail.classList.contains('isMarked')) {
+                showModal = true;
+                modalElement = e.detail;
+            }
+        })
 
         ready = true;
     });

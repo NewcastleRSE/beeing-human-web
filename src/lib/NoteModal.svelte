@@ -40,8 +40,10 @@
 
     // find the siblings of the message element
     let parentElement = $derived.by(() => {
-        if (message) {
+        if (message && !message.hasAttribute('type')) {
             return message.parentElement;
+        } else if (message && message.hasAttribute('type') && message.getAttribute('type') ===  'editorial') {
+            return message;
         } else {
             return undefined;
         }
@@ -55,7 +57,9 @@
                 return "bg-success-100";
             } else if (parentElement.getAttribute("subtype") == "del") {
                 return "bg-error-100";
-            } else {
+            } else if (parentElement.getAttribute("type") == "editorial") {
+                return "bg-warning-200";
+            } else  {
                 return "";
             }
         } else {
@@ -71,6 +75,8 @@
                 return "bg-success-500";
             } else if (parentElement.getAttribute("subtype") == "del") {
                 return "bg-error-500";
+            } else if (parentElement.getAttribute("type") == "editorial") {
+                return "bg-warning-600";
             } else {
                 return "";
             }
@@ -85,8 +91,13 @@
                 change: "change",
                 add: "addition",
                 del: "deletion",
+                editorial: "editorial note",
             };
-            return type[parentElement.getAttribute("subtype")];
+            if (parentElement.getAttribute("type") === "editorial") {
+                return type[parentElement.getAttribute("type")];
+            } else {
+                return type[parentElement.getAttribute("subtype")];
+            }
         } else {
             return "";
         }
@@ -95,11 +106,19 @@
     let altReadings = $derived.by(() => {
         let altReadings = [];
         if (parentElement) {
-            // create a list of all tei-rdg siblings of the message element
-            let siblings = parentElement.querySelectorAll("tei-rdg");
-            siblings.forEach((sibling) => {
-                altReadings.push(sibling);
-            });
+            if (parentElement.tagName === 'TEI-APP') {
+                // create a list of all tei-rdg siblings of the message element
+                let siblings = parentElement.querySelectorAll("tei-rdg");
+                siblings.forEach((sibling) => {
+                    altReadings.push(sibling);
+                });
+                
+            } else if (parentElement.tagName === 'TEI-NOTE') {
+                // add all the children to the altReadings array
+                parentElement.childNodes.forEach((child) => {
+                    altReadings.push(child);
+                });
+            }
             return altReadings;
         } else {
             return undefined;
