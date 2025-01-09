@@ -92,4 +92,5 @@ export function wrapChildren(elt, wrapper) {
     wrapper.appendChild(elt.firstChild);
   }
   elt.appendChild(wrapper);
+  elt.setAttribute('data-wrapped', 'true');
 }

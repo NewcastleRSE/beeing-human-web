@@ -40,7 +40,7 @@
             el.classList.remove("bg-error-200", "hover:bg-error-400");
         }
         if (el.classList.contains("bg-secondary-200")) {
-            el.classList.remove("bg-secondary-200", "hover:bg-error-400");
+            el.classList.remove("bg-secondary-200", "hover:bg-secondary-400");
         }
 
         // removes any common styles from the variationCommonStyles array
