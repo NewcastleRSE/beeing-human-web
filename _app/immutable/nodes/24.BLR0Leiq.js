@@ -1,1 +1,0 @@
-import"../chunks/disclose-version.Bg9kRutz.js";import"../chunks/legacy.CtaTdtmd.js";import{a0 as o}from"../chunks/runtime.BgiTR1sa.js";import{a as p,t as e}from"../chunks/template.Dwgzg2G3.js";var r=e("<h1>About</h1> <p>This is an example about page</p>",1);function f(a){var t=r();o(2),p(a,t)}export{f as component};
