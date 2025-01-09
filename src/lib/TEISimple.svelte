@@ -14,8 +14,8 @@
 <script>
     import { onMount } from 'svelte';
     import CETEI from 'CETEIcean';
-    import { base } from "$app/paths";
     import {teiBehaviours} from '../utils/teiBehaviours';
+    
 
 
     let { path = '', statusCheck} = $props();

@@ -212,17 +212,25 @@ export let teiBehaviours = {
             }
         },
         "lem": function (elt) {
-            if (elt.hasAttribute('data-empty')) {
-                elt.innerHTML = '[+1609]'
-                addTailwindClasslist(elt, 'hidden')
-            }
-            elt.classList.add('hover');
+            // if (elt.hasAttribute('data-empty')) {
+            //     elt.innerHTML = '[+1609]'
+            //     addTailwindClasslist(elt, 'hidden')
+            // }
+            // elt.classList.add('hover');
 
             // inherits styles from its grandparent
             let ancestorClassList = elt.parentNode.parentNode.classList;
             if (ancestorClassList) {
                 elt.classList.add(...ancestorClassList)
             }
+
+            // registers a custom event that will send the element on click
+            let event = new CustomEvent('variationClicked', { detail: elt });
+
+            elt.onclick = function () {
+                window.dispatchEvent(event);
+            };
+
         },
         "fw": [
             ["tei-titlePage>tei-fw[type=horizontalRule]", function () {

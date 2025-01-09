@@ -3,6 +3,8 @@
     import IiifViewer from "./IIIFViewer.svelte";
     import PdfViewer from "./PdfViewer.svelte";
 
+    import NoteModal from "./NoteModal.svelte";
+
     const mdBreakPoint = 768
 
     let windowSize = $state(0)
@@ -15,7 +17,10 @@
 
     let ready = $state(false);
 
-    let variationCommonStyles = ["px-2", "py-1", "rounded-md",  'cursor-pointer', 'transition-colors', 'duration-300', 'ease-in-out'];
+    // isMarked serves as a shortcut to test whether the element is currently visibly marked on the page
+    let variationCommonStyles = ["px-2", "py-1", "rounded-md",  'cursor-pointer', 'transition-colors', 'duration-300', 'ease-in-out', 'isMarked'];
+    
+    let showModal = $state(false);
 
     import {
         dataViewerState
@@ -184,6 +189,16 @@
         if (![true, false].includes(dataViewerState.editorialNotes)) {
             dataViewerState.editorialNotes = false;
         }
+        
+        // listens for event 'variationClicked' to show the variation detail
+        window.addEventListener("variationClicked", (e) => {
+            // if the element contains the class 'isMarked', show the modal
+            console.log(e.detail)
+            if (e.detail.classList.contains('isMarked')) {
+                showModal = true;
+            }
+        });
+
         ready = true;
     });
     
@@ -194,6 +209,7 @@
 
 {#if ready}
     {#key dataViewerState.activeDataset}
+    <NoteModal message="this is something else!" bind:show={showModal}/>
     <div class="md:flex w-full mx-auto md:p-8 md:max-h-screen">
         {#if dataViewerState.activeView === "both" || dataViewerState.activeView === "facsimile"}
             <div
