@@ -159,9 +159,9 @@
                     </div>
                     <div class="sm:flex sm:items-start">
                         <div
-                            class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left"
+                            class="mt-3 w-full text-center sm:ml-4 sm:mt-0 sm:text-left"
                         >
-                            <div class="flex gap-2 items-center"><h3 class="h4  w-fit">{type} </h3>
+                            <div class="flex gap-2 items-center mb-10"><h3 class=" font-bold w-fit">{type} </h3>
                             <span class="h-1 w-full {accentColour} my-2"></span></div>
                             <div class="mt-2">
                                 {#each altReadings as reading}
