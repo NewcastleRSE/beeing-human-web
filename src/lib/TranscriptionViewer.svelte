@@ -15,6 +15,8 @@
 
     let ready = $state(false);
 
+    let variationCommonStyles = ["px-2", "py-1", "rounded-md",  'cursor-pointer', 'transition-colors', 'duration-300', 'ease-in-out'];
+
     import {
         dataViewerState
     } from "../stores/dataViewer.svelte";
@@ -32,7 +34,20 @@
     function cleanVariationStyles(el) {
         // removes any bg styling for the element
         if (el.classList.contains("bg-success-200")) {
-            el.classList.remove("bg-success-200");
+            el.classList.remove("bg-success-200", "hover:bg-success-400");
+        }
+        if (el.classList.contains("bg-error-200")) {
+            el.classList.remove("bg-error-200", "hover:bg-error-400");
+        }
+        if (el.classList.contains("bg-secondary-200")) {
+            el.classList.remove("bg-secondary-200", "hover:bg-error-400");
+        }
+
+        // removes any common styles from the variationCommonStyles array
+        for (const style of variationCommonStyles) {
+            if (el.classList.contains(style)) {
+                el.classList.remove(style);
+            }
         }
 
         // removes unnecesary textual content
@@ -41,6 +56,7 @@
             el.innerHTML === "[Does not exist in 1609]"
         ) {
             el.textContent = "";
+            el.classList.add('hidden')
         }
     }
 
@@ -52,14 +68,17 @@
             // restores baseline styling for elements inside apps
             // child.classList = "";
             if (app.getAttribute('subtype') === 'add') {
-                child.classList.add('bg-success-200')
+                child.classList.add('bg-success-200', 'hover:bg-success-400',)
             } else if (app.getAttribute('subtype') === 'del') {
-                child.classList.add('bg-red-200')
+                child.classList.add('bg-error-200', 'hover:bg-error-400')
             } else {
-                child.classList.add('bg-secondary-200')
+                child.classList.add('bg-secondary-200', 'hover:bg-secondary-400')
             }
 
-            child.classList.add("px-1", "py-0.5", "rounded-md");
+            // adds common styles from the variationCommonStyles array
+            for (const style of variationCommonStyles) {
+                child.classList.add(style);
+            }
 
             // adds messages for empty elements
             if (child.tagName === "TEI-LEM") {
