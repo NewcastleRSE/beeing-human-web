@@ -34,6 +34,36 @@
         }
     }
 
+    async function changePage(pageNumber) {
+        try {
+            await iiif.ready.then(() => {
+                iiif.setPage([parseInt(pageNumber)]);
+            });
+        } catch (e) {
+            console.warn('tify is not ready');
+        }
+    }
+
+    async function previousPage() {
+        try {
+            await iiif.ready.then(() => {
+                console.log(iiif.viewer)
+            });
+        } catch (e) {
+            console.warn('tify is not ready', e);
+        }
+    }
+
+    async function nextPage() {
+        try {
+            await iiif.ready.then(() => {
+                iiif.nextPage();
+            });
+        } catch (e) {
+            console.warn('tify is not ready');
+        }
+    }
+
     onMount(async () => {
         if (browser) {
             try {
@@ -59,6 +89,8 @@
 
 </script>
 
+
+<button onclick={() => previousPage()}>-</button><button onclick={() => changePage(2)}>Go to Page 2</button><button onclick={() => nextPage()}>+</button>
 <div id="facsimile-viewer" class="h-full">
 </div>
 
