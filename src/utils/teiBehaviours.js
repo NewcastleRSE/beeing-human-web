@@ -200,6 +200,21 @@ export let teiBehaviours = {
                 }
             } else {
                 addTailwindClasslist(elt, 'hidden')
+                // find closest element that is not hidden
+                let closestVisible = elt.previousElementSibling;
+                while (closestVisible.classList.contains('hidden')) {
+                    closestVisible = closestVisible.previousElementSibling;
+                }
+                // dispatches an event from the closest visible element every time it scrolls into view
+                let text = document.getElementById('TEI-container').parentElement;
+                text.addEventListener('scroll', function () {
+                    let rect = closestVisible.getBoundingClientRect();
+                    if(rect.top >= 0 && rect.bottom <= window.innerHeight / 3) {
+                        let event = new CustomEvent('sigInView', { detail: {sig: elt.getAttribute('n')} });
+                        window.dispatchEvent(event);
+                    }
+                })
+
             }
 
         },
