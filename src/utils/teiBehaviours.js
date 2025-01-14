@@ -48,7 +48,7 @@ export let teiBehaviours = {
                     addTailwindClasslist(elt, 'text-sm')
                 }
             ],
-            ["[type='editorial']", function(elt) {
+            ["[type='editorial']", function (elt) {
                 let event = new CustomEvent('editorialNoteClicked', { detail: elt });
 
                 elt.onclick = function () {
@@ -184,11 +184,24 @@ export let teiBehaviours = {
                     var sig = document.createElement('p');
                     sig.innerHTML = this.sigsDict[elt.getAttribute('n')];
                     sig.classList.add('signature')
+                    
+                    // check if the element is in view anytime the tei-text is scrolled
+                    // find tei-text
+                    let text = document.getElementById('TEI-container').parentElement;
+                    text.addEventListener('scroll', function () {
+                        let rect = elt.getBoundingClientRect();
+                        if (rect.top >= 0 && rect.bottom <= window.innerHeight / 3) {
+                            // if the element is in view, send a custom element with the signature
+                            let event = new CustomEvent('sigInView', { detail: {sig: elt.getAttribute('n')} });
+                            window.dispatchEvent(event);
+                        }
+                    });
                     return sig
                 }
             } else {
                 addTailwindClasslist(elt, 'hidden')
             }
+
         },
         "cb": function (elt) {
             // hides the cb, causing too many issues

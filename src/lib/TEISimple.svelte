@@ -15,6 +15,8 @@
     import { onMount } from 'svelte';
     import CETEI from 'CETEIcean';
     import {teiBehaviours} from '../utils/teiBehaviours';
+
+    import {teiViewerState} from '../stores/teiViewer.svelte';
     
 
 
@@ -53,7 +55,26 @@
             if (path === '') {
                 throw 'No path specified';
             }
-            loadTei(path)
+            await loadTei(path).then(() => {
+                // get an array of all pbs
+                const pbElm = document.querySelectorAll('tei-pb');
+                // put the n attribute of each pb in the teiVierState store
+                pbElm.forEach(pb => {
+                    teiViewerState.signatures.push(pb.getAttribute('n'))
+                })
+                teiViewerState.currentSignature = teiViewerState.signatures[0];
+                // add event listener for iiifPageChange
+                window.addEventListener('iiifPageChange', (e) => {
+                    // scroll into view the element with the same n attribute as the currentSignature
+                    const pb = document.querySelector(`tei-pb[n="${teiViewerState.currentSignature}"]`);
+                    // only do this if the pb exists and is not already in view
+                    if (pb && !pb.getBoundingClientRect().top >= 0) {
+                        pb.scrollIntoView({behavior: 'smooth', block: 'start'});
+                        console.log('scrolling to', teiViewerState.currentSignature, pb)
+                    }
+                })
+                loaded = true;
+            });
         } catch (err) {
             error = err.toString();
             loaded = false;
@@ -63,6 +84,7 @@
 
 </script>
 
+{@debug teiViewerState}
 
 <div id='TEI-container' data-testid="TEI-container">
     {#if !loaded}

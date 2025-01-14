@@ -1,7 +1,9 @@
 <script>
     import { onDestroy, onMount } from "svelte";
     import { browser } from "$app/environment";
-    import {elementReady} from '../utils/generalHelpers'
+    import { elementReady } from "../utils/generalHelpers";
+
+    import { teiViewerState } from "../stores/teiViewer.svelte";
 
     // This needs to be imported only on the browser, otherwise it will generate an error
     // import "tify";
@@ -42,33 +44,44 @@
             await iiif.ready.then(() => {
                 // Add event listener to the next page button
                 elementReady(".tify-scan-page-button.-next").then(() => {
-                    const nextButton = document.querySelector(".tify-scan-page-button.-next");
-                    nextButton.addEventListener('click', () => {
-                        currentPage += 1;
-                    })
-                })
-
-                elementReady(".tify-header-button[title='Next page']").then(() => {
-                    const nextButton = document.querySelector(".tify-header-button[title='Next page'");
-                    nextButton.addEventListener('click', () => {
+                    const nextButton = document.querySelector(
+                        ".tify-scan-page-button.-next",
+                    );
+                    nextButton.addEventListener("click", () => {
                         currentPage += 1;
                     });
-                })
+                });
 
-                elementReady(".tify-scan-page-button.-previous").then(() =>{
-                    const prevButton = document.querySelector(".tify-scan-page-button.-previous");
-                    prevButton.addEventListener('click', () => {
-                        currentPage -= 1;
-                    })
-                })
+                elementReady(".tify-header-button[title='Next page']").then(
+                    () => {
+                        const nextButton = document.querySelector(
+                            ".tify-header-button[title='Next page'",
+                        );
+                        nextButton.addEventListener("click", () => {
+                            currentPage += 1;
+                        });
+                    },
+                );
 
-                elementReady(".tify-header-button[title='Previous page']").then(() => {
-                    const prevButton = document.querySelector(".tify-header-button[title='Previous page'");
-                    prevButton.addEventListener('click', () => {
+                elementReady(".tify-scan-page-button.-previous").then(() => {
+                    const prevButton = document.querySelector(
+                        ".tify-scan-page-button.-previous",
+                    );
+                    prevButton.addEventListener("click", () => {
                         currentPage -= 1;
                     });
-                })
+                });
 
+                elementReady(".tify-header-button[title='Previous page']").then(
+                    () => {
+                        const prevButton = document.querySelector(
+                            ".tify-header-button[title='Previous page'",
+                        );
+                        prevButton.addEventListener("click", () => {
+                            currentPage -= 1;
+                        });
+                    },
+                );
             });
         } catch (e) {
             console.warn("tify is not ready", e);
@@ -79,28 +92,7 @@
         try {
             await iiif.ready.then(() => {
                 iiif.setPage([parseInt(pageNumber)]);
-            });
-        } catch (e) {
-            console.warn("tify is not ready");
-        }
-    }
-
-    async function previousPage() {
-        try {
-            await iiif.ready.then(() => {
-                currentPage -= 1;
-                changePage(currentPage);
-            });
-        } catch (e) {
-            console.warn("tify is not ready", e);
-        }
-    }
-
-    async function nextPage() {
-        try {
-            await iiif.ready.then(() => {
-                currentPage += 1;
-                changePage(currentPage);
+                currentPage = pageNumber;
             });
         } catch (e) {
             console.warn("tify is not ready");
@@ -125,6 +117,39 @@
             }
         }
         loaded = true;
+
+        // Listen to event 'nextPage'
+        window.addEventListener("sigInView", (evt) => {
+            if (evt.detail.sig != teiViewerState.currentSignature) {
+                // find the index of the signature in the array
+                const index = teiViewerState.signatures.indexOf(evt.detail.sig);
+                // adjust the page based on the starting page of the iiif manifesto
+                changePage(index + parseInt(startPage));
+                // update the current signature in the store
+                teiViewerState.currentSignature = evt.detail.sig;
+            }
+        });
+    });
+
+    $effect(() => {
+        if (
+            currentPage !==
+            teiViewerState.signatures.indexOf(teiViewerState.currentSignature) +
+                parseInt(startPage)
+        ) {
+            // set currentSignature to the signature of the current page in the viewer
+            teiViewerState.currentSignature =
+                teiViewerState.signatures[currentPage - parseInt(startPage)];
+            // send iiiPageChange event
+            // sends the index of the signature it should scroll to -> because PBs appear at the top of the page, that should be the preceding signature rather than the current one
+            window.dispatchEvent(
+                new CustomEvent("iiifPageChange", {
+                    detail: {
+                        indexOfNewPb: currentPage - parseInt(startPage),
+                    },
+                }),
+            );
+        }
     });
 
     onDestroy(() => {
@@ -134,9 +159,6 @@
     });
 </script>
 
-{@debug currentPage}
+{@debug teiViewerState, currentPage}
 
-<button onclick={() => previousPage()}>-</button><button
-    onclick={() => changePage(2)}>Go to Page 2</button
-><button onclick={() => nextPage()}>+</button>
 <div id="facsimile-viewer" class="h-full"></div>
