@@ -118,7 +118,6 @@
         }
         loaded = true;
 
-        // Listen to event 'nextPage'
         window.addEventListener("sigInView", (evt) => {
             if (evt.detail.sig != teiViewerState.currentSignature) {
                 // find the index of the signature in the array

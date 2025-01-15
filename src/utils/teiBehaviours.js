@@ -180,22 +180,22 @@ export let teiBehaviours = {
             let emptySigs = ['¶3r', 'A3r', 'B1r']
             if (!findIfAncestor(elt, 'tei-list')) {
                 // if pb is in the contents page ignore it, causing too many issues
+                // check if the element is in view anytime the tei-text is scrolled
+                // find tei-text
+                let text = document.getElementById('TEI-container').parentElement;
+                text.addEventListener('scroll', function () {
+                    let rect = elt.getBoundingClientRect();
+                    if (rect.top >= 0 && rect.bottom <= window.innerHeight / 3) {
+                        // if the element is in view, send a custom element with the signature
+                        let event = new CustomEvent('sigInView', { detail: { sig: elt.getAttribute('n') } });
+                        window.dispatchEvent(event);
+                    }
+                });
                 if (this.sigsDict[elt.getAttribute('n')] && !emptySigs.includes(elt.getAttribute('n'))) {
                     var sig = document.createElement('p');
                     sig.innerHTML = this.sigsDict[elt.getAttribute('n')];
                     sig.classList.add('signature')
-                    
-                    // check if the element is in view anytime the tei-text is scrolled
-                    // find tei-text
-                    let text = document.getElementById('TEI-container').parentElement;
-                    text.addEventListener('scroll', function () {
-                        let rect = elt.getBoundingClientRect();
-                        if (rect.top >= 0 && rect.bottom <= window.innerHeight / 3) {
-                            // if the element is in view, send a custom element with the signature
-                            let event = new CustomEvent('sigInView', { detail: {sig: elt.getAttribute('n')} });
-                            window.dispatchEvent(event);
-                        }
-                    });
+
                     return sig
                 }
             } else {
@@ -209,8 +209,8 @@ export let teiBehaviours = {
                 let text = document.getElementById('TEI-container').parentElement;
                 text.addEventListener('scroll', function () {
                     let rect = closestVisible.getBoundingClientRect();
-                    if(rect.top >= 0 && rect.bottom <= window.innerHeight / 3) {
-                        let event = new CustomEvent('sigInView', { detail: {sig: elt.getAttribute('n')} });
+                    if (rect.top >= 0 && rect.bottom <= window.innerHeight / 3) {
+                        let event = new CustomEvent('sigInView', { detail: { sig: elt.getAttribute('n') } });
                         window.dispatchEvent(event);
                     }
                 })
