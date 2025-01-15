@@ -12,24 +12,22 @@
 -->
 
 <script>
-    import { onMount } from 'svelte';
-    import CETEI from 'CETEIcean';
-    import {teiBehaviours} from '../utils/teiBehaviours';
-    
+    import { onMount } from "svelte";
+    import CETEI from "CETEIcean";
+    import { teiBehaviours } from "../utils/teiBehaviours";
 
+    import { teiViewerState } from "../stores/teiViewer.svelte";
 
-    let { path = '', statusCheck} = $props();
+    let { path = "", statusCheck } = $props();
 
     let loaded = $state(false);
     let error = $state(undefined);
 
-
     async function loadTei(path) {
-        
-        console.log('adding tei')
-        loaded = false
-        const parent = document.getElementById('TEI-container');
-        
+        console.log("adding tei");
+        loaded = false;
+        const parent = document.getElementById("TEI-container");
+
         // cleans the parent container, in case it has any previous content
         while (parent.firstChild) {
             parent.removeChild(parent.lastChild);
@@ -38,35 +36,72 @@
         // inserts TEI content
         var cetei = new CETEI();
         cetei.addBehaviors(teiBehaviours);
-        await cetei.getHTML5(path, function(data) {
+        await cetei
+            .getHTML5(path, function (data) {
                 parent.appendChild(data);
-        }).then(() => {
-            console.log('finished')
-            loaded = true;
-            statusCheck({loaded: 'loaded'})
-            return path;
-        });
+            })
+            .then(() => {
+                console.log("finished");
+                loaded = true;
+                statusCheck({ loaded: "loaded" });
+                return path;
+            });
     }
 
     onMount(async () => {
         try {
-            if (path === '') {
-                throw 'No path specified';
+            if (path === "") {
+                throw "No path specified";
             }
-            loadTei(path)
+            await loadTei(path).then(() => {
+                // get an array of all pbs
+                const pbElm = document.querySelectorAll("tei-pb");
+                // put the n attribute of each pb in the teiVierState store
+                pbElm.forEach((pb) => {
+                    teiViewerState.signatures.push(pb.getAttribute("n"));
+                });
+                teiViewerState.currentSignature = teiViewerState.signatures[0];
+                // add event listener for iiifPageChange
+                window.addEventListener("iiifPageChange", (e) => {
+                    // scroll into view the element with the same n attribute as the currentSignature
+                    let pb = document.querySelector(
+                        `tei-pb[n="${teiViewerState.currentSignature}"]`,
+                    );
+
+                    // if pb is hidden, find the closest visible element and scroll to that
+                    if (pb && pb.classList.contains("hidden")) {
+                        // find closest element that is not hidden
+                        let closestVisible = pb.previousElementSibling;
+                        while (closestVisible.classList.contains("hidden")) {
+                            closestVisible =
+                                closestVisible.previousElementSibling;
+                        }
+                        pb = closestVisible;
+                    }
+
+                    // only do this if the pb exists and is not already in view
+                    if (pb && !pb.getBoundingClientRect().top >= 0) {
+                        pb.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                        });
+                    }
+                });
+                loaded = true;
+            });
         } catch (err) {
             error = err.toString();
             loaded = false;
-            return
+            return;
         }
-    })
-
+    });
 </script>
 
+{@debug teiViewerState}
 
-<div id='TEI-container' data-testid="TEI-container">
+<div id="TEI-container" data-testid="TEI-container">
     {#if !loaded}
-        <p id='loading-message'>Loading...</p>
+        <p id="loading-message">Loading...</p>
     {/if}
     {#if error}
         <p data-testid="error-message">{error}</p>

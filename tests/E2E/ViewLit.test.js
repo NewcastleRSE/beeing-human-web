@@ -36,7 +36,7 @@ test.describe('Page content containers exist tests', () => {
         await expect(page).toHaveURL('/literature');
         const articles = await page.getByRole('article').all();
         expect(articles.length).toBeGreaterThan(0);
-    });    
+    });
 })
 
 test.describe('Transcription page has TEI content', () => {
@@ -108,11 +108,60 @@ test.describe('Page has IIIF viewer content', () => {
         console.log(`Running ${testInfo.title}`);
         await page.goto('/literature/transcription');
     });
-    
-    test('Expect that page contains the IIIF viewer', async ({page}) => {
+
+    test('Expect that page contains the IIIF viewer', async ({ page }) => {
         await expect(page).toHaveURL('/literature/transcription');
         const iiifViewer = page.getByTestId('iiif-viewer');
         await expect(iiifViewer).toBeVisible();
     })
 })
 
+
+
+// // Synchronicity between iiifviewer and transcription
+// test.describe('Synchronicity between IIIF viewer and transcription', () => {
+//     test.beforeEach('Open start URL', async ({ page }, testInfo) => {
+//         console.log(`Running ${testInfo.title}`);
+//         await page.goto('/literature/transcription');
+//     });
+
+//     test('Expect that when the user clicks on the next page button in the IIIF viewer, the transcription is updated', async ({ page }) => {
+//         await expect(page).toHaveURL('/literature/transcription');
+//         const iiifViewer = page.getByTestId('iiif-viewer');
+//         await expect(iiifViewer).toBeVisible();
+//         // await until the IIIF viewer is loaded
+//         await page.waitForSelector('pb');
+//         const nextPageButtons = page.getByTitle('Next page').all();
+//         const nextPageButton = await nextPageButtons[0];
+//         await expect(nextPageButton).toBeVisible();
+//         // get the first visible pb element in the viewport
+//         pbs = await page.locator('pb').all();
+//         const firstVisiblePb = await findFirstVisiblePb(pbs);
+
+//         // click the next page four times
+//         await nextPageButton.click();
+//         await nextPageButton.click();
+//         await nextPageButton.click();
+//         await nextPageButton.click();
+
+//         // get the first visible pb element in the viewport
+//         const firstVisiblePbAfter = await findFirstVisiblePb(pbs);
+
+//         // check that the first visible pb element has changed
+//         expect(firstVisiblePb).not.toEqual(firstVisiblePbAfter);
+//     })
+// })
+
+// async function findFirstVisiblePb(pbs) {
+//     let firstVisiblePb = undefined;
+//     while (firstVisiblePb === undefined) {
+//         for (pb of pbs) {
+//             const boundingBox = await pb.boundingBox();
+//             if (boundingBox !== null && boundingBox.y > 0) {
+//                 firstVisiblePb = pb;
+//                 break;
+//             }
+//         }
+//     }
+//     return firstVisiblePb
+// }
