@@ -1,0 +1,1 @@
+import"../chunks/disclose-version.Bg9kRutz.js";import"../chunks/legacy.CtaTdtmd.js";import{T as i}from"../chunks/TranscriptionViewer.BC8hPK6X.js";function n(o){i(o,{})}function m(o){n(o)}export{m as component};
