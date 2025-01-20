@@ -1,1 +1,0 @@
-import{h as r,d as i,C as c,D as _,F as h,g as d,k,i as u,j as y,U as l}from"./runtime.DisdzdHy.js";function I(f,n,t){r&&i();var e=f,s=l,a,o=c()?_:h;d(()=>{o(s,s=n())&&(a&&k(a),a=u(()=>t(e)))}),r&&(e=y)}export{I as k};
