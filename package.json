@@ -42,6 +42,7 @@
     "prettier": "^3.3.3",
     "prettier-plugin-svelte": "^3.2.8",
     "rehype-class-names": "^2.0.0",
+    "remark-footnotes": "^2.0.0",
     "smplr": "^0.6.1",
     "standardized-audio-context-mock": "^9.6.30",
     "svelte": "^5.2.0",

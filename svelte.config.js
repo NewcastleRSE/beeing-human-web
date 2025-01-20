@@ -3,6 +3,7 @@ import adapter from "@sveltejs/adapter-static";
 
 import {mdsvex} from 'mdsvex'
 import rehypeClassNames from 'rehype-class-names'
+import remarkFootnotes from "remark-footnotes";
 import { customClasses } from "./skeleton-typography.js";
 
 // rehype plugin adds the class name necessary for Skeleton typography
@@ -17,6 +18,7 @@ const mdsvexOptions = {
     backticks: true,
     dashes: true
   },
+  remarkPlugins: [remarkFootnotes],
   rehypePlugins: [
     [rehypeClassNames, customClasses]
   ]
