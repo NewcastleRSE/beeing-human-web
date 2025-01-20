@@ -12,8 +12,6 @@ author: olivia
 date: 2025/01/20
 ---
 
-# Thought experiment: a queen bee in interdisciplinary space
-
 After Queen Elizabeth II died in 2022, the papers reported that the palace beekeeper, John Chapple, had undertaken the traditional (Western) duty of telling the royal bees. This handed-down ritual involves [telling the bees](https://www.atlasobscura.com/articles/telling-the-bees-death) of major events in a household: a marriage, a christening, but most of all a death. It symbolically links the human domestic sphere with the world inside the hive, along the vector of an emotionally-loaded moment from the human world that the bees become included in the metabolism of. 
 
 This very same week, our project team had a reversal of this 'telling the bees' moment. The lab scientists came in to say that their queen had died, and they explained how that entire colony might now be unviable. As they answered our curious questions about buying new colonies on the internet, and how the queenless colony would behave, we noticed that the mood in the room had considerably dampened. We were sad to be told the news, and not exactly for scientific or Royalist reasons. Before working on this project I would have speculated a reason for our group response, but now I am more cautious, more aware that the most readily available answers will not always suffice: that our insights can be fine-tuned. 
