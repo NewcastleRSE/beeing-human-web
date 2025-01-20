@@ -36,6 +36,7 @@ export default {
 			}
 		},
 	},
+	important: true,
 	plugins: [
 		forms,
 		require('tailwind-clip-path'),

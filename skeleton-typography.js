@@ -14,5 +14,6 @@ export const customClasses = {
     kbd: 'kbd',
     del: 'del',
     ins: 'ins',
-    img: 'm-auto max-w-sm my-10'
+    img: 'm-auto max-w-sm my-10',
+    li: 'list-item mb-2'
 }
