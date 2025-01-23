@@ -146,8 +146,6 @@
     });
 </script>
 
-{@debug altReadings}
-
 {#if show}
     <div
         class="relative z-10"
