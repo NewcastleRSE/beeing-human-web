@@ -24,13 +24,27 @@ export let teiBehaviours = {
             // if figure has a graphic element, add it as an img using the url of the graphic element
             let graphic = elt.querySelector('tei-graphic');
             if (graphic) {
+                let imgDiv = document.createElement('div');
+
                 let img = document.createElement('img');
                 // get url from graphic element
                 let src = graphic.getAttribute('url');
                 // define the img.src by adding the src to the transcriptionData object
                 img.src = transcriptionData['1623']['teiMediaRoot'] + src;
                 addTailwindClasslist(img, 'w-full h-auto');
-                wrapElement(elt, img);
+                imgDiv.appendChild(img);
+
+                // add caption if it exists
+                let caption = elt.querySelector('tei-figDesc');
+                if (caption) {
+                    let captionElt = document.createElement('p');
+                    captionElt.innerHTML = caption.innerHTML;
+                    addTailwindClasslist(captionElt, 'text-center text-sm');
+                    imgDiv.appendChild(captionElt);
+                }
+
+                imgDiv.classList.add('mb-4', 'flex', 'flex-col', 'gap-2', 'p-4');
+                return imgDiv;
             }
         },
         "foreign": function (elt) {
