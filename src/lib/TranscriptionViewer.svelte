@@ -262,7 +262,7 @@
                 data-testid="transcription"
             >
                 <TeiSimple
-                    path={transcriptionData[dataViewerState.activeDataset].teiURL}
+                    path={transcriptionData[dataViewerState.activeDataset].teiURL} mediaRoot={transcriptionData[dataViewerState.activeDataset].teiMediaRoot}
                     statusCheck={(status) => handleStatus(status)}
                 />
             </div>

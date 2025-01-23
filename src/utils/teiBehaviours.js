@@ -2,6 +2,8 @@ import { addTailwindClasslist, findIfAncestor, findInDescendant, findPreviousEle
 import { teiSetBodyLayout } from "./teiBehavioursHelper";
 import ornament from '../assets/text_divider.svg'
 
+import transcriptionData from './../routes/(sections)/literature/transcription/transcriptionData.json'
+
 // just left it here as an example of how to select between elements with different attributes.
 export let teiBehaviours = {
     "tei": {
@@ -17,6 +19,19 @@ export let teiBehaviours = {
                 }
             }
             this.sigsDict = sigsDict;
+        },
+        "figure": function (elt) {
+            // if figure has a graphic element, add it as an img using the url of the graphic element
+            let graphic = elt.querySelector('tei-graphic');
+            if (graphic) {
+                let img = document.createElement('img');
+                // get url from graphic element
+                let src = graphic.getAttribute('url');
+                // define the img.src by adding the src to the transcriptionData object
+                img.src = transcriptionData['1623']['teiMediaRoot'] + src;
+                addTailwindClasslist(img, 'w-full h-auto');
+                wrapElement(elt, img);
+            }
         },
         "foreign": function (elt) {
             addTailwindClasslist(elt, "italic")
