@@ -18,7 +18,7 @@
 
     import { teiViewerState } from "../stores/teiViewer.svelte";
 
-    let { path = "", statusCheck } = $props();
+    let { path = "", mediaRoot="",  statusCheck } = $props();
 
     let loaded = $state(false);
     let error = $state(undefined);

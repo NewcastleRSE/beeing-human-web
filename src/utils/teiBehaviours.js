@@ -2,6 +2,8 @@ import { addTailwindClasslist, findIfAncestor, findInDescendant, findPreviousEle
 import { teiSetBodyLayout } from "./teiBehavioursHelper";
 import ornament from '../assets/text_divider.svg'
 
+import transcriptionData from './../routes/(sections)/literature/transcription/transcriptionData.json'
+
 // just left it here as an example of how to select between elements with different attributes.
 export let teiBehaviours = {
     "tei": {
@@ -18,6 +20,33 @@ export let teiBehaviours = {
             }
             this.sigsDict = sigsDict;
         },
+        "figure": function (elt) {
+            // if figure has a graphic element, add it as an img using the url of the graphic element
+            let graphic = elt.querySelector('tei-graphic');
+            if (graphic) {
+                let imgDiv = document.createElement('div');
+
+                let img = document.createElement('img');
+                // get url from graphic element
+                let src = graphic.getAttribute('url');
+                // define the img.src by adding the src to the transcriptionData object
+                img.src = transcriptionData['1623']['teiMediaRoot'] + src;
+                addTailwindClasslist(img, 'w-full h-auto');
+                imgDiv.appendChild(img);
+
+                // add caption if it exists
+                let caption = elt.querySelector('tei-figDesc');
+                if (caption) {
+                    let captionElt = document.createElement('p');
+                    captionElt.innerHTML = caption.innerHTML;
+                    addTailwindClasslist(captionElt, 'text-center text-sm');
+                    imgDiv.appendChild(captionElt);
+                }
+
+                imgDiv.classList.add('mb-4', 'flex', 'flex-col', 'gap-2', 'p-4');
+                return imgDiv;
+            }
+        },
         "foreign": function (elt) {
             addTailwindClasslist(elt, "italic")
         },
@@ -28,7 +57,36 @@ export let teiBehaviours = {
             }
             addTailwindClasslist(elt, tailwindString)
         },
+        "media": function (elt) {
+            // checks if the media element has a url and is audio
+            if (elt.getAttribute('url') && elt.getAttribute('mimeType') === 'audio/mp3') {
+                let audioDiv = document.createElement('div');
+                
+                let audio = document.createElement('audio');
+                audio.src = transcriptionData['1623']['teiMediaRoot'] + elt.getAttribute('url');
+                audio.controls = true;
+                audio.classList.add('w-full');
+                audioDiv.appendChild(audio);
+                // if the elt has a 'desc' child, add it as the audio description
+                let desc = elt.querySelector('tei-desc');
+                console.log(desc);
+                if (desc) {
+                    let descElt = document.createElement('p');
+                    descElt.innerHTML = desc.innerHTML;
+                    addTailwindClasslist(descElt, 'text-center text-sm');
+                    audioDiv.appendChild(descElt);
+                }
+
+                audioDiv.classList.add('mb-4', 'flex', 'flex-col', 'gap-2', 'p-4');
+
+                return audioDiv;
+            }
+        },
         "note": [
+            ["[type='editorial']", function (elt) {
+                console.log('Im being activated', elt.getAttribute('xml:id'))
+                elt.classList.add('hidden');
+            }],
             ["[place='inline']", function (elt) {
                 addTailwindClasslist(elt, "text-sm h-fit")
                 teiSetBodyLayout(elt);
@@ -47,14 +105,7 @@ export let teiBehaviours = {
                 function (elt) {
                     addTailwindClasslist(elt, 'text-sm')
                 }
-            ],
-            ["[type='editorial']", function (elt) {
-                let event = new CustomEvent('editorialNoteClicked', { detail: elt });
-
-                elt.onclick = function () {
-                    window.dispatchEvent(event);
-                }
-            }]
+            ]
         ],
         'p': function (elt) {
             teiSetBodyLayout(elt);
@@ -81,6 +132,13 @@ export let teiBehaviours = {
                     const supEl = document.createElement('sup');
                     supEl.append(elt)
                     return sup
+                }
+            } else if(elt.getAttribute('type') === 'attachment') {
+                // This is a point of attachment for an editorial note, so any processing and styling is left to the TEI viwer component
+                let event = new CustomEvent('editorialNoteClicked', { detail: elt });
+
+                elt.onclick = function () {
+                    window.dispatchEvent(event);
                 }
             } else {
                 var link = document.createElement('a');
