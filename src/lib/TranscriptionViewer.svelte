@@ -140,7 +140,7 @@
         try {
             const notesElements = document.querySelectorAll('tei-ref[type="attachment"]')
 
-            let variationCommonStyles = ["px-2", "py-1", "rounded-md",  'cursor-pointer', 'transition-colors', 'duration-300', 'ease-in-out', 'bg-warning-200', 'isMarked'];
+            let variationCommonStyles = ["px-2", "py-1", "rounded-md",  'cursor-pointer', 'transition-colors', 'duration-300', 'ease-in-out', 'bg-warning-200', 'hover:bg-warning-400', 'isMarked'];
 
             if (!editorialNotes) {
                 for (const note of notesElements) {
