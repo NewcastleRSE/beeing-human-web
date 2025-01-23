@@ -57,6 +57,31 @@ export let teiBehaviours = {
             }
             addTailwindClasslist(elt, tailwindString)
         },
+        "media": function (elt) {
+            // checks if the media element has a url and is audio
+            if (elt.getAttribute('url') && elt.getAttribute('mimeType') === 'audio/mp3') {
+                let audioDiv = document.createElement('div');
+                
+                let audio = document.createElement('audio');
+                audio.src = transcriptionData['1623']['teiMediaRoot'] + elt.getAttribute('url');
+                audio.controls = true;
+                audio.classList.add('w-full');
+                audioDiv.appendChild(audio);
+                // if the elt has a 'desc' child, add it as the audio description
+                let desc = elt.querySelector('tei-desc');
+                console.log(desc);
+                if (desc) {
+                    let descElt = document.createElement('p');
+                    descElt.innerHTML = desc.innerHTML;
+                    addTailwindClasslist(descElt, 'text-center text-sm');
+                    audioDiv.appendChild(descElt);
+                }
+
+                audioDiv.classList.add('mb-4', 'flex', 'flex-col', 'gap-2', 'p-4');
+
+                return audioDiv;
+            }
+        },
         "note": [
             ["[type='editorial']", function (elt) {
                 console.log('Im being activated', elt.getAttribute('xml:id'))
