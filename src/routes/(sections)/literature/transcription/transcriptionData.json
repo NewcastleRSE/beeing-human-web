@@ -8,7 +8,7 @@
         "title": "1609 facsimile"
     },
     "1623": {
-        "teiURL": "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/refs/heads/dev/1623_consolidated.xml",
+        "teiURL": "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/refs/heads/sound-annotation-exp/1623_consolidated.xml",
         "iiifManifest": "https://iiif.archive.org/iiif/RAM2023-1081/manifest.json",
         "manifestStartPage": "5",
         "pdfFallback": "./2023-1081_text.pdf",

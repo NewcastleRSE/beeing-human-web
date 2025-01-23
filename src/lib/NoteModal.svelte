@@ -42,8 +42,19 @@
     let parentElement = $derived.by(() => {
         if (message && !message.hasAttribute('type')) {
             return message.parentElement;
-        } else if (message && message.hasAttribute('type') && message.getAttribute('type') ===  'editorial') {
-            return message;
+        } else if (message && message.hasAttribute('type') && message.getAttribute('type') ===  'attachment') {
+            // the trigger is a point of attachment for an editorial note
+            // find the element with the xml:id that matches the target and return that element
+            let target = message.getAttribute('target');
+            // remove the '#' from the target
+            target = target.replace('#', '');
+            let parentElement = document.getElementById(target);
+            console.log(target);
+            if (parentElement) {
+                return parentElement;
+            } else {
+                return undefined;
+            }
         } else {
             return undefined;
         }
@@ -119,12 +130,23 @@
                     altReadings.push(child);
                 });
             }
+            // for each altReading check if they are a textual node
+            for (const reading of altReadings) {
+                // if the reading is a node type of 3 (text node) then create a new element
+                if (reading.nodeType === 3) {
+                    let span = document.createElement('span');
+                    span.append(reading);
+                    reading.innerHTML = span.outerHTML;
+                }
+            }
             return altReadings;
         } else {
             return undefined;
         }
     });
 </script>
+
+{@debug altReadings}
 
 {#if show}
     <div

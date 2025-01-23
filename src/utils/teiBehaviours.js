@@ -29,6 +29,10 @@ export let teiBehaviours = {
             addTailwindClasslist(elt, tailwindString)
         },
         "note": [
+            ["[type='editorial']", function (elt) {
+                console.log('Im being activated', elt.getAttribute('xml:id'))
+                elt.classList.add('hidden');
+            }],
             ["[place='inline']", function (elt) {
                 addTailwindClasslist(elt, "text-sm h-fit")
                 teiSetBodyLayout(elt);
@@ -47,14 +51,7 @@ export let teiBehaviours = {
                 function (elt) {
                     addTailwindClasslist(elt, 'text-sm')
                 }
-            ],
-            ["[type='editorial']", function (elt) {
-                let event = new CustomEvent('editorialNoteClicked', { detail: elt });
-
-                elt.onclick = function () {
-                    window.dispatchEvent(event);
-                }
-            }]
+            ]
         ],
         'p': function (elt) {
             teiSetBodyLayout(elt);
@@ -81,6 +78,13 @@ export let teiBehaviours = {
                     const supEl = document.createElement('sup');
                     supEl.append(elt)
                     return sup
+                }
+            } else if(elt.getAttribute('type') === 'attachment') {
+                // This is a point of attachment for an editorial note, so any processing and styling is left to the TEI viwer component
+                let event = new CustomEvent('editorialNoteClicked', { detail: elt });
+
+                elt.onclick = function () {
+                    window.dispatchEvent(event);
                 }
             } else {
                 var link = document.createElement('a');
