@@ -1,6 +1,7 @@
 <script>
     import { fade, fly } from "svelte/transition";
     import { onMount } from "svelte";
+    import { base } from "$app/paths";
 
     let { imgDetails, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
@@ -70,7 +71,7 @@
                         >
                     </div>
                     <div class="flex flex-col items-center gap-8">
-                            <img src={imgDetails.url} alt={imgDetails.alt} />
+                            <img src={base + imgDetails.url} alt={imgDetails.alt} />
                             {#if imgDetails.caption}
                                 <p class="w-fit">{imgDetails.caption}</p>
                             {/if}
