@@ -12,6 +12,7 @@ layout: article
 
 <script>
     import {base} from '$app/paths'
+    import ImgContainer from '$lib/ImgContainer.svelte'
 </script>
 
 In 1609 Butler saw into print a new kind of bee manual, *The Feminine Monarchie, or a Treatise Concerning Bees, and the Due Ordering of them*. It was printed by the Oxford printer Joseph Barnes. Butler’s break with tradition is signalled in the sub-title on the title page: *Wherein The truth, found out by experience and diligent observation, discovereth the idle and fond conceipts, which many have written anent \[about\] this subject*. His writing may be peppered with references from classical ‘authorities’, for example, Aristotle’s *Historia Animalium* (History of Animals), Pliny the Elder’s *Naturalis Historia* (Natural History), and Virgil’s *Georgics*, but he does not always agree with them, and, in contrast to contemporaries like Edward Topsell, his knowledge of bees is informed by his fieldwork, not only by what he read.
@@ -20,7 +21,7 @@ What prompted him to do things differently? Once Butler was sure of the feminine
 
 You can see the staves of bee piping that he included in the 1609 edition below:
 
-![Detail from 1609 F1r, a snippet of music as it appears in the first edition of the Feminine Monarchie]({base}/assets/articles/book-hive/music-1609.jpeg)
+<ImgContainer imgUrl="/assets/articles/book-hive/music-1609.jpeg" altText="Detail from 1609 F1r, a snippet of music as it appears in the first edition of the Feminine Monarchie" caption="F1r (1609)"/>
 
 For an explanation of this music, and its representation on the page, see [here](#).
 
