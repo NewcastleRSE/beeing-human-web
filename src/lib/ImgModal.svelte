@@ -58,7 +58,7 @@
                 class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
             >
                 <div
-                    class="rounded-lg text-left shadow-xl transition-all my-8 w-full max-w-lg md:w-fit md:max-w-none md:max-w-dvw p-6 bg-white"
+                    class="rounded-lg text-left shadow-xl transition-all my-8 w-full max-w-lg md:w-fit md:max-w-none md:max-w-dvw px-12 pb-6 pt-4 bg-surface-50"
                     transition:fly={{ y: 20, duration: 300 }}
                     id="modal-screen"
                 >
@@ -69,8 +69,11 @@
                             onclick={buttonClickedHandler}>&#x2715;</button
                         >
                     </div>
-                    <div class="sm:flex sm:items-start">
+                    <div class="flex flex-col items-center gap-8">
                             <img src={imgDetails.url} alt={imgDetails.alt} />
+                            {#if imgDetails.caption}
+                                <p class="w-fit">{imgDetails.caption}</p>
+                            {/if}
                     </div>
                 </div>
             </div>
