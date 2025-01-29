@@ -40,7 +40,7 @@
     });
 </script>
 
-{#if show}
+`{#if show}
     <div
         class="relative z-10"
         aria-labelledby="modal-title"
@@ -59,25 +59,26 @@
                 class="flex min-h-full items-center justify-center md:p-4 text-center"
             >
                 <div
-                    class="md:rounded-lg text-left shadow-xl transition-all md:my-8 w-full max-w-lg md:w-fit md:max-w-none md:max-w-dvw md:px-12 md:pb-6 md:pt-4 py-1 bg-surface-50"
+                    class="md:rounded-lg text-left shadow-xl transition-all md:my-8 w-full max-w-lg md:w-fit md:max-w-none md:max-w-dvw md:px-12 md:pb-6 md:pt-4 py-1 bg-surface-50 md:max-h-fit flex flex-col items-center gap-4"
                     transition:fly={{ y: 20, duration: 300 }}
                     id="modal-screen"
                 >
-                    <div class="flex justify-end p-2">
                         <button
                             type="button"
-                            class="text-xl hover:font-bold"
+                            class="text-xl hover:font-bold self-end p-2"
                             onclick={buttonClickedHandler}>&#x2715;</button
                         >
-                    </div>
-                    <div class="flex flex-col items-center gap-2 md:gap-8">
-                            <img src={base + imgDetails.url} alt={imgDetails.alt} />
-                            {#if imgDetails.caption}
-                                <p class="w-fit">{imgDetails.caption}</p>
-                            {/if}
-                    </div>
+                    <img
+                        src={base + imgDetails.url}
+                        alt={imgDetails.alt}
+                        class="object-contain max-h-[75vh]"
+                    />
+                    {#if imgDetails.caption}
+                        <p class="w-fit">{imgDetails.caption}</p>
+                    {/if}
                 </div>
             </div>
         </div>
     </div>
 {/if}
+`
