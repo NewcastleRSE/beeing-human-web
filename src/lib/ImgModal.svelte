@@ -40,7 +40,7 @@
     });
 </script>
 
-`{#if show}
+{#if show}
     <div
         class="relative z-10"
         aria-labelledby="modal-title"
@@ -81,4 +81,3 @@
         </div>
     </div>
 {/if}
-`
