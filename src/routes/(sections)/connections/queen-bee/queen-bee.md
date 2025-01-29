@@ -12,9 +12,15 @@ author: olivia
 date: 2025/01/20
 ---
 
+<script>
+    import ImgContainer from '$lib/ImgContainer.svelte'
+</script>
+
 After Queen Elizabeth II died in 2022, the papers reported that the palace beekeeper, John Chapple, had undertaken the traditional (Western) duty of telling the royal bees. This handed-down ritual involves [telling the bees](https://www.atlasobscura.com/articles/telling-the-bees-death) of major events in a household: a marriage, a christening, but most of all a death. It symbolically links the human domestic sphere with the world inside the hive, along the vector of an emotionally-loaded moment from the human world that the bees become included in the metabolism of. 
 
-This very same week, our project team had a reversal of this 'telling the bees' moment. The lab scientists came in to say that their queen had died, and they explained how that entire colony might now be unviable. As they answered our curious questions about buying new colonies on the internet, and how the queenless colony would behave, we noticed that the mood in the room had considerably dampened. We were sad to be told the news, and not exactly for scientific or Royalist reasons. Before working on this project I would have speculated a reason for our group response, but now I am more cautious, more aware that the most readily available answers will not always suffice: that our insights can be fine-tuned. 
+This very same week, our project team had a reversal of this 'telling the bees' moment. The lab scientists came in to say that their queen had died, and they explained how that entire colony might now be unviable. As they answered our curious questions about buying new colonies on the internet, and how the queenless colony would behave, we noticed that the mood in the room had considerably dampened. We were sad to be told the news, and not exactly for scientific or Royalist reasons. Before working on this project I would have speculated a reason for our group response, but now I am more cautious, more aware that the most readily available answers will not always suffice: that our insights can be fine-tuned.
+
+<ImgContainer imgUrl="/assets/articles/queen-bee/queenbee(1).jpg" altText="A close-up picture of a queen bee in our lab" caption="A close up picture of a queen bee in our lab"/>
 
 Our Leverhulme Trust-funded project, [Bee-ing Human](https://newcastlerse.github.io/beeing-human-web), has wanted to talk to and with bees, and to listen to them, particularly in relation to questions of emotion. We've taken an early modern book as our centrepiece: Charles Butler's *A Feminine Monarchie*, the title of which draws attention to the fact that he was focussing on the idea of a system with a female leader. First published in 1609, then in subsequent editions of 1623 and 1634, Butler's book is multi-modal. He kept bees, and writes with scientific precision about the practicalities of beekeeping. He's also a great storyteller, and knows how to turn his narrative dial between sharp first-person proof, to more incredulous second- or third-hand anecdote. In the middle of the book there is composed bee music, which again is situated somewhere between replicated and observed sounds, and impressionistic imitation. The text itself, through its punctuation, rhetoric and language, speaks in a variety of voices that create certain moods and movements. 
 
@@ -36,7 +42,9 @@ In the same vein, the project enables us to see all the different things 'emotio
 - The performance of emotion: the accreted cultural reference points that get used to describe how the bees behave, like the frameworks of the Amazons or the court. 
 - Musical and rhetorical conceptions or productions of emotion that are more to do with being 'moved' and affected by sound, pace, tempo, and which draw more directly on the etymological root of the word 'emotion'.  
 
-I cannot articulate fully the view that my colleagues, each with their discrete, careful scholarly systems, hold of the queen bee, but as a result of our collaboration I can feel the moments when she starts to fly into their territory. I can feel my view start to blur, as it were, or the language and truth-making systems of my own expertise and disciplinary standpoint start to run thin, and that is the moment when it becomes necessary to draw in a colleague from another field. The queen flies over to them and they pick up the task of describing her in a different light. 
+I cannot articulate fully the view that my colleagues, each with their discrete, careful scholarly systems, hold of the queen bee, but as a result of our collaboration I can feel the moments when she starts to fly into their territory. I can feel my view start to blur, as it were, or the language and truth-making systems of my own expertise and disciplinary standpoint start to run thin, and that is the moment when it becomes necessary to draw in a colleague from another field. The queen flies over to them and they pick up the task of describing her in a different light.
+
+<ImgContainer imgUrl="/assets/articles/queen-bee/teaminthelab.jpg" altText="A photograph of the Beeing Human team in the lab" caption="The Being Human team in the lab. (L-R): Magnus Williamson, Tiago Sousa Garcia, Balu, Vivek Nityananda, Jennifer Richards, Olivia Smith, Bennett Hogg"/>
 
 What does the queen look like as she flies between us?
 
