@@ -3,7 +3,15 @@
     import { typeColours } from "../utils/typeColours";
     import { base } from "$app/paths";
 
-    let { author, date, type } = $props();
+    import CitationModal from "./CitationModal.svelte";
+
+    let { author, date, type, title } = $props();
+
+    let show = $state(false);
+
+    function toggleModal() {
+        show = !show;
+    }
 </script>
 
 <div class="flex md:gap-6 w-full justify-evenly md:justify-start items-center align-center mb-4">
@@ -19,5 +27,7 @@
             ></span
         > <time datetime="{date}" class="text-xs">{date}</time>
     </div>
-    <button class="text-xs md:ml-auto relative z-10 rounded-full {typeColours[type].background} px-3 py-1.5 font-normal {typeColours[type].text} hover:{typeColours[type].hover}">Citation &#128366;</button>
+    <button class="text-xs md:ml-auto relative z-10 rounded-full {typeColours[type].background} px-3 py-1.5 font-normal {typeColours[type].text} hover:{typeColours[type].hover}" onclick={toggleModal}>Citation &#128366;</button>
 </div>
+
+<CitationModal bind:show={show} citationInfo={{author, date, title}}/>

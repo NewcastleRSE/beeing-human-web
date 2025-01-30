@@ -15,9 +15,9 @@
     let {options, valueChange} = $props();
     let radioValue = $state(options.defaultValue);
 
+    console.log(options)
 
 </script>
-
 
 <div class="flex flex-col gap-2 font-light text-xs md:text-sm" data-testid="radio-group-{options.label}">
     <label for="radio-group-{options.label}" class="hidden md:block font-light text-sm pl-4"
@@ -33,7 +33,13 @@
         {#key options}
         {#each Object.entries(options.values) as [label, value]}
             <RadioItem bind:group={radioValue} name={label} value={value} onchange={() => valueChange({origin: options.label, newValue: value})} id="{makeHtmlId(options.label)}-{makeHtmlId(value)}-button"
-                            >{label.toLowerCase()}</RadioItem
+                            >
+                            {#if options.keepLabelsCase}
+                                {label}
+                            {:else}
+                                {label.toLowerCase()}
+                            {/if}
+                            </RadioItem
                         >
         {/each}
         {/key}
