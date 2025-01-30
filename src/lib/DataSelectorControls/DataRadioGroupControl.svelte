@@ -15,7 +15,6 @@
     let {options, valueChange} = $props();
     let radioValue = $state(options.defaultValue);
 
-    console.log(options)
 
 </script>
 

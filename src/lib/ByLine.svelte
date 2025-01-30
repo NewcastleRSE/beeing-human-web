@@ -7,6 +7,8 @@
 
     let { author, date, type, title } = $props();
 
+    let dateType = new Date(date)
+
     let show = $state(false);
 
     function toggleModal() {
@@ -22,10 +24,10 @@
     />
     <div class="text-sm flex flex-col">
         <span
-            >by <a rel="author" class="anchor" href={people[author].url}
+            ><em>by</em> <a rel="author" class="anchor" href={people[author].url}
                 >{people[author].name}</a
             ></span
-        > <time datetime="{date}" class="text-xs">{date}</time>
+        > <time datetime="{dateType}" class="text-xs">{dateType.toLocaleDateString("en-UK", {weekday: 'long', month: 'long', day:'numeric', year:'numeric'})}</time>
     </div>
     <button class="text-xs md:ml-auto relative z-10 rounded-full {typeColours[type].background} px-3 py-1.5 font-normal {typeColours[type].text} hover:{typeColours[type].hover}" onclick={toggleModal}>Citation &#128366;</button>
 </div>
