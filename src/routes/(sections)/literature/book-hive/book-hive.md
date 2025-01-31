@@ -8,12 +8,17 @@ img: 'assets/articles/book-hive/hive-fp.jpg'
 imgAlt: 'detail of the Feminine Monarchie frontespiece (1623) showing an illustration of a hive: a stylised series of hexagons with a few oversized bees over it. Around the hive the words: Solertia et Labore; below: Socordiam Lvimvs'
 type: article
 layout: article
+author: jenny
+date: 2025/01/03
 ---
 
 <script>
     import {base} from '$app/paths'
     import ImgContainer from '$lib/ImgContainer.svelte'
+    import ByLine from '$lib/ByLine.svelte'
 </script>
+
+<ByLine author={author} date={date} type={type} title={title}/>
 
 In 1609 Butler saw into print a new kind of bee manual, *The Feminine Monarchie, or a Treatise Concerning Bees, and the Due Ordering of them*. It was printed by the Oxford printer Joseph Barnes. Butler’s break with tradition is signalled in the sub-title on the title page: *Wherein The truth, found out by experience and diligent observation, discovereth the idle and fond conceipts, which many have written anent \[about\] this subject*. His writing may be peppered with references from classical ‘authorities’, for example, Aristotle’s *Historia Animalium* (History of Animals), Pliny the Elder’s *Naturalis Historia* (Natural History), and Virgil’s *Georgics*, but he does not always agree with them, and, in contrast to contemporaries like Edward Topsell, his knowledge of bees is informed by his fieldwork, not only by what he read.
 

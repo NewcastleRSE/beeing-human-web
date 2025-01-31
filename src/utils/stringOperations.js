@@ -54,3 +54,11 @@ export function makeHtmlId(string) {
     }
     return string;
 }
+
+export function formatAuthorName(author) {
+    const nameParts = author.split(' ');
+    if (nameParts.length < 2) {
+    return author; // Return the original name if it doesn't have both first and last names
+    }
+    return `${nameParts[1]}, ${nameParts[0]}`;
+}

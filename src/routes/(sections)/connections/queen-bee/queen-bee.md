@@ -14,7 +14,10 @@ date: 2025/01/20
 
 <script>
     import ImgContainer from '$lib/ImgContainer.svelte'
+    import ByLine from '$lib/ByLine.svelte'
 </script>
+
+<ByLine author={author} date={date} type={type} title={title}/>
 
 After Queen Elizabeth II died in 2022, the papers reported that the palace beekeeper, John Chapple, had undertaken the traditional (Western) duty of telling the royal bees. This handed-down ritual involves [telling the bees](https://www.atlasobscura.com/articles/telling-the-bees-death) of major events in a household: a marriage, a christening, but most of all a death. It symbolically links the human domestic sphere with the world inside the hive, along the vector of an emotionally-loaded moment from the human world that the bees become included in the metabolism of. 
 
