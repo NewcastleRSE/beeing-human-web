@@ -60,7 +60,7 @@
         {/if}
         </p>
         <button
-            class="w-16 py-2 px-2 rounded-xl text-white transition-colors duration-500 ease-in-out {buttonClicked ? 'bg-green-500' : 'bg-tertiary-400 hover:bg-tertiary-600'}"
+            class="w-16 py-2 px-2 rounded-xl text-white transition-all duration-500 ease-in-out drop-shadow-md border-2 border-tertiary-500 {buttonClicked ? 'border-green-500 bg-green-400' : 'bg-transparent hover:bg-tertiary-400'}"
             onclick={copyCitation}
         >
             {#if buttonClicked}
