@@ -6,6 +6,7 @@
 
   import { page } from "$app/stores";
   import SectionHero from "../../lib/SectionHero.svelte";
+    import PeopleCollection from "../../lib/PeopleCollection.svelte";
 
   let path = $derived.by(() => {
     let path = $page.route.id.split("/");
@@ -52,7 +53,7 @@
 
 <div class="w-4/5 mx-auto my-6">
   {#if !isSlug(path)}
-    <ArticleCollection data={{}} />
+    <PeopleCollection people = {data.people}/>
   {:else}
     {@render children()}
   {/if}
