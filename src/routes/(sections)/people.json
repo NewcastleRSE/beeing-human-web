@@ -2,37 +2,42 @@
     "jenny": {
         "name": "Jennifer Richards",
         "img": "assets/people/jenny_avatar.png",
-        "url": "#"
+        "url": "/people/jenny"
     },
     "olivia": {
         "name": "Olivia Smith",
         "img": "assets/people/OliviaSmith.jpg",
-        "url": "#"
+        "url": "/people/olivia"
     },
     "bennett": {
         "name": "Bennett Hogg",
         "img": "assets/people/bennett_avatar.png",
-        "url": "#"
+        "url": "/people/bennett"
     },
     "magnus": {
         "name": "Magnus Williamson",
         "img": "assets/people/magnus_avatar.png",
-        "url": "#"
+        "url": "/people/magnus"
     },
     "tiago": {
         "name": "Tiago Sousa Garcia",
         "byLastName": "Sousa Garcia, Tiago",
         "img": "assets/people/tsg.png",
-        "url": "#"
+        "url": "/people/tiago"
     },
     "balu": {
         "name": "Balu GS",
         "img": "assets/people/balu_avatar.png",
-        "url": "#"
+        "url": "/people/balu"
     },
     "vivek": {
         "name": "Vivek Nityananda",
         "img": "assets/people/vivek_avatar.png",
-        "url": "#"
+        "url": "/people/vivek"
+    },
+    "luigi": {
+        "name": "Luigi Baciadonna",
+        "img": "assets/people/luigi_avatar.png",
+        "url": "/people/luigi"
     }
 }
