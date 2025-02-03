@@ -1,7 +1,7 @@
 <script>
   import { ProgressRadial } from "@skeletonlabs/skeleton";
   import { marked } from 'marked';
-  import DOMPurify from 'dompurify'
+  import DOMPurify from 'isomorphic-dompurify';
   import ArticleLayout from "./ArticleLayout.svelte";
 
   let { content = undefined } = $props();

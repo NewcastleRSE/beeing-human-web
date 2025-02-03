@@ -22,8 +22,20 @@
     "tiago": {
         "name": "Tiago Sousa Garcia",
         "byLastName": "Sousa Garcia, Tiago",
+        "title": "Senior Research Software Engineer",
         "img": "assets/people/tsg.png",
-        "url": "/people/tiago"
+        "url": "/people/tiago",
+        "bio": "Tiago is a frontend web developer and digital humanist. Before his graduate and post-graduate education in literature, he worked as a software developer and studied computer engineering in Portugal. Between 2017 and 2021, he was the Research Associate for the *[ATNU](https://research.ncl.ac.uk/atnu/)* project, based at the School of English, where he also taught literary and digital humanities’ focused modules. In 2020-2021, he convened and ran the *Coding for Humanists* study group, and from 2022 he is one of the co-convenors of the *Code Community* at Newcastle University. Until 2022 he was a co-managing editor of the *[Journal of the Text Encoding Initiative](https://journals.openedition.org/jtei/)* and an editorial assistant for *[The Programming Historian](https://programminghistorian.org/en/)*",
+        "socials": {
+            "X": "https://x.com/tiagosousagarci",
+            "github": "https://github.com/tiagosousagarcia",
+            "orcid": "https://orcid.org/0000-0001-5694-7285"
+        },
+        "web": {
+            "personal": "https://tiagosousagarcia.co.uk/",
+            "staff": "https://rse.ncldata.dev/team/tiago-sousa-garcia"
+        },
+        "email": "tiago.sousa-garcia@newcastle.ac.uk"
     },
     "balu": {
         "name": "Balu GS",

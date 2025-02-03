@@ -4,7 +4,6 @@
     let { people } = $props();
 </script>
 
-{@debug people}
 
 {#if people}
     <div class="flex flex-wrap w-2/3 m-auto justify-start">

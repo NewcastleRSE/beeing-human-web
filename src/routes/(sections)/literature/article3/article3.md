@@ -8,6 +8,8 @@ img: 'assets/felipe-santana--e_njRV9hRE-unsplash.jpg'
 imgAlt: 'a random illustration'
 type: article
 layout: article
+author: 'tiago'
+date: '2024/12/13'
 ---
 
 <script>
