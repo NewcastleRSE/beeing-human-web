@@ -4,7 +4,7 @@
   import DOMPurify from 'isomorphic-dompurify';
   import ArticleLayout from "./ArticleLayout.svelte";
 
-  let { content = undefined } = $props();
+  let { content = undefined, layout = true } = $props();
   
 </script>
 
@@ -21,8 +21,12 @@
 {#if content === undefined}
   <ProgressRadial value={undefined} />
 {:else}
+  {#if layout}
   <ArticleLayout>
     <!-- <SvelteMarkdown source={content} /> -->
      {@html DOMPurify.sanitize(marked.parse(content))}
   </ArticleLayout>
+  {:else}
+    {@html DOMPurify.sanitize(marked.parse(content))}
+  {/if}
 {/if}

@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 
-export async function load({ parent, params }) {
+export async function load({ parent, params, fetch }) {
    
    const allData = await parent();
 
@@ -15,6 +15,18 @@ export async function load({ parent, params }) {
               articles.push(allData[article]);
          }
     }
+
+//     find all buzzwords where 'author' matches 'slug
+// get the buzzwords from /api/buzzwords
+     const res = await fetch('/api/buzzwords');
+     const buzzwords = await res.json();
+     let buzzwordsArr = [];
+     for (let bz of Object.keys(buzzwords.buzzwords)) {
+          if (buzzwords.buzzwords[bz].author === slug) {
+               buzzwordsArr.push(buzzwords.buzzwords[bz]);
+          };
+     }
+
     
     if (articles.length > 0) {
      //     create an object with title, url and parent for each article
@@ -30,7 +42,7 @@ export async function load({ parent, params }) {
 //    if slug is a key in peopleData, return the person object
     if (slug in peopleData) {
          return {
-              person: {...peopleData[slug], articles: articles}
+              person: {...peopleData[slug], articles: articles, buzzwords: buzzwordsArr}
          }
     } else {
          error(404, 'Person does not exist');

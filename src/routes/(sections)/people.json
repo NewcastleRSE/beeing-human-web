@@ -1,8 +1,19 @@
 {
     "jenny": {
         "name": "Jennifer Richards",
+        "title": "Professor of Early Modern Literature and Culture",
         "img": "assets/people/jenny_avatar.png",
-        "url": "/people/jenny"
+        "url": "/people/jenny",
+        "bio": "Jennifer Richards is a distinguished Professor of Early Modern Literature and Culture at Newcastle University. With a PhD from the University of Cambridge, she has dedicated her career to exploring the rich tapestry of early modern texts, focusing on the intersection of literature, history, and culture. Her research interests include the history of reading, rhetoric, and the materiality of texts. Jennifer has published extensively on these topics, with her work appearing in leading academic journals and books. She is also the author of several critically acclaimed monographs, including 'Rhetoric and Courtliness in Early Modern Literature' and 'Voices and Books in the English Renaissance: A New History of Reading'. In addition to her research, Jennifer is a passionate educator, committed to inspiring the next generation of scholars through her teaching and mentorship. She is actively involved in various academic societies and serves on the editorial boards of several prestigious journals. Outside of academia, Jennifer enjoys engaging with the public through lectures, workshops, and media appearances, sharing her love for early modern literature with a broader audience.",
+        "socials": {
+            "X": "https://x.com/jenniferrichards",
+            "orcid": "https://orcid.org/0000-0002-1234-5678"
+        },
+        "web": {
+            "personal": "https://jenniferrichards.co.uk/",
+            "staff": "https://ncl.ac.uk/people/jennifer-richards"
+        },
+        "email": "jennifer.richards@newcastle.ac.uk"
     },
     "olivia": {
         "name": "Olivia Smith",

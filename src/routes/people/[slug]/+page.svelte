@@ -3,6 +3,7 @@
     import { makeHtmlId } from "./../../../utils/stringOperations";
 
     import InjectMD from "$lib/InjectMD.svelte";
+    import BuzzwordCard from "$lib/BuzzwordCard.svelte";
 
     let { data } = $props();
 
@@ -35,7 +36,7 @@
     }
 </script>
 
-<div class="flex flex-row items-center gap-44">
+<div class="flex flex-row items-start w-4/5 mx-auto my-20">
     <div class="flex flex-col gap-4 items-center">
         <img
             class="rounded-full max-w-80"
@@ -145,23 +146,36 @@
             {/if}
         </div>
     </div>
-    <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-8 w-2/3 ml-auto">
         <div class="flex flex-col">
             <h3 class="h3">{personData.name}</h3>
             <h4 class="h4 text-gray-500 text-lg italic">{personData.title}</h4>
         </div>
-        <InjectMD content={personData.bio} />
-        {#if personData.articles}
+        <InjectMD content={personData.bio} layout= {false} />
         <div>
-            <h5 class="h5 text-black text-xl">Articles</h5>
-            <ul>
-            {#each personData.articles as article}
-                <li>
-                    <a href="article.url" class="anchor">{article.title}</a>
-                </li>
-            {/each}
-        </ul>
-    </div>
-    {/if}
+        {#if personData.articles}
+            <div>
+                <h5 class="h5 text-black text-xl">Articles</h5>
+                <ul>
+                    {#each personData.articles as article}
+                        <li>
+                            <a href="{base}/{article.url}" class="anchor"
+                                >{article.title}</a
+                            >
+                        </li>
+                    {/each}
+                </ul>
+            </div>
+        {/if}
+        {#if personData.buzzwords}
+            <div class="flex flex-col gap-4 w-2/3">
+                <h5 class="h5 text-black text-xl">Buzzwords</h5>
+                    {#each personData.buzzwords as buzzword}
+                    <BuzzwordCard
+                    {buzzword}
+                />
+                    {/each}
+            </div>
+        {/if}</div>
     </div>
 </div>
