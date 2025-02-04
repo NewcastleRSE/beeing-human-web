@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
-import { daysOfTheWeek, monthsOfTheYear } from '../../src/utils/generalConstants'
+
+import {people} from '../mocks/mockVarsPeople';
 
 test.describe('Page navigation tests', () => {
     test('Page loads and has expected option', async ({ page }) => {
@@ -177,7 +178,14 @@ test.describe('Page has correct contents tests - buzzwords', () => {
             let originalData = buzzwords.find((buzz) => buzz.id === id);
             if (originalData.author) {
                 let displayAuthor = await card.getByTestId('buzzword-byline').textContent();
-                expect(displayAuthor.toLowerCase()).toMatch(originalData.author);
+                // find the display name in the people object
+                let expectedAuthor = undefined;
+                for (let person of Object.keys(people)) {
+                    if (originalData.author === person) {
+                        expectedAuthor = people[person].name.toLowerCase();
+                    }
+                }
+                expect(displayAuthor.toLowerCase()).toMatch(expectedAuthor);
             } else {
                 await expect(card.getByTestId('buzzword-byline')).toHaveCount(0);
             }
@@ -1401,7 +1409,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
 
             for (let card of buzzCards) {
                 const byline = await card.getByTestId('buzzword-byline').innerText();
-                expect(byline.toLowerCase()).toEqual('tiago');
+                expect(byline.toLowerCase()).toEqual('tiago sousa garcia');
             };
         });
 
@@ -1415,7 +1423,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
 
             for (let card of buzzCards) {
                 const byline = await card.getByTestId('buzzword-byline').innerText();
-                expect(byline.toLowerCase()).toEqual('olivia');
+                expect(byline.toLowerCase()).toEqual('olivia smith');
             };
         })
     });

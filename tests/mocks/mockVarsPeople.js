@@ -1,4 +1,4 @@
-{
+export const people = {
     "jenny": {
         "name": "Jennifer Richards",
         "img": "assets/people/jenny_avatar.png",
