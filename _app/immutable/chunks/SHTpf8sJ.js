@@ -1,0 +1,1 @@
+import"./Bg9kRutz.js";import{p as t,a as i,n as p,c as s,r as l}from"./D1zf5A6b.js";import{a as d,t as m}from"./C16yeeFS.js";import{s as n}from"./5bl_xxKd.js";var c=m('<div id="article-body" class="max-w-4xl mx-auto flex flex-col gap-3 leading-relaxed"><!></div>');function h(r,o){t(o,!0);var a=c(),e=s(a);n(e,()=>o.children??p),l(a),d(r,a),i()}export{h as A};
