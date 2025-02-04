@@ -8,10 +8,15 @@ img: 'assets/pexels-tomas-anunziata-129267-695207.jpg'
 imgAlt: 'random'
 type: article
 layout: article
+author: tiago
+date: 2025/01/02
 ---
 <script>
     import Portal from '$lib/Portal.svelte'
+    import ByLine from '$lib/ByLine.svelte'
 </script>
+
+<ByLine author={author} date={date} type={type} title={title}/>
 
 
 

@@ -1,6 +1,6 @@
 <script>
     import { base } from "$app/paths";
-    import { makeHtmlId } from "./../../../utils/stringOperations";
+    import { capitaliseFirstLetter, makeHtmlId } from "./../../../utils/stringOperations";
 
     import InjectMD from "$lib/InjectMD.svelte";
     import BuzzwordCard from "$lib/BuzzwordCard.svelte";
@@ -148,20 +148,20 @@
     </div>
     <div class="flex flex-col gap-8 w-2/3 ml-auto">
         <div class="flex flex-col">
-            <h3 class="h3">{personData.name}</h3>
-            <h4 class="h4 text-gray-500 text-lg italic">{personData.title}</h4>
+            <h3 class="h3 text-4xl">{personData.name}</h3>
+            <span class="h4 text-gray-500 text-lg italic">{personData.title} · {personData.affiliation}</span>
         </div>
         <InjectMD content={personData.bio} layout= {false} />
-        <div>
+        <div class="mt-6">
         {#if personData.articles}
             <div>
-                <h5 class="h5 text-black text-xl">Articles</h5>
-                <ul>
+                <h4 class="h4 mt-6 mb-2 font-thin text-2xl">Articles</h4>
+                <ul class="flex flex-col gap-2 list-disc">
                     {#each personData.articles as article}
-                        <li>
+                        <li class="ml-12 text-lg">
                             <a href="{base}/{article.url}" class="anchor"
                                 >{article.title}</a
-                            >
+                            > · <a class="italic text-gray-500" href="/{article.parent}">{capitaliseFirstLetter(article.parent)}</a>
                         </li>
                     {/each}
                 </ul>
@@ -169,11 +169,12 @@
         {/if}
         {#if personData.buzzwords}
             <div class="flex flex-col gap-4 w-2/3">
-                <h5 class="h5 text-black text-xl">Buzzwords</h5>
+                <h4 class="h4 mt-6 mb-2 font-thin text-2xl">Buzzwords</h4>
                     {#each personData.buzzwords as buzzword}
+                    <div class="ml-6">
                     <BuzzwordCard
                     {buzzword}
-                />
+                /></div>
                     {/each}
             </div>
         {/if}</div>
