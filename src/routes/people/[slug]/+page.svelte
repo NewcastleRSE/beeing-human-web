@@ -36,10 +36,10 @@
     }
 </script>
 
-<div class="flex flex-row items-start w-4/5 mx-auto my-20">
+<div class="flex flex-col md:flex-row md:items-start gap-4 md:w-4/5 mx-auto md:my-20">
     <div class="flex flex-col gap-4 items-center">
         <img
-            class="rounded-full max-w-80"
+            class="rounded-full max-w-40 md:max-w-80"
             src="{base}/{personData.img}"
             alt="A picture of {personData.name}"
         />
@@ -146,7 +146,7 @@
             {/if}
         </div>
     </div>
-    <div class="flex flex-col gap-8 w-2/3 ml-auto">
+    <div class="flex flex-col gap-8 md:w-2/3 ml-auto">
         <div class="flex flex-col">
             <h3 class="h3 text-4xl">{personData.name}</h3>
             <span class="h4 text-gray-500 text-lg italic">{personData.title} · {personData.affiliation}</span>
@@ -168,10 +168,10 @@
             </div>
         {/if}
         {#if personData.buzzwords}
-            <div class="flex flex-col gap-4 w-2/3">
+            <div class="flex flex-col gap-4 md:w-2/3">
                 <h4 class="h4 mt-6 mb-2 font-thin text-2xl">Buzzwords</h4>
                     {#each personData.buzzwords as buzzword}
-                    <div class="ml-6">
+                    <div class="md:ml-6">
                     <BuzzwordCard
                     {buzzword}
                 /></div>
