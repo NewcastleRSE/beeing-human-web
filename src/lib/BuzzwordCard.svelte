@@ -15,7 +15,6 @@
 
 </script>
 
-{@debug buzzword}
 
 <div class="card bg-surface-200 max-w-fill" data-testid="buzzword-card" id={buzzword.id}>
     <header class="card-header flex gap-x-10">
