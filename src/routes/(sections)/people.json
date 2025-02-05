@@ -3,18 +3,17 @@
         "name": "Jennifer Richards",
         "img": "assets/people/jenny_avatar.png",
         "url": "/people/jenny",
-        "title": "Professor, English (2001) Chair",
+        "title": "English (2001) Chair",
         "affiliation": "University of Cambridge",
-        "bio": "Jennifer Richards is a distinguished Professor of Early Modern Literature and Culture at Newcastle University. With a PhD from the University of Cambridge, she has dedicated her career to exploring the rich tapestry of early modern texts, focusing on the intersection of literature, history, and culture. Her research interests include the history of reading, rhetoric, and the materiality of texts. Jennifer has published extensively on these topics, with her work appearing in leading academic journals and books. She is also the author of several critically acclaimed monographs, including 'Rhetoric and Courtliness in Early Modern Literature' and 'Voices and Books in the English Renaissance: A New History of Reading'. In addition to her research, Jennifer is a passionate educator, committed to inspiring the next generation of scholars through her teaching and mentorship. She is actively involved in various academic societies and serves on the editorial boards of several prestigious journals. Outside of academia, Jennifer enjoys engaging with the public through lectures, workshops, and media appearances, sharing her love for early modern literature with a broader audience.",
+        "bio": "Prior to joining Cambridge in 2023, Jennifer (FBA, FEA) was the Joseph Cowen Chair, Newcastle University, and the Director of the Humanities Research Institute.  Her areas of expertise include Renaissance English Literature, the history of reading, history of rhetoric (with a focus on delivery), and scholarly editing. Her most recent book, *Voices and Books in the English Renaissance: A New History of Reading*, was published by Oxford in 2019. It was out of this work on voice, rhetoric and reading that her interest in Charles Butler's study of the sound of bees began. As Chair of the English Association, and in collaboration with the School of Advanced Studies, London, she has launched an online series exploring collaboration: [‘Thinking Forwards’](https://englishassociation.ac.uk/thinking-forwards-collaboration/).",
         "socials": {
-            "X": "#",
-            "orcid": "#"
+            "X": "https://x.com/JenniferRichar7",
+            "bluesky": "https://bsky.app/profile/jennyrichards.bsky.social"
         },
         "web": {
-            "personal": "",
-            "staff": "#"
+            "staff": "https://www.english.cam.ac.uk/people/Jennifer.Richards"
         },
-        "email": "#"
+        "email": "jr970@cam.ac.uk"
     },
     "olivia": {
         "name": "Olivia Smith",
