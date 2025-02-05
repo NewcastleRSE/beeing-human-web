@@ -3,18 +3,17 @@
         "name": "Jennifer Richards",
         "img": "assets/people/jenny_avatar.png",
         "url": "/people/jenny",
-        "title": "Professor, English (2001) Chair",
+        "title": "English (2001) Chair",
         "affiliation": "University of Cambridge",
-        "bio": "Jennifer Richards is a distinguished Professor of Early Modern Literature and Culture at Newcastle University. With a PhD from the University of Cambridge, she has dedicated her career to exploring the rich tapestry of early modern texts, focusing on the intersection of literature, history, and culture. Her research interests include the history of reading, rhetoric, and the materiality of texts. Jennifer has published extensively on these topics, with her work appearing in leading academic journals and books. She is also the author of several critically acclaimed monographs, including 'Rhetoric and Courtliness in Early Modern Literature' and 'Voices and Books in the English Renaissance: A New History of Reading'. In addition to her research, Jennifer is a passionate educator, committed to inspiring the next generation of scholars through her teaching and mentorship. She is actively involved in various academic societies and serves on the editorial boards of several prestigious journals. Outside of academia, Jennifer enjoys engaging with the public through lectures, workshops, and media appearances, sharing her love for early modern literature with a broader audience.",
+        "bio": "Prior to joining Cambridge in 2023, Jennifer (FBA, FEA) was the Joseph Cowen Chair, Newcastle University, and the Director of the Humanities Research Institute.  Her areas of expertise include Renaissance English Literature, the history of reading, history of rhetoric (with a focus on delivery), and scholarly editing. Her most recent book, *Voices and Books in the English Renaissance: A New History of Reading*, was published by Oxford in 2019. It was out of this work on voice, rhetoric and reading that her interest in Charles Butler's study of the sound of bees began. As Chair of the English Association, and in collaboration with the School of Advanced Studies, London, she has launched an online series exploring collaboration: [‘Thinking Forwards’](https://englishassociation.ac.uk/thinking-forwards-collaboration/).",
         "socials": {
-            "X": "#",
-            "orcid": "#"
+            "X": "https://x.com/JenniferRichar7",
+            "bluesky": "https://bsky.app/profile/jennyrichards.bsky.social"
         },
         "web": {
-            "personal": "",
-            "staff": "#"
+            "staff": "https://www.english.cam.ac.uk/people/Jennifer.Richards"
         },
-        "email": "#"
+        "email": "jr970@cam.ac.uk"
     },
     "olivia": {
         "name": "Olivia Smith",
@@ -54,21 +53,17 @@
     },
     "magnus": {
         "name": "Magnus Williamson",
-        "img": "assets/people/magnus_avatar.png",
+        "img": "assets/people/magnus_headshot.jpg",
         "url": "/people/magnus",
         "title": "Professor of Early Music",
         "affiliation": "Newcastle University",
-        "bio": "John Doe is a seasoned professional with over 20 years of experience in the technology industry. He holds a Master's degree in Computer Science from the University of Technology and has worked with several leading tech companies throughout his career. John specializes in software development, project management, and IT consulting. He has a proven track record of delivering high-quality software solutions on time and within budget. John is passionate about mentoring young professionals and has been a guest speaker at numerous tech conferences. In his free time, he enjoys hiking, reading, and exploring new technologies.",
-        "socials": {
-            "X": "#",
-            "orcid": "#",
-            "github": "#"
-        },
+        "bio": "Magnus Williamson (FSA) researches the musical traditions of late-medieval and early modern Europe, especially in the sources and contexts of early-Tudor polyphony. He has led and participated in a number of collaborative projects: the Early English Organ Project; the *Experience of Worship* (AHRC/ESRC, 2009-12); *Dispositifs de la Performance Musicale à la Renaissance* (CNRS/Le Studium, 2013-14); *Tudor Partbooks* (AHRC, 2014-17); *Tallis* (Leverhulme Trust, visiting fellowship, 2017); the *Sarum Hymnal in Manuscript and Print* (British Academy, 2017-18); *English Saints Offices* (British Academy, 2029-21); *Aural Histories* (AHRC, 2022-25); *Henry VIII on Tour* (2022-25) and *Bee-ing Human* (Leverhulme Trust, 2022-25).  His facsimile edition of the Eton Choirbook (Oxford, 2010) won the American Musicological Society’s Palisca Prize. He is chairman of the British Academy edition, Early English Church Music.",
         "web": {
-            "personal": "#",
-            "staff": "#"
+            "googleScholar": "https://scholar.google.com/citations?user=nGbUCf0AAAAJ&hl=it",
+            "staff": "https://www.ncl.ac.uk/sacs/people/profile/magnuswilliamson.html",
+            "personal": "http://www.tudorpartbooks.ac.uk/"
         },
-        "email": "#"
+        "email": "magnus.williamson@ncl.ac.uk"
     },
     "tiago": {
         "name": "Tiago Sousa Garcia",
@@ -112,19 +107,18 @@
         "name": "Vivek Nityananda",
         "img": "assets/people/vivek_avatar.png",
         "url": "/people/vivek",
-        "title": "David Phillips Research Fellow",
-        "affiliation": "Newcastle University",
-        "bio": "John Doe is a seasoned professional with over 20 years of experience in the technology industry. He holds a Master's degree in Computer Science from the University of Technology and has worked with several leading tech companies throughout his career. John specializes in software development, project management, and IT consulting. He has a proven track record of delivering high-quality software solutions on time and within budget. John is passionate about mentoring young professionals and has been a guest speaker at numerous tech conferences. In his free time, he enjoys hiking, reading, and exploring new technologies.",
+        "title": "Senior Lecturer",
+        "affiliation": "Bioscience Institute, Newcastle University",
+        "bio": "Vivek Nityananda received his PhD from the Indian Institute of Science, Bengaluru. He worked in Minneapolis and London before moving to Newcastle University where he is now a Senior Lecturer. He researches insect vision, cognition and welfare. He is also interested in pessimism and optimism and has written a book on overconfidence. He collaborates with researchers in the arts and humanities and regularly communicates science through cartoons, animation and plays.",
         "socials": {
-            "X": "#",
-            "orcid": "#",
-            "github": "#"
+            "bluesky": "https://bsky.app/profile/viveknityananda.bsky.social",
+            "orcid": "https://orcid.org/0000-0002-2878-2425"
         },
         "web": {
-            "personal": "#",
-            "staff": "#"
+            "personal": "https://www.viveknityananda.com",
+            "staff": "https://www.ncl.ac.uk/cbe/about/staff/profile/viveknityananda.html"
         },
-        "email": "#"
+        "email": "vivek.nityananda@newcastle.ac.uk"
     },
     "luigi": {
         "name": "Luigi Baciadonna",
