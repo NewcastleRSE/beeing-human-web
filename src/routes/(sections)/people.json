@@ -1,11 +1,11 @@
 {
     "jenny": {
         "name": "Jennifer Richards",
-        "img": "assets/people/jenny_avatar.png",
+        "img": "assets/people/Jennifer Richards_BA.jpg",
         "url": "/people/jenny",
         "title": "English (2001) Chair",
         "affiliation": "University of Cambridge",
-        "bio": "Prior to joining Cambridge in 2023, Jennifer (FBA, FEA) was the Joseph Cowen Chair, Newcastle University, and the Director of the Humanities Research Institute.  Her areas of expertise include Renaissance English Literature, the history of reading, history of rhetoric (with a focus on delivery), and scholarly editing. Her most recent book, *Voices and Books in the English Renaissance: A New History of Reading*, was published by Oxford in 2019. It was out of this work on voice, rhetoric and reading that her interest in Charles Butler's study of the sound of bees began. As Chair of the English Association, and in collaboration with the School of Advanced Studies, London, she has launched an online series exploring collaboration: [‘Thinking Forwards’](https://englishassociation.ac.uk/thinking-forwards-collaboration/).",
+        "bio": "Prior to joining Cambridge in 2023, Jennifer (FBA, FEA) was the Joseph Cowen Chair, Newcastle University, and the Director of the Humanities Research Institute.  Her areas of expertise include Renaissance English Literature, the history of reading, history of rhetoric (with a focus on delivery), and scholarly editing. Her most recent book, *Voices and Books in the English Renaissance: A New History of Reading*, was published by Oxford in 2019. It was out of this work on voice, rhetoric and reading that her interest in Charles Butler's study of the sound of bees began. As Chair of the English Association, and in collaboration with the School of Advanced Studies, London, she has launched an online series exploring collaboration: ['Thinking Forwards'](https://englishassociation.ac.uk/thinking-forwards-collaboration/).",
         "socials": {
             "X": "https://x.com/JenniferRichar7",
             "bluesky": "https://bsky.app/profile/jennyrichards.bsky.social"
@@ -21,17 +21,11 @@
         "url": "/people/olivia",
         "title": "Research Associate",
         "affiliation": "University of Cambridge",
-        "bio": "John Doe is a seasoned professional with over 20 years of experience in the technology industry. He holds a Master's degree in Computer Science from the University of Technology and has worked with several leading tech companies throughout his career. John specializes in software development, project management, and IT consulting. He has a proven track record of delivering high-quality software solutions on time and within budget. John is passionate about mentoring young professionals and has been a guest speaker at numerous tech conferences. In his free time, he enjoys hiking, reading, and exploring new technologies.",
+        "bio": "Olivia Smith works on early modern literature, with a focus on natural history and science writing, and histories of emotion and cognition. Before coming to Cambridge, she was Balzan Research Fellow and then Wellcome Trust Research Fellow at Oxford. She has devised masterclasses at the Royal College of Physicians and in the Wellcome archive, and is interested in articulating the value of a humanities skillset across the disciplines. With colleagues in Modern Languages she's co-edited the books *Cognitive Confusions: Dreams, Delusions and Illusions in Early Modern Culture* (2017) and the forthcoming *Elemental Objects: Proceedings from a Virtual Showcase* (2025). Her most recently published essay is a piece on the early modern condition of erotomania, which appears in *Love: A Cultural History*, edited by Katherine Ibbett (2024).",
         "socials": {
-            "X": "#",
-            "orcid": "#",
-            "github": "#"
+            "bluesky": "https://bsky.app/profile/oliviasmith.bsky.social"
         },
-        "web": {
-            "personal": "#",
-            "staff": "#"
-        },
-        "email": "#"
+        "email": "ofs20@cam.ac.uk"
     },
     "bennett": {
         "name": "Bennett Hogg",
@@ -39,7 +33,7 @@
         "url": "/people/bennett",
         "title": "Senior Lecturer",
         "affiliation": "Newcastle University",
-        "bio": "John Doe is a seasoned professional with over 20 years of experience in the technology industry. He holds a Master's degree in Computer Science from the University of Technology and has worked with several leading tech companies throughout his career. John specializes in software development, project management, and IT consulting. He has a proven track record of delivering high-quality software solutions on time and within budget. John is passionate about mentoring young professionals and has been a guest speaker at numerous tech conferences. In his free time, he enjoys hiking, reading, and exploring new technologies.",
+        "bio": "John Doe is a seasoned professional with over 20 years of experience in the technology industry. He holds a Masters degree in Computer Science from the University of Technology and has worked with several leading tech companies throughout his career. John specializes in software development, project management, and IT consulting. He has a proven track record of delivering high-quality software solutions on time and within budget. John is passionate about mentoring young professionals and has been a guest speaker at numerous tech conferences. In his free time, he enjoys hiking, reading, and exploring new technologies.",
         "socials": {
             "X": "#",
             "orcid": "#",
@@ -105,7 +99,7 @@
     },
     "vivek": {
         "name": "Vivek Nityananda",
-        "img": "assets/people/vivek_avatar.png",
+        "img": "assets/people/Vivek_hs.jpg",
         "url": "/people/vivek",
         "title": "Senior Lecturer",
         "affiliation": "Bioscience Institute, Newcastle University",
@@ -122,20 +116,11 @@
     },
     "luigi": {
         "name": "Luigi Baciadonna",
-        "img": "assets/people/luigi_avatar.png",
+        "img": "assets/people/LB.jpg",
         "url": "/people/luigi",
         "title": "Research Associate",
-        "affiliation": "Newcastle University",
-        "bio": "John Doe is a seasoned professional with over 20 years of experience in the technology industry. He holds a Master's degree in Computer Science from the University of Technology and has worked with several leading tech companies throughout his career. John specializes in software development, project management, and IT consulting. He has a proven track record of delivering high-quality software solutions on time and within budget. John is passionate about mentoring young professionals and has been a guest speaker at numerous tech conferences. In his free time, he enjoys hiking, reading, and exploring new technologies.",
-        "socials": {
-            "X": "#",
-            "orcid": "#",
-            "github": "#"
-        },
-        "web": {
-            "personal": "#",
-            "staff": "#"
-        },
-        "email": "#"
+        "affiliation": "Newcastle University and University of Turin" ,
+        "bio": "Luigi Baciadonna has a background in psychology and obtained his PhD in Biological Sciences from Queen Mary University of London in 2017. His research focuses on the expression and perception of emotions across different animal species, ranging from insects to vertebrates. After almost a decade in the UK he moved to Italy to work on the cognitive and perceptual abilities in African penguins. In 2022, he was awarded a Marie Skłodowska-Curie Fellowship (FEAR-BEES) to conduct a European project on the neurobiological mechanisms of fear in honey bees at the French CNRS (IBPS - Paris Sorbonne & CBI-CRCA - Paul Sabatier University) and the University of Florence (Italy). His work integrates behavioural, cognitive and neurophysiological approaches to explore how emotions shape cognition and decision-making in animals. ",
+        "email": "luigi.baciadonna@newcastle.ac.uk"
     }
 }
