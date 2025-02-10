@@ -116,11 +116,18 @@
     },
     "luigi": {
         "name": "Luigi Baciadonna",
-        "img": "assets/people/LB.jpg",
+        "img": "assets/people/lb2.png",
         "url": "/people/luigi",
         "title": "Research Associate",
         "affiliation": "Newcastle University and University of Turin" ,
         "bio": "Luigi Baciadonna has a background in psychology and obtained his PhD in Biological Sciences from Queen Mary University of London in 2017. His research focuses on the expression and perception of emotions across different animal species, ranging from insects to vertebrates. After almost a decade in the UK he moved to Italy to work on the cognitive and perceptual abilities in African penguins. In 2022, he was awarded a Marie Skłodowska-Curie Fellowship (FEAR-BEES) to conduct a European project on the neurobiological mechanisms of fear in honey bees at the French CNRS (IBPS - Paris Sorbonne & CBI-CRCA - Paul Sabatier University) and the University of Florence (Italy). His work integrates behavioural, cognitive and neurophysiological approaches to explore how emotions shape cognition and decision-making in animals. ",
-        "email": "luigi.baciadonna@newcastle.ac.uk"
+        "email": "luigi.baciadonna@newcastle.ac.uk",
+        "socials": {
+            "X": "https://x.com/LBaciadonna",
+            "orcid":  "https://orcid.org/0000-0003-0011-801X"
+        },
+        "web": {
+            "staff": "https://www.researchgate.net/profile/Luigi-Baciadonna?ev=hdr_xprf"
+        }
     }
 }
