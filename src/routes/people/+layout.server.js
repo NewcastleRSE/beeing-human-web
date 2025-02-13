@@ -1,4 +1,4 @@
-import people from './../(sections)/people.json'
+import people from './../people/people.json'
 
 export async function load() {
     return {people: people};

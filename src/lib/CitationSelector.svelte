@@ -1,7 +1,7 @@
 <script>
     import DataRadioGroupControl from "./DataSelectorControls/DataRadioGroupControl.svelte";
 
-    import people from "./../routes/(sections)/people.json";
+    import people from "./../routes/people/people.json";
 
     import { formatAuthorName } from "../utils/stringOperations";
 
