@@ -8,7 +8,7 @@ img: 'assets/pexels-tomas-anunziata-129267-695207.jpg'
 imgAlt: 'random'
 type: article
 layout: article
-author: tiago
+author: [tiago, vivek]
 date: 2025/01/02
 ---
 <script>
