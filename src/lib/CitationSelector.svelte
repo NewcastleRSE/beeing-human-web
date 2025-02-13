@@ -20,14 +20,26 @@
 
     let style = $state("MLA");
 
-    let author = $derived.by(() => people[citationInfo.author].name);
+    let author = $derived.by(() => {
+        let authorArray = [];
+        for (const author of citationInfo.authorArray) {
+            authorArray.push(people[author].name);
+        }
+        return authorArray;
+    });
 
     let authorByLastName = $derived.by(() => {
-        if (people[citationInfo.author].byLastName) {
-            return people[citationInfo.author].byLastName;
-        } else {
-            return formatAuthorName(people[citationInfo.author].name);
+        let authorByLastNameArray = [];
+        for (const author of citationInfo.authorArray) {
+            if (people[author].byLastName) {
+                authorByLastNameArray.push(people[author].byLastName);
+            } else {
+                authorByLastNameArray.push(
+                    formatAuthorName(people[author].name),
+                );
+            }
         }
+        return authorByLastNameArray;
     });
 
     let accessDate = new Date().toLocaleDateString();
@@ -60,16 +72,23 @@
     <div class="flex flex-col gap-4 px-4">
         <h2 class="text-lg md:text-2xl">How to cite:</h2>
         <div class="flex gap-2 w-full">
-            <p class="pl-8 text-gray-700 text-base w-2/3 md:w-4/5" id="citation">
+            <p
+                class="pl-8 text-gray-700 text-base w-2/3 md:w-4/5"
+                id="citation"
+            >
                 {#if style === "MLA"}
-                    {authorByLastName}. "{citationInfo.title}".
+                    {#each authorByLastName as authorName, i}
+                        {#if i != 0}{' '}{/if}{authorName}{#if authorByLastName.length - 1 !== i}, {/if}
+                    {/each}. "{citationInfo.title}".
                     <em>Bee-ing Human</em>, {url}. Accessed {accessDate}
                 {:else if style === "chicago"}
-                    {authorByLastName}, "{citationInfo.title}", Bee-ing Human,
-                    last modified {publishedDate}, {url}, Accessed {accessDate}
+                    {#each authorByLastName as authorName, i}
+                    {#if i != 0}{' '}{/if}{authorName}{#if authorByLastName.length - 1 !== i}, {/if}{/each}, "{citationInfo.title}", Bee-ing
+                    Human, last modified {publishedDate}, {url}, Accessed {accessDate}
                 {:else if style === "mhra"}
-                    {author}, '{citationInfo.title}', <em>Bee-ing Human</em>, {publishedDate},
-                    &lt;{url}&gt; [accessed {accessDate}]
+                    {#each author as authorName, i}{#if i != 0}{' '}{/if}{authorName}{#if authorByLastName.length - 1 !== i}, {/if}{/each}, '{citationInfo.title}',
+                    <em>Bee-ing Human</em>, {publishedDate}, &lt;{url}&gt;
+                    [accessed {accessDate}]
                 {/if}
             </p>
             <button

@@ -13,7 +13,13 @@ export async function load({ parent, params, fetch }) {
     for (let article of Object.keys(allData)) {
          if (allData[article].author === slug) {
               articles.push(allData[article]);
-         }
+         } else if (Array.isArray(allData[article].author)) {
+               for (let a of allData[article].author) {
+                   if (a === slug) {
+                        articles.push(allData[article]);
+                   }
+              }
+          }
     }
 
 //     find all buzzwords where 'author' matches 'slug
