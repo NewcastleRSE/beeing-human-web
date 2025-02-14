@@ -97,8 +97,6 @@
     });
 </script>
 
-{@debug teiViewerState}
-
 <div id="TEI-container" data-testid="TEI-container">
     {#if !loaded}
         <p id="loading-message">Loading...</p>
