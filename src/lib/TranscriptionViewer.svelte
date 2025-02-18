@@ -33,6 +33,7 @@
         changeVariationDetail(dataViewerState.variationDetail);
         changeEditorialNoteVisibility(dataViewerState.editorialNotes);
         toggleBothViewOption(smallScreen);
+        skipToSection(dataViewerState.activeNavigator); 
     })
 
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
@@ -183,6 +184,21 @@
                 }
             } catch (e) {
                 console.log('window is not ready, could not adjust button visibility')
+            }
+        }
+    }
+
+    function skipToSection() {
+        if (ready) {
+            // find the element which id matches the activeNavigator
+            const section = document.getElementById(dataViewerState.activeNavigator);
+            if (section) {
+                // find out whether the element is in view
+                const rect = section.getBoundingClientRect();
+                if (rect.top < 0 || rect.bottom > window.innerHeight) {
+                    // if it is not in view, scroll to it
+                    section.scrollIntoView({behavior: "smooth", block: "start"});
+                }
             }
         }
     }
