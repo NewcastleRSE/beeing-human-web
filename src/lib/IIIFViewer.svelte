@@ -45,7 +45,7 @@
         try {
             await iiif.ready.then(() => {
                 const pageSelectButton = document.querySelector(
-                    ".tify-page-select-button",
+                    ".tify-header-column.-pagination",
                 );
                 if (pageSelectButton) {
                     // find custom page select button
@@ -54,6 +54,12 @@
                     pageSelectButton.replaceWith(customButton);
 
                 }
+
+                // find parent container
+                const barHeader = document.querySelector(".tify-header-column.-title");
+                // delete class list
+                barHeader.classList = "";
+
             });
         } catch (e) {
             console.warn("tify is not ready");
