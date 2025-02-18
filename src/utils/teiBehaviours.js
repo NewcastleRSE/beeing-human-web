@@ -453,6 +453,16 @@ export let teiBehaviours = {
             ["[type=contents-chapter]", function (elt) {
                 addTailwindClasslist(elt, "flex flex-col my-8")
             }],
+            ["[type=chapter]", function (elt) {
+               let text = document.getElementById('TEI-container').parentElement;
+               text.addEventListener('scroll', function () {            
+                let rect = elt.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    // if the element is in view, send a custom element with the id
+                    console.log('Im in view ', elt.getAttribute('id'))
+                }
+            });
+            }],
             ["_", function (elt) {
                 addTailwindClasslist(elt, 'flex flex-col')
             }]
