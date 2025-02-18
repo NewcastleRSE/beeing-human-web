@@ -4,6 +4,7 @@
     import { elementReady } from "../utils/generalHelpers";
 
     import { teiViewerState } from "../stores/teiViewer.svelte";
+    import PageSelectButton from "./PageSelectButton.svelte";
 
     // This needs to be imported only on the browser, otherwise it will generate an error
     // import "tify";
@@ -22,6 +23,7 @@
         });
         removeHeader();
         addListenersToButtons();
+        replacePageSelectButton();
     }
 
     async function removeHeader() {
@@ -33,6 +35,31 @@
                 if (iiifTitleHeader) {
                     iiifTitleHeader.remove();
                 }
+            });
+        } catch (e) {
+            console.warn("tify is not ready");
+        }
+    }
+
+    async function replacePageSelectButton() {
+        try {
+            await iiif.ready.then(() => {
+                const pageSelectButton = document.querySelector(
+                    ".tify-header-column.-pagination",
+                );
+                if (pageSelectButton) {
+                    // find custom page select button
+                    let customButton = document.querySelector("#custom-page-select-button")
+                    // replace the page select button with the custom button
+                    pageSelectButton.replaceWith(customButton);
+
+                }
+
+                // find parent container
+                const barHeader = document.querySelector(".tify-header-column.-title");
+                // delete class list
+                barHeader.classList = "";
+
             });
         } catch (e) {
             console.warn("tify is not ready");
@@ -105,10 +132,10 @@
                 // import tify and create a new instance
                 await import("tify").then(() => {
                     if (manifest && startPage) {
-                        buildIIIFY(manifest);
                         if (currentPage === undefined) {
                             currentPage = parseInt(startPage);
                         }
+                        buildIIIFY(manifest);
                     }
                 });
                 loaded = true;
@@ -158,6 +185,5 @@
     });
 </script>
 
-{@debug teiViewerState, currentPage}
-
 <div id="facsimile-viewer" class="h-full"></div>
+<PageSelectButton {currentPage} newPage={(nP) => changePage(nP)}/>
