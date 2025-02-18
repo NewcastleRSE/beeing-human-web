@@ -36,6 +36,7 @@
     })
 
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
+    import DataNavigator from "./DataSelectorControls/DataNavigator.svelte";
 
     function cleanVariationStyles(el) {
         // removes any bg styling for the element
@@ -225,6 +226,8 @@
     
 
 </script>
+
+<DataNavigator listIndex={[["chapter 1", "1"], ["chapter 2", "2"], ["chapter 3", "3"]]} />
 
 <svelte:window bind:innerWidth={windowSize}/>
 
