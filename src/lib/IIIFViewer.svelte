@@ -153,8 +153,20 @@
                 changePage(index + parseInt(startPage));
                 // update the current signature in the store
                 teiViewerState.currentSignature = evt.detail.sig;
+
+                // find the element for evt.detail.sig
+                const sigElement = document.querySelector(`[n='${evt.detail.sig}']`);
+                // find its closest parent with a type "chapter"
+                const chapterElement = sigElement.closest("[type='chapter']");
+                if (chapterElement) {
+                    if (chapterElement.getAttribute('id') != teiViewerState.currentSection) {
+                        teiViewerState.currentSection = chapterElement.getAttribute('id');
+                    }
+                }
+                
             }
         });
+        
     });
 
     $effect(() => {
@@ -184,6 +196,8 @@
         }
     });
 </script>
+
+{@debug teiViewerState}
 
 <div id="facsimile-viewer" class="h-full"></div>
 <PageSelectButton {currentPage} newPage={(nP) => changePage(nP)}/>

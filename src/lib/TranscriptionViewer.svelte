@@ -237,10 +237,6 @@
             }
         })
 
-        window.addEventListener("chapterInView", (e) => {
-            console.log('chapter in view', e.detail);
-        });
-
         ready = true;
     });
     

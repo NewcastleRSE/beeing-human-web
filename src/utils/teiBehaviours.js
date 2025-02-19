@@ -61,7 +61,7 @@ export let teiBehaviours = {
             // checks if the media element has a url and is audio
             if (elt.getAttribute('url') && elt.getAttribute('mimeType') === 'audio/mp3') {
                 let audioDiv = document.createElement('div');
-                
+
                 let audio = document.createElement('audio');
                 audio.src = transcriptionData['1623']['teiMediaRoot'] + elt.getAttribute('url');
                 audio.controls = true;
@@ -133,7 +133,7 @@ export let teiBehaviours = {
                     supEl.append(elt)
                     return sup
                 }
-            } else if(elt.getAttribute('type') === 'attachment') {
+            } else if (elt.getAttribute('type') === 'attachment') {
                 // This is a point of attachment for an editorial note, so any processing and styling is left to the TEI viwer component
                 let event = new CustomEvent('editorialNoteClicked', { detail: elt });
 
@@ -452,16 +452,6 @@ export let teiBehaviours = {
             }],
             ["[type=contents-chapter]", function (elt) {
                 addTailwindClasslist(elt, "flex flex-col my-8")
-            }],
-            ["[type=chapter]", function (elt) {
-               let text = document.getElementById('TEI-container').parentElement;
-               text.addEventListener('scroll', function () {            
-                let rect = elt.getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                    // if the element is in view, send a custom element with the id
-                    console.log('Im in view ', elt.getAttribute('id'))
-                }
-            });
             }],
             ["_", function (elt) {
                 addTailwindClasslist(elt, 'flex flex-col')
