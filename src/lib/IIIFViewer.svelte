@@ -4,6 +4,7 @@
     import { elementReady } from "../utils/generalHelpers";
 
     import { teiViewerState } from "../stores/teiViewer.svelte";
+
     import PageSelectButton from "./PageSelectButton.svelte";
 
     // This needs to be imported only on the browser, otherwise it will generate an error
@@ -155,9 +156,18 @@
                 teiViewerState.currentSignature = evt.detail.sig;
 
                 // find the element for evt.detail.sig
-                const sigElement = document.querySelector(`[n='${evt.detail.sig}']`);
+                const sigElement = document.querySelector(`[n='${teiViewerState.signatures[index+1]}']`);
                 // find its closest parent with a type "chapter"
-                const chapterElement = sigElement.closest("[type='chapter']");
+                let chapterElement = sigElement.closest("[type='chapter']");
+                if (!chapterElement) {
+                    const possibleSections = ["titlepage", "preface", "dedication", "contents"];
+                    for (const section of possibleSections) {
+                        chapterElement = sigElement.closest(`[type='${section}']`);
+                        if (chapterElement) {
+                            break;
+                        }
+                    }
+                }
                 if (chapterElement) {
                     if (chapterElement.getAttribute('id') != teiViewerState.currentSection) {
                         teiViewerState.currentSection = chapterElement.getAttribute('id');
@@ -196,8 +206,6 @@
         }
     });
 </script>
-
-{@debug teiViewerState}
 
 <div id="facsimile-viewer" class="h-full"></div>
 <PageSelectButton {currentPage} newPage={(nP) => changePage(nP)}/>

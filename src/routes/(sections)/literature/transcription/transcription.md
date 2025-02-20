@@ -21,9 +21,9 @@ dataSelectorControls: [{
             dataSource: false,
             type: "navigator",
             listIndex: [
-                ["Titlepage", 0],
-                ["Preface", 1],
-                ["Ad Autorem", 2],
+                ["Titlepage", "titlepage"],
+                ["Preface", preface],
+                ["Ad Autorem", dedication],
                 ["Table of Contents", "contents"],
                 ["Chapter 1", "ch1"],
                 ["Chapter 2", "ch2"],
@@ -36,7 +36,7 @@ dataSelectorControls: [{
                 ["Chapter 9", "ch9"],
                 ["Chapter 10", "ch10"],
             ],
-            defaultSelected: 0
+            defaultSelected: "titlepage"
         },
         {
             dataSource: false,

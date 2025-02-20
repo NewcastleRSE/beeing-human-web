@@ -69,7 +69,6 @@ export let teiBehaviours = {
                 audioDiv.appendChild(audio);
                 // if the elt has a 'desc' child, add it as the audio description
                 let desc = elt.querySelector('tei-desc');
-                console.log(desc);
                 if (desc) {
                     let descElt = document.createElement('p');
                     descElt.innerHTML = desc.innerHTML;
@@ -84,7 +83,6 @@ export let teiBehaviours = {
         },
         "note": [
             ["[type='editorial']", function (elt) {
-                console.log('Im being activated', elt.getAttribute('xml:id'))
                 elt.classList.add('hidden');
             }],
             ["[place='inline']", function (elt) {

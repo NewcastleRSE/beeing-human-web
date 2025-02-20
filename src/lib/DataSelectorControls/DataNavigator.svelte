@@ -12,8 +12,8 @@
         }
     })
 
-    function changeSelected () {
-        valueChange({origin: 'navigator', newValue: options.listIndex[selected][1]})
+    function changeSelected (event) {
+        valueChange({origin: 'navigator', newValue: selected})
     }
 </script>
 
@@ -21,24 +21,26 @@
     <div>
         <button 
             onclick={() => {
-                selected -= 1;
+                const currentlySelectedIndex = options.listIndex.findIndex((section) => section[1] == selected);
+                selected = options.listIndex[currentlySelectedIndex - 1][1];
                 changeSelected();
             }}
-        disabled={selected == 0}>
+        disabled={selected == options.listIndex[0][1]}>
             ←
         </button>
         <select bind:value={selected}
-        onchange= {changeSelected}>
-            {#each options.listIndex as section, i}
-                <option value={i}>{section[0]}</option>
+        onchange= {changeSelected} id="navigator-select">
+            {#each options.listIndex as section}
+                <option value={section[1]}>{section[0]}</option>
             {/each}
         </select>
         <button
             onclick={() => {
-                selected += 1;
+                const currentlySelectedIndex = options.listIndex.findIndex((section) => section[1] == selected);
+                selected = options.listIndex[currentlySelectedIndex + 1][1];
                 changeSelected();
             }}
-        disabled={selected == options.listIndex.length - 1}>
+        disabled={selected == options.listIndex[options.listIndex.length - 1][1]}>
             →
         </button>
     </div>
