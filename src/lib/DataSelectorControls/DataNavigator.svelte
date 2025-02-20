@@ -18,7 +18,8 @@
 </script>
 
 {#if options != undefined}
-    <div class="flex text-4xl md:text-5xl justify-center items-center text-gray-600 w-48">
+
+<div class="flex text-4xl md:text-5xl justify-center items-center text-gray-600 w-48">
         <button
         class="hover:font-bold hover:cursor-pointer hover:text-black transition-all ease-in-out duration-200 motion-reduce:transition-none" 
             onclick={() => {
