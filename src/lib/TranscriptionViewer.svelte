@@ -5,11 +5,11 @@
 
     import NoteModal from "./NoteModal.svelte";
 
-    const mdBreakPoint = 768
+    const mdBreakPoint = 768;
 
-    let windowSize = $state(0)
+    let windowSize = $state(0);
     let smallScreen = $derived.by(() => {
-        return windowSize < mdBreakPoint
+        return windowSize < mdBreakPoint;
     });
 
     // If TRUE, loads the PDF, rather than IIIF
@@ -18,22 +18,44 @@
     let ready = $state(false);
 
     // isMarked serves as a shortcut to test whether the element is currently visibly marked on the page
-    let variationCommonStyles = ["px-2", "py-1", "rounded-md",  'cursor-pointer', 'transition-colors', 'duration-300', 'ease-in-out', 'isMarked'];
-    
+    let variationCommonStyles = [
+        "px-2",
+        "py-1",
+        "rounded-md",
+        "cursor-pointer",
+        "transition-colors",
+        "duration-300",
+        "ease-in-out",
+        "isMarked",
+    ];
+
     let showModal = $state(false);
     let modalElement = $state(null);
 
-    import {
-        dataViewerState
-    } from "../stores/dataViewer.svelte";
-    import { onMount } from "svelte";
+    import { dataViewerState } from "../stores/dataViewer.svelte";
+    import { teiViewerState } from "../stores/teiViewer.svelte";
 
+    import { onMount } from "svelte";
 
     $effect(() => {
         changeVariationDetail(dataViewerState.variationDetail);
+    });
+
+    $effect(() => {
         changeEditorialNoteVisibility(dataViewerState.editorialNotes);
+    });
+
+    $effect(() => {
         toggleBothViewOption(smallScreen);
-    })
+    });
+
+    $effect(() => {
+        skipToSection(dataViewerState.activeNavigator);
+    });
+
+    $effect(() => {
+        changeSectionWithoutSkipping(teiViewerState.currentSection);
+    });
 
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
 
@@ -62,7 +84,7 @@
             el.innerHTML === "[Does not exist in 1609]"
         ) {
             el.textContent = "";
-            el.classList.add('hidden')
+            el.classList.add("hidden");
         }
     }
 
@@ -73,12 +95,15 @@
 
             // restores baseline styling for elements inside apps
             // child.classList = "";
-            if (app.getAttribute('subtype') === 'add') {
-                child.classList.add('bg-success-200', 'hover:bg-success-400',)
-            } else if (app.getAttribute('subtype') === 'del') {
-                child.classList.add('bg-error-200', 'hover:bg-error-400')
+            if (app.getAttribute("subtype") === "add") {
+                child.classList.add("bg-success-200", "hover:bg-success-400");
+            } else if (app.getAttribute("subtype") === "del") {
+                child.classList.add("bg-error-200", "hover:bg-error-400");
             } else {
-                child.classList.add('bg-secondary-200', 'hover:bg-secondary-400')
+                child.classList.add(
+                    "bg-secondary-200",
+                    "hover:bg-secondary-400",
+                );
             }
 
             // adds common styles from the variationCommonStyles array
@@ -90,7 +115,7 @@
             if (child.tagName === "TEI-LEM") {
                 if (child.hasAttribute("data-empty")) {
                     child.innerHTML = "[+1609]";
-                    child.classList.remove('hidden')
+                    child.classList.remove("hidden");
                 }
             } else if (child.tagName === "TEI-RDG") {
                 if (child.hasAttribute("data-empty")) {
@@ -138,9 +163,22 @@
 
     function changeEditorialNoteVisibility(editorialNotes) {
         try {
-            const notesElements = document.querySelectorAll('tei-ref[type="attachment"]')
+            const notesElements = document.querySelectorAll(
+                'tei-ref[type="attachment"]',
+            );
 
-            let variationCommonStyles = ["px-2", "py-1", "rounded-md",  'cursor-pointer', 'transition-colors', 'duration-300', 'ease-in-out', 'bg-warning-200', 'hover:bg-warning-400', 'isMarked'];
+            let variationCommonStyles = [
+                "px-2",
+                "py-1",
+                "rounded-md",
+                "cursor-pointer",
+                "transition-colors",
+                "duration-300",
+                "ease-in-out",
+                "bg-warning-200",
+                "hover:bg-warning-400",
+                "isMarked",
+            ];
 
             if (!editorialNotes) {
                 for (const note of notesElements) {
@@ -149,9 +187,7 @@
                     for (const style of variationCommonStyles) {
                         note.classList.remove(style);
                     }
-                    
                 }
-
             } else {
                 for (const note of notesElements) {
                     // note.classList.remove('hidden');
@@ -159,29 +195,68 @@
                     for (const style of variationCommonStyles) {
                         note.classList.add(style);
                     }
-
                 }
             }
         } catch (e) {
-            console.warn('Document is not ready, could not change visibility of editorial notes')
+            console.warn(
+                "Document is not ready, could not change visibility of editorial notes",
+            );
         }
     }
 
     function toggleBothViewOption(smallScreen) {
         if (ready) {
             try {
-                const button = document.getElementById('view-both-button').closest('label');
+                const button = document
+                    .getElementById("view-both-button")
+                    .closest("label");
                 if (smallScreen) {
-                    if (dataViewerState.activeView == 'both') {
-                        dataViewerState.activeView = 'transcription'
-                        document.getElementById('view-transcription-button').click();
+                    if (dataViewerState.activeView == "both") {
+                        dataViewerState.activeView = "transcription";
+                        document
+                            .getElementById("view-transcription-button")
+                            .click();
                     }
-                    button.classList.add('hidden');
+                    button.classList.add("hidden");
                 } else {
-                    button.classList.remove('hidden')
+                    button.classList.remove("hidden");
                 }
             } catch (e) {
-                console.log('window is not ready, could not adjust button visibility')
+                console.log(
+                    "window is not ready, could not adjust button visibility",
+                );
+            }
+        }
+    }
+
+    function skipToSection() {
+        if (ready) {
+            // find the element which id matches the activeNavigator
+            const section = document.getElementById(
+                dataViewerState.activeNavigator,
+            );
+            if (section) {
+                // find out whether the element is in view
+                const rect = section.getBoundingClientRect();
+                if (rect.top < 0 || rect.bottom > window.innerHeight) {
+                    // if it is not in view, scroll to it
+                    section.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                    });
+                    teiViewerState.currentSection = dataViewerState.activeNavigator;
+                }
+            }
+        }
+    }
+
+    function changeSectionWithoutSkipping(newSection) {
+        // find navigator-select
+        if (newSection) {
+            const navigatorSelect = document.getElementById("navigator-select");
+            if (navigatorSelect) {
+                // select the option that matches the newSection without triggering onchange
+                navigatorSelect.value = newSection;
             }
         }
     }
@@ -191,22 +266,30 @@
             dataViewerState.activeDataset = "1623";
         }
 
-        if (!["facsimile", "transcription", "both"].includes(dataViewerState.activeView)) {
+        if (
+            !["facsimile", "transcription", "both"].includes(
+                dataViewerState.activeView,
+            )
+        ) {
             dataViewerState.activeView = "both";
         }
-        
-        if (!["no variation", "major changes", "all changes"].includes(dataViewerState.variationDetail)) {
+
+        if (
+            !["no variation", "major changes", "all changes"].includes(
+                dataViewerState.variationDetail,
+            )
+        ) {
             dataViewerState.variationDetail = "no variation";
         }
 
         if (![true, false].includes(dataViewerState.editorialNotes)) {
             dataViewerState.editorialNotes = false;
         }
-        
+
         // listens for event 'variationClicked' to show the variation detail
         window.addEventListener("variationClicked", (e) => {
             // if the element contains the class 'isMarked', show the modal
-            if (e.detail.classList.contains('isMarked')) {
+            if (e.detail.classList.contains("isMarked")) {
                 showModal = true;
                 modalElement = e.detail;
             }
@@ -214,59 +297,71 @@
 
         window.addEventListener("editorialNoteClicked", (e) => {
             // if the element contains the class 'isMarked', show the modal
-            if (e.detail.classList.contains('isMarked')) {
+            if (e.detail.classList.contains("isMarked")) {
                 showModal = true;
                 modalElement = e.detail;
             }
-        })
+        });
 
         ready = true;
     });
-    
-
 </script>
 
-<svelte:window bind:innerWidth={windowSize}/>
+<svelte:window bind:innerWidth={windowSize} />
 
 {#if ready}
     {#key dataViewerState.activeDataset}
-    <NoteModal message={modalElement} bind:show={showModal}/>
-    <div class="md:flex w-full mx-auto md:p-8 md:max-h-screen">
-        {#if dataViewerState.activeView === "both" || dataViewerState.activeView === "facsimile"}
-            <div
-                class="md:flex-1 w-full {dataViewerState.activeView == 'both'
-                    ? 'md:w-1/2'
-                    : ''} h-dvh"
-                data-testid="iiif-viewer"
-            >
-            {#if !fallback}
-                <IiifViewer
-                    manifest={transcriptionData[dataViewerState.activeDataset].iiifManifest}
-                    startPage={transcriptionData[dataViewerState.activeDataset]
-                        .manifestStartPage}
-                />
-            {:else}
-                {#key dataViewerState.activeDataset}
-                <PdfViewer url={transcriptionData[dataViewerState.activeDataset]
-                        .pdfFallback} pageNum={transcriptionData[dataViewerState.activeDataset]
-                            .pdfFallbackStartPage} objectTitle={transcriptionData[dataViewerState.activeDataset].title}/>
-                {/key}
+        <NoteModal message={modalElement} bind:show={showModal} />
+        <div class="md:flex w-full mx-auto md:p-8 md:max-h-screen">
+            {#if dataViewerState.activeView === "both" || dataViewerState.activeView === "facsimile"}
+                <div
+                    class="md:flex-1 w-full {dataViewerState.activeView ==
+                    'both'
+                        ? 'md:w-1/2'
+                        : ''} h-dvh"
+                    data-testid="iiif-viewer"
+                >
+                    {#if !fallback}
+                        <IiifViewer
+                            manifest={transcriptionData[
+                                dataViewerState.activeDataset
+                            ].iiifManifest}
+                            startPage={transcriptionData[
+                                dataViewerState.activeDataset
+                            ].manifestStartPage}
+                        />
+                    {:else}
+                        {#key dataViewerState.activeDataset}
+                            <PdfViewer
+                                url={transcriptionData[
+                                    dataViewerState.activeDataset
+                                ].pdfFallback}
+                                pageNum={transcriptionData[
+                                    dataViewerState.activeDataset
+                                ].pdfFallbackStartPage}
+                                objectTitle={transcriptionData[
+                                    dataViewerState.activeDataset
+                                ].title}
+                            />
+                        {/key}
+                    {/if}
+                </div>
             {/if}
-            </div>
-        {/if}
-        {#if dataViewerState.activeView === "both" || dataViewerState.activeView === "transcription"}
-            <div
-                class="md:flex w-full md:h-dvh {dataViewerState.activeView == 'both'
-                    ? 'md:w-1/2'
-                    : ''} md:overflow-auto overflow-x-clip md:px-16"
-                data-testid="transcription"
-            >
-                <TeiSimple
-                    path={transcriptionData[dataViewerState.activeDataset].teiURL}
-                    statusCheck={(status) => handleStatus(status)}
-                />
-            </div>
-        {/if}
-    </div>
+            {#if dataViewerState.activeView === "both" || dataViewerState.activeView === "transcription"}
+                <div
+                    class="md:flex w-full md:h-dvh {dataViewerState.activeView ==
+                    'both'
+                        ? 'md:w-1/2'
+                        : ''} md:overflow-auto overflow-x-clip md:px-16"
+                    data-testid="transcription"
+                >
+                    <TeiSimple
+                        path={transcriptionData[dataViewerState.activeDataset]
+                            .teiURL}
+                        statusCheck={(status) => handleStatus(status)}
+                    />
+                </div>
+            {/if}
+        </div>
     {/key}
 {/if}

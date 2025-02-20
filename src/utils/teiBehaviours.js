@@ -61,7 +61,7 @@ export let teiBehaviours = {
             // checks if the media element has a url and is audio
             if (elt.getAttribute('url') && elt.getAttribute('mimeType') === 'audio/mp3') {
                 let audioDiv = document.createElement('div');
-                
+
                 let audio = document.createElement('audio');
                 audio.src = transcriptionData['1623']['teiMediaRoot'] + elt.getAttribute('url');
                 audio.controls = true;
@@ -69,7 +69,6 @@ export let teiBehaviours = {
                 audioDiv.appendChild(audio);
                 // if the elt has a 'desc' child, add it as the audio description
                 let desc = elt.querySelector('tei-desc');
-                console.log(desc);
                 if (desc) {
                     let descElt = document.createElement('p');
                     descElt.innerHTML = desc.innerHTML;
@@ -84,7 +83,6 @@ export let teiBehaviours = {
         },
         "note": [
             ["[type='editorial']", function (elt) {
-                console.log('Im being activated', elt.getAttribute('xml:id'))
                 elt.classList.add('hidden');
             }],
             ["[place='inline']", function (elt) {
@@ -133,7 +131,7 @@ export let teiBehaviours = {
                     supEl.append(elt)
                     return sup
                 }
-            } else if(elt.getAttribute('type') === 'attachment') {
+            } else if (elt.getAttribute('type') === 'attachment') {
                 // This is a point of attachment for an editorial note, so any processing and styling is left to the TEI viwer component
                 let event = new CustomEvent('editorialNoteClicked', { detail: elt });
 

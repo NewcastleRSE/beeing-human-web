@@ -24,7 +24,6 @@
     let error = $state(undefined);
 
     async function loadTei(path) {
-        console.log("adding tei");
         loaded = false;
         const parent = document.getElementById("TEI-container");
 
@@ -41,7 +40,6 @@
                 parent.appendChild(data);
             })
             .then(() => {
-                console.log("finished");
                 loaded = true;
                 statusCheck({ loaded: "loaded" });
                 return path;

@@ -19,6 +19,27 @@ dataSelectorControls: [{
         },
         {
             dataSource: false,
+            type: "navigator",
+            listIndex: [
+                ["Titlepage", "titlepage"],
+                ["Preface", preface],
+                ["Ad Autorem", dedication],
+                ["Table of Contents", "contents"],
+                ["Chapter 1", "ch1"],
+                ["Chapter 2", "ch2"],
+                ["Chapter 3", "ch3"],
+                ["Chapter 4", "ch4"],
+                ["Chapter 5", "ch5"],
+                ["Chapter 6", "ch6"],
+                ["Chapter 7", "ch7"],
+                ["Chapter 8", "ch8"],
+                ["Chapter 9", "ch9"],
+                ["Chapter 10", "ch10"],
+            ],
+            defaultSelected: "titlepage"
+        },
+        {
+            dataSource: false,
             type: "radioGroup",
             label: "view",
             defaultValue: 'both',

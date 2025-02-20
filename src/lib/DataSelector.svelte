@@ -12,6 +12,8 @@
     import DataRadioGroupControl from "$lib/DataSelectorControls/DataRadioGroupControl.svelte";
     import DataSlideToggle from "$lib/DataSelectorControls/DataSlideToggle.svelte";
 
+    import DataNavigator from "$lib/DataSelectorControls/DataNavigator.svelte";
+
     import { dataViewerState } from "../stores/dataViewer.svelte";
 
     let { controlsArray } = $props();
@@ -27,7 +29,6 @@
     }
 
     function updateOtherFilters(changeObject) {
-        console.log('updating')
         if (changeObject.origin === "view") {
             dataViewerState.activeView = changeObject.newValue;
         }
@@ -39,8 +40,13 @@
         if (changeObject.origin === "editorial notes") {
             dataViewerState.editorialNotes = changeObject.newValue;
         }
+
+        if (changeObject.origin === 'navigator') {
+            dataViewerState.activeNavigator = changeObject.newValue;
+        }
     }
 </script>
+
 
 {#key dataViewerState}
 <form
@@ -73,6 +79,9 @@
                         valueChange={(changeObject) =>
                             updateOtherFilters(changeObject)}
                     />
+                {:else if controlOptions.type === "navigator"}
+                    <DataNavigator options = {controlOptions}
+                    valueChange = {(changeObject) => updateOtherFilters(changeObject)} />
                 {/if}
             {/if}
         {/each}
