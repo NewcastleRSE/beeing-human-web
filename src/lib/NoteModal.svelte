@@ -49,7 +49,18 @@
             // remove the '#' from the target
             target = target.replace('#', '');
             let parentElement = document.getElementById(target);
-            console.log(target);
+            if (parentElement) {
+                return parentElement;
+            } else {
+                return undefined;
+            }
+        } else if (message && message.hasAttribute('type') && message.getAttribute('type') === 'fragmentedNoteAttachement') {
+            // the trigger is a fragment attachment point (there will be at least two of those)
+            // find the element with the xml:id that matches corresp and return that element
+            let corresp = message.getAttribute('corresp');
+            // remove the '#' from the corresp
+            corresp = corresp.replace('#', '');
+            let parentElement = document.getElementById(corresp);
             if (parentElement) {
                 return parentElement;
             } else {
@@ -145,6 +156,8 @@
         }
     });
 </script>
+
+{@debug message}
 
 {#if show}
     <div
