@@ -180,8 +180,6 @@
                 }
             }
 
-            console.log(groupedNotes)
-
             let variationCommonStyles = [
                 "px-2",
                 "py-1",
@@ -195,7 +193,7 @@
                 "isMarked",
             ];
 
-            const handleHover = function (e) {
+            const handleHover = (e) => {
                 for (const otherNote of groupedNotes[e.target.getAttribute("corresp")]) {
                     if (otherNote !== e.target) {
                         otherNote.classList.add("bg-warning-400");
@@ -203,7 +201,7 @@
                 }
             }
 
-            const handleMouseOut = function (e) {
+            const handleMouseOut = (e) => {
                 for (const otherNote of groupedNotes[e.target.getAttribute("corresp")]) {
                     if (otherNote !== e.target) {
                         otherNote.classList.remove("bg-warning-400");
@@ -223,14 +221,21 @@
                 for (const groupNotes of Object.keys(groupedNotes)) {
                     for (const note of groupedNotes[groupNotes]) {
 
-                        // THESE EVENTS ARE NOT BEING REMOVED!
-                        note.removeEventListener("mouseover", handleHover,);
-                        note.removeEventListener("mouseleave", handleMouseOut);
-                        
-
                         for (const style of variationCommonStyles) {
                             note.classList.remove(style);
                         }
+
+                        // nuclear option to remove all event listeners
+                        // This is a bit extreme but regardless of what I tried I could not get the event listeners to be removed by .removeEventListener
+                        let newNote = note.cloneNode(true);
+                        note.replaceWith(newNote);
+                        
+                        // reinserts the custom event editorialNoteClicked
+                        newNote.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            window.dispatchEvent(new CustomEvent("editorialNoteClicked", { detail: e.target }));
+                        });
+                        
                     }
                 }
             } else {
@@ -354,7 +359,6 @@
 
         window.addEventListener("editorialNoteClicked", (e) => {
             // if the element contains the class 'isMarked', show the modal
-            console.log('Ive been clicked', e.detail);
             if (e.detail.classList.contains("isMarked")) {
                 showModal = true;
                 modalElement = e.detail;
