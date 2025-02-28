@@ -167,6 +167,19 @@
                 'tei-ref[type="attachment"]',
             );
 
+            const fragmentedNotes = document.querySelectorAll('tei-seg[type="fragmentedNoteAttachement"]');
+
+            // groups fragmented notes by their corresp attribute
+            let groupedNotes = {};
+            for (const note of fragmentedNotes) {
+                const corresp = note.getAttribute("corresp");
+                if (groupedNotes[corresp]) {
+                    groupedNotes[corresp].push(note);
+                } else {
+                    groupedNotes[corresp] = [note];
+                }
+            }
+
             let variationCommonStyles = [
                 "px-2",
                 "py-1",
@@ -180,6 +193,22 @@
                 "isMarked",
             ];
 
+            const handleHover = (e) => {
+                for (const otherNote of groupedNotes[e.target.getAttribute("corresp")]) {
+                    if (otherNote !== e.target) {
+                        otherNote.classList.add("bg-warning-400");
+                    }
+                }
+            }
+
+            const handleMouseOut = (e) => {
+                for (const otherNote of groupedNotes[e.target.getAttribute("corresp")]) {
+                    if (otherNote !== e.target) {
+                        otherNote.classList.remove("bg-warning-400");
+                    }
+                }
+            }
+
             if (!editorialNotes) {
                 for (const note of notesElements) {
                     // note.classList.add('hidden');
@@ -188,12 +217,45 @@
                         note.classList.remove(style);
                     }
                 }
+
+                for (const groupNotes of Object.keys(groupedNotes)) {
+                    for (const note of groupedNotes[groupNotes]) {
+
+                        for (const style of variationCommonStyles) {
+                            note.classList.remove(style);
+                        }
+
+                        // nuclear option to remove all event listeners
+                        // This is a bit extreme but regardless of what I tried I could not get the event listeners to be removed by .removeEventListener
+                        let newNote = note.cloneNode(true);
+                        note.replaceWith(newNote);
+                        
+                        // reinserts the custom event editorialNoteClicked
+                        newNote.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            window.dispatchEvent(new CustomEvent("editorialNoteClicked", { detail: e.target }));
+                        });
+                        
+                    }
+                }
             } else {
                 for (const note of notesElements) {
                     // note.classList.remove('hidden');
 
                     for (const style of variationCommonStyles) {
                         note.classList.add(style);
+                    }
+                }
+
+                for (const groupNotes of Object.keys(groupedNotes)) {
+                    for (const note of groupedNotes[groupNotes]) {
+                        // add event listener that will add the hover styles to the other notes in the group
+                        note.addEventListener("mouseover", handleHover);
+                        note.addEventListener("mouseleave", handleMouseOut);
+
+                        for (const style of variationCommonStyles) {
+                            note.classList.add(style);
+                        }
                     }
                 }
             }

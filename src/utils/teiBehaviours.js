@@ -397,6 +397,14 @@ export let teiBehaviours = {
             ["[rend='italic']", function (elt) {
                 addTailwindClasslist(elt, "italic");
             }],
+            ["[type='fragmentedNoteAttachement']", function(elt) {
+                // This is a fragment point of attachment for an editorial note, so any processing and styling is left to the TEI viwer component
+                let event = new CustomEvent('editorialNoteClicked', { detail: elt });
+
+                elt.onclick = function () {
+                    window.dispatchEvent(event);
+                }
+            }]
         ],
         "titlePage": function (elt) {
             addTailwindClasslist(elt, "flex flex-col content-center py-32")
