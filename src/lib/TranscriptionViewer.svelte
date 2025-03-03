@@ -377,7 +377,6 @@
 
         window.addEventListener("editorialNoteClicked", (e) => {
             // if the element contains the class 'isMarked', show the modal
-            console.log(e.detail);
             if (e.detail.classList.contains("isMarked")) {
                 showModal = true;
                 modalElement = e.detail;
