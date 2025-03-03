@@ -35,7 +35,7 @@
     />
     <div class="text-sm flex flex-col">
         <span
-            ><em>by</em> <a rel="author" class="anchor" href={people[authorName].url}
+            ><em>by</em> <a rel="author" class="anchor" href="{base}/{people[authorName].url}"
                 >{people[authorName].name}</a
             ></span
         > <time datetime="{dateType}" class="text-xs">{dateType.toLocaleDateString("en-UK", {weekday: 'long', month: 'long', day:'numeric', year:'numeric'})}</time>
