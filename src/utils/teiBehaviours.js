@@ -1,5 +1,5 @@
 import { addTailwindClasslist, findIfAncestor, findInDescendant, findPreviousElement, removeTailwindClasslist, wrapChildren, wrapElement } from "./generalHelpers";
-import { teiSetBodyLayout } from "./teiBehavioursHelper";
+import { getElementRect, teiSetBodyLayout } from "./teiBehavioursHelper";
 import ornament from '../assets/text_divider.svg'
 
 import transcriptionData from './../routes/(sections)/literature/transcription/transcriptionData.json'
@@ -240,8 +240,9 @@ export let teiBehaviours = {
                 // find tei-text
                 let text = document.getElementById('TEI-container').parentElement;
                 text.addEventListener('scroll', function () {
-                    let rect = elt.getBoundingClientRect();
-                    if (rect.top >= 0 && rect.bottom <= window.innerHeight / 3) {
+                    let rect = getElementRect(elt);
+
+                    if (rect && (rect.top >= 0 && rect.bottom <= window.innerHeight / 3)) {
                         // if the element is in view, send a custom element with the signature
                         let event = new CustomEvent('sigInView', { detail: { sig: elt.getAttribute('n') } });
                         window.dispatchEvent(event);
@@ -264,8 +265,9 @@ export let teiBehaviours = {
                 // dispatches an event from the closest visible element every time it scrolls into view
                 let text = document.getElementById('TEI-container').parentElement;
                 text.addEventListener('scroll', function () {
-                    let rect = closestVisible.getBoundingClientRect();
-                    if (rect.top >= 0 && rect.bottom <= window.innerHeight / 3) {
+                    let rect = getElementRect(elt);
+
+                    if (rect && (rect.top >= 0 && rect.bottom <= window.innerHeight / 3)) {
                         let event = new CustomEvent('sigInView', { detail: { sig: elt.getAttribute('n') } });
                         window.dispatchEvent(event);
                     }

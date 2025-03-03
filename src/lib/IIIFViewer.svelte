@@ -11,7 +11,6 @@
     // import "tify";
     import "tify/dist/tify.css";
 
-    let loaded = $state(false);
     let iiif = $state(undefined);
     let currentPage = $state(undefined);
 
@@ -139,12 +138,10 @@
                         buildIIIFY(manifest);
                     }
                 });
-                loaded = true;
             } catch (e) {
                 console.error(e);
             }
         }
-        loaded = true;
 
         window.addEventListener("sigInView", (evt) => {
             if (evt.detail.sig != teiViewerState.currentSignature) {

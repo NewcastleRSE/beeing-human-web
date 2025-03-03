@@ -30,3 +30,14 @@ export function teiSetBodyLayout(elt) {
     
     }
 }
+
+export function getElementRect(elt) {
+    // with fragmented notes elements, getBoundingClientRect() was returning all 0s, so this function is a workaround to make sure the element is in the DOM and visible before checking if the element is in view and dispatching an event
+    
+    if (elt && elt.offsetParent !== null) {
+        return elt.getBoundingClientRect();
+    } else {
+        // console.warn('Element is not in the DOM or is hidden');
+        return null;
+    }
+}
