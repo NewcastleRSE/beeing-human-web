@@ -138,7 +138,7 @@
             } else if (parentElement.tagName === 'TEI-NOTE') {
                 // add all the children to the altReadings array
                 parentElement.childNodes.forEach((child) => {
-                    altReadings.push(child);
+                    altReadings.push(child.cloneNode(true));
                 });
             }
             // for each altReading check if they are a textual node
@@ -156,8 +156,6 @@
         }
     });
 </script>
-
-{@debug message}
 
 {#if show}
     <div
