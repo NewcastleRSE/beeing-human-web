@@ -75,6 +75,18 @@ export function findInDescendant(node, targetName, targetList = []) {
   return targetList
 }
 
+export function findAncestor(node, targetNode) {
+  // checks if node is a descendent of targetNode and returns ancestor if so; returns null if it reaches <html>;
+  if (node.parentNode.tagName.toLowerCase() === 'html') {
+    return null;
+  } else if (node.parentNode.tagName.toLowerCase() === targetNode.toLowerCase()) {
+    return node.parentNode;
+  } else {
+    return findAncestor(node.parentNode, targetNode);
+  }
+}
+
+
 export function findIfAncestor(node, targetNode) {
   // checks if node is a descendent of targetNode; returns false if it reaches <html>;
   if (node.parentNode.tagName.toLowerCase() === 'html') {

@@ -1,4 +1,4 @@
-import { addTailwindClasslist, findIfAncestor, findInDescendant, findPreviousElement, removeTailwindClasslist, wrapChildren, wrapElement } from "./generalHelpers";
+import { addTailwindClasslist, findAncestor, findIfAncestor, findInDescendant, findPreviousElement, wrapChildren, wrapElement } from "./generalHelpers";
 import { getElementRect, teiSetBodyLayout } from "./teiBehavioursHelper";
 import ornament from '../assets/text_divider.svg'
 
@@ -133,8 +133,17 @@ export let teiBehaviours = {
                 }
             } else if (elt.getAttribute('type') === 'attachment') {
                 // This is a point of attachment for an editorial note, so any processing and styling is left to the TEI viwer component
-                let event = new CustomEvent('editorialNoteClicked', { detail: elt });
 
+                // checks to see if the element is also contained by a another ref with the same type
+                let parentRef = findAncestor(elt, 'tei-ref');
+                if (parentRef) {
+                    console.log(elt, 'is contained by', parentRef);
+                    // if the it is contained by a ref, add the point of attachement to the parent ref and does not dispatch an event on the inner ref;
+                    parentRef.setAttribute('target', `${parentRef.getAttribute('target')} ${elt.getAttribute('target')}`);
+                }
+                
+                let event = new CustomEvent('editorialNoteClicked', { detail: elt });
+                
                 elt.onclick = function () {
                     window.dispatchEvent(event);
                 }

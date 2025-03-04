@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import { fade, fly } from "svelte/transition";
+    import TextDivider from "./TextDivider.svelte";
 
     let { message, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
@@ -41,16 +42,31 @@
     // find the siblings of the message element
     let parentElement = $derived.by(() => {
         if (message && !message.hasAttribute('type')) {
-            return message.parentElement;
+            return [message.parentElement];
         } else if (message && message.hasAttribute('type') && message.getAttribute('type') ===  'attachment') {
             // the trigger is a point of attachment for an editorial note
             // find the element with the xml:id that matches the target and return that element
-            let target = message.getAttribute('target');
-            // remove the '#' from the target
-            target = target.replace('#', '');
-            let parentElement = document.getElementById(target);
-            if (parentElement) {
-                return parentElement;
+            let targetAttribute = message.getAttribute('target');
+
+            // if there's mor than one target, split the string and return the first target
+            let targets = [];
+            if (targetAttribute.includes(' ')) {
+                targets = targetAttribute.split(' ');
+            } else {
+                targets.push(targetAttribute);
+            }
+
+            let parentElements = [];
+            for (let target of targets) {
+                // remove the '#' from the target
+                target = target.replace('#', '');
+                let parentElement = document.getElementById(target);
+                if (parentElement) {
+                    parentElements.push(parentElement);
+                }
+            }
+            if (parentElements.length > 0) {
+                return parentElements;
             } else {
                 return undefined;
             }
@@ -62,7 +78,7 @@
             corresp = corresp.replace('#', '');
             let parentElement = document.getElementById(corresp);
             if (parentElement) {
-                return parentElement;
+                return [parentElement];
             } else {
                 return undefined;
             }
@@ -73,13 +89,13 @@
 
     let bgColour = $derived.by(() => {
         if (parentElement) {
-            if (parentElement.getAttribute("subtype") == "change") {
+            if (parentElement[0].getAttribute("subtype") == "change") {
                 return "bg-secondary-100";
-            } else if (parentElement.getAttribute("subtype") == "add") {
+            } else if (parentElement[0].getAttribute("subtype") == "add") {
                 return "bg-success-100";
-            } else if (parentElement.getAttribute("subtype") == "del") {
+            } else if (parentElement[0].getAttribute("subtype") == "del") {
                 return "bg-error-100";
-            } else if (parentElement.getAttribute("type") == "editorial") {
+            } else if (parentElement[0].getAttribute("type") == "editorial") {
                 return "bg-warning-200";
             } else  {
                 return "";
@@ -91,13 +107,13 @@
 
     let accentColour = $derived.by(() => {
         if (parentElement) {
-            if (parentElement.getAttribute("subtype") == "change") {
+            if (parentElement[0].getAttribute("subtype") == "change") {
                 return "bg-secondary-500";
-            } else if (parentElement.getAttribute("subtype") == "add") {
+            } else if (parentElement[0].getAttribute("subtype") == "add") {
                 return "bg-success-500";
-            } else if (parentElement.getAttribute("subtype") == "del") {
+            } else if (parentElement[0].getAttribute("subtype") == "del") {
                 return "bg-error-500";
-            } else if (parentElement.getAttribute("type") == "editorial") {
+            } else if (parentElement[0].getAttribute("type") == "editorial") {
                 return "bg-warning-600";
             } else {
                 return "";
@@ -115,10 +131,10 @@
                 del: "deletion",
                 editorial: "editorial note",
             };
-            if (parentElement.getAttribute("type") === "editorial") {
-                return type[parentElement.getAttribute("type")];
+            if (parentElement[0].getAttribute("type") === "editorial") {
+                return type[parentElement[0].getAttribute("type")];
             } else {
-                return type[parentElement.getAttribute("subtype")];
+                return type[parentElement[0].getAttribute("subtype")];
             }
         } else {
             return "";
@@ -128,26 +144,34 @@
     let altReadings = $derived.by(() => {
         let altReadings = [];
         if (parentElement) {
-            if (parentElement.tagName === 'TEI-APP') {
+            if (parentElement[0].tagName === 'TEI-APP') {
+                let altReading = []
                 // create a list of all tei-rdg siblings of the message element
-                let siblings = parentElement.querySelectorAll("tei-rdg");
+                let siblings = parentElement[0].querySelectorAll("tei-rdg");
                 siblings.forEach((sibling) => {
-                    altReadings.push(sibling);
+                    altReading.push(sibling);
                 });
+                altReadings.push(altReading);
                 
-            } else if (parentElement.tagName === 'TEI-NOTE') {
+            } else if (parentElement[0].tagName === 'TEI-NOTE') {
                 // add all the children to the altReadings array
-                parentElement.childNodes.forEach((child) => {
-                    altReadings.push(child.cloneNode(true));
-                });
+                for (const note of parentElement) {
+                    let altReading = [];
+                    note.childNodes.forEach((child) => {
+                        altReading.push(child.cloneNode(true));
+                    });
+                    altReadings.push(altReading);
+                }
             }
             // for each altReading check if they are a textual node
             for (const reading of altReadings) {
-                // if the reading is a node type of 3 (text node) then create a new element
-                if (reading.nodeType === 3) {
-                    let span = document.createElement('span');
-                    span.append(reading);
-                    reading.innerHTML = span.outerHTML;
+                for (const el of reading) {
+                    // if the reading is a node type of 3 (text node) then create a new element
+                    if (el.nodeType === 3) {
+                        let span = document.createElement('span');
+                        span.append(el);
+                        el.innerHTML = span.outerHTML;
+                    }
                 }
             }
             return altReadings;
@@ -214,8 +238,18 @@
                             <div class="flex gap-2 items-center mb-10"><h3 class=" font-bold w-fit">{type} </h3>
                             <span class="h-1 w-full {accentColour} my-2"></span></div>
                             <div class="mt-2">
-                                {#each altReadings as reading}
-                                    {@html reading.innerHTML}
+                                {#each altReadings as reading, i}
+                                    <div class="mb-4">
+                                        {#each reading as el}
+                                            {@html el.innerHTML}
+                                        {/each}
+                                    </div>
+                                    <!-- Only adds the divider if there are more than one readings and it's not the last one -->
+                                    {#if altReadings.length > 1}
+                                        {#if i < altReadings.length - 1}
+                                            <TextDivider fillColour="#5E9DB5" class="mb-4"/>
+                                        {/if}
+                                    {/if}
                                 {/each}
                             </div>
                         </div>
