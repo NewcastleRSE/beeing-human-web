@@ -48,7 +48,7 @@
             // find the element with the xml:id that matches the target and return that element
             let targetAttribute = message.getAttribute('target');
 
-            // if there's mor than one target, split the string and return the first target
+            // if there's more than one target, split the string and return the first target
             let targets = [];
             if (targetAttribute.includes(' ')) {
                 targets = targetAttribute.split(' ');
@@ -72,16 +72,32 @@
             }
         } else if (message && message.hasAttribute('type') && message.getAttribute('type') === 'fragmentedNoteAttachement') {
             // the trigger is a fragment attachment point (there will be at least two of those)
-            // find the element with the xml:id that matches corresp and return that element
-            let corresp = message.getAttribute('corresp');
-            // remove the '#' from the corresp
-            corresp = corresp.replace('#', '');
-            let parentElement = document.getElementById(corresp);
-            if (parentElement) {
-                return [parentElement];
+
+            let correspAttribute = message.getAttribute('corresp');
+
+            // if there's more than one corresp, split the string
+            let corresps = [];
+            if (correspAttribute.includes(' ')) {
+                corresps = correspAttribute.split(' ');
+            } else {
+                corresps.push(correspAttribute);
+            }
+
+            let parentElements = [];
+            for (let corresp of corresps) {
+                // remove the '#' from the corresp
+                corresp = corresp.replace('#', '');
+                let parentElement = document.getElementById(corresp);
+                if (parentElement) {
+                    parentElements.push(parentElement);
+                }
+            }
+            if (parentElements.length > 0) {
+                return parentElements;
             } else {
                 return undefined;
             }
+            
         } else {
             return undefined;
         }

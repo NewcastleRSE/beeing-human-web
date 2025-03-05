@@ -54,17 +54,23 @@ export function checkForParentNotes(elt) {
             parentSeg = potentialSeg;
         }
     }
+
+    // sets the bit to add
+    let additionalTarget = '';
+    if (elt.tagName === 'TEI-REF') {
+        additionalTarget = elt.getAttribute('target');
+    } else if (elt.tagName === 'TEI-SEG') {
+        additionalTarget = elt.getAttribute('corresp');
+    }
     
     if (parentRef || parentSeg) {
         // if it is contained by a ref, add the point of attachement to the ref target
         if (parentRef && !parentSeg) {
-            console.log(elt, 'is contained by', parentRef);
             // if the it is contained by a ref, add the target to the parent ref and does not dispatch an event on the inner ref;
-            parentRef.setAttribute('target', `${parentRef.getAttribute('target')} ${elt.getAttribute('target')}`);
+            parentRef.setAttribute('target', `${parentRef.getAttribute('target')} ${additionalTarget}`);
         } else if (parentSeg && !parentRef) {
-            console.log(elt, 'is contained by', parentSeg);
             // if it is by a fragmented note, add the target to the corresp
-            parentSeg.setAttribute('corresp', `${parentSeg.getAttribute('corresp')} ${elt.getAttribute('target')}`);
+            parentSeg.setAttribute('corresp', `${parentSeg.getAttribute('corresp')} ${additionalTarget}`);
         }
         
     } else {
