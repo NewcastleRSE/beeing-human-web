@@ -1,5 +1,5 @@
-import { addTailwindClasslist, findIfAncestor, findInDescendant, findPreviousElement, removeTailwindClasslist, wrapChildren, wrapElement } from "./generalHelpers";
-import { getElementRect, teiSetBodyLayout } from "./teiBehavioursHelper";
+import { addTailwindClasslist, findAncestor, findIfAncestor, findInDescendant, findPreviousElement, wrapChildren, wrapElement } from "./generalHelpers";
+import { checkForParentNotes, getElementRect, teiSetBodyLayout } from "./teiBehavioursHelper";
 import ornament from '../assets/text_divider.svg'
 
 import transcriptionData from './../routes/(sections)/literature/transcription/transcriptionData.json'
@@ -133,8 +133,11 @@ export let teiBehaviours = {
                 }
             } else if (elt.getAttribute('type') === 'attachment') {
                 // This is a point of attachment for an editorial note, so any processing and styling is left to the TEI viwer component
-                let event = new CustomEvent('editorialNoteClicked', { detail: elt });
 
+                checkForParentNotes(elt);
+                
+                let event = new CustomEvent('editorialNoteClicked', { detail: elt });
+                
                 elt.onclick = function () {
                     window.dispatchEvent(event);
                 }
@@ -401,6 +404,9 @@ export let teiBehaviours = {
             }],
             ["[type='fragmentedNoteAttachement']", function(elt) {
                 // This is a fragment point of attachment for an editorial note, so any processing and styling is left to the TEI viwer component
+
+                checkForParentNotes(elt);
+
                 let event = new CustomEvent('editorialNoteClicked', { detail: elt, bubbles: true });
 
                 elt.onclick = function () {
