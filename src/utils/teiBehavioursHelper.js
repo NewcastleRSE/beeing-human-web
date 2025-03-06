@@ -80,3 +80,15 @@ export function checkForParentNotes(elt) {
     return parentRef;
 
 }
+
+export function checkAncestorForClass(elt, className) {
+    // checks to see if the element is contained by or a descendent of an element with a specific className
+    let parent = elt.parentNode;
+    while (parent.tagName != 'TEI-TEI') {
+        if (parent.classList.contains(className)) {
+            return true;
+        }
+        parent = parent.parentNode;
+    }
+    return false;
+}

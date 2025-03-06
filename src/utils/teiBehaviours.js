@@ -1,5 +1,5 @@
 import { addTailwindClasslist, findAncestor, findIfAncestor, findInDescendant, findPreviousElement, wrapChildren, wrapElement } from "./generalHelpers";
-import { checkForParentNotes, getElementRect, teiSetBodyLayout } from "./teiBehavioursHelper";
+import { checkAncestorForClass, checkForParentNotes, getElementRect, teiSetBodyLayout } from "./teiBehavioursHelper";
 import ornament from '../assets/text_divider.svg'
 
 import transcriptionData from './../routes/(sections)/literature/transcription/transcriptionData.json'
@@ -383,8 +383,8 @@ export let teiBehaviours = {
                 addTailwindClasslist(elt, 'italic')
             }],
             ["[rend=opposite]", function (elt) {
-                // if parent is italic, this should not be italic
-                if (elt.parentNode.classList.contains('italic')) {
+                // if any of its ancestors are in italics, remove the italic class
+                if (checkAncestorForClass(elt, 'italic')) {
                     elt.classList.remove('italic');
                     elt.classList.add('not-italic');
                 } else {
