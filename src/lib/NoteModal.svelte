@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import { fade, fly } from "svelte/transition";
     import TextDivider from "./TextDivider.svelte";
+    import { base } from "$app/paths";
 
     let { message, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
@@ -41,17 +42,21 @@
 
     // find the siblings of the message element
     let parentElement = $derived.by(() => {
-        if (message && !message.hasAttribute('type')) {
+        if (message && !message.hasAttribute("type")) {
             return [message.parentElement];
-        } else if (message && message.hasAttribute('type') && message.getAttribute('type') ===  'attachment') {
+        } else if (
+            message &&
+            message.hasAttribute("type") &&
+            message.getAttribute("type") === "attachment"
+        ) {
             // the trigger is a point of attachment for an editorial note
             // find the element with the xml:id that matches the target and return that element
-            let targetAttribute = message.getAttribute('target');
+            let targetAttribute = message.getAttribute("target");
 
             // if there's more than one target, split the string and return the first target
             let targets = [];
-            if (targetAttribute.includes(' ')) {
-                targets = targetAttribute.split(' ');
+            if (targetAttribute.includes(" ")) {
+                targets = targetAttribute.split(" ");
             } else {
                 targets.push(targetAttribute);
             }
@@ -59,7 +64,7 @@
             let parentElements = [];
             for (let target of targets) {
                 // remove the '#' from the target
-                target = target.replace('#', '');
+                target = target.replace("#", "");
                 let parentElement = document.getElementById(target);
                 if (parentElement) {
                     parentElements.push(parentElement);
@@ -70,15 +75,19 @@
             } else {
                 return undefined;
             }
-        } else if (message && message.hasAttribute('type') && message.getAttribute('type') === 'fragmentedNoteAttachement') {
+        } else if (
+            message &&
+            message.hasAttribute("type") &&
+            message.getAttribute("type") === "fragmentedNoteAttachement"
+        ) {
             // the trigger is a fragment attachment point (there will be at least two of those)
 
-            let correspAttribute = message.getAttribute('corresp');
+            let correspAttribute = message.getAttribute("corresp");
 
             // if there's more than one corresp, split the string
             let corresps = [];
-            if (correspAttribute.includes(' ')) {
-                corresps = correspAttribute.split(' ');
+            if (correspAttribute.includes(" ")) {
+                corresps = correspAttribute.split(" ");
             } else {
                 corresps.push(correspAttribute);
             }
@@ -86,7 +95,7 @@
             let parentElements = [];
             for (let corresp of corresps) {
                 // remove the '#' from the corresp
-                corresp = corresp.replace('#', '');
+                corresp = corresp.replace("#", "");
                 let parentElement = document.getElementById(corresp);
                 if (parentElement) {
                     parentElements.push(parentElement);
@@ -97,7 +106,6 @@
             } else {
                 return undefined;
             }
-            
         } else {
             return undefined;
         }
@@ -113,7 +121,7 @@
                 return "bg-error-100";
             } else if (parentElement[0].getAttribute("type") == "editorial") {
                 return "bg-warning-200";
-            } else  {
+            } else {
                 return "";
             }
         } else {
@@ -160,22 +168,38 @@
     let altReadings = $derived.by(() => {
         let altReadings = [];
         if (parentElement) {
-            if (parentElement[0].tagName === 'TEI-APP') {
-                let altReading = []
+            if (parentElement[0].tagName === "TEI-APP") {
+                let altReading = [];
                 // create a list of all tei-rdg siblings of the message element
                 let siblings = parentElement[0].querySelectorAll("tei-rdg");
                 siblings.forEach((sibling) => {
                     altReading.push(sibling);
                 });
                 altReadings.push(altReading);
-                
-            } else if (parentElement[0].tagName === 'TEI-NOTE') {
+            } else if (parentElement[0].tagName === "TEI-NOTE") {
                 // add all the children to the altReadings array
                 for (const note of parentElement) {
                     let altReading = [];
                     note.childNodes.forEach((child) => {
                         altReading.push(child.cloneNode(true));
                     });
+
+                    // Finds the author of the note
+                    if (note.getAttribute("resp")) {
+                        try {
+                            const person = document.querySelector(
+                                note.getAttribute("resp"),
+                            );
+                            let persName = person.querySelector("tei-persName");
+                            altReading.push(persName.cloneNode(true));
+                        } catch (e) {
+                            console.warn(
+                                "Could not find the person element with the id: " +
+                                    note.getAttribute("resp"),
+                            );
+                        }
+                    }
+
                     altReadings.push(altReading);
                 }
             }
@@ -184,7 +208,7 @@
                 for (const el of reading) {
                     // if the reading is a node type of 3 (text node) then create a new element
                     if (el.nodeType === 3) {
-                        let span = document.createElement('span');
+                        let span = document.createElement("span");
                         span.append(el);
                         el.innerHTML = span.outerHTML;
                     }
@@ -251,19 +275,40 @@
                         <div
                             class="mt-3 w-full text-center sm:ml-4 sm:mt-0 sm:text-left"
                         >
-                            <div class="flex gap-2 items-center mb-10"><h3 class=" font-bold w-fit">{type} </h3>
-                            <span class="h-1 w-full {accentColour} my-2"></span></div>
+                            <div class="flex gap-2 items-center mb-10">
+                                <h3 class=" font-bold w-fit">{type}</h3>
+                                <span class="h-1 w-full {accentColour} my-2"
+                                ></span>
+                            </div>
                             <div class="mt-2">
                                 {#each altReadings as reading, i}
                                     <div class="mb-4">
                                         {#each reading as el}
-                                            {@html el.innerHTML}
+                                            {#if el.tagName != "TEI-PERSNAME"}
+                                                {@html el.innerHTML}
+                                            {:else}
+                                                <div
+                                                    class="text-sm text-secondary-600 italic mt-4 pr-4 text-right"
+                                                >
+                                                    <a
+                                                        href="{base}/people/{el.getAttribute(
+                                                            'corresp',
+                                                        )}"
+                                                        class="hover:anchor"
+                                                        target="_blank"
+                                                        >— {@html el.innerHTML}</a
+                                                    >
+                                                </div>
+                                            {/if}
                                         {/each}
                                     </div>
                                     <!-- Only adds the divider if there are more than one readings and it's not the last one -->
                                     {#if altReadings.length > 1}
                                         {#if i < altReadings.length - 1}
-                                            <TextDivider fillColour="#5E9DB5" class="mb-4"/>
+                                            <TextDivider
+                                                fillColour="#5E9DB5"
+                                                class="mb-4"
+                                            />
                                         {/if}
                                     {/if}
                                 {/each}
