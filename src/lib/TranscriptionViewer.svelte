@@ -58,6 +58,7 @@
     });
 
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
+    import { isElementVisibleInViewport } from "../utils/teiBehavioursHelper";
 
     function cleanVariationStyles(el) {
         // removes any bg styling for the element
@@ -316,16 +317,16 @@
             );
             if (section) {
                 // find out whether the element is in view
-                const rect = section.getBoundingClientRect();
-                if (rect.top < 0 || rect.bottom > window.innerHeight) {
-                    // if it is not in view, scroll to it
-                    section.scrollIntoView({
+                isElementVisibleInViewport(section, (isVisible, entry) => {
+                    if (!isVisible) {
+                        section.scrollIntoView({
                         behavior: "smooth",
                         block: "start",
                     });
                     teiViewerState.currentSection =
                         dataViewerState.activeNavigator;
-                }
+                    }
+                });
             }
         }
     }
@@ -390,7 +391,7 @@
                         break;
                     }
                     parent = parent.parentElement;
-                }   
+                }
             }
         });
 

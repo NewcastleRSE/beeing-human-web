@@ -42,6 +42,32 @@ export function getElementRect(elt) {
     }
 }
 
+export function isElementVisibleInViewport(elt, callback) {
+    if (!elt) {
+        console.warn('Element is not provided');
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Element is visible in the viewport
+                callback(true, entry);
+                observer.unobserve(entry.target);
+            } else {
+                // Element is not visible in the viewport
+                callback(false, entry);
+            }
+        });
+    }, {
+        root: null, // Use the viewport as the root
+        rootMargin: '0px',
+        threshold: 0.1 // Trigger callback when 10% of the element is visible
+    });
+
+    observer.observe(elt);
+}
+
 export function checkForParentNotes(elt) {
     // checks to see if the element is also contained by a another ref with the same type
     let parentRef = findAncestor(elt, 'tei-ref');
