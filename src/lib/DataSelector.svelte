@@ -12,6 +12,12 @@
     import DataRadioGroupControl from "$lib/DataSelectorControls/DataRadioGroupControl.svelte";
     import DataSlideToggle from "$lib/DataSelectorControls/DataSlideToggle.svelte";
 
+    import Maximize from "./icons/Maximize.svelte";
+    import Minimize from "./icons/Minimize.svelte";
+
+    import { slide } from "svelte/transition";
+    import { cubicInOut } from "svelte/easing";
+
     import DataNavigator from "$lib/DataSelectorControls/DataNavigator.svelte";
 
     import { dataViewerState } from "../stores/dataViewer.svelte";
@@ -41,50 +47,68 @@
             dataViewerState.editorialNotes = changeObject.newValue;
         }
 
-        if (changeObject.origin === 'navigator') {
+        if (changeObject.origin === "navigator") {
             dataViewerState.activeNavigator = changeObject.newValue;
         }
     }
+
+    let showBar = $state(true);
+
+    const toggleBar = () => {
+        showBar = !showBar;
+    };
+
 </script>
 
-
 {#key dataViewerState}
-<form
-    class="flex flex-col md:flex-row w-full bg-primary-400 items-center md:justify-between md:content-center md:px-12 py-10 gap-2"
->
-    <!-- Data source selector goes here -->
-    {#each controlsArray as controlOptions}
-        {#if controlOptions.dataSource}
-            <DataSourceControl
-                options={controlOptions}
-                valueChange={(changeObject) => updateDataSource(changeObject)}
-            />
-        {/if}
-    {/each}
-    <div
-        class="flex flex-col md:flex-row items-center md:content-center gap-4 md:gap-32"
+    <form
+        class="sticky top-0 md:static z-50 md:z-auto w-full bg-primary-400 py-6"
     >
-        <!-- Other controls go here -->
+    <button onclick={toggleBar} class="w-max ml-8 mr-auto" data-sveltekit-noscroll>{#if showBar}
+        <Minimize/>
+        {:else}
+        <Maximize/>
+        {/if}</button>
+        {#if showBar}
+        <div transition:slide={{duration: 200, easing: cubicInOut}} class="flex flex-col md:flex-row items-center md:justify-between md:content-center md:px-12 py-10 gap-2">
+        <!-- Data source selector goes here -->
         {#each controlsArray as controlOptions}
-            {#if !controlOptions.dataSource}
-                {#if controlOptions.type === "radioGroup"}
-                    <DataRadioGroupControl
-                        options={controlOptions}
-                        valueChange={(changeObject) =>
-                            updateOtherFilters(changeObject)}
-                    />
-                {:else if controlOptions.type === "toggle"}
-                    <DataSlideToggle
-                        options={controlOptions}
-                        valueChange={(changeObject) =>
-                            updateOtherFilters(changeObject)}
-                    />
-                {:else if controlOptions.type === "navigator"}
-                    <DataNavigator options = {controlOptions}
-                    valueChange = {(changeObject) => updateOtherFilters(changeObject)} />
-                {/if}
+            {#if controlOptions.dataSource}
+                <DataSourceControl
+                    options={controlOptions}
+                    valueChange={(changeObject) =>
+                        updateDataSource(changeObject)}
+                />
             {/if}
         {/each}
-    </div>
-</form>
+        <div
+            class="flex flex-col md:flex-row items-center md:content-center gap-4 md:gap-32"
+        >
+            <!-- Other controls go here -->
+            {#each controlsArray as controlOptions}
+                {#if !controlOptions.dataSource}
+                    {#if controlOptions.type === "radioGroup"}
+                        <DataRadioGroupControl
+                            options={controlOptions}
+                            valueChange={(changeObject) =>
+                                updateOtherFilters(changeObject)}
+                        />
+                    {:else if controlOptions.type === "toggle"}
+                        <DataSlideToggle
+                            options={controlOptions}
+                            valueChange={(changeObject) =>
+                                updateOtherFilters(changeObject)}
+                        />
+                    {:else if controlOptions.type === "navigator"}
+                        <DataNavigator
+                            options={controlOptions}
+                            valueChange={(changeObject) =>
+                                updateOtherFilters(changeObject)}
+                        />
+                    {/if}
+                {/if}
+            {/each}
+        </div></div>
+        {/if}
+    </form>
 {/key}
