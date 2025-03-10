@@ -20,7 +20,10 @@
 
     import DataNavigator from "$lib/DataSelectorControls/DataNavigator.svelte";
 
+    import { beforeNavigate, disableScrollHandling } from '$app/navigation';
+
     import { dataViewerState } from "../stores/dataViewer.svelte";
+    import { onMount } from "svelte";
 
     let { controlsArray } = $props();
 
@@ -58,57 +61,75 @@
         showBar = !showBar;
     };
 
+    onMount(() => {
+        window.addEventListener("scroll", (e) => {
+            console.log(e);
+        });
+    });
+
+    // THIS SOLUTION SEEMS TO WORK BUT IS A LITTLE HACKY -- TEST IT MORE
+    beforeNavigate(() => {
+        disableScrollHandling();});
 </script>
 
+{@debug showBar}
+
 {#key dataViewerState}
-    <form
-        class="sticky top-0 md:static z-50 md:z-auto w-full bg-primary-400 py-6"
-    >
-    <button onclick={toggleBar} class="w-max ml-8 mr-auto" data-sveltekit-noscroll>{#if showBar}
-        <Minimize/>
-        {:else}
-        <Maximize/>
-        {/if}</button>
-        {#if showBar}
-        <div transition:slide={{duration: 200, easing: cubicInOut}} class="flex flex-col md:flex-row items-center md:justify-between md:content-center md:px-12 py-10 gap-2">
-        <!-- Data source selector goes here -->
-        {#each controlsArray as controlOptions}
-            {#if controlOptions.dataSource}
-                <DataSourceControl
-                    options={controlOptions}
-                    valueChange={(changeObject) =>
-                        updateDataSource(changeObject)}
-                />
-            {/if}
-        {/each}
-        <div
-            class="flex flex-col md:flex-row items-center md:content-center gap-4 md:gap-32"
+    <form class="sticky top-0 z-50 md:z-auto w-full bg-primary-400 py-6">
+        <button
+            onclick={toggleBar}
+            class="w-max ml-8 mr-auto"
+            data-sveltekit-noscroll
+            >{#if showBar}
+                <Minimize />
+            {:else}
+                <Maximize />
+            {/if}</button
         >
-            <!-- Other controls go here -->
-            {#each controlsArray as controlOptions}
-                {#if !controlOptions.dataSource}
-                    {#if controlOptions.type === "radioGroup"}
-                        <DataRadioGroupControl
+        {#if showBar}
+            <div
+                transition:slide={{ duration: 200, easing: cubicInOut }}
+                class="flex flex-col md:flex-row items-center md:justify-between md:content-center md:px-12 py-10 gap-2"
+            >
+                <!-- Data source selector goes here -->
+                {#each controlsArray as controlOptions}
+                    {#if controlOptions.dataSource}
+                        <DataSourceControl
                             options={controlOptions}
                             valueChange={(changeObject) =>
-                                updateOtherFilters(changeObject)}
-                        />
-                    {:else if controlOptions.type === "toggle"}
-                        <DataSlideToggle
-                            options={controlOptions}
-                            valueChange={(changeObject) =>
-                                updateOtherFilters(changeObject)}
-                        />
-                    {:else if controlOptions.type === "navigator"}
-                        <DataNavigator
-                            options={controlOptions}
-                            valueChange={(changeObject) =>
-                                updateOtherFilters(changeObject)}
+                                updateDataSource(changeObject)}
                         />
                     {/if}
-                {/if}
-            {/each}
-        </div></div>
+                {/each}
+                <div
+                    class="flex flex-col md:flex-row items-center md:content-center gap-4 md:gap-32"
+                >
+                    <!-- Other controls go here -->
+                    {#each controlsArray as controlOptions}
+                        {#if !controlOptions.dataSource}
+                            {#if controlOptions.type === "radioGroup"}
+                                <DataRadioGroupControl
+                                    options={controlOptions}
+                                    valueChange={(changeObject) =>
+                                        updateOtherFilters(changeObject)}
+                                />
+                            {:else if controlOptions.type === "toggle"}
+                                <DataSlideToggle
+                                    options={controlOptions}
+                                    valueChange={(changeObject) =>
+                                        updateOtherFilters(changeObject)}
+                                />
+                            {:else if controlOptions.type === "navigator"}
+                                <DataNavigator
+                                    options={controlOptions}
+                                    valueChange={(changeObject) =>
+                                        updateOtherFilters(changeObject)}
+                                />
+                            {/if}
+                        {/if}
+                    {/each}
+                </div>
+            </div>
         {/if}
     </form>
 {/key}
