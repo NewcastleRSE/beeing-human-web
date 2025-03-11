@@ -20,10 +20,9 @@
 
     import DataNavigator from "$lib/DataSelectorControls/DataNavigator.svelte";
 
-    import { beforeNavigate, disableScrollHandling } from "$app/navigation";
+    import { beforeNavigate, afterNavigate } from "$app/navigation";
 
     import { dataViewerState } from "../stores/dataViewer.svelte";
-    import { onMount } from "svelte";
 
     let { controlsArray } = $props();
 
@@ -54,13 +53,6 @@
             dataViewerState.activeNavigator = changeObject.newValue;
         }
     }
-
-    const propertyMap = {
-        view: "activeView",
-        variation: "variationDetail",
-        "editorial notes": "editorialNotes",
-        navigator: "activeNavigator",
-    };
 
     let width = $state(undefined);
 
@@ -110,15 +102,29 @@
             showBar = true;
             open = false;
         }
+    });
+
+    $effect(() => {
+        if (!smallScreen) {
+            showBar = true;
+        }
     })
 
     // THIS SOLUTION SEEMS TO WORK BUT IS A LITTLE HACKY -- TEST IT MORE
+    let lastScrollValue = 0;
     beforeNavigate(() => {
-        disableScrollHandling();
+        lastScrollValue = scrollValue;
+        console.log('about to navigate: ', lastScrollValue);
     });
+
+    afterNavigate(() => {
+        window.scrollTo(0, lastScrollValue);
+        console.log('navigated: ', lastScrollValue, pastDelta);
+    });
+
 </script>
 
-{@debug pastDelta}
+{@debug scrollValue}
 
 <svelte:window bind:innerWidth={width} bind:scrollY={scrollValue}/>
 
