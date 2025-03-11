@@ -165,9 +165,6 @@
                                 />
                             {:else if controlOptions.type === "toggle"}
                                 <DataSlideToggle
-                                    defaultValue={propertyMap[
-                                        controlOptions.label
-                                    ]}
                                     options={controlOptions}
                                     valueChange={(changeObject) =>
                                         updateOtherFilters(changeObject)}

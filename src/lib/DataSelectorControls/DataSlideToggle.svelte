@@ -11,9 +11,7 @@
 
     let {options, valueChange, defaultValue} = $props();
 
-    let initialValue = defaultValue ? defaultValue : options.values.default;
-
-    let slideValue = $state(initialValue);
+    let slideValue = $state(options.values.default);
 
 </script>
 
