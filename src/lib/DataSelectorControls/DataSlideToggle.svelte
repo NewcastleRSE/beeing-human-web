@@ -9,9 +9,11 @@
 <script>
     import {SlideToggle} from '@skeletonlabs/skeleton';
 
-    let {options, valueChange} = $props();
+    let {options, valueChange, defaultValue} = $props();
 
-    let slideValue = $state(options.values.default);
+    let initialValue = defaultValue ? defaultValue : options.values.default;
+
+    let slideValue = $state(initialValue);
 
 </script>
 

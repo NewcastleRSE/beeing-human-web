@@ -20,7 +20,7 @@
 
     import DataNavigator from "$lib/DataSelectorControls/DataNavigator.svelte";
 
-    import { beforeNavigate, disableScrollHandling } from '$app/navigation';
+    import { beforeNavigate, disableScrollHandling } from "$app/navigation";
 
     import { dataViewerState } from "../stores/dataViewer.svelte";
     import { onMount } from "svelte";
@@ -55,41 +55,92 @@
         }
     }
 
+    const propertyMap = {
+        view: "activeView",
+        variation: "variationDetail",
+        "editorial notes": "editorialNotes",
+        navigator: "activeNavigator",
+    };
+
+    let width = $state(undefined);
+
     let showBar = $state(true);
 
+    let smallScreen = $derived.by(() => {
+        return width < 768;
+    });
+
     const toggleBar = () => {
+        restPoint = scrollValue;
         showBar = !showBar;
     };
 
-    onMount(() => {
-        window.addEventListener("scroll", (e) => {
-            console.log(e);
-        });
+    let scrollValue = $state(undefined);
+
+    // set a variable that determines whether or not the user scrolled past a certain delta after the previous rest point
+    const scrollDelta = 200;
+    let restPoint = 0;
+    let open = false;
+    
+    let pastDelta = $derived.by(() => {
+        if (scrollValue) {
+
+            if (scrollValue < restPoint) {
+                restPoint = scrollValue;
+                if (scrollValue < scrollDelta) {
+                    open = true;
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            if (scrollValue > restPoint + scrollDelta) {
+                restPoint = scrollValue;
+                return true;
+            } else {
+                return false;
+            }
+        }
     });
+
+    $effect(() => {
+        if (pastDelta && !open) {
+            showBar = false;
+        } else if (pastDelta && open) {
+            showBar = true;
+            open = false;
+        }
+    })
 
     // THIS SOLUTION SEEMS TO WORK BUT IS A LITTLE HACKY -- TEST IT MORE
     beforeNavigate(() => {
-        disableScrollHandling();});
+        disableScrollHandling();
+    });
 </script>
 
-{@debug showBar}
+{@debug pastDelta}
+
+<svelte:window bind:innerWidth={width} bind:scrollY={scrollValue}/>
 
 {#key dataViewerState}
-    <form class="sticky top-0 z-50 md:z-auto w-full bg-primary-400 py-6">
-        <button
-            onclick={toggleBar}
-            class="w-max ml-8 mr-auto"
-            data-sveltekit-noscroll
-            >{#if showBar}
-                <Minimize />
-            {:else}
-                <Maximize />
-            {/if}</button
-        >
+    <form class="sticky top-0 md:static md:z-auto w-full bg-primary-400 py-6">
+        {#if smallScreen}
+            <button
+                onclick={toggleBar}
+                class="w-max ml-8 mr-auto"
+                data-sveltekit-noscroll
+                >{#if showBar}
+                    <Minimize />
+                {:else}
+                    <Maximize />
+                {/if}</button
+            >
+        {/if}
         {#if showBar}
             <div
                 transition:slide={{ duration: 200, easing: cubicInOut }}
-                class="flex flex-col md:flex-row items-center md:justify-between md:content-center md:px-12 py-10 gap-2"
+                class="flex flex-col flex-wrap md:flex-row items-center md:justify-between md:content-center md:px-12 py-10 gap-2"
             >
                 <!-- Data source selector goes here -->
                 {#each controlsArray as controlOptions}
@@ -102,7 +153,7 @@
                     {/if}
                 {/each}
                 <div
-                    class="flex flex-col md:flex-row items-center md:content-center gap-4 md:gap-32"
+                    class="flex flex-col md:flex-row items-center md:content-center gap-4 md:gap-32 flex-wrap"
                 >
                     <!-- Other controls go here -->
                     {#each controlsArray as controlOptions}
@@ -115,6 +166,9 @@
                                 />
                             {:else if controlOptions.type === "toggle"}
                                 <DataSlideToggle
+                                    defaultValue={propertyMap[
+                                        controlOptions.label
+                                    ]}
                                     options={controlOptions}
                                     valueChange={(changeObject) =>
                                         updateOtherFilters(changeObject)}
