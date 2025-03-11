@@ -83,8 +83,7 @@
     let open = false;
     
     let pastDelta = $derived.by(() => {
-        if (scrollValue) {
-
+        if (scrollValue && smallScreen) {
             if (scrollValue < restPoint) {
                 restPoint = scrollValue;
                 if (scrollValue < scrollDelta) {
