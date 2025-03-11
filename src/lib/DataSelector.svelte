@@ -70,7 +70,7 @@
     let scrollValue = $state(undefined);
 
     // set a variable that determines whether or not the user scrolled past a certain delta after the previous rest point
-    const scrollDelta = 200;
+    const scrollDelta = 500;
     let restPoint = 0;
     let open = false;
     
