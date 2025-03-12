@@ -114,17 +114,13 @@
     let lastScrollValue = 0;
     beforeNavigate(() => {
         lastScrollValue = scrollValue;
-        console.log('about to navigate: ', lastScrollValue);
     });
 
     afterNavigate(() => {
         window.scrollTo(0, lastScrollValue);
-        console.log('navigated: ', lastScrollValue, pastDelta);
     });
 
 </script>
-
-{@debug scrollValue}
 
 <svelte:window bind:innerWidth={width} bind:scrollY={scrollValue}/>
 
