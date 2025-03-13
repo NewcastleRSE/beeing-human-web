@@ -119,6 +119,20 @@ export let teiBehaviours = {
                 wrapChildren(elt.parentElement, link);
             }]
         ],
+        "persName": [
+            ["_", function (elt) {
+                if (!findIfAncestor(elt, 'tei-titlepage')) {
+                    elt.classList.add('italic');
+                }
+            }],
+        ],
+        "placeName": [
+            ["_", function (elt) {
+                if (!findIfAncestor(elt, 'tei-titlepage')) {
+                    elt.classList.add('italic');
+                }
+            }],
+        ],
         "ref": function (elt) {
             let sup = false
             if (elt.getAttribute('rend') === 'superscript') {
@@ -394,6 +408,11 @@ export let teiBehaviours = {
             ["[rend='finis']", function (elt) {
                 addTailwindClasslist(elt, 'my-24')
             }],
+        ],
+        "q": [
+            ["_", function (elt) {
+                addTailwindClasslist(elt, 'italic');
+            }]            
         ],
         "seg": [
             ["[type='special-list-ch1']", function (elt) {
