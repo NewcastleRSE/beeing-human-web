@@ -8,7 +8,7 @@
         "title": "1609 facsimile"
     },
     "1623": {
-        "teiURL": "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/refs/heads/dev/1623_consolidated.xml",
+        "teiURL": "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/refs/heads/roman-semicolons/1623_consolidated.xml",
         "teiMediaRoot": "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/refs/heads/dev/",
         "iiifManifest": "https://iiif.archive.org/iiif/RAM2023-1081/manifest.json",
         "manifestStartPage": "5",

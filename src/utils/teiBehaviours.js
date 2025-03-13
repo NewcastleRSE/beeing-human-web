@@ -443,6 +443,9 @@ export let teiBehaviours = {
             ["[rend='italic']", function (elt) {
                 addTailwindClasslist(elt, "italic");
             }],
+            ["[rend='roman']", function (elt) {
+                addTailwindClasslist(elt, "not-italic");
+            }],
             ["[type='fragmentedNoteAttachement']", function (elt) {
                 // This is a fragment point of attachment for an editorial note, so any processing and styling is left to the TEI viwer component
 
