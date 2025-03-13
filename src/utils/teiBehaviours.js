@@ -50,13 +50,35 @@ export let teiBehaviours = {
         "foreign": function (elt) {
             addTailwindClasslist(elt, "italic")
         },
-        "lg": function (elt) {
-            let tailwindString = "px-8 flex flex-col mb-4"
-            if (elt.getAttribute('lang') || elt.getAttribute('rend') === 'italic') {
-                tailwindString += ' italic'
-            }
-            addTailwindClasslist(elt, tailwindString)
-        },
+        "lg": [
+            ["[rend='inline']", function (elt) {
+                let tailwindString = "pl-8 mb-4"
+                if (elt.getAttribute('lang') || elt.getAttribute('rend') === 'italic') {
+                    tailwindString += ' italic'
+                }
+                addTailwindClasslist(elt, tailwindString)
+
+                // add a br in between children elements
+                let placesToAdd = [];
+                for (let i = 0; i < elt.children.length - 1; i++) {
+                    if (i < elt.children.length - 1) {
+                        placesToAdd.push(elt.children[i])
+                    }
+                }
+
+                for (const place of placesToAdd) {
+                    let br = document.createElement('br');
+                    place.after(br);
+                }
+            }],
+            ["_", function (elt) {
+                let tailwindString = "px-8 flex flex-col mb-4"
+                if (elt.getAttribute('lang') || elt.getAttribute('rend') === 'italic') {
+                    tailwindString += ' italic'
+                }
+                addTailwindClasslist(elt, tailwindString)
+            }]
+        ],
         "media": function (elt) {
             // checks if the media element has a url and is audio
             if (elt.getAttribute('url') && elt.getAttribute('mimeType') === 'audio/mp3') {
@@ -149,9 +171,9 @@ export let teiBehaviours = {
                 // This is a point of attachment for an editorial note, so any processing and styling is left to the TEI viwer component
 
                 checkForParentNotes(elt);
-                
+
                 let event = new CustomEvent('editorialNoteClicked', { detail: elt });
-                
+
                 elt.onclick = function () {
                     window.dispatchEvent(event);
                 }
@@ -412,7 +434,7 @@ export let teiBehaviours = {
         "q": [
             ["_", function (elt) {
                 addTailwindClasslist(elt, 'italic');
-            }]            
+            }]
         ],
         "seg": [
             ["[type='special-list-ch1']", function (elt) {
@@ -421,7 +443,7 @@ export let teiBehaviours = {
             ["[rend='italic']", function (elt) {
                 addTailwindClasslist(elt, "italic");
             }],
-            ["[type='fragmentedNoteAttachement']", function(elt) {
+            ["[type='fragmentedNoteAttachement']", function (elt) {
                 // This is a fragment point of attachment for an editorial note, so any processing and styling is left to the TEI viwer component
 
                 checkForParentNotes(elt);
