@@ -324,6 +324,13 @@ export let teiBehaviours = {
             for (const child of elt.children) {
                 child.classList.add(`var-${elt.getAttribute('subtype')}`)
             }
+
+            // remove any whitespace nodes from the element
+            for (const node of elt.childNodes) {
+                if (node.nodeType === 3) {
+                    node.remove()
+                }
+            }
         },
         "rdg": function (elt) {
             elt.classList.add('hidden');
