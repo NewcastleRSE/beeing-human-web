@@ -150,6 +150,7 @@
                             options={controlOptions}
                             valueChange={(changeObject) =>
                                 updateDataSource(changeObject)}
+                            currentValue={dataViewerState.activeDataset}
                         />
                     {/if}
                 {/each}
