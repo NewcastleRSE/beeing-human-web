@@ -132,10 +132,16 @@
                 // import tify and create a new instance
                 await import("tify").then(() => {
                     if (manifest && startPage) {
-                        if (currentPage === undefined) {
+                        if (currentPage === undefined && teiViewerState.currentSignature === undefined) {
+                            // mounting on first page load
                             currentPage = parseInt(startPage);
                         }
                         buildIIIFY(manifest);
+                        if (currentPage === undefined && teiViewerState.currentSignature !== undefined) {
+                            // mounting after the view was changed to transcription
+                            currentPage = teiViewerState.signatures.indexOf(teiViewerState.currentSignature) + parseInt(startPage);
+                            changePage(currentPage);
+                        }
                     }
                 });
             } catch (e) {
@@ -180,7 +186,7 @@
         if (
             currentPage !==
             teiViewerState.signatures.indexOf(teiViewerState.currentSignature) +
-                parseInt(startPage)
+                parseInt(startPage) && currentPage !== undefined
         ) {
             // set currentSignature to the signature of the current page in the viewer
             teiViewerState.currentSignature =
@@ -203,6 +209,6 @@
         }
     });
 </script>
-
+{@debug teiViewerState, currentPage}
 <div id="facsimile-viewer" class="h-full"></div>
 <PageSelectButton {currentPage} newPage={(nP) => changePage(nP)}/>
