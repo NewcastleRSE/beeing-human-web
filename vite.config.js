@@ -1,13 +1,30 @@
+import { sentrySvelteKit } from "@sentry/sveltekit";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vitest/config";
-import { svelteTesting } from '@testing-library/svelte/vite'
+import { svelteTesting } from "@testing-library/svelte/vite";
+
 
 export default defineConfig({
-  plugins: [sveltekit(), svelteTesting()],
+  plugins: [
+    sentrySvelteKit({
+      sourceMapsUploadOptions: {
+        org: "ncl-rse",
+        project: "beeing-human-web",
+        release: "beeing-human-web@" + process.env.npm_package_version,
+        environment: process.argv.includes('dev') ? 'development' : 'production',
+      },
+    }),
+    sveltekit(),
+    svelteTesting(),
+  ],
   test: {
-    include: ["src/**/*.{test,spec}.{js,ts}", "tests/components/*.{test,spec}.{js,ts}", "tests/unit/*.{test,spec}.{js,ts}"],
-    environment: 'jsdom',
-    setupFiles: ['./vitest-setup.js'],
+    include: [
+      "src/**/*.{test,spec}.{js,ts}",
+      "tests/components/*.{test,spec}.{js,ts}",
+      "tests/unit/*.{test,spec}.{js,ts}",
+    ],
+    environment: "jsdom",
+    setupFiles: ["./vitest-setup.js"],
     hookTimeout: 25000,
   },
 });

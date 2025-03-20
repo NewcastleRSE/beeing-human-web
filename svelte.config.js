@@ -43,6 +43,9 @@ const config = {
     prerender: {
       handleHttpError: 'warn',
       handleMissingId: 'warn'
+    },
+    version: {
+      name: process.env.npm_package_version,
     }
   },
 
