@@ -8,10 +8,19 @@
   -->
 <script>
     import {SlideToggle} from '@skeletonlabs/skeleton';
+    import { onMount } from 'svelte';
 
-    let {options, valueChange, defaultValue} = $props();
+    let {options, valueChange, currentValue} = $props();
 
-    let slideValue = $state(options.values.default);
+    let slideValue = $state(undefined);
+
+    onMount(() => {
+        if ([true, false].includes(currentValue)) {
+            slideValue = currentValue;
+        } else {
+            slideValue = options.values.default;
+        }
+    })
 
 </script>
 

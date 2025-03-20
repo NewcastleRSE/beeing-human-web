@@ -2,12 +2,22 @@
     import { onMount } from "svelte";
 
     // listIndex should be an array of arrays in which the first value is the display name and the second value is the xml:id
-    let { options, valueChange } = $props();
+    let { options, valueChange, currentSelected } = $props();
 
     let selected = $state(0);
 
     onMount(() => {
-        if (options && options.defaultSelected != 0) {
+
+        // list all possible values of  listIndex
+        let validValues = [];
+        for (const val of options.listIndex) {
+            validValues.push(val[1]);
+        }
+        
+        if (validValues.includes(currentSelected)) {
+            // find the index of the currentSelected value in the listIndex array
+            selected = currentSelected;
+        } else if (options && options.defaultSelected != 0) {
             selected = options.defaultSelected;
         }
     });
@@ -16,6 +26,7 @@
         valueChange({ origin: "navigator", newValue: selected });
     }
 </script>
+
 
 {#if options != undefined}
     <div

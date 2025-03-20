@@ -8,9 +8,11 @@
   -->
 
 <script>
-    let {options, valueChange} = $props();
+    import { onMount } from "svelte";
 
-    let selected = $state(options.default);
+    let {options, valueChange, currentValue} = $props();
+
+    let selected = $state(undefined);
 
     function handleClick(valueChange) {
         let newValue = document.getElementById('data-source-select').value
@@ -20,6 +22,27 @@
         });
     }
 
+    onMount(() => {
+        // checks to see if the current value of is in options.values
+        let validValues = []
+        for (const val of Object.values(options.values)) {
+            validValues.push(parseInt(val))
+        }
+
+        console.log(validValues, currentValue)
+
+        if (currentValue && validValues.includes(currentValue)) {
+            if (currentValue > 1000) {
+                // i.e., if the value is a year
+                selected = currentValue.toString()
+            } else {
+                // else, the value is an index
+                selected = currentValue
+            }
+        } else {
+            selected = options.default
+        }
+    })
 
 </script>
 

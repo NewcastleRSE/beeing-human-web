@@ -150,6 +150,7 @@
                             options={controlOptions}
                             valueChange={(changeObject) =>
                                 updateDataSource(changeObject)}
+                            currentValue={dataViewerState.activeDataset}
                         />
                     {/if}
                 {/each}
@@ -164,18 +165,21 @@
                                     options={controlOptions}
                                     valueChange={(changeObject) =>
                                         updateOtherFilters(changeObject)}
+                                    currentSelected = {{'view': dataViewerState.activeView, 'variation': dataViewerState.variationDetail}}
                                 />
                             {:else if controlOptions.type === "toggle"}
                                 <DataSlideToggle
                                     options={controlOptions}
                                     valueChange={(changeObject) =>
                                         updateOtherFilters(changeObject)}
+                                    currentValue = {dataViewerState.editorialNotes}
                                 />
                             {:else if controlOptions.type === "navigator"}
                                 <DataNavigator
                                     options={controlOptions}
                                     valueChange={(changeObject) =>
                                         updateOtherFilters(changeObject)}
+                                    currentSelected = {dataViewerState.activeNavigator}
                                 />
                             {/if}
                         {/if}

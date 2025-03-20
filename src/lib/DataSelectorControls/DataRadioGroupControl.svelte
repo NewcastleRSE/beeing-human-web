@@ -10,13 +10,27 @@
     import {RadioGroup, RadioItem} from '@skeletonlabs/skeleton';
 
     import {makeHtmlId} from '../../utils/stringOperations'
+    import { onMount } from 'svelte';
 
 
-    let {options, valueChange} = $props();
-    let radioValue = $state(options.defaultValue);
+    let {options, valueChange, currentSelected} = $props();
+    let radioValue = $state(undefined);
+
+    onMount(() => {
+        // choose correct currentSelected value based on label
+        let correctCurrentSelected = currentSelected[options.label];
+        // checks to see if currentSelected is valid for this selector
+        const validValues = Object.values(options.values);
+        if (validValues.includes(correctCurrentSelected)) {
+            radioValue = correctCurrentSelected;
+        } else {
+            radioValue = options.defaultValue;
+        }
+    })
 
 
 </script>
+
 
 <div class="flex flex-col gap-2 font-light text-xs md:text-sm" data-testid="radio-group-{options.label}">
     <label for="radio-group-{options.label}" class="hidden md:block font-light text-sm pl-4"
