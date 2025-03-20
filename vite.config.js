@@ -10,8 +10,10 @@ export default defineConfig({
       sourceMapsUploadOptions: {
         org: "ncl-rse",
         project: "beeing-human-web",
-        release: "beeing-human-web@" + process.env.npm_package_version,
-        environment: process.argv.includes('dev') ? 'development' : 'production',
+        release: {
+          name: "being-human-web@" + process.env.npm_package_version,
+        }
+
       },
     }),
     sveltekit(),
