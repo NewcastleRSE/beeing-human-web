@@ -399,8 +399,6 @@
     });
 </script>
 
-{@debug dataViewerState}
-
 <svelte:window bind:innerWidth={windowSize} />
 
 {#if ready}
