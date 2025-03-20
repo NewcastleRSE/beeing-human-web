@@ -172,6 +172,7 @@
                                     options={controlOptions}
                                     valueChange={(changeObject) =>
                                         updateOtherFilters(changeObject)}
+                                    currentValue = {dataViewerState.editorialNotes}
                                 />
                             {:else if controlOptions.type === "navigator"}
                                 <DataNavigator
