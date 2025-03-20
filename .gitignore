@@ -1,2 +1,4 @@
 node_modules
 .svelte-kit
+# Sentry Config File
+.env.sentry-build-plugin
