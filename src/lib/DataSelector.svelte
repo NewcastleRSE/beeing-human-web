@@ -165,6 +165,7 @@
                                     options={controlOptions}
                                     valueChange={(changeObject) =>
                                         updateOtherFilters(changeObject)}
+                                    currentSelected = {{'view': dataViewerState.activeView, 'variation': dataViewerState.variationDetail}}
                                 />
                             {:else if controlOptions.type === "toggle"}
                                 <DataSlideToggle

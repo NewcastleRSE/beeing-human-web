@@ -27,7 +27,6 @@
     }
 </script>
 
-{@debug selected}
 
 {#if options != undefined}
     <div
