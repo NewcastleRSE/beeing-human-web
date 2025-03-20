@@ -38,8 +38,6 @@
 
 </script>
 
-{@debug currentValue, selected}
-
 <select
     name="data-source"
     id="data-source-select"

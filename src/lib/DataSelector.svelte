@@ -177,6 +177,7 @@
                                     options={controlOptions}
                                     valueChange={(changeObject) =>
                                         updateOtherFilters(changeObject)}
+                                    currentSelected = {dataViewerState.activeNavigator}
                                 />
                             {/if}
                         {/if}
