@@ -1,5 +1,6 @@
 <script>
   import TranscriptionViewer from "../../lib/TranscriptionViewer.svelte";
+
 </script>
 
 <h1>1609 display version</h1>
