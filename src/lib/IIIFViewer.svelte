@@ -139,8 +139,7 @@
                         buildIIIFY(manifest);
                         if (currentPage === undefined && teiViewerState.currentSignature !== undefined) {
                             // mounting after the view was changed to transcription
-                            currentPage = teiViewerState.signatures.indexOf(teiViewerState.currentSignature) + parseInt(startPage);
-                            changePage(currentPage);
+                            changePage(teiViewerState.signatures.indexOf(teiViewerState.currentSignature) + parseInt(startPage));
                         }
                     }
                 });
@@ -149,14 +148,16 @@
             }
         }
 
-        window.addEventListener("sigInView", (evt) => {
+        window.addEventListener("sigInView", async (evt) => {
             if (evt.detail.sig != teiViewerState.currentSignature) {
                 // find the index of the signature in the array
                 const index = teiViewerState.signatures.indexOf(evt.detail.sig);
                 // adjust the page based on the starting page of the iiif manifesto
-                changePage(index + parseInt(startPage));
-                // update the current signature in the store
-                teiViewerState.currentSignature = evt.detail.sig;
+                await changePage(index + parseInt(startPage)).then(() => {
+                    // update the current signature in the store
+                    teiViewerState.currentSignature = evt.detail.sig;
+                });
+                
 
                 // find the element for evt.detail.sig
                 const sigElement = document.querySelector(`[n='${teiViewerState.signatures[index+1]}']`);
