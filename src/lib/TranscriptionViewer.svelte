@@ -317,14 +317,29 @@
             );
             if (section) {
                 // find out whether the element is in view
-                isElementVisibleInViewport(section, (isVisible, entry) => {
+                teiViewerState.scrolling = true;
+                isElementVisibleInViewport(section, (isVisible) => {
                     if (!isVisible) {
                         section.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                    });
-                    teiViewerState.currentSection =
-                        dataViewerState.activeNavigator;
+                            behavior: "smooth",
+                            block: "start",
+                        });
+                    } else {
+                        // update stores
+                        // update current section
+                        teiViewerState.currentSection =
+                            dataViewerState.activeNavigator;
+
+                        // update current signature
+                        // find first pb in section and apply that as current signature
+                        const pb = section.querySelector("tei-pb");
+                        if (pb) {
+                            const sig = pb.getAttribute("facs");
+                            teiViewerState.currentSignature = sig;
+                        }
+
+                        // update scrolling state
+                        teiViewerState.scrolling = false;
                     }
                 });
             }

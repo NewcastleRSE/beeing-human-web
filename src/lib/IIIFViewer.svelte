@@ -149,7 +149,7 @@
         }
 
         window.addEventListener("sigInView", async (evt) => {
-            if (evt.detail.sig != teiViewerState.currentSignature) {
+            if (evt.detail.sig != teiViewerState.currentSignature && !teiViewerState.scrolling) {
                 // find the index of the signature in the array
                 const index = teiViewerState.signatures.indexOf(evt.detail.sig);
                 // adjust the page based on the starting page of the iiif manifesto
