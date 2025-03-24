@@ -106,3 +106,29 @@ export function wrapChildren(elt, wrapper) {
   elt.appendChild(wrapper);
   elt.setAttribute('data-wrapped', 'true');
 }
+
+export function findFirstDescendantByTagName(parentElement, tagName) {
+  if (!parentElement || !tagName) {
+      console.warn('Parent element or tag name is not provided');
+      return null;
+  }
+
+  // Convert tagName to uppercase to match the tagName property of elements
+  tagName = tagName.toUpperCase();
+
+  // Helper function to recursively search for the element
+  function search(element) {
+      for (let child of element.children) {
+          if (child.tagName === tagName) {
+              return child;
+          }
+          const found = search(child);
+          if (found) {
+              return found;
+          }
+      }
+      return null;
+  }
+
+  return search(parentElement);
+}

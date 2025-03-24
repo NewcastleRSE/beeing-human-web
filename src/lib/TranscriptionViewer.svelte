@@ -59,6 +59,7 @@
 
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
     import { isElementVisibleInViewport } from "../utils/teiBehavioursHelper";
+    import { findFirstDescendantByTagName } from "../utils/generalHelpers";
 
     function cleanVariationStyles(el) {
         // removes any bg styling for the element
@@ -318,7 +319,12 @@
             if (section) {
                 // find out whether the element is in view
                 teiViewerState.scrolling = true;
-                isElementVisibleInViewport(section, (isVisible) => {
+
+                // find first child in section
+                const firstChild = section.firstElementChild;
+
+                // first child should be visible
+                isElementVisibleInViewport(firstChild, (isVisible) => {
                     if (!isVisible) {
                         section.scrollIntoView({
                             behavior: "smooth",
@@ -331,8 +337,12 @@
                             dataViewerState.activeNavigator;
 
                         // update current signature
-                        // find first pb in section and apply that as current signature
-                        const pb = section.querySelector("tei-pb");
+                        // find the first pb that appears after the first child of section in the run of the document
+                        const pb = findFirstDescendantByTagName(
+                            section,
+                            "tei-pb",
+                        );
+
                         if (pb) {
                             const sig = pb.getAttribute("facs");
                             teiViewerState.currentSignature = sig;

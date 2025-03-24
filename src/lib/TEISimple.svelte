@@ -18,10 +18,11 @@
 
     import { teiViewerState } from "../stores/teiViewer.svelte";
 
-    let { path = "", mediaRoot="",  statusCheck } = $props();
+    let { path = "", mediaRoot = "", statusCheck } = $props();
 
     let loaded = $state(false);
     let error = $state(undefined);
+    let changedHere = false;
 
     async function loadTei(path) {
         loaded = false;
@@ -46,6 +47,87 @@
             });
     }
 
+    // window.addEventListener("sigInView", async (evt) => {
+    //     console.log("sigInView", evt.detail.sig);
+    //     if (
+    //         evt.detail.sig != teiViewerState.currentSignature &&
+    //         !teiViewerState.scrolling && !changedHere
+    //     ) {
+    //         console.log("should change page in the IIIF");
+    //         // updates the currentSignature in the store
+    //         teiViewerState.currentSignature = evt.detail.sig;
+
+    //         // // find the element for evt.detail.sig
+    //         // const sigElement = document.querySelector(
+    //         //     `[n='${teiViewerState.signatures[index + 1]}']`,
+    //         // );
+    //         // // find its closest parent with a type "chapter"
+    //         // let chapterElement = sigElement.closest("[type='chapter']");
+    //         // if (!chapterElement) {
+    //         //     const possibleSections = [
+    //         //         "titlepage",
+    //         //         "preface",
+    //         //         "dedication",
+    //         //         "contents",
+    //         //     ];
+    //         //     for (const section of possibleSections) {
+    //         //         chapterElement = sigElement.closest(`[type='${section}']`);
+    //         //         if (chapterElement) {
+    //         //             break;
+    //         //         }
+    //         //     }
+    //         // }
+    //         // if (chapterElement) {
+    //         //     if (
+    //         //         chapterElement.getAttribute("id") !=
+    //         //         teiViewerState.currentSection
+    //         //     ) {
+    //         //         teiViewerState.currentSection =
+    //         //             chapterElement.getAttribute("id");
+    //         //     }
+    //         // }
+    //     }
+    // });
+
+    $effect(() => {
+        if (
+            (teiViewerState.currentPage !==
+                teiViewerState.signatures.indexOf(
+                    teiViewerState.currentSignature,
+                ) +
+                    teiViewerState.currentPage) !==
+                undefined &&
+            !teiViewerState.scrolling
+        ) {
+            if (changedHere) {
+                // page changed here (by scrolling the TEI)
+            } else {
+                // page changed elsewhere
+                let pb = document.querySelector(
+                    `tei-pb[n="${teiViewerState.currentSignature}"]`,
+                );
+
+                // if pb is hidden, find the closest visible element and scroll to that
+                if (pb && pb.classList.contains("hidden")) {
+                    // find closest element that is not hidden
+                    let closestVisible = pb.previousElementSibling;
+                    while (closestVisible.classList.contains("hidden")) {
+                        closestVisible = closestVisible.previousElementSibling;
+                    }
+                    pb = closestVisible;
+                }
+
+                // only do this if the pb exists and is not already in view
+                if (pb && !pb.getBoundingClientRect().top >= 0) {
+                    pb.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                    });
+                }
+            }
+        }
+    });
+
     onMount(async () => {
         try {
             if (path === "") {
@@ -62,28 +144,31 @@
                 // add event listener for iiifPageChange
                 window.addEventListener("iiifPageChange", (e) => {
                     // scroll into view the element with the same n attribute as the currentSignature
-                    let pb = document.querySelector(
-                        `tei-pb[n="${teiViewerState.currentSignature}"]`,
-                    );
-
-                    // if pb is hidden, find the closest visible element and scroll to that
-                    if (pb && pb.classList.contains("hidden")) {
-                        // find closest element that is not hidden
-                        let closestVisible = pb.previousElementSibling;
-                        while (closestVisible.classList.contains("hidden")) {
-                            closestVisible =
-                                closestVisible.previousElementSibling;
-                        }
-                        pb = closestVisible;
-                    }
-
-                    // only do this if the pb exists and is not already in view
-                    if (pb && !pb.getBoundingClientRect().top >= 0) {
-                        pb.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start",
-                        });
-                    }
+                    // let pb = document.querySelector(
+                    //     `tei-pb[n="${teiViewerState.currentSignature}"]`,
+                    // );
+                    // // if pb is hidden, find the closest visible element and scroll to that
+                    // if (pb && pb.classList.contains("hidden")) {
+                    //     // find closest element that is not hidden
+                    //     let closestVisible = pb.previousElementSibling;
+                    //     while (closestVisible.classList.contains("hidden")) {
+                    //         closestVisible =
+                    //             closestVisible.previousElementSibling;
+                    //     }
+                    //     pb = closestVisible;
+                    // }
+                    // // only do this if the pb exists and is not already in view
+                    // if (pb && !pb.getBoundingClientRect().top >= 0) {
+                    //     pb.scrollIntoView({
+                    //         behavior: "smooth",
+                    //         block: "start",
+                    //     });
+                    // }
+                });
+                // find TEI container
+                document.querySelector("[data-testid='transcription']").addEventListener("scroll", () => {
+                    changedHere = true;
+                    console.log('will activate');
                 });
                 loaded = true;
             });
