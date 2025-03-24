@@ -167,6 +167,8 @@
                 });
                 // find TEI container
                 document.querySelector("[data-testid='transcription']").addEventListener("scroll", () => {
+                    // NEEDS TO CHANGE THE TRIGGERING BEHAVIOUR TO CHANGE THE STATE - AT EACH SCROLL CHECKS TO SEE IF THE CURRENT SIGNATURE IS STILL IN VIEW: IF SO, DOES NOTHING; IF NOT, CHANGES THE CURRENT SIGNATURE TO THE CLOSEST ONE IN VIEW
+                    
                     changedHere = true;
                     console.log('will activate');
                 });
