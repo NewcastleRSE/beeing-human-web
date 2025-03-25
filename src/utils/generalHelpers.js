@@ -132,3 +132,32 @@ export function findFirstDescendantByTagName(parentElement, tagName) {
 
   return search(parentElement);
 }
+
+// General purpose version of the equivalent function in teiBehavioursHelper.js
+// Only provides current status, does not observe until it is in view
+export function isElementVisibleUntracked(elt, callback) {
+  if (!elt) {
+      console.warn('Element is not provided');
+      return;
+  }
+
+  const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+          if (entry.isIntersecting) {
+              // Element is visible in the viewport
+              callback(true);
+              observer.unobserve(entry.target);
+          } else {
+              // Element is not visible in the viewport
+              callback(false);
+              observer.unobserve(entry.target);
+          }
+      });
+  }, {
+      root: null, // Use the viewport as the root
+      rootMargin: '0px',
+      threshold: 0.1 // Trigger callback when 10% of the element is visible
+  });
+
+  observer.observe(elt);
+}

@@ -17,6 +17,7 @@
     import { teiBehaviours } from "../utils/teiBehaviours";
 
     import { teiViewerState } from "../stores/teiViewer.svelte";
+    import { isElementVisibleUntracked } from "../utils/generalHelpers";
 
     let { path = "", mediaRoot = "", statusCheck } = $props();
 
@@ -45,6 +46,48 @@
                 statusCheck({ loaded: "loaded" });
                 return path;
             });
+    }
+
+    function turnPageOnScroll() {
+        // NEEDS TO CHANGE THE TRIGGERING BEHAVIOUR TO CHANGE THE STATE - AT EACH SCROLL CHECKS TO SEE IF THE CURRENT SIGNATURE IS STILL IN VIEW: IF SO, DOES NOTHING; IF NOT, CHANGES THE CURRENT SIGNATURE TO THE CLOSEST ONE IN VIEW
+
+        changedHere = true;
+        // checks to see if the current sig is in view
+        const currentPb = document.querySelector(
+            `tei-pb[n="${teiViewerState.currentSignature}"]`,
+        );
+
+        isElementVisibleUntracked(currentPb, (visible) => {
+            if (visible) {
+                // if the current sig is still in view, do nothing
+            } else {
+                // find the closest pb in view
+                const indexOfCurrentPB = teiViewerState.signatures.indexOf(
+                    teiViewerState.currentSignature,
+                );
+
+                // IF DETECT DIRECTION OF TRAVEL YOU CAN CHANGE THE INDEX TO BE UP OR DOWN
+                // ALSO NEED TO CHECK IF THERE IS A NEXT PB (OR ONE BEFORE)
+                // ALSO NEED TO ACCOUNT FOR PBs THAT ARE HIDDEN
+
+                // check if the next pb is visible
+                const nextPB = document.querySelector(
+                    `tei-pb[n="${teiViewerState.signatures[indexOfCurrentPB + 1]}"]`,
+                );
+
+                isElementVisibleUntracked(nextPB, (visible) => {
+                    if (visible) {
+                        // checks to see if it is in the top third of the page
+                        const rect = nextPB.getBoundingClientRect();
+                        if (rect.top < window.innerHeight / 3) {
+                            teiViewerState.currentSignature =
+                                teiViewerState.signatures[indexOfCurrentPB + 1];
+                        }
+                    }
+                });
+            }
+        });
+        changedHere = false;
     }
 
     // window.addEventListener("sigInView", async (evt) => {
@@ -166,12 +209,11 @@
                     // }
                 });
                 // find TEI container
-                document.querySelector("[data-testid='transcription']").addEventListener("scroll", () => {
-                    // NEEDS TO CHANGE THE TRIGGERING BEHAVIOUR TO CHANGE THE STATE - AT EACH SCROLL CHECKS TO SEE IF THE CURRENT SIGNATURE IS STILL IN VIEW: IF SO, DOES NOTHING; IF NOT, CHANGES THE CURRENT SIGNATURE TO THE CLOSEST ONE IN VIEW
-                    
-                    changedHere = true;
-                    console.log('will activate');
-                });
+                document
+                    .querySelector("[data-testid='transcription']")
+                    .addEventListener("scroll", () => {
+                        turnPageOnScroll();
+                    });
                 loaded = true;
             });
         } catch (err) {
