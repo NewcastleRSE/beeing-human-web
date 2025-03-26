@@ -14,6 +14,7 @@
 <script>
     import { onMount } from "svelte";
     import CETEI from "CETEIcean";
+    import _ from 'lodash';
     import { teiBehaviours } from "../utils/teiBehaviours";
 
     import { teiViewerState } from "../stores/teiViewer.svelte";
@@ -24,6 +25,20 @@
     let loaded = $state(false);
     let error = $state(undefined);
     let changedHere = false;
+
+    let lastScrollTop = 0;
+
+    function detectScrollDirection() {
+        const currentScroll = document.querySelector("[data-testid='transcription']").scrollTop;
+
+        if (currentScroll > lastScrollTop) {
+            lastScrollTop = currentScroll;
+            return 1;
+        } else {
+            lastScrollTop = currentScroll;
+            return -1;
+        }
+    }
 
     async function loadTei(path) {
         loaded = false;
@@ -71,9 +86,24 @@
                 // ALSO NEED TO ACCOUNT FOR PBs THAT ARE HIDDEN
 
                 // check if the next pb is visible
-                const nextPB = document.querySelector(
-                    `tei-pb[n="${teiViewerState.signatures[indexOfCurrentPB + 1]}"]`,
+
+                let indexToCheck = indexOfCurrentPB + (1 * detectScrollDirection());
+                
+                let nextPB = document.querySelector(
+                    `tei-pb[n="${teiViewerState.signatures[indexToCheck]}"]`,
                 );
+
+                // checks to see if nextPb is visible
+                if (nextPB && nextPB.classList.contains("hidden")) {
+                    // find the closest visible element
+                    let closestVisible = nextPB.nextElementSibling;
+                    while (closestVisible.classList.contains("hidden")) {
+                        closestVisible = closestVisible.nextElementSibling;
+                    }
+                    nextPB = closestVisible;
+                }
+
+                console.log(nextPB)
 
                 isElementVisibleUntracked(nextPB, (visible) => {
                     if (visible) {
@@ -208,12 +238,12 @@
                     //     });
                     // }
                 });
-                // find TEI container
+
+                // Might need to adjust the rate ot throttling later -- currently hard to tell because the iiif document is taking a while
+                const throttledScrollHandler = _.throttle(turnPageOnScroll, 100);
                 document
                     .querySelector("[data-testid='transcription']")
-                    .addEventListener("scroll", () => {
-                        turnPageOnScroll();
-                    });
+                    .addEventListener("scroll", throttledScrollHandler);
                 loaded = true;
             });
         } catch (err) {
