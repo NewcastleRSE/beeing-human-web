@@ -58,25 +58,33 @@
             `tei-pb[n="${teiViewerState.currentSignature}"]`,
         );
 
+        console.log(
+            `firing, current sig: ${teiViewerState.currentSignature}, current pb:`,
+            currentPb,
+        );
+
         isElementVisibleUntracked(currentPb, (visible) => {
-            if (visible) {
-                // if the current sig is still in view, do nothing
-            } else {
-                // find the closest pb in view
+            // find index of current pb in the signature array
+            const indexOfCurrentPB = teiViewerState.signatures.indexOf(
+                teiViewerState.currentSignature,
+            );
 
-                // find index of current pb in the signature array
-                const indexOfCurrentPB = teiViewerState.signatures.indexOf(
-                    teiViewerState.currentSignature,
-                );
+            // checks in both directions
+            let indexToCheck = [indexOfCurrentPB - 1, indexOfCurrentPB + 1];
 
-                // checks in both directions
-                let indexToCheck = [indexOfCurrentPB - 1, indexOfCurrentPB + 1];
+            for (const [direction, nextIndex] of indexToCheck.entries()) {
+                if (
+                    nextIndex >= 0 &&
+                    nextIndex < teiViewerState.signatures.length - 1
+                ) {
+                    if (visible && direction === 1) {
+                        // if the current sig is still in view and is going forward, do nothing
+                    } else {
+                        // find the closest pb in view
 
-                for (const [direction, nextIndex] of indexToCheck.entries()) {
-                    if (
-                        nextIndex >= 0 &&
-                        nextIndex < teiViewerState.signatures.length - 1
-                    ) {
+                        console.log(
+                            `checking ${direction === 1 ? "next" : "previous"} pb`,
+                        );
                         let check = nextIndex;
                         // selects the next pb
                         let nextPB = document.querySelector(
@@ -98,7 +106,7 @@
                                 `tei-pb[n="${teiViewerState.signatures[check]}"]`,
                             );
                         }
-                        
+
                         // checks to see if nextPb will be visible (some pbs are hidden: title page, table of contents, etc.)
                         if (nextPB && nextPB.classList.contains("hidden")) {
                             // find the closest visible element
@@ -114,15 +122,17 @@
 
                         // checks to see if the nextPB is currently visible on the screen, and is above a certain threshold
                         if (nextPB) {
+                            console.log(
+                                `${direction === 1 ? "next" : "previous"}`,
+                                nextPB,
+                            );
                             isElementVisibleUntracked(nextPB, (visible) => {
                                 if (visible) {
                                     // checks to see if it is in the top third of the page
                                     const rect = nextPB.getBoundingClientRect();
                                     if (rect.top < window.innerHeight / 3) {
                                         teiViewerState.currentSignature =
-                                            teiViewerState.signatures[
-                                                check
-                                            ];
+                                            teiViewerState.signatures[check];
                                     }
                                 }
                             });
@@ -131,6 +141,7 @@
                 }
             }
         });
+
         changedHere = false;
     }
 
