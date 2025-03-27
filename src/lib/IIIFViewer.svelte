@@ -121,13 +121,14 @@
         }
     }
 
-    async function changePage(pageNumber) {
+    async function changePage(pageNumber = teiViewerState.currentPage) {
         try {
+            console.log("changing page to ", pageNumber);
             teiViewerState.scrolling = true;
-            console.log("changing page to", pageNumber);
             await iiif.ready.then(() => {
                 iiif.setPage([parseInt(pageNumber)]);
                 teiViewerState.currentPage = parseInt(pageNumber);
+                console.log('changed page to ', pageNumber);
                 changeHere = false;
                 teiViewerState.scrolling = false;
             });
@@ -151,7 +152,7 @@
                         }
                         buildIIIFY(manifest);
                         if (
-                            teiViewerState.currentPage === undefined &&
+                            
                             teiViewerState.currentSignature !== undefined
                         ) {
                             // mounting after the view was changed to transcription
@@ -186,18 +187,7 @@
                     teiViewerState.signatures[
                         teiViewerState.currentPage - parseInt(startPage)
                     ];
-              
-                // send iiiPageChange event
-                // sends the index of the signature it should scroll to -> because PBs appear at the top of the page, that should be the preceding signature rather than the current one
-                // window.dispatchEvent(
-                //     new CustomEvent("iiifPageChange", {
-                //         detail: {
-                //             indexOfNewPb:
-                //                 teiViewerState.currentPage -
-                //                 parseInt(startPage),
-                //         },
-                //     }),
-                // );
+                changePage()
             } else {
                 changePage(
                     teiViewerState.signatures.indexOf(
@@ -221,5 +211,8 @@
 <div id="facsimile-viewer" class="h-full"></div>
 <PageSelectButton
     currentPage={teiViewerState.currentPage}
-    newPage={(nP) => changePage(nP)}
+    newPage={(nP) => {
+        changeHere = true;
+        teiViewerState.currentPage = parseInt(nP);
+    }}
 />

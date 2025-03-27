@@ -52,15 +52,11 @@
     }
 
     function turnPageOnScroll() {
+        console.log('turning page on scroll is being called')
         changedHere = true;
         // checks to see if the current sig is in view
         const currentPb = document.querySelector(
             `tei-pb[n="${teiViewerState.currentSignature}"]`,
-        );
-
-        console.log(
-            `firing, current sig: ${teiViewerState.currentSignature}, current pb:`,
-            currentPb,
         );
 
         isElementVisibleUntracked(currentPb, (visible) => {
@@ -82,9 +78,6 @@
                     } else {
                         // find the closest pb in view
 
-                        console.log(
-                            `checking ${direction === 1 ? "next" : "previous"} pb`,
-                        );
                         let check = nextIndex;
                         // selects the next pb
                         let nextPB = document.querySelector(
@@ -92,7 +85,7 @@
                         );
 
                         // checks to see if the next pb is an empty page, if so, skips it
-                        const emptySigs = ["¶2v", "A3r", "B1r"];
+                        const emptySigs = ["¶2v", "A2v", "A4v"];
                         if (
                             nextPB &&
                             emptySigs.includes(nextPB.getAttribute("n"))
@@ -122,15 +115,12 @@
 
                         // checks to see if the nextPB is currently visible on the screen, and is above a certain threshold
                         if (nextPB) {
-                            console.log(
-                                `${direction === 1 ? "next" : "previous"}`,
-                                nextPB,
-                            );
                             isElementVisibleUntracked(nextPB, (visible) => {
                                 if (visible) {
                                     // checks to see if it is in the top third of the page
                                     const rect = nextPB.getBoundingClientRect();
                                     if (rect.top < window.innerHeight / 3) {
+                                        console.log('changing here')
                                         teiViewerState.currentSignature =
                                             teiViewerState.signatures[check];
                                     }
@@ -144,48 +134,6 @@
 
         changedHere = false;
     }
-
-    // window.addEventListener("sigInView", async (evt) => {
-    //     console.log("sigInView", evt.detail.sig);
-    //     if (
-    //         evt.detail.sig != teiViewerState.currentSignature &&
-    //         !teiViewerState.scrolling && !changedHere
-    //     ) {
-    //         console.log("should change page in the IIIF");
-    //         // updates the currentSignature in the store
-    //         teiViewerState.currentSignature = evt.detail.sig;
-
-    //         // // find the element for evt.detail.sig
-    //         // const sigElement = document.querySelector(
-    //         //     `[n='${teiViewerState.signatures[index + 1]}']`,
-    //         // );
-    //         // // find its closest parent with a type "chapter"
-    //         // let chapterElement = sigElement.closest("[type='chapter']");
-    //         // if (!chapterElement) {
-    //         //     const possibleSections = [
-    //         //         "titlepage",
-    //         //         "preface",
-    //         //         "dedication",
-    //         //         "contents",
-    //         //     ];
-    //         //     for (const section of possibleSections) {
-    //         //         chapterElement = sigElement.closest(`[type='${section}']`);
-    //         //         if (chapterElement) {
-    //         //             break;
-    //         //         }
-    //         //     }
-    //         // }
-    //         // if (chapterElement) {
-    //         //     if (
-    //         //         chapterElement.getAttribute("id") !=
-    //         //         teiViewerState.currentSection
-    //         //     ) {
-    //         //         teiViewerState.currentSection =
-    //         //             chapterElement.getAttribute("id");
-    //         //     }
-    //         // }
-    //     }
-    // });
 
     $effect(() => {
         if (
@@ -232,46 +180,56 @@
                 throw "No path specified";
             }
             await loadTei(path).then(() => {
-                // get an array of all pbs
-                const pbElm = document.querySelectorAll("tei-pb");
-                // put the n attribute of each pb in the teiVierState store
-                pbElm.forEach((pb) => {
-                    teiViewerState.signatures.push(pb.getAttribute("n"));
-                });
-                teiViewerState.currentSignature = teiViewerState.signatures[0];
-                // add event listener for iiifPageChange
-                window.addEventListener("iiifPageChange", (e) => {
-                    // scroll into view the element with the same n attribute as the currentSignature
-                    // let pb = document.querySelector(
-                    //     `tei-pb[n="${teiViewerState.currentSignature}"]`,
-                    // );
-                    // // if pb is hidden, find the closest visible element and scroll to that
-                    // if (pb && pb.classList.contains("hidden")) {
-                    //     // find closest element that is not hidden
-                    //     let closestVisible = pb.previousElementSibling;
-                    //     while (closestVisible.classList.contains("hidden")) {
-                    //         closestVisible =
-                    //             closestVisible.previousElementSibling;
-                    //     }
-                    //     pb = closestVisible;
-                    // }
-                    // // only do this if the pb exists and is not already in view
-                    // if (pb && !pb.getBoundingClientRect().top >= 0) {
-                    //     pb.scrollIntoView({
-                    //         behavior: "smooth",
-                    //         block: "start",
-                    //     });
-                    // }
-                });
+
+                // checks to see if array of pbs is in state
+                if (teiViewerState.signatures.length == 0) {
+                    // get an array of all pbs
+                    const pbElm = document.querySelectorAll("tei-pb");
+                    // put the n attribute of each pb in the teiVierState store
+                    pbElm.forEach((pb) => {
+                        teiViewerState.signatures.push(pb.getAttribute("n"));
+                    });   
+                }
+
+                if (teiViewerState.currentSignature === undefined) {
+                    teiViewerState.currentSignature = teiViewerState.signatures[0];
+                } else {
+                    // if the current signature is not the first one, scroll to it
+                    let pb = document.querySelector(
+                        `tei-pb[n="${teiViewerState.currentSignature}"]`,
+                    );
+
+                    // if pb is hidden, find the closest visible element and scroll to that
+                    if (pb && pb.classList.contains("hidden")) {
+                        // find closest element that is not hidden
+                        let closestVisible = pb.previousElementSibling;
+                        while (closestVisible.classList.contains("hidden")) {
+                            closestVisible = closestVisible.previousElementSibling;
+                        }
+                        pb = closestVisible;
+                    }
+
+                    // only do this if the pb exists and is not already in view
+                    if (pb && !pb.getBoundingClientRect().top >= 0) {
+                        pb.scrollIntoView();
+                    }
+                }
+                
 
                 // Might need to adjust the rate ot throttling later -- currently hard to tell because the iiif document is taking a while
                 const throttledScrollHandler = _.throttle(
                     turnPageOnScroll,
                     300,
                 );
+
+                const debouncedScrollHandler = _.debounce(
+                    turnPageOnScroll,
+                    150,
+                );
+
                 document
                     .querySelector("[data-testid='transcription']")
-                    .addEventListener("scroll", throttledScrollHandler);
+                    .addEventListener("scroll", debouncedScrollHandler);
                 loaded = true;
             });
         } catch (err) {
