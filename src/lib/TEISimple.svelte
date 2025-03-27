@@ -14,7 +14,7 @@
 <script>
     import { onMount } from "svelte";
     import CETEI from "CETEIcean";
-    import _ from 'lodash';
+    import _ from "lodash";
     import { teiBehaviours } from "../utils/teiBehaviours";
 
     import { teiViewerState } from "../stores/teiViewer.svelte";
@@ -27,18 +27,6 @@
     let changedHere = false;
 
     let lastScrollTop = 0;
-
-    function detectScrollDirection() {
-        const currentScroll = document.querySelector("[data-testid='transcription']").scrollTop;
-
-        if (currentScroll > lastScrollTop) {
-            lastScrollTop = currentScroll;
-            return 1;
-        } else {
-            lastScrollTop = currentScroll;
-            return -1;
-        }
-    }
 
     async function loadTei(path) {
         loaded = false;
@@ -64,8 +52,6 @@
     }
 
     function turnPageOnScroll() {
-        // NEEDS TO CHANGE THE TRIGGERING BEHAVIOUR TO CHANGE THE STATE - AT EACH SCROLL CHECKS TO SEE IF THE CURRENT SIGNATURE IS STILL IN VIEW: IF SO, DOES NOTHING; IF NOT, CHANGES THE CURRENT SIGNATURE TO THE CLOSEST ONE IN VIEW
-
         changedHere = true;
         // checks to see if the current sig is in view
         const currentPb = document.querySelector(
@@ -77,44 +63,72 @@
                 // if the current sig is still in view, do nothing
             } else {
                 // find the closest pb in view
+
+                // find index of current pb in the signature array
                 const indexOfCurrentPB = teiViewerState.signatures.indexOf(
                     teiViewerState.currentSignature,
                 );
 
-                // IF DETECT DIRECTION OF TRAVEL YOU CAN CHANGE THE INDEX TO BE UP OR DOWN
-                // ALSO NEED TO CHECK IF THERE IS A NEXT PB (OR ONE BEFORE)
-                // ALSO NEED TO ACCOUNT FOR PBs THAT ARE HIDDEN
+                // checks in both directions
+                let indexToCheck = [indexOfCurrentPB - 1, indexOfCurrentPB + 1];
 
-                // check if the next pb is visible
+                for (const [direction, nextIndex] of indexToCheck.entries()) {
+                    if (
+                        nextIndex >= 0 &&
+                        nextIndex < teiViewerState.signatures.length - 1
+                    ) {
+                        let check = nextIndex;
+                        // selects the next pb
+                        let nextPB = document.querySelector(
+                            `tei-pb[n="${teiViewerState.signatures[check]}"]`,
+                        );
 
-                let indexToCheck = indexOfCurrentPB + (1 * detectScrollDirection());
-                
-                let nextPB = document.querySelector(
-                    `tei-pb[n="${teiViewerState.signatures[indexToCheck]}"]`,
-                );
+                        // checks to see if the next pb is an empty page, if so, skips it
+                        const emptySigs = ["¶2v", "A3r", "B1r"];
+                        if (
+                            nextPB &&
+                            emptySigs.includes(nextPB.getAttribute("n"))
+                        ) {
+                            if (direction === 0) {
+                                check -= 1;
+                            } else {
+                                check += 1;
+                            }
+                            nextPB = document.querySelector(
+                                `tei-pb[n="${teiViewerState.signatures[check]}"]`,
+                            );
+                        }
+                        
+                        // checks to see if nextPb will be visible (some pbs are hidden: title page, table of contents, etc.)
+                        if (nextPB && nextPB.classList.contains("hidden")) {
+                            // find the closest visible element
+                            let closestVisible = nextPB.nextElementSibling;
+                            while (
+                                closestVisible.classList.contains("hidden")
+                            ) {
+                                closestVisible =
+                                    closestVisible.nextElementSibling;
+                            }
+                            nextPB = closestVisible;
+                        }
 
-                // checks to see if nextPb is visible
-                if (nextPB && nextPB.classList.contains("hidden")) {
-                    // find the closest visible element
-                    let closestVisible = nextPB.nextElementSibling;
-                    while (closestVisible.classList.contains("hidden")) {
-                        closestVisible = closestVisible.nextElementSibling;
-                    }
-                    nextPB = closestVisible;
-                }
-
-                console.log(nextPB)
-
-                isElementVisibleUntracked(nextPB, (visible) => {
-                    if (visible) {
-                        // checks to see if it is in the top third of the page
-                        const rect = nextPB.getBoundingClientRect();
-                        if (rect.top < window.innerHeight / 3) {
-                            teiViewerState.currentSignature =
-                                teiViewerState.signatures[indexOfCurrentPB + 1];
+                        // checks to see if the nextPB is currently visible on the screen, and is above a certain threshold
+                        if (nextPB) {
+                            isElementVisibleUntracked(nextPB, (visible) => {
+                                if (visible) {
+                                    // checks to see if it is in the top third of the page
+                                    const rect = nextPB.getBoundingClientRect();
+                                    if (rect.top < window.innerHeight / 3) {
+                                        teiViewerState.currentSignature =
+                                            teiViewerState.signatures[
+                                                check
+                                            ];
+                                    }
+                                }
+                            });
                         }
                     }
-                });
+                }
             }
         });
         changedHere = false;
@@ -240,7 +254,10 @@
                 });
 
                 // Might need to adjust the rate ot throttling later -- currently hard to tell because the iiif document is taking a while
-                const throttledScrollHandler = _.throttle(turnPageOnScroll, 100);
+                const throttledScrollHandler = _.throttle(
+                    turnPageOnScroll,
+                    300,
+                );
                 document
                     .querySelector("[data-testid='transcription']")
                     .addEventListener("scroll", throttledScrollHandler);
