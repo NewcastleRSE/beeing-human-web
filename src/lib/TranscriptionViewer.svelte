@@ -49,12 +49,87 @@
         toggleBothViewOption(smallScreen);
     });
 
-    $effect(() => {
-        skipToSection(dataViewerState.activeNavigator);
-    });
+    // $effect(() => {
+    //     skipToSection(dataViewerState.activeNavigator);
+    // });
 
     $effect(() => {
-        changeSectionWithoutSkipping(teiViewerState.currentSection);
+        // CHANGES THE SECTION WHILE SCROLLING OR TURNING THE PAGE
+        // check if both facsimile and transcription are on the same page
+        if (teiViewerState.currentSignature && ready) {
+            // checks to see if there is any section in state
+            if (!teiViewerState.currentSection) {
+                // if not, set the current section to dataViewerState.activeNavigator
+                teiViewerState.currentSection = dataViewerState.activeNavigator;
+            }
+
+            // might need more here
+            const sigsOutsideDivs = {
+                "¶2r": "titlepage",
+                "¶3r": "preface",
+                A1v: "dedication",
+                A2r: "contents",
+                B1r: "ch1",
+                H1r: "ch4",
+            };
+
+            if (
+                Object.keys(sigsOutsideDivs).includes(
+                    teiViewerState.currentSignature,
+                )
+            ) {
+                teiViewerState.currentSection =
+                    sigsOutsideDivs[teiViewerState.currentSignature];
+                dataViewerState.activeNavigator =
+                    sigsOutsideDivs[teiViewerState.currentSignature];
+            } else {
+                // check to see if current signature is in in current section
+                const section = document.getElementById(
+                    teiViewerState.currentSection,
+                );
+
+                const pbInSection = section.querySelector(
+                    `tei-pb[n="${teiViewerState.currentSignature}"]`,
+                );
+
+                const pbElement = document.querySelector(
+                    `tei-pb[n="${teiViewerState.currentSignature}"]`,
+                );
+
+                if (!pbInSection && pbElement) {
+                    // if not, find the closest div type chapter that is an ancestor of the current signature
+                    const chapter = pbElement.closest(
+                        'tei-div[type="chapter"]',
+                    );
+                    if (chapter) {
+                        // find the id of the chapter
+                        const chapterId = chapter.getAttribute("id");
+                        // change the activeNavigator to the chapterId
+                        dataViewerState.activeNavigator = chapterId;
+                    } else {
+                        const possibleSectionIds = [
+                            "titlepage",
+                            "preface",
+                            "dedication",
+                            "contents",
+                        ];
+
+                        // checks to see if the current signature is in any of the possible sections
+                        for (const sectionId of possibleSectionIds) {
+                            const section = document.getElementById(sectionId);
+                            const pb = section.querySelector(
+                                `tei-pb[n="${teiViewerState.currentSignature}"]`,
+                            );
+                            if (pb) {
+                                teiViewerState.currentSection = sectionId;
+                                dataViewerState.activeNavigator = sectionId;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     });
 
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
@@ -390,6 +465,10 @@
 
         if (![true, false].includes(dataViewerState.editorialNotes)) {
             dataViewerState.editorialNotes = false;
+        }
+
+        if (!dataViewerState.activeNavigator) {
+            dataViewerState.activeNavigator = "titlepage";
         }
 
         // listens for event 'variationClicked' to show the variation detail

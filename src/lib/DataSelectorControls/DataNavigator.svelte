@@ -5,11 +5,12 @@
     let { options, valueChange, currentSelected } = $props();
 
     let selected = $state(0);
+    let validValues = [];
 
     onMount(() => {
 
         // list all possible values of  listIndex
-        let validValues = [];
+        
         for (const val of options.listIndex) {
             validValues.push(val[1]);
         }
@@ -25,8 +26,13 @@
     function changeSelected(event) {
         valueChange({ origin: "navigator", newValue: selected });
     }
-</script>
 
+    $effect(() => {
+        if (validValues.includes(currentSelected)) {
+            selected = currentSelected;
+        }
+    });
+</script>
 
 {#if options != undefined}
     <div

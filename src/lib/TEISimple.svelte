@@ -52,7 +52,6 @@
     }
 
     function turnPageOnScroll() {
-        console.log('turning page on scroll is being called')
         changedHere = true;
         // checks to see if the current sig is in view
         const currentPb = document.querySelector(
@@ -120,7 +119,6 @@
                                     // checks to see if it is in the top third of the page
                                     const rect = nextPB.getBoundingClientRect();
                                     if (rect.top < window.innerHeight / 3) {
-                                        console.log('changing here')
                                         teiViewerState.currentSignature =
                                             teiViewerState.signatures[check];
                                     }
