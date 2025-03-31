@@ -64,6 +64,125 @@ export function findPreviousElement(node, targetName) {
   }
 }
 
+/**
+ * Finds the first milestone element of the specified type that appears before the given node in the document.
+ * This function searches recursively through siblings and their descendants.
+ * @param {HTMLElement} node - The starting element node.
+ * @param {string} milestoneType - The tag name of the milestone element to find.
+ * @returns {HTMLElement|null} - The first milestone element of the specified type, or null if none is found.
+ */
+export function findPreviousMilestone(node, milestoneType) {
+  if (!node || !milestoneType) {
+      console.warn('Node or milestone type is not provided');
+      return null;
+  }
+
+  // Convert milestoneType to lowercase to match tagName comparisons
+  milestoneType = milestoneType.toLowerCase();
+
+  // Helper function to search recursively for the milestone in a node's descendants
+  function searchInDescendants(element) {
+      if (!element) return null;
+
+      for (let child of element.children) {
+          if (child.tagName.toLowerCase() === milestoneType) {
+              return child;
+          }
+          const found = searchInDescendants(child);
+          if (found) {
+              return found;
+          }
+      }
+      return null;
+  }
+
+  // Traverse siblings and parents to find the previous milestone
+  while (node) {
+      // Check previous siblings and their descendants
+      let sibling = node.previousElementSibling;
+      while (sibling) {
+          // Check if the sibling itself is the milestone
+          if (sibling.tagName.toLowerCase() === milestoneType) {
+              return sibling;
+          }
+
+          // Check if the milestone exists in the sibling's descendants
+          const foundInDescendants = searchInDescendants(sibling);
+          if (foundInDescendants) {
+              return foundInDescendants;
+          }
+
+          sibling = sibling.previousElementSibling;
+      }
+
+      // Move up to the parent node and continue searching
+      node = node.parentElement;
+  }
+
+  // If no milestone is found, return null
+  return null;
+}
+
+/**
+ * Finds the last milestone element of the specified type that appears before the given node in the document.
+ * This function searches recursively through siblings, their descendants, and parent nodes.
+ * @param {HTMLElement} node - The starting element node.
+ * @param {string} milestoneType - The tag name of the milestone element to find.
+ * @returns {HTMLElement|null} - The last milestone element of the specified type before the node, or null if none is found.
+ */
+export function findLastMilestoneBefore(node, milestoneType) {
+  if (!node || !milestoneType) {
+      console.warn('Node or milestone type is not provided');
+      return null;
+  }
+
+  // Convert milestoneType to lowercase to match tagName comparisons
+  milestoneType = milestoneType.toLowerCase();
+
+  // Helper function to search recursively for the milestone in a node's descendants
+  function searchInDescendants(element) {
+      if (!element) return null;
+
+      let lastFound = null;
+      for (let child of element.children) {
+          if (child.tagName.toLowerCase() === milestoneType) {
+              lastFound = child; // Update the last found milestone
+          }
+          const foundInDescendants = searchInDescendants(child);
+          if (foundInDescendants) {
+              lastFound = foundInDescendants; // Update if a deeper milestone is found
+          }
+      }
+      return lastFound;
+  }
+
+  // Traverse siblings and parents to find the last milestone before the node
+  while (node) {
+      // Check previous siblings and their descendants
+      let sibling = node.previousElementSibling;
+      while (sibling) {
+          // Check if the sibling itself is the milestone
+          if (sibling.tagName.toLowerCase() === milestoneType) {
+              return sibling;
+          }
+
+          // Check if the milestone exists in the sibling's descendants
+          const foundInDescendants = searchInDescendants(sibling);
+          if (foundInDescendants) {
+              return foundInDescendants;
+          }
+
+          sibling = sibling.previousElementSibling;
+      }
+
+      // Move up to the parent node and continue searching
+      node = node.parentElement;
+  }
+
+  // If no milestone is found, return null
+  return null;
+}
+
 export function findInDescendant(node, targetName, targetList = []) {
   for (let child of node.children) {
     if (child.tagName.toLowerCase() === targetName) {
@@ -140,7 +259,6 @@ export function isElementVisibleUntracked(elt, callback) {
       console.warn('Element is not provided');
       return;
   }
-
   const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -156,7 +274,7 @@ export function isElementVisibleUntracked(elt, callback) {
   }, {
       root: null, // Use the viewport as the root
       rootMargin: '0px',
-      threshold: 0.1 // Trigger callback when 10% of the element is visible
+      threshold: 0.001 // Trigger callback when 0.1% of the element is visible
   });
 
   observer.observe(elt);

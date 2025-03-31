@@ -49,14 +49,13 @@
         toggleBothViewOption(smallScreen);
     });
 
-    // $effect(() => {
-    //     skipToSection(dataViewerState.activeNavigator);
-    // });
+    // FIRING WHEN IT SHOULDN'T (IE, CHANGING TO CH 5 THEN SCROLLING UP A PAGE)
+    $effect(() => {
+        skipToSection(dataViewerState.activeNavigator);
+    });
 
     $effect(() => {
-        // CHANGES THE SECTION WHILE SCROLLING OR TURNING THE PAGE
-        // check if both facsimile and transcription are on the same page
-        if (teiViewerState.currentSignature && ready) {
+        if (teiViewerState.updateSection) {
             // checks to see if there is any section in state
             if (!teiViewerState.currentSection) {
                 // if not, set the current section to dataViewerState.activeNavigator
@@ -64,37 +63,50 @@
             }
 
             // might need more here
-            const sigsOutsideDivs = {
+            const firstSigs = {
                 "¶2r": "titlepage",
                 "¶3r": "preface",
-                A1v: "dedication",
-                A2r: "contents",
-                B1r: "ch1",
-                H1r: "ch4",
+                "A1v": "dedication",
+                "A2r": "contents",
+                "B1r": "ch1",
+                "D4r": "ch2",
+                "E4r": "ch3",
+                "H1r": "ch4",
+                "I3r": "ch5",
+                "N3v": "ch6",
+                "P4r": "ch7",
+                "S2r": "ch8",
+                "T1r": "ch9",
+                "T2v": "ch10",
             };
 
             if (
-                Object.keys(sigsOutsideDivs).includes(
+                Object.keys(firstSigs).includes(
                     teiViewerState.currentSignature,
                 )
             ) {
                 teiViewerState.currentSection =
-                    sigsOutsideDivs[teiViewerState.currentSignature];
+                    firstSigs[teiViewerState.currentSignature];
                 dataViewerState.activeNavigator =
-                    sigsOutsideDivs[teiViewerState.currentSignature];
+                    firstSigs[teiViewerState.currentSignature];
             } else {
                 // check to see if current signature is in in current section
                 const section = document.getElementById(
                     teiViewerState.currentSection,
                 );
 
-                const pbInSection = section.querySelector(
-                    `tei-pb[n="${teiViewerState.currentSignature}"]`,
-                );
+                let pbInSection = null;
+                let pbElement = null;
 
-                const pbElement = document.querySelector(
-                    `tei-pb[n="${teiViewerState.currentSignature}"]`,
-                );
+                if (section) {
+                    pbInSection = section.querySelector(
+                        `tei-pb[n="${teiViewerState.currentSignature}"]`,
+                    );
+
+                    pbElement = document.querySelector(
+                        `tei-pb[n="${teiViewerState.currentSignature}"]`,
+                    );
+                }
 
                 if (!pbInSection && pbElement) {
                     // if not, find the closest div type chapter that is an ancestor of the current signature
@@ -129,12 +141,17 @@
                     }
                 }
             }
+            teiViewerState.updateSection = false;
         }
     });
 
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
+    import {
+        findLastMilestoneBefore,
+        isElementVisibleUntracked,
+    } from "../utils/generalHelpers";
     import { isElementVisibleInViewport } from "../utils/teiBehavioursHelper";
-    import { findFirstDescendantByTagName } from "../utils/generalHelpers";
+    import { index } from "d3";
 
     function cleanVariationStyles(el) {
         // removes any bg styling for the element
@@ -393,7 +410,6 @@
             );
             if (section) {
                 // find out whether the element is in view
-                teiViewerState.scrolling = true;
 
                 // find first child in section
                 const firstChild = section.firstElementChild;
@@ -401,43 +417,32 @@
                 // first child should be visible
                 isElementVisibleInViewport(firstChild, (isVisible) => {
                     if (!isVisible) {
-                        section.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start",
-                        });
-                    } else {
                         // update stores
-                        // update current section
-                        teiViewerState.currentSection =
-                            dataViewerState.activeNavigator;
 
                         // update current signature
-                        // find the first pb that appears after the first child of section in the run of the document
-                        const pb = findFirstDescendantByTagName(
-                            section,
+                        // find the tei-pb element that appears immediately before the start of the section
+                        const pb = findLastMilestoneBefore(
+                            firstChild,
                             "tei-pb",
                         );
 
                         if (pb) {
-                            const sig = pb.getAttribute("facs");
-                            teiViewerState.currentSignature = sig;
+                            const sig = pb.getAttribute("n");
+                            // teiViewerState.currentSignature = sig;
+                            teiViewerState.currentPage =
+                                teiViewerState.signatures.indexOf(sig) +
+                                parseInt(5);
+                            teiViewerState.updateTEI = true;
+                            // teiViewerState.updateIIIF = true;
+                            // update current section
+                            teiViewerState.currentSection =
+                                dataViewerState.activeNavigator;
                         }
-
+                    } else {
                         // update scrolling state
                         teiViewerState.scrolling = false;
                     }
                 });
-            }
-        }
-    }
-
-    function changeSectionWithoutSkipping(newSection) {
-        // find navigator-select
-        if (newSection) {
-            const navigatorSelect = document.getElementById("navigator-select");
-            if (navigatorSelect) {
-                // select the option that matches the newSection without triggering onchange
-                navigatorSelect.value = newSection;
             }
         }
     }
@@ -552,8 +557,9 @@
                     data-testid="transcription"
                 >
                     <TeiSimple
-                        path={transcriptionData[dataViewerState.activeDataset]
-                            .teiURL}
+                        transcriptionData={transcriptionData[
+                            dataViewerState.activeDataset
+                        ]}
                         statusCheck={(status) => handleStatus(status)}
                     />
                 </div>

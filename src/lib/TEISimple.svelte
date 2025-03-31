@@ -19,14 +19,16 @@
 
     import { teiViewerState } from "../stores/teiViewer.svelte";
     import { isElementVisibleUntracked } from "../utils/generalHelpers";
+    import { index } from "d3";
 
-    let { path = "", mediaRoot = "", statusCheck } = $props();
+    let { transcriptionData = "", statusCheck } = $props();
+
+    let path = $derived(transcriptionData.teiURL);
+    let startPage = $derived(transcriptionData.manifestStartPage);
 
     let loaded = $state(false);
     let error = $state(undefined);
     let changedHere = false;
-
-    let lastScrollTop = 0;
 
     async function loadTei(path) {
         loaded = false;
@@ -65,110 +67,151 @@
             );
 
             // checks in both directions
-            let indexToCheck = [indexOfCurrentPB - 1, indexOfCurrentPB + 1];
+            let found = false;
+            const firstBackStep = () => {
+                if (indexOfCurrentPB > 0) {
+                    return indexOfCurrentPB - 1;
+                } else {
+                    return 0;
+                }
+            };
 
-            for (const [direction, nextIndex] of indexToCheck.entries()) {
-                if (
-                    nextIndex >= 0 &&
-                    nextIndex < teiViewerState.signatures.length - 1
-                ) {
-                    if (visible && direction === 1) {
-                        // if the current sig is still in view and is going forward, do nothing
-                    } else {
-                        // find the closest pb in view
-
-                        let check = nextIndex;
-                        // selects the next pb
-                        let nextPB = document.querySelector(
-                            `tei-pb[n="${teiViewerState.signatures[check]}"]`,
-                        );
-
-                        // checks to see if the next pb is an empty page, if so, skips it
-                        const emptySigs = ["¶2v", "A2v", "A4v"];
-                        if (
-                            nextPB &&
-                            emptySigs.includes(nextPB.getAttribute("n"))
-                        ) {
-                            if (direction === 0) {
-                                check -= 1;
-                            } else {
-                                check += 1;
-                            }
-                            nextPB = document.querySelector(
+            const firstForwardStep = () => {
+                if (indexOfCurrentPB > teiViewerState.signatures.length) {
+                    return teiViewerState.signatures.length - 1;
+                } else {
+                    return indexOfCurrentPB + 1;
+                }
+            };
+            let indexToCheck = [firstBackStep(), firstForwardStep()];
+            // THERE MIGHT BE SOME PERFORMANCE PROBLEMS HERE (IT GOES THROUGH THE ENTIRE ARRAY), BUT LEAVING IT FOR NOW
+            while (!found) {
+                for (const [direction, nextIndex] of indexToCheck.entries()) {
+                    if (
+                        (nextIndex >= 0 &&
+                            nextIndex < teiViewerState.signatures.length - 1) ||
+                        (nextIndex < 0 &&
+                            nextIndex < teiViewerState.signatures.length - 1) ||
+                        (nextIndex >= 0 &&
+                            nextIndex > teiViewerState.signatures.length - 1)
+                    ) {
+                        if (visible && direction === 1) {
+                            // if the current sig is still in view and is going forward, do nothing
+                            found = true;
+                        } else {
+                            let check = nextIndex;
+                            // selects the next pb
+                            let nextPB = document.querySelector(
                                 `tei-pb[n="${teiViewerState.signatures[check]}"]`,
                             );
-                        }
 
-                        // checks to see if nextPb will be visible (some pbs are hidden: title page, table of contents, etc.)
-                        if (nextPB && nextPB.classList.contains("hidden")) {
-                            // find the closest visible element
-                            let closestVisible = nextPB.nextElementSibling;
-                            while (
-                                closestVisible.classList.contains("hidden")
+                            // checks to see if the next pb is an empty page, if so, skips it
+                            const emptySigs = ["¶2v", "A4v"];
+                            if (
+                                nextPB &&
+                                emptySigs.includes(nextPB.getAttribute("n"))
                             ) {
-                                closestVisible =
-                                    closestVisible.nextElementSibling;
-                            }
-                            nextPB = closestVisible;
-                        }
-
-                        // checks to see if the nextPB is currently visible on the screen, and is above a certain threshold
-                        if (nextPB) {
-                            isElementVisibleUntracked(nextPB, (visible) => {
-                                if (visible) {
-                                    // checks to see if it is in the top third of the page
-                                    const rect = nextPB.getBoundingClientRect();
-                                    if (rect.top < window.innerHeight / 3) {
-                                        teiViewerState.currentSignature =
-                                            teiViewerState.signatures[check];
-                                    }
+                                if (direction === 0) {
+                                    check -= 1;
+                                } else {
+                                    check += 1;
                                 }
-                            });
+                                nextPB = document.querySelector(
+                                    `tei-pb[n="${teiViewerState.signatures[check]}"]`,
+                                );
+                            }
+
+                            // checks to see if nextPb will be visible (some pbs are hidden: title page, table of contents, etc.)
+                            if (nextPB && nextPB.classList.contains("hidden")) {
+                                // find the closest visible element
+                                let closestVisible = nextPB.nextElementSibling;
+                                while (
+                                    closestVisible.classList.contains("hidden")
+                                ) {
+                                    closestVisible =
+                                        closestVisible.nextElementSibling;
+                                }
+                                nextPB = closestVisible;
+                            }
+
+                            // checks to see if the nextPB is currently visible on the screen, and is above a certain threshold
+                            if (nextPB) {
+                                isElementVisibleUntracked(nextPB, (visible) => {
+                                    if (visible) {
+                                        found = true;
+                                        // checks to see if it is in the top third of the page
+                                        const rect =
+                                            nextPB.getBoundingClientRect();
+                                        if (rect.top < window.innerHeight / 3) {
+                                            teiViewerState.currentSignature =
+                                                teiViewerState.signatures[
+                                                    check
+                                                ];
+                                            teiViewerState.updateIIIF = true;
+                                            teiViewerState.updateSection = true;
+                                        }
+                                    }
+                                });
+                            }
                         }
+                    } else {
+                        // if the index is out of bounds, stop checking
+                        found = true;
                     }
                 }
+                const nextBackStep = () => {
+                    if (indexToCheck[0] > 0) {
+                        return indexToCheck[0] - 1;
+                    } else {
+                        return 0;
+                    }
+                };
+
+                const nextForwardStep = () => {
+                    if (indexToCheck[1] > teiViewerState.signatures.length) {
+                        return teiViewerState.signatures.length - 1;
+                    } else {
+                        return indexToCheck[1] + 1;
+                    }
+                };
+                indexToCheck = [nextBackStep(), nextForwardStep()];
             }
         });
-
-        changedHere = false;
     }
 
     $effect(() => {
-        if (
-            (teiViewerState.currentPage !==
-                teiViewerState.signatures.indexOf(
-                    teiViewerState.currentSignature,
-                ) +
-                    teiViewerState.currentPage) !==
-                undefined &&
-            !teiViewerState.scrolling
-        ) {
-            if (changedHere) {
-                // page changed here (by scrolling the TEI)
-            } else {
-                // page changed elsewhere
-                let pb = document.querySelector(
-                    `tei-pb[n="${teiViewerState.currentSignature}"]`,
-                );
+        if (teiViewerState.updateTEI) {
+            // page changed elsewhere
 
-                // if pb is hidden, find the closest visible element and scroll to that
-                if (pb && pb.classList.contains("hidden")) {
-                    // find closest element that is not hidden
-                    let closestVisible = pb.previousElementSibling;
-                    while (closestVisible.classList.contains("hidden")) {
-                        closestVisible = closestVisible.previousElementSibling;
-                    }
-                    pb = closestVisible;
-                }
+            // find the pb that corresponds to the new page
+            const targetPbN =
+                teiViewerState.signatures[
+                    teiViewerState.currentPage - parseInt(startPage)
+                ];
 
-                // only do this if the pb exists and is not already in view
-                if (pb && !pb.getBoundingClientRect().top >= 0) {
-                    pb.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                    });
+            let pb = document.querySelector(`tei-pb[n="${targetPbN}"]`);
+
+            console.log("TEISimple: ", pb);
+
+            // if pb is hidden, find the closest visible element and scroll to that
+            if (pb && pb.classList.contains("hidden")) {
+                // find closest element that is not hidden
+                let closestVisible = pb.previousElementSibling;
+                while (closestVisible.classList.contains("hidden")) {
+                    closestVisible = closestVisible.previousElementSibling;
                 }
+                pb = closestVisible;
             }
+
+            // only do this if the pb exists and is not already in view
+            if (pb && !pb.getBoundingClientRect().top >= 0) {
+                pb.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+                teiViewerState.currentSignature = pb.getAttribute("n");
+            }
+            teiViewerState.updateTEI = false;
         }
     });
 
@@ -178,7 +221,6 @@
                 throw "No path specified";
             }
             await loadTei(path).then(() => {
-
                 // checks to see if array of pbs is in state
                 if (teiViewerState.signatures.length == 0) {
                     // get an array of all pbs
@@ -186,11 +228,12 @@
                     // put the n attribute of each pb in the teiVierState store
                     pbElm.forEach((pb) => {
                         teiViewerState.signatures.push(pb.getAttribute("n"));
-                    });   
+                    });
                 }
 
                 if (teiViewerState.currentSignature === undefined) {
-                    teiViewerState.currentSignature = teiViewerState.signatures[0];
+                    teiViewerState.currentSignature =
+                        teiViewerState.signatures[0];
                 } else {
                     // if the current signature is not the first one, scroll to it
                     let pb = document.querySelector(
@@ -202,7 +245,8 @@
                         // find closest element that is not hidden
                         let closestVisible = pb.previousElementSibling;
                         while (closestVisible.classList.contains("hidden")) {
-                            closestVisible = closestVisible.previousElementSibling;
+                            closestVisible =
+                                closestVisible.previousElementSibling;
                         }
                         pb = closestVisible;
                     }
@@ -212,7 +256,6 @@
                         pb.scrollIntoView();
                     }
                 }
-                
 
                 // Might need to adjust the rate ot throttling later -- currently hard to tell because the iiif document is taking a while
                 const throttledScrollHandler = _.throttle(

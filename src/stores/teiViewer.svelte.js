@@ -4,4 +4,7 @@ export const teiViewerState = $state({
     currentSection: undefined,
     currentPage: undefined,
     scrolling: false,
+    updateIIIF: false,
+    updateTEI: false,
+    updateSection: false
 })

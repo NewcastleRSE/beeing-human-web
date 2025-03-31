@@ -52,19 +52,17 @@ export function isElementVisibleInViewport(elt, callback) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 // Element is visible in the viewport
-                console.log('in view')
                 callback(true);
                 observer.unobserve(entry.target);
             } else {
                 // Element is not visible in the viewport
-                console.log('not in view')
                 callback(false);
             }
         });
     }, {
         root: null, // Use the viewport as the root
         rootMargin: '0px',
-        threshold: 0.1 // Trigger callback when 10% of the element is visible
+        threshold: 0.001 // Trigger callback when 0.1% of the element is visible
     });
 
     observer.observe(elt);

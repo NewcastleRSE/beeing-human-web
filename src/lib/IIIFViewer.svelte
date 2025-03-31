@@ -78,7 +78,7 @@
                     );
                     nextButton.addEventListener("click", () => {
                         teiViewerState.currentPage += 1;
-                        changeHere = true;
+                        teiViewerState.updateTEI = true;
                     });
                 });
 
@@ -89,7 +89,7 @@
                         );
                         nextButton.addEventListener("click", () => {
                             teiViewerState.currentPage += 1;
-                            changeHere = true;
+                            teiViewerState.updateTEI = true;
                         });
                     },
                 );
@@ -100,7 +100,7 @@
                     );
                     prevButton.addEventListener("click", () => {
                         teiViewerState.currentPage -= 1;
-                        changeHere = true;
+                        teiViewerState.updateTEI = true;
                     });
                 });
 
@@ -111,7 +111,7 @@
                         );
                         prevButton.addEventListener("click", () => {
                             teiViewerState.currentPage -= 1;
-                            changeHere = true;
+                            teiViewerState.updateTEI = true;
                         });
                     },
                 );
@@ -171,31 +171,14 @@
     });
 
     $effect(() => {
-        // This effect should only take place if it is provoked by an action  taken in this component (i.e., if clicked next page, or changed to a completely different page)
-        if (
-            teiViewerState.currentPage !==
+        if (teiViewerState.updateIIIF) {
+            // set currentSignature to the signature of the current page in the viewer
+            changePage(
                 teiViewerState.signatures.indexOf(
                     teiViewerState.currentSignature,
-                ) +
-                    parseInt(startPage) &&
-            teiViewerState.currentPage !== undefined &&
-            !teiViewerState.scrolling
-        ) {
-            // set currentSignature to the signature of the current page in the viewer
-            if (changeHere) {
-                teiViewerState.currentSignature =
-                    teiViewerState.signatures[
-                        teiViewerState.currentPage - parseInt(startPage)
-                    ];
-                changePage()
-            } else {
-                changePage(
-                    teiViewerState.signatures.indexOf(
-                        teiViewerState.currentSignature,
-                    ) + parseInt(startPage),
-                );
-            }
-            changeHere = false;
+                ) + parseInt(startPage),
+            );
+            teiViewerState.updateIIIF = false;
         }
     });
 
@@ -212,7 +195,8 @@
 <PageSelectButton
     currentPage={teiViewerState.currentPage}
     newPage={(nP) => {
-        changeHere = true;
+        teiViewerState.updateTEI = true;
+        teiViewerState.updateSection = true;
         teiViewerState.currentPage = parseInt(nP);
     }}
 />
