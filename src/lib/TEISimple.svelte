@@ -19,7 +19,6 @@
 
     import { teiViewerState } from "../stores/teiViewer.svelte";
     import { isElementVisibleUntracked } from "../utils/generalHelpers";
-    import { index } from "d3";
 
     let { transcriptionData = "", statusCheck } = $props();
 
@@ -28,7 +27,6 @@
 
     let loaded = $state(false);
     let error = $state(undefined);
-    let changedHere = false;
 
     async function loadTei(path) {
         loaded = false;
@@ -236,7 +234,7 @@
 
     onMount(async () => {
         try {
-            if (path === "") {
+            if (path === "" || path === undefined) {
                 throw "No path specified";
             }
             await loadTei(path).then(() => {
