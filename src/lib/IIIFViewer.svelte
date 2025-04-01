@@ -79,6 +79,7 @@
                     nextButton.addEventListener("click", () => {
                         teiViewerState.currentPage += 1;
                         teiViewerState.updateTEI = true;
+                        teiViewerState.updateSection = true;
                     });
                 });
 
@@ -90,6 +91,7 @@
                         nextButton.addEventListener("click", () => {
                             teiViewerState.currentPage += 1;
                             teiViewerState.updateTEI = true;
+                            teiViewerState.updateSection = true;
                         });
                     },
                 );
@@ -101,6 +103,7 @@
                     prevButton.addEventListener("click", () => {
                         teiViewerState.currentPage -= 1;
                         teiViewerState.updateTEI = true;
+                        teiViewerState.updateSection = true;
                     });
                 });
 
@@ -112,6 +115,7 @@
                         prevButton.addEventListener("click", () => {
                             teiViewerState.currentPage -= 1;
                             teiViewerState.updateTEI = true;
+                            teiViewerState.updateSection = true;
                         });
                     },
                 );
@@ -198,5 +202,6 @@
         teiViewerState.updateTEI = true;
         teiViewerState.updateSection = true;
         teiViewerState.currentPage = parseInt(nP);
+        changePage(nP);
     }}
 />

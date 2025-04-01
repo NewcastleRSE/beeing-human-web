@@ -50,6 +50,7 @@
         }
 
         if (changeObject.origin === "navigator") {
+            dataViewerState.navigatorChoice = true;
             dataViewerState.activeNavigator = changeObject.newValue;
         }
     }

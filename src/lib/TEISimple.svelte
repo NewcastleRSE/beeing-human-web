@@ -215,6 +215,27 @@
         }
     });
 
+    function scrollToPB(signature) {
+        let pb = document.querySelector(
+            `tei-pb[n="${signature}"]`,
+        );
+
+        // if pb is hidden, find the closest visible element and scroll to that
+        if (pb && pb.classList.contains("hidden")) {
+            // find closest element that is not hidden
+            let closestVisible = pb.previousElementSibling;
+            while (closestVisible.classList.contains("hidden")) {
+                closestVisible = closestVisible.previousElementSibling;
+            }
+            pb = closestVisible;
+        }
+
+        // only do this if the pb exists and is not already in view
+        if (pb && !pb.getBoundingClientRect().top >= 0) {
+            pb.scrollIntoView();
+        }
+    }
+
     onMount(async () => {
         try {
             if (path === "") {
@@ -234,27 +255,27 @@
                 if (teiViewerState.currentSignature === undefined) {
                     teiViewerState.currentSignature =
                         teiViewerState.signatures[0];
+                } else if (
+                    teiViewerState.currentPage !==
+                    teiViewerState.signatures.indexOf(
+                        teiViewerState.currentSignature,
+                    ) +
+                        parseInt(startPage)
+                ) {
+                    // If the current page and current signature do not match, update the current signature to match -- means the view was facsimile only and the page was changed:
+                    teiViewerState.currentSignature =
+                        teiViewerState.signatures[
+                            teiViewerState.currentPage - parseInt(startPage)
+                        ];
+
+                        scrollToPB(
+                            teiViewerState.currentSignature,
+                        );
                 } else {
                     // if the current signature is not the first one, scroll to it
-                    let pb = document.querySelector(
-                        `tei-pb[n="${teiViewerState.currentSignature}"]`,
-                    );
-
-                    // if pb is hidden, find the closest visible element and scroll to that
-                    if (pb && pb.classList.contains("hidden")) {
-                        // find closest element that is not hidden
-                        let closestVisible = pb.previousElementSibling;
-                        while (closestVisible.classList.contains("hidden")) {
-                            closestVisible =
-                                closestVisible.previousElementSibling;
-                        }
-                        pb = closestVisible;
-                    }
-
-                    // only do this if the pb exists and is not already in view
-                    if (pb && !pb.getBoundingClientRect().top >= 0) {
-                        pb.scrollIntoView();
-                    }
+                    scrollToPB(
+                            teiViewerState.currentSignature,
+                        );
                 }
 
                 // Might need to adjust the rate ot throttling later -- currently hard to tell because the iiif document is taking a while

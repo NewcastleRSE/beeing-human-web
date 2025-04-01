@@ -66,24 +66,22 @@
             const firstSigs = {
                 "¶2r": "titlepage",
                 "¶3r": "preface",
-                "A1v": "dedication",
-                "A2r": "contents",
-                "B1r": "ch1",
-                "D4r": "ch2",
-                "E4r": "ch3",
-                "H1r": "ch4",
-                "I3r": "ch5",
-                "N3v": "ch6",
-                "P4r": "ch7",
-                "S2r": "ch8",
-                "T1r": "ch9",
-                "T2v": "ch10",
+                A1v: "dedication",
+                A2r: "contents",
+                B1r: "ch1",
+                D4r: "ch2",
+                E4r: "ch3",
+                H1r: "ch4",
+                I3r: "ch5",
+                N3v: "ch6",
+                P4r: "ch7",
+                S2r: "ch8",
+                T1r: "ch9",
+                T2v: "ch10",
             };
 
             if (
-                Object.keys(firstSigs).includes(
-                    teiViewerState.currentSignature,
-                )
+                Object.keys(firstSigs).includes(teiViewerState.currentSignature)
             ) {
                 teiViewerState.currentSection =
                     firstSigs[teiViewerState.currentSignature];
@@ -146,12 +144,8 @@
     });
 
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
-    import {
-        findLastMilestoneBefore,
-        isElementVisibleUntracked,
-    } from "../utils/generalHelpers";
+    import { findLastMilestoneBefore } from "../utils/generalHelpers";
     import { isElementVisibleInViewport } from "../utils/teiBehavioursHelper";
-    import { index } from "d3";
 
     function cleanVariationStyles(el) {
         // removes any bg styling for the element
@@ -403,7 +397,7 @@
     }
 
     function skipToSection() {
-        if (ready) {
+        if (ready && dataViewerState.navigatorChoice) {
             // find the element which id matches the activeNavigator
             const section = document.getElementById(
                 dataViewerState.activeNavigator,
@@ -428,12 +422,16 @@
 
                         if (pb) {
                             const sig = pb.getAttribute("n");
-                            // teiViewerState.currentSignature = sig;
+                            teiViewerState.currentSignature = sig;
                             teiViewerState.currentPage =
                                 teiViewerState.signatures.indexOf(sig) +
-                                parseInt(5);
+                                parseInt(
+                                    transcriptionData[
+                                        dataViewerState.activeDataset
+                                    ].manifestStartPage,
+                                );
                             teiViewerState.updateTEI = true;
-                            // teiViewerState.updateIIIF = true;
+                            teiViewerState.updateIIIF = true;
                             // update current section
                             teiViewerState.currentSection =
                                 dataViewerState.activeNavigator;
@@ -443,8 +441,34 @@
                         teiViewerState.scrolling = false;
                     }
                 });
+            } else {
+                // if the section is not found, it means we are in the facsimile only view
+
+                const startingSigs = {
+                    "titlepage": "¶2r",
+                    "preface": "¶3r",
+                    "dedication": "A1v",
+                    "contents": "A2r",
+                    "ch1": "B1r",
+                    "ch2": "D4r",
+                    "ch3": "E4r",
+                    "ch4": "H1r",
+                    "ch5": "I3r",
+                    "ch6": "N3v",
+                    "ch7": "P4r",
+                    "ch8": "S2r",
+                    "ch9": "T1r",
+                    "ch10": "T2v",
+                };
+
+                teiViewerState.currentSignature = 
+                    startingSigs[dataViewerState.activeNavigator];
+                teiViewerState.updateIIIF = true;
+                teiViewerState.currentSection = 
+                    dataViewerState.activeNavigator;
             }
         }
+        dataViewerState.navigatorChoice = false;
     }
 
     onMount(() => {
