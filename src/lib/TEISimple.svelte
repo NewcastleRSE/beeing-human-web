@@ -51,6 +51,28 @@
             });
     }
 
+    function isNextPBApproachingTop(
+        nextPB,
+        transcriptionElement,
+        threshold = 250,
+    ) {
+        // This works better than using the position on the screen, however it might be a bit more tricky to find a good adjustment for smaller / older screens. Might need to use different thresholds for different screen sizes
+        if (!nextPB || !transcriptionElement) {
+            console.warn("nextPB or transcriptionElement is not provided");
+            return false;
+        }
+
+        // Get the bounding rectangles
+        const nextPBRect = nextPB.getBoundingClientRect();
+        const transcriptionRect = transcriptionElement.getBoundingClientRect();
+
+        // Check if nextPB is approaching the top of the transcription element
+        return (
+            nextPBRect.top >= transcriptionRect.top &&
+            nextPBRect.top <= transcriptionRect.top + threshold
+        );
+    }
+
     function turnPageOnScroll() {
         // checks to see if the current sig is in view
         const currentPb = document.querySelector(
@@ -136,10 +158,8 @@
                                 isElementVisibleUntracked(nextPB, (visible) => {
                                     if (visible) {
                                         found = true;
-                                        // checks to see if it is in the top third of the page
-                                        const rect =
-                                            nextPB.getBoundingClientRect();
-                                        if (rect.top < window.innerHeight / 3) {
+                                        
+                                        if (isNextPBApproachingTop(nextPB, document.querySelector("[data-testid='transcription']"))) {
                                             teiViewerState.currentSignature =
                                                 teiViewerState.signatures[
                                                     check
@@ -211,9 +231,7 @@
     });
 
     function scrollToPB(signature) {
-        let pb = document.querySelector(
-            `tei-pb[n="${signature}"]`,
-        );
+        let pb = document.querySelector(`tei-pb[n="${signature}"]`);
 
         // if pb is hidden, find the closest visible element and scroll to that
         if (pb && pb.classList.contains("hidden")) {
@@ -263,14 +281,10 @@
                             teiViewerState.currentPage - parseInt(startPage)
                         ];
 
-                        scrollToPB(
-                            teiViewerState.currentSignature,
-                        );
+                    scrollToPB(teiViewerState.currentSignature);
                 } else {
                     // if the current signature is not the first one, scroll to it
-                    scrollToPB(
-                            teiViewerState.currentSignature,
-                        );
+                    scrollToPB(teiViewerState.currentSignature);
                 }
 
                 // Might need to adjust the rate ot throttling later -- currently hard to tell because the iiif document is taking a while
