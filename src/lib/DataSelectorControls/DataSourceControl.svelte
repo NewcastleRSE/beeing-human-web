@@ -29,7 +29,6 @@
             validValues.push(parseInt(val))
         }
 
-        console.log(validValues, currentValue)
 
         if (currentValue && validValues.includes(currentValue)) {
             if (currentValue > 1000) {

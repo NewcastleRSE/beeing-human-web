@@ -10,9 +10,10 @@
     // This needs to be imported only on the browser, otherwise it will generate an error
     // import "tify";
     import "tify/dist/tify.css";
+    import { dataViewerState } from "../stores/dataViewer.svelte";
 
     let iiif = $state(undefined);
-    let currentPage = $state(undefined);
+    let changeHere = false;
 
     let { manifest = undefined, startPage = undefined } = $props();
 
@@ -29,7 +30,7 @@
     async function removeHeader() {
         try {
             await iiif.ready.then(() => {
-                iiif.setPage([parseInt(startPage)]);
+                iiif.setPage([teiViewerState.currentPage]);
                 const iiifTitleHeader =
                     document.getElementsByClassName("tify-header-title")[0];
                 if (iiifTitleHeader) {
@@ -49,17 +50,19 @@
                 );
                 if (pageSelectButton) {
                     // find custom page select button
-                    let customButton = document.querySelector("#custom-page-select-button")
+                    let customButton = document.querySelector(
+                        "#custom-page-select-button",
+                    );
                     // replace the page select button with the custom button
                     pageSelectButton.replaceWith(customButton);
-
                 }
 
                 // find parent container
-                const barHeader = document.querySelector(".tify-header-column.-title");
+                const barHeader = document.querySelector(
+                    ".tify-header-column.-title",
+                );
                 // delete class list
                 barHeader.classList = "";
-
             });
         } catch (e) {
             console.warn("tify is not ready");
@@ -75,7 +78,9 @@
                         ".tify-scan-page-button.-next",
                     );
                     nextButton.addEventListener("click", () => {
-                        currentPage += 1;
+                        teiViewerState.currentPage += 1;
+                        teiViewerState.updateTEI = true;
+                        teiViewerState.updateSection = true;
                     });
                 });
 
@@ -85,7 +90,9 @@
                             ".tify-header-button[title='Next page'",
                         );
                         nextButton.addEventListener("click", () => {
-                            currentPage += 1;
+                            teiViewerState.currentPage += 1;
+                            teiViewerState.updateTEI = true;
+                            teiViewerState.updateSection = true;
                         });
                     },
                 );
@@ -95,7 +102,9 @@
                         ".tify-scan-page-button.-previous",
                     );
                     prevButton.addEventListener("click", () => {
-                        currentPage -= 1;
+                        teiViewerState.currentPage -= 1;
+                        teiViewerState.updateTEI = true;
+                        teiViewerState.updateSection = true;
                     });
                 });
 
@@ -105,7 +114,9 @@
                             ".tify-header-button[title='Previous page'",
                         );
                         prevButton.addEventListener("click", () => {
-                            currentPage -= 1;
+                            teiViewerState.currentPage -= 1;
+                            teiViewerState.updateTEI = true;
+                            teiViewerState.updateSection = true;
                         });
                     },
                 );
@@ -115,11 +126,14 @@
         }
     }
 
-    async function changePage(pageNumber) {
+    async function changePage(pageNumber = teiViewerState.currentPage) {
         try {
+            teiViewerState.scrolling = true;
             await iiif.ready.then(() => {
                 iiif.setPage([parseInt(pageNumber)]);
-                currentPage = pageNumber;
+                teiViewerState.currentPage = parseInt(pageNumber);
+                changeHere = false;
+                teiViewerState.scrolling = false;
             });
         } catch (e) {
             console.warn("tify is not ready");
@@ -132,68 +146,42 @@
                 // import tify and create a new instance
                 await import("tify").then(() => {
                     if (manifest && startPage) {
-                        if (currentPage === undefined) {
-                            currentPage = parseInt(startPage);
+                        if (
+                            teiViewerState.currentPage === undefined &&
+                            teiViewerState.currentSignature === undefined
+                        ) {
+                            // mounting on first page load
+                            teiViewerState.currentPage = parseInt(startPage);
                         }
                         buildIIIFY(manifest);
+                        if (
+                            
+                            teiViewerState.currentSignature !== undefined
+                        ) {
+                            // mounting after the view was changed to transcription
+                            changePage(
+                                teiViewerState.signatures.indexOf(
+                                    teiViewerState.currentSignature,
+                                ) + parseInt(startPage),
+                            );
+                        }
                     }
                 });
             } catch (e) {
                 console.error(e);
             }
         }
-
-        window.addEventListener("sigInView", (evt) => {
-            if (evt.detail.sig != teiViewerState.currentSignature) {
-                // find the index of the signature in the array
-                const index = teiViewerState.signatures.indexOf(evt.detail.sig);
-                // adjust the page based on the starting page of the iiif manifesto
-                changePage(index + parseInt(startPage));
-                // update the current signature in the store
-                teiViewerState.currentSignature = evt.detail.sig;
-
-                // find the element for evt.detail.sig
-                const sigElement = document.querySelector(`[n='${teiViewerState.signatures[index+1]}']`);
-                // find its closest parent with a type "chapter"
-                let chapterElement = sigElement.closest("[type='chapter']");
-                if (!chapterElement) {
-                    const possibleSections = ["titlepage", "preface", "dedication", "contents"];
-                    for (const section of possibleSections) {
-                        chapterElement = sigElement.closest(`[type='${section}']`);
-                        if (chapterElement) {
-                            break;
-                        }
-                    }
-                }
-                if (chapterElement) {
-                    if (chapterElement.getAttribute('id') != teiViewerState.currentSection) {
-                        teiViewerState.currentSection = chapterElement.getAttribute('id');
-                    }
-                }
-                
-            }
-        });
-        
     });
 
     $effect(() => {
-        if (
-            currentPage !==
-            teiViewerState.signatures.indexOf(teiViewerState.currentSignature) +
-                parseInt(startPage)
-        ) {
+        if (teiViewerState.updateIIIF) {
             // set currentSignature to the signature of the current page in the viewer
-            teiViewerState.currentSignature =
-                teiViewerState.signatures[currentPage - parseInt(startPage)];
-            // send iiiPageChange event
-            // sends the index of the signature it should scroll to -> because PBs appear at the top of the page, that should be the preceding signature rather than the current one
-            window.dispatchEvent(
-                new CustomEvent("iiifPageChange", {
-                    detail: {
-                        indexOfNewPb: currentPage - parseInt(startPage),
-                    },
-                }),
+            changePage(
+                teiViewerState.signatures.indexOf(
+                    teiViewerState.currentSignature,
+                ) + parseInt(startPage),
             );
+            teiViewerState.updateIIIF = false;
         }
     });
 
@@ -205,4 +193,20 @@
 </script>
 
 <div id="facsimile-viewer" class="h-full"></div>
-<PageSelectButton {currentPage} newPage={(nP) => changePage(nP)}/>
+<PageSelectButton
+    currentPage={teiViewerState.currentPage}
+    newPage={(nP) => {
+        teiViewerState.updateTEI = true;
+        teiViewerState.updateSection = true;
+        if (parseInt(nP) > teiViewerState.signatures.length + parseInt(startPage)) {
+            nP = teiViewerState.signatures.length + parseInt(startPage);
+        }
+
+        if (parseInt(nP) < 0) {
+            nP = 1;
+        }
+
+        teiViewerState.currentPage = parseInt(nP);
+        changePage(nP);
+    }}
+/>
