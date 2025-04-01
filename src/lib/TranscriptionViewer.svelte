@@ -80,60 +80,109 @@
                 T2v: "ch10",
             };
 
-            if (
-                Object.keys(firstSigs).includes(teiViewerState.currentSignature)
-            ) {
-                teiViewerState.currentSection =
-                    firstSigs[teiViewerState.currentSignature];
-                dataViewerState.activeNavigator =
-                    firstSigs[teiViewerState.currentSignature];
-            } else {
-                // check to see if current signature is in in current section
-                const section = document.getElementById(
-                    teiViewerState.currentSection,
+            if (dataViewerState.activeView === "facsimile") {
+                // if the active view is facsimile the current signature is not going to be accurately tracked, so need to update it separately here:
+
+                const offset = parseInt(
+                    transcriptionData[dataViewerState.activeDataset]
+                        .manifestStartPage,
                 );
 
-                let pbInSection = null;
-                let pbElement = null;
+                const startingPages = {
+                    titlepage: 0 + offset,
+                    preface: 2 + offset,
+                    dedication: 7 + offset,
+                    contents: 10 + offset,
+                    ch1: 18 + offset,
+                    ch2: 40 + offset,
+                    ch3: 48 + offset,
+                    ch4: 66 + offset,
+                    ch5: 78 + offset,
+                    ch6: 116 + offset,
+                    ch7: 128 + offset,
+                    ch8: 148 + offset,
+                    ch9: 154 + offset,
+                    ch10: 157 + offset,
+                };
 
-                if (section) {
-                    pbInSection = section.querySelector(
-                        `tei-pb[n="${teiViewerState.currentSignature}"]`,
-                    );
-
-                    pbElement = document.querySelector(
-                        `tei-pb[n="${teiViewerState.currentSignature}"]`,
-                    );
-                }
-
-                if (!pbInSection && pbElement) {
-                    // if not, find the closest div type chapter that is an ancestor of the current signature
-                    const chapter = pbElement.closest(
-                        'tei-div[type="chapter"]',
-                    );
-                    if (chapter) {
-                        // find the id of the chapter
-                        const chapterId = chapter.getAttribute("id");
-                        // change the activeNavigator to the chapterId
-                        dataViewerState.activeNavigator = chapterId;
+                // check where the current page sits in the starting pages
+                for (const [i, key] of Object.keys(startingPages).entries()) {
+                    const nextKey = Object.keys(startingPages)[i + 1];
+                    if (nextKey) {
+                        if (
+                            teiViewerState.currentPage >= startingPages[key] &&
+                            teiViewerState.currentPage < startingPages[nextKey]
+                        ) {
+                            // if the current page is between two starting pages, set the current signature to the one that matches
+                            teiViewerState.currentSection = key;
+                            dataViewerState.activeNavigator = key;
+                            break;
+                        }
                     } else {
-                        const possibleSectionIds = [
-                            "titlepage",
-                            "preface",
-                            "dedication",
-                            "contents",
-                        ];
+                        // if the current page is greater than the last starting page, set the current signature to the last one
+                        teiViewerState.currentSection = key;
+                        dataViewerState.activeNavigator = key;
+                    }
+                }
+            } else {
+                if (
+                    Object.keys(firstSigs).includes(
+                        teiViewerState.currentSignature,
+                    )
+                ) {
+                    teiViewerState.currentSection =
+                        firstSigs[teiViewerState.currentSignature];
+                    dataViewerState.activeNavigator =
+                        firstSigs[teiViewerState.currentSignature];
+                } else {
+                    // check to see if current signature is in in current section
+                    const section = document.getElementById(
+                        teiViewerState.currentSection,
+                    );
 
-                        // checks to see if the current signature is in any of the possible sections
-                        for (const sectionId of possibleSectionIds) {
-                            const section = document.getElementById(sectionId);
-                            const pb = section.querySelector(
-                                `tei-pb[n="${teiViewerState.currentSignature}"]`,
-                            );
-                            if (pb) {
-                                teiViewerState.currentSection = sectionId;
-                                dataViewerState.activeNavigator = sectionId;
-                                break;
+                    let pbInSection = null;
+                    let pbElement = null;
+
+                    if (section) {
+                        pbInSection = section.querySelector(
+                            `tei-pb[n="${teiViewerState.currentSignature}"]`,
+                        );
+
+                        pbElement = document.querySelector(
+                            `tei-pb[n="${teiViewerState.currentSignature}"]`,
+                        );
+                    }
+
+                    if (!pbInSection && pbElement) {
+                        // if not, find the closest div type chapter that is an ancestor of the current signature
+                        const chapter = pbElement.closest(
+                            'tei-div[type="chapter"]',
+                        );
+                        if (chapter) {
+                            // find the id of the chapter
+                            const chapterId = chapter.getAttribute("id");
+                            // change the activeNavigator to the chapterId
+                            dataViewerState.activeNavigator = chapterId;
+                        } else {
+                            const possibleSectionIds = [
+                                "titlepage",
+                                "preface",
+                                "dedication",
+                                "contents",
+                            ];
+
+                            // checks to see if the current signature is in any of the possible sections
+                            for (const sectionId of possibleSectionIds) {
+                                const section =
+                                    document.getElementById(sectionId);
+                                const pb = section.querySelector(
+                                    `tei-pb[n="${teiViewerState.currentSignature}"]`,
+                                );
+                                if (pb) {
+                                    teiViewerState.currentSection = sectionId;
+                                    dataViewerState.activeNavigator = sectionId;
+                                    break;
+                                }
                             }
                         }
                     }
@@ -445,27 +494,26 @@
                 // if the section is not found, it means we are in the facsimile only view
 
                 const startingSigs = {
-                    "titlepage": "¶2r",
-                    "preface": "¶3r",
-                    "dedication": "A1v",
-                    "contents": "A2r",
-                    "ch1": "B1r",
-                    "ch2": "D4r",
-                    "ch3": "E4r",
-                    "ch4": "H1r",
-                    "ch5": "I3r",
-                    "ch6": "N3v",
-                    "ch7": "P4r",
-                    "ch8": "S2r",
-                    "ch9": "T1r",
-                    "ch10": "T2v",
+                    titlepage: "¶2r",
+                    preface: "¶3r",
+                    dedication: "A1v",
+                    contents: "A2r",
+                    ch1: "B1r",
+                    ch2: "D4r",
+                    ch3: "E4r",
+                    ch4: "H1r",
+                    ch5: "I3r",
+                    ch6: "N3v",
+                    ch7: "P4r",
+                    ch8: "S2r",
+                    ch9: "T1r",
+                    ch10: "T2v",
                 };
 
-                teiViewerState.currentSignature = 
+                teiViewerState.currentSignature =
                     startingSigs[dataViewerState.activeNavigator];
                 teiViewerState.updateIIIF = true;
-                teiViewerState.currentSection = 
-                    dataViewerState.activeNavigator;
+                teiViewerState.currentSection = dataViewerState.activeNavigator;
             }
         }
         dataViewerState.navigatorChoice = false;

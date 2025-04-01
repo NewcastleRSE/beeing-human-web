@@ -10,6 +10,7 @@
     // This needs to be imported only on the browser, otherwise it will generate an error
     // import "tify";
     import "tify/dist/tify.css";
+    import { dataViewerState } from "../stores/dataViewer.svelte";
 
     let iiif = $state(undefined);
     let changeHere = false;
@@ -197,6 +198,14 @@
     newPage={(nP) => {
         teiViewerState.updateTEI = true;
         teiViewerState.updateSection = true;
+        if (parseInt(nP) > teiViewerState.signatures.length + parseInt(startPage)) {
+            nP = teiViewerState.signatures.length + parseInt(startPage);
+        }
+
+        if (parseInt(nP) < 0) {
+            nP = 1;
+        }
+
         teiViewerState.currentPage = parseInt(nP);
         changePage(nP);
     }}
