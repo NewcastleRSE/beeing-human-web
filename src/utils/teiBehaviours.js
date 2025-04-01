@@ -275,18 +275,7 @@ export let teiBehaviours = {
             let emptySigs = ['¶3r', 'A3r', 'B1r']
             if (!findIfAncestor(elt, 'tei-list')) {
                 // if pb is in the contents page ignore it, causing too many issues
-                // check if the element is in view anytime the tei-text is scrolled
-                // find tei-text
-                let text = document.getElementById('TEI-container').parentElement;
-                text.addEventListener('scroll', function () {
-                    let rect = getElementRect(elt);
-
-                    if (rect && (rect.top >= 0 && rect.bottom <= window.innerHeight / 3)) {
-                        // if the element is in view, send a custom element with the signature
-                        let event = new CustomEvent('sigInView', { detail: { sig: elt.getAttribute('n') } });
-                        window.dispatchEvent(event);
-                    }
-                });
+                
                 if (this.sigsDict[elt.getAttribute('n')] && !emptySigs.includes(elt.getAttribute('n'))) {
                     var sig = document.createElement('p');
                     sig.innerHTML = this.sigsDict[elt.getAttribute('n')];
@@ -296,22 +285,6 @@ export let teiBehaviours = {
                 }
             } else {
                 addTailwindClasslist(elt, 'hidden')
-                // find closest element that is not hidden
-                let closestVisible = elt.previousElementSibling;
-                while (closestVisible.classList.contains('hidden')) {
-                    closestVisible = closestVisible.previousElementSibling;
-                }
-                // dispatches an event from the closest visible element every time it scrolls into view
-                let text = document.getElementById('TEI-container').parentElement;
-                text.addEventListener('scroll', function () {
-                    let rect = getElementRect(elt);
-
-                    if (rect && (rect.top >= 0 && rect.bottom <= window.innerHeight / 3)) {
-                        let event = new CustomEvent('sigInView', { detail: { sig: elt.getAttribute('n') } });
-                        window.dispatchEvent(event);
-                    }
-                })
-
             }
 
         },

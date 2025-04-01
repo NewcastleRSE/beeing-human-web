@@ -52,7 +52,6 @@
     }
 
     function turnPageOnScroll() {
-        changedHere = true;
         // checks to see if the current sig is in view
         const currentPb = document.querySelector(
             `tei-pb[n="${teiViewerState.currentSignature}"]`,
