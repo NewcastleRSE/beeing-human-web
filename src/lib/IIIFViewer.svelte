@@ -127,12 +127,10 @@
 
     async function changePage(pageNumber = teiViewerState.currentPage) {
         try {
-            console.log("changing page to ", pageNumber);
             teiViewerState.scrolling = true;
             await iiif.ready.then(() => {
                 iiif.setPage([parseInt(pageNumber)]);
                 teiViewerState.currentPage = parseInt(pageNumber);
-                console.log('changed page to ', pageNumber);
                 changeHere = false;
                 teiViewerState.scrolling = false;
             });
@@ -192,8 +190,6 @@
         }
     });
 </script>
-
-{@debug teiViewerState}
 
 <div id="facsimile-viewer" class="h-full"></div>
 <PageSelectButton

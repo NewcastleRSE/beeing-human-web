@@ -191,8 +191,6 @@
 
             let pb = document.querySelector(`tei-pb[n="${targetPbN}"]`);
 
-            console.log("TEISimple: ", pb);
-
             // if pb is hidden, find the closest visible element and scroll to that
             if (pb && pb.classList.contains("hidden")) {
                 // find closest element that is not hidden
