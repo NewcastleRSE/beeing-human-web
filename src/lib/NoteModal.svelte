@@ -3,6 +3,7 @@
     import { fade, fly } from "svelte/transition";
     import TextDivider from "./TextDivider.svelte";
     import { base } from "$app/paths";
+    import { replaceState } from "$app/navigation";
 
     let { message, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
@@ -187,11 +188,14 @@
                     // Finds the author of the note
                     if (note.getAttribute("resp")) {
                         try {
-                            const person = document.querySelector(
-                                note.getAttribute("resp"),
-                            );
-                            let persName = person.querySelector("tei-persName");
-                            altReading.push(persName.cloneNode(true));
+                            
+                            let peopleCodes = note.getAttribute("resp").split(" ");
+                            // if there is more than one author, it finds all
+                            for (const persCode of peopleCodes) {
+                                const person = document.querySelector(persCode);
+                                let persName = person.querySelector("tei-persName");
+                                altReading.push(persName.cloneNode(true));
+                            }
                         } catch (e) {
                             console.warn(
                                 "Could not find the person element with the id: " +
