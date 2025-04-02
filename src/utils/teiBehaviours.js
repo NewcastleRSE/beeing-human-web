@@ -50,6 +50,13 @@ export let teiBehaviours = {
         "foreign": function (elt) {
             addTailwindClasslist(elt, "italic")
         },
+        "gloss": [
+            ["[rend='italic']", function (elt) {
+                console.log('gloss')
+                addTailwindClasslist(elt, "italic")
+            }
+            ]
+        ],
         "lg": [
             ["[rend='inline']", function (elt) {
                 let tailwindString = "pl-8 mb-4"
