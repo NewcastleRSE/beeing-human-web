@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import {makeHtmlId} from '../../src/utils/stringOperations';
+import {makeHtmlId} from './../../../src/utils/stringOperations';
 
 test.describe('Page navigation tests', () => {
     test('Page loads and has expected option', async ({ page }) => {
