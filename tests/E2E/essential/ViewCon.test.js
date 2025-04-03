@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import {people} from '../mocks/mockVarsPeople';
+import {people} from './mocks/mockVarsPeople';
 
 test.describe('Page navigation tests', () => {
     test('Page loads and has expected option', async ({ page }) => {
