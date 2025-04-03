@@ -2,7 +2,7 @@
     let { id } = $props();
 </script>
 
-<div class="aspect-w-16 aspect-h-9">
+<div class="aspect-w-16 aspect-h-9 my-4">
 <iframe
     class="rounded-lg"
     src="https://www.youtube-nocookie.com/embed/{id}"
