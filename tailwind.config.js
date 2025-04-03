@@ -37,9 +37,14 @@ export default {
 		},
 	},
 	important: true,
+	// IF THERE ARE CONFLICTS WITH ASPECT RATIO MIGHT NEED TO REACTIVATE THIS
+	// corePlugins: {
+	// 	aspectRatio: false,
+	// },
 	plugins: [
 		forms,
 		require('tailwind-clip-path'),
+		require('@tailwindcss/aspect-ratio'),
 		// 4. Append the Skeleton plugin (after other plugins)
 		skeleton({
       themes: {
