@@ -64,14 +64,14 @@ test.describe('Transcription page has TEI content', () => {
         const container = page.getByTestId('TEI-container');
         await Promise.all([
             container.waitFor('visible'),
-            expect(page.getByText('Feminine Monarchie', { exact: true })).toBeVisible()
+            expect(page.getByText('Feminine Monarchie:', { exact: true })).toBeVisible()
         ]);
     });
 
     // Test that tei-body is visible
     test('Expect that the literature view contains TEI-body after the page loads', async ({ page }) => {
         await expect(page).toHaveURL('/literature/transcription');
-        const teiText = page.getByText('Feminine Monarchie', { exact: true });
+        const teiText = page.getByText('Feminine Monarchie:', { exact: true });
         await Promise.all([
             teiText.waitFor('visible'),
             // locating by css selectors is considered bad practice, but there's no other way (currently) of locating this element; for a simple existence check, it's fine
@@ -82,7 +82,7 @@ test.describe('Transcription page has TEI content', () => {
     // Test that tei-header is not visible
     test('Expect that the literature view contains TEI-header after the page loads, but that this is not visible', async ({ page }) => {
         await expect(page).toHaveURL('/literature/transcription');
-        const teiText = page.getByText('Feminine Monarchie', { exact: true });
+        const teiText = page.getByText('Feminine Monarchie:', { exact: true });
         await Promise.all([
             teiText.waitFor('visible'),
             // locating by css selectors is considered bad practice, but there's no other way (currently) of locating this element; for a simple existence check, it's fine
