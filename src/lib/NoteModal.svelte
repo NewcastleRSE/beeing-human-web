@@ -3,7 +3,6 @@
     import { fade, fly } from "svelte/transition";
     import TextDivider from "./TextDivider.svelte";
     import { base } from "$app/paths";
-    import { replaceState } from "$app/navigation";
 
     let { message, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
@@ -16,6 +15,74 @@
     function close() {
         show = !show;
     }
+
+    function appendNotes() {
+        // attach readings to correct div
+        if (altReadings) {
+                const notesDiv = document.getElementById("note-content");
+                for (const [i, reading] of altReadings.entries()) {
+                    let singNoteDiv = document.createElement("div");
+                    singNoteDiv.classList.add("mb-4");
+                    for (const elRead of reading) {
+                        if (elRead.tagName != "TEI-PERSNAME") {
+                            // check to see if it is not a text node and not hidden:
+                            if (elRead.nodeType != 3 && elRead.classList.contains("hidden")) {
+                                elRead.classList.remove("hidden");
+                            }
+                            singNoteDiv.appendChild(elRead);
+                        } else {
+                            let authorName = document.createElement("div");
+                            authorName.innerHTML = "— ";
+                            authorName.classList.add(
+                                "text-sm",
+                                "text-secondary-600",
+                                "italic",
+                                "mt-4",
+                                "pr-4",
+                                "text-right",
+                                "w-full"
+                            );
+                            let authorLink = document.createElement("a");
+                            authorLink.setAttribute(
+                                "href",
+                                `${base}/people/${elRead.getAttribute("corresp")}`,
+                            );
+                            authorLink.setAttribute("target", "_blank");
+                            authorLink.classList.add("hover:anchor");
+                            authorLink.innerHTML = elRead.innerHTML;
+                            authorName.appendChild(authorLink);
+                            singNoteDiv.appendChild(authorName);
+                        }
+                    }
+                    notesDiv.appendChild(singNoteDiv);
+                    if (altReadings.length > 1) {
+                        if (i < altReadings.length - 1) {
+                            // find the hidden text divider
+                            let textDivider = document.querySelector(
+                                ".text-divider.hidden",
+                            );
+                            if (textDivider) {
+                                textDivider.classList.remove("hidden");
+                                textDivider.classList.add("block");
+                                notesDiv.appendChild(textDivider);
+                            }
+                        }
+                    }
+                }
+            }
+    }
+
+    $effect(() => {
+        if (show) {
+            appendNotes();
+        } else {
+            // remove the notes
+            let noteContent = document.getElementById("note-content");
+            if (noteContent) {
+                noteContent.innerHTML = "";
+            }
+        }
+    })
 
     onMount(() => {
         // prevents window is not defined errors
@@ -38,6 +105,7 @@
                     buttonClicked = false;
                 }
             });
+            
         }
     });
 
@@ -174,7 +242,7 @@
                 // create a list of all tei-rdg siblings of the message element
                 let siblings = parentElement[0].querySelectorAll("tei-rdg");
                 siblings.forEach((sibling) => {
-                    altReading.push(sibling);
+                    altReading.push(sibling.cloneNode(true));
                 });
                 altReadings.push(altReading);
             } else if (parentElement[0].tagName === "TEI-NOTE") {
@@ -188,12 +256,14 @@
                     // Finds the author of the note
                     if (note.getAttribute("resp")) {
                         try {
-                            
-                            let peopleCodes = note.getAttribute("resp").split(" ");
+                            let peopleCodes = note
+                                .getAttribute("resp")
+                                .split(" ");
                             // if there is more than one author, it finds all
                             for (const persCode of peopleCodes) {
                                 const person = document.querySelector(persCode);
-                                let persName = person.querySelector("tei-persName");
+                                let persName =
+                                    person.querySelector("tei-persName");
                                 altReading.push(persName.cloneNode(true));
                             }
                         } catch (e) {
@@ -284,38 +354,8 @@
                                 <span class="h-1 w-full {accentColour} my-2"
                                 ></span>
                             </div>
-                            <div class="mt-2">
-                                {#each altReadings as reading, i}
-                                    <div class="mb-4">
-                                        {#each reading as el}
-                                            {#if el.tagName != "TEI-PERSNAME"}
-                                                {@html el.innerHTML}
-                                            {:else}
-                                                <div
-                                                    class="text-sm text-secondary-600 italic mt-4 pr-4 text-right"
-                                                >
-                                                    <a
-                                                        href="{base}/people/{el.getAttribute(
-                                                            'corresp',
-                                                        )}"
-                                                        class="hover:anchor"
-                                                        target="_blank"
-                                                        >— {@html el.innerHTML}</a
-                                                    >
-                                                </div>
-                                            {/if}
-                                        {/each}
-                                    </div>
-                                    <!-- Only adds the divider if there are more than one readings and it's not the last one -->
-                                    {#if altReadings.length > 1}
-                                        {#if i < altReadings.length - 1}
-                                            <TextDivider
-                                                fillColour="#5E9DB5"
-                                                class="mb-4"
-                                            />
-                                        {/if}
-                                    {/if}
-                                {/each}
+                            <div class="mt-2" id="note-content">
+                                
                             </div>
                         </div>
                     </div>
@@ -323,4 +363,5 @@
             </div>
         </div>
     </div>
+    <TextDivider fillColour="#5E9DB5" class="mb-4 text-divider hidden"/>
 {/if}

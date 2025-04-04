@@ -227,33 +227,40 @@
 
     function applyVariationStyles(app) {
         for (const child of app.children) {
-            // removes any previous styling for the element
-            cleanVariationStyles(child);
+            
 
             // restores baseline styling for elements inside apps
             // child.classList = "";
-            if (app.getAttribute("subtype") === "add") {
-                child.classList.add("bg-success-200", "hover:bg-success-400");
-            } else if (app.getAttribute("subtype") === "del") {
-                child.classList.add("bg-error-200", "hover:bg-error-400");
-            } else {
-                child.classList.add(
-                    "bg-secondary-200",
-                    "hover:bg-secondary-400",
-                );
-            }
 
-            // adds common styles from the variationCommonStyles array
-            for (const style of variationCommonStyles) {
-                child.classList.add(style);
-            }
-
-            // adds messages for empty elements
             if (child.tagName === "TEI-LEM") {
+                // removes any previous styling for the element
+                cleanVariationStyles(child);
+                
+                // adds messages for empty elements
                 if (child.hasAttribute("data-empty")) {
                     child.innerHTML = "[+1609]";
                     child.classList.remove("hidden");
                 }
+                
+                if (app.getAttribute("subtype") === "add") {
+                    child.classList.add(
+                        "bg-success-200",
+                        "hover:bg-success-400",
+                    );
+                } else if (app.getAttribute("subtype") === "del") {
+                    child.classList.add("bg-error-200", "hover:bg-error-400");
+                } else {
+                    child.classList.add(
+                        "bg-secondary-200",
+                        "hover:bg-secondary-400",
+                    );
+                }
+
+                // adds common styles from the variationCommonStyles array
+                for (const style of variationCommonStyles) {
+                    child.classList.add(style);
+                }
+
             } else if (child.tagName === "TEI-RDG") {
                 if (child.hasAttribute("data-empty")) {
                     child.innerHTML = "[Does not exist in 1609]";

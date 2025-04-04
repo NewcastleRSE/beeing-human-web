@@ -52,7 +52,6 @@ export let teiBehaviours = {
         },
         "gloss": [
             ["[rend='italic']", function (elt) {
-                console.log('gloss')
                 addTailwindClasslist(elt, "italic")
             }
             ]
