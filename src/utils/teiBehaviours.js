@@ -56,6 +56,11 @@ export let teiBehaviours = {
             }
             ]
         ],
+        "lb": function (elt) {
+            // replace with a br element
+            let br = document.createElement('br');
+            elt.replaceWith(br);
+        },
         "lg": [
             ["[rend='inline']", function (elt) {
                 let tailwindString = "pl-8 mb-4"
@@ -467,14 +472,14 @@ export let teiBehaviours = {
                 addTailwindClasslist(elt, 'flex flex-col text-6xl self-center place-items-center mb-4')
             }],
             ["[type=sub", function (elt) {
-                addTailwindClasslist(elt, 'flex flex-col text-xl self-center place-items-center mb-4')
+                addTailwindClasslist(elt, 'flex flex-col text-xl self-center place-items-center mb-4 text-center')
             }]
         ],
         "byline": function (elt) {
             addTailwindClasslist(elt, "flex flex-col self-center place-items-center text-xl")
         },
         "epigraph": function (elt) {
-            addTailwindClasslist(elt, "flex flex-col self-center place-items-center text-sm mb-4")
+            addTailwindClasslist(elt, "flex flex-col self-center place-items-center text-sm mb-4 text-center")
         },
         "docImprint": function (elt) {
             addTailwindClasslist(elt, "text-center");
