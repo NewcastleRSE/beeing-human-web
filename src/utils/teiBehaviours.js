@@ -469,7 +469,7 @@ export let teiBehaviours = {
         },
         "titlePart": [
             ["[type=main", function (elt) {
-                addTailwindClasslist(elt, 'flex flex-col text-6xl self-center place-items-center mb-4')
+                addTailwindClasslist(elt, 'flex flex-col text-6xl self-center place-items-center mb-4 text-center')
             }],
             ["[type=sub", function (elt) {
                 addTailwindClasslist(elt, 'flex flex-col text-xl self-center place-items-center mb-4 text-center')
