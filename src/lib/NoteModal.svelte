@@ -24,10 +24,9 @@
                     let singNoteDiv = document.createElement("div");
                     singNoteDiv.classList.add("mb-4");
                     for (const elRead of reading) {
-                        console.log(elRead)
                         if (elRead.tagName != "TEI-PERSNAME") {
-                            // check to see if it is hidden:
-                            if (elRead.classList.contains("hidden")) {
+                            // check to see if it is not a text node and not hidden:
+                            if (elRead.nodeType != 3 && elRead.classList.contains("hidden")) {
                                 elRead.classList.remove("hidden");
                             }
                             singNoteDiv.appendChild(elRead);
@@ -243,7 +242,7 @@
                 // create a list of all tei-rdg siblings of the message element
                 let siblings = parentElement[0].querySelectorAll("tei-rdg");
                 siblings.forEach((sibling) => {
-                    altReading.push(sibling);
+                    altReading.push(sibling.cloneNode(true));
                 });
                 altReadings.push(altReading);
             } else if (parentElement[0].tagName === "TEI-NOTE") {
@@ -295,8 +294,6 @@
         }
     });
 </script>
-
-{@debug altReadings}
 
 {#if show}
     <div
