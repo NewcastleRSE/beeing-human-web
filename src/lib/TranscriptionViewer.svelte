@@ -1,4 +1,6 @@
 <script>
+    import {page} from "$app/state";
+
     import TeiSimple from "./TEISimple.svelte";
     import IiifViewer from "./IIIFViewer.svelte";
     import PdfViewer from "./PdfViewer.svelte";
@@ -585,7 +587,23 @@
 
         ready = true;
     });
+
+    $effect(() => {
+        if (page.url.hash) {
+            if (page.url.hash === '#ch4'){
+                // at some point between this and updating IIIF, current page becomes NaN -- can't figure out why
+                teiViewerState.currentSignature = "H1r";
+                teiViewerState.updateIIIF = true;
+            }
+        } else {
+            console.log('no direct link');
+        }
+    })
+
+
 </script>
+
+{@debug teiViewerState}
 
 <svelte:window bind:innerWidth={windowSize} />
 

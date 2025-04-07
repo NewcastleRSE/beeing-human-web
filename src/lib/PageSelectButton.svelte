@@ -1,6 +1,7 @@
 <script>
     let { currentPage, newPage } = $props();
 </script>
+
 <div id="custom-page-select-button" class="flex self-center">
 <input class="max-w-16 text-center rounded-l-md"
     min="0"
