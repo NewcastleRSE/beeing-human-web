@@ -173,15 +173,16 @@
         }
     });
 
-    $effect(() => {
+    $effect(async () => {
         if (teiViewerState.updateIIIF) {
             // set currentSignature to the signature of the current page in the viewer
-            changePage(
+            await changePage(
                 teiViewerState.signatures.indexOf(
                     teiViewerState.currentSignature,
                 ) + parseInt(startPage),
-            );
-            teiViewerState.updateIIIF = false;
+            ).then(() => {
+                teiViewerState.updateIIIF = false;
+            });
         }
     });
 

@@ -590,10 +590,12 @@
 
     $effect(() => {
         if (page.url.hash) {
+            console.log('linked to page', page.url.hash);
             if (page.url.hash === '#ch4'){
                 // at some point between this and updating IIIF, current page becomes NaN -- can't figure out why
                 teiViewerState.currentSignature = "H1r";
                 teiViewerState.updateIIIF = true;
+                teiViewerState.updateSection = true;
             }
         } else {
             console.log('no direct link');
