@@ -126,7 +126,7 @@
 <svelte:window bind:innerWidth={width} bind:scrollY={scrollValue}/>
 
 {#key dataViewerState}
-    <form class="sticky top-0 md:static md:z-auto w-full bg-primary-400 py-6">
+    <div class="sticky top-0 md:static md:z-auto w-full bg-primary-400 py-6">
         {#if smallScreen}
             <button
                 onclick={toggleBar}
@@ -188,5 +188,5 @@
                 </div>
             </div>
         {/if}
-    </form>
+    </div>
 {/key}
