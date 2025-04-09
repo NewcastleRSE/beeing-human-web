@@ -44,7 +44,7 @@ export function getElementRect(elt) {
 
 export function isElementVisibleInViewport(elt, callback) {
     if (!elt) {
-        console.warn('Element is not provided');
+        console.warn('Element is not provided for visibility check');
         return;
     }
 

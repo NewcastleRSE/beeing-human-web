@@ -1,4 +1,6 @@
 <script>
+    import {page} from "$app/state";
+
     import TeiSimple from "./TEISimple.svelte";
     import IiifViewer from "./IIIFViewer.svelte";
     import PdfViewer from "./PdfViewer.svelte";
@@ -66,18 +68,18 @@
             const firstSigs = {
                 "¶2r": "titlepage",
                 "¶3r": "preface",
-                A1v: "dedication",
-                A2r: "contents",
-                B1r: "ch1",
-                D4r: "ch2",
-                E4r: "ch3",
-                H1r: "ch4",
-                I3r: "ch5",
-                N3v: "ch6",
-                P4r: "ch7",
-                S2r: "ch8",
-                T1r: "ch9",
-                T2v: "ch10",
+                "A1v": "dedication",
+                "A2r": "contents",
+                "B1r": "ch1",
+                "D4r": "ch2",
+                "E4r": "ch3",
+                "H1r": "ch4",
+                "I3r": "ch5",
+                "N3v": "ch6",
+                "P4r": "ch7",
+                "S2r": "ch8",
+                "T1r": "ch9",
+                "T2v": "ch10",
             };
 
             if (dataViewerState.activeView === "facsimile") {
@@ -195,6 +197,7 @@
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
     import { findLastMilestoneBefore } from "../utils/generalHelpers";
     import { isElementVisibleInViewport } from "../utils/teiBehavioursHelper";
+    import { replaceState } from "$app/navigation";
 
     function cleanVariationStyles(el) {
         // removes any bg styling for the element
@@ -585,6 +588,7 @@
 
         ready = true;
     });
+
 </script>
 
 <svelte:window bind:innerWidth={windowSize} />

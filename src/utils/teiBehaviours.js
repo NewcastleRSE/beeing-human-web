@@ -145,9 +145,10 @@ export let teiBehaviours = {
         "ptr": [
             ["tei-item>tei-ptr", function (elt) {
                 let link = document.createElement('a');
+                link.setAttribute('data-href', elt.getAttribute('target'));
+                link.setAttribute('href', elt.getAttribute('target'));
+                link.setAttribute('data-type', 'internalLink');
                 link.classList.add('text-secondary-500', 'hover:text-secondary-900', 'hover:cursor-pointer', 'hover:underline');
-
-                link.href = elt.getAttribute('target');
 
                 wrapChildren(elt.parentElement, link);
             }]
@@ -189,8 +190,16 @@ export let teiBehaviours = {
                     window.dispatchEvent(event);
                 }
             } else {
+                // creates a fake link instead
                 var link = document.createElement('a');
                 link.classList.add('anchor');
+
+                if (elt.getAttribute('target')[0] === '#' && elt.getAttribute('target').length > 1) {
+                    // adds these types only if it is an internal link to the same page
+                    link.setAttribute('data-href', elt.getAttribute('target'));
+                    link.setAttribute('data-type', 'internalLink');
+                }
+                
                 link.href = elt.getAttribute('target');
                 if (sup) {
                     const supEl = document.createElement('sup');
@@ -199,6 +208,7 @@ export let teiBehaviours = {
                 } else {
                     link.innerHTML = elt.innerHTML;
                 }
+
 
                 // highlights when hovered and finds the corresponding element to highlight
                 link.addEventListener('mouseover', function () {

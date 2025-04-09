@@ -18,7 +18,9 @@
     import { teiBehaviours } from "../utils/teiBehaviours";
 
     import { teiViewerState } from "../stores/teiViewer.svelte";
-    import { isElementVisibleUntracked } from "../utils/generalHelpers";
+    import { findLastMilestoneBefore, isElementVisibleUntracked } from "../utils/generalHelpers";
+    import { page } from "$app/state";
+    import { replaceState } from "$app/navigation";
 
     let { transcriptionData = "", statusCheck } = $props();
 
@@ -38,7 +40,9 @@
         }
 
         // inserts TEI content
-        var cetei = new CETEI();
+        var cetei = new CETEI(
+            {ignoreFragmentId: true}
+        );
         cetei.addBehaviors(teiBehaviours);
         await cetei
             .getHTML5(path, function (data) {
@@ -249,6 +253,69 @@
         }
     }
 
+    function internalLinkScroll(eltId) {
+        const startingSigs = {
+            titlepage: "¶2r",
+            preface: "¶3r",
+            dedication: "A1v",
+            contents: "A2r",
+            ch1: "B1r",
+            ch2: "D4r",
+            ch3: "E4r",
+            ch4: "H1r",
+            ch5: "I3r",
+            ch6: "N3v",
+            ch7: "P4r",
+            ch8: "S2r",
+            ch9: "T1r",
+            ch10: "T2v",
+        };
+
+        // gets the target of the link
+        let targetEl = document.querySelector(eltId);
+        // checks to see if the target is a chapter
+        if (Object.keys(startingSigs).includes(targetEl.id)) {
+            // if it is, uses the object to find the corresponding signature;
+            teiViewerState.currentSignature =
+                startingSigs[targetEl.id];
+            scrollToPB(
+                startingSigs[targetEl.id],
+            );
+            teiViewerState.updateIIIF = true;
+            teiViewerState.updateSection = true;
+        } else {
+            // if it isn't, tries to find the pb that immediately precedes it
+            let pb = findLastMilestoneBefore(targetEl, "tei-pb");
+            if (pb) {
+                teiViewerState.currentSignature = pb.getAttribute("n");
+                scrollToPB(pb.getAttribute("n"));
+                teiViewerState.updateIIIF = true;
+                teiViewerState.updateSection = true;
+                targetEl.scrollIntoView();
+            } else {
+                console.warn("No pb found for target element");
+            }
+        }
+    }
+
+    function internalLinkScrollHandler(e) {
+        // prevents the default action of the link
+        e.preventDefault();
+        internalLinkScroll(this.getAttribute("href"));
+    }
+
+    function navigateToHashFromUrl() {
+        // gets the intended hash from the url
+        const destHash = page.url.hash;
+                
+        // resets the hash to prevent the page from jumping 
+        // to the element when the page loads
+        if (loaded) {
+            replaceState('', page.state)
+            internalLinkScroll(destHash); 
+        }
+    }
+
     onMount(async () => {
         try {
             if (path === "" || path === undefined) {
@@ -288,10 +355,10 @@
                 }
 
                 // Might need to adjust the rate ot throttling later -- currently hard to tell because the iiif document is taking a while
-                const throttledScrollHandler = _.throttle(
-                    turnPageOnScroll,
-                    300,
-                );
+                // const throttledScrollHandler = _.throttle(
+                //     turnPageOnScroll,
+                //     300,
+                // );
 
                 const debouncedScrollHandler = _.debounce(
                     turnPageOnScroll,
@@ -302,13 +369,33 @@
                     .querySelector("[data-testid='transcription']")
                     .addEventListener("scroll", debouncedScrollHandler);
                 loaded = true;
+
+                // adds onclick event to each element with data-type="internal-link"
+                const internalLinks = document.querySelectorAll(
+                    "[data-type='internalLink']",
+                );
+                internalLinks.forEach((link) => {
+                    link.addEventListener("click", internalLinkScrollHandler);
+                });
             });
+
+            loaded = true;
+
+            if (page.url.hash) {
+                navigateToHashFromUrl();
+            }
         } catch (err) {
             error = err.toString();
             loaded = false;
             return;
         }
     });
+
+    $effect(() => {
+        if (page.url.hash && loaded) {
+            navigateToHashFromUrl();
+        }
+    })
 </script>
 
 <div id="TEI-container" data-testid="TEI-container">
