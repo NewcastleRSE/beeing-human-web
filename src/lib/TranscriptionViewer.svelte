@@ -68,18 +68,18 @@
             const firstSigs = {
                 "¶2r": "titlepage",
                 "¶3r": "preface",
-                A1v: "dedication",
-                A2r: "contents",
-                B1r: "ch1",
-                D4r: "ch2",
-                E4r: "ch3",
-                H1r: "ch4",
-                I3r: "ch5",
-                N3v: "ch6",
-                P4r: "ch7",
-                S2r: "ch8",
-                T1r: "ch9",
-                T2v: "ch10",
+                "A1v": "dedication",
+                "A2r": "contents",
+                "B1r": "ch1",
+                "D4r": "ch2",
+                "E4r": "ch3",
+                "H1r": "ch4",
+                "I3r": "ch5",
+                "N3v": "ch6",
+                "P4r": "ch7",
+                "S2r": "ch8",
+                "T1r": "ch9",
+                "T2v": "ch10",
             };
 
             if (dataViewerState.activeView === "facsimile") {
@@ -197,6 +197,7 @@
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
     import { findLastMilestoneBefore } from "../utils/generalHelpers";
     import { isElementVisibleInViewport } from "../utils/teiBehavioursHelper";
+    import { replaceState } from "$app/navigation";
 
     function cleanVariationStyles(el) {
         // removes any bg styling for the element
@@ -588,24 +589,7 @@
         ready = true;
     });
 
-    $effect(() => {
-        if (page.url.hash) {
-            console.log('linked to page', page.url.hash);
-            if (page.url.hash === '#ch4'){
-                // at some point between this and updating IIIF, current page becomes NaN -- can't figure out why
-                teiViewerState.currentSignature = "H1r";
-                teiViewerState.updateIIIF = true;
-                teiViewerState.updateSection = true;
-            }
-        } else {
-            console.log('no direct link');
-        }
-    })
-
-
 </script>
-
-{@debug teiViewerState}
 
 <svelte:window bind:innerWidth={windowSize} />
 

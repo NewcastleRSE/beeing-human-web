@@ -10,7 +10,6 @@
     // This needs to be imported only on the browser, otherwise it will generate an error
     // import "tify";
     import "tify/dist/tify.css";
-    import { dataViewerState } from "../stores/dataViewer.svelte";
 
     let iiif = $state(undefined);
     let changeHere = false;
@@ -38,7 +37,7 @@
                 }
             });
         } catch (e) {
-            console.warn("tify is not ready");
+            console.warn("tify is not ready during removing header");
         }
     }
 
@@ -65,7 +64,7 @@
                 barHeader.classList = "";
             });
         } catch (e) {
-            console.warn("tify is not ready");
+            console.warn("tify is not ready during replacing page select button");
         }
     }
 
@@ -122,22 +121,26 @@
                 );
             });
         } catch (e) {
-            console.warn("tify is not ready", e);
+            console.warn("tify is not ready during adding listeners", e);
         }
     }
 
     async function changePage(pageNumber = teiViewerState.currentPage) {
-        try {
-            teiViewerState.scrolling = true;
-            await iiif.ready.then(() => {
+        
+        teiViewerState.scrolling = true;
+        await iiif.ready
+        .then(
+            () => {
                 iiif.setPage([parseInt(pageNumber)]);
                 teiViewerState.currentPage = parseInt(pageNumber);
                 changeHere = false;
                 teiViewerState.scrolling = false;
-            });
-        } catch (e) {
-            console.warn("tify is not ready");
-        }
+            },
+            (e) => {
+                console.error("Error setting page", e);
+                teiViewerState.scrolling = false;
+                changeHere = false;
+            })
     }
 
     onMount(async () => {

@@ -256,7 +256,7 @@ export function findFirstDescendantByTagName(parentElement, tagName) {
 // Only provides current status, does not observe until it is in view
 export function isElementVisibleUntracked(elt, callback) {
   if (!elt) {
-      console.warn('Element is not provided');
+      console.warn('Element is not provided for visibility check in isElementVisibleUntracked');
       return;
   }
   const observer = new IntersectionObserver((entries, observer) => {
