@@ -129,5 +129,34 @@
         "web": {
             "staff": "https://www.researchgate.net/profile/Luigi-Baciadonna?ev=hdr_xprf"
         }
+    },
+    "martin": {
+        "name": "Martin Giurfa",
+        "img": "assets/people/gr1_lrg.jpg",
+        "url": "/people/martin",
+        "title": "Professor",
+        "affiliation": "Institute of Biology Paris, Seine - Sorbonne University Paris" ,
+        "bio": "Martin Giurfa is an Exceptional-Class Professor of Neurosciences at Sorbonne University, where he directs the Institute of Biology Paris-Seine. His research focuses on learning, memory and cognitive processing in insects, from behavior to molecules. He has brought a cognitive dimension to studies on honey bee learning and memory as his work revealed bees under the new light of their remarkable cognitive faculties. ",
+        "email": "",
+        "socials": {
+            "orcid":  "https://orcid.org/0000-0001-7173-769X"
+        },
+        "web": {
+            "staff": ""
+        }
+    },
+    "catherine": {
+        "name": "Catherine Macri",
+        "img": "assets/people/203.png",
+        "url": "/people/catherine",
+        "title": "Doctoral Candidate",
+        "affiliation": "CNRS - NeuroSU, Institute of Biology Paris Seine" ,
+        "bio": "Catherine Macri - Doctoral Candidate, CNRS - NeuroSU, Institute of Biology Paris Seine, Sorbonne university & Research Center on Animal Cognition, University of Toulouse - Investigates markers of consciousness (such as perceptual awareness and fear) in honey bees, at the behavioral, physiological and neurobiological level.",
+        "email": "",
+        "socials": {
+            "orcid":  "https://orcid.org/0000-0002-2775-3059"
+        },
+        "web": {
+        }
     }
 }
