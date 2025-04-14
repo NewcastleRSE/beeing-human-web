@@ -13,7 +13,8 @@
         "web": {
             "staff": "https://www.english.cam.ac.uk/people/Jennifer.Richards"
         },
-        "email": "jr970@cam.ac.uk"
+        "email": "jr970@cam.ac.uk",
+        "role": "core"
     },
     "olivia": {
         "name": "Olivia Smith",
@@ -25,7 +26,8 @@
         "socials": {
             "bluesky": "https://bsky.app/profile/oliviasmith.bsky.social"
         },
-        "email": "ofs20@cam.ac.uk"
+        "email": "ofs20@cam.ac.uk",
+        "role": "core"
     },
     "bennett": {
         "name": "Bennett Hogg",
@@ -43,7 +45,8 @@
             "personal": "#",
             "staff": "#"
         },
-        "email": "#"
+        "email": "#",
+        "role": "core"
     },
     "magnus": {
         "name": "Magnus Williamson",
@@ -57,7 +60,8 @@
             "staff": "https://www.ncl.ac.uk/sacs/people/profile/magnuswilliamson.html",
             "personal": "http://www.tudorpartbooks.ac.uk/"
         },
-        "email": "magnus.williamson@ncl.ac.uk"
+        "email": "magnus.williamson@ncl.ac.uk",
+        "role": "core"
     },
     "tiago": {
         "name": "Tiago Sousa Garcia",
@@ -76,7 +80,8 @@
             "personal": "https://tiagosousagarcia.co.uk/",
             "staff": "https://rse.ncldata.dev/team/tiago-sousa-garcia"
         },
-        "email": "tiago.sousa-garcia@newcastle.ac.uk"
+        "email": "tiago.sousa-garcia@newcastle.ac.uk",
+        "role": "core"
     },
     "balu": {
         "name": "Balu GS",
@@ -94,7 +99,8 @@
             "personal": "#",
             "staff": "#"
         },
-        "email": "#"
+        "email": "#",
+        "role": "core"
         
     },
     "vivek": {
@@ -112,7 +118,8 @@
             "personal": "https://www.viveknityananda.com",
             "staff": "https://www.ncl.ac.uk/cbe/about/staff/profile/viveknityananda.html"
         },
-        "email": "vivek.nityananda@newcastle.ac.uk"
+        "email": "vivek.nityananda@newcastle.ac.uk",
+        "role": "core"
     },
     "luigi": {
         "name": "Luigi Baciadonna",
@@ -128,6 +135,38 @@
         },
         "web": {
             "staff": "https://www.researchgate.net/profile/Luigi-Baciadonna?ev=hdr_xprf"
-        }
+        },
+        "role": "core"
+    },
+    "martin": {
+        "name": "Martin Giurfa",
+        "img": "assets/people/gr1_lrg.jpg",
+        "url": "/people/martin",
+        "title": "Professor",
+        "affiliation": "Institute of Biology Paris, Seine - Sorbonne University Paris" ,
+        "bio": "Martin Giurfa is an Exceptional-Class Professor of Neurosciences at Sorbonne University, where he directs the Institute of Biology Paris-Seine. His research focuses on learning, memory and cognitive processing in insects, from behavior to molecules. He has brought a cognitive dimension to studies on honey bee learning and memory as his work revealed bees under the new light of their remarkable cognitive faculties. ",
+        "email": "",
+        "socials": {
+            "orcid":  "https://orcid.org/0000-0001-7173-769X"
+        },
+        "web": {
+            "staff": ""
+        },
+        "role": "contributor"
+    },
+    "catherine": {
+        "name": "Catherine Macri",
+        "img": "assets/people/203.png",
+        "url": "/people/catherine",
+        "title": "Doctoral Candidate",
+        "affiliation": "CNRS - NeuroSU, Institute of Biology Paris Seine" ,
+        "bio": "Catherine Macri - Doctoral Candidate, CNRS - NeuroSU, Institute of Biology Paris Seine, Sorbonne university & Research Center on Animal Cognition, University of Toulouse - Investigates markers of consciousness (such as perceptual awareness and fear) in honey bees, at the behavioral, physiological and neurobiological level.",
+        "email": "",
+        "socials": {
+            "orcid":  "https://orcid.org/0000-0002-2775-3059"
+        },
+        "web": {
+        },
+        "role": "contributor"
     }
 }
