@@ -3,9 +3,9 @@ title: "The honey bee: a conscious bee-ing?"
 id: conscious-beeing
 parent: science
 link: science/conscious-beeing
-lead: "Something something sometimg"
-img: 'assets/articles/emotions-in-invertebrates/bioscience-image-library-by-fayette-reynolds-wDH7c3pXkpY-unsplash.jpg'
-imgAlt: 'Nervous Tissue: Spinal Cord Motor Neuron. smear: spinal cord magnification: 200x'
+lead: "Bees are a flagship species in the study of invertebrate consciousness. Beloved by the public for their ecological importance and complex social behaviors, they provide a unique opportunity to engage society in the broader discussion about animal consciousness."
+img: 'assets/articles/conscious-beeing/alexander-grey-p203ekCK4Ac-unsplash.jpg'
+imgAlt: 'Psychedelic colorful rainbow paint wallpaper background.'
 type: article
 layout: article
 author: [catherine, luigi, martin]
