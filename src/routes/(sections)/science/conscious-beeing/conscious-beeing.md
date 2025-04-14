@@ -1,0 +1,112 @@
+---
+title: "The honey bee: a conscious bee-ing?"
+id: conscious-beeing
+parent: science
+link: science/conscious-beeing
+lead: "Something something sometimg"
+img: 'assets/articles/emotions-in-invertebrates/bioscience-image-library-by-fayette-reynolds-wDH7c3pXkpY-unsplash.jpg'
+imgAlt: 'Nervous Tissue: Spinal Cord Motor Neuron. smear: spinal cord magnification: 200x'
+type: article
+layout: article
+author: [catherine, luigi, martin]
+date: 2025/04/10
+---
+<script>
+    import Portal from '$lib/Portal.svelte'
+    import ByLine from '$lib/ByLine.svelte'
+    import AdditionalInfoBox from '$lib/AdditionalInfoBox.svelte'
+</script>
+
+<ByLine author={author} date={date} type={type} title={title}/>
+
+## Introduction
+**What is consciousness?** Consciousness is defined as ***the capacity of a living being to have subjective experiences of itself and its surrounding world***. If this definition appears simple or raw, the study of consciousness, in particular in animals, remains a genuine challenge, primarily because, unlike humans, animals cannot provide verbal reports of their subjective experiences.
+
+### Animal consciousness, a historical debate
+In the 17th century, Descartes perceived animals as automatons "without reason" (Descartes and Rodis-Lewis 1994). Since then, society's perception of animals has evolved significantly, thanks in part to scientific research on their cognitive abilities. In 2012, the Cambridge Declaration on Consciousness (Low 2012) recognized consciousness similar to that of humans in vertebrates, while excluding nearly all invertebrates. Twelve years later, the New York Declaration (Andrews, Birch, et al. 2024) proposed a "realistic possibility" of consciousness in several invertebrate species, opening new avenues for research and ethical reflection.
+
+### A scientific challenge
+Since animals cannot speak, proving the existence of conscious states is difficult. Researchers interested in animal consciousness have to rely on experiments carefully designed to identify objective and measurable indicators of consciousness, while avoiding the pitfall of anthropomorphism. To understand this theoretical framework, we must return to the definition of consciousness, which should include two key elements: a rich sensory world (*how we perceive what surrounds us*) and an inner world (*'itself', our body, feelings and thoughts*). In fact, reducing the term consciousness to a single definition is challenging as it can be understood as a spectrum encompassing different aspects or levels, such as conscious attention, body perception, sentience, and emotions (Birch et al 2022 and Birch, Snell and Clayton 2020), among others. The question that deserves experimental investigation should therefore shift from "which animals are conscious" to "how animals are conscious" (Andrews 2024). We will explore these concepts in more detail below.
+
+### Why bees? 
+Bees, with their miniature yet remarkably efficient brains, are ideal subjects for exploring these questions. Studies have shown that they can categorize objects, learn rules, and even count (Ravi et al 2020). This raises an intriguing question: could bees be conscious? (Birch 2020) Beyond their cognitive abilities, bees also serve as a flagship species in the study of invertebrate consciousness. Beloved by the public for their ecological importance and complex social behaviors, they provide a unique opportunity to engage society in the broader discussion about animal consciousness.
+
+In this article, we will examine the question of bee consciousness by examining three key aspects that are commonly associated with conscious states:
+- **Conscious attention or Perceptual awareness** with trace conditioning (honey bees),
+- **Body awareness** (bumble bees),
+- **Sentience and emotions**, such as fear and play (honey bees and bumble bees).
+
+## 1/ Conscious attention in honey bees: Trace conditioning
+Our research takes advantage of different forms of Pavlovian conditioning, some of which have been associated with a conscious processing of the relationship between the stimuli to be associated. In the traditionally used *delay Pavlovian conditioning*, the conditioned stimulus (a bell, in the famous case of Pavlov's dog) was immediately followed by the unconditioned rewarding stimulus (the meat), creating a temporal overlap facilitating predictive learning, i.e. the fact that the bell anticipated the arrival of the food. But in *trace Pavlovian conditioning*, a gap is introduced between the conditioned and the unconditioned stimulus. For learning to occur, the animal must maintain a mental "trace" of the conditioned stimulus (hence, the name 'trace conditioning') —which imposes a cognitive load that requires sustained attention. In humans, it is well established that introducing a distraction during this gap prevents learning, and that only individuals who are consciously aware of the association can effectively retain the trace (Clark, Manns and Squire 2001 and Droege et al. 2021).
+
+We tested whether honey bees rely on similar mechanisms by using a Pavlovian conditioning protocol in which they learn to associate an odorant with a sugary reward. In one condition, the reward was given immediately after the odorant, with a brief overlap between the two stimuli (delay conditioning); in the other, a gap was introduced between the odorant and the sugar reward (trace conditioning). In both cases, bees successfully learned to respond to the odorant in anticipation of the reward, though their performance was lower in the more cognitively demanding trace conditioning task. When we introduced distractors - such as the stroke of a feather or brief light flashes - during the interval between odorant and sugar onset, bees failed to learn the odor-sugar association under the trace conditioning regime, while their learning remained intact in the delay conditioning regime. This suggests that trace conditioning in bees, as in humans, requires active attention to succeed.
+
+Some philosophers consider attention to be the gateway to consciousness, proposing that conscious awareness emerges from the selective processing of information. In this view, attention is not just a cognitive mechanism but a fundamental prerequisite for subjective experience (Birch, Snell and Clayton 2020 and Droege et al. 2021). Our findings suggest that honey bees engage a form of conscious attention or focused concentration when performing complex tasks (**MISSING REF**), reinforcing the idea that their perception extends beyond simple, automatic responses.
+
+## 2/ Body awareness for navigating a complex environment
+Researchers have investigated whether bumble bees exhibit a form of body awareness by observing their behavior when encountering narrow passages in their flight trajectories along a tunnel. Unlike honeybees, bumble bees vary in size, with some individuals having a wingspan nearly as large as that of the queen.
+
+To compare their responses, scientists measured a "Gap/Wings" ratio, defined as the width of the passage divided by the wingspan. Bumble bees facing the edges of the gap within the tunnel performed consistent peering maneuvers while maintaining the gap in their frontal visual field. In this way, while oscillating in suspended flight in front of the gap edges, they extracted information about the gap extent, which they could then refer to their own size considered from one extended wing to the other extended wing. When the ratio was high (wide passage), bumble bees flew straight through the gap without hesitation. However, when the ratio was low (narrow passage), they paused, adjusted their posture, and tilted their bodies to fly sideways without damaging their wings.
+
+This sideways-passing behavior is reminiscent of how humans instinctively assess whether a space is too narrow to walk through face-first. It suggests that bumble bees adapt their flight strategy based on their body size and environment, a crucial ability for survival in complex habitats.
+
+Could these adjustments reflect a **rudimentary form of body awareness** - a self-representation that allows bumble bees to navigate the world with greater flexibility? Some theories of consciousness propose that bodily self-awareness is a foundational step toward more complex forms of subjective experience. While this does not mean bumble bees have an explicit sense of self, their ability to account for their own body in space raises intriguing questions about the building blocks of consciousness in insects.
+
+## 3/ Sentience & emotions
+Sentience can be defined as the capacity to have valenced experiences, such as pain or pleasure. Sentience is often associated with the ability to experience a range of emotional states, and the richness of these emotions can offer insight into the depth of an animal's sentience. In this section, we explore three emotional states observed in bees.
+
+### A /Fear
+When we experience fear, our physiology changes: heart rate, body temperature, and respiration increase, and our movements often become more erratic or defensive (Anderson and Adolphs 2014). Our research project investigates whether honey bees exhibit similar responses.
+
+To induce a fear-like state, we used an aversive learning protocol called ICARUS (**MISSING REF**). In this experiment, a bee is placed in a box with two compartments connected by a passage. The setup is illuminated with red light, which bees perceive as total darkness due to their lack of red-sensitive photoreceptors. When one of the compartments was lit with blue light, bees were spontaneously attracted to it. However, upon entering the illuminated zone, they received a mild electric shock. Over time, the bees began hesitating more before approaching the light, gradually learning to suppress their spontaneous attraction and associating the blue light with an unpleasant experience. Control groups (either bees that received no shock or bees that received shocks unpaired with the blue light) did not develop this avoidance behavior, confirming that bees in the experimental group formed a **conditioned aversion to the light**. But does this aversion reflect **fear**? 
+
+Beyond this learned avoidance, we decided to measure two physiological responses in the conditioned bees:
+1. **Body temperature**, detected using thermal cameras.
+1. **CO₂ emissions**, measured with sensors to assess potential increased respiratory rate.
+
+Bees in the experimental group showed elevated body temperature and respiration when exposed to the blue light, even in the absence of shock—physiological markers commonly associated with fear in vertebrates. Moreover, the increase in these physiological parameters was positively correlated with the bees' individual learning scores. In other words, the bees that learned most effectively to avoid the blue light were also the ones in which these parameters increased the most. These results reflect physiological reactions indicative of a fear-like state. **Behaviorally**, they sought refuge in the corners of the chamber, turning their backs to the light. **Acoustically**, they emitted distinctive buzzing sounds, which may serve as distress cue.
+
+By combining these physiological, behavioral, and acoustic observations, this study provides compelling evidence that **bees can enter a fear-like state**, increasing our understanding of their sentience.
+
+### B / Play
+Bumble bees have been observed rolling balls with no apparent benefit. A study sought to determine whether this behavior could be classified as case of play by comparing it to five criteria established in play theory (Burghardt 2005):
+1. **Absence of immediate utility**: Rolling the balls does not contribute to their survival.
+1. **Spontaneity and pleasure**: The behavior is voluntary and rewarding in itself, demonstrated by the bees' preference for entering areas containing mobile balls.
+1. **Locomotor differentiation**: The movements associated with the balls are different from functional behaviors like foraging.
+1. **Non-stereotyped repetition**: Each individual interacted with the balls multiple times, ruling out simple curiosity. Analysis shows a high variability in interactions with the balls, excluding stereotypy.
+1. **Relaxed context**: Although the conditions minimized stress factors, a more effective way to test this criterion would be to introduce stress to the bees and observe whether play-like behavior still occurs.
+
+The results show that this behavior meets several play criteria, but some limitations remain: small sample sizes, lack of testing in an enriched environment, and partially validated criteria. In conclusion, this study suggests that bumble bees could experience positive emotions through play, a first in a field focused on the study of negative emotions.
+
+## Conclusion
+**New perspectives on insect consciousness and the precautionary principle**: Although we cannot definitively claim that bees are conscious, studies on their attention, body awareness, and emotional states suggest they possess at least some elements of consciousness. It may not be the same kind of consciousness we experience as humans, but current research should further focus on different levels of consciousness in Hymenoptera to determine similarities and differences across species. These findings, combining behavioral, physiological, and cognitive analyses, call for an ethical reflection on the status of these animals that must extend beyond academic circles and engage society as a whole. These advances call for a rethinking of our practices. The widespread use of pesticides, ineffective in the short term and harmful to pollinators, jeopardizes their survival and the health of ecosystems. Adopting environmentally friendly solutions is essential to preserve bees, but also to ensure our own future.
+
+
+<AdditionalInfoBox title = 'Definitions'>
+
+    **Attention**: the ability to gather and prioritize information from one's environment, functioning like a mental bandwidth that allows for focus on relevant elements while excluding others. 
+
+    **Body awareness**: being aware of one's body allows it to be perceived as a distinct entity from the surrounding world.
+
+    **Consciousness**: the capacity of a living being to have subjective experiences of the world around it and of itself.
+
+    **Fear**: a set of physiological and behavioral responses triggered by the perception of a future or immediate threat, functioning like the body's alarm system.
+
+    **Play**: Motor activities performed with no apparent benefits for the player. The patterns of movements will appear outside of their primary context (example: hunting, food-seeking…) and can be modified, repeated, exaggerated, fragmented or disordered. There are three major categories of play: social, locomotor and object play. Play should be distinguished from mere exploration or curiosity.
+
+    **Sentience**: the ability to identify a sensation as pleasant or unpleasant (associating a hedonic value, for example, pain, pleasure, etc.).
+</AdditionalInfoBox>
+
+## References
+- Anderson, D. J., & Adolphs, R. (2014). A Framework for Studying Emotions across Species. *Cell*, 157: 187‑200.
+- Andrews, K. (2024). All animals are conscious: Shifting the null hypothesis in consciousness science. *Mind and Language*, 39:415-433. 
+- Andrews, K., Birch, J., Sebo, J., and Sims, T. (2024) Background to the New York Declaration on Animal Consciousness. [nydeclaration.com](https://sites.google.com/nyu.edu/nydeclaration/declaration).
+- Birch, J. (2020). The search for invertebrate consciousness. *Noûs*, 56: 133–153. 
+- Birch, J. et al. (2022). How should we study animal consciousness scientifically? *Journal of Consciousness Studies*, 29: 8‑28.
+- Birch, J., Schnell, A. K., & Clayton, N. S. (2020). Dimensions of animal consciousness. *Trends in Cognitive Sciences*, 24: 789‑801.
+- Burghardt, G. M. (2005). *The Genesis of Animal Play: Testing the Limits*. The MIT Press.
+- Clark, R. E., Manns, J. R., & Squire, L. R. (2001). Trace and delay eyeblink conditioning: Contrasting phenomena of declarative and nondeclarative memory. *Psychological Science*, 12:304-8. 
+- Descartes, R., and Rodis-Lewis, G. (1994). *Les passions de l’âme*. Librairie Philosophique J. Vrin.
+- Droege, P. et al. (2021). Trace conditioning as a test for animal consciousness: A new approach. *Animal Cognition*, 24: 1299‑1304.
+- Low, P. (2012) The Cambridge Declaration on Consciousness. Proceedings of the Francis Crick Memorial Conference, Churchill College, Cambridge University,  pp 1-2.
+- Ravi, S. et al. (2020). Bumblebees perceive the spatial layout of their environment in relation to their body size and form to minimize inflight collisions. Proceedings of the National Academy of Sciences, 117: 31494‑31499.  
