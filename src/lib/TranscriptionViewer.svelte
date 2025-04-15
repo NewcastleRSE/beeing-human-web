@@ -1,6 +1,4 @@
 <script>
-    import {page} from "$app/state";
-
     import TeiSimple from "./TEISimple.svelte";
     import IiifViewer from "./IIIFViewer.svelte";
     import PdfViewer from "./PdfViewer.svelte";
@@ -34,10 +32,31 @@
     let showModal = $state(false);
     let modalElement = $state(null);
 
+
     import { dataViewerState } from "../stores/dataViewer.svelte";
     import { teiViewerState } from "../stores/teiViewer.svelte";
 
     import { onMount } from "svelte";
+
+    
+    // needed to prevent the effect to reseting the state on mount
+    let currentDataset = '';
+    $effect(() => {
+        if (ready && 
+            dataViewerState.activeDataset &&
+            currentDataset &&
+            dataViewerState.activeDataset !== currentDataset) {
+            // resets state:
+            teiViewerState.signatures = [];
+            teiViewerState.currentSignature = undefined;
+            teiViewerState.currentSection = undefined;
+            teiViewerState.currentPage = undefined;
+            teiViewerState.scrolling = false;
+            teiViewerState.updateIIIF = false;
+            teiViewerState.updateTEI = false;
+            teiViewerState.updateSection = false;
+        }
+    });
 
     $effect(() => {
         changeVariationDetail(dataViewerState.variationDetail);
@@ -51,7 +70,6 @@
         toggleBothViewOption(smallScreen);
     });
 
-    // FIRING WHEN IT SHOULDN'T (IE, CHANGING TO CH 5 THEN SCROLLING UP A PAGE)
     $effect(() => {
         skipToSection(dataViewerState.activeNavigator);
     });
@@ -197,7 +215,8 @@
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
     import { findLastMilestoneBefore } from "../utils/generalHelpers";
     import { isElementVisibleInViewport } from "../utils/teiBehavioursHelper";
-    import { replaceState } from "$app/navigation";
+    import { derived } from "svelte/store";
+    import { updateSession } from "@sentry/core";
 
     function cleanVariationStyles(el) {
         // removes any bg styling for the element
@@ -530,9 +549,14 @@
     }
 
     onMount(() => {
+        ready = false;
+        
         if (dataViewerState.activeDataset === 0) {
             dataViewerState.activeDataset = "1623";
         }
+
+        // necessary to reset the state after changing datasets
+        currentDataset = dataViewerState.activeDataset;
 
         if (
             !["facsimile", "transcription", "both"].includes(
