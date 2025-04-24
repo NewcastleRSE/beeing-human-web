@@ -168,5 +168,19 @@
         "web": {
         },
         "role": "contributor"
+    },
+    "adrin": {
+        "name": "adrin neatrour",
+        "img": "assets/people/bennett_avatar.png",
+        "url": "/people/adrin",
+        "title": "",
+        "affiliation": "",
+        "bio": "",
+        "email": "",
+        "socials": {
+        },
+        "web": {
+        },
+        "role": "contributor"
     }
 }

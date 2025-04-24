@@ -155,11 +155,13 @@
     <div class="flex flex-col gap-8 md:w-2/3 ml-auto">
         <div class="flex flex-col">
             <h3 class="h3 text-4xl">{personData.name}</h3>
+            {#if personData.title && personData.affiliation}
             <span class="h4 text-gray-500 text-lg italic">{personData.title} · {personData.affiliation}</span>
+            {/if}
         </div>
         <InjectMD content={personData.bio} layout= {false} />
         <div class="mt-6">
-        {#if personData.articles}
+        {#if personData.articles.length > 0}
             <div>
                 <h4 class="h4 mt-6 mb-2 font-thin text-2xl">Articles</h4>
                 <ul class="flex flex-col gap-2 list-disc">
@@ -173,7 +175,7 @@
                 </ul>
             </div>
         {/if}
-        {#if personData.buzzwords}
+        {#if personData.buzzwords.length > 0}
             <div class="flex flex-col gap-4 md:w-2/3">
                 <h4 class="h4 mt-6 mb-2 font-thin text-2xl">Buzzwords</h4>
                     {#each personData.buzzwords as buzzword}
