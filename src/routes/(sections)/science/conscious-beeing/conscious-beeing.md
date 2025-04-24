@@ -15,6 +15,7 @@ date: 2025/04/10
     import Portal from '$lib/Portal.svelte'
     import ByLine from '$lib/ByLine.svelte'
     import AdditionalInfoBox from '$lib/AdditionalInfoBox.svelte'
+    import ImgContainer from '$lib/ImgContainer.svelte'
 </script>
 
 <ByLine author={author} date={date} type={type} title={title}/>
@@ -28,6 +29,8 @@ In the 17th century, Descartes perceived animals as automatons "without reason" 
 ### A scientific challenge
 Since animals cannot speak, proving the existence of conscious states is difficult. Researchers interested in animal consciousness have to rely on experiments carefully designed to identify objective and measurable indicators of consciousness, while avoiding the pitfall of anthropomorphism. To understand this theoretical framework, we must return to the definition of consciousness, which should include two key elements: a rich sensory world (*how we perceive what surrounds us*) and an inner world (*'itself', our body, feelings and thoughts*). In fact, reducing the term consciousness to a single definition is challenging as it can be understood as a spectrum encompassing different aspects or levels, such as conscious attention, body perception, sentience, and emotions (Birch et al 2022 and Birch, Schnell and Clayton 2020), among others. The question that deserves experimental investigation should therefore shift from "which animals are conscious" to "how animals are conscious" (Andrews 2024). We will explore these concepts in more detail below.
 
+<ImgContainer imgUrl='/assets/articles/conscious-beeing/image1.jpeg' altText='A bee landing on a flower' caption='© Catherine Macri'/>
+
 ### Why bees? 
 Bees, with their miniature yet remarkably efficient brains, are ideal subjects for exploring these questions. Studies have shown that they can categorize objects, learn rules, and even count (Giurfa 2007). This raises an intriguing question: could bees be conscious? (Birch 2020) Beyond their cognitive abilities, bees also serve as a flagship species in the study of invertebrate consciousness. Beloved by the public for their ecological importance and complex social behaviors, they provide a unique opportunity to engage society in the broader discussion about animal consciousness.
 
@@ -39,6 +42,8 @@ In this article, we will examine the question of bee consciousness by examining 
 ## 1/ Conscious attention in honey bees: Trace conditioning
 Our research takes advantage of different forms of Pavlovian conditioning, some of which have been associated with a conscious processing of the relationship between the stimuli to be associated. In the traditionally used *delay Pavlovian conditioning*, the conditioned stimulus (a bell, in the famous case of Pavlov's dog) was immediately followed by the unconditioned rewarding stimulus (the meat), creating a temporal overlap facilitating predictive learning, i.e. the fact that the bell anticipated the arrival of the food. But in *trace Pavlovian conditioning*, a gap is introduced between the conditioned and the unconditioned stimulus. For learning to occur, the animal must maintain a mental "trace" of the conditioned stimulus (hence, the name 'trace conditioning') —which imposes a cognitive load that requires sustained attention. In humans, it is well established that introducing a distraction during this gap prevents learning, and that only individuals who are consciously aware of the association can effectively retain the trace (Clark, Manns and Squire 2001 and Droege et al. 2021).
 
+<ImgContainer imgUrl='/assets/articles/conscious-beeing/image2.png' altText='A diagram explaining the difference between delay conditioning and trace conditioning' caption='Automatic vs. Active treatment of information during associative learning. In humans and honeybees, delay conditioning is insensible to the application of a distractor, reminiscent of an automatic treatment of information. On the other hand, trace conditioning is sensitive to distractors and fall under an active treatment of information.'/>
+
 We tested whether honey bees rely on similar mechanisms by using a Pavlovian conditioning protocol in which they learn to associate an odorant with a sugary reward. In one condition, the reward was given immediately after the odorant, with a brief overlap between the two stimuli (delay conditioning); in the other, a gap was introduced between the odorant and the sugar reward (trace conditioning). In both cases, bees successfully learned to respond to the odorant in anticipation of the reward, though their performance was lower in the more cognitively demanding trace conditioning task. When we introduced distractors - such as the stroke of a feather or brief light flashes - during the interval between odorant and sugar onset, bees failed to learn the odor-sugar association under the trace conditioning regime, while their learning remained intact in the delay conditioning regime. This suggests that trace conditioning in bees, as in humans, requires active attention to succeed.
 
 Some philosophers consider attention to be the gateway to consciousness, proposing that conscious awareness emerges from the selective processing of information. In this view, attention is not just a cognitive mechanism but a fundamental prerequisite for subjective experience (Birch, Snell and Clayton 2020 and Droege et al. 2021). Our findings suggest that honey bees engage a form of conscious attention or focused concentration when performing complex tasks (Paoli, Macri and Giurfa 2023), reinforcing the idea that their perception extends beyond simple, automatic responses.
@@ -49,6 +54,8 @@ Researchers have investigated whether bumble bees exhibit a form of body awarene
 To compare their responses, scientists measured a "Gap/Wings" ratio, defined as the width of the passage divided by the wingspan. Bumble bees facing the edges of the gap within the tunnel performed consistent peering maneuvers while maintaining the gap in their frontal visual field. In this way, while oscillating in suspended flight in front of the gap edges, they extracted information about the gap extent, which they could then refer to their own size considered from one extended wing to the other extended wing. When the ratio was high (wide passage), bumble bees flew straight through the gap without hesitation. However, when the ratio was low (narrow passage), they paused, adjusted their posture, and tilted their bodies to fly sideways without damaging their wings.
 
 This sideways-passing behavior is reminiscent of how humans instinctively assess whether a space is too narrow to walk through face-first. It suggests that bumble bees adapt their flight strategy based on their body size and environment, a crucial ability for survival in complex habitats.
+
+<ImgContainer imgUrl='/assets/articles/conscious-beeing/image3.png' altText='Two graphs illustrating the experimental results of bees strategies in gap crossing' caption="Different strategies of gap crossing. The larger the gap, the more direct the bumblebee's flying trajectory will be. When the gap is narrow, a different strategy is at play, with a period of hesitation, possibly to evaluate the gap size and even a body reorientation, which could prevent collisions of the wings. Source: Ravi et al. (2020) modified"/>
 
 Could these adjustments reflect a **rudimentary form of body awareness** - a self-representation that allows bumble bees to navigate the world with greater flexibility? Some theories of consciousness propose that bodily self-awareness is a foundational step toward more complex forms of subjective experience. While this does not mean bumble bees have an explicit sense of self, their ability to account for their own body in space raises intriguing questions about the building blocks of consciousness in insects.
 
@@ -64,6 +71,8 @@ Beyond this learned avoidance, we decided to measure two physiological responses
 1. **Body temperature**, detected using thermal cameras.
 1. **CO₂ emissions**, measured with sensors to assess potential increased respiratory rate.
 
+<ImgContainer imgUrl='/assets/articles/conscious-beeing/image4.jpeg' altText='Honeybee under a thermal camera' caption="Honeybee under a thermal camera. © Catherine Macri"/>
+
 Bees in the experimental group showed elevated body temperature and respiration when exposed to the blue light, even in the absence of shock—physiological markers commonly associated with fear in vertebrates. Moreover, the increase in these physiological parameters was positively correlated with the bees' individual learning scores. In other words, the bees that learned most effectively to avoid the blue light were also the ones in which these parameters increased the most. These results reflect physiological reactions indicative of a fear-like state. **Behaviorally**, they sought refuge in the corners of the chamber, turning their backs to the light. **Acoustically**, they emitted distinctive buzzing sounds, which may serve as distress cue.
 
 By combining these physiological, behavioral, and acoustic observations, this study provides compelling evidence that **bees can enter a fear-like state**, increasing our understanding of their sentience.
@@ -76,10 +85,14 @@ Bumble bees have been observed rolling balls with no apparent benefit. A study (
 1. **Non-stereotyped repetition**: Each individual interacted with the balls multiple times, ruling out simple curiosity. Analysis shows a high variability in interactions with the balls, excluding stereotypy.
 1. **Relaxed context**: Although the conditions minimized stress factors, a more effective way to test this criterion would be to introduce stress to the bees and observe whether play-like behavior still occurs.
 
+<ImgContainer imgUrl="/assets/articles/conscious-beeing/image5.jpeg" altText="A closeup of a bumblebee rolling six small wooden balls, three of which are purple, the other three orange." caption="Bumblebee rolling wooden balls. © Richard Rickitt "/>
+
 The results show that this behavior meets several play criteria, but some limitations remain: small sample sizes, lack of testing in an enriched environment, and partially validated criteria. In conclusion, this study suggests that bumble bees could experience positive emotions through play, a first in a field focused on the study of negative emotions.
 
 ## Conclusion
 **New perspectives on insect consciousness and the precautionary principle**: Although we cannot definitively claim that bees are conscious, studies on their attention, body awareness, and emotional states suggest they possess at least some elements of consciousness. It may not be the same kind of consciousness we experience as humans, but current research should further focus on different levels of consciousness in Hymenoptera to determine similarities and differences across species. These findings, combining behavioral, physiological, and cognitive analyses, call for an ethical reflection on the status of these animals that must extend beyond academic circles and engage society as a whole. These advances call for a rethinking of our practices. The widespread use of pesticides, ineffective in the short term and harmful to pollinators, jeopardizes their survival and the health of ecosystems. Adopting environmentally friendly solutions is essential to preserve bees, but also to ensure our own future.
+
+<ImgContainer imgUrl="/assets/articles/conscious-beeing/image6.jpeg" altText="A picture of a beekeeper tending to one beehive (out of four) on a roof of a building with the skyline of a city (Paris) on the background" caption="Our experimental apiary on the roof of Sorbonne university, the Jussieu campus. © Catherine Macri"/>
 
 
 <AdditionalInfoBox title = 'Definitions'>
@@ -113,4 +126,4 @@ The results show that this behavior meets several play criteria, but some limita
 - Low, P. (2012) The Cambridge Declaration on Consciousness. Proceedings of the Francis Crick Memorial Conference, Churchill College, Cambridge University,  pp 1-2.
 - Marchal, P., Villar, M. E. et al. (2019). Inhibitory learning of phototaxis by honeybees in a passive-avoidance task. Learning and Memory 26: 412-423
 - Paoli, M., Macri, C., & Giurfa, M. (2023). A cognitive account of trace conditioning in insects. *Current Opinion in Insect Science*, 57, 101034.
-- Ravi, S. et al. (2020). Bumblebees perceive the spatial layout of their environment in relation to their body size and form to minimize inflight collisions. Proceedings of the National Academy of Sciences, 117: 31494‑31499.  
+- Ravi, S. et al. (2020). Bumblebees perceive the spatial layout of their environment in relation to their body size and form to minimize inflight collisions. *Proceedings of the National Academy of Sciences*, 117: 31494‑31499.  
