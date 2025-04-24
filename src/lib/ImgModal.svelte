@@ -74,7 +74,7 @@
                         class="object-contain max-h-[75vh]"
                     />
                     {#if imgDetails.caption}
-                        <p class="w-fit">{imgDetails.caption}</p>
+                        <p class="w-fit max-w-lg">{imgDetails.caption}</p>
                     {/if}
                 </div>
             </div>
