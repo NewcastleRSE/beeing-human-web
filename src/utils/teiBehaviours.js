@@ -11,7 +11,13 @@ export let teiBehaviours = {
             // main container
             const tailwindClasses = ['flex', 'flex-col']
             e.classList.add(...tailwindClasses);
-            const listSigs = [...e.getElementsByTagName('tei-pb')];
+            let listSigs = []
+            for (const pb of e.getElementsByTagName('tei-pb')) {
+                if (pb.getAttribute('data-origfile') != '1609') {
+                    // if the pb is not inside a rdg element, add it to the list
+                    listSigs.push(pb);
+                }
+            }
             let sigsDict = {}
             for (const [i, tag] of listSigs.entries()) {
                 if (i - 1 > 0) {
@@ -118,6 +124,9 @@ export let teiBehaviours = {
             ["[type='editorial']", function (elt) {
                 elt.classList.add('hidden');
             }],
+            ["[data-origfile='1609']", function (elt) {
+                elt.classList.add('text-sm', 'italic');
+            }],
             ["[place='inline']", function (elt) {
                 addTailwindClasslist(elt, "text-sm h-fit")
                 teiSetBodyLayout(elt);
@@ -136,7 +145,7 @@ export let teiBehaviours = {
                 function (elt) {
                     addTailwindClasslist(elt, 'text-sm')
                 }
-            ]
+            ],
         ],
         'p': function (elt) {
             teiSetBodyLayout(elt);
@@ -296,12 +305,18 @@ export let teiBehaviours = {
             let emptySigs = ['¶3r', 'A3r', 'B1r']
             if (!findIfAncestor(elt, 'tei-list')) {
                 // if pb is in the contents page ignore it, causing too many issues
+                // also ignores pbs in the rdg element (i.e., imported from 1609)
                 
                 if (this.sigsDict[elt.getAttribute('n')] && !emptySigs.includes(elt.getAttribute('n'))) {
                     var sig = document.createElement('p');
                     sig.innerHTML = this.sigsDict[elt.getAttribute('n')];
                     sig.classList.add('signature')
-
+                    return sig
+                } else if (elt.getAttribute('data-origfile') === '1609') {
+                    // if the pb is not inside a rdg element, add it to the list
+                    let sig = document.createElement('p');
+                    sig.innerHTML = elt.getAttribute('n');
+                    sig.classList.add('signature')
                     return sig
                 }
             } else {

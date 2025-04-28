@@ -130,7 +130,7 @@ export function findPreviousMilestone(node, milestoneType) {
  * @param {string} milestoneType - The tag name of the milestone element to find.
  * @returns {HTMLElement|null} - The last milestone element of the specified type before the node, or null if none is found.
  */
-export function findLastMilestoneBefore(node, milestoneType) {
+export function findLastMilestoneBefore(node, milestoneType, exclusionAttribute = 'data-origfile', exlusionAttributeValue = '1609') {
   if (!node || !milestoneType) {
       console.warn('Node or milestone type is not provided');
       return null;
@@ -140,12 +140,12 @@ export function findLastMilestoneBefore(node, milestoneType) {
   milestoneType = milestoneType.toLowerCase();
 
   // Helper function to search recursively for the milestone in a node's descendants
-  function searchInDescendants(element) {
+  function searchInDescendants(element, exclusionAttribute, exlusionAttributeValue) {
       if (!element) return null;
 
       let lastFound = null;
       for (let child of element.children) {
-          if (child.tagName.toLowerCase() === milestoneType) {
+          if (child.tagName.toLowerCase() === milestoneType && child.getAttribute(exclusionAttribute) !== exlusionAttributeValue) {
               lastFound = child; // Update the last found milestone
           }
           const foundInDescendants = searchInDescendants(child);
@@ -162,7 +162,7 @@ export function findLastMilestoneBefore(node, milestoneType) {
       let sibling = node.previousElementSibling;
       while (sibling) {
           // Check if the sibling itself is the milestone
-          if (sibling.tagName.toLowerCase() === milestoneType) {
+          if (sibling.tagName.toLowerCase() === milestoneType && sibling.getAttribute(exclusionAttribute) !== exlusionAttributeValue) {
               return sibling;
           }
 
