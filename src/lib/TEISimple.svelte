@@ -214,12 +214,16 @@
 
             // if pb is hidden, find the closest visible element and scroll to that
             if (pb && pb.classList.contains("hidden")) {
-                // find closest element that is not hidden
-                let closestVisible = pb.previousElementSibling;
-                while (closestVisible.classList.contains("hidden")) {
-                    closestVisible = closestVisible.previousElementSibling;
+                try {
+                    // find closest element that is not hidden
+                    let closestVisible = pb.previousElementSibling;
+                    while (closestVisible.classList.contains("hidden") || closestVisible.getAttribute('data-origfile') === '1609') {
+                        closestVisible = closestVisible.previousElementSibling;
+                    }
+                    pb = closestVisible;
+                } catch (e) {
+                    console.warn(pb);
                 }
-                pb = closestVisible;
             }
 
             // only do this if the pb exists and is not already in view
@@ -328,7 +332,9 @@
                     const pbElm = document.querySelectorAll("tei-pb");
                     // put the n attribute of each pb in the teiVierState store
                     pbElm.forEach((pb) => {
-                        teiViewerState.signatures.push(pb.getAttribute("n"));
+                        if (pb.getAttribute('data-origfile') != '1609') {
+                            teiViewerState.signatures.push(pb.getAttribute("n"));
+                        }
                     });
                 }
 
