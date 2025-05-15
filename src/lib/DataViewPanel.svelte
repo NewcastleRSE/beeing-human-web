@@ -40,7 +40,7 @@
     });
 
     onMount(() => {
-        if (!dataset) {
+        if (!dataset && datasetArray) {
             dataViewerState.activeDataset = 0;
             dataViewerState.activeView = "details";
         }
