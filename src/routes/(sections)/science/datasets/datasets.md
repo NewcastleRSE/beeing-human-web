@@ -49,6 +49,6 @@ layout: false
 </TypographyLead>
 
 {#await data.datasets then datasets}
-    <DataViewPanel dataset = {datasets[dataViewerState.activeDataset]}/>
+    <DataViewPanel datasetArray = {datasets}/>
 {/await}
 

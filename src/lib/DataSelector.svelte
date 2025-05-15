@@ -123,6 +123,8 @@
 
 </script>
 
+{@debug dataViewerState}
+
 <svelte:window bind:innerWidth={width} bind:scrollY={scrollValue}/>
 
 {#key dataViewerState}
