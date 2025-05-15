@@ -551,8 +551,10 @@
     onMount(() => {
         ready = false;
         
-        if (dataViewerState.activeDataset === 0) {
+        // if activeDataset contains a value from the science view, reset to 1623
+        if (!["1623", "1609"].includes(dataViewerState.activeDataset)) {
             dataViewerState.activeDataset = "1623";
+            dataViewerState.activeView = "both";
         }
 
         // necessary to reset the state after changing datasets

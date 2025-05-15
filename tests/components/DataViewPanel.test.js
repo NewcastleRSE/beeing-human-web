@@ -27,18 +27,18 @@ describe ('Load and display data view panel', () => {
     afterEach(() => cleanup());
 
     it('should be able to mount the component without any data', () => {
-        const container = render(DataViewPanel, {dataset: ''});
+        const container = render(DataViewPanel, {datasetArray: []});
         expect(container).toBeTruthy();
     });
 
     it('should display an error message if no data has been passed', async () => {
-        render(DataViewPanel, {dataset: ''});
+        render(DataViewPanel, {datasetArray: []});
         const errorMessage = await screen.findByText('Error: no data available', {exact: false})
         expect(errorMessage).toBeTruthy();
     });
 
     it('should be able to display the data when the required data is passed', async () => {
-        render(DataViewPanel, {dataset: datasets[0]});
+        render(DataViewPanel, {datasetArray: datasets});
         const container = screen.getByTestId('data-content-div');
         expect(container).toBeTruthy();
     });
