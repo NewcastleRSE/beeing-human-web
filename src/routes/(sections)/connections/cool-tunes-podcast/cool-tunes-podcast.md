@@ -1,0 +1,38 @@
+---
+title: "Cool Tunes For a Hot Planet Podcast"
+id: cool-tunes-podcast
+parent: connections
+link: connections/cool-tunes-podcast
+lead: "Produced by a team of like-minded musician/activists, the podcast explores the intersection of music and the struggle for social and environmental justice. The 'bees' episode grew from a belief that music from multiple places and times, but centered around universal human experiences, would create compelling and meaningful programming"
+img: 'assets/articles/cool-tunes-podcast/will-francis-ZDNyhmgkZlQ-unsplash.jpg'
+imgAlt: 'Description of the cover image'
+type: article
+layout: article
+author: warren
+date: 2025/05/19
+---
+
+<script>
+    import ByLine from '$lib/ByLine.svelte'
+    import EmbedYTVideo from '$lib/EmbedYTVideo.svelte';
+</script>
+
+<ByLine author={author} date={date} type={type} title={title}/>
+
+I’m a musician and a climate activist — two vocations increasingly interwoven in my life over the past several decades.
+
+As an artist, I sing, study, and teach the elaborate North Indian classical artsong called "*khyal*" (from an Arabic word meaning imagination).  I lived in India for many years, studying this style of singing from a master teacher, with my own New Delhi concert premiere in 1990.  This form of music is centuries old, but very much a living tradition; musicians still compose new repertoire and performance models continue to evolve.  The art is taught in the ancient ways of oral tradition, making it a form of continual dialogue and engagement with previous generations of teachers and performers — a community of practice dating back hundreds of years.  Climate change threatens both our past and our future, putting this unique form of human expression at risk.
+
+This style of music offers no opportunity to address social and environmental issues directly, for the song texts are in an archaic dialect of Hindi which is not widely understood, and the Hindustani concert format is not appropriate for speechifying. But my convictions about the urgency of climate action left me no choice but to find other pathways of engagement.
+
+I believe there are three intersecting facets of climate activism.  First — change our conversation; second — change our consumption; third — change our politics.
+
+The first of these is the area where my training and imagination can be most effective.  As a citizen, I strive to reduce my carbon footprint (changing my consumption) and to bring environmentally responsible government to power (changing my politics) — but as an artist, I have the opportunity to foreground environmental issues in my public statements and performances, and through related actions, like producing benefit concerts for environmental groups, curating environmentally-themed video and audio programming, and, most recently, by producing episodes of the [Cool Tunes For A Hot Planet](https://www.youtube.com/@cooltunes4ahotplanet) podcast.
+
+Produced by a team of like-minded musician/activists under the umbrella of the environmental organization [Third Act](https://www.thirdact.org), the podcast explores the intersection of music and the struggle for social and environmental justice.  My role in the group is to produce special profiles and interviews, typically released midway through each month.  These do a "deep dive" on single individuals, organizations, or subjects, and complement the episodes released at the beginning of the month, which feature multiple artists in a "variety-show" format.
+
+The "bees" episode grew from my belief that music from multiple places and times, but centered around universal human experiences, would create compelling and meaningful programming.  As an environmentalist I am keenly aware of the threats to bees (and insects in general) from climate change, pollution, pesticides, and human population expansion.  I had an intuition that bee-themed music would be an effective unifying device for a podcast.  I set about looking for examples, and found enough material to fill many hours of time — including Charles Butler's remarkable madrigal, which led me to the Choir of Little St. Mary’s, then to Simon Jackson, and then to Jennifer Richards and the "Bee-Ing Human" project.
+
+A conversation in 2021 with ecomusicologist Jeff Dodd Titon made me aware of buzz pollination, in which bumblebees trigger sympathetic resonance in flower anthers, releasing pollen by vibrating themselves and the blossoms at specific pitches.  With this as a clue, I began hunting for bumblebee scientists, and found Jessica Braun, a PhD candidate at the University of Nevada who agreed to do an interview.  A neighbor introduced me to Brian Woerner of the World Honey Exchange — and now I also had an expert perspective on honeybees and honey!  These interview segments helped put the wide range of musical excerpts in context, and the whole podcast became an example of John Muir’s apothegm that "*When we try to pick out anything by itself, we find it hitched to everything else in the universe.*"
+
+<EmbedYTVideo id="V5XezJwyX2A"/>
