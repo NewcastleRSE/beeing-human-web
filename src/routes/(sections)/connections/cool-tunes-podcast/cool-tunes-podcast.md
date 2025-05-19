@@ -15,6 +15,7 @@ date: 2025/05/19
 <script>
     import ByLine from '$lib/ByLine.svelte'
     import EmbedYTVideo from '$lib/EmbedYTVideo.svelte';
+    import { base } from "$app/paths";
 </script>
 
 <ByLine author={author} date={date} type={type} title={title}/>
@@ -22,7 +23,7 @@ date: 2025/05/19
 
 <EmbedYTVideo id="V5XezJwyX2A"/>
 
-[Warren Senders](/people/warren) is a musician, educator, and climate activist living outside Boston in the city of Medford, Massachusetts. He is a faculty member at [New England Conservatory of Music](https://necmusic.edu/), and a scholar/performer specializing in North Indian (Hindustani) classical singing. He teaches a course at the Conservatory in which students make their own instruments from recycled and trash materials, transforming their understanding of, and relationship to, the consumer economy and the waste stream. Here he tells us more about what inspires and drives his work, and introduces us to his [Cool Tunes For A Hot Planet](https://www.youtube.com/@cooltunes4ahotplanet) podcast, and episode on bees.
+[Warren Senders]({base}/people/warren) is a musician, educator, and climate activist living outside Boston in the city of Medford, Massachusetts. He is a faculty member at [New England Conservatory of Music](https://necmusic.edu/), and a scholar/performer specializing in North Indian (Hindustani) classical singing. He teaches a course at the Conservatory in which students make their own instruments from recycled and trash materials, transforming their understanding of, and relationship to, the consumer economy and the waste stream. Here he tells us more about what inspires and drives his work, and introduces us to his [Cool Tunes For A Hot Planet](https://www.youtube.com/@cooltunes4ahotplanet) podcast, and episode on bees.
 
 'I'm a musician and a climate activist, two vocations increasingly interwoven in my life over the past several decades. 
 
