@@ -1,5 +1,4 @@
 <script>
-  import { ProgressRadial } from "@skeletonlabs/skeleton";
   import { marked } from "marked";
   import DOMPurify from "isomorphic-dompurify";
   import ArticleLayout from "./ArticleLayout.svelte";
@@ -32,7 +31,11 @@
   ```
 -->
 <!-- <svelte:component this={}/> -->
-<ArticleLayout {layout}>
-  <!-- <SvelteMarkdown source={content} /> -->
+ {#if layout}
+  <ArticleLayout {layout}>
+    <!-- <SvelteMarkdown source={content} /> -->
+    {@html sanitizedContent}
+  </ArticleLayout>
+{:else}
   {@html sanitizedContent}
-</ArticleLayout>
+{/if}

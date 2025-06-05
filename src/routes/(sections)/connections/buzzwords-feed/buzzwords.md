@@ -3,7 +3,7 @@ title: Buzzwords feed
 id: connections-buzzwords
 parent: connections
 link: connections/buzzwords-feed
-lead: "Buzz Lightyear is a fictional character in the Disney–Pixar Toy Story franchise. He is a superhero action figure from an in-universe media franchise. Buzz is recognizable by his lime green, purple, and white space suit. Originating as a one-man band toy named Tinny, he evolved into a space ranger action figure during the development of Toy Story, a decision made by director John Lasseter. He is named after American astronaut Buzz Aldrin, the second person to walk on the Moon. Buzz Lightyear is a recurring character in all of the Toy Story franchise's animated feature films, including spin-offs. In the Toy Story films he is voiced by Tim Allen."
+lead: "Buzzwords are the little thoughts and diversions we came across during our discussions and research. They might be tangential to our main topic, or an aside that seems pertinent enough to be recorded. Some of these buzzwords might turn into longer articles, others will remain here as a fleeting reflection."
 img: 'assets/pexels-setu-r8-9224488.jpg'
 imgAlt: 'a view of a minaret from a ruined stone doorway or window'
 type: experience
