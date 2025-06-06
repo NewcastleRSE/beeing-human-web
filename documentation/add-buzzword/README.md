@@ -15,7 +15,7 @@
 
 - Create a [**new branch**](/documentation/create-new-branch/README.md)
 
-- - Navigate to `src`, then `routes` in the project files. You should see these four folders: `literature`, `music`, `science`, `connections` (as well as some others). Select `connections`, then `buzzwords`.
+- - Navigate to `src`, then `routes`, then `(sections)` in the project files. You should see these four folders: `literature`, `music`, `science`, `connections` (as well as some others). Select `connections`, then `buzzwords`.
 
 - On the top right of the screen, select `Add file`, then `Create new file` if you want to work from the browser, or upload file if you prefer to work locally.
 
@@ -26,9 +26,9 @@
 - Your buzzword needs to start with the following heading (feel free to copy it directly from here):
 ```
 ---
-author: [YOUR NAME]
-date: [DATE]
-tags: [A LIST OF TAGS SEPARATED BY A COMMA AND A SPACE]
+author: YOUR NAME
+date: DATE
+tags: A LIST OF TAGS SEPARATED BY A COMMA AND A SPACE
 ---
 ```
 
