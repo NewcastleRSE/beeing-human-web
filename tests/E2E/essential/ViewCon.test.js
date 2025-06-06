@@ -256,7 +256,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
             const nrBuzzCards = buzzCards.length;
     
             const filterMenu = page.getByTestId('tag-selector-container');
-            const button = filterMenu.getByRole('button', { name: 'bee-keeping' });
+            const button = filterMenu.getByRole('button', { name: 'bees' });
     
             await button.click();
     
@@ -277,7 +277,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
             }
     
             const filterMenu = page.getByTestId('tag-selector-container');
-            const button = filterMenu.getByRole('button', { name: 'bee-keeping' });
+            const button = filterMenu.getByRole('button', { name: 'bees' });
     
             await button.click();
     
@@ -382,7 +382,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
             await expect(page).toHaveURL('/connections/buzzwords-feed');
 
             // get ids for expected cards
-            const buttonsToPress = ['technology', 'literature'];
+            const buttonsToPress = ['connections', 'play'];
             let expectedBuzzwords = buzzwords.filter((e) => {
                 const array = new Array(e.tags).flat();
                     if (array.includes(buttonsToPress[0]) && array.includes(buttonsToPress[1])) {
@@ -745,7 +745,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
             expect(firstClickCount).toBeLessThan(initialCount);
 
             // second button, should be more than firstClickCount, but less than initialCount
-            await page.getByRole('button', {name: 'Magnus'}).click();
+            await page.getByRole('button', {name: 'Olivia'}).click();
             let finalCount = 0;
             for (let chip of filterChips) {
                 if (await chip.isEnabled()) {
@@ -785,7 +785,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
             await expect(page).toHaveURL('/connections/buzzwords-feed');
 
             // gets ids for expected cards
-            const buttonToPress = ['tiago', 'jenny'];
+            const buttonToPress = ['tiago', 'olivia'];
             let expectedBuzzwords = buzzwords.filter((e) => {
                 if (buttonToPress.includes(e.author)) {
                     return e;
@@ -1355,7 +1355,7 @@ test.describe('Page user interactions tests - buzzwords', () => {
         test('Searching for a term that is also a filter then clicking that filter should remove the chip button', async ({page}) => {
             await expect(page).toHaveURL('/connections/buzzwords-feed');
 
-            const searchTerms = ['balu ', 'vivek '];
+            const searchTerms = ['tiago ', 'vivek '];
 
             // fill the search box
             for (let term of searchTerms) {

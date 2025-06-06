@@ -3,7 +3,7 @@ title: "A film about bees and bee keeping "
 id: where-the-bee-sucks
 parent: connections
 link: connections/where-the-bee-sucks
-lead: "Where the Bee Sucks is a 50 min film that looks at the year long cycle of bee keeping from the point of view of Ralph, the bee keeper."
+lead: "*Where the Bee Sucks* is a 50 min film that looks at the year long cycle of bee keeping from the point of view of Ralph, the bee keeper."
 img: 'assets/articles/where-the-bee-sucks/screengrab.png'
 imgAlt: 'A screen grab from Where the Bee Sucks, depicting the beekeeper, Ralph, tending to his hives dressed in a green smock and face veil.'
 type: article

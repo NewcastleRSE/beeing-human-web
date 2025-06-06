@@ -55,7 +55,6 @@
     }
     return { heroObject, subsectionMetada };
   });
-
 </script>
 
 <div class="w-4/5 mx-auto my-6">
@@ -74,17 +73,16 @@
 </div>
 
 {#if "dataSelector" in heroObject && heroObject.dataSelector}
-  <DataSelector
-    controlsArray={heroObject.dataSelectorControls}
-  />
+  <DataSelector controlsArray={heroObject.dataSelectorControls} />
 {:else}
-  <SectionHero
-    title={heroObject.title}
-    img={heroObject.img ? heroObject.img : undefined}
-    type={heroObject.type}
-  >
-    {heroObject.lead}
-  </SectionHero>
+  {#key heroObject}
+    <SectionHero
+      title={heroObject.title}
+      img={heroObject.img ? heroObject.img : undefined}
+      type={heroObject.type}
+      lead={heroObject.lead ? heroObject.lead : undefined}
+    />
+  {/key}
 {/if}
 
 <div class="w-4/5 mx-auto my-6">
@@ -92,5 +90,4 @@
   {#if isSection(path)}
     <ArticleCollection data={subsectionMetada} />
   {/if}
-</div>  
-
+</div>

@@ -5,8 +5,6 @@ data: bee_data_demo.csv
 date: 2023-07-31
 ---
 
-This is the first dataset
-
 1. Bees were trained to fly into an arena with an LCD screen (gamma corrected) in the center of the arena 
 1. In the arena they were trained to associate either blue or green colour (presented in the screen) with a high sucrose reward (50%) presented in a vial in the right or left side of the arena 
 1. The opposite side contained a vial with  equal amount of water

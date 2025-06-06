@@ -3,7 +3,7 @@ title: Datasets
 id: science-datasets
 parent: science
 link: science/datasets
-lead: "A data set (or dataset) is a collection of data. In the case of tabular data, a data set corresponds to one or more database tables, where every column of a table represents a particular variable, and each row corresponds to a given record of the data set in question. The data set lists values for each of the variables, such as for example height and weight of an object, for each member of the data set. Data sets can also consist of a collection of documents or files."
+lead: "Here you will find the raw data for some of the experiments we ran in the bee lab, for you to explore in various forms, validate our interpretations, and draw your own conclusions."
 img: 'assets/pexels-murillohm-10854279.jpg'
 imgAlt: 'a neatly arranged pile of wood'
 type: data
@@ -15,7 +15,6 @@ dataSelectorControls: [{
             default: 0,
             values: {
                 "Dataset 1": 0,
-                "Dataset 2": 1
             },
         },
         {
@@ -44,9 +43,9 @@ layout: false
 
 </script>
 
-<TypographyLead>
+<!-- <TypographyLead>
     Some short copy about the experiment. Not the experimental details. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lacus ipsum, faucibus ut metus sed, iaculis posuere mi. Vestibulum rutrum in nisl id elementum.
-</TypographyLead>
+</TypographyLead> -->
 
 {#await data.datasets then datasets}
     <DataViewPanel datasetArray = {datasets}/>

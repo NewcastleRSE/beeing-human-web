@@ -39,18 +39,19 @@ test.describe('Page content tests', () => {
     });  
 })
 
-test.describe('Page content tests - binaural playback', () => {
-    test.beforeEach('Open start URL', async ({ page }, testInfo) => {
-        console.log(`Running ${testInfo.title}`);
-        await page.goto('/music/binaural-recording');
-    });
+// Not currently deployed
+// test.describe('Page content tests - binaural playback', () => {
+//     test.beforeEach('Open start URL', async ({ page }, testInfo) => {
+//         console.log(`Running ${testInfo.title}`);
+//         await page.goto('/music/binaural-recording');
+//     });
 
-    test('Expect music view to have a media player element', async ({ page }) => {
-        await expect(page).toHaveURL('/music/binaural-recording');
-        const audioPlayer = page.getByTestId('audio-player')
-        expect(audioPlayer).toBeAttached();
-    });
-});
+//     test('Expect music view to have a media player element', async ({ page }) => {
+//         await expect(page).toHaveURL('/music/binaural-recording');
+//         const audioPlayer = page.getByTestId('audio-player')
+//         expect(audioPlayer).toBeAttached();
+//     });
+// });
 
 test.describe('Page content tests - transcription', () => {
     test.beforeEach('Open start URL', async ({ page }, testInfo) => {
@@ -65,47 +66,49 @@ test.describe('Page content tests - transcription', () => {
     });
 })
 
-test.describe('Paginator tests', () => {
-    test.beforeEach('Open start URL', async ({ page }, testInfo) => {
-        console.log(`Running ${testInfo.title}`);
-        await page.goto('/music/music-transcription');
-    });
 
-    test('Expect Paginator to have been created', async ({ page }) => {
-        await expect(page).toHaveURL('/music/music-transcription');
-        const paginator = page.getByTestId('paginator');
-        await expect(paginator).toBeVisible();
-    });
+// Not currently deployed
+// test.describe('Paginator tests', () => {
+//     test.beforeEach('Open start URL', async ({ page }, testInfo) => {
+//         console.log(`Running ${testInfo.title}`);
+//         await page.goto('/music/music-transcription');
+//     });
 
-    test('Next button should exist', async ({ page }) => {
-        await expect(page).toHaveURL('/music/music-transcription');
-        const nxtButton = page.getByTestId('btn-nxt');
-        await expect(nxtButton).toBeVisible();
-    });
+//     test('Expect Paginator to have been created', async ({ page }) => {
+//         await expect(page).toHaveURL('/music/music-transcription');
+//         const paginator = page.getByTestId('paginator');
+//         await expect(paginator).toBeVisible();
+//     });
 
-    test('The previous button should not exist on the first page', async ({ page }) => {
-        await expect(page).toHaveURL('/music/music-transcription');
-        const prevButton = page.getByTestId('btn-prev');
-        await expect(prevButton).not.toBeVisible();
-    });
+//     test('Next button should exist', async ({ page }) => {
+//         await expect(page).toHaveURL('/music/music-transcription');
+//         const nxtButton = page.getByTestId('btn-nxt');
+//         await expect(nxtButton).toBeVisible();
+//     });
 
-    test('Pressing the next button should change the page and make the previous button visible', async ({ page }) => {
-        await expect(page).toHaveURL('/music/music-transcription');
-        const nxtButton = page.getByTestId('btn-nxt');
-        await nxtButton.click();
-        const prevButton = page.getByTestId('btn-prev');
-        await expect(prevButton).toBeVisible();
-    });
+//     test('The previous button should not exist on the first page', async ({ page }) => {
+//         await expect(page).toHaveURL('/music/music-transcription');
+//         const prevButton = page.getByTestId('btn-prev');
+//         await expect(prevButton).not.toBeVisible();
+//     });
 
-    test('Pressing the prev button should send you back to the first page', async ({ page }) => {
-        await expect(page).toHaveURL('/music/music-transcription');
-        const nxtButton = page.getByTestId('btn-nxt');
-        await nxtButton.click();
-        const prevButton = page.getByTestId('btn-prev');
-        prevButton.click();
-        await expect(prevButton).not.toBeVisible();
-    });
-});
+//     test('Pressing the next button should change the page and make the previous button visible', async ({ page }) => {
+//         await expect(page).toHaveURL('/music/music-transcription');
+//         const nxtButton = page.getByTestId('btn-nxt');
+//         await nxtButton.click();
+//         const prevButton = page.getByTestId('btn-prev');
+//         await expect(prevButton).toBeVisible();
+//     });
+
+//     test('Pressing the prev button should send you back to the first page', async ({ page }) => {
+//         await expect(page).toHaveURL('/music/music-transcription');
+//         const nxtButton = page.getByTestId('btn-nxt');
+//         await nxtButton.click();
+//         const prevButton = page.getByTestId('btn-prev');
+//         prevButton.click();
+//         await expect(prevButton).not.toBeVisible();
+//     });
+// });
 
 // MIDI player is currently not deployed
 // test.describe('MIDI player tests', () => {
