@@ -1,6 +1,7 @@
 <script>
   import  {typeColours} from '../utils/typeColours'
   import InternalLink from '$lib/InternalLink.svelte';
+  import InjectMd from './InjectMD.svelte';
   let { cardObject } = $props();
 </script>
 
@@ -23,9 +24,9 @@
       <div class="group relative">
         <h3 class="mt-3 text-lg font-semibold leading-6 group-hover:text-primary-600 group-hover:font-black transition-colours ease-in-out duration-150 motion-reduce:transition-none">
             <span class="absolute inset-0"></span>
-            {cardObject.title}
+            <InjectMd content={cardObject.title} layout={false}/>
         </h3>
-        <p class="mt-5 line-clamp-3 text-sm leading-6 text-secondary-600">{cardObject.lead}</p>
+        <p class="mt-5 line-clamp-3 text-sm leading-6 text-secondary-600"><InjectMd content={cardObject.lead} layout={false}/></p>
       </div>
 
       <!-- IF WE WANT AUTHOR INFO -->
