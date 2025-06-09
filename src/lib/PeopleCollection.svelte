@@ -24,5 +24,14 @@
                 {/if}
             {/each}
         </div>
+        <TextDivider class="w-1/3"/>
+        <h2 class="h2 text-secondary-700">Advisory Board</h2>
+        <div class="flex flex-wrap w-2/3 m-auto justify-start">
+            {#each Object.keys(people).sort() as key}
+                {#if people[key].role === "advisory-board"}
+                    <PersonCard person={people[key]} />
+                {/if}
+            {/each}
+        </div>
     </div>
 {/if}
