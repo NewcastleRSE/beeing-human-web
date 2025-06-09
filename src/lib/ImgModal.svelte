@@ -2,6 +2,7 @@
     import { fade, fly } from "svelte/transition";
     import { onMount } from "svelte";
     import { base } from "$app/paths";
+    import InjectMD from "./InjectMD.svelte";
 
     let { imgDetails, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
@@ -74,7 +75,18 @@
                         class="object-contain max-h-[75vh]"
                     />
                     {#if imgDetails.caption}
-                        <p class="w-fit max-w-lg">{imgDetails.caption}</p>
+                        <p class="w-fit max-w-lg"><InjectMD
+                                content={imgDetails.caption}
+                                layout={false}
+                            /></p>
+                    {/if}
+                    {#if imgDetails.captionCustomStyle}
+                        <p class="w-fit max-w-lg">
+                            <InjectMD
+                                content={imgDetails.captionCustomStyle}
+                                layout={false}
+                            />
+                        </p>
                     {/if}
                 </div>
             </div>
