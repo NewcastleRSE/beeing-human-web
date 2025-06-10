@@ -197,5 +197,20 @@
             "staff": "https://necmusic.edu/faculty/warren-senders"
         },
         "role": "contributor"
+    },
+    "richard": {
+        "name": "Richard Wistreich",
+        "img": "assets/people/richardwistreich.jpg",
+        "url": "/people/richard",
+        "title": "Professor of Music History",
+        "affiliation": "Royal College of Music",
+        "bio": "Richard Wistreich is Professor of Music History at the Royal College of Music. He works on aspects of performance and materiality, currently focusing on the role of voice in the construction of early modern identity. *Warrior, Courtier, Singer: Giulio Cesare Brancaccio and the Performance of Identity in the Late Renaissance*, based on his PhD dissertation, came out with Ashgate in 2007. Since then, he has published widely on the history of singing, and on the composer, Claudio Monteverdi; he has co-edited (with Iain Fenlon) the *Cambridge History of Sixteenth Century Music*. Richard has also had a long career as a professional singer and performance teacher, specialising in music of the sixteenth and seventeenth centuries.",
+        "email": "",
+        "socials": {
+        },
+        "web": {
+            "staff": "https://www.rcm.ac.uk/research/people/details/?id=03709"
+        },
+        "role": "advisory-board"
     }
 }
