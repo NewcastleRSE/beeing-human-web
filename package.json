@@ -1,6 +1,6 @@
 {
   "name": "beeing-human-web",
-  "version": "0.17.3",
+  "version": "0.17.4",
   "private": true,
   "scripts": {
     "dev": "vite dev",
