@@ -16,13 +16,47 @@
         show = !show;
     }
 
+    function removeNotes() {
+        let noteContent = document.getElementById("note-content");
+        if (noteContent) {
+            noteContent.innerHTML = "";
+        }
+    }
+
+    
     function appendNotes() {
         // attach readings to correct div
         if (altReadings) {
                 const notesDiv = document.getElementById("note-content");
+                // checks to see if there is an object in the altReadings array
+                let ids = []
+                for (const [i, reading] of altReadings.entries()) {
+                    // checks to see if the last element is an object
+                    if (typeof(reading[reading.length - 1]) === "object") {
+                        // if it is an object, add it to ids dictionary
+                        ids[i] = reading[reading.length - 1].id;
+                        //pop it from the reading array
+                        reading.pop();
+                    } else {
+                        ids[i] = null;
+                    }
+                }
                 for (const [i, reading] of altReadings.entries()) {
                     let singNoteDiv = document.createElement("div");
                     singNoteDiv.classList.add("mb-4");
+                    singNoteDiv.classList.add("single-note");
+                    // THIS IS REMOVING TOO MANY NOTES IF USED REPEATEDLY
+                    if (ids[i]) {
+                        // checks to see if the id exists in the notesDiv
+                        const existingNote = document.getElementById(`modal-${ids[i]}`);
+                        if (existingNote) {
+                            // if it exists, remove it
+                            existingNote.remove();
+                        }
+                        
+                        singNoteDiv.setAttribute("id", `modal-${ids[i]}`);
+                    }
+                    
                     for (const elRead of reading) {
                         if (elRead.tagName != "TEI-PERSNAME") {
                             // check to see if it is not a text node and not hidden:
@@ -77,10 +111,7 @@
             appendNotes();
         } else {
             // remove the notes
-            let noteContent = document.getElementById("note-content");
-            if (noteContent) {
-                noteContent.innerHTML = "";
-            }
+            removeNotes();
         }
     })
 
@@ -236,6 +267,7 @@
 
     let altReadings = $derived.by(() => {
         let altReadings = [];
+        
         if (parentElement) {
             if (parentElement[0].tagName === "TEI-APP") {
                 let altReading = [];
@@ -272,6 +304,10 @@
                                     note.getAttribute("resp"),
                             );
                         }
+                    }
+
+                    if (note.getAttribute("xml:id")) {
+                        altReading.push({id: note.getAttribute("xml:id")});
                     }
 
                     altReadings.push(altReading);
