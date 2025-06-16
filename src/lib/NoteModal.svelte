@@ -45,7 +45,6 @@
                     let singNoteDiv = document.createElement("div");
                     singNoteDiv.classList.add("mb-4");
                     singNoteDiv.classList.add("single-note");
-                    // THIS IS REMOVING TOO MANY NOTES IF USED REPEATEDLY
                     if (ids[i]) {
                         // checks to see if the id exists in the notesDiv
                         const existingNote = document.getElementById(`modal-${ids[i]}`);
