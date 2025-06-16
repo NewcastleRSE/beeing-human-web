@@ -23,86 +23,90 @@
         }
     }
 
-    
     function appendNotes() {
         // attach readings to correct div
         if (altReadings) {
-                const notesDiv = document.getElementById("note-content");
-                // checks to see if there is an object in the altReadings array
-                let ids = []
-                for (const [i, reading] of altReadings.entries()) {
-                    // checks to see if the last element is an object
-                    if (typeof(reading[reading.length - 1]) === "object") {
-                        // if it is an object, add it to ids dictionary
-                        ids[i] = reading[reading.length - 1].id;
-                        //pop it from the reading array
-                        reading.pop();
+            const notesDiv = document.getElementById("note-content");
+            // checks to see if there is an object in the altReadings array
+            let ids = [];
+            for (const [i, reading] of altReadings.entries()) {
+                // checks to see if the last element is an object
+                if (typeof reading[reading.length - 1] === "object") {
+                    // if it is an object, add it to ids dictionary
+                    ids[i] = reading[reading.length - 1].id;
+                    //pop it from the reading array
+                    reading.pop();
+                } else {
+                    ids[i] = null;
+                }
+            }
+            for (const [i, reading] of altReadings.entries()) {
+                let singNoteDiv = document.createElement("div");
+                singNoteDiv.classList.add("mb-4");
+                singNoteDiv.classList.add("single-note");
+                if (ids[i]) {
+                    // checks to see if the id exists in the notesDiv
+                    const existingNote = document.getElementById(
+                        `modal-${ids[i]}`,
+                    );
+                    if (existingNote) {
+                        // if it exists, remove it
+                        existingNote.remove();
+                    }
+
+                    singNoteDiv.setAttribute("id", `modal-${ids[i]}`);
+                }
+
+                for (const elRead of reading) {
+                    if (elRead.tagName != "TEI-PERSNAME") {
+                        // check to see if it is not a text node and not hidden:
+                        if (
+                            elRead.nodeType != 3 &&
+                            elRead.classList.contains("hidden")
+                        ) {
+                            elRead.classList.remove("hidden");
+                        }
+                        singNoteDiv.appendChild(elRead);
                     } else {
-                        ids[i] = null;
+                        let authorName = document.createElement("div");
+                        authorName.innerHTML = "— ";
+                        authorName.classList.add(
+                            "text-sm",
+                            "text-secondary-600",
+                            "italic",
+                            "mt-4",
+                            "pr-4",
+                            "text-right",
+                            "w-full",
+                        );
+                        let authorLink = document.createElement("a");
+                        authorLink.setAttribute(
+                            "href",
+                            `${base}/people/${elRead.getAttribute("corresp")}`,
+                        );
+                        authorLink.setAttribute("target", "_blank");
+                        authorLink.classList.add("hover:anchor");
+                        authorLink.innerHTML = elRead.innerHTML;
+                        authorName.appendChild(authorLink);
+                        singNoteDiv.appendChild(authorName);
                     }
                 }
-                for (const [i, reading] of altReadings.entries()) {
-                    let singNoteDiv = document.createElement("div");
-                    singNoteDiv.classList.add("mb-4");
-                    singNoteDiv.classList.add("single-note");
-                    if (ids[i]) {
-                        // checks to see if the id exists in the notesDiv
-                        const existingNote = document.getElementById(`modal-${ids[i]}`);
-                        if (existingNote) {
-                            // if it exists, remove it
-                            existingNote.remove();
-                        }
-                        
-                        singNoteDiv.setAttribute("id", `modal-${ids[i]}`);
-                    }
-                    
-                    for (const elRead of reading) {
-                        if (elRead.tagName != "TEI-PERSNAME") {
-                            // check to see if it is not a text node and not hidden:
-                            if (elRead.nodeType != 3 && elRead.classList.contains("hidden")) {
-                                elRead.classList.remove("hidden");
-                            }
-                            singNoteDiv.appendChild(elRead);
-                        } else {
-                            let authorName = document.createElement("div");
-                            authorName.innerHTML = "— ";
-                            authorName.classList.add(
-                                "text-sm",
-                                "text-secondary-600",
-                                "italic",
-                                "mt-4",
-                                "pr-4",
-                                "text-right",
-                                "w-full"
-                            );
-                            let authorLink = document.createElement("a");
-                            authorLink.setAttribute(
-                                "href",
-                                `${base}/people/${elRead.getAttribute("corresp")}`,
-                            );
-                            authorLink.setAttribute("target", "_blank");
-                            authorLink.classList.add("hover:anchor");
-                            authorLink.innerHTML = elRead.innerHTML;
-                            authorName.appendChild(authorLink);
-                            singNoteDiv.appendChild(authorName);
-                        }
-                    }
-                    notesDiv.appendChild(singNoteDiv);
-                    if (altReadings.length > 1) {
-                        if (i < altReadings.length - 1) {
-                            // find the hidden text divider
-                            let textDivider = document.querySelector(
-                                ".text-divider.hidden",
-                            );
-                            if (textDivider) {
-                                textDivider.classList.remove("hidden");
-                                textDivider.classList.add("block");
-                                notesDiv.appendChild(textDivider);
-                            }
+                notesDiv.appendChild(singNoteDiv);
+                if (altReadings.length > 1) {
+                    if (i < altReadings.length - 1) {
+                        // find the hidden text divider
+                        let textDivider = document.querySelector(
+                            ".text-divider.hidden",
+                        );
+                        if (textDivider) {
+                            textDivider.classList.remove("hidden");
+                            textDivider.classList.add("block");
+                            notesDiv.appendChild(textDivider);
                         }
                     }
                 }
             }
+        }
     }
 
     $effect(() => {
@@ -112,7 +116,7 @@
             // remove the notes
             removeNotes();
         }
-    })
+    });
 
     onMount(() => {
         // prevents window is not defined errors
@@ -131,11 +135,17 @@
                         !clickInside
                     ) {
                         close();
+                    } else if (event.target.hasAttribute("type") &&
+                        event.target.getAttribute("type") === "noteCrossRef"){
+                        // check if the target has an attribute of type === 'noteCrossRef'
+                        // get original ref
+                        let originalRef = document.querySelector(event.target.getAttribute("target"));
+                        let originalNote = document.querySelector(originalRef.getAttribute("target"));
+                            console.log(originalRef, originalNote);
                     }
                     buttonClicked = false;
                 }
             });
-            
         }
     });
 
@@ -266,7 +276,7 @@
 
     let altReadings = $derived.by(() => {
         let altReadings = [];
-        
+
         if (parentElement) {
             if (parentElement[0].tagName === "TEI-APP") {
                 let altReading = [];
@@ -306,7 +316,7 @@
                     }
 
                     if (note.getAttribute("xml:id")) {
-                        altReading.push({id: note.getAttribute("xml:id")});
+                        altReading.push({ id: note.getAttribute("xml:id") });
                     }
 
                     altReadings.push(altReading);
@@ -389,14 +399,37 @@
                                 <span class="h-1 w-full {accentColour} my-2"
                                 ></span>
                             </div>
-                            <div class="mt-2" id="note-content">
-                                
+                            <div class="mt-2" id="note-content"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- BEGIN: Vertically centered, right-aligned floating modal -->
+                <div
+                    class="fixed top-1/2 right-8 -translate-y-1/2 z-20"
+                    style="pointer-events: none;"
+                >
+                    <div
+                        class="w-96 max-w-full bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col pointer-events-auto"
+                        style="min-height: 300px;"
+                    >
+                        <div class="flex justify-end p-2">
+                            <button
+                                type="button"
+                                class="text-xl hover:font-bold"
+                                onclick={buttonClickedHandler}>&#x2715;</button>
+                        </div>
+                        <div class="flex-1 p-4">
+                            <h3 class="font-bold mb-2">Floating Modal</h3>
+                            <div>
+                                <!-- Add your floating modal content here -->
+                                <p>This is the floating modal vertically centered and to the right of the main modal.</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- END: Vertically centered, right-aligned floating modal -->
             </div>
         </div>
     </div>
-    <TextDivider fillColour="#5E9DB5" class="mb-4 text-divider hidden"/>
+    <TextDivider fillColour="#5E9DB5" class="mb-4 text-divider hidden" />
 {/if}

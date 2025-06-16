@@ -32,20 +32,20 @@
     let showModal = $state(false);
     let modalElement = $state(null);
 
-
     import { dataViewerState } from "../stores/dataViewer.svelte";
     import { teiViewerState } from "../stores/teiViewer.svelte";
 
     import { onMount } from "svelte";
 
-    
     // needed to prevent the effect to reseting the state on mount
-    let currentDataset = '';
+    let currentDataset = "";
     $effect(() => {
-        if (ready && 
+        if (
+            ready &&
             dataViewerState.activeDataset &&
             currentDataset &&
-            dataViewerState.activeDataset !== currentDataset) {
+            dataViewerState.activeDataset !== currentDataset
+        ) {
             // resets state:
             teiViewerState.signatures = [];
             teiViewerState.currentSignature = undefined;
@@ -86,18 +86,18 @@
             const firstSigs = {
                 "¶2r": "titlepage",
                 "¶3r": "preface",
-                "A1v": "dedication",
-                "A2r": "contents",
-                "B1r": "ch1",
-                "D4r": "ch2",
-                "E4r": "ch3",
-                "H1r": "ch4",
-                "I3r": "ch5",
-                "N3v": "ch6",
-                "P4r": "ch7",
-                "S2r": "ch8",
-                "T1r": "ch9",
-                "T2v": "ch10",
+                A1v: "dedication",
+                A2r: "contents",
+                B1r: "ch1",
+                D4r: "ch2",
+                E4r: "ch3",
+                H1r: "ch4",
+                I3r: "ch5",
+                N3v: "ch6",
+                P4r: "ch7",
+                S2r: "ch8",
+                T1r: "ch9",
+                T2v: "ch10",
             };
 
             if (dataViewerState.activeView === "facsimile") {
@@ -249,21 +249,19 @@
 
     function applyVariationStyles(app) {
         for (const child of app.children) {
-            
-
             // restores baseline styling for elements inside apps
             // child.classList = "";
 
             if (child.tagName === "TEI-LEM") {
                 // removes any previous styling for the element
                 cleanVariationStyles(child);
-                
+
                 // adds messages for empty elements
                 if (child.hasAttribute("data-empty")) {
                     child.innerHTML = "[+1609]";
                     child.classList.remove("hidden");
                 }
-                
+
                 if (app.getAttribute("subtype") === "add") {
                     child.classList.add(
                         "bg-success-200",
@@ -282,7 +280,6 @@
                 for (const style of variationCommonStyles) {
                     child.classList.add(style);
                 }
-
             } else if (child.tagName === "TEI-RDG") {
                 if (child.hasAttribute("data-empty")) {
                     child.innerHTML = "[Does not exist in 1609]";
@@ -330,7 +327,7 @@
     function changeEditorialNoteVisibility(editorialNotes) {
         try {
             const notesElements = document.querySelectorAll(
-                'tei-ref[type="attachment"]',
+                'tei-ref[type="attachment"], tei-ref[type="noteCrossRef"]',
             );
 
             const fragmentedNotes = document.querySelectorAll(
@@ -550,7 +547,7 @@
 
     onMount(() => {
         ready = false;
-        
+
         // if activeDataset contains a value from the science view, reset to 1623
         if (!["1623", "1609"].includes(dataViewerState.activeDataset)) {
             dataViewerState.activeDataset = "1623";
@@ -614,7 +611,6 @@
 
         ready = true;
     });
-
 </script>
 
 <svelte:window bind:innerWidth={windowSize} />
