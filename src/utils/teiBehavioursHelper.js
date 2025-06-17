@@ -69,6 +69,9 @@ export function isElementVisibleInViewport(elt, callback) {
 }
 
 export function checkForParentNotes(elt) {
+    // records original target
+    elt.setAttribute('data-origtarget', elt.getAttribute('target'));
+    
     // checks to see if the element is also contained by a another ref with the same type
     let parentRef = findAncestor(elt, 'tei-ref');
     let potentialSeg = findAncestor(elt, 'tei-seg');

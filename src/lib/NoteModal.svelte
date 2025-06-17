@@ -7,8 +7,8 @@
     let { message, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
     let showSubModal = $state(false);
-    let originalRef = $state("");
-    let originalNote = $state("");
+    let originalRef = $state(undefined);
+    let originalNote = $state(undefined);
 
     function buttonClickedHandler() {
         buttonClicked = true;
@@ -117,12 +117,46 @@
         }
     }
 
+    function appendSubNotes() {
+        let origRefDiv = document.getElementById("submodal-orig-ref");
+        let origNoteDiv = document.getElementById("submodal-orig-note");
+
+        if (origRefDiv && origNoteDiv) {
+            for (const child of originalRef.childNodes) {
+                origRefDiv.appendChild(child.cloneNode(true));
+            }
+
+            for (const child of originalNote.childNodes) {
+                origNoteDiv.appendChild(child.cloneNode(true));
+            }
+        }
+    }
+
+    function removeSubNotes() {
+        let subModalOrigRef = document.getElementById("submodal-orig-ref");
+        if (subModalOrigRef) {
+            subModalOrigRef.innerHTML = "";
+        }
+        let subModalOrigNote = document.getElementById("submodal-orig-note");
+        if (subModalOrigNote) {
+            subModalOrigNote.innerHTML = "";
+        }
+    }
+
     $effect(() => {
         if (show) {
             appendNotes();
         } else {
-            // remove the notes
             removeNotes();
+        }
+    });
+
+    $effect(() => {
+        if (showSubModal && originalRef && originalNote) {
+            appendSubNotes();
+        } else {
+            // remove the sub notes
+            removeSubNotes();
         }
     });
 
@@ -150,6 +184,7 @@
                 }
 
                 if (show && !showSubModal) {
+
                     if (
                         event.target.closest(".fixed") &&
                         !buttonClicked &&
@@ -160,16 +195,15 @@
                         event.target.hasAttribute("type") &&
                         event.target.getAttribute("type") === "noteCrossRef"
                     ) {
+                        showSubModal = true;
                         // check if the target has an attribute of type === 'noteCrossRef'
                         // get original ref
                         originalRef = document.querySelector(
                             event.target.getAttribute("target"),
                         );
                         originalNote = document.querySelector(
-                            originalRef.getAttribute("target"),
+                            originalRef.getAttribute("data-origtarget"),
                         );
-                        showSubModal = true;
-                        console.log(originalRef, originalNote);
                     }
                     buttonClicked = false;
                 }
@@ -368,6 +402,8 @@
     });
 </script>
 
+{@debug originalRef}
+
 {#if show}
     <div
         class="relative z-10"
@@ -407,7 +443,9 @@
             To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         -->
                 <div
-                    class="relative transform overflow-hidden rounded-lg {bgColour} px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 {showSubModal ? 'opacity-80 grayscale' : ''}"
+                    class="relative transform overflow-hidden rounded-lg {bgColour} px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 {showSubModal
+                        ? 'opacity-80 grayscale pointer-events-none'
+                        : ''}"
                     transition:fly={{ y: 20, duration: 300 }}
                     id="modal-screen"
                 >
@@ -440,7 +478,7 @@
                         transition:fly={{ y: 20, duration: 300 }}
                     >
                         <div
-                            class="{bgColour} w-96 max-w-full  rounded-lg shadow-2xl border border-gray-200 flex flex-col pointer-events-auto"
+                            class="{bgColour} w-96 max-w-full rounded-lg shadow-2xl border border-gray-200 flex flex-col pointer-events-auto"
                             style="min-height: 300px;"
                         >
                             <div class="flex justify-end p-2">
@@ -452,13 +490,8 @@
                                 >
                             </div>
                             <div class="flex-1 p-4">
-                                <h3 class="font-bold mb-2">Floating Modal</h3>
-                                <div>
-                                    <!-- Add your floating modal content here -->
-                                        {@html originalRef.outerHTML}
-                                   
-                                        {@html originalNote.outerHTML}
-                                </div>
+                                <div id="submodal-orig-ref"></div>
+                                <div id="submodal-orig-note"></div>
                             </div>
                         </div>
                     </div>
