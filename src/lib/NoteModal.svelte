@@ -7,6 +7,8 @@
     let { message, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
     let showSubModal = $state(false);
+    let originalRef = $state("");
+    let originalNote = $state("");
 
     function buttonClickedHandler() {
         buttonClicked = true;
@@ -160,10 +162,10 @@
                     ) {
                         // check if the target has an attribute of type === 'noteCrossRef'
                         // get original ref
-                        let originalRef = document.querySelector(
+                        originalRef = document.querySelector(
                             event.target.getAttribute("target"),
                         );
-                        let originalNote = document.querySelector(
+                        originalNote = document.querySelector(
                             originalRef.getAttribute("target"),
                         );
                         showSubModal = true;
@@ -453,11 +455,9 @@
                                 <h3 class="font-bold mb-2">Floating Modal</h3>
                                 <div>
                                     <!-- Add your floating modal content here -->
-                                    <p>
-                                        This is the floating modal vertically
-                                        centered and to the right of the main
-                                        modal.
-                                    </p>
+                                        {@html originalRef.outerHTML}
+                                   
+                                        {@html originalNote.outerHTML}
                                 </div>
                             </div>
                         </div>
