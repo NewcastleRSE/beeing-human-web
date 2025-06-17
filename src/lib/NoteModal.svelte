@@ -6,10 +6,16 @@
 
     let { message, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
+    let showSubModal = $state(false);
 
     function buttonClickedHandler() {
         buttonClicked = true;
         close();
+    }
+
+    function subModalButtonClickedHandler() {
+        buttonClicked = true;
+        showSubModal = false;
     }
 
     function close() {
@@ -125,23 +131,43 @@
         if (isBrowser) {
             window.addEventListener("click", (event) => {
                 // define whether the user clicked inside the '#modal-screen' element
-                if (show) {
-                    let modalScreen = document.getElementById("modal-screen");
-                    let clickInside = modalScreen.contains(event.target);
+                const modalScreen = document.getElementById("modal-screen");
+                const subModal = document.getElementById("floating-submodal");
+                const clickInsideMain =
+                    modalScreen && modalScreen.contains(event.target);
+                const clickInsideSub =
+                    subModal && subModal.contains(event.target);
 
+                if (show && showSubModal) {
+                    // If both modals are open and click is outside both, close only the sub modal
+                    if (!clickInsideMain && !clickInsideSub) {
+                        showSubModal = false;
+                        buttonClicked = false;
+                        return;
+                    }
+                }
+
+                if (show && !showSubModal) {
                     if (
                         event.target.closest(".fixed") &&
                         !buttonClicked &&
-                        !clickInside
+                        !clickInsideMain
                     ) {
                         close();
-                    } else if (event.target.hasAttribute("type") &&
-                        event.target.getAttribute("type") === "noteCrossRef"){
+                    } else if (
+                        event.target.hasAttribute("type") &&
+                        event.target.getAttribute("type") === "noteCrossRef"
+                    ) {
                         // check if the target has an attribute of type === 'noteCrossRef'
                         // get original ref
-                        let originalRef = document.querySelector(event.target.getAttribute("target"));
-                        let originalNote = document.querySelector(originalRef.getAttribute("target"));
-                            console.log(originalRef, originalNote);
+                        let originalRef = document.querySelector(
+                            event.target.getAttribute("target"),
+                        );
+                        let originalNote = document.querySelector(
+                            originalRef.getAttribute("target"),
+                        );
+                        showSubModal = true;
+                        console.log(originalRef, originalNote);
                     }
                     buttonClicked = false;
                 }
@@ -379,7 +405,7 @@
             To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         -->
                 <div
-                    class="relative transform overflow-hidden rounded-lg {bgColour} px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+                    class="relative transform overflow-hidden rounded-lg {bgColour} px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 {showSubModal ? 'opacity-80 grayscale' : ''}"
                     transition:fly={{ y: 20, duration: 300 }}
                     id="modal-screen"
                 >
@@ -403,31 +429,41 @@
                         </div>
                     </div>
                 </div>
-                <!-- BEGIN: Vertically centered, right-aligned floating modal -->
-                <div
-                    class="fixed top-1/2 right-8 -translate-y-1/2 z-20"
-                    style="pointer-events: none;"
-                >
+                {#if showSubModal}
+                    <!-- BEGIN: Vertically centered, right-aligned floating modal -->
                     <div
-                        class="w-96 max-w-full bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col pointer-events-auto"
-                        style="min-height: 300px;"
+                        class="fixed top-1/2 right-8 -translate-y-1/2 z-20"
+                        style="pointer-events: none;"
+                        id="floating-submodal"
+                        transition:fly={{ y: 20, duration: 300 }}
                     >
-                        <div class="flex justify-end p-2">
-                            <button
-                                type="button"
-                                class="text-xl hover:font-bold"
-                                onclick={buttonClickedHandler}>&#x2715;</button>
-                        </div>
-                        <div class="flex-1 p-4">
-                            <h3 class="font-bold mb-2">Floating Modal</h3>
-                            <div>
-                                <!-- Add your floating modal content here -->
-                                <p>This is the floating modal vertically centered and to the right of the main modal.</p>
+                        <div
+                            class="{bgColour} w-96 max-w-full  rounded-lg shadow-2xl border border-gray-200 flex flex-col pointer-events-auto"
+                            style="min-height: 300px;"
+                        >
+                            <div class="flex justify-end p-2">
+                                <button
+                                    type="button"
+                                    class="text-xl hover:font-bold"
+                                    onclick={subModalButtonClickedHandler}
+                                    >&#x2715;</button
+                                >
+                            </div>
+                            <div class="flex-1 p-4">
+                                <h3 class="font-bold mb-2">Floating Modal</h3>
+                                <div>
+                                    <!-- Add your floating modal content here -->
+                                    <p>
+                                        This is the floating modal vertically
+                                        centered and to the right of the main
+                                        modal.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- END: Vertically centered, right-aligned floating modal -->
+                    <!-- END: Vertically centered, right-aligned floating modal -->
+                {/if}
             </div>
         </div>
     </div>
