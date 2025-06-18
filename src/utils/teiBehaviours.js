@@ -198,9 +198,10 @@ export let teiBehaviours = {
                 elt.onclick = function () {
                     window.dispatchEvent(event);
                 }
+
             } else if (elt.getAttribute('type') === 'noteCrossRef') {
                 // This is a cross-reference to an editorial note, so any processing and styling is left to the TEI viwer component
-                
+
             } else {
                 // creates a fake link instead
                 var link = document.createElement('a');
@@ -211,7 +212,7 @@ export let teiBehaviours = {
                     link.setAttribute('data-href', elt.getAttribute('target'));
                     link.setAttribute('data-type', 'internalLink');
                 }
-                
+
                 link.href = elt.getAttribute('target');
                 if (sup) {
                     const supEl = document.createElement('sup');
@@ -309,7 +310,7 @@ export let teiBehaviours = {
             if (!findIfAncestor(elt, 'tei-list')) {
                 // if pb is in the contents page ignore it, causing too many issues
                 // also ignores pbs in the rdg element (i.e., imported from 1609)
-                
+
                 if (this.sigsDict[elt.getAttribute('n')] && !emptySigs.includes(elt.getAttribute('n'))) {
                     var sig = document.createElement('p');
                     sig.innerHTML = this.sigsDict[elt.getAttribute('n')];
@@ -451,7 +452,7 @@ export let teiBehaviours = {
             }],
         ],
         "q": [
-            ["[type='reported']", function(elt) {
+            ["[type='reported']", function (elt) {
                 // insert text node at the start of the element
                 let text = document.createTextNode('"');
                 elt.insertBefore(text, elt.firstChild);

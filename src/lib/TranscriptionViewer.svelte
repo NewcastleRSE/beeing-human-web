@@ -19,7 +19,6 @@
 
     // isMarked serves as a shortcut to test whether the element is currently visibly marked on the page
     let variationCommonStyles = [
-        "px-2",
         "py-1",
         "rounded-md",
         "cursor-pointer",
@@ -346,7 +345,6 @@
             }
 
             let variationCommonStyles = [
-                "px-2",
                 "py-1",
                 "rounded-md",
                 "cursor-pointer",
