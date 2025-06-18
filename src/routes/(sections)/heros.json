@@ -18,5 +18,10 @@
         "title": "Connections",
         "type": "section",
         "lead": "Connections is the place were we, as a team, reflect on the points of contact and divergence between the different sections of the project. It is also the space where we connect to organisations and people from outside of our project whose work touches on the themes we explored through *The Feminine Monarchie*."
+    },
+    "about": {
+        "title": "About",
+        "type": "section",
+        "lead": "This project is a collaboration between the University of Bristol and the University of Exeter, supported by the Arts and Humanities Research Council (AHRC) as part of the *Beyond Text* programme. It is a response to Charles Butler's *The Feminine Monarchie*, a 17th-century text that explores the role of bees in society and their relationship to human culture."
     }
 }
