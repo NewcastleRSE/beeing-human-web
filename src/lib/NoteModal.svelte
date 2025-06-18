@@ -6,10 +6,18 @@
 
     let { message, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
+    let showSubModal = $state(false);
+    let originalRef = $state(undefined);
+    let originalNote = $state(undefined);
 
     function buttonClickedHandler() {
         buttonClicked = true;
         close();
+    }
+
+    function subModalButtonClickedHandler() {
+        buttonClicked = true;
+        showSubModal = false;
     }
 
     function close() {
@@ -23,96 +31,134 @@
         }
     }
 
-    
     function appendNotes() {
         // attach readings to correct div
         if (altReadings) {
-                const notesDiv = document.getElementById("note-content");
-                // checks to see if there is an object in the altReadings array
-                let ids = []
-                for (const [i, reading] of altReadings.entries()) {
-                    // checks to see if the last element is an object
-                    if (typeof(reading[reading.length - 1]) === "object") {
-                        // if it is an object, add it to ids dictionary
-                        ids[i] = reading[reading.length - 1].id;
-                        //pop it from the reading array
-                        reading.pop();
+            const notesDiv = document.getElementById("note-content");
+            // checks to see if there is an object in the altReadings array
+            let ids = [];
+            for (const [i, reading] of altReadings.entries()) {
+                // checks to see if the last element is an object
+                if (typeof reading[reading.length - 1] === "object") {
+                    // if it is an object, add it to ids dictionary
+                    ids[i] = reading[reading.length - 1].id;
+                    //pop it from the reading array
+                    reading.pop();
+                } else {
+                    ids[i] = null;
+                }
+            }
+            for (const [i, reading] of altReadings.entries()) {
+                let singNoteDiv = document.createElement("div");
+                singNoteDiv.classList.add("mb-4");
+                singNoteDiv.classList.add("single-note");
+                if (ids[i]) {
+                    // checks to see if the id exists in the notesDiv
+                    const existingNote = document.getElementById(
+                        `modal-${ids[i]}`,
+                    );
+                    if (existingNote) {
+                        // if it exists, remove it
+                        existingNote.remove();
+                    }
+
+                    singNoteDiv.setAttribute("id", `modal-${ids[i]}`);
+                }
+
+                for (const elRead of reading) {
+                    if (elRead.tagName != "TEI-PERSNAME") {
+                        // check to see if it is not a text node and not hidden:
+                        if (
+                            elRead.nodeType != 3 &&
+                            elRead.classList.contains("hidden")
+                        ) {
+                            elRead.classList.remove("hidden");
+                        }
+                        singNoteDiv.appendChild(elRead);
                     } else {
-                        ids[i] = null;
+                        let authorName = document.createElement("div");
+                        authorName.innerHTML = "— ";
+                        authorName.classList.add(
+                            "text-sm",
+                            "text-secondary-600",
+                            "italic",
+                            "mt-4",
+                            "pr-4",
+                            "text-right",
+                            "w-full",
+                        );
+                        let authorLink = document.createElement("a");
+                        authorLink.setAttribute(
+                            "href",
+                            `${base}/people/${elRead.getAttribute("corresp")}`,
+                        );
+                        authorLink.setAttribute("target", "_blank");
+                        authorLink.classList.add("hover:anchor");
+                        authorLink.innerHTML = elRead.innerHTML;
+                        authorName.appendChild(authorLink);
+                        singNoteDiv.appendChild(authorName);
                     }
                 }
-                for (const [i, reading] of altReadings.entries()) {
-                    let singNoteDiv = document.createElement("div");
-                    singNoteDiv.classList.add("mb-4");
-                    singNoteDiv.classList.add("single-note");
-                    if (ids[i]) {
-                        // checks to see if the id exists in the notesDiv
-                        const existingNote = document.getElementById(`modal-${ids[i]}`);
-                        if (existingNote) {
-                            // if it exists, remove it
-                            existingNote.remove();
-                        }
-                        
-                        singNoteDiv.setAttribute("id", `modal-${ids[i]}`);
-                    }
-                    
-                    for (const elRead of reading) {
-                        if (elRead.tagName != "TEI-PERSNAME") {
-                            // check to see if it is not a text node and not hidden:
-                            if (elRead.nodeType != 3 && elRead.classList.contains("hidden")) {
-                                elRead.classList.remove("hidden");
-                            }
-                            singNoteDiv.appendChild(elRead);
-                        } else {
-                            let authorName = document.createElement("div");
-                            authorName.innerHTML = "— ";
-                            authorName.classList.add(
-                                "text-sm",
-                                "text-secondary-600",
-                                "italic",
-                                "mt-4",
-                                "pr-4",
-                                "text-right",
-                                "w-full"
-                            );
-                            let authorLink = document.createElement("a");
-                            authorLink.setAttribute(
-                                "href",
-                                `${base}/people/${elRead.getAttribute("corresp")}`,
-                            );
-                            authorLink.setAttribute("target", "_blank");
-                            authorLink.classList.add("hover:anchor");
-                            authorLink.innerHTML = elRead.innerHTML;
-                            authorName.appendChild(authorLink);
-                            singNoteDiv.appendChild(authorName);
-                        }
-                    }
-                    notesDiv.appendChild(singNoteDiv);
-                    if (altReadings.length > 1) {
-                        if (i < altReadings.length - 1) {
-                            // find the hidden text divider
-                            let textDivider = document.querySelector(
-                                ".text-divider.hidden",
-                            );
-                            if (textDivider) {
-                                textDivider.classList.remove("hidden");
-                                textDivider.classList.add("block");
-                                notesDiv.appendChild(textDivider);
-                            }
+                notesDiv.appendChild(singNoteDiv);
+                if (altReadings.length > 1) {
+                    if (i < altReadings.length - 1) {
+                        // find the hidden text divider
+                        let textDivider = document.querySelector(
+                            ".text-divider.hidden",
+                        );
+                        if (textDivider) {
+                            textDivider.classList.remove("hidden");
+                            textDivider.classList.add("block");
+                            notesDiv.appendChild(textDivider);
                         }
                     }
                 }
             }
+        }
+    }
+
+    function appendSubNotes() {
+        let origRefDiv = document.getElementById("submodal-orig-ref");
+        let origNoteDiv = document.getElementById("submodal-orig-note");
+
+        if (origRefDiv && origNoteDiv) {
+            for (const child of originalRef.childNodes) {
+                origRefDiv.appendChild(child.cloneNode(true));
+            }
+
+            for (const child of originalNote.childNodes) {
+                origNoteDiv.appendChild(child.cloneNode(true));
+            }
+        }
+    }
+
+    function removeSubNotes() {
+        let subModalOrigRef = document.getElementById("submodal-orig-ref");
+        if (subModalOrigRef) {
+            subModalOrigRef.innerHTML = "";
+        }
+        let subModalOrigNote = document.getElementById("submodal-orig-note");
+        if (subModalOrigNote) {
+            subModalOrigNote.innerHTML = "";
+        }
     }
 
     $effect(() => {
         if (show) {
             appendNotes();
         } else {
-            // remove the notes
             removeNotes();
         }
-    })
+    });
+
+    $effect(() => {
+        if (showSubModal && originalRef && originalNote) {
+            appendSubNotes();
+        } else {
+            // remove the sub notes
+            removeSubNotes();
+        }
+    });
 
     onMount(() => {
         // prevents window is not defined errors
@@ -121,21 +167,46 @@
         if (isBrowser) {
             window.addEventListener("click", (event) => {
                 // define whether the user clicked inside the '#modal-screen' element
-                if (show) {
-                    let modalScreen = document.getElementById("modal-screen");
-                    let clickInside = modalScreen.contains(event.target);
+                const modalScreen = document.getElementById("modal-screen");
+                const subModal = document.getElementById("floating-submodal");
+                const clickInsideMain =
+                    modalScreen && modalScreen.contains(event.target);
+                const clickInsideSub =
+                    subModal && subModal.contains(event.target);
 
+                if (show && showSubModal) {
+                    // If both modals are open and click is outside both, close only the sub modal
+                    if (!clickInsideMain && !clickInsideSub) {
+                        showSubModal = false;
+                        buttonClicked = false;
+                        return;
+                    }
+                }
+
+                if (show && !showSubModal) {
                     if (
                         event.target.closest(".fixed") &&
                         !buttonClicked &&
-                        !clickInside
+                        !clickInsideMain
                     ) {
                         close();
+                    } else if (
+                        event.target.hasAttribute("type") &&
+                        event.target.getAttribute("type") === "noteCrossRef"
+                    ) {
+                        showSubModal = true;
+                        // check if the target has an attribute of type === 'noteCrossRef'
+                        // get original ref
+                        originalRef = document.querySelector(
+                            event.target.getAttribute("target"),
+                        );
+                        originalNote = document.querySelector(
+                            originalRef.getAttribute("data-origtarget"),
+                        );
                     }
                     buttonClicked = false;
                 }
             });
-            
         }
     });
 
@@ -266,7 +337,7 @@
 
     let altReadings = $derived.by(() => {
         let altReadings = [];
-        
+
         if (parentElement) {
             if (parentElement[0].tagName === "TEI-APP") {
                 let altReading = [];
@@ -306,7 +377,7 @@
                     }
 
                     if (note.getAttribute("xml:id")) {
-                        altReading.push({id: note.getAttribute("xml:id")});
+                        altReading.push({ id: note.getAttribute("xml:id") });
                     }
 
                     altReadings.push(altReading);
@@ -329,6 +400,8 @@
         }
     });
 </script>
+
+{@debug originalRef}
 
 {#if show}
     <div
@@ -369,7 +442,9 @@
             To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         -->
                 <div
-                    class="relative transform overflow-hidden rounded-lg {bgColour} px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+                    class="relative transform overflow-hidden rounded-lg {bgColour} px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 {showSubModal
+                        ? 'opacity-80 grayscale pointer-events-none'
+                        : ''}"
                     transition:fly={{ y: 20, duration: 300 }}
                     id="modal-screen"
                 >
@@ -389,14 +464,57 @@
                                 <span class="h-1 w-full {accentColour} my-2"
                                 ></span>
                             </div>
-                            <div class="mt-2" id="note-content">
-                                
-                            </div>
+                            <div class="mt-2" id="note-content"></div>
                         </div>
                     </div>
                 </div>
+                {#if showSubModal}
+                    <!-- BEGIN: Vertically centered, right-aligned floating modal -->
+                    <div
+                        class="fixed top-1/2 -translate-y-1/2 z-20"
+                        style="pointer-events: none;"
+                        id="floating-submodal"
+                        transition:fly={{ y: 20, duration: 300 }}
+                    >
+                        <div
+                            class="{bgColour} md:w-96 max-w-full rounded-lg shadow-2xl border border-gray-200 flex flex-col pointer-events-auto"
+                            style="min-height: 300px;"
+                        >
+                            <div class="flex justify-end p-2">
+                                <button
+                                    type="button"
+                                    class="text-xl hover:font-bold"
+                                    onclick={subModalButtonClickedHandler}
+                                    >&#x2715;</button
+                                >
+                            </div>
+                            <div class="flex flex-col p-4">
+                                <div
+                                    class="mb-4 font-notoserif font-light text-lg"
+                                >
+                                    <span
+                                        class="bold text-4xl relative top-2 text-tertiary-800"
+                                        >“</span
+                                    >
+                                    
+
+                                    <span
+                                        id="submodal-orig-ref"
+                                        class=" text-secondary-800"
+                                    ></span>
+                                </div>
+                                <TextDivider
+                                        fillColour="#5E9DB5"
+                                        class="mb-4 text-divider"
+                                    />
+                                <span id="submodal-orig-note"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END: Vertically centered, right-aligned floating modal -->
+                {/if}
             </div>
         </div>
     </div>
-    <TextDivider fillColour="#5E9DB5" class="mb-4 text-divider hidden"/>
+    <TextDivider fillColour="#5E9DB5" class="mb-4 text-divider hidden" />
 {/if}

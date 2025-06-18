@@ -29,7 +29,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'pfdisplay': ['Playfair Display', 'ui-serif']
+				'pfdisplay': ['Playfair Display', 'ui-serif'],
+				'notoserif': ['Noto Serif', 'ui-serif'],
 			},
 			colors: {
 				...beeTheme.colors,

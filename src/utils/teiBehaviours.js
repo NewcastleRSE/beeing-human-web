@@ -198,6 +198,9 @@ export let teiBehaviours = {
                 elt.onclick = function () {
                     window.dispatchEvent(event);
                 }
+            } else if (elt.getAttribute('type') === 'noteCrossRef') {
+                // This is a cross-reference to an editorial note, so any processing and styling is left to the TEI viwer component
+                
             } else {
                 // creates a fake link instead
                 var link = document.createElement('a');
