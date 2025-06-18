@@ -184,7 +184,6 @@
                 }
 
                 if (show && !showSubModal) {
-
                     if (
                         event.target.closest(".fixed") &&
                         !buttonClicked &&
@@ -472,13 +471,13 @@
                 {#if showSubModal}
                     <!-- BEGIN: Vertically centered, right-aligned floating modal -->
                     <div
-                        class="fixed top-1/2 right-8 -translate-y-1/2 z-20"
+                        class="fixed top-1/2 -translate-y-1/2 z-20"
                         style="pointer-events: none;"
                         id="floating-submodal"
                         transition:fly={{ y: 20, duration: 300 }}
                     >
                         <div
-                            class="{bgColour} w-96 max-w-full rounded-lg shadow-2xl border border-gray-200 flex flex-col pointer-events-auto"
+                            class="{bgColour} md:w-96 max-w-full rounded-lg shadow-2xl border border-gray-200 flex flex-col pointer-events-auto"
                             style="min-height: 300px;"
                         >
                             <div class="flex justify-end p-2">
@@ -489,9 +488,26 @@
                                     >&#x2715;</button
                                 >
                             </div>
-                            <div class="flex-1 p-4">
-                                <div id="submodal-orig-ref"></div>
-                                <div id="submodal-orig-note"></div>
+                            <div class="flex flex-col p-4">
+                                <div
+                                    class="mb-4 font-notoserif font-light text-lg"
+                                >
+                                    <span
+                                        class="bold text-4xl relative top-2 text-tertiary-800"
+                                        >“</span
+                                    >
+                                    
+
+                                    <span
+                                        id="submodal-orig-ref"
+                                        class=" text-secondary-800"
+                                    ></span>
+                                </div>
+                                <TextDivider
+                                        fillColour="#5E9DB5"
+                                        class="mb-4 text-divider"
+                                    />
+                                <span id="submodal-orig-note"></span>
                             </div>
                         </div>
                     </div>
