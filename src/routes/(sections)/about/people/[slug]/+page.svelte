@@ -1,6 +1,6 @@
 <script>
     import { base } from "$app/paths";
-    import { capitaliseFirstLetter, makeHtmlId } from "./../../../utils/stringOperations";
+    import { capitaliseFirstLetter, makeHtmlId } from "../../../../../utils/stringOperations";
 
     import InjectMD from "$lib/InjectMD.svelte";
     import BuzzwordCard from "$lib/BuzzwordCard.svelte";

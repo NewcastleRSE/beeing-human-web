@@ -1,5 +1,5 @@
 <script>
-    import people from "./../routes/people/people.json";
+    import people from "./../routes/(sections)/about/people/people.json";
     import { typeColours } from "../utils/typeColours";
     import { base } from "$app/paths";
 

@@ -1,6 +1,6 @@
 <script>
     import { capitaliseFirstLetter } from "../utils/stringOperations";
-    import people from '../routes/people/people.json'
+    import people from '../routes/(sections)/about/people/people.json'
     import InjectBuzzword from "$lib/InjectBuzzword.svelte";
     import {base} from '$app/paths'
 

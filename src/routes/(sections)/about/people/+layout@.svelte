@@ -5,8 +5,8 @@
   import ArticleCollection from "$lib/ArticleCollection.svelte";
 
   import { page } from "$app/stores";
-  import SectionHero from "../../lib/SectionHero.svelte";
-    import PeopleCollection from "../../lib/PeopleCollection.svelte";
+  import SectionHero from "$lib/SectionHero.svelte";
+    import PeopleCollection from "$lib/PeopleCollection.svelte";
 
   let path = $derived.by(() => {
     let path = $page.route.id.split("/");
