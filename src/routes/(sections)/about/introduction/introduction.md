@@ -10,15 +10,22 @@ type: article
 layout: article
 author: [jenny, tiago, olivia]
 date: 2025/06/19
+order: 1
 ---
 
 <script>
     import {base} from '$app/paths'
     import ImgContainer from '$lib/ImgContainer.svelte'
     import ByLine from '$lib/ByLine.svelte'
+    import AdditionalInfoBox from '$lib/AdditionalInfoBox.svelte'
+
 </script>
 
 <ByLine author={author} date={date} type={type} title={title}/>
+
+<AdditionalInfoBox title = 'This article is a draft'>
+    
+</AdditionalInfoBox>
 
 This experimental project, funded by the [Leverhulme Trust](https://www.leverhulme.ac.uk/), is a collaboration between artists and humanists (composition, literary studies, musicology), scientists (biology, psychology, animal cognition), and a research software engineer, who came together to explore historical and contemporary approaches to the study of bee 'sentience', and create a digital bee book that could contain our different research findings. Here we introduce our [digital bee book]({base}/) (our research 'hive'), and our [born-digital edition]({base}/literature/transcription) of the seventeenth-century printed book that inspired it. You can find out more about why we chose to work together, and our defence of the importance of connecting knowledge across disciplines [here]().
 

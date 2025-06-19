@@ -7,4 +7,5 @@ lead: "Meet the people behind *Bee-ing Human* and its extended network of collab
 img: 'assets/jacqueline-o-gara-ZLkmJVCOYq8-unsplash.jpg'
 imgAlt: 'a number of bees approaching the entrance to a wooden hive'
 type: data
+order: 2
 ---
