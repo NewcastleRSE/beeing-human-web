@@ -30,12 +30,12 @@
     {#each authorArray as authorName}
     <img
         class="inline-block h-12 w-12 md:h-16 md:w-16 rounded-full border-solid border-2 border-primary-500"
-        src="{base}/{people[authorName].img}"
+        src="{base}{people[authorName].img}"
         alt="A picture of {people[authorName].name}"
     />
     <div class="text-sm flex flex-col">
         <span
-            ><em>by</em> <a rel="author" class="anchor" href="{base}/{people[authorName].url}"
+            ><em>by</em> <a rel="author" class="anchor" href="{base}/about/{people[authorName].url}"
                 >{people[authorName].name}</a
             ></span
         > <time datetime="{dateType}" class="text-xs">{dateType.toLocaleDateString("en-UK", {weekday: 'long', month: 'long', day:'numeric', year:'numeric'})}</time>
