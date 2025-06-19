@@ -44,7 +44,7 @@
     <div class="flex flex-col gap-4 items-center">
         <img
             class="rounded-full max-w-40 md:max-w-80"
-            src="{base}{personData.img}"
+            src="{base}/{personData.img}"
             alt="A picture of {personData.name}"
         />
         <div
