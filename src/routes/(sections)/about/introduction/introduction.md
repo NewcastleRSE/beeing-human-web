@@ -1,5 +1,5 @@
 ---
-title: Introdution
+title: Introduction
 id: introduction
 parent: about
 link: about/introduction
