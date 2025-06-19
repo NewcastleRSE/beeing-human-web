@@ -18,5 +18,10 @@
         "title": "Connections",
         "type": "section",
         "lead": "Connections is the place were we, as a team, reflect on the points of contact and divergence between the different sections of the project. It is also the space where we connect to organisations and people from outside of our project whose work touches on the themes we explored through *The Feminine Monarchie*."
+    },
+    "about": {
+        "title": "About",
+        "type": "section",
+        "lead": "This experimental project, funded by the [Leverhulme Trust](https://www.leverhulme.ac.uk/), is a collaboration between artists and humanists (composition, literary studies, musicology), scientists (biology, psychology, animal cognition), and a research software engineer, who came together to explore historical and contemporary approaches to the study of bee 'sentience', and create a digital bee book that could contain our different research findings."
     }
 }

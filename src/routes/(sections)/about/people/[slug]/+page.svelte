@@ -1,6 +1,6 @@
 <script>
     import { base } from "$app/paths";
-    import { capitaliseFirstLetter, makeHtmlId } from "./../../../utils/stringOperations";
+    import { capitaliseFirstLetter, makeHtmlId } from "../../../../../utils/stringOperations";
 
     import InjectMD from "$lib/InjectMD.svelte";
     import BuzzwordCard from "$lib/BuzzwordCard.svelte";
@@ -44,7 +44,7 @@
     <div class="flex flex-col gap-4 items-center">
         <img
             class="rounded-full max-w-40 md:max-w-80"
-            src="{base}/{personData.img}"
+            src="{base}{personData.img}"
             alt="A picture of {personData.name}"
         />
         <div
