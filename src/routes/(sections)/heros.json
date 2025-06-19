@@ -22,6 +22,6 @@
     "about": {
         "title": "About",
         "type": "section",
-        "lead": "This project is a collaboration between the University of Bristol and the University of Exeter, supported by the Arts and Humanities Research Council (AHRC) as part of the *Beyond Text* programme. It is a response to Charles Butler's *The Feminine Monarchie*, a 17th-century text that explores the role of bees in society and their relationship to human culture."
+        "lead": "This experimental project, funded by the [Leverhulme Trust](https://www.leverhulme.ac.uk/), is a collaboration between artists and humanists (composition, literary studies, musicology), scientists (biology, psychology, animal cognition), and a research software engineer, who came together to explore historical and contemporary approaches to the study of bee 'sentience', and create a digital bee book that could contain our different research findings."
     }
 }
