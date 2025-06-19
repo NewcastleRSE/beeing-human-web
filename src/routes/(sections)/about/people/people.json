@@ -1,7 +1,7 @@
 {
     "jenny": {
         "name": "Jennifer Richards",
-        "img": "/assets/people/Jennifer Richards_BA.jpg",
+        "img": "assets/people/Jennifer Richards_BA.jpg",
         "url": "people/jenny",
         "title": "English (2001) Chair",
         "affiliation": "University of Cambridge",
@@ -18,7 +18,7 @@
     },
     "olivia": {
         "name": "Olivia Smith",
-        "img": "/assets/people/OliviaSmith.jpg",
+        "img": "assets/people/OliviaSmith.jpg",
         "url": "people/olivia",
         "title": "Research Associate",
         "affiliation": "University of Cambridge",
@@ -31,7 +31,7 @@
     },
     "bennett": {
         "name": "Bennett Hogg",
-        "img": "/assets/people/bennett_avatar.png",
+        "img": "assets/people/bennett_avatar.png",
         "url": "people/bennett",
         "title": "Senior Lecturer",
         "affiliation": "Newcastle University",
@@ -50,7 +50,7 @@
     },
     "magnus": {
         "name": "Magnus Williamson",
-        "img": "/assets/people/magnus_headshot.jpg",
+        "img": "assets/people/magnus_headshot.jpg",
         "url": "people/magnus",
         "title": "Professor of Early Music",
         "affiliation": "Newcastle University",
@@ -68,7 +68,7 @@
         "byLastName": "Sousa Garcia, Tiago",
         "title": "Senior Research Software Engineer",
         "affiliation": "Newcastle University",
-        "img": "/assets/people/tsg.png",
+        "img": "assets/people/tsg.png",
         "url": "people/tiago",
         "bio": "Tiago is a frontend web developer and digital humanist. Before his graduate and post-graduate education in literature, he worked as a software developer and studied computer engineering in Portugal. Between 2017 and 2021, he was the Research Associate for the *[ATNU](https://research.ncl.ac.uk/atnu/)* project, based at the School of English, where he also taught literary and digital humanities’ focused modules. In 2020-2021, he convened and ran the *Coding for Humanists* study group, and from 2022 he is one of the co-convenors of the *Code Community* at Newcastle University. Until 2022 he was a co-managing editor of the *[Journal of the Text Encoding Initiative](https://journals.openedition.org/jtei/)* and an editorial assistant for *[The Programming Historian](https://programminghistorian.org/en/)*",
         "socials": {
@@ -85,7 +85,7 @@
     },
     "balu": {
         "name": "Balu GS",
-        "img": "/assets/people/balu_avatar.png",
+        "img": "assets/people/balu_avatar.png",
         "url": "people/balu",
         "title": "Research Associate",
         "affiliation": "Newcastle University",
@@ -105,7 +105,7 @@
     },
     "vivek": {
         "name": "Vivek Nityananda",
-        "img": "/assets/people/Vivek_hs.jpg",
+        "img": "assets/people/Vivek_hs.jpg",
         "url": "people/vivek",
         "title": "Senior Lecturer",
         "affiliation": "Bioscience Institute, Newcastle University",
@@ -123,7 +123,7 @@
     },
     "luigi": {
         "name": "Luigi Baciadonna",
-        "img": "/assets/people/lb2.png",
+        "img": "assets/people/lb2.png",
         "url": "people/luigi",
         "title": "Research Associate",
         "affiliation": "Newcastle University and University of Turin" ,
@@ -140,7 +140,7 @@
     },
     "martin": {
         "name": "Martin Giurfa",
-        "img": "/assets/people/gr1_lrg.jpg",
+        "img": "assets/people/gr1_lrg.jpg",
         "url": "people/martin",
         "title": "Professor",
         "affiliation": "Institute of Biology Paris, Seine - Sorbonne University Paris" ,
@@ -156,7 +156,7 @@
     },
     "catherine": {
         "name": "Catherine Macri",
-        "img": "/assets/people/203.png",
+        "img": "assets/people/203.png",
         "url": "people/catherine",
         "title": "Doctoral Candidate",
         "affiliation": "CNRS - NeuroSU, Institute of Biology Paris Seine" ,
@@ -171,7 +171,7 @@
     },
     "adrin": {
         "name": "adrin neatrour",
-        "img": "/assets/people/adrin.jpg",
+        "img": "assets/people/adrin.jpg",
         "url": "people/adrin",
         "title": "",
         "affiliation": "",
@@ -185,7 +185,7 @@
     },
     "warren": {
         "name": "Warren Senders",
-        "img": "/assets/people/thumbnail_WRS_selfie_in_red_light.jpg",
+        "img": "assets/people/thumbnail_WRS_selfie_in_red_light.jpg",
         "url": "people/warren",
         "title": "",
         "affiliation": "",
@@ -200,7 +200,7 @@
     },
     "richard": {
         "name": "Richard Wistreich",
-        "img": "/assets/people/richardwistreich.jpg",
+        "img": "assets/people/richardwistreich.jpg",
         "url": "people/richard",
         "title": "Professor of Music History",
         "affiliation": "Royal College of Music",
