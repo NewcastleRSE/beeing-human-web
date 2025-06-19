@@ -1,1 +1,0 @@
-{"version":3,"file":"0.uL5A2D4b.js","sources":["../../../../../../src/routes/+layout.js"],"sourcesContent":["export const prerender = true;\n"],"names":["prerender"],"mappings":"4fAAO,MAAMA,EAAY"}
