@@ -37,7 +37,12 @@ export let teiBehaviours = {
                 let src = graphic.getAttribute('url');
                 // define the img.src by adding the src to the transcriptionData object
                 img.src = transcriptionData['1623']['teiMediaRoot'] + src;
-                addTailwindClasslist(img, 'w-full h-auto');
+                if (graphic.getAttribute('rend') === 'small') {
+                    addTailwindClasslist(img, 'w-1/4');                    
+                } else {
+                    addTailwindClasslist(img, 'w-full');
+                }
+                addTailwindClasslist(img, 'h-auto mx-auto',)
                 imgDiv.appendChild(img);
 
                 // add caption if it exists
