@@ -153,8 +153,12 @@ export let teiBehaviours = {
             ],
         ],
         'p': function (elt) {
-            teiSetBodyLayout(elt);
-            addTailwindClasslist(elt, 'indent-4 mb-2')
+            if (elt.parentElement && elt.parentElement.tagName != 'TEI-NOTE') {
+                teiSetBodyLayout(elt);
+                addTailwindClasslist(elt, 'indent-4 mb-2')
+            } else {
+                elt.parentElement.classList.add('flex', 'flex-col');
+            }
         },
         "ptr": [
             ["tei-item>tei-ptr", function (elt) {
