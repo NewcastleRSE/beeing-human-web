@@ -28,6 +28,18 @@
         "isMarked",
     ];
 
+    let translationCommonStyles = [
+        "bg-primary-200",
+        "hover:bg-primary-400",
+        "py-1",
+        "rounded-md",
+        "cursor-pointer",
+        "transition-colors",
+        "duration-300",
+        "ease-in-out",
+        "isMarked",
+    ];
+
     let showModal = $state(false);
     let modalElement = $state(null);
 
@@ -64,6 +76,10 @@
     $effect(() => {
         changeEditorialNoteVisibility(dataViewerState.editorialNotes);
     });
+
+    $effect (() => {
+        changeTranslationVisibility(dataViewerState.translations);
+    })
 
     $effect(() => {
         toggleBothViewOption(smallScreen);
@@ -214,8 +230,6 @@
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
     import { findLastMilestoneBefore } from "../utils/generalHelpers";
     import { isElementVisibleInViewport } from "../utils/teiBehavioursHelper";
-    import { derived } from "svelte/store";
-    import { updateSession } from "@sentry/core";
 
     function cleanVariationStyles(el) {
         // removes any bg styling for the element
@@ -292,6 +306,7 @@
             ready = true;
             changeVariationDetail(dataViewerState.variationDetail);
             changeEditorialNoteVisibility(dataViewerState.editorialNotes);
+            changeTranslationVisibility(dataViewerState.translations);
             toggleBothViewOption(smallScreen);
         }
     }
@@ -444,6 +459,45 @@
         }
     }
 
+    function changeTranslationVisibility(translations) {
+        try {
+            const translationElements = document.querySelectorAll(
+                'tei-foreign[corresp]',
+            );
+
+            console.log(translationElements);
+
+            if (!translations) {
+                translationElements.forEach((translation) => {
+                    for (const style of translationCommonStyles) {
+                        translation.classList.remove(style);
+                    }
+                });
+            } else {
+                translationElements.forEach((translation) => {
+                    for (const style of translationCommonStyles) {
+                        translation.classList.add(style);
+                    }
+
+                    // adds event listener that will dispatch the custom event translationClicked
+                    translation.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        window.dispatchEvent(
+                            new CustomEvent("translationClicked", {
+                                detail: e.target,
+                                bubbles: true,
+                            }),
+                        );
+                    });
+                });
+            }
+        } catch (e) {
+            console.warn(
+                "Document is not ready, could not change visibility of translations",
+            );
+        }
+    }
+
     function toggleBothViewOption(smallScreen) {
         if (ready) {
             try {
@@ -575,6 +629,10 @@
             dataViewerState.editorialNotes = false;
         }
 
+        if (![true, false].includes(dataViewerState.translations)) {
+            dataViewerState.translations = false;
+        }
+
         if (!dataViewerState.activeNavigator) {
             dataViewerState.activeNavigator = "titlepage";
         }
@@ -589,6 +647,25 @@
         });
 
         window.addEventListener("editorialNoteClicked", (e) => {
+            // if the element contains the class 'isMarked', show the modal
+            if (e.detail.classList.contains("isMarked")) {
+                showModal = true;
+                modalElement = e.detail;
+            } else {
+                // checks to see if any of its ancestors contain the class 'isMarked'
+                let parent = e.detail.parentElement;
+                while (parent) {
+                    if (parent.classList.contains("isMarked")) {
+                        showModal = true;
+                        modalElement = parent;
+                        break;
+                    }
+                    parent = parent.parentElement;
+                }
+            }
+        });
+
+        window.addEventListener("translationClicked", (e) => {
             // if the element contains the class 'isMarked', show the modal
             if (e.detail.classList.contains("isMarked")) {
                 showModal = true;
