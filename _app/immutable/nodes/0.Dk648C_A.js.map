@@ -1,1 +1,0 @@
-{"version":3,"file":"0.Dk648C_A.js","sources":["../../../../../../src/routes/+layout.js"],"sourcesContent":["export const prerender = true;\n"],"names":["prerender"],"mappings":"ojBAAO,MAAMA,EAAY"}
