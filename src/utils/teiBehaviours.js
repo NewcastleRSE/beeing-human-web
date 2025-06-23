@@ -56,6 +56,11 @@ export let teiBehaviours = {
         "foreign": function (elt) {
             addTailwindClasslist(elt, "italic")
         },
+        "emph": [
+            ["[rend='blackletter']", function (elt) {
+                elt.classList.add('font-blackletter');
+            }]
+        ],
         "gloss": [
             ["[rend='italic']", function (elt) {
                 addTailwindClasslist(elt, "italic")
