@@ -90,7 +90,7 @@
                         let authorLink = document.createElement("a");
                         authorLink.setAttribute(
                             "href",
-                            `${base}/people/${elRead.getAttribute("corresp")}`,
+                            `${base}/about/people/${elRead.getAttribute("corresp")}`,
                         );
                         authorLink.setAttribute("target", "_blank");
                         authorLink.classList.add("hover:anchor");
@@ -212,7 +212,11 @@
 
     // find the siblings of the message element
     let parentElement = $derived.by(() => {
-        if (message && !message.hasAttribute("type")) {
+        if (
+            message &&
+            !message.hasAttribute("type") &&
+            message.tagName != "TEI-FOREIGN"
+        ) {
             return [message.parentElement];
         } else if (
             message &&
@@ -276,6 +280,11 @@
             } else {
                 return undefined;
             }
+        } else if (message && message.tagName === "TEI-FOREIGN") {
+            const noteTarget = document.querySelector(
+                message.getAttribute("corresp"),
+            );
+            return [noteTarget];
         } else {
             return undefined;
         }
@@ -289,6 +298,11 @@
                 return "bg-success-100";
             } else if (parentElement[0].getAttribute("subtype") == "del") {
                 return "bg-error-100";
+            } else if (
+                parentElement[0].getAttribute("type") == "editorial" &&
+                parentElement[0].getAttribute("subtype") == "translation"
+            ) {
+                return "bg-primary-200";
             } else if (parentElement[0].getAttribute("type") == "editorial") {
                 return "bg-warning-200";
             } else {
@@ -307,6 +321,11 @@
                 return "bg-success-500";
             } else if (parentElement[0].getAttribute("subtype") == "del") {
                 return "bg-error-500";
+            } else if (
+                parentElement[0].getAttribute("type") == "editorial" &&
+                parentElement[0].getAttribute("subtype") == "translation"
+            ) {
+                return "bg-primary-600";
             } else if (parentElement[0].getAttribute("type") == "editorial") {
                 return "bg-warning-600";
             } else {
@@ -324,8 +343,9 @@
                 add: "addition",
                 del: "deletion",
                 editorial: "editorial note",
+                translation: "translation",
             };
-            if (parentElement[0].getAttribute("type") === "editorial") {
+            if (parentElement[0].getAttribute("type") === "editorial" && parentElement[0].getAttribute("subtype") != "translation") {
                 return type[parentElement[0].getAttribute("type")];
             } else {
                 return type[parentElement[0].getAttribute("subtype")];
@@ -401,7 +421,7 @@
     });
 </script>
 
-{@debug originalRef}
+{@debug message}
 
 {#if show}
     <div
@@ -496,7 +516,6 @@
                                         class="bold text-4xl relative top-2 text-tertiary-800"
                                         >“</span
                                     >
-                                    
 
                                     <span
                                         id="submodal-orig-ref"
@@ -504,9 +523,9 @@
                                     ></span>
                                 </div>
                                 <TextDivider
-                                        fillColour="#5E9DB5"
-                                        class="mb-4 text-divider"
-                                    />
+                                    fillColour="#5E9DB5"
+                                    class="mb-4 text-divider"
+                                />
                                 <span id="submodal-orig-note"></span>
                             </div>
                         </div>

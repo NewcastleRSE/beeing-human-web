@@ -49,6 +49,10 @@
             dataViewerState.editorialNotes = changeObject.newValue;
         }
 
+        if (changeObject.origin === "translations") {
+            dataViewerState.translations = changeObject.newValue;
+        }
+
         if (changeObject.origin === "navigator") {
             dataViewerState.navigatorChoice = true;
             dataViewerState.activeNavigator = changeObject.newValue;
@@ -175,7 +179,7 @@
                                     options={controlOptions}
                                     valueChange={(changeObject) =>
                                         updateOtherFilters(changeObject)}
-                                    currentValue = {dataViewerState.editorialNotes}
+                                    currentValue = {dataViewerState.label === 'editorial notes' ? dataViewerState.editorialNotes : dataViewerState.translations}
                                 />
                             {:else if controlOptions.type === "navigator"}
                                 <DataNavigator

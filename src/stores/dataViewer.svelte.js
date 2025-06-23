@@ -4,5 +4,6 @@ export const dataViewerState = $state({
     variationDetail: 'no variation',
     editorialNotes: false,
     activeNavigator: '',
-    navigatorChoice: false
+    navigatorChoice: false,
+    translations: false
 })

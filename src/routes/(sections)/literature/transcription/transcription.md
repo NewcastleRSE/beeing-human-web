@@ -67,6 +67,14 @@ dataSelectorControls: [{
             values: {
                 default: false,
             },
+        },
+        {
+            dataSource: false,
+            type: "toggle",
+            label: "translations",
+            values: {
+                default:false,
+            },
         }
 ]
 type: [data, experience]
