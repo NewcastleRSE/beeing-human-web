@@ -73,7 +73,7 @@ dataSelectorControls: [{
             type: "toggle",
             label: "translations",
             values: {
-                default:false,
+                default: false,
             },
         }
 ]

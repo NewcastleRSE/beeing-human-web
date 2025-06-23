@@ -465,8 +465,6 @@
                 'tei-foreign[corresp]',
             );
 
-            console.log(translationElements);
-
             if (!translations) {
                 translationElements.forEach((translation) => {
                     for (const style of translationCommonStyles) {
