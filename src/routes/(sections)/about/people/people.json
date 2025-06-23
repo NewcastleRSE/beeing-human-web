@@ -212,5 +212,19 @@
             "staff": "https://www.rcm.ac.uk/research/people/details/?id=03709"
         },
         "role": "advisory-board"
+    },
+    "henry": {
+        "name": "Henry Howard",
+        "img": "assets/people/Henry_Howard.jpg",
+        "url": "people/henry",
+        "title": "Translator",
+        "affiliation": "",
+        "bio": "Dr Henry Howard is a translator, editor, landowner, gardener, cathedral musician and breakfast chef. His translations of *Early English Saints’ Offices* (edited by David Hiley) will shortly be published by Stainer and Bell for the British Academy in the Early English Church Music series. He is currently working with John Harper on a translation and edition of the Old Customary of Salisbury Cathedral. His translation from the Romanian of Max Blecher’s novel *Scarred Hearts*, published in 2009, currently ranks 1,155,549 in Books on Amazon. Henry lives in Cumbria amid a small herd of free-range Oxford Sandy and Black pigs.",
+        "email": "",
+        "socials": {
+        },
+        "web": {
+        },
+        "role": "contributor"
     }
 }
