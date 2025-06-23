@@ -127,7 +127,6 @@
 
 </script>
 
-{@debug dataViewerState}
 
 <svelte:window bind:innerWidth={width} bind:scrollY={scrollValue}/>
 
@@ -179,7 +178,7 @@
                                     options={controlOptions}
                                     valueChange={(changeObject) =>
                                         updateOtherFilters(changeObject)}
-                                    currentValue = {dataViewerState.label === 'editorial notes' ? dataViewerState.editorialNotes : dataViewerState.translations}
+                                    currentValue = {controlOptions.label === 'editorial notes' ? dataViewerState.editorialNotes : dataViewerState.translations}
                                 />
                             {:else if controlOptions.type === "navigator"}
                                 <DataNavigator

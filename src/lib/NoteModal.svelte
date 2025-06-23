@@ -421,8 +421,6 @@
     });
 </script>
 
-{@debug message}
-
 {#if show}
     <div
         class="relative z-10"
