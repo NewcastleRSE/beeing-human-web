@@ -31,6 +31,7 @@ export default {
 			fontFamily: {
 				'pfdisplay': ['Playfair Display', 'ui-serif'],
 				'notoserif': ['Noto Serif', 'ui-serif'],
+				'blackletter': ['UnifrakturMaguntia', 'ui-serif'],
 			},
 			colors: {
 				...beeTheme.colors,
