@@ -54,6 +54,9 @@ export let teiBehaviours = {
                     imgDiv.appendChild(captionElt);
                 }
 
+                if (elt.getAttribute('type') === 'diagram') {
+                    addTailwindClasslist(imgDiv, 'grid grid-cols-[4fr_1fr] md:gap-16 gap-4 leading-relaxed text-lg')
+                }
                 imgDiv.classList.add('mb-4', 'flex', 'flex-col', 'gap-2', 'p-4');
                 return imgDiv;
             }
