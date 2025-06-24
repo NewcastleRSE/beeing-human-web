@@ -531,6 +531,10 @@ export let teiBehaviours = {
             addTailwindClasslist(elt, "text-center");
         },
         "head": [
+            ["tei-lg[id=melissomeloslyrics]>tei-lg>tei-head", function (elt) {
+                // hides the heads in the lyrics to melissomelos
+                addTailwindClasslist(elt, 'hidden');
+            }],
             ["tei-div[type=preface]>tei-head", function (elt) {
                 addTailwindClasslist(elt, 'text-4xl mb-16')
             }],
