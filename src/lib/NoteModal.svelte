@@ -39,7 +39,7 @@
             let ids = [];
             for (const [i, reading] of altReadings.entries()) {
                 // checks to see if the last element is an object
-                if (typeof reading[reading.length - 1] === "object") {
+                if (typeof reading[reading.length - 1] === "object" && Object.keys(reading[reading.length - 1]).includes("id")) {
                     // if it is an object, add it to ids dictionary
                     ids[i] = reading[reading.length - 1].id;
                     //pop it from the reading array
@@ -64,7 +64,7 @@
 
                     singNoteDiv.setAttribute("id", `modal-${ids[i]}`);
                 }
-
+                
                 for (const elRead of reading) {
                     if (elRead.tagName != "TEI-PERSNAME") {
                         // check to see if it is not a text node and not hidden:
