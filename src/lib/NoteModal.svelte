@@ -39,7 +39,10 @@
             let ids = [];
             for (const [i, reading] of altReadings.entries()) {
                 // checks to see if the last element is an object
-                if (typeof reading[reading.length - 1] === "object" && Object.keys(reading[reading.length - 1]).includes("id")) {
+                if (
+                    typeof reading[reading.length - 1] === "object" &&
+                    Object.keys(reading[reading.length - 1]).includes("id")
+                ) {
                     // if it is an object, add it to ids dictionary
                     ids[i] = reading[reading.length - 1].id;
                     //pop it from the reading array
@@ -64,7 +67,7 @@
 
                     singNoteDiv.setAttribute("id", `modal-${ids[i]}`);
                 }
-                
+
                 for (const elRead of reading) {
                     if (elRead.tagName != "TEI-PERSNAME") {
                         // check to see if it is not a text node and not hidden:
@@ -345,7 +348,10 @@
                 editorial: "editorial note",
                 translation: "translation",
             };
-            if (parentElement[0].getAttribute("type") === "editorial" && parentElement[0].getAttribute("subtype") != "translation") {
+            if (
+                parentElement[0].getAttribute("type") === "editorial" &&
+                parentElement[0].getAttribute("subtype") != "translation"
+            ) {
                 return type[parentElement[0].getAttribute("type")];
             } else {
                 return type[parentElement[0].getAttribute("subtype")];
@@ -364,7 +370,19 @@
                 // create a list of all tei-rdg siblings of the message element
                 let siblings = parentElement[0].querySelectorAll("tei-rdg");
                 siblings.forEach((sibling) => {
-                    altReading.push(sibling.cloneNode(true));
+                    let clonedSibling = sibling.cloneNode(true);
+                    // find and remove elements with class 'tei-footer' and 'tei-header' in clonedSibling, as discussed in this issue: https://github.com/NewcastleRSE/beeing-human-tei-data/issues/150
+                    let footerElements = clonedSibling.querySelectorAll(
+                        ".tei-footer, .tei-header",
+                    );
+                    footerElements.forEach((footerElement) => {
+                        // replace the footer element with a br element
+                        let brElement = document.createElement("br");
+                        brElement.classList.add("mb-2");
+                        footerElement.replaceWith(brElement);
+                    });
+                    
+                    altReading.push(clonedSibling);
                 });
                 altReadings.push(altReading);
             } else if (parentElement[0].tagName === "TEI-NOTE") {
