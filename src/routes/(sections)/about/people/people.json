@@ -226,5 +226,33 @@
         "web": {
         },
         "role": "contributor"
+    },
+    "luke": {
+        "name": "Luke Howard",
+        "img": "assets/people/bennett_avatar.png",
+        "url": "people/luke",
+        "title": "",
+        "affiliation": "",
+        "bio": "Luke Howard is the founder of [the bee collective](https://www.beethecollective.com/), an organization dedicated to supporting pollinators through outreach, education, habitat establishment, and art. He has been a beekeeper and artist for 9 years, and has continued to push the boundaries and conversations on pollinators, community, and what it means to be part of your environment. He has dedicated his life to connecting with the natural world, his local and global community, and serving as a conduit between the two. His vision for the *beecoming home* project was supported and helped brought to life by Dr. Sarah Scott.",
+        "socials": {
+        },
+        "web": {
+        },
+        "email": "#",
+        "role": "contributor"
+    },
+    "sarah": {
+        "name": "Sarah Scott",
+        "img": "assets/people/bennett_avatar.png",
+        "url": "people/sarah",
+        "title": "",
+        "affiliation": "",
+        "bio": "Dr. Sarah Scott is a bee research scientist and entomologist. Sarah has dedicated her life towards understanding the drivers of bee decline, improving wild bee welfare, learning how we can improve the quality of urban habitat to support bees, and connecting with the community to make long lasting, positive impacts for the environment.",
+        "socials": {
+        },
+        "web": {
+        },
+        "email": "#",
+        "role": "contributor"
     }
 }
