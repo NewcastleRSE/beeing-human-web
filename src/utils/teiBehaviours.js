@@ -405,7 +405,7 @@ export let teiBehaviours = {
                     // IF PAGE BREAK IS IN THE CONTENTS, IGNORE IT, CAUSING TOO MANY ISSUES
 
                     const pageFooterDiv = document.createElement('div');
-                    let tailwindStringWrapper = "gap-16 mt-2 mb-16 text-sm"
+                    let tailwindStringWrapper = "gap-16 mt-2 mb-16 text-sm tei-footer"
                     let tailwindStringElt = "justify-self-end"
                     if (elt.parentNode.tagName === 'TEI-DIV') {
                         tailwindStringWrapper += " grid grid-cols-4"
@@ -429,7 +429,7 @@ export let teiBehaviours = {
             ["[type=header]", function (elt) {
                 if (elt.parentNode.tagName != 'DIV') {
                     const pageHeaderDiv = document.createElement('div')
-                    addTailwindClasslist(pageHeaderDiv, "grid grid-cols-4 gap-16 mb-2")
+                    addTailwindClasslist(pageHeaderDiv, "grid grid-cols-4 gap-16 mb-2 tei-header")
                     wrapElement(elt, pageHeaderDiv);
                     addTailwindClasslist(elt, 'italic text-lg justify-self-center col-span-3')
                 } else {
