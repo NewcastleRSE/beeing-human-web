@@ -3,9 +3,9 @@ title: "Becoming Home: A blending of Art and Nature "
 id: beecoming-home
 parent: connections
 link: connections/beecoming-home
-lead: "something something something"
+lead: "This project invited global artists to collaborate with bees by placing sculptures inside of active honeybee hives. The bees contribute by building honeycomb onto the artwork, creating living organic sculptures that highlight pollinator diversity and the beauty of interspecies collaboration."
 img: 'assets/articles/beecoming-home/image1.jpg'
-imgAlt: 'something'
+imgAlt: 'honeycomb built on top of open books'
 type: article
 layout: article
 author: [luke, sarah]
@@ -70,7 +70,7 @@ The bee collective is a grassroots organization working to make urban spaces mor
 
 ### 2. Becoming home — Art meets ecology 
 
-    This project invited global artists to collaborate with bees by placing sculptures inside of active honeybee hives.  The bees contribute by building honeycomb onto the artwork, creating living organic sculptures that highlight pollinator diversity and the beauty of interspecies collaboration. This project aims to provide an immersive experience that raises awareness about pollinators, their habitats, and the incredible diversity of bee species beyond honeybees. 
+    This project invited global artists to collaborate with bees by placing sculptures inside of active honeybee hives. The bees contribute by building honeycomb onto the artwork, creating living organic sculptures that highlight pollinator diversity and the beauty of interspecies collaboration. This project aims to provide an immersive experience that raises awareness about pollinators, their habitats, and the incredible diversity of bee species beyond honeybees. 
 
 ### 3. Living sculptures in prairie spaces  
 
