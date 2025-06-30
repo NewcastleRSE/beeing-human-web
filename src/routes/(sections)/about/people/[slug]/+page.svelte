@@ -156,7 +156,7 @@
         <div class="flex flex-col">
             <h3 class="h3 text-4xl">{personData.name}</h3>
             {#if personData.title || personData.affiliation}
-            <span class="h4 text-gray-500 text-lg italic">{#if personData.title}{personData.title}{/if}{#if personData.affiliation} · {personData.affiliation}{/if}</span>
+            <span class="h4 text-gray-500 text-lg italic">{#if personData.title}{personData.title}{/if} {#if personData.affiliation}· {personData.affiliation}{/if}</span>
             {/if}
         </div>
         <InjectMD content={personData.bio} layout= {false} />
