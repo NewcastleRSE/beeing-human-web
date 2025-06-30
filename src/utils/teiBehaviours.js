@@ -477,6 +477,14 @@ export let teiBehaviours = {
                 text = document.createTextNode('"');
                 elt.appendChild(text);
             }],
+            ["[rend='marks']", function (elt) {
+                // insert text node at the start of the element
+                let text = document.createTextNode('"');
+                elt.insertBefore(text, elt.firstChild);
+                // insert text node at the end of the element
+                text = document.createTextNode('"');
+                elt.appendChild(text);
+            }],
             ["_", function (elt) {
                 addTailwindClasslist(elt, 'italic');
             }]
