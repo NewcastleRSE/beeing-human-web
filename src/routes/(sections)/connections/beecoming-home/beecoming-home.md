@@ -64,15 +64,15 @@ The theme of the 2025 event is "The Light and Dark", nested under the broader th
 
 The bee collective is a grassroots organization working to make urban spaces more bee- and human- friendly through habitat creation, community education, and art. Our three core projects are:  
 
-1. Urban pollinator habitat  
+### 1. Urban pollinator habitat  
 
     We’ve transformed 1.25 acres of vacant lots in Columbus, OH into pollinator friendly habitat and  partnered with 9 community gardens to establish pollinator habitat. With your support, we plan to expand this work with two new habitat plantings in 2025. 
 
-2. Becoming home — Art meets ecology 
+### 2. Becoming home — Art meets ecology 
 
     This project invited global artists to collaborate with bees by placing sculptures inside of active honeybee hives.  The bees contribute by building honeycomb onto the artwork, creating living organic sculptures that highlight pollinator diversity and the beauty of interspecies collaboration. This project aims to provide an immersive experience that raises awareness about pollinators, their habitats, and the incredible diversity of bee species beyond honeybees. 
 
-3. Living sculptures in prairie spaces  
+### 3. Living sculptures in prairie spaces  
 
    We’re developing larger, more permanent sculptures designed to provide habitat while telling a story of conservation and restoration.  These sculptures will inhabit our prairie spaces, deepening the connection between ecological function and artistic expression as a metamorphosis of the *beecoming home* project.  
 
