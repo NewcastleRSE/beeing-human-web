@@ -24,11 +24,11 @@ date: 2025/06/25
 
 *Beecoming home* aims to provide a space where art, community, and nature can sit and talk a while. *So much of our daily lives have become disconnected from nature* — from our commute to work in individual cars, to our sterile and uniform lawns, to the way we speak about ourselves as separate from the animal kingdom. **We aim to unite culture and ecology in a thought- provoking, inter-species collaboration and facilitate an open and curious dialogue that invites everyone to the table.**
 
-<ImgContainer imgUrl="/assets/articles/beecoming-home/image1.jpg" altText="beehives growing out of old books"/>
+<ImgContainer imgUrl="/assets/articles/beecoming-home/image1.jpg" altText="beehives growing out of old books" caption="Honeycomb on repurposed books, artist Shannon West 'After Longing' (name of piece), location: The Mansion Gallery 2024; material: repurposed book, pulp, epoxy, beeswax"/>
 
 Through this exercise, we want to connect to people through their personal stories, highlight the unifying threads between humans and nature, and inspire people to connect with their surroundings in new ways. We work with artists to amplify their voices and encourage them to rethink what it means to ***co-create and co-habitate*** with nature. We invite artists on a journey of trust and discovery and facilitate the transformation of their artwork into something entirely different with input from honey bees. Much like the relationship between a gardener and their garden, we aim to guide artists to harness the unique beauty, wisdom, and gifts nature has to offer in collaboration.
 
-<ImgContainer imgUrl="/assets/articles/beecoming-home/image2.jpg" altText="beekeeper tending to his hives"/>
+<ImgContainer imgUrl="/assets/articles/beecoming-home/image2.jpg" altText="beekeeper tending to his hives" caption="Luke Howard placing artwork from Madison Friedland (East Stroudburg, PA) into a honey bee hive in May of 2025" />
 
 **The formula is this:** Selected artists from around North America create a sculpture that is placed inside an active honeybee colony, turning the creative process over to the bees, encouraging them to contribute to the vision and build their intricate honeycomb directly onto the artwork. The stunning, one-of-a-kind pieces of art represent a blending of nature and art in a physical representation of what it could look like to live harmoniously with nature, rather than disconnected from it. We never know how the bees will choose to interact with the pieces, the materials they are made from, or the shapes and spaces they provide. Through this process, we are learning and growing with the bees, responding to their preferences, all while carefully monitoring the impact on the colonies' overall health.
 
@@ -36,11 +36,11 @@ This is the fourth year of this project- what started as a dream and a lot of de
 
 [Luke Howard]({base}/about/people/luke) is the founder of [the bee collective](https://www.beethecollective.com/), an organization dedicated to supporting pollinators through outreach, education, habitat establishment, and art. He has been a beekeeper and artist for 9 years, and has continued to push the boundaries and conversations on pollinators, community, and what it means to be part of your environment. He has dedicated his life to connecting with the natural world, his local and global community, and serving as a conduit between the two. His vision for the *beecoming home* project was supported and helped brought to life by [Dr. Sarah Scott]({base}/about/people/sarah), a bee research scientist and entomologist. Sarah has dedicated her life towards understanding the drivers of bee decline, improving wild bee welfare, learning how we can improve the quality of urban habitat to support bees, and connecting with the community to make long lasting, positive impacts for the environment.
 
-<ImgContainer imgUrl="/assets/articles/beecoming-home/image3.jpg" altText="two people looking straight at the camera on the side of a field"/>
+<ImgContainer imgUrl="/assets/articles/beecoming-home/image3.jpg" altText="two people looking straight at the camera on the side of a field" caption="Luke Howard and Sarah Scott walking in England, Spring 2025"/>
 
 The theme of the 2025 event is "The Light and Dark", nested under the broader theme of "Home". The feeling and definition of home is unique to each individual, and is shaped by lived and learned experiences. *Beecoming home* year 4 will build on previous years' exploration of home to expand into the light and dark aspects of this feeling. The balance of light and dark can signify many things — good and evil, happiness and sadness, renewal and stagnation. Both light and dark play important roles within each of our stories. Acknowledging both in our journey brings balance and harmony to our stories and an enriching tale to tell. This year, we encouraged artists to reflect on their definition of home, and how light and dark have influenced their stories. This year's gallery aims to see stories of triumph, strength, determination, sadness, loss, joy — all through the lens of what means home to you.
 
-<ImgContainer imgUrl="/assets/articles/beecoming-home/image4.jpg" altText="A beehive growing on the underside of a wooden curved structure"/>
+<ImgContainer imgUrl="/assets/articles/beecoming-home/image4.jpg" altText="A beehive growing on the underside of a wooden curved structure" caption="Honeycomb on hand carved wood, artist: Danny Fransecon, taken at The Vanderelli Room gallery, Fall 2023"/>
 
 <AdditionalInfoBox title="On the concept of home">
 
@@ -50,7 +50,7 @@ The theme of the 2025 event is "The Light and Dark", nested under the broader th
 
 </AdditionalInfoBox>
 
-<ImgContainer imgUrl="/assets/articles/beecoming-home/image5.jpg" altText="A small beehive in a flower like structure"/>
+<ImgContainer imgUrl="/assets/articles/beecoming-home/image5.jpg" altText="A small beehive in a flower like structure" caption="Honeybees working on an art piece in June of 2025, Artist: Denise Desmond."/>
 
 <AdditionalInfoBox title="On the concept of light and dark ">
 
@@ -76,4 +76,4 @@ The bee collective is a grassroots organization working to make urban spaces mor
 
    We’re developing larger, more permanent sculptures designed to provide habitat while telling a story of conservation and restoration.  These sculptures will inhabit our prairie spaces, deepening the connection between ecological function and artistic expression as a metamorphosis of the *beecoming home* project.  
 
-<ImgContainer imgUrl="/assets/articles/beecoming-home/image6.jpeg" altText="A picture of a shed with a large sign saying Ohio needs bees"/>
+<ImgContainer imgUrl="/assets/articles/beecoming-home/image6.jpeg" altText="A picture of a shed with a large sign saying Ohio needs bees" caption="The Bee Collective headquarters summer 2024"/>
