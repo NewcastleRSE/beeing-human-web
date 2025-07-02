@@ -243,16 +243,16 @@
     },
     "sarah": {
         "name": "Sarah Scott",
-        "img": "assets/people/bennett_avatar.png",
+        "img": "assets/people/S_Scott.jpg",
         "url": "people/sarah",
         "title": "",
         "affiliation": "",
-        "bio": "Dr. Sarah Scott is a bee research scientist and entomologist. Sarah has dedicated her life towards understanding the drivers of bee decline, improving wild bee welfare, learning how we can improve the quality of urban habitat to support bees, and connecting with the community to make long lasting, positive impacts for the environment.",
+        "bio": "<p>Sarah B. Scott is a pollinator ecologist and ecotoxicologist whose research explores the environmental drivers of pollinator health and decline. With an academic background in Zoology, Environmental Studies, and Art, she earned her PhD in Entomology from The Ohio State University. Her work focuses on the lethal and sublethal effects of metal contamination on bumble bee physiology, behavior, and overall fitness.</p><p>Sarah was awarded a Royal Society Newton International Fellowship to continue her research at the University of Cambridge. There, she expanded her investigations to include the effects of metal exposure on pollinator behavior, biomechanics, and gene expression. She currently holds a research position at Newcastle University, where her work centers on wild bee welfare, including the development of non-lethal diagnostic tools to assess bee cognitive states in natural settings.</p><p>Her research lies at the intersection of environmental toxicology, pollinator biology, and habitat quality, with the goal of identifying strategies to protect pollinators and the ecosystems they depend on. In addition to her scientific work, Sarah is deeply committed to science communication and is also a scientific illustrator.</p>",
         "socials": {
         },
         "web": {
         },
-        "email": "#",
+        "email": "",
         "role": "contributor"
     },
     "simon": {
