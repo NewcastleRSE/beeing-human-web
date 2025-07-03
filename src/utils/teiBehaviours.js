@@ -67,7 +67,14 @@ export let teiBehaviours = {
         "emph": [
             ["[rend='blackletter']", function (elt) {
                 elt.classList.add('font-blackletter');
+            }],
+            ["[rend='italic']", function (elt) {
+                elt.classList.add('italic');
+            }],
+            ["_", function (elt) {
+                elt.classList.add('italic');
             }]
+
         ],
         "gloss": [
             ["[rend='italic']", function (elt) {
