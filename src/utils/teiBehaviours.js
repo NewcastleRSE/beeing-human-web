@@ -71,6 +71,9 @@ export let teiBehaviours = {
             ["[rend='italic']", function (elt) {
                 elt.classList.add('italic');
             }],
+            ["[rend='bold'", function (elt) {
+                elt.classList.add('font-bold');
+            }],
             ["_", function (elt) {
                 elt.classList.add('italic');
             }]
