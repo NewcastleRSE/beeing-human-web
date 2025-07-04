@@ -393,7 +393,6 @@ export let teiBehaviours = {
                 }
             } else if (elt.hasAttribute('rend') && elt.getAttribute('rend') === 'hidden') {
                 // if the pb is hidden, do not display it
-                console.log(this)
                 addTailwindClasslist(elt, 'hidden')
             } else {
                 addTailwindClasslist(elt, 'hidden')
