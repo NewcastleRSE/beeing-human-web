@@ -7,7 +7,7 @@ export function teiSetBodyLayout(elt) {
     let titlePage = document.getElementsByTagName('tei-titlepage');
     if (!titlePage[0].contains(elt)) {
 
-        if (elt.parentNode.tagName != 'DIV') {
+        if (elt.parentNode && elt.parentNode.tagName != 'DIV') {
             let parentDiv = document.createElement('div');
             // Define a grid with 2 columns, where the first column takes 3/4 and the second column takes 1/4 of the width
             const tailwindClasses = ['grid', 'grid-cols-[4fr_1fr]', 'md:gap-16', 'gap-4', 'leading-relaxed', 'text-lg']
@@ -120,4 +120,31 @@ export function checkAncestorForClass(elt, className) {
         parent = parent.parentNode;
     }
     return false;
+}
+
+// write a function that splits one element into three based on the position of another element
+export function splitElementIntoThree(elt, positionElt) {
+    // splits the element into three parts based on the position of the positionElt
+    // returns an array of three elements, the first is the part before the positionElt, the second is the positionElt, and the third is the part after the positionElt
+
+    let children = [...elt.childNodes];
+    let index = children.indexOf(positionElt);
+
+    if (index === -1) {
+        console.warn('Position element not found in parent');
+        return [elt, null, null];
+    }
+
+    let before = document.createElement('div');
+    let after = document.createElement('div');
+
+    for (let i = 0; i < index; i++) {
+        before.appendChild(children[i].cloneNode(true));
+    }
+    
+    for (let i = index + 1; i < children.length; i++) {
+        after.appendChild(children[i].cloneNode(true));
+    }
+
+    return [before, positionElt.cloneNode(true), after];
 }

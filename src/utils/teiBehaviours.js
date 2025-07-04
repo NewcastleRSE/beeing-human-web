@@ -1,5 +1,5 @@
 import { addTailwindClasslist, findAncestor, findIfAncestor, findInDescendant, findPreviousElement, wrapChildren, wrapElement } from "./generalHelpers";
-import { checkAncestorForClass, checkForParentNotes, getElementRect, teiSetBodyLayout } from "./teiBehavioursHelper";
+import { checkAncestorForClass, checkForParentNotes, getElementRect, splitElementIntoThree, teiSetBodyLayout } from "./teiBehavioursHelper";
 import ornament from '../assets/text_divider.svg'
 
 import transcriptionData from './../routes/(sections)/literature/transcription/transcriptionData.json'
@@ -24,7 +24,12 @@ export let teiBehaviours = {
                     sigsDict[tag.getAttribute('n')] = listSigs[i - 1].getAttribute('n')
                 }
             }
+
             this.sigsDict = sigsDict;
+        },
+        "teiHeader": function (e) {
+            this.edition = e.querySelector('tei-imprint>tei-date').getAttribute('when')
+            this.hideContent(e, false);
         },
         "figure": function (elt) {
             // if figure has a graphic element, add it as an img using the url of the graphic element
@@ -38,7 +43,7 @@ export let teiBehaviours = {
                 // define the img.src by adding the src to the transcriptionData object
                 img.src = transcriptionData['1623']['teiMediaRoot'] + src;
                 if (graphic.getAttribute('rend') === 'small') {
-                    addTailwindClasslist(img, 'w-1/4');                    
+                    addTailwindClasslist(img, 'w-1/4');
                 } else {
                     addTailwindClasslist(img, 'w-full');
                 }
@@ -61,9 +66,22 @@ export let teiBehaviours = {
                 return imgDiv;
             }
         },
-        "foreign": function (elt) {
-            addTailwindClasslist(elt, "italic")
-        },
+        "foreign": [
+            ["[rend='roman']", function (elt) {
+                elt.classList.add('not-italic');
+            }],
+            ["[rend='round']", function (elt) {
+                elt.classList.add('not-italic');
+            }],
+            ["[rend='italic']", function (elt) {
+                elt.classList.add('italic');
+            }],
+            ["_", function (elt) {
+                if (!findIfAncestor(elt, 'tei-titlepage')) {
+                    elt.classList.add('italic');
+                }
+            }],
+        ],
         "emph": [
             ["[rend='blackletter']", function (elt) {
                 elt.classList.add('font-blackletter');
@@ -172,8 +190,22 @@ export let teiBehaviours = {
         ],
         'p': function (elt) {
             if (elt.parentElement && elt.parentElement.tagName != 'TEI-NOTE') {
-                teiSetBodyLayout(elt);
-                addTailwindClasslist(elt, 'indent-4 mb-2')
+                // if the element contains a tei-note of place inline -- only affects on element in 1609
+                if (elt.querySelector('tei-note[place="inline"]')) {
+                    //get the note element
+                    let note = elt.querySelector('tei-note[place="inline"]');
+                    let splitPar = splitElementIntoThree(elt, note);
+                    // replace elt with the splitPar array of elements
+                    elt.replaceWith(...splitPar);
+                    for (const par of splitPar) {
+                        // adds the same classes to the split paragraphs
+                        teiSetBodyLayout(par);
+                        addTailwindClasslist(par, 'indent-4 mb-2');
+                    }
+                } else {
+                    teiSetBodyLayout(elt);
+                    addTailwindClasslist(elt, 'indent-4 mb-2')
+                }
             } else {
                 elt.parentElement.classList.add('flex', 'flex-col');
             }
@@ -190,6 +222,15 @@ export let teiBehaviours = {
             }]
         ],
         "persName": [
+            ["[rend='roman']", function (elt) {
+                elt.classList.add('not-italic');
+            }],
+            ["[rend='round']", function (elt) {
+                elt.classList.add('not-italic');
+            }],
+            ["[rend='italic']", function (elt) {
+                elt.classList.add('italic');
+            }],
             ["_", function (elt) {
                 if (!findIfAncestor(elt, 'tei-titlepage')) {
                     elt.classList.add('italic');
@@ -334,7 +375,7 @@ export let teiBehaviours = {
         },
         "pb": function (elt) {
             let emptySigs = ['¶3r', 'A3r', 'B1r']
-            if (!findIfAncestor(elt, 'tei-list')) {
+            if (!findIfAncestor(elt, 'tei-list') && !elt.hasAttribute('rend')) {
                 // if pb is in the contents page ignore it, causing too many issues
                 // also ignores pbs in the rdg element (i.e., imported from 1609)
 
@@ -350,6 +391,9 @@ export let teiBehaviours = {
                     sig.classList.add('signature')
                     return sig
                 }
+            } else if (elt.hasAttribute('rend') && elt.getAttribute('rend') === 'hidden') {
+                // if the pb is hidden, do not display it
+                addTailwindClasslist(elt, 'hidden')
             } else {
                 addTailwindClasslist(elt, 'hidden')
             }
@@ -447,11 +491,14 @@ export let teiBehaviours = {
                 }
             }],
             ["[type=ornament]", function (elt) {
-                let ornamentEl = document.createElement('object');
-                ornamentEl.setAttribute('data', ornament);
-                addTailwindClasslist(elt, 'flex justify-center my-8')
+                // creates an ornament element if the elt does not contain a figure element
+                if (!elt.querySelector('tei-figure')) {
+                    let ornamentEl = document.createElement('object');
+                    ornamentEl.setAttribute('data', ornament);
+                    addTailwindClasslist(elt, 'flex justify-center my-8')
 
-                return ornamentEl;
+                    return ornamentEl;
+                }
             }]
         ],
         "hi": [
