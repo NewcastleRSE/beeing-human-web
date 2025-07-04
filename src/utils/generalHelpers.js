@@ -73,8 +73,8 @@ export function findPreviousElement(node, targetName) {
  */
 export function findPreviousMilestone(node, milestoneType) {
   if (!node || !milestoneType) {
-      console.warn('Node or milestone type is not provided');
-      return null;
+    console.warn('Node or milestone type is not provided');
+    return null;
   }
 
   // Convert milestoneType to lowercase to match tagName comparisons
@@ -82,41 +82,41 @@ export function findPreviousMilestone(node, milestoneType) {
 
   // Helper function to search recursively for the milestone in a node's descendants
   function searchInDescendants(element) {
-      if (!element) return null;
+    if (!element) return null;
 
-      for (let child of element.children) {
-          if (child.tagName.toLowerCase() === milestoneType) {
-              return child;
-          }
-          const found = searchInDescendants(child);
-          if (found) {
-              return found;
-          }
+    for (let child of element.children) {
+      if (child.tagName.toLowerCase() === milestoneType) {
+        return child;
       }
-      return null;
+      const found = searchInDescendants(child);
+      if (found) {
+        return found;
+      }
+    }
+    return null;
   }
 
   // Traverse siblings and parents to find the previous milestone
   while (node) {
-      // Check previous siblings and their descendants
-      let sibling = node.previousElementSibling;
-      while (sibling) {
-          // Check if the sibling itself is the milestone
-          if (sibling.tagName.toLowerCase() === milestoneType) {
-              return sibling;
-          }
-
-          // Check if the milestone exists in the sibling's descendants
-          const foundInDescendants = searchInDescendants(sibling);
-          if (foundInDescendants) {
-              return foundInDescendants;
-          }
-
-          sibling = sibling.previousElementSibling;
+    // Check previous siblings and their descendants
+    let sibling = node.previousElementSibling;
+    while (sibling) {
+      // Check if the sibling itself is the milestone
+      if (sibling.tagName.toLowerCase() === milestoneType) {
+        return sibling;
       }
 
-      // Move up to the parent node and continue searching
-      node = node.parentElement;
+      // Check if the milestone exists in the sibling's descendants
+      const foundInDescendants = searchInDescendants(sibling);
+      if (foundInDescendants) {
+        return foundInDescendants;
+      }
+
+      sibling = sibling.previousElementSibling;
+    }
+
+    // Move up to the parent node and continue searching
+    node = node.parentElement;
   }
 
   // If no milestone is found, return null
@@ -132,8 +132,8 @@ export function findPreviousMilestone(node, milestoneType) {
  */
 export function findLastMilestoneBefore(node, milestoneType, exclusionAttribute = 'data-origfile', exlusionAttributeValue = '1609') {
   if (!node || !milestoneType) {
-      console.warn('Node or milestone type is not provided');
-      return null;
+    console.warn('Node or milestone type is not provided');
+    return null;
   }
 
   // Convert milestoneType to lowercase to match tagName comparisons
@@ -141,42 +141,42 @@ export function findLastMilestoneBefore(node, milestoneType, exclusionAttribute 
 
   // Helper function to search recursively for the milestone in a node's descendants
   function searchInDescendants(element, exclusionAttribute, exlusionAttributeValue) {
-      if (!element) return null;
+    if (!element) return null;
 
-      let lastFound = null;
-      for (let child of element.children) {
-          if (child.tagName.toLowerCase() === milestoneType && child.getAttribute(exclusionAttribute) !== exlusionAttributeValue) {
-              lastFound = child; // Update the last found milestone
-          }
-          const foundInDescendants = searchInDescendants(child);
-          if (foundInDescendants) {
-              lastFound = foundInDescendants; // Update if a deeper milestone is found
-          }
+    let lastFound = null;
+    for (let child of element.children) {
+      if (child.tagName.toLowerCase() === milestoneType && child.getAttribute(exclusionAttribute) !== exlusionAttributeValue) {
+        lastFound = child; // Update the last found milestone
       }
-      return lastFound;
+      const foundInDescendants = searchInDescendants(child);
+      if (foundInDescendants) {
+        lastFound = foundInDescendants; // Update if a deeper milestone is found
+      }
+    }
+    return lastFound;
   }
 
   // Traverse siblings and parents to find the last milestone before the node
   while (node) {
-      // Check previous siblings and their descendants
-      let sibling = node.previousElementSibling;
-      while (sibling) {
-          // Check if the sibling itself is the milestone
-          if (sibling.tagName.toLowerCase() === milestoneType && sibling.getAttribute(exclusionAttribute) !== exlusionAttributeValue) {
-              return sibling;
-          }
-
-          // Check if the milestone exists in the sibling's descendants
-          const foundInDescendants = searchInDescendants(sibling);
-          if (foundInDescendants) {
-              return foundInDescendants;
-          }
-
-          sibling = sibling.previousElementSibling;
+    // Check previous siblings and their descendants
+    let sibling = node.previousElementSibling;
+    while (sibling) {
+      // Check if the sibling itself is the milestone
+      if (sibling.tagName.toLowerCase() === milestoneType && sibling.getAttribute(exclusionAttribute) !== exlusionAttributeValue) {
+        return sibling;
       }
 
-      // Move up to the parent node and continue searching
-      node = node.parentElement;
+      // Check if the milestone exists in the sibling's descendants
+      const foundInDescendants = searchInDescendants(sibling);
+      if (foundInDescendants) {
+        return foundInDescendants;
+      }
+
+      sibling = sibling.previousElementSibling;
+    }
+
+    // Move up to the parent node and continue searching
+    node = node.parentElement;
   }
 
   // If no milestone is found, return null
@@ -207,13 +207,21 @@ export function findAncestor(node, targetNode) {
 
 
 export function findIfAncestor(node, targetNode) {
-  // checks if node is a descendent of targetNode; returns false if it reaches <html>;
-  if (node.parentNode.tagName.toLowerCase() === 'html') {
-    return false;
-  } else if (node.parentNode.tagName.toLowerCase() === targetNode.toLowerCase()) {
-    return true;
-  } else {
-    return findIfAncestor(node.parentNode, targetNode);
+  try {
+    // checks if node is a descendent of targetNode; returns false if it reaches <html>;
+    if (node.parentNode && node.parentNode.tagName.toLowerCase() === 'html') {
+      return false;
+    } else if (node.parentNode && node.parentNode.tagName.toLowerCase() === targetNode.toLowerCase()) {
+      return true;
+    } else if(node.parentNode) {
+      return findIfAncestor(node.parentNode, targetNode);
+    } else {
+      return false; // Return false if node.parentNode is null
+    }
+  } catch (error) {
+    console.error('Error in findIfAncestor:', error);
+    console.log(node, targetNode)
+    return false; // Return false if an error occurs, such as if node.parentNode is null
   }
 }
 
@@ -228,8 +236,8 @@ export function wrapChildren(elt, wrapper) {
 
 export function findFirstDescendantByTagName(parentElement, tagName) {
   if (!parentElement || !tagName) {
-      console.warn('Parent element or tag name is not provided');
-      return null;
+    console.warn('Parent element or tag name is not provided');
+    return null;
   }
 
   // Convert tagName to uppercase to match the tagName property of elements
@@ -237,16 +245,16 @@ export function findFirstDescendantByTagName(parentElement, tagName) {
 
   // Helper function to recursively search for the element
   function search(element) {
-      for (let child of element.children) {
-          if (child.tagName === tagName) {
-              return child;
-          }
-          const found = search(child);
-          if (found) {
-              return found;
-          }
+    for (let child of element.children) {
+      if (child.tagName === tagName) {
+        return child;
       }
-      return null;
+      const found = search(child);
+      if (found) {
+        return found;
+      }
+    }
+    return null;
   }
 
   return search(parentElement);
@@ -256,25 +264,25 @@ export function findFirstDescendantByTagName(parentElement, tagName) {
 // Only provides current status, does not observe until it is in view
 export function isElementVisibleUntracked(elt, callback) {
   if (!elt) {
-      console.warn('Element is not provided for visibility check in isElementVisibleUntracked');
-      return;
+    console.warn('Element is not provided for visibility check in isElementVisibleUntracked');
+    return;
   }
   const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-          if (entry.isIntersecting) {
-              // Element is visible in the viewport
-              callback(true);
-              observer.unobserve(entry.target);
-          } else {
-              // Element is not visible in the viewport
-              callback(false);
-              observer.unobserve(entry.target);
-          }
-      });
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Element is visible in the viewport
+        callback(true);
+        observer.unobserve(entry.target);
+      } else {
+        // Element is not visible in the viewport
+        callback(false);
+        observer.unobserve(entry.target);
+      }
+    });
   }, {
-      root: null, // Use the viewport as the root
-      rootMargin: '0px',
-      threshold: 0.001 // Trigger callback when 0.1% of the element is visible
+    root: null, // Use the viewport as the root
+    rootMargin: '0px',
+    threshold: 0.001 // Trigger callback when 0.1% of the element is visible
   });
 
   observer.observe(elt);
