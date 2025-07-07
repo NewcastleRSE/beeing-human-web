@@ -77,9 +77,9 @@
         changeEditorialNoteVisibility(dataViewerState.editorialNotes);
     });
 
-    $effect (() => {
+    $effect(() => {
         changeTranslationVisibility(dataViewerState.translations);
-    })
+    });
 
     $effect(() => {
         toggleBothViewOption(smallScreen);
@@ -97,23 +97,43 @@
                 teiViewerState.currentSection = dataViewerState.activeNavigator;
             }
 
-            // might need more here
-            const firstSigs = {
-                "¶2r": "titlepage",
-                "¶3r": "preface",
-                A1v: "dedication",
-                A2r: "contents",
-                B1r: "ch1",
-                D4r: "ch2",
-                E4r: "ch3",
-                H1r: "ch4",
-                I3r: "ch5",
-                N3v: "ch6",
-                P4r: "ch7",
-                S2r: "ch8",
-                T1r: "ch9",
-                T2v: "ch10",
+            const firstSigsDict = {
+                "1623": {
+                    "¶2r": "titlepage",
+                    "¶3r": "preface",
+                    "A1v": "dedication",
+                    "A2r": "contents",
+                    "B1r": "ch1",
+                    "D4r": "ch2",
+                    "E4r": "ch3",
+                    "H1r": "ch4",
+                    "I3r": "ch5",
+                    "N3v": "ch6",
+                    "P4r": "ch7",
+                    "S2r": "ch8",
+                    "T1r": "ch9",
+                    "T2v": "ch10",
+                },
+                "1609": {
+                    "a1r": "titlepage",
+                    "a2r": "preface",
+                    "a4v": "dedication",
+                    "b1v": "contents",
+                    "A1r": "ch1",
+                    "B8r": "ch2",
+                    "C3v": "ch3",
+                    "D5r": "ch4",
+                    "E5r": "ch5",
+                    "G2r": "ch6",
+                    "H4v": "ch7",
+                    "I7r": "ch8",
+                    "K1r": "ch9",
+                    "K5r": "ch10",
+                },
             };
+
+            let firstSigs =
+                firstSigsDict[dataViewerState.activeDataset.toString()];
 
             if (dataViewerState.activeView === "facsimile") {
                 // if the active view is facsimile the current signature is not going to be accurately tracked, so need to update it separately here:
@@ -123,22 +143,44 @@
                         .manifestStartPage,
                 );
 
-                const startingPages = {
-                    titlepage: 0 + offset,
-                    preface: 2 + offset,
-                    dedication: 7 + offset,
-                    contents: 10 + offset,
-                    ch1: 18 + offset,
-                    ch2: 40 + offset,
-                    ch3: 48 + offset,
-                    ch4: 66 + offset,
-                    ch5: 78 + offset,
-                    ch6: 116 + offset,
-                    ch7: 128 + offset,
-                    ch8: 148 + offset,
-                    ch9: 154 + offset,
-                    ch10: 157 + offset,
+                const startingPagesDict = {
+                    "1623": {
+                        titlepage: 0 + offset,
+                        preface: 2 + offset,
+                        dedication: 7 + offset,
+                        contents: 10 + offset,
+                        ch1: 18 + offset,
+                        ch2: 40 + offset,
+                        ch3: 48 + offset,
+                        ch4: 66 + offset,
+                        ch5: 78 + offset,
+                        ch6: 116 + offset,
+                        ch7: 128 + offset,
+                        ch8: 148 + offset,
+                        ch9: 154 + offset,
+                        ch10: 157 + offset,
+                    },
+                    "1609": {
+                        titlepage: 0 + offset,
+                        preface: 2 + offset,
+                        dedication: 7 + offset,
+                        contents: 9 + offset,
+                        ch1: 24 + offset,
+                        ch2: 54 + offset,
+                        ch3: 61 + offset,
+                        ch4: 80 + offset,
+                        ch5: 96 + offset,
+                        ch6: 122 + offset,
+                        ch7: 143 + offset,
+                        ch8: 164 + offset,
+                        ch9: 168 + offset,
+                        ch10: 176 + offset,
+                    }
                 };
+
+                let startingPages =
+                    startingPagesDict[dataViewerState.activeDataset.toString()];
+
 
                 // check where the current page sits in the starting pages
                 for (const [i, key] of Object.keys(startingPages).entries()) {
@@ -462,7 +504,7 @@
     function changeTranslationVisibility(translations) {
         try {
             const translationElements = document.querySelectorAll(
-                'tei-foreign[corresp]',
+                "tei-foreign[corresp]",
             );
 
             if (!translations) {
@@ -569,22 +611,43 @@
             } else {
                 // if the section is not found, it means we are in the facsimile only view
 
-                const startingSigs = {
-                    titlepage: "¶2r",
-                    preface: "¶3r",
-                    dedication: "A1v",
-                    contents: "A2r",
-                    ch1: "B1r",
-                    ch2: "D4r",
-                    ch3: "E4r",
-                    ch4: "H1r",
-                    ch5: "I3r",
-                    ch6: "N3v",
-                    ch7: "P4r",
-                    ch8: "S2r",
-                    ch9: "T1r",
-                    ch10: "T2v",
-                };
+                const startingSigsDict = {
+                    "1623": {
+                        titlepage: "¶2r",
+                        preface: "¶3r",
+                        dedication: "A1v",
+                        contents: "A2r",
+                        ch1: "B1r",
+                        ch2: "D4r",
+                        ch3: "E4r",
+                        ch4: "H1r",
+                        ch5: "I3r",
+                        ch6: "N3v",
+                        ch7: "P4r",
+                        ch8: "S2r",
+                        ch9: "T1r",
+                        ch10: "T2v",
+                    },
+                    "1609": {
+                        titlepage: "a1r",
+                        preface: "a2r",
+                        dedication: "a4v",
+                        contents: "b1v",
+                        ch1: "A1r",
+                        ch2: "B8r",
+                        ch3: "C3v",
+                        ch4: "D5r",
+                        ch5: "E5r",
+                        ch6: "G2r",
+                        ch7: "H4v",
+                        ch8: "I7r",
+                        ch9: "K1r",
+                        ch10: "K5r",
+                    },
+                }
+
+                let startingSigs =
+                    startingSigsDict[dataViewerState.activeDataset.toString()];
 
                 teiViewerState.currentSignature =
                     startingSigs[dataViewerState.activeNavigator];
