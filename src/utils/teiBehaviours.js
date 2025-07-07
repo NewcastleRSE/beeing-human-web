@@ -499,6 +499,9 @@ export let teiBehaviours = {
 
                     return ornamentEl;
                 }
+            }],
+            ["[type='sig']", function (elt) {
+                elt.classList.add('hidden');
             }]
         ],
         "hi": [

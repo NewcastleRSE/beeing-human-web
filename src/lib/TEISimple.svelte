@@ -203,6 +203,9 @@
     $effect(() => {
         if (teiViewerState.updateTEI) {
             // page changed elsewhere
+            
+            // saves the details of intended pb, even if it is not visible
+            let intendedPb = undefined;
 
             // find the pb that corresponds to the new page
             const targetPbN =
@@ -213,7 +216,7 @@
             let pb = document.querySelector(`tei-pb[n="${targetPbN}"]`);
 
             // if pb is hidden, find the closest visible element and scroll to that
-            if (pb && pb.classList.contains("hidden")) {
+            if (pb && pb.classList.contains("hidden") && pb.getAttribute('rend') != 'hidden') {
                 try {
                     // find closest element that is not hidden
                     let closestVisible = pb.previousElementSibling;
@@ -221,9 +224,14 @@
                         closestVisible = closestVisible.previousElementSibling;
                     }
                     pb = closestVisible;
+                    
                 } catch (e) {
                     console.warn(pb);
                 }
+            } else if (pb && pb.getAttribute('rend') === 'hidden') {
+                // if the pb is hidden, find the next sibling element and scroll to that
+                intendedPb = pb;
+                pb = pb.nextElementSibling;
             }
 
             // only do this if the pb exists and is not already in view
@@ -232,7 +240,12 @@
                     behavior: "smooth",
                     block: "start",
                 });
-                teiViewerState.currentSignature = pb.getAttribute("n");
+                if (!intendedPb) {
+                    teiViewerState.currentSignature = pb.getAttribute("n");
+                } else {
+                    teiViewerState.currentSignature = intendedPb.getAttribute("n");
+                }
+                
             }
             teiViewerState.updateTEI = false;
         }
