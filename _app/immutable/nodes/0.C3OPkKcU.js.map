@@ -1,0 +1,1 @@
+{"version":3,"file":"0.C3OPkKcU.js","sources":["../../../../../../src/routes/+layout.js"],"sourcesContent":["export const prerender = true;\n"],"names":["prerender"],"mappings":"yjBAAO,MAAMA,EAAY"}
