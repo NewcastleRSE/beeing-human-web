@@ -300,5 +300,14 @@
             "personal": "https://josephcampana.com/"
         },
         "role": "advisory-board"
+    },
+    "jess": {
+        "name": "Jess Dunmore",
+        "img": "assets/people/jess_dunmore.jpg",
+        "url": "people/jess",
+        "title": "PhD Student",
+        "affiliation": "University of Cambridge",
+        "bio": "Jess Dunmore is a PhD student in English Literature at the University of Cambridge. Having graduated from the University of Oxford, Jess studied an MPhil at Cambridge before progressing onto a PhD. Her research, which is generously funded by the Cambridge Trust and Newnham College, recovers the 'elemental ecopoetics' of early modern natural philosophy. Informed by the nexus of material, ecological, and poetic encounters that underpin her research, she embraces the opportunities and challenges posed by creative, interdisciplinary forms of criticism. When not immersed in the seventeenth century, Jess can usually be found in the lido or running out and about in the countryside.",
+        "role": "contributor"
     }
 }

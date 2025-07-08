@@ -78,6 +78,7 @@ dataSelectorControls: [{
         }
 ]
 type: [data, experience]
+order: 1
 ---
 <script>
     import TranscriptionViewer from '$lib/TranscriptionViewer.svelte'
