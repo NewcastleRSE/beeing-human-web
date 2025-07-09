@@ -35,17 +35,7 @@
         "url": "people/bennett",
         "title": "Senior Lecturer",
         "affiliation": "Newcastle University",
-        "bio": "John Doe is a seasoned professional with over 20 years of experience in the technology industry. He holds a Masters degree in Computer Science from the University of Technology and has worked with several leading tech companies throughout his career. John specializes in software development, project management, and IT consulting. He has a proven track record of delivering high-quality software solutions on time and within budget. John is passionate about mentoring young professionals and has been a guest speaker at numerous tech conferences. In his free time, he enjoys hiking, reading, and exploring new technologies.",
-        "socials": {
-            "X": "#",
-            "orcid": "#",
-            "github": "#"
-        },
-        "web": {
-            "personal": "#",
-            "staff": "#"
-        },
-        "email": "#",
+        "bio": "Bennett Hogg teaches musicology and composition at Newcastle University and is a keen amateur natural historian. He has researched extensively in the fields of both scholarly and creative practices in the areas of environmental sound (AHRC '<a href='https://landscapequartet.org/' target='_blank'>Landscape Quartet</a>', 2012-2014), biophonics, and relationships between music and nature. From February to September 2014 he was Austrian Science Fund (FWF) research fellow at Kunst Universitat, Graz on the 'Emotional Improvisation' project led by Prof Deniz Peters. Since 2010 he has collaborated with German flautist and environmental sound artist <a href='https://sabvog.de/' target='_blank'>Sabine Vogel</a> of Berlin's Splitter Orchester. His most recent work has included the role played by aesthetics and spatial awareness in data sonification (Leverhulme Trust 2021-2024; UKRI 2025-2027), and the early atonal music of Anton von Webern, specifically its connetion with ideas of space/place and the natural environment. He kept bees as a teenager and came perilously close to becoming an environmental scientist before opting to study music as an undergraduate.",
         "role": "core"
     },
     "magnus": {
@@ -84,22 +74,12 @@
         "role": "core"
     },
     "balu": {
-        "name": "Balu GS",
-        "img": "assets/people/balu_avatar.png",
+        "name": "Balu",
+        "img": "assets/people/Balu_pic.JPG",
         "url": "people/balu",
-        "title": "Research Associate",
-        "affiliation": "Newcastle University",
-        "bio": "",
-        "socials": {
-            "X": "#",
-            "orcid": "#",
-            "github": "#"
-        },
-        "web": {
-            "personal": "#",
-            "staff": "#"
-        },
-        "email": "#",
+        "title": "Associate Professor",
+        "affiliation": "Atria University",
+        "bio": "Balu joined the project from 2022 to 2023. He completed his PhD at the Indian Institute of Science Education and Research, Thiruvananthapuram and joined us after postdoctoral research there and at Lund University. He is now an Associate Professor at Atria University, Bengaluru.",
         "role": "core"
         
     },
@@ -185,7 +165,7 @@
     },
     "warren": {
         "name": "Warren Senders",
-        "img": "assets/people/thumbnail_WRS_selfie_in_red_light.jpg",
+        "img": "assets/people/warren_senders.jpg",
         "url": "people/warren",
         "title": "",
         "affiliation": "",
