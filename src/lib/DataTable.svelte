@@ -1,8 +1,7 @@
 <script>
+    import { onMount } from 'svelte';
 
-    import {onMount} from 'svelte';
-
-    let { inputData } = $props();
+    let { inputData, tableId = "data-table-container-" + Math.random().toString(36).slice(2, 10) } = $props();
 
     // builds a table for an array of JSON objects in this format
     //     {
@@ -57,7 +56,7 @@
         // Check if the inputData is available and has the expected structure
         if (inputData && Array.isArray(inputData)) {
             const table = buildTable(inputData);
-            const container = document.getElementById("data-table-container");
+            const container = document.getElementById(tableId);
             container.innerHTML = ""; // Clear any existing content
             container.appendChild(table);
         } else {
@@ -67,6 +66,6 @@
 </script>
 
 <h2 class="h2 my-4">Number of links per chapter</h2>
-<div id="data-table-container">
+<div id={tableId}>
     <!-- The table will be inserted here -->
 </div>

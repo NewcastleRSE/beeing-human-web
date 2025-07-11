@@ -1,112 +1,158 @@
 <script>
     import * as d3 from "d3";
     import { onMount } from "svelte";
-    let { inputData } = $props();
+    let { inputData, graphId = "chord-graph-" + Math.random().toString(36).slice(2, 10) } = $props();
 
-    // Move colors array outside the function so it's accessible in markup
     const colors = [
-        "#1f77b4",
-        "#ff7f0e",
-        "#2ca02c",
-        "#d62728",
-        "#9467bd",
-        "#FFD700",
-        "#e377c2",
-        "#7f7f7f",
-        "#bcbd22",
-        "#17becf",
-        "#9edae5",
+        "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
+        "#FFD700", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#9edae5"
     ];
 
-    onMount(() => {
-        // Check if the #chord-graph element is already present
-        if (document.getElementById("chord-graph")) {
-            buildGraph();
+    let svg;
+    let container;
+    let width = 800;
+    let height = 800;
+    let radius = 350;
+
+    function getContainerSize() {
+        if (container) {
+            const rect = container.getBoundingClientRect();
+            width = rect.width;
+            height = rect.height;
+            radius = Math.min(width, height) / 2 - 40; // leave some margin
         }
+    }
+
+    onMount(() => {
+        getContainerSize();
+        window.addEventListener("resize", handleResize);
+        if (container) buildGraph();
+        return () => window.removeEventListener("resize", handleResize);
     });
 
+    function handleResize() {
+        d3.select(`#${graphId} svg`).remove();
+        getContainerSize();
+        buildGraph();
+    }
+
     function buildGraph() {
-        // 11 groups, so create a vector of 11 different colors
+        d3.select(`#${graphId}`).selectAll("svg").remove();
 
-        // create the svg area
-        var svg = d3
-            .select("#chord-graph")
+        svg = d3
+            .select(`#${graphId}`)
             .append("svg")
-            .attr("width", 1300)      // Increased width for label space
-            .attr("height", 1300)     // Increased height for label space
+            .attr("width", width)
+            .attr("height", height)
             .append("g")
-            .attr("transform", "translate(650,650)"); // Center the graph
+            .attr("transform", `translate(${width / 2},${height / 2})`);
 
-        // give this matrix to d3.chord(): it will calculates all the info we need to draw arc and ribbon
         var res = d3
             .chord()
-            .padAngle(0.05) // padding between entities (black arc)
+            .padAngle(0.05)
             .sortSubgroups(d3.descending)(inputData.matrix);
 
-        // add the groups on the outer part of the circle
-        svg.datum(res)
+        // Add groups (arcs)
+        const group = svg.datum(res)
             .append("g")
             .selectAll("g")
-            .data(function (d) {
-                return d.groups;
-            })
+            .data(d => d.groups)
             .enter()
             .append("g")
-            .each(function (d, i) {
-                // Draw the arc
-                d3.select(this)
-                    .append("path")
-                    .style("fill", colors[i])
-                    .style("stroke", "black")
-                    .attr("d", d3.arc().innerRadius(520).outerRadius(540));
+            .attr("class", "chord-group");
 
-                // Add the label
+        group.append("path")
+            .style("fill", (d, i) => colors[i])
+            .style("stroke", "black")
+            .attr("d", d3.arc().innerRadius(radius - 30).outerRadius(radius - 10));
+
+        // Add group labels
+        group.append("text")
+            .each(function (d, i) {
                 const angle = (d.startAngle + d.endAngle) / 2;
-                const x = Math.sin(angle) * 570; // 570 is just outside the arc
-                const y = -Math.cos(angle) * 570;
+                const x = Math.sin(angle) * (radius + 20);
+                const y = -Math.cos(angle) * (radius + 20);
                 d3.select(this)
-                    .append("text")
                     .attr("x", x)
                     .attr("y", y)
                     .attr("text-anchor", angle > Math.PI ? "end" : "start")
                     .attr("alignment-baseline", "middle")
                     .attr("transform", `rotate(${(angle * 180) / Math.PI},${x},${y})`)
                     .text(inputData.labels ? inputData.labels[i] : `Group ${i + 1}`)
-                    .style("font-size", "1.5em") // Larger font for readability
+                    .style("font-size", "1.2em")
                     .style("fill", "#222");
             });
 
-        // Add the links between groups
-        svg.datum(res)
+        // Add ribbons (connections)
+        const ribbons = svg.datum(res)
             .append("g")
-            .selectAll("path")
-            .data(function (d) {
-                return d;
-            })
+            .selectAll("path.chord-ribbon")
+            .data(d => d)
             .enter()
             .append("path")
-            .attr("d", d3.ribbon().radius(520)) // Increased radius
-            .style("fill", function (d) {
-                return colors[d.source.index];
-            })
-            .style("stroke", "black");
+            .attr("class", "chord-ribbon")
+            .attr("d", d3.ribbon().radius(radius - 30))
+            .style("fill", d => colors[d.source.index])
+            .style("stroke", "black")
+            .style("opacity", 1);
+
+        // --- Hover effects (as before) ---
+        ribbons.on("mouseover", function(event, d) {
+            const sourceIndex = d.source.index;
+            ribbons.transition().duration(200)
+                .style("opacity", r => r.source.index === sourceIndex ? 1 : 0.1);
+
+            const targetIndices = new Set(
+                res.filter(r => r.source.index === sourceIndex).map(r => r.target.index)
+            );
+            targetIndices.add(sourceIndex);
+
+            group.transition().duration(200)
+                .style("opacity", (g, i) => targetIndices.has(i) ? 1 : 0.1);
+
+            group.select("path")
+                .transition().duration(200)
+                .style("stroke-width", (g, i) => i === sourceIndex ? "4px" : "1px");
+        });
+
+        ribbons.on("mouseout", function() {
+            ribbons.transition().duration(200).style("opacity", 1);
+            group.transition().duration(200).style("opacity", 1);
+            group.select("path")
+                .transition().duration(200)
+                .style("stroke-width", "1px");
+        });
+
+        group.on("mouseover", function(event, d) {
+            const groupIndex = d.index;
+            const connectedGroups = new Set([groupIndex]);
+            res.forEach(ribbon => {
+                if (ribbon.source.index === groupIndex) connectedGroups.add(ribbon.target.index);
+                if (ribbon.target.index === groupIndex) connectedGroups.add(ribbon.source.index);
+            });
+
+            ribbons.transition().duration(200)
+                .style("opacity", r =>
+                    r.source.index === groupIndex || r.target.index === groupIndex ? 1 : 0.1
+                );
+
+            group.transition().duration(200)
+                .style("opacity", (g, i) => connectedGroups.has(i) ? 1 : 0.1);
+
+            d3.select(this).select("path")
+                .transition().duration(200)
+                .style("stroke-width", "4px");
+        });
+
+        group.on("mouseout", function(event, d) {
+            ribbons.transition().duration(200).style("opacity", 1);
+            group.transition().duration(200).style("opacity", 1);
+            d3.select(this).select("path")
+                .transition().duration(200)
+                .style("stroke-width", "1px");
+        });
     }
 </script>
 
 <h2 class="h2 my-4">Chord Graph</h2>
-<div class="flex flex-row items-start gap-8">
-    <div id="chord-graph"></div>
-    {#if inputData.labels}
-        <div class="bg-white rounded-lg shadow p-6 mt-8 min-w-[220px]">
-            <h3 class="font-bold mb-4 text-lg">Legend</h3>
-            <ul class="space-y-3">
-                {#each inputData.labels as label, i}
-                    <li class="flex items-center space-x-3">
-                        <span class="inline-block w-6 h-6 rounded-full border border-gray-300" style="background:{colors[i]}"></span>
-                        <span class="text-base">{label}</span>
-                    </li>
-                {/each}
-            </ul>
-        </div>
-    {/if}
-</div>
+<div id={graphId} bind:this={container} class="w-full h-[70vh] min-h-[400px]"></div>

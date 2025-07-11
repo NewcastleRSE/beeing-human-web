@@ -1,7 +1,7 @@
 <script>
     import * as d3 from "d3";
     import { onMount } from "svelte";
-    let { inputData } = $props();
+    let { inputData, graphId = "network-graph-" + Math.random().toString(36).slice(2, 10) } = $props();
 
     let container;
     let width = 800;
@@ -18,7 +18,7 @@
     onMount(() => {
         getContainerSize();
         window.addEventListener("resize", handleResize);
-        if (document.getElementById("network-graph")) {
+        if (document.getElementById(graphId)) {
             buildGraph();
         }
         return () => {
@@ -27,8 +27,7 @@
     });
 
     function handleResize() {
-        // Remove old SVG and redraw with new size
-        d3.select("#network-graph svg").remove();
+        d3.select(`#${graphId} svg`).remove();
         getContainerSize();
         buildGraph();
     }
@@ -39,7 +38,7 @@
             innerHeight = height - margin.top - margin.bottom;
 
         var svg = d3
-            .select("#network-graph")
+            .select(`#${graphId}`)
             .append("svg")
             .attr("width", width)
             .attr("height", height)
@@ -223,4 +222,4 @@
 </script>
 
 <h2 class="h2 my-4">Network Graph</h2>
-<div id="network-graph" bind:this={container} class="w-full h-[70vh] min-h-[400px]"></div>
+<div id={graphId} bind:this={container} class="w-full h-[70vh] min-h-[400px]"></div>

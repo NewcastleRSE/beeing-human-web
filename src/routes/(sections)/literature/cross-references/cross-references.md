@@ -19,12 +19,26 @@ order: 4
     import NetworkGraph from '$lib/NetworkGraph.svelte'
     import DataTable from '$lib/DataTable.svelte'
     import ChordGraph from '$lib/ChordGraph.svelte'
+    import TextDivider from '$lib/TextDivider.svelte'
 
-    let { data } = $props()
+    let { inputData } = $props()
+
 </script>
 
 <ByLine author={author} date={date} type={type} title={title}/>
 
-<NetworkGraph inputData = {data.xreferences}/>
-<ChordGraph inputData = {data.flowMatrix}/>
-<DataTable inputData = {data.nodesLinksCount}/>
+# Cross-reference analysis for 1623
+
+<NetworkGraph inputData = {inputData[0].xreferences}/>
+<ChordGraph inputData = {inputData[0].flowMatrix}/>
+<DataTable inputData = {inputData[0].nodesLinksCount}/>
+
+
+<TextDivider/>
+
+
+# Cross-reference analysis for 1609
+
+<NetworkGraph inputData = {inputData[1].xreferences}/>
+<ChordGraph inputData = {inputData[1].flowMatrix}/>
+<DataTable inputData = {inputData[1].nodesLinksCount}/>
