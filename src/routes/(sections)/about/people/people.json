@@ -35,7 +35,7 @@
         "url": "people/bennett",
         "title": "Senior Lecturer",
         "affiliation": "Newcastle University",
-        "bio": "Bennett Hogg teaches musicology and composition at Newcastle University and is a keen amateur natural historian. He has researched extensively in the fields of both scholarly and creative practices in the areas of environmental sound (AHRC '<a href='https://landscapequartet.org/' target='_blank'>Landscape Quartet</a>', 2012-2014), biophonics, and relationships between music and nature. From February to September 2014 he was Austrian Science Fund (FWF) research fellow at Kunst Universitat, Graz on the 'Emotional Improvisation' project led by Prof Deniz Peters. Since 2010 he has collaborated with German flautist and environmental sound artist <a href='https://sabvog.de/' target='_blank'>Sabine Vogel</a> of Berlin's Splitter Orchester. His most recent work has included the role played by aesthetics and spatial awareness in data sonification (Leverhulme Trust 2021-2024; UKRI 2025-2027), and the early atonal music of Anton von Webern, specifically its connetion with ideas of space/place and the natural environment. He kept bees as a teenager and came perilously close to becoming an environmental scientist before opting to study music as an undergraduate.",
+        "bio": "Bennett Hogg teaches musicology and composition at Newcastle University and is a keen amateur natural historian. He has researched extensively in the fields of both scholarly and creative practices in the areas of environmental sound (AHRC '<a href='https://landscapequartet.org/' target='_blank'>Landscape Quartet</a>', 2012-2014), biophonics, and relationships between music and nature. From February to September 2014 he was Austrian Science Fund (FWF) research fellow at Kunst Universitat, Graz on the 'Emotional Improvisation' project led by Prof Deniz Peters. Since 2010 he has collaborated with German flautist and environmental sound artist <a href='https://sabvog.de/' target='_blank'>Sabine Vogel</a> of Berlin's Splitter Orchester. His most recent work has included the role played by aesthetics and spatial awareness in data sonification (<a href='https://projectradical.github.io/about/' target='_blank'>Leverhulme Trust 2021-2024</a>; <a href='https://sonicintangibles.github.io/about/' target='_blank'>UKRI 2025-2027</a>), and the early atonal music of Anton von Webern, specifically its connetion with ideas of space/place and the natural environment. He kept bees as a teenager and came perilously close to becoming an environmental scientist before opting to study music as an undergraduate.",
         "role": "core"
     },
     "magnus": {
@@ -289,5 +289,30 @@
         "affiliation": "University of Cambridge",
         "bio": "Jess Dunmore is a PhD student in English Literature at the University of Cambridge. Having graduated from the University of Oxford, Jess studied an MPhil at Cambridge before progressing onto a PhD. Her research, which is generously funded by the Cambridge Trust and Newnham College, recovers the 'elemental ecopoetics' of early modern natural philosophy. Informed by the nexus of material, ecological, and poetic encounters that underpin her research, she embraces the opportunities and challenges posed by creative, interdisciplinary forms of criticism. When not immersed in the seventeenth century, Jess can usually be found in the lido or running out and about in the countryside.",
         "role": "contributor"
+    },
+    "emily": {
+        "name": "Emily Doolittle",
+        "img": "assets/people/Emily_Doolittle.jpg",
+        "url": "people/emily",
+        "title": "Athenaeum Research Fellow and Lecturer in Composition",
+        "affiliation": "Royal Conservatoire of Scotland",
+        "bio": "Dr Emily Doolittle is a Canadian-born, Glasgow-based music researcher and composer with an ongoing interest in zoomusicology, the study of the music-like aspects of non-human animal song. Doolittle's zoomusicological outputs include compositions, inter-species improvisations, musicological and cultural studies, and interdisciplinary scientific collaborations. Other research interests include gender and creativity, storytelling through music, and environmental activism and the arts. In addition to her own interdisciplinary research, she facilitates interdisciplinary research for others through the founding and co-organizing of <a href='https://shareinterdisciplinary.co.uk/' target='_blank'>SHARE (Science, Humanities and Arts Research Exchange)</a> and <a href='https://shareinterdisciplinary.co.uk/projects/rascal/' target='_blank'>RASCAL (Research on Animal Songs in Culture, Art and Literature)</a>. Doolittle is an Athenaeum Research Fellow and Lecturer in Composition at the Royal Conservatoire of Scotland, where she has worked since 2017.",
+        "role": "advisory-board",
+        "web": {
+            "staff": "https://www.rcs.ac.uk/bio/emily-doolittle/",
+            "personal": "https://emilydoolittle.com/"
+        }
+    },
+    "james": {
+        "name": "James Cummings",
+        "img": "assets/people/james_cummings.jpg",
+        "url": "people/james",
+        "title": "Reader in Digital Textual Studies and Late Medieval Literature",
+        "affiliation": "Newcastle University",
+        "bio": "<a href='https://www.ncl.ac.uk/elll/people/profile/jamescummings.html' target='_blank'>James Cummings</a> is the Reader in Digital Textual Studies and Late-Medieval Literature in the <a href='https://www.ncl.ac.uk/elll/' target='_blank'>School of English</a> at <a href='https://www.ncl.ac.uk/' target='_blank'>Newcastle University</a>. He has a long history of volunteering for the <a href='https://tei-c.org/' target='_blank'>Text Encoding Initiative Consortium</a>, and a lot of his research relates to the creation, analysis, and publicaton of TEI-encoded documents. His late-medieval research interests relate to the history and editing of early performance texts, and he has collaborated for a long time with the <a href='https://ereed.org/' target='_blank'>Records of Early English Drama</a> project. He has helped instigate a number of Digital Humanities outreach, training, and awareness activities including <a href='https://digital.humanities.ox.ac.uk/digital-humanities-oxford-summer-school' target='_blank'>DHOxSS</a>, <a href='http://dhawards.org/' target='_blank'>DH Awards</a>, and <a href='https://digitalmedievalist.org/' target='_blank'>Digital Medievalist</a>. He has worked with many projects, but has particularly enjoyed advising the <em>Bee-ing Human</em> project because of its inherent interdisciplinarity.",
+        "role": "advisory-board",
+        "web": {
+            "staff": "https://www.ncl.ac.uk/elll/people/profile/jamescummings.html"
+        }
     }
 }
