@@ -3,9 +3,9 @@ title: Cross-references
 id: cross-references
 parent: literature
 link: literature/cross-references
-lead: "something something something"
-img: 'assets/articles/book-hive/hive-fp.jpg'
-imgAlt: 'detail of the Feminine Monarchie frontespiece (1623) showing an illustration of a hive: a stylised series of hexagons with a few oversized bees over it. Around the hive the words: Solertia et Labore; below: Socordiam Lvimvs'
+lead: "A draft visualisation of the internal cross-referencing systems in the 1623 and 1609 editions of the Feminine Monarchie"
+img: 'assets/articles/cross-references/banner-rotated.jpg'
+imgAlt: 'A spide web with morning dew'
 type: data
 author: tiago
 date: 2025/07/10
@@ -21,11 +21,17 @@ order: 4
     import ChordGraph from '$lib/ChordGraph.svelte'
     import TextDivider from '$lib/TextDivider.svelte'
 
+    import AdditionalInfoBox from '$lib/AdditionalInfoBox.svelte'
+
     let { inputData } = $props()
 
 </script>
 
 <ByLine author={author} date={date} type={type} title={title}/>
+
+<AdditionalInfoBox title = 'This article is a draft'>
+    
+</AdditionalInfoBox>
 
 # Cross-reference analysis for 1623
 
