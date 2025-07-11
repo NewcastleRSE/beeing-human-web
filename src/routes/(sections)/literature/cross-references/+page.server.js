@@ -38,18 +38,18 @@ export async function load({ fetch }) {
             links: xreferences
         };
 
-        // create an object that orders the nodes by number of outbound links
+        // create an object that orders the nodes by number of outbound links to other nodes
         let nodesByOutlinks = nodeLinks.nodes.map(node => {
-            // count the number of links where this node is the source
-            let outboundCount = nodeLinks.links.filter(link => link.source === node.id).length;
+            // count the number of links where this node is the source and the target is NOT the same node
+            let outboundCount = nodeLinks.links.filter(link => link.source === node.id && link.target !== node.id).length;
             // return a new object with the node's properties and the outbound count
             return { ...node, outboundCount };
         });
 
-        // create an object that orders the nodes by number of inbound links
+        // create an object that orders the nodes by number of inbound links from other nodes
         let nodesByInlinks = nodeLinks.nodes.map(node => {
-            // count the number of links where this node is the target
-            let inboundCount = nodeLinks.links.filter(link => link.target === node.id).length;
+            // count the number of links where this node is the target and the source is NOT the same node
+            let inboundCount = nodeLinks.links.filter(link => link.target === node.id && link.source !== node.id).length;
             // return a new object with the node's properties and the inbound count
             return { ...node, inboundCount };
         });
