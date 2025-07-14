@@ -73,6 +73,41 @@ async function processCrossRefCSV(url) {
     };
 }
 
+async function fetchClassicalAuthors(url) {
+    const res = await fetch(url);
+    if (!res.ok) return { error: 'Failed to load content' };
+
+    const data = await res.text();
+    let parsedData = csvParse(data, (d) => d);
+
+    // find unique values for source and target
+    let uniqueSources = [...new Set(parsedData.map(d => d.source))];
+    let uniqueTargets = [...new Set(parsedData.map(d => d.target))];
+
+    // join the two arrays to create a combined list of authors
+    let nodes = [...new Set([...uniqueSources, ...uniqueTargets])].map(author => ({
+        id: author,
+        name: author
+    }));
+
+    // extract the data array in parsedData and edit each entry to include source and destination, but renaming 'destination' to 'target'
+    let xreferences = parsedData.map(entry => ({
+        source: entry.source,
+        target: entry.target,
+    }));
+
+    // build the node links object
+    let nodeLinks = {
+        nodes: nodes,
+        links: xreferences
+    };
+
+    return {
+        classicalXreferences: { ...nodeLinks }
+    }
+
+}
+
 export async function load({ fetch }) {
     // List of CSV URLs to process
     const urls = [
@@ -81,13 +116,20 @@ export async function load({ fetch }) {
         // Add more URLs here as needed
     ];
 
+    const classicalUrls = [
+        'https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/refs/heads/data-analysis/data-analysis/classical-refs-1623.csv',
+        'https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/refs/heads/data-analysis/data-analysis/classical-refs-1609.csv'
+    ];
+
     // Process all files in parallel
     const results = await Promise.all(urls.map(url => processCrossRefCSV(url)));
+    const classicalResults = await Promise.all(classicalUrls.map(url => fetchClassicalAuthors(url)));
 
     // You can return all results, or just the first if only one file is used
     // Here, return an object keyed by file index (or you could use a label)
 
     return {
-        datasets: results
+        datasets: results,
+        classicalDatasets: classicalResults,
     };
 }
