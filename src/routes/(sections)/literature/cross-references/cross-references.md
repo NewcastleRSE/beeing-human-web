@@ -23,7 +23,7 @@ order: 4
 
     import AdditionalInfoBox from '$lib/AdditionalInfoBox.svelte'
 
-    let { inputData } = $props()
+    let { inputData, classicalData } = $props()
 
 </script>
 
@@ -48,3 +48,9 @@ order: 4
 <NetworkGraph inputData = {inputData[1].xreferences}/>
 <ChordGraph inputData = {inputData[1].flowMatrix}/>
 <DataTable inputData = {inputData[1].nodesLinksCount}/>
+
+# References for 1623
+<NetworkGraph inputData = {classicalData[0].classicalXreferences}/>
+
+# References for 1609
+<NetworkGraph inputData = {classicalData[1].classicalXreferences}/>

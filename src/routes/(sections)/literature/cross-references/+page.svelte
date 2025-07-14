@@ -3,4 +3,4 @@
     let { data } = $props();
 </script>
 
-<Article inputData = {data.datasets}/>
+<Article inputData = {data.datasets} classicalData = {data.classicalDatasets}/>
