@@ -4,8 +4,8 @@ id: cross-references
 parent: literature
 link: literature/cross-references
 lead: "A draft visualisation of the internal cross-referencing systems in the 1623 and 1609 editions of the Feminine Monarchie"
-img: 'assets/articles/cross-references/banner-rotated.jpg'
-imgAlt: 'A spide web with morning dew'
+img: 'assets/articles/cross-references/simon-kadula-DIwC450lRGI-unsplash.jpg'
+imgAlt: 'a group of bees on top of a hive-like background'
 type: data
 author: tiago
 date: 2025/07/10
