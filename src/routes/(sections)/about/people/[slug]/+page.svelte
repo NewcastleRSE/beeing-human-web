@@ -1,6 +1,9 @@
 <script>
     import { base } from "$app/paths";
-    import { capitaliseFirstLetter, makeHtmlId } from "../../../../../utils/stringOperations";
+    import {
+        capitaliseFirstLetter,
+        makeHtmlId,
+    } from "../../../../../utils/stringOperations";
 
     import InjectMD from "$lib/InjectMD.svelte";
     import BuzzwordCard from "$lib/BuzzwordCard.svelte";
@@ -27,7 +30,7 @@
   <path d="M32 16c0 8.837-7.163 16-16 16-8.838 0-16-7.163-16-16C0 7.162 7.162 0 16 0c8.837 0 16 7.162 16 16Z" />
   <path d="M18.813 9.637h-5.45v13.9h5.474c4.555 0 7.35-3.378 7.35-6.95 0-1.635-.562-3.372-1.77-4.704-1.215-1.336-3.065-2.246-5.605-2.246ZM18.6 21.3h-2.813v-9.425H18.5c1.823 0 3.12.552 3.96 1.4.842.849 1.252 2.021 1.252 3.312 0 .784-.239 1.967-.993 2.948-.745.969-2.01 1.765-4.119 1.765Zm5.311-4.026c-.251 1.74-1.494 4.276-5.311 4.276h-3.063H18.6c3.817 0 5.06-2.536 5.311-4.276Zm1.812-2.405c-.657-2.601-2.85-4.982-6.91-4.982h-5.2 5.2c4.06 0 6.253 2.38 6.91 4.982Zm.215 1.718ZM8.363 9.675v13.887h2.425V9.675H8.363Zm2.175 13.637H8.612h1.925ZM9.575 8.65c.84 0 1.513-.689 1.513-1.513 0-.823-.673-1.512-1.513-1.512-.838 0-1.512.674-1.512 1.513 0 .823.672 1.512 1.512 1.512Z" fill="#fff"/>
 </svg>`;
-            } else if(key === "bluesky") {
+            } else if (key === "bluesky") {
                 svg = `<svg class="${iconSize} fill-black hover:fill-gray-500" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
 <path d="M351.121 315.106C416.241 363.994 486.281 463.123 512 516.315C537.719 463.123 607.759 363.994 672.879 315.106C719.866 279.83 796 252.536 796 339.388C796 356.734 786.055 485.101 780.222 505.943C759.947 578.396 686.067 596.876 620.347 585.691C735.222 605.242 764.444 670.002 701.333 734.762C581.473 857.754 529.061 703.903 515.631 664.481C513.169 657.254 512.017 653.873 512 656.748C511.983 653.873 510.831 657.254 508.369 664.481C494.939 703.903 442.527 857.754 322.667 734.762C259.556 670.002 288.778 605.242 403.653 585.691C337.933 596.876 264.053 578.396 243.778 505.943C237.945 485.101 228 356.734 228 339.388C228 252.536 304.134 279.83 351.121 315.106Z"/>
 </svg>`;
@@ -40,11 +43,13 @@
     }
 </script>
 
-<div class="flex flex-col md:flex-row md:items-start gap-4 md:w-4/5 mx-auto md:my-20">
+<div
+    class="flex flex-col md:flex-row md:items-start gap-4 md:w-4/5 mx-auto md:my-20"
+>
     <div class="flex flex-col gap-4 items-center">
         <img
             class="rounded-full max-w-40 md:max-w-80"
-            src="{base}/{personData.img}"
+            src="{base}/medium/{personData.img}"
             alt="A picture of {personData.name}"
         />
         <div
@@ -93,7 +98,15 @@
                                 </g></svg
                             >
                         {:else if key === "googleScholar"}
-                        <svg class="{iconSize} fill-current text-black hover:text-gray-500" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M5.242 13.769 0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+                            <svg
+                                class="{iconSize} fill-current text-black hover:text-gray-500"
+                                viewBox="0 0 24 24"
+                                role="img"
+                                xmlns="http://www.w3.org/2000/svg"
+                                ><path
+                                    d="M5.242 13.769 0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"
+                                /></svg
+                            >
                         {:else}
                             <svg
                                 class="{iconSize} fill-current text-black hover:text-gray-500"
@@ -156,35 +169,44 @@
         <div class="flex flex-col">
             <h3 class="h3 text-4xl">{personData.name}</h3>
             {#if personData.title || personData.affiliation}
-            <span class="h4 text-gray-500 text-lg italic">{#if personData.title}{personData.title}{/if} {#if personData.affiliation}· {personData.affiliation}{/if}</span>
+                <span class="h4 text-gray-500 text-lg italic"
+                    >{#if personData.title}{personData.title}{/if}
+                    {#if personData.affiliation}· {personData.affiliation}{/if}</span
+                >
             {/if}
         </div>
-        <InjectMD content={personData.bio} layout= {false} />
+        <InjectMD content={personData.bio} layout={false} />
         <div class="mt-6">
-        {#if personData.articles.length > 0}
-            <div>
-                <h4 class="h4 mt-6 mb-2 font-thin text-2xl">Articles</h4>
-                <ul class="flex flex-col gap-2 list-disc">
-                    {#each personData.articles as article}
-                        <li class="ml-12 text-lg">
-                            <a href="{base}/{article.url}" class="anchor"
-                                >{article.title}</a
-                            > · <a class="italic text-gray-500" href="/{article.parent}">{capitaliseFirstLetter(article.parent)}</a>
-                        </li>
-                    {/each}
-                </ul>
-            </div>
-        {/if}
-        {#if personData.buzzwords.length > 0}
-            <div class="flex flex-col gap-4 md:w-2/3">
-                <h4 class="h4 mt-6 mb-2 font-thin text-2xl">Buzzwords</h4>
+            {#if personData.articles.length > 0}
+                <div>
+                    <h4 class="h4 mt-6 mb-2 font-thin text-2xl">Articles</h4>
+                    <ul class="flex flex-col gap-2 list-disc">
+                        {#each personData.articles as article}
+                            <li class="ml-12 text-lg">
+                                <a href="{base}/{article.url}" class="anchor"
+                                    >{article.title}</a
+                                >
+                                ·
+                                <a
+                                    class="italic text-gray-500"
+                                    href="/{article.parent}"
+                                    >{capitaliseFirstLetter(article.parent)}</a
+                                >
+                            </li>
+                        {/each}
+                    </ul>
+                </div>
+            {/if}
+            {#if personData.buzzwords.length > 0}
+                <div class="flex flex-col gap-4 md:w-2/3">
+                    <h4 class="h4 mt-6 mb-2 font-thin text-2xl">Buzzwords</h4>
                     {#each personData.buzzwords as buzzword}
-                    <div class="md:ml-6">
-                    <BuzzwordCard
-                    {buzzword}
-                /></div>
+                        <div class="md:ml-6">
+                            <BuzzwordCard {buzzword} />
+                        </div>
                     {/each}
-            </div>
-        {/if}</div>
+                </div>
+            {/if}
+        </div>
     </div>
 </div>

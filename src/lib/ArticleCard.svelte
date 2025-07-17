@@ -8,7 +8,7 @@
 <article class="flex flex-col items-start justify-between rounded-lg group hover:ring-8 hover:ring-primary-300 ring-offset-8 ring-primary-300/25 transition-all transition-c duration-500 motion-reduce:transition-none">
   <InternalLink link = {cardObject.link} class="no-underline">
     <div class="relative w-full">
-      <img src="{cardObject.img}" alt="{cardObject.imgAlt}" class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]">
+      <img src="medium/{cardObject.img}" alt="{cardObject.imgAlt}" class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]">
       <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
     </div>
     <div class="max-w-xl">
