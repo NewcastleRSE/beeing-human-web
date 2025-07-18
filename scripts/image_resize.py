@@ -1,5 +1,6 @@
 import os
 from PIL import Image
+from shutil import rmtree
 
 # Set your static directory
 STATIC_DIR = os.path.join(os.path.dirname(__file__), '..', 'static')
@@ -35,32 +36,42 @@ def resize_and_crop(img, orig_size, size):
     
     return img_copy
 
-for root, dirs, files in os.walk(STATIC_DIR):
-    # Skip the output folders to avoid recursion
-    if os.path.abspath(root) in [os.path.abspath(THUMBNAIL_DIR), os.path.abspath(MEDIUM_DIR), os.path.abspath(CROP_DIR)]:
-        continue
-    for fname in files:
-        if is_image(fname):
-            fpath = os.path.join(root, fname)
-            # Preserve subfolder structure in output dirs
-            rel_dir = os.path.relpath(root, STATIC_DIR)
-            thumb_out_dir = os.path.join(THUMBNAIL_DIR, rel_dir)
-            med_out_dir = os.path.join(MEDIUM_DIR, rel_dir)
-            crop_out_dir = os.path.join(CROP_DIR, rel_dir)
-            os.makedirs(thumb_out_dir, exist_ok=True)
-            os.makedirs(med_out_dir, exist_ok=True)
-            os.makedirs(crop_out_dir, exist_ok=True)
-            try:
-                with Image.open(fpath) as img:
-                    # Thumbnail
-                    thumb = resize_keep_aspect(img, THUMBNAIL_SIZE)
-                    thumb.save(os.path.join(thumb_out_dir, fname))
-                    # Medium
-                    med = resize_keep_aspect(img, MEDIUM_SIZE)
-                    med.save(os.path.join(med_out_dir, fname))
-                    print(f"Processed {os.path.relpath(fpath, STATIC_DIR)}")
-                    # Crop
-                    crop = resize_and_crop(img, MEDIUM_SIZE, CROP_SIZE)
-                    crop.save(os.path.join(crop_out_dir, fname))
-            except Exception as e:
-                print(f"Error processing {fpath}: {e}")
+
+def main():
+    print("Starting image processing...")
+    for dir_path in [THUMBNAIL_DIR, MEDIUM_DIR, CROP_DIR]:
+        # Clear existing output directories
+        if os.path.exists(dir_path):
+            rmtree(dir_path)
+    for root, dirs, files in os.walk(STATIC_DIR):
+        # Skip the output folders to avoid recursion
+        if os.path.abspath(root) in [os.path.abspath(THUMBNAIL_DIR), os.path.abspath(MEDIUM_DIR), os.path.abspath(CROP_DIR)]:
+            continue
+        for fname in files:
+            if is_image(fname):
+                fpath = os.path.join(root, fname)
+                # Preserve subfolder structure in output dirs
+                rel_dir = os.path.relpath(root, STATIC_DIR)
+                thumb_out_dir = os.path.join(THUMBNAIL_DIR, rel_dir)
+                med_out_dir = os.path.join(MEDIUM_DIR, rel_dir)
+                crop_out_dir = os.path.join(CROP_DIR, rel_dir)
+                os.makedirs(thumb_out_dir, exist_ok=True)
+                os.makedirs(med_out_dir, exist_ok=True)
+                os.makedirs(crop_out_dir, exist_ok=True)
+                try:
+                    with Image.open(fpath) as img:
+                        # Thumbnail
+                        thumb = resize_keep_aspect(img, THUMBNAIL_SIZE)
+                        thumb.save(os.path.join(thumb_out_dir, fname))
+                        # Medium
+                        med = resize_keep_aspect(img, MEDIUM_SIZE)
+                        med.save(os.path.join(med_out_dir, fname))
+                        # Crop
+                        crop = resize_and_crop(img, MEDIUM_SIZE, CROP_SIZE)
+                        crop.save(os.path.join(crop_out_dir, fname))
+                        print(f"Processed {os.path.relpath(fpath, STATIC_DIR)}")
+                except Exception as e:
+                    print(f"Error processing {fpath}: {e}")
+
+if __name__ == "__main__":
+    main()
