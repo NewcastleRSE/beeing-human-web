@@ -4,7 +4,7 @@ test("Page loads and has expected header", async ({ page }) => {
   await page.goto("/");
   const banner = page.getByTestId('logo-landing-page');
   await expect(banner).toBeVisible();
-  expect(page.getByText('An exploration of Charles')).toBeVisible();
+  expect(page.getByText('Inspired by Charles')).toBeVisible();
 });
 
 test('Page loads and has expected ViewSelector', async({page}) => {
