@@ -41,7 +41,7 @@
     data-testid = {testid}>
         <InternalLink {link} class="group">
             <div
-                style="background-image: url({backgroundImage}); background-position: center;"
+                style="background-image: url(crops/{backgroundImage}); background-position: center;"
                 class="clip-path-hexagon absolute w-[7.75rem] h-[6.875rem] top-[0.438rem] left-[0.438rem] bg-black/50 bg-blend-multiply group-hover:bg-black/75 transition-all ease-in-out duration-300 motion-reduce:transition-none flex justify-center items-center"
             >
                 <p class="size-fit text-white md:text-xl">
@@ -55,7 +55,7 @@
     <div class="" data-testid = {testid}>
         <InternalLink {link} class="group">
         <div
-            style="background-image: url({backgroundImage}); background-position: center;"
+            style="background-image: url(crops/{backgroundImage}); background-position: center;"
             class="clip-path-hexagonBorder w-[8.563rem] h-[7.688rem] bg-secondary-50/75 bg-blend-overlay group-hover:bg-secondary-900/75 transition-all ease-in-out duration-300 motion-reduce:transition-none flex justify-center items-center">
                 <p class="invisible size-fit no-underline text-white text-sm text-center group-hover:visible transition-all ease-in-out duration-300 motion-reduce:transition-none">
                     {text}

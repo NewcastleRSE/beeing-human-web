@@ -30,7 +30,7 @@
     {#each authorArray as authorName}
     <img
         class="inline-block h-12 w-12 md:h-16 md:w-16 rounded-full border-solid border-2 border-primary-500"
-        src="{base}/{people[authorName].img}"
+        src="{base}/thumbnails/{people[authorName].img}"
         alt="A picture of {people[authorName].name}"
     />
     <div class="text-sm flex flex-col">
