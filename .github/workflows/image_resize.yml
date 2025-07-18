@@ -13,10 +13,10 @@ jobs:
             contents: write
 
         steps:
-            - name: Install PIL package
+            - name: Install Pillow package
               run: |
                 python -m pip install --upgrade pip
-                pip install PIL
+                pip install Pillow
             - name: Checkout repository
               uses: actions/checkout@v4
             - name: Run image resize script

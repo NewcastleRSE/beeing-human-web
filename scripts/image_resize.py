@@ -1,5 +1,5 @@
 import os
-from PIL import Image
+from Pillow import Image
 from shutil import rmtree
 
 # Set your static directory
