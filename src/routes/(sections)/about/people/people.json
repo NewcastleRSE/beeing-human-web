@@ -314,5 +314,18 @@
         "web": {
             "staff": "https://www.ncl.ac.uk/elll/people/profile/jamescummings.html"
         }
+    },
+    "rachel": {
+        "name": "Rachel Willie",
+        "img": "assets/people/rachel_willie.jpg",
+        "url": "people/rachel",
+        "title": "Reader in Early Modern Literary Studies",
+        "affiliation": "Liverpool John Moores University",
+        "bio": "Rachel Willie is Reader in Early Modern Literary Studies at Liverpool John Moores University, and she has a background is in English and Music. With the support of the AHRC, she co-founded the Soundscapes in the Early Modern World reseach network and it is through the work of the network that she was introduced to, and became fascinated by, Butler's bee-text. She has published widely on seventeenth-century English literary history and culture, where her research interests include 'the paper stage', emotions, the senses, materiality, politics and religion. Her most recent publication is a co-edited collection with Chloe Preedy on <em>Thomas Nashe and Literary Performance</em>, to which she contributed an essay on how Nashe's voice is ventriloquised in the mid-seventeenth century. She has articles forthcoming on literacy and orality in Nicholas Bownde, embodiment and voice in John Lyly, and soundmaking from the music of the spheres to the music of the beehive.",
+        "role": "advisory-board",
+        "web": {
+            "staff": "https://profiles.ljmu.ac.uk/11090-rachel-willie"
+        },
+        "email": "R.J.Willie@ljmu.ac.uk"
     }
 }
