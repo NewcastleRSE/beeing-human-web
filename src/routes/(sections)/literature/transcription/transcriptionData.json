@@ -15,5 +15,14 @@
         "pdfFallback": "./2023-1081_text.pdf",
         "pdfFallbackStartPage": 5,
         "title": "1623 facsimile"
+    },
+    "1634": {
+        "teiURL": "",
+        "teiMediaRoot": "",
+        "iiifManifest": "https://iiif.wellcomecollection.org/presentation/v2/b30337884",
+        "manifestStartPage": "11",
+        "pdfFallback": "./feminine_monarchie_1634.pdf",
+        "pdfFallbackStartPage": 12,
+        "title": "1634 facsimile"
     }
 }
