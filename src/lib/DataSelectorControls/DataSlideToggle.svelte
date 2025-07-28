@@ -10,9 +10,17 @@
     import { SlideToggle } from "@skeletonlabs/skeleton";
     import { onMount } from "svelte";
 
-    let { options, valueChange, currentValue, disabled = false } = $props();
+    let { options, valueChange, currentValue } = $props();
 
     let slideValue = $state(undefined);
+
+    let disabled = $derived.by(() => {
+        if (currentValue === 'disabled') {
+            return true;
+        } else {
+            return false;
+        }
+    });
 
     onMount(() => {
         if ([true, false].includes(currentValue)) {

@@ -23,6 +23,12 @@
         "manifestStartPage": "11",
         "pdfFallback": "./feminine_monarchie_1634.pdf",
         "pdfFallbackStartPage": 12,
-        "title": "1634 facsimile"
+        "title": "1634 facsimile",
+        "disabledButtons": [
+            "variation",
+            "editorial notes",
+            "translations",
+            "navigator"
+        ]
     }
 }

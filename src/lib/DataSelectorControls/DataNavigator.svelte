@@ -2,10 +2,18 @@
     import { onMount } from "svelte";
 
     // listIndex should be an array of arrays in which the first value is the display name and the second value is the xml:id
-    let { options, valueChange, currentSelected, disabled = false } = $props();
+    let { options, valueChange, currentSelected } = $props();
 
     let selected = $state(0);
     let validValues = [];
+    
+    let disabled = $derived.by(() => {
+        if (currentSelected === 'disabled') {
+            return true;
+        } else {
+            return false;
+        }
+    });
 
     onMount(() => {
 

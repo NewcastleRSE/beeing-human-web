@@ -13,12 +13,20 @@
     import { onMount } from 'svelte';
 
 
-    let {options, valueChange, currentSelected, disabled = false} = $props();
+    let {options, valueChange, currentSelected} = $props();
     let radioValue = $state(undefined);
+    let disabled = $derived.by(() => {
+        if (currentSelected[options.label] === 'disabled') {
+            return true;
+        } else {
+            return false;
+        }
+    });
 
     onMount(() => {
         // choose correct currentSelected value based on label
         let correctCurrentSelected = currentSelected[options.label];
+        
         // checks to see if currentSelected is valid for this selector
         const validValues = Object.values(options.values);
         if (validValues.includes(correctCurrentSelected)) {
@@ -30,6 +38,8 @@
 
 
 </script>
+
+{@debug currentSelected}
 
 
 <div class="flex flex-col gap-2 font-light text-xs md:text-sm  {disabled ? 'opacity-50 cursor-not-allowed' : ''}" data-testid="radio-group-{options.label}">

@@ -90,6 +90,10 @@
     });
 
     $effect(() => {
+        disableButtons(disabledButtons);
+    })
+
+    $effect(() => {
         if (teiViewerState.updateSection) {
             // checks to see if there is any section in state
             if (!teiViewerState.currentSection) {
@@ -658,11 +662,48 @@
         dataViewerState.navigatorChoice = false;
     }
 
+    function disableButtons(disabledButtons) {
+        let buttonDict = {
+            variation: () => {dataViewerState.variationDetail = "disabled"},
+            "editorial notes": () => {dataViewerState.editorialNotes = "disabled"},
+            translations: () => {dataViewerState.translations = "disabled"},
+            "navigator": () => {dataViewerState.activeNavigator = "disabled"},
+        }
+
+        let teiDefaultsDict =  {
+            activeView: "both",
+            variationDetail: "no variation",
+            editorialNotes: false,
+            translations: false,
+            activeNavigator: "titlepage"
+        }
+
+        if (disabledButtons != undefined) {
+            for(const button of disabledButtons) {
+                buttonDict[button]();
+            }
+        } else {
+            for(const key of Object.keys(dataViewerState)) {
+                if (dataViewerState[key] === "disabled") {
+                    dataViewerState[key] = teiDefaultsDict[key];
+                }
+            }
+        }
+    }
+
+    let disabledButtons = $derived.by(() => {
+        if (transcriptionData[dataViewerState.activeDataset] && transcriptionData[dataViewerState.activeDataset]["disabledButtons"]) {
+            return transcriptionData[dataViewerState.activeDataset]["disabledButtons"];
+        } else {
+            return undefined;
+        }
+    });
+
     onMount(() => {
         ready = false;
 
         // if activeDataset contains a value from the science view, reset to 1623
-        if (!["1623", "1609"].includes(dataViewerState.activeDataset)) {
+        if (!["1623", "1609", "1634"].includes(dataViewerState.activeDataset)) {
             dataViewerState.activeDataset = "1623";
             dataViewerState.activeView = "both";
         }
@@ -748,6 +789,7 @@
         ready = true;
     });
 </script>
+
 
 <svelte:window bind:innerWidth={windowSize} />
 
