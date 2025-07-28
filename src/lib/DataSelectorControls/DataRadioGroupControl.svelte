@@ -31,7 +31,6 @@
 
 </script>
 
-{@debug radioValue}
 
 <div class="flex flex-col gap-2 font-light text-xs md:text-sm  {disabled ? 'opacity-50 cursor-not-allowed' : ''}" data-testid="radio-group-{options.label}">
     <label for="radio-group-{options.label}" class="hidden md:block font-light text-sm pl-4"
