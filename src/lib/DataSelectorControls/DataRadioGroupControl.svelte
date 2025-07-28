@@ -13,7 +13,7 @@
     import { onMount } from 'svelte';
 
 
-    let {options, valueChange, currentSelected} = $props();
+    let {options, valueChange, currentSelected, disabled = false} = $props();
     let radioValue = $state(undefined);
 
     onMount(() => {
@@ -31,8 +31,9 @@
 
 </script>
 
+{@debug radioValue}
 
-<div class="flex flex-col gap-2 font-light text-xs md:text-sm" data-testid="radio-group-{options.label}">
+<div class="flex flex-col gap-2 font-light text-xs md:text-sm  {disabled ? 'opacity-50 cursor-not-allowed' : ''}" data-testid="radio-group-{options.label}">
     <label for="radio-group-{options.label}" class="hidden md:block font-light text-sm pl-4"
         >{options.label}</label
     >
@@ -45,15 +46,15 @@
     >
         {#key options}
         {#each Object.entries(options.values) as [label, value]}
-            <RadioItem bind:group={radioValue} name={label} value={value} onchange={() => valueChange({origin: options.label, newValue: value})} id="{makeHtmlId(options.label)}-{makeHtmlId(value)}-button"
+            <RadioItem bind:group={radioValue} name={label} value={value} onchange={() => { !disabled ? valueChange({origin: options.label, newValue: value}) : radioValue = options.defaultValue }} id="{makeHtmlId(options.label)}-{makeHtmlId(value)}-button"
                             >
                             {#if options.keepLabelsCase}
                                 {label}
                             {:else}
                                 {label.toLowerCase()}
                             {/if}
-                            </RadioItem
-                        >
+                            </RadioItem>
+
         {/each}
         {/key}
     </RadioGroup>
