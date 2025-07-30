@@ -5,5 +5,6 @@ export const dataViewerState = $state({
     editorialNotes: false,
     activeNavigator: '',
     navigatorChoice: false,
-    translations: false
+    translations: false,
+    viewOptionsDisabled: false,
 })

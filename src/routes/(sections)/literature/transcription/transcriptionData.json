@@ -5,7 +5,12 @@
         "manifestStartPage": "1",
         "pdfFallback": "./bim_early-english-books-1475-1640_the-feminine-monarchie-_butler-charles_1609.pdf",
         "pdfFallbackStartPage": 1,
-        "title": "1609 facsimile"
+        "title": "1609 facsimile",
+        "disabledButtons": [
+            "variation",
+            "editorial notes",
+            "translations"
+        ]
     },
     "1623": {
         "teiURL": "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/refs/heads/dev/1623_consolidated.xml",
@@ -28,7 +33,8 @@
             "variation",
             "editorial notes",
             "translations",
-            "navigator"
+            "navigator",
+            "view"
         ]
     }
 }
