@@ -6,6 +6,14 @@
 
     let selected = $state(0);
     let validValues = [];
+    
+    let disabled = $derived.by(() => {
+        if (currentSelected === 'disabled') {
+            return true;
+        } else {
+            return false;
+        }
+    });
 
     onMount(() => {
 
@@ -36,7 +44,7 @@
 
 {#if options != undefined}
     <div
-        class="flex text-4xl md:text-5xl justify-center items-center text-gray-600 w-48"
+        class="flex text-4xl md:text-5xl justify-center items-center text-gray-600 w-48 {disabled ? 'opacity-50 cursor-not-allowed' : ''}"
     >
         <button
             class="hover:font-bold hover:cursor-pointer hover:text-black transition-all ease-in-out duration-200 motion-reduce:transition-none"
@@ -47,7 +55,7 @@
                 selected = options.listIndex[currentlySelectedIndex - 1][1];
                 changeSelected();
             }}
-            disabled={selected == options.listIndex[0][1]} aria-label="Previous section"
+            disabled={!disabled ? selected == options.listIndex[0][1] : disabled} aria-label="Previous section"
         >
             <svg
                 class="size-[32px] fill-secondary-400 hover:fill-secondary-800 rotate-180"
@@ -71,6 +79,7 @@
             class="select text-lg text-center md:text-xl bg-transparent border-none rounded-lg max-w-fit font-pfdisplay hover:font-bold hover:cursor-pointer transition-all ease-in-out duration-200 motion-reduce:transition-none text-black w-40"
             onchange={changeSelected}
             id="navigator-select"
+            disabled={disabled}
         >
             {#each options.listIndex as section}
                 <option value={section[1]}>{section[0]}</option>
@@ -85,8 +94,7 @@
                 selected = options.listIndex[currentlySelectedIndex + 1][1];
                 changeSelected();
             }}
-            disabled={selected ==
-                options.listIndex[options.listIndex.length - 1][1]} aria-label="Next section"
+            disabled={!disabled ? selected == options.listIndex[options.listIndex.length - 1][1] : disabled} aria-label="Next section"
         >
             <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
             <svg

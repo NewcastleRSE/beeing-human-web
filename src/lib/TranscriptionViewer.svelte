@@ -66,6 +66,13 @@
             teiViewerState.updateIIIF = false;
             teiViewerState.updateTEI = false;
             teiViewerState.updateSection = false;
+
+            // resets state for dataviewer
+            dataViewerState.activeNavigator = "titlepage";
+            dataViewerState.translations = false;
+            dataViewerState.variationDetail = "no variation";
+            dataViewerState.editorialNotes = false;
+
         }
     });
 
@@ -90,6 +97,10 @@
     });
 
     $effect(() => {
+        disableButtons(disabledButtons);
+    });
+
+    $effect(() => {
         if (teiViewerState.updateSection) {
             // checks to see if there is any section in state
             if (!teiViewerState.currentSection) {
@@ -101,34 +112,34 @@
                 "1623": {
                     "¶2r": "titlepage",
                     "¶3r": "preface",
-                    "A1v": "dedication",
-                    "A2r": "contents",
-                    "B1r": "ch1",
-                    "D4r": "ch2",
-                    "E4r": "ch3",
-                    "H1r": "ch4",
-                    "I3r": "ch5",
-                    "N3v": "ch6",
-                    "P4r": "ch7",
-                    "S2r": "ch8",
-                    "T1r": "ch9",
-                    "T2v": "ch10",
+                    A1v: "dedication",
+                    A2r: "contents",
+                    B1r: "ch1",
+                    D4r: "ch2",
+                    E4r: "ch3",
+                    H1r: "ch4",
+                    I3r: "ch5",
+                    N3v: "ch6",
+                    P4r: "ch7",
+                    S2r: "ch8",
+                    T1r: "ch9",
+                    T2v: "ch10",
                 },
                 "1609": {
-                    "a1r": "titlepage",
-                    "a2r": "preface",
-                    "a4v": "dedication",
-                    "b1v": "contents",
-                    "A1r": "ch1",
-                    "B8r": "ch2",
-                    "C3v": "ch3",
-                    "D5r": "ch4",
-                    "E5r": "ch5",
-                    "G2r": "ch6",
-                    "H4v": "ch7",
-                    "I7r": "ch8",
-                    "K1r": "ch9",
-                    "K5r": "ch10",
+                    a1r: "titlepage",
+                    a2r: "preface",
+                    a4v: "dedication",
+                    b1v: "contents",
+                    A1r: "ch1",
+                    B8r: "ch2",
+                    C3v: "ch3",
+                    D5r: "ch4",
+                    E5r: "ch5",
+                    G2r: "ch6",
+                    H4v: "ch7",
+                    I7r: "ch8",
+                    K1r: "ch9",
+                    K5r: "ch10",
                 },
             };
 
@@ -175,12 +186,11 @@
                         ch8: 164 + offset,
                         ch9: 168 + offset,
                         ch10: 176 + offset,
-                    }
+                    },
                 };
 
                 let startingPages =
                     startingPagesDict[dataViewerState.activeDataset.toString()];
-
 
                 // check where the current page sits in the starting pages
                 for (const [i, key] of Object.keys(startingPages).entries()) {
@@ -272,6 +282,7 @@
     import transcriptionData from "../routes/(sections)/literature/transcription/transcriptionData.json";
     import { findLastMilestoneBefore } from "../utils/generalHelpers";
     import { isElementVisibleInViewport } from "../utils/teiBehavioursHelper";
+    import { active } from "d3";
 
     function cleanVariationStyles(el) {
         // removes any bg styling for the element
@@ -644,7 +655,7 @@
                         ch9: "K1r",
                         ch10: "K5r",
                     },
-                }
+                };
 
                 let startingSigs =
                     startingSigsDict[dataViewerState.activeDataset.toString()];
@@ -658,11 +669,119 @@
         dataViewerState.navigatorChoice = false;
     }
 
+    function disableButtons(disabledButtons) {
+        let buttonDict = {
+            variation: () => {
+                dataViewerState.variationDetail = "disabled";
+            },
+            "editorial notes": () => {
+                dataViewerState.editorialNotes = "disabled";
+            },
+            translations: () => {
+                dataViewerState.translations = "disabled";
+            },
+            navigator: () => {
+                dataViewerState.activeNavigator = "disabled";
+            },
+            view: () => {
+                // Setting it as disabled would interfere with the facsimile display; although it is a little hacky, the preferred solution is to deactivate the buttons from the transcription viewer
+                let viewOptions = document.querySelector(
+                    "div[data-testid='radio-group-view']",
+                );
+                dataViewerState.activeView = "facsimile";
+                // This flag is so that reactivating the buttons doesn't miss 'view' (which would display the facsimile view)
+                dataViewerState.viewOptionsDisabled = true;
+                if (viewOptions) {
+                    viewOptions.classList.add(
+                        "opacity-50",
+                        "cursor-not-allowed",
+                    );
+                    // add cursor not-allowed to all radio items
+                    let radioItems = viewOptions.querySelectorAll(
+                        "input[type='radio']",
+                    );
+                    for (const item of radioItems) {
+                        item.disabled = true;
+                        item.classList.add("cursor-not-allowed");
+                    }
+                }
+            },
+        };
+
+        let teiDefaultsDict = {
+            activeView: "both",
+            variationDetail: "no variation",
+            editorialNotes: false,
+            translations: false,
+            activeNavigator: "titlepage",
+        };
+
+        let defaultsToButtons = {
+            activeView: "view",
+            variationDetail: "variation",
+            editorialNotes: "editorial notes",
+            translations: "translations",
+            activeNavigator: "navigator",
+        };
+
+        if (disabledButtons && disabledButtons.length > 0) {
+            for (const button of disabledButtons) {
+                buttonDict[button]();
+            }
+        }
+
+        for (const key of Object.keys(dataViewerState)) {
+            if (
+                dataViewerState[key] === "disabled" &&
+                (disabledButtons === undefined || !disabledButtons.includes(defaultsToButtons[key]))
+            ) {
+                dataViewerState[key] = teiDefaultsDict[key];
+            } else if (
+                dataViewerState[key] === "facsimile" &&
+                dataViewerState.viewOptionsDisabled && (disabledButtons === undefined ||
+                !disabledButtons.includes(defaultsToButtons[key]))
+            ) {
+                dataViewerState[key] = teiDefaultsDict[key];
+                dataViewerState.viewOptionsDisabled = false;
+                let viewOptions = document.querySelector(
+                    "div[data-testid='radio-group-view']",
+                );
+                if (viewOptions) {
+                    viewOptions.classList.remove(
+                        "opacity-50",
+                        "cursor-not-allowed",
+                    );
+                    // remove cursor not-allowed from all radio items
+                    let radioItems = viewOptions.querySelectorAll(
+                        "input[type='radio']",
+                    );
+                    for (const item of radioItems) {
+                        item.disabled = false;
+                        item.classList.remove("cursor-not-allowed");
+                    }
+                }
+            }
+        }
+    }
+
+    let disabledButtons = $derived.by(() => {
+        if (
+            transcriptionData[dataViewerState.activeDataset] &&
+            transcriptionData[dataViewerState.activeDataset]["disabledButtons"]
+        ) {
+            return transcriptionData[dataViewerState.activeDataset][
+                "disabledButtons"
+            ];
+        } else {
+            return undefined;
+        }
+    });
+
     onMount(() => {
         ready = false;
 
         // if activeDataset contains a value from the science view, reset to 1623
-        if (!["1623", "1609"].includes(dataViewerState.activeDataset)) {
+        if (!["1623", "1609", "1634"].includes(dataViewerState.activeDataset)) {
             dataViewerState.activeDataset = "1623";
             dataViewerState.activeView = "both";
         }

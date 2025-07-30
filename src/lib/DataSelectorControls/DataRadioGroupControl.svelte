@@ -15,10 +15,18 @@
 
     let {options, valueChange, currentSelected} = $props();
     let radioValue = $state(undefined);
+    let disabled = $derived.by(() => {
+        if (currentSelected[options.label] === 'disabled') {
+            return true;
+        } else {
+            return false;
+        }
+    });
 
     onMount(() => {
         // choose correct currentSelected value based on label
         let correctCurrentSelected = currentSelected[options.label];
+        
         // checks to see if currentSelected is valid for this selector
         const validValues = Object.values(options.values);
         if (validValues.includes(correctCurrentSelected)) {
@@ -28,11 +36,22 @@
         }
     })
 
+    $effect(() => {
+        updateRadioValue(currentSelected[options.label])
+    })
+
+    function updateRadioValue(newValue) {
+        if (Object.values(options.values).includes(newValue)) {
+            radioValue = newValue;
+        } else {
+            radioValue = options.defaultValue;
+        }
+    }
 
 </script>
 
 
-<div class="flex flex-col gap-2 font-light text-xs md:text-sm" data-testid="radio-group-{options.label}">
+<div class="flex flex-col gap-2 font-light text-xs md:text-sm  {disabled ? 'opacity-50 cursor-not-allowed' : ''}" data-testid="radio-group-{options.label}">
     <label for="radio-group-{options.label}" class="hidden md:block font-light text-sm pl-4"
         >{options.label}</label
     >
@@ -45,15 +64,15 @@
     >
         {#key options}
         {#each Object.entries(options.values) as [label, value]}
-            <RadioItem bind:group={radioValue} name={label} value={value} onchange={() => valueChange({origin: options.label, newValue: value})} id="{makeHtmlId(options.label)}-{makeHtmlId(value)}-button"
+            <RadioItem bind:group={radioValue} name={label} value={value} onchange={() => { !disabled ? valueChange({origin: options.label, newValue: value}) : radioValue = options.defaultValue }} id="{makeHtmlId(options.label)}-{makeHtmlId(value)}-button"
                             >
                             {#if options.keepLabelsCase}
                                 {label}
                             {:else}
                                 {label.toLowerCase()}
                             {/if}
-                            </RadioItem
-                        >
+                            </RadioItem>
+
         {/each}
         {/key}
     </RadioGroup>
