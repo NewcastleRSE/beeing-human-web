@@ -36,10 +36,19 @@
         }
     })
 
+    $effect(() => {
+        updateRadioValue(currentSelected[options.label])
+    })
+
+    function updateRadioValue(newValue) {
+        if (Object.values(options.values).includes(newValue)) {
+            radioValue = newValue;
+        } else {
+            radioValue = options.defaultValue;
+        }
+    }
 
 </script>
-
-{@debug currentSelected}
 
 
 <div class="flex flex-col gap-2 font-light text-xs md:text-sm  {disabled ? 'opacity-50 cursor-not-allowed' : ''}" data-testid="radio-group-{options.label}">

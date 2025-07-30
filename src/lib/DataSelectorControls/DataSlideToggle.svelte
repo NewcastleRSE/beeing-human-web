@@ -29,6 +29,18 @@
             slideValue = options.values.default;
         }
     });
+
+    $effect(() => {
+        updateRadioValue(currentValue);
+    })
+
+    function updateRadioValue(newValue) {
+        if ([true, false].includes(newValue)) {
+            slideValue = newValue;
+        } else {
+            slideValue = options.values.default;
+        }
+    }
 </script>
 
 <div

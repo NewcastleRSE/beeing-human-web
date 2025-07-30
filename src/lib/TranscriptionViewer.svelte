@@ -66,6 +66,13 @@
             teiViewerState.updateIIIF = false;
             teiViewerState.updateTEI = false;
             teiViewerState.updateSection = false;
+
+            // resets state for dataviewer
+            dataViewerState.activeNavigator = "titlepage";
+            dataViewerState.translations = false;
+            dataViewerState.variationDetail = "no variation";
+            dataViewerState.editorialNotes = false;
+
         }
     });
 
@@ -719,7 +726,6 @@
 
         if (disabledButtons && disabledButtons.length > 0) {
             for (const button of disabledButtons) {
-                console.log("Disabling button: ", button);
                 buttonDict[button]();
             }
         }
