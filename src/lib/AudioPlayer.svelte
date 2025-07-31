@@ -1,16 +1,14 @@
 <script>
     import { RangeSlider } from "@skeletonlabs/skeleton";
-
     import { onMount } from "svelte";
-
+    import {base} from '$app/paths';
     import PlayIcon from "$lib/icons/PlayIcon.svelte";
     import PauseIcon from "$lib/icons/PauseIcon.svelte";
     import ForwardIcon from "./icons/ForwardIcon.svelte";
     import BackwardIcon from "./icons/BackwardIcon.svelte";
-
     import { secsToMinSecs } from "../utils/MIDIPlaybackHelper";
 
-    let { audioPath } = $props();
+    let { audioPath, artist='N/A', title='N/A', coverImage='https://picsum.photos/200', coverImageAlt='random things' } = $props();
 
     let duration = $state(undefined);
     let currentPlace = $state(undefined);
@@ -42,7 +40,7 @@
     }
 
     onMount(() => {
-        audioElement = document.getElementById("audioPlayer");
+        audioElement = new Audio(`${base}/${audioPath}`);
 
         audioElement.addEventListener("loadeddata", () => {
             duration = audioElement.duration;
@@ -66,15 +64,12 @@
 <div
     class="w-full md:w-2/3 m-auto md:min-h-64 flex flex-col justify-center bg-secondary-50 p-6 rounded-lg shadow" data-testid = "audio-player"
 >
-    <audio id="audioPlayer">
-        <source src={audioPath} type="audio/mpeg" />
-    </audio>
 
     <div class="flex max-w-fit mb-4 md:mb-6 m-auto gap-2 md:gap-4 text-secondary-900">
-        <img class="size-20 md:size-28 rounded-lg border-2 md:border-4 border-primary-800" src="https://picsum.photos/200" alt="random things"/>
+        <img class="size-20 md:size-28 rounded-lg border-2 md:border-4 border-primary-800" src={coverImage} alt={coverImageAlt}/>
         <div class="flex flex-col h-fit md:max-w-40 place-self-center text-center">
-            <p class="text-xs md:text-sm italic font-light">Charles Butler</p>
-            <p class="md:text-lg">Melissomelos, or the Bees Madrigal</p>
+            <p class="text-xs md:text-sm italic font-light">{artist}</p>
+            <p class="md:text-lg">{title}</p>
         </div>
     </div>
     {#if duration != undefined}
