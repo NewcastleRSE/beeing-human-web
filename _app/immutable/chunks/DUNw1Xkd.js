@@ -1,1 +1,0 @@
-try{let e=typeof window<"u"?window:typeof global<"u"?global:typeof globalThis<"u"?globalThis:typeof self<"u"?self:{},d=new e.Error().stack;d&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[d]="6267d191-6470-4b5e-836f-0d85ad91c9b2",e._sentryDebugIdIdentifier="sentry-dbid-6267d191-6470-4b5e-836f-0d85ad91c9b2")}catch{}let n=!1;function l(){n=!0}export{l as e,n as l};
