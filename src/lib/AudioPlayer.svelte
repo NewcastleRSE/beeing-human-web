@@ -7,8 +7,13 @@
     import ForwardIcon from "./icons/ForwardIcon.svelte";
     import BackwardIcon from "./icons/BackwardIcon.svelte";
     import { secsToMinSecs } from "../utils/MIDIPlaybackHelper";
+    
+    import CC from "$lib/icons/CC.svelte";
+    import CCBy from "$lib/icons/CCBY.svelte";
+    import CCNC from "$lib/icons/CCNC.svelte";
+    import CCND from "$lib/icons/CCND.svelte";
 
-    let { audioPath, artist='N/A', title='N/A', coverImage='https://picsum.photos/200', coverImageAlt='random things' } = $props();
+    let { audioPath, artist='N/A', title='N/A', coverImage='https://picsum.photos/200', coverImageAlt='random things', license=undefined } = $props();
 
     let duration = $state(undefined);
     let currentPlace = $state(undefined);
@@ -97,4 +102,16 @@
         </button>
         <button class="btn" onclick={skipFwd}><ForwardIcon class="size-6 fill-secondary-500 stroke-secondary-700 hover:fill-secondary-400 hover:stroke-0 transition-all ease-in-out duration-300 motion-reduce:transition-none" /></button>
     </div>
+    
+    {#if license}
+        <div class="text-xs font-light mt-2">
+            {#if license === 'cc-by-nc-nd'}
+                <p>Licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-ND 4.0</a> <CC/> <CCBy/> <CCNC/> <CCND/></p>
+            {:else if license === 'cc-by-nc-sa'}
+                <p>Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a></p>
+            {:else}
+                <p>License: {license}</p>
+            {/if}
+        </div>
+    {/if}
 </div>
