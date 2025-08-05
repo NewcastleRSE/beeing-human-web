@@ -3,7 +3,7 @@ title: Chapel in the Hive
 id: chapel-in-the-hive
 parent: music
 link: music/chapel-in-the-hive
-lead: "Joseph Campana writes about his collaboration with Kurt Stallmann in 'The Chapel in the Hive', a performance of poetry and inspired by an intriguing passage from Charles Butler's *Feminine Monarchie*."
+lead: "Joseph Campana writes about his collaboration with Kurt Stallmann in 'The Chapel in the Hive', a performance of poetry inspired by an intriguing passage from Charles Butler's *Feminine Monarchie*."
 img: 'assets/articles/chapel-in-the-hive/DSC_0609-67.jpg'
 imgAlt: 'A picture of the interior ceiling of La Sagrada Familia in Barcelona'
 type: article
@@ -24,9 +24,9 @@ date: 2025/08/04
 
 ## Making with Bees, Making with Butler
 
-From early cave paintings to georgic poetry, horror films full of deadly swarms to episodes of *Star Trek* or *Black Mirror*, humans have made culture out of agriculture. Think of the countless images, lyrics, songs, stories, and other responses. These live alongside gardening and husbandry manuals, works of natural history, early scientific explorations of the miniature world of insects through microscopy, and so much more. What emerges is a collective curiosity about bees across millennia.
+From early cave paintings to georgic poetry, horror films full of deadly swarms to episodes of *Star Trek* or *Black Mirror*, humans have made culture out of agriculture. Think of the countless images, lyrics, songs, stories, and other responses. These live alongside gardening and husbandry manuals, works of natural history, early scientific explorations of the miniature world of insects through microscopy, and so much more. What emerges most prominently from that world is a collective curiosity about bees across millennia.
 
-This was the world, some 25 or so years ago, that I entered when I stumbled across Charles Butler’s The Feminine Monarchie at the Albert R. Mann library at Cornell University. As usual, for me, I began what became an abiding interest in bees with a moment in a poem:
+This was the rich world of apiculture I discovered some 25 or so years ago when I stumbled across Charles Butler’s *The Feminine Monarchie* at the Albert R. Mann library at Cornell University. As usual, for me, I began what became an abiding interest in bees with a moment in a poem:
 
 <div class="md:w-fit mx-auto my-4">
 <span class="ml-16">As Bees</span><br/>
@@ -80,7 +80,7 @@ Both that motif and Melissomelos would prove central for our collaboration, touc
 
 That motif weaves through the entire work and it becomes quite literally central at the beginning of the centre section, 'Golden Cell', in which I perform a poem as Kurt improvises on the piano beginning, as you can hear, with that familiar sound. The sound haunted us both–its insistence and its melancholy (at least to some human ears). For the earless bees, who pipe at various times but especially as the would-be queens seek to hatch and kill off their rivals to ascend the ‘throne’, it might be melancholy or murder: take your pick.
 
-<EmbedYTVideo id="1105580012?h=8a784977a8" provider="vimeo"/>
+<EmbedYTVideo id="1105580012?h=8a784977a8" provider="vimeo" credit="Kenya Jeremiah Gillespie"/>
 
 ## Save or Be Saved
 
