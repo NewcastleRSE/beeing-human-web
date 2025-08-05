@@ -8,7 +8,7 @@ export const customClasses = {
     h5: 'h5 font-thin',
     h6: 'h6 font-thin',
     a: 'anchor',
-    blockquote: 'blockquote',
+    blockquote: 'blockquote text-lg font-light not-italic pl-8 my-4 text-secondary-800 w-2/3 mx-auto',
     pre: 'pre',
     code: 'code',
     kbd: 'kbd',
