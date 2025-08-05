@@ -16,7 +16,6 @@
   });
 </script>
 
-{@debug section}
 
 <svelte:head>
   <!-- 100% privacy-first analytics -->
