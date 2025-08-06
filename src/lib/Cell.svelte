@@ -2,13 +2,14 @@
     import { onMount } from "svelte";
     import InternalLink from "./InternalLink.svelte";
     import { capitaliseFirstLetter } from "../utils/stringOperations";
+    import InjectMD from "$lib/InjectMD.svelte";
 
     let {
         type = undefined,
         link = undefined,
         text = undefined,
         backgroundImage = undefined,
-        testid = undefined
+        testid = undefined,
     } = $props();
 
     onMount(async () => {
@@ -38,7 +39,8 @@
     <!-- Main section -->
     <div
         class="clip-path-hexagonBorder w-[8.563rem] h-[7.688rem] bg-primary-600 relative"
-    data-testid = {testid}>
+        data-testid={testid}
+    >
         <InternalLink {link} class="group">
             <div
                 style="background-image: url({backgroundImage}); background-position: center;"
@@ -52,17 +54,20 @@
     </div>
 {:else if type === "article"}
     <!-- Direct links -->
-    <div class="" data-testid = {testid}>
+    <div class="" data-testid={testid}>
         <InternalLink {link} class="group">
-        <div
-            style="background-image: url({backgroundImage}); background-position: center;"
-            class="clip-path-hexagonBorder w-[8.563rem] h-[7.688rem] bg-secondary-50/75 bg-blend-overlay group-hover:bg-secondary-900/75 transition-all ease-in-out duration-300 motion-reduce:transition-none flex justify-center items-center">
-                <p class="invisible size-fit no-underline text-white text-sm text-center group-hover:visible transition-all ease-in-out duration-300 motion-reduce:transition-none">
-                    {text}
+            <div
+                style="background-image: url({backgroundImage}); background-position: center;"
+                class="clip-path-hexagonBorder w-[8.563rem] h-[7.688rem] bg-secondary-50/75 bg-blend-overlay group-hover:bg-secondary-900/75 transition-all ease-in-out duration-300 motion-reduce:transition-none flex justify-center items-center"
+            >
+                <p
+                    class="invisible size-fit no-underline text-white text-sm text-center group-hover:visible transition-all ease-in-out duration-300 motion-reduce:transition-none"
+                >
+                    <InjectMD content={text} layout={false} />
                 </p>
-        </div>
+            </div>
         </InternalLink>
     </div>
 {:else if type === "empty"}
-    <div class=""  data-testid = {testid}></div>
+    <div class="" data-testid={testid}></div>
 {/if}
