@@ -6,7 +6,7 @@ link: music/chapel-in-the-hive
 lead: "Joseph Campana writes about his collaboration with Kurt Stallmann in 'The Chapel in the Hive', a performance of poetry inspired by an intriguing passage from Charles Butler's *Feminine Monarchie*."
 img: 'assets/articles/chapel-in-the-hive/DSC_0609-67.jpg'
 imgAlt: 'A picture of the interior ceiling of La Sagrada Familia in Barcelona'
-type: article
+type: [article, media]
 layout: article
 author: joseph
 date: 2025/08/04

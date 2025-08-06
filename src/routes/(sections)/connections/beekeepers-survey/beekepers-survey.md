@@ -6,7 +6,7 @@ link: connections/beekeepers-survey
 lead: "Butler left his books in his study and chose instead to observe and listen to bees in the field. We are particularly interested in his study of swarms. We hope that today's beekeepers can add their knowledge to our project."
 img: 'assets/articles/beekeepers-survey/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg'
 imgAlt: 'a handwritten list with empty checkboxes'
-type: article
+type: [article, experience, data]
 layout: article
 author: [bennett, jenny]
 date: 2025/04/11

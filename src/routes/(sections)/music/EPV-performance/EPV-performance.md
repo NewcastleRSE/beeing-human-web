@@ -6,7 +6,7 @@ link: music/EPV-performance
 lead: "Ensemble Pro Victoria bring Charles Butler’s Melissomelos to life in Newcastle University’s King’s Hall, February 2024."
 img: 'assets/articles/EPV-performance/EPV-at-New-Coll.png'
 imgAlt: 'choir singing in a darkened church'
-type: article
+type: media
 layout: article
 author: magnus
 date: 2025/04/03
