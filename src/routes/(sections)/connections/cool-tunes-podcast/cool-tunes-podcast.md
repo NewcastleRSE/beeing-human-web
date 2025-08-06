@@ -6,7 +6,7 @@ link: connections/cool-tunes-podcast
 lead: "Produced by a team of like-minded musician/activists, the podcast explores the intersection of music and the struggle for social and environmental justice. The 'bees' episode grew from a belief that music from multiple places and times, but centered around universal human experiences, would create compelling and meaningful programming"
 img: 'assets/articles/cool-tunes-podcast/will-francis-ZDNyhmgkZlQ-unsplash.jpg'
 imgAlt: 'Description of the cover image'
-type: article
+type: [article, media]
 layout: article
 author: warren
 date: 2025/05/19

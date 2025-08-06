@@ -20,13 +20,30 @@
       const builtPath = buildPath(path, page)
       let id = undefined;
 
+      let title = undefined;
+
       for (const key of Object.keys(data)) {
         if (`/${data[key].link}` === builtPath) {
-          return (data[key].title).toLowerCase()
+          // if data[key].title contains hyphen, replace it with space
+          if (data[key].title.includes('-')) {
+            title = data[key].title.replace(/-/g, ' ')
+          } else {
+            title = data[key].title;
+          }
         }
       }
       if (id === undefined) {
-        return page.toLowerCase();
+        if (page.includes('-')) {
+          title = page.replace(/-/g, ' ');
+        } else {
+          title = page;
+        }
+      }
+      if (title) {
+        return title.toLowerCase();
+      } else {
+        // throw an error if title is not found
+        console.error(`Title not found for page: ${page}`);
       }
     };
 

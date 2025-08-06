@@ -15,5 +15,10 @@ export const typeColours = {
       'background': 'bg-tertiary-300',
       'text': 'text-tertiary-800',
       'hover': 'bg-tertiary-400'
+    },
+    'media': {
+      'background': 'bg-success-300',
+      'text': 'text-success-800',
+      'hover': 'bg-success-400'
     }
   }

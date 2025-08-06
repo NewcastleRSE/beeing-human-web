@@ -4,7 +4,6 @@
     import { base } from "$app/paths";
 
     import CitationModal from "./CitationModal.svelte";
-    import { derived } from "svelte/store";
 
     let { author, date, type, title } = $props();
 
@@ -20,11 +19,18 @@
         }
     })
 
+    let colourType = $derived.by(() => {
+        if (type && Array.isArray(type)) {
+            return type[0];
+        } else {
+            return type
+        }
+    });
+
     function toggleModal() {
         show = !show;
     }
 </script>
-
 
 <div class="flex md:gap-6 w-full justify-evenly md:justify-start items-center align-center mb-4">
     {#each authorArray as authorName}
@@ -41,6 +47,6 @@
         > <time datetime="{dateType}" class="text-xs">{dateType.toLocaleDateString("en-UK", {weekday: 'long', month: 'long', day:'numeric', year:'numeric'})}</time>
     </div>
     {/each}
-    <button class="text-xs md:ml-auto relative z-10 rounded-full {typeColours[type].background} px-3 py-1.5 font-normal {typeColours[type].text} hover:{typeColours[type].hover}" onclick={toggleModal}>Citation &#128366;</button>
+    <button class="text-xs md:ml-auto relative z-10 rounded-full {typeColours[colourType].background} px-3 py-1.5 font-normal {typeColours[colourType].text} hover:{typeColours[colourType].hover}" onclick={toggleModal}>Citation &#128366;</button>
 </div>
 <CitationModal bind:show={show} citationInfo={{authorArray, date, title}}/>
