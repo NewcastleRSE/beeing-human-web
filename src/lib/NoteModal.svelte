@@ -3,7 +3,6 @@
     import { fade, fly } from "svelte/transition";
     import TextDivider from "./TextDivider.svelte";
     import { base } from "$app/paths";
-    import { consoleLoggingIntegration } from "@sentry/sveltekit";
 
     let { message, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
@@ -439,7 +438,6 @@
         }
     });
 </script>
-{@debug parent}
 {#if show}
     <div
         class="relative z-10"
