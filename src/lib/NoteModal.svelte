@@ -218,7 +218,7 @@
         if (
             message &&
             !message.hasAttribute("type") &&
-            message.tagName != "TEI-FOREIGN"
+            (message.tagName != "TEI-FOREIGN" && !message.hasAttribute("xml:lang"))
         ) {
             return [message.parentElement];
         } else if (
@@ -283,7 +283,7 @@
             } else {
                 return undefined;
             }
-        } else if (message && message.tagName === "TEI-FOREIGN") {
+        } else if (message && message.tagName === "TEI-FOREIGN" || message && message.hasAttribute("xml:lang")) {
             const noteTarget = document.querySelector(
                 message.getAttribute("corresp"),
             );
@@ -438,7 +438,6 @@
         }
     });
 </script>
-
 {#if show}
     <div
         class="relative z-10"
