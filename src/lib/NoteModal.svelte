@@ -3,6 +3,7 @@
     import { fade, fly } from "svelte/transition";
     import TextDivider from "./TextDivider.svelte";
     import { base } from "$app/paths";
+    import { consoleLoggingIntegration } from "@sentry/sveltekit";
 
     let { message, show = $bindable(false) } = $props();
     let buttonClicked = $state(false);
@@ -218,7 +219,7 @@
         if (
             message &&
             !message.hasAttribute("type") &&
-            message.tagName != "TEI-FOREIGN"
+            (message.tagName != "TEI-FOREIGN" && !message.hasAttribute("xml:lang"))
         ) {
             return [message.parentElement];
         } else if (
@@ -283,7 +284,7 @@
             } else {
                 return undefined;
             }
-        } else if (message && message.tagName === "TEI-FOREIGN") {
+        } else if (message && message.tagName === "TEI-FOREIGN" || message && message.hasAttribute("xml:lang")) {
             const noteTarget = document.querySelector(
                 message.getAttribute("corresp"),
             );
@@ -438,7 +439,7 @@
         }
     });
 </script>
-
+{@debug parent}
 {#if show}
     <div
         class="relative z-10"

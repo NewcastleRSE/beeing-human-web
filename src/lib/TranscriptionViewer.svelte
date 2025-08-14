@@ -515,7 +515,7 @@
     function changeTranslationVisibility(translations) {
         try {
             const translationElements = document.querySelectorAll(
-                "tei-foreign[corresp]",
+                "tei-foreign[corresp], [corresp][xml\\:lang]",
             );
 
             if (!translations) {
