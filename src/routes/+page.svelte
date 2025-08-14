@@ -3,8 +3,11 @@
   import LogoLandingPage from "$lib/LogoLandingPage.svelte";
   let { data } = $props();
 
+  import SiteSearch from "../lib/SiteSearch.svelte";
+
 </script>
 
+<SiteSearch />
 <div class="w-4/5 mx-auto my-6">
   <header class="flex flex-col w-full items-center shrink mb-6 md:mb-32" data-testid="logo-landing-page">
     <LogoLandingPage />

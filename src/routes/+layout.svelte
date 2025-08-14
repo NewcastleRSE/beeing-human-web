@@ -11,8 +11,10 @@
   let { children } = $props();
 
   let section = $derived.by(() => {
-    const path = $page.route.id.split("/");
-    return path.length >= 3 ? path[2] : undefined;
+    if ($page.route.id) {
+      const path = $page.route.id.split("/");
+      return path.length >= 3 ? path[2] : undefined;
+    }
   });
 </script>
 
