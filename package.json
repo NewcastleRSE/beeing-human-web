@@ -66,9 +66,11 @@
     "isomorphic-dompurify": "^2.21.0",
     "jsdom": "^22.1.0",
     "lodash": "^4.17.21",
+    "lunr": "^2.3.9",
     "midi-player-js": "^2.0.16",
     "parse-md": "^3.0.3",
     "rehype": "^13.0.2",
+    "remove-markdown": "^0.6.2",
     "tify": "^0.31.0",
     "uuid": "^9.0.1",
     "verovio": "^3.16.0"

@@ -152,3 +152,14 @@ export function getArticleMetadata(listArticles) {
     }
     return articles
 }
+
+export function returnArticleSearch(listArticles) {
+    // returns id, title and content for a list of articles
+    const articles = [];
+    for (const path in listArticles) {
+        const {metadata, content} = parseMD(listArticles[path].default);
+        const id = metadata.id
+        articles.push({id, title: metadata.title, author: metadata.author, content: content});
+    }
+    return articles;
+}

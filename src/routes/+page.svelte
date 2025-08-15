@@ -6,7 +6,7 @@
 
 </script>
 
-<SiteSearch/>
+<SiteSearch searchIndex = {data.searchIndex} />
 <div class="w-4/5 mx-auto my-6">
   <header class="flex flex-col w-full items-center shrink mb-6 md:mb-32" data-testid="logo-landing-page">
     <LogoLandingPage />
@@ -15,5 +15,5 @@
     </p>
   </header>
 
-  <Hive {data} />
+  <Hive data={data.articleData} />
 </div>
