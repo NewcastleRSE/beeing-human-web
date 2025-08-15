@@ -2,6 +2,7 @@
   import LogoLandingPage from "$lib/LogoLandingPage.svelte";
   import SectionSelector from "$lib/SectionSelector.svelte";
   import Breadcrumbs from "$lib/Breadcrumbs.svelte";
+  import SiteSearchButton from "../../lib/SiteSearchButton.svelte";
 
   import ArticleCollection from "$lib/ArticleCollection.svelte";
 
@@ -67,6 +68,7 @@
         class="w-1/2 border-t md:w-0 md:self-center md:h-28 md:border-l md:border-t-0 border-surface-500 self-end justify-self-end"
       ></div>
       <SectionSelector {section} />
+      <SiteSearchButton articleData={data.articleData} searchIndex={data.searchIndex} />
     </div>
     <Breadcrumbs {path} {data} class="md:left-0" />
   </header>

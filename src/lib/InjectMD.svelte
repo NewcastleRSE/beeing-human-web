@@ -8,7 +8,7 @@
   import { customClasses } from "./../utils/textClasses";
   import { onMount } from "svelte";
 
-  let { content = undefined, layout = true } = $props();
+  let { content = undefined, layout = true, outerTag = true } = $props();
 
   let sanitizedContent = $state("");
 
@@ -19,6 +19,11 @@
       .process(parsedContent);
     sanitizedContent = DOMPurify.sanitize(classed);
   });
+
+  function removeOuterTag(content) {
+    // removes p tags surrounding content
+    return content.replace(/<\/?p>/g, "");
+  }
 </script>
 
 <!-- 
@@ -36,6 +41,8 @@
     <!-- <SvelteMarkdown source={content} /> -->
     {@html sanitizedContent}
   </ArticleLayout>
+{:else if !outerTag}
+  {@html removeOuterTag(sanitizedContent)}
 {:else}
   {@html sanitizedContent}
 {/if}

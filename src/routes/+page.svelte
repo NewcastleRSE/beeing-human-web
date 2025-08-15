@@ -1,6 +1,7 @@
 <script>
   import Hive from "$lib/Hive.svelte";
   import LogoLandingPage from "$lib/LogoLandingPage.svelte";
+  import SiteSearchButton from "../lib/SiteSearchButton.svelte";
   let { data } = $props();
 
 </script>
@@ -12,6 +13,8 @@
       Inspired by Charles Butler’s <em>The Feminine Monarchie</em>
     </p>
   </header>
+  
+  <SiteSearchButton articleData={data.articleData} searchIndex={data.searchIndex} />
 
-  <Hive {data} />
+  <Hive data={data.articleData} />
 </div>
