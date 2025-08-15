@@ -3,7 +3,7 @@
     import SiteSearchModal from './SiteSearchModal.svelte';
 
     // receives an array of posts to search
-    let {searchIndex} = $props();
+    let {searchIndex, articleData} = $props();
 
     let show = $state(false);
 
@@ -17,4 +17,4 @@
     <MagGlass class="w-4 fill-secondary-400 group-hover:fill-secondary-500 transition-colors duration-200"/><span class="hidden md:inline"> Search...</span>
 </button>
 
-<SiteSearchModal {searchIndex} bind:show={show}/>
+<SiteSearchModal {articleData} {searchIndex} bind:show={show}/>

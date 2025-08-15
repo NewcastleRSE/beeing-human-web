@@ -12,6 +12,7 @@ export async function load({fetch}) {
         this.ref('id')
         this.field('title')
         this.field('content')
+        this.field('author')
         this.metadataWhitelist = ['position']
 
         searchData.forEach(post => {
