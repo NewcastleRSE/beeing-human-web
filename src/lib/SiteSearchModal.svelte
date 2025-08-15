@@ -2,6 +2,7 @@
     import MagGlass from "./icons/MagGlass.svelte";
     import InjectMD from "./InjectMD.svelte";
     import lunr from "lunr";
+    import {base} from "$app/paths";
 
     // receives an array of posts to search
     let { searchIndex, show = $bindable(false), articleData } = $props();
@@ -67,7 +68,7 @@
             <div
                 class="pl-2 font-light text-secondary-500 flex items-center flex-shrink-0"
             >
-                <h2 class="text-xl flex-grow">Search</h2>
+                <h2 class="hidden md:block text-xl flex-grow">Search</h2>
                 <!-- Close button -->
                 <button
                     onclick={closeModal}
@@ -95,7 +96,7 @@
                     <ul class="list-none p-0 m-0">
                         {#each searchResults as result}
                             <a
-                                href={result.link}
+                                href={`${base}/${result.link}`}
                                 onclick={() => closeModal()}
                             >
                                 <li

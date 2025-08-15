@@ -6,7 +6,6 @@
 
 </script>
 
-<SiteSearchButton articleData={data.articleData} searchIndex={data.searchIndex} />
 <div class="w-4/5 mx-auto my-6">
   <header class="flex flex-col w-full items-center shrink mb-6 md:mb-32" data-testid="logo-landing-page">
     <LogoLandingPage />
@@ -14,6 +13,8 @@
       Inspired by Charles Butler’s <em>The Feminine Monarchie</em>
     </p>
   </header>
+  
+  <SiteSearchButton articleData={data.articleData} searchIndex={data.searchIndex} />
 
   <Hive data={data.articleData} />
 </div>
