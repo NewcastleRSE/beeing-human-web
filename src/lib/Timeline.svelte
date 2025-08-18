@@ -3,25 +3,20 @@
     let {timelineArray} = $props();
 </script>
 
-<div class="py-24 sm:py-32 dark:bg-gray-900">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto grid max-w-2xl grid-cols-1 gap-8 overflow-hidden lg:mx-0 lg:max-w-none lg:grid-cols-4">
-        {#each timelineArray as { date, dateString, title, description }, i}
-      <div>
-        <time datetime={date} class="flex items-center text-sm/6 font-semibold text-secondary-400 dark:text-indigo-400">
-          <svg viewBox="0 0 4 4" aria-hidden="true" class="mr-4 size-1 flex-none">
-            <circle r="2" cx="2" cy="2" fill="currentColor" />
-          </svg>
-          {dateString}
-          <!-- only display this div if not the last in the array -->
-          {#if i !== timelineArray.length - 1}
-          <div aria-hidden="true" class="absolute -ml-2 h-px w-screen -translate-x-full bg-secondary-700/10 sm:-ml-4 lg:static lg:-mr-6 lg:ml-8 lg:w-auto lg:flex-auto lg:translate-x-0 dark:bg-white/15"></div>
-          {/if}
-        </time>
-        <p class="mt-6 text-lg/8 font-semibold tracking-tight text-primary-600 dark:text-white"><InjectMD content={title} layout={false} outerTag={false} /></p>
-        <p class="mt-1 text-base/7 text-gray-600 dark:text-gray-400"><InjectMD content={description} layout={false} outerTag={false} /></p>
-      </div>
-      {/each}
-    </div>
-  </div>
-</div>
+
+
+<ol class="relative border-s border-secondary-200 dark:border-gray-700">     
+    {#each timelineArray as { date, dateString, title, description }, i}             
+    <li class="mb-10 ms-4">
+        
+        <time class="mb-1 text-sm font-normal leading-none text-secondary-300 dark:text-gray-500">{dateString}</time>
+        <div class="absolute w-3 h-3 bg-secondary-500 rounded-full mt-1.5 -start-1.5"></div>
+        <h3 class="text-lg font-semibold text-primary-600 dark:text-white"><InjectMD content={title} layout={false} outerTag={false} /></h3>
+        <p class="mb-4 text-base font-normal text-secondary-500 dark:text-gray-400"><InjectMD content={description} layout={false} outerTag={false} /></p>
+        <!-- <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700">Learn more <svg class="w-3 h-3 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+  </svg></a> -->
+    </li>
+    {/each}
+</ol>
+
