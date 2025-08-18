@@ -149,5 +149,5 @@ You can listen to the Bee-ing Human team talking about their collaboration as pa
 
 You can find out more about The Leverhulme Trust Project Grant scheme [here](https://www.leverhulme.ac.uk/research-project-grants). When preparing our application we took special note of advice from the Trust, that, for this scheme, they favour 'applications that surmount traditional disciplinary academic boundaries and involve a willingness to take appropriate degrees of risk in setting research objectives'. It's not hard to see how a group of literary scholars, musicologists, biologists, psychologists, and software engineers who wanted to understand the inner experience of bees might have thought this the right scheme! 
 
-## The *Bee-ing Human* timeline
+<h2 class="h2 mt-6 mb-2 font-thin" id="the-bee-ing-human-timeline">The <em>Bee-ing Human</em> timeline</h2>
 <Timeline {timelineArray}/>
