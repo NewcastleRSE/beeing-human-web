@@ -47,7 +47,7 @@ In the same vein, the project enables us to see all the different things 'emotio
 
 I cannot articulate fully the view that my colleagues, each with their discrete, careful scholarly systems, hold of the queen bee, but as a result of our collaboration I can feel the moments when she starts to fly into their territory. I can feel my view start to blur, as it were, or the language and truth-making systems of my own expertise and disciplinary standpoint start to run thin, and that is the moment when it becomes necessary to draw in a colleague from another field. The queen flies over to them and they pick up the task of describing her in a different light.
 
-<ImgContainer imgUrl="/assets/articles/queen-bee/teaminthelab.jpg" altText="A photograph of the Beeing Human team in the lab" caption="The Being Human team in the lab. (L-R): Magnus Williamson, Tiago Sousa Garcia, Balu, Vivek Nityananda, Jennifer Richards, Olivia Smith, Bennett Hogg"/>
+<ImgContainer imgUrl="/assets/articles/queen-bee/teaminthelab.jpg" altText="A photograph of the Beeing Human team in the lab" caption="The Being Human team in the lab. (L-R): Magnus Williamson, Tiago Sousa Garcia, Balamurali G. S., Vivek Nityananda, Jennifer Richards, Olivia Smith, Bennett Hogg"/>
 
 What does the queen look like as she flies between us?
 
