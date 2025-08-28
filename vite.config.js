@@ -2,7 +2,10 @@ import { sentrySvelteKit } from "@sentry/sveltekit";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vitest/config";
 import { svelteTesting } from "@testing-library/svelte/vite";
+import dotenv from "dotenv";
 
+
+dotenv.config();
 
 export default defineConfig({
   plugins: [
@@ -10,6 +13,7 @@ export default defineConfig({
       sourceMapsUploadOptions: {
         org: "ncl-rse",
         project: "beeing-human-web",
+        authToken: process.env.SENTRY_AUTH_TOKEN,
         release: {
           name: "being-human-web@" + process.env.npm_package_version,
         }
