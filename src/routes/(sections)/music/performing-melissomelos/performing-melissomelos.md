@@ -27,7 +27,7 @@ I first came across Butler's bee madrigal *Melissomelos* when working, like [Ric
 
 'Butler transcribed the music of bees'? It was intriguing – and the intrigue continued to build when I first looked at a copy of Butler's music.
 
-What was remarkable about Butler's bee music, I soon found out, was the accuracy of his musical transcription and the innovative nature of the soundworld his bees produced. Like James Pruett (who wrote about *Melissomelos* in the 1960s) and I suspect many others, I at first assumed that the 'music of the bees' would be a kind of buzzing noise.[^2] Far from it. Butler's attentive ear was rendering with empirical precision the piping noise bees make before they swarm. Before they swarm, bees make a 'tooting' or 'honking' type noise created by the exhalation of air from the spiracles on the thorax.[^3]
+What was remarkable about Butler's bee music, I soon found out, was the accuracy of his musical transcription and the innovative nature of the soundworld his bees produced. You can listen to a recording of queen bees piping [here](https://youtu.be/5Wbs4D-yUsA?si=OGRzT6g1AhzZxzU3) to compare with Butler's musical transcription. Like James Pruett (who wrote about *Melissomelos* in the 1960s) and I suspect many others, I at first assumed that the 'music of the bees' would be a kind of buzzing noise.[^2] Far from it. Butler's attentive ear was rendering with empirical precision the piping noise bees make before they swarm. Before they swarm, the queens make a 'tooting' or 'honking' type noise when they vibrate their abdomens against the wax of the honeycombs.[^3]
 
 Taking his wind instrument in hand, he accurately recorded the pitches made by the bees – the 'solo' bee initially piping around middle C and F a perfect fourth above, the 'chorus' of bees adding notes around a perfect fifth and an octave higher than middle C. In musical terms, the result is a piece of early modern musical minimalism several centuries before the innovations of Steve Reich and Philip Glass, embedded within a partsong that allegorises the 'feminine monarchy' of the hive in terms of an Amazonian nation. In other words, what Butler was doing was making sense of the bees' music. This is no irrational, senseless buzzing. 'Not to bee *animal musicum*', Butler was later to write in his *Principles of Musik* (1636), 'is Not to bee *animal rationale*' (no pun intended).[^4]
 
@@ -47,7 +47,7 @@ And this tension perhaps gets to the heart of Butler's ideas about the music of 
 
 [^2]: James Pruett, 'Charles Butler—Musician, Grammarian, Apiarist', *The Musical Quarterly*, 49:4 (Oct, 1963): 498-509.
 
-[^3]: Edward F. Woods, 'The Queen Bee's Siren', *New Scientist* 341 (1963): 501-03.
+[^3]: James Simpson, 'The Mechanism of Honey-Bee Queen Piping', *Zeitschrift für vergleichende Physiologie* 48 (1964), pp. 277-282.
 
 [^4]: Charls \[sic\] Butler, *The Principles of Musik* (London: John Haviland, 1636), p.120.
 
