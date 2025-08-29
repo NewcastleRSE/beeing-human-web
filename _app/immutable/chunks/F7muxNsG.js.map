@@ -1,0 +1,1 @@
+{"version":3,"file":"F7muxNsG.js","sources":["../../../../../../src/lib/customMDSvexComponents/ol.svelte"],"sourcesContent":["<script>\n    let {children} = $props();\n</script>\n\n<ol class=\"list-decimal list-inside pl-10\">\n    {@render children?.()}\n</ol>"],"names":[],"mappings":"kfAAA,oDAEA"}
