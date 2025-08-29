@@ -68,6 +68,7 @@
         valueChange={(changeObject) => {
             style = changeObject.newValue;
         }}
+        currentSelected = {styleGuides.defaultValue}
     />
     <div class="flex flex-col gap-4 px-4">
         <h2 class="text-lg md:text-2xl">How to cite:</h2>
