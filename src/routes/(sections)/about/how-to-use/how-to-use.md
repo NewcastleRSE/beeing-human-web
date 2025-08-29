@@ -3,9 +3,9 @@ title: "How to use and cite *Bee-ing Human*"
 id: how-to-use
 parent: about
 link: about/how-to-use
-lead: "Learn about the *Bee-ing Human* project, its goals, ambitions, ways of working and how we created a 21st century digital bee book."
-img: 'assets/articles/introduction/zulian-firmansyah-sEUAJeFn5mE-unsplash.jpg'
-imgAlt: 'An open door to a dreamlike world on an orange wall'
+lead: "Read our quick, easy to use, manual on how to make the best of *Bee-ing Human*."
+img: 'assets/articles/how-to-use/bruce-warrington-Dqxfu4iehhU-unsplash.jpg'
+imgAlt: 'close-up of a hatch door with printed instructions on how to use it'
 type: article
 layout: article
 author: [jenny]
@@ -18,37 +18,94 @@ order: 2
     import ImgContainer from '$lib/ImgContainer.svelte'
     import ByLine from '$lib/ByLine.svelte'
     import AdditionalInfoBox from '$lib/AdditionalInfoBox.svelte'
+    import HiveSelector from '$lib/icons/HiveSelector.svelte'
+    import MagGlass from '$lib/icons/MagGlass.svelte'
 
 </script>
 
 <ByLine author={author} date={date} type={type} title={title}/>
 
-This experimental project, funded by the [Leverhulme Trust](https://www.leverhulme.ac.uk/) (2022-26), is a collaboration between humanists and musicians (literary studies, musicology, composition), scientists (biology, psychology, animal cognition), and a research software engineer, who came together to explore historical and contemporary approaches to the study of bee 'sentience', and create a digital bee book that could set our different research findings side by side. Here we introduce our [Digital Bee Book]({base}/) (our research 'hive'), and our [born-digital edition]({base}/literature/transcription#titlepage) of the seventeenth-century printed book (or acoustic 'hive') that inspired it. You can find out more about why we chose to work together, and our defence of the importance of connecting knowledge across disciplines [here](#).
+<AdditionalInfoBox title = 'This article is a draft'/>
 
-<ImgContainer imgUrl="/assets/articles/introduction/image1.jpg" altText="a group of seven people smiling at the camera" captionCustomStyle="The team in the lab, Newcastle 2023, from left to right: [Magnus]({base}/about/people/magnus), [Tiago]({base}/about/people/tiago), [Vivek]({base}/about/people/vivek), [Olivia]({base}/about/people/olivia), [Jenny]({base}/about/people/jenny), [Bennett]({base}/about/people/bennett), [Balamurali G. S.]({base}/about/people/balu)"/>
+## What is the best way to explore the Bee-ing Human website?
 
-Let's start with the printed book that inspired this project: *The Feminine Monarchie: Or The Historie of Bees*, a seventeenth-century manual for beekeepers, substantially revised and reprinted three times (1609, 1623, 1634). This book was created by Charles Butler (1560-1647) with his printers, first Joseph Barnes (Oxford), and then John Haviland (London). Butler was an [Oxford graduate](#), a vicar, a teacher of grammar and [rhetoric](#), a musician, and an apiarist. His book is full of practical information for beekeepers. To help organise the reader's experience he devised an innovative system of navigational devices. The most obvious navigational device he uses is the traditional Table of Contents (or 'Index of Chapters', as he calls it), which provides an overview of the information in the book in the order in which it appears. Butler's table is at the front of the book. However, this is only one device he uses. This table is followed by another one, titled 'The Notes or the Contents' for each chapter. The term 'Notes' refers to the marginal headings of sections within chapters, each one of which is given a number. These Notes enable Butler to create multiple cross-references and thus pathways throughout the book for the reader to explore. Butler's unique system of cross-referencing relies on a simple code, using the letters V., C, and N., which he explains in the ['Preface to the Reader']({base}/literature/transcription#preface) thus: 'V. signifieth vide, or See, C. with his number the Chapter, and N. with his number the Marginall Note'. If the cross-reference omits the letter 'C.'  that is because the Note is in the same Chapter ([sig. ¶4v]({base}/literature/transcription#frontpar8)).
+In the [Introduction]({base}/about/introduction) we explain that we conceived our project as a research hive with different disciplinary perspectives brought together in a common space: our Digital Bee Book. Our [landing page]({base}/) takes inspiration from both an abstracted beehive and the frontispiece to Butler's book. It offers four separate entry points ([literature]({base}/literature), [music]({base}/music), [science]({base}/science), and [connections]({base}/connections). Each represents a honey storage/brood cell. You may be interested in one cell / disciplinary approach only, and choose to spend your time there. That's absolutely fine by us. But we'd be delighted if you also decided to jump from perspective to perspective—from music to literature to science to connections—by following one of the many hyperlinks in the articles, or by using either the view selector at the top of each page (<HiveSelector/>), or the search tool (<MagGlass class="w-4 inline"/> top right).
 
-To understand how this works in practice, let us consider one of the many topics discussed in the book: the best kind of spring weather for swarming. You can find this topic listed for Chapter 5 in the 'Index': '5 A kinde spring for swarmes'. The Note (or heading) and its number will help you find the relevant information, in this case the advice that 'A warme, calme, and showring spring causeth many and rathe \[early\] swarmes, though sudden stormes doe hinder them. *v*.'. At the same time, the letter *v*. at the end of this sentence alerts us to a cross-reference in the margin: *V.c.7.n.60*. Both the *v*. and the cross-reference are highlighted with red arrows in the example below. If we look (V. = vide or see) for the heading and its number (*n.60*) in the margin of Chapter 7 (*c.7*) we will discover wet springs are also dangerous for early swarms.
+<ImgContainer imgUrl="/assets/articles/how-to-use/image1.png" altText="a screenshot of the website showing the section selector" captionCustomStyle="The view selector"/>
 
-<ImgContainer imgUrl="/assets/articles/introduction/image2.png" altText="A screenshot from the edition, with red arrows"/>
+By changing perspective you will understand Butler's multidisciplinary approach better. You will also understand how his interest in the 'emotions' of bees is taken up (differently) by today's scientists exploring animal sentience. You can collect perspectives on Butler's interest in sound as a tool for understanding emotions in the [literature]({base}/literature) and [music]({base}/music) cells. You can also read our own reflections on working across space and time: e.g. in the [connections]({base}/connections) cell you can read the reflections of a literary scholar on being in the bee lab (as we called it), or of a scientist on how reading Butler led him to rethink the idea of an experiment. 
 
-There are hundreds and hundreds of cross-references like this one across Butler's book. You can see just how many there are, as well as how many new cross-references Butler added to the second edition (1623), with these interactive [graphs]({base}/literature/cross-references) created by [Tiago]({base}/about/people/tiago). The cross-references shape the reading experience. You may want to read Butler's book in a linear way, from start to finish, and you can do so easily by ignoring the cross-references. However, you can also explore topics that interest you (like wet springs), following the links that Butler has provided, moving back and forth to gather focussed information. In our born-digital edition of 1623 (our copy text), these references appear as hyperlinks, so you can zigzag ([bee-like!](https://www.aps.org/apsnews/2022/12/honeybees-windy-conditions)) quickly through the text with a click. This system of cross-referencing, whether in the original printed version, or in our born-digital edition, makes it easy for the reader to locate what they want to know quickly.
+You may be wondering, though, where you can find the bees in this human-made hive? 
 
-In the same way that Butler took advantage of the print medium to create an interconnected text, so, in designing the Digital Bee Book, we have taken advantage of the inherent interconnectedness of the world wide web to present our multifaceted work as a series of connected articles, experiences, and datasets. Taking inspiration partly from Butler's intricately cross-referenced text, partly from the common understanding of a beehive as a series of separate but connected cells, and partly wanting to represent how we actually worked, we conceived of our project as a research hive with different disciplinary perspectives brought together in a common space: our Digital Bee Book. Our  [landing page]({base}/), as [we explain elsewhere](#), takes inspiration from both an abstracted beehive and the frontispiece to Butler's book. It offers four separate entry points ([literature]({base}/literature), [music]({base}/music), [science]({base}/science), and [connections]({base}/connections). Each of these represents a honey storage/brood cell (and links to further 'cells'). We encourage you to jump from perspective to perspective — from music to science, say — by following one of the many hyperlinks in the articles, or simply by using the view selector at the top of the screen.
+You will find photos of the bumble bees in the science lab, and learn about experiments in the [science]({base}/science) cell. You will hear both queen honeybees piping, and humans piping like queen honeybees in our [music]({base}/music) cell, and find humans (beekeepers and artists!) working with bees, even co-creating works of art with them in our [connections]({base}/connections) cell. If you look carefully you may occasionally spot a bee on our landing page, and you spy another one in the title bar of the browser…
 
-<ImgContainer imgUrl="/assets/articles/introduction/view-selector.png" altText="A detail screenshot of the top of the website, with a the view selector option clicked" caption="Changing perspectives"/>
+## What is the best way to explore our born-digital edition of *The Feminine Monarchie* (1623)?
 
-This elaborate system of cross-referencing isn't the only print feature of Butler's book that is unusual. Butler sees the hive as an interactive, acoustic space. He used his training as a musician and rhetorician, listening for pitch and tone, to understand the behaviour and emotions of virgin queens at a crucial stage in the life of a colony: swarming. In his book he set out to share his conception of life inside the hive as an interactive experience for the reader. Print seems inimical to such an aspiration. After all, in the age of the handpress, print 'fixes' words on the page, quite literally (Ong 1982: 121): a page is locked in the chase–the quadrangular iron frame in which the composed type is arranged in columns or pages, held in place by the quoins or wedges (chase, n.2 OED 2) – and inked, then pressed (printed). Yet, authors and printers understood typography as an expressive medium (McKenzie 2002: 198-236), and reading as an immersive, embodied experience (Jajdelska, 2016; Richards 2019). As we explain in [The Book as a Hive]({base}/literature/book-hive), there are several print features of the 1623 edition that indicate Butler shared this view. These include the frontispiece of a hive, the portal through which we enter the book, and perhaps also the floral, cell-like decorative features. It most certainly includes the bee-song in a [sociable table-book format]({base}/music/music-book-layout) in [Chapter 5]({base}/literature/transcription#ch5), which recreates the hive as an acoustic and communal space so that musically-literate readers can 'pipe' – or imagine they are piping (or ['tooting' and 'quacking'](#)) – like virgin-queens to understand what is happening.
+Our digital hive not only includes essays inspired by (or about) Charles Butler's remarkable, seventeenth-century bee manual, *The Feminine Monarchie* (1623), it also shares it.
 
-In our digital edition, you don't need to 'pipe' like a bee (unless you want to) to share this experience. You can listen instead to the performance of the bee song by [Ensemble Pro Victoria]({base}/music/EPV-performance) (2024), in which bee piping is represented with a wind instrument, or to the performance by [the Choir of Little St Mary's, Cambridge]({base}/music/performing-melissomelos) Cambridge (2017), directed by Simon Jackson, where the piping is represented with the human voice. You can also watch Simon's student choristers at Peterhouse, Cambridge, [exploring how to perform the bee song](#) (2025). If you were to pipe like a bee, which Butler surely intended us to do, you would be engaging in a rhetorical activity he calls perfect *prosopopoeia* (personification), 'when the complete feigning of a character is represented in our speech', in his treatise, [*Rhetorica*](#). When a reader steps into character, human or animal, the voice and emotions they express become theirs, temporarily. You don't need to be a specialist in rhetoric or music to experience this. This is the one moment in the book when Butler dares to imagine a collaboration between reader and beekeeper and bees. We have found a similar desire for cross-species co-creation among the beekeepers and artists who have kindly contributed to this project. You can find out about their stories in [connections]({base}/connections):  a [bee-keeper who interacts with bees with little protective clothing]({base}/connections/where-the-bee-sucks), and [artists who co-sculpt with bees]({base}/connections/beecoming-home).
+This [hyperlink]({base}/literature/transcription) will take you directly to our born-digital edition of [*The Feminine Monarchie*]({base}/literature/transcription), which you can also access from the landing page by clicking the [literature]({base}/literature) cell. The view selector at the top of the screen offers you different ways of viewing the edited text.
 
-And what of our collaboration? It was important to us that the design of the Digital Bee Book reflected as much as possible our experience of working together. We worked separately within our disciplinary groups, but we also came together regularly to share our work, and even to experiment on each other. You can find out about [Bennett]({base}/about/people/bennett)'s silent sound experiment with the members of the project team [here](#), and you can read [Olivia]({base}/about/people/olivia)'s reflections on our multi-disciplinary collaboration [here]({base}/connections/queen-bee). There is also one piece of scholarly editing that we all did together. [Chapter 5]({base}/literature/transcription#ch5), the most heavily revised chapter in Butler's book, and the one at its heart, is also the one that has received most attention from our project team. This is the only chapter we had time to annotate in the time available, and we chose to do this together. If you read [Chapter 5]({base}/literature/transcription#ch5) in our born-digital edition, with the editorial notes turned *on* (see the image below, top-right), you will find notes provided by literary scholars, musicologists and scientists, from simple glosses of hard words, to sonic analyses of Butler's song, to scientific explanations.
+<ImgContainer imgUrl="/assets/articles/how-to-use/image2.png" altText="a screenshot of the website showing the edition controls" captionCustomStyle="The edition view controls"/>
 
-<ImgContainer imgUrl="/assets/articles/introduction/editorial-notes-on.png" altText="A detail screenshot showing the editorial notes switch in the on position" caption="The editorial notes option turned on"/>
+The copy text for our edition is the 1623 edition. You will see that [Olivia Smith]({base}/about/people/olivia)'s edited transcription sits alongside the facsimile (the images of the 1623 edition). With a click of a tab you can choose to view the facsimile only, or the edited transcription instead. If you view both side by side (the default setting), then the facsimile images will follow the transcription, changing page by page as you scroll down. If you want to go to a particular chapter, then click the dropdown menu top left. Olivia has compared 1623 with 1609. You can see the changes, and track Butler's revisions, and thus the evolution of his thinking, by clicking the **variation** button (major changes/all changes). The kinds of changes Butler made have been colour-coded (green, grey, pink). If you want to see the 1609 edition only then you can do so by clicking the down arrow next to **1623** at the top left corner. The translations button will give you access to [Henry Howard]({base}about/people/henry)'s complete Latin translations for the 1623 edition, while the **editorial notes** button will share our team's collective annotation of the central Chapter 5.
 
-Our project has different but connected parts. One topic above all others, however, has connected us: the study of the emotions, or the emotion-like states, of bees, past and present. This might seem a topic that should divide a project team made up of humanities scholars and scientists. Butler is comfortable ascribing human-like behaviours and emotions to bees, and he even gives them a 'voice'. Such anthropomorphism is anathema in the science lab today. The challenges of scientifically assessing the emotional life of so phylogenetically distant a species as bees are immense. And yet the attempt to do so really matters. Here Butler shares something in common with our science colleagues: he understood that these tiny invertebrates are integral to our well-being, and that we need to understand and care for them better. As the title of our project, *Bee-ing Human*, suggests, humans and bees already interconnect, even in the science lab: the judgement bias tests used by [Vivek]({base}/about/people/vivek), [Balu]({base}/about/people/balu), and [Luigi]({base}/about/people/luigi) to understand whether 'pessimism' is contagious among [bumble bees](#), or whether individual bumble bees have 'bad days', are inspired by [multiple lines of research in human clinical psychology]({base}/science/emotions-in-invertebrates). By the same token, Butler's anthropomorphism had its limits. He does not think of bees as little people. He acknowledges that they are 'other', and when he uses a term like 'voice' to describe the sounds they emit, he does so because he understands that non-verbal qualities such as tone and pitch, which he is recording, are unique carriers of what he thinks of as emotions. But whether one is a literary scholar, a musicologist, a scientist, or a beekeeper, we are likely to agree that the study of the sentience of bees, and, indeed, of all invertebrates, matters when they remain unprotected by international law; this is a shared endeavour that has ramifications for human self-knowledge.
+You can also explore Butler's remarkable system of cross-referencing by clicking the hyperlinked marginal references. 
 
-Our Digital Bee Book is now open to visitors, and new collaborations. Many of the contributions we have collected, which you can find in [connections]({base}/connections), and across our digital book, have been shared with us by the researchers we met as we went foraging. We would like to thank the scientists, artists, musicians, humanities scholars, beekeepers, and librarians who have connected with us. If you are a beekeeper and would like to contribute, we hope you find your way to our [beekeeper survey]({base}/connections/beekeepers-survey). Similarly, if you have a project you would like to share, please get in touch.
+You can explore and compare the cross-references in 1609 and 1623 with these interactive [graphs]({base}/literature/cross-references).
 
-<ImgContainer imgUrl="/assets/articles/introduction/team_cropped.jpg" altText="A group of seven people smiling at the camera" captionCustomStyle="The team in Newcastle 2025, from left to right:  [Olivia]({base}/about/people/olivia), [Vivek]({base}/about/people/vivek), [Bennett]({base}/about/people/bennett), [Jenny]({base}/about/people/jenny), [Luigi]({base}/about/people/luigi), [Tiago]({base}/about/people/tiago), [Magnus]({base}/about/people/magnus)"/>
+And you can learn about what makes our edition born-digital [here](#).
+
+## How might you use Bee-ing Human in your teaching?
+
+Watch this space: we are working with our students in 2025/6 to hear what they say. 
+
+## Who made Bee-ing human?
+
+The Project Lead is [Jennifer Richards]({base}/about/people/jenny)
+
+The Project Co-Leads are [Bennett Hogg]({base}/about/people/jenny), [Vivek Nityananda]({base}/about/people/vivek), [Magnus Williamson]({base}/about/people/magnus).
+
+The Research Associates on this project were [Balu G.S.]({base}/about/people/balu), [Olivia Smith]({base}/about/people/olivia), [Luigi Baciadonna]({base}/about/people/luigi).
+
+The born-digital edition was edited by [Jennifer Richards]({base}/about/people/jenny), [Olivia Smith]({base}/about/people/olivia) and [Tiago Sousa Garcia]({base}/about/people/tiago).
+
+Charles Butler's bee song was transcribed by [Magnus Williamson]({base}/about/people/magnus).
+
+The digital book was designed by [Tiago Sousa Garcia]({base}/about/people/tiago).
+
+The editorial work was proof-read by [Simon Davies]({base}/about/people/simon-davies); Charles Butler's Latin was translated by [Henry Howard]({base}/about/people/henry).
+
+Please see our [people page]({base}/about/people/vivek) for the full list of everyone who co-created this Bee Book, including our Advisory Board, and the scholars (Contributors) who shared their work with us.
+
+## Our House Style
+
+Style guides for academic writing offer conventions for the presentation of information, and they vary by discipline. Scientists usually use in-text citation, whereas humanities scholars usually use footnotes. (Long essays by humanities scholars in this project, though, use in-text citation.) This is a multidisciplinary project, and our contributors are familiar with different conventions, and styles of formatting. We have chosen to respect those differences. 
+
+You can find out why there are different referencing styles by discipline [here](https://www.thecleancopy.com/453/#:~:text=Major%20citation%20styles%20are%20linked%20to%20certain%20disciplines,a%20good%20fit%20for%20literary%20and%20archival%20sources.).
+
+Image credits can be found [here]({base}/about/image-credits).
+
+## How do I cite something from Bee-ing human?
+
+Please cite the author's from the page you are referencing, along with the title of their piece. 
+
+For example:
+
+‍Baciadonna, Luigi and Vivek Nityananda. 'Inner Life - Emotions - in Invertebrates'. *Bee-ing Human*. [https://bee-inghuman.newcastle.ac.uk/science/emotions-in-invertebrates]({base}/science/emotions-in-invertebrates) [Accessed October 1, 2025.]
+
+Wistreich, Richard. 'Music-book Layout: Functionality and Sociability'. *Bee-ing human*. [https://bee-inghuman.newcastle.ac.uk/music/music-book-layout]({base}/music/music-book-layout). [Accessed October 1, 2025.]
+
+You can use the 'Citation' button at the top of each article to copy a preformatted citation in several commonly used style guides.
+
+The born-digital edition should be cited as follows: 
+
+Butler, Charles, *The Feminine Monarchie* (1623). *Bee-ing human.* Edited by Jennifer Richards, Olivia Smith, and Tiago Sousa Garcia. [Accessed October 1, 2025.]  
+
+## Who do I contact if I want to suggest a correction or make a contribution?
+
+This is a live project, and we are keen to keep improving it. If you spot an error do let us know. Similarly, if you have a project you think we should know about, please get in with [Jennifer Richards]({base}/about/people/jenny).
+
+Lovely beekeepers, please fill out our [Survey]({base}/connections/beekeepers-survey)! We are keen to continue working with you.
+
+## Usage rights
+TBD
