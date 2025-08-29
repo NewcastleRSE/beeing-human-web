@@ -1,1 +1,0 @@
-{"version":3,"file":"20.LdohAakd.js","sources":["../../../../../../src/routes/(sections)/literature/+page.svelte"],"sourcesContent":["<script>\n    import Literature from './literature.md'\n\n</script>\n\n<Literature/>\n"],"names":[],"mappings":"kZAAA,CAGA"}
