@@ -23,7 +23,7 @@ date: 2025/08/29
 Charles Butler was a prolific reader but a very selective composer. He
 wrote only two surviving pieces: *Melissomelos*, which appeared in two
 editions of *Feminine Monarchie* (1623 and 1634) and the *Dial-Song*,
-which appeared only the 1636 *Principles of Musick* where it is
+which appeared only in the 1636 *Principles of Musick* where it is
 attributed to the otherwise-unknown 'W. Syddael'.[^1] In both cases
 Butler set out to achieve particular aims. *Melissomelos* both
 illustrates and reflects upon the behaviour of bees as they prepare to
@@ -104,8 +104,8 @@ text-declamation, nor the amorous or pastoral *topoi*, nor the musical
 characteristics of an Italianate madrigal.[^11] It is not a thematically
 or tonally unified partsong; its two texted sections are strikingly
 different. Instead, it falls into a series of discreet sections,
-chronologically corresponding to Chapter V, sections 28 (*The Bees
-Musick*) to 34 (*The manner of their swarming*): 
+chronologically corresponding to [Chapter 5, sections 28 (*The Bees
+Musick*)]({base}/literature/transcription#ch5sumn28) to [34 (*The manner of their swarming*)]({base}/literature/transcription#ch5sumn34): 
 
 1. Bars 1-27: *As of all states the Monarchie is best*: a four-part texted song for SATB in simple duple time, using black-void notation; four rhyming stanzas describe (1) the social organization of bee colonies, (2) the role of the Queen, (3) the preparation for swarming, and (4) the interaction of 'Princess' and Queen and the assembling of the 'Armie'.
 1. Bars 28-41: illustration of the interaction of the 'Princess'
@@ -155,9 +155,7 @@ consort at Newcastle University on 29 February 2024.[^19] The results
 were revealing. From end to end, *Melissomelos* lasts 15 minutes: in a
 complete performance, both listeners and performers become acutely aware
 of the passage of time (although the 2024 performance held the
-audience's attention throughout). Presented with a relatively simple
-strophic song, the temptation is to cut the repetitions and move on to
-the next section. It would be tempting to treat Butler's repetitions as
+audience's attention throughout). It would be tempting to treat Butler's repetitions as
 embarrassing prolixity and to move quickly on -- but this would traduce
 one of his main purposes, which is to show the passage of time. This is
 exemplified by the progression from one vocal texture and mode to
