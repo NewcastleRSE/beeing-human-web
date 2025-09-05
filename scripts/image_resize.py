@@ -16,7 +16,7 @@ os.makedirs(MEDIUM_DIR, exist_ok=True)
 os.makedirs(CROP_DIR, exist_ok=True)
 
 def is_image(filename):
-    return filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp'))
+    return filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp', '.tiff'))
 
 def resize_keep_aspect(img, max_size):
     img_copy = img.copy()
