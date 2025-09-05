@@ -255,11 +255,11 @@ imagination is not the voice of authority as such, but what is
 essentially a question; an individual bee initiating a conversation that
 is courtly, formal, and freighted with high political stakes. A silent
 response, for example, on the part of (what Butler imagines to be) the
-reigning queen may mean death to the princess (K3v and K4r). This
+reigning queen may mean death to the princess ([K3v and K4r]({base}/literature/transcription#ch5par35)). This
 silence, though, need not be taken as an absolute command because a
 silent response from her mother may spur the princess to continue her
 pleading 'In hope at last to move pitie' (see text of *Melissomelos*,
-1623, L1v and L2r). This is a courtly environment of interlocutors with
+1623, [L1v]({base}/literature/transcription#ch5musiccontratenorlyrics2) and [L2r]({base}/literature/transcription#ch5musicbassuslyrics2)). This is a courtly environment of interlocutors with
 their individual and dynamic subjectivities in play rather than a public
 courtyard in which decisions are proclaimed. When Butler discerns these
 voices embedded in the hive's soundscape, he transcribes them in musical
@@ -359,11 +359,11 @@ Streamer: he listens in on an enclosed and limited soundscape. Like
 Streamer he discerns 'voices' but is uncertain whether he can make them
 out exactly because 'in that confused noise, which the buzzing Bees in
 the busie time of their departing doe make, my dull hearing could not
-perfectly apprehend it' (Butler, 1623, K4r). He identifies that the
+perfectly apprehend it' ([Butler, 1623, K4r]({base}/literature/transcription#ch5par38)). He identifies that the
 royal conversations have an impact on the *polis* at large, because if
 the reigning queen, as Butler imagines her, 'though mournfully
 intreated' denies a princess leave to depart, 'then the swarme tarieth,
-and the poore Ladie must die' (Butler, 1623, K4r). Even if he were able
+and the poore Ladie must die' ([Butler, 1623, K4r]({base}/literature/transcription#ch5par38)). Even if he were able
 to hear perfectly the 'voices' of the royal court through the 'confused
 noise' of the hive, Butler would not be able to understand the language
 'spoken' by the bees, but between his sense of hearing, his knowledge of
@@ -417,7 +417,7 @@ only way to present this in a meaningful and engaging way is to rely on
 sound, not semantics, to organise and present the phenomenon.[^5] Forty
 years later this sonic logic resonates with the wordless sections of
 Butler's
-[*Melissomelos*](https://bee-inghuman.newcastle.ac.uk/music/melissomelos-edition),
+[*Melissomelos*]({base}/music/melissomelos-edition),
 in which he deploys his transcriptions of the bee voices, but organises
 them into something recognisable as *human* music. It is sound, not
 language, that is the organising principle used to render what Butler
