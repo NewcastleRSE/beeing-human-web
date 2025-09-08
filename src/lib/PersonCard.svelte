@@ -23,7 +23,7 @@
 </a>
 
 {:else}
-<div class="relative p-2 md:w-1/3 mx-auto justify-center group min-h-full">
+<div class="hidden md:block relative p-2 md:w-1/3 mx-auto justify-center group min-h-full">
     <div class="w-full h-full {randomColour}"></div>
 </div>
 
