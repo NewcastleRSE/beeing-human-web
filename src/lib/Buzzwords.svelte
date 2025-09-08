@@ -22,7 +22,7 @@
     import { slide } from "svelte/transition";
     import { expoInOut } from 'svelte/easing';
 
-    let {buzzwords, listTags, listAuthors} = $props();
+    let {buzzwords, listTags, listAuthors, people} = $props();
 
     // Does not create the template until it is loaded
     let loaded = $state(false);
@@ -295,6 +295,8 @@
     })
 
 </script>
+
+{@debug people}
 
 <svelte:window bind:innerWidth={windowWidth} />
 
