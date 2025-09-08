@@ -1,0 +1,1 @@
+{"version":3,"file":"6.BvfN-N-S.js","sources":["../../../../../../src/routes/(sections)/about/+page.svelte"],"sourcesContent":["<script>\n    import About from './about.md'\n\n</script>\n\n<About/>\n"],"names":[],"mappings":"kZAAA,CAGA"}
