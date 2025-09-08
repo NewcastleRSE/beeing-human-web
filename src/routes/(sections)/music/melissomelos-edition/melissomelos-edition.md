@@ -20,5 +20,5 @@ date: 2025/06/06
 
 <ByLine author={author} date={date} type={type} title={title}/>
 <div class="h-dvh">
-    <PdfViewer url='./Melissomelos-collated-edition-20250605.pdf' pageNum=0 objectTitle='Edition of Melissomelos'/>
+    <PdfViewer url='./Melissomelos-collated-edition-20250814.pdf' pageNum=0 objectTitle='Edition of Melissomelos'/>
 </div>
