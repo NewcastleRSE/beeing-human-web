@@ -14,6 +14,13 @@
                     <PersonCard person={people[key]} />
                 {/if}
             {/each}
+            <!-- if the number of PersonCards inside this div is not divisible by 3 add empty cards until it is -->
+            {#if Object.keys(people).filter(key => people[key].role === "core").length % 3 === 1}
+                <PersonCard person={null} empty={true} />
+                <PersonCard person={null} empty={true} />
+            {:else if Object.keys(people).filter(key => people[key].role === "core").length % 3 === 2}
+                <PersonCard person={null} empty={true} />
+            {/if}
         </div>
         <TextDivider class="w-1/3"/>
         <h2 class="h2 text-secondary-700">Contributors</h2>
@@ -23,6 +30,13 @@
                     <PersonCard person={people[key]} />
                 {/if}
             {/each}
+            <!-- if the number of PersonCards inside this div is not divisible by 3 add empty cards until it is -->
+            {#if Object.keys(people).filter(key => people[key].role === "contributor").length % 3 === 1}
+                <PersonCard person={null} empty={true} />
+                <PersonCard person={null} empty={true} />
+            {:else if Object.keys(people).filter(key => people[key].role === "contributor").length % 3 === 2}
+                <PersonCard person={null} empty={true} />
+            {/if}
         </div>
         <TextDivider class="w-1/3"/>
         <h2 class="h2 text-secondary-700">Advisory Board</h2>
@@ -32,6 +46,13 @@
                     <PersonCard person={people[key]} />
                 {/if}
             {/each}
+            <!-- if the number of PersonCards inside this div is not divisible by 3 add empty cards until it is -->
+            {#if Object.keys(people).filter(key => people[key].role === "advisory-board").length % 3 === 1}
+                <PersonCard person={null} empty={true} />
+                <PersonCard person={null} empty={true} />
+            {:else if Object.keys(people).filter(key => people[key].role === "advisory-board").length % 3 === 2}
+                <PersonCard person={null} empty={true} />
+            {/if}
         </div>
     </div>
 {/if}
