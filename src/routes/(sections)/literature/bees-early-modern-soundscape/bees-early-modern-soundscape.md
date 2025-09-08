@@ -3,7 +3,7 @@ title: "Bees in the Early Modern Soundscape: An Overview of Sound in Seventeenth
 id: bees-early-modern-soundscape
 parent: literature
 link: literature/bees-early-modern-soundscape
-lead: "In this article, Bennett Hogg explores how the sound of bees was variously interpreted, used, and represented in apiculture manuals and other *bee*-wrintings of the seventeenth century"
+lead: "In this article, Bennett Hogg explores how the sound of bees was variously interpreted, used, and represented in apiculture manuals and other bee-writings of the seventeenth century."
 img: 'assets/articles/bees-early-modern-soundscape/michael-held-6n5XRyPBzAI-unsplash.jpg'
 imgAlt: "many bees filling the entire frame of the photo"
 type: article
@@ -68,7 +68,7 @@ in some of the music of Iannis Xenakis (Pithoprakta, for example) or
 Gyorgy Ligeti (Atmosphères, Lontano). In these pieces multiple
 independent lines of sound blur together into an overall single
 sonority. Traffic noise from a busy motorway might be another example of
-this, where no single vehicles' sound dominates but there is a
+this, where no single vehicle's sound dominates but there is a
 generalised if complex single 'traffic' sound. A crowded room with lots
 of people talking at once might be another. Listening to the buzz of a
 hive to determine the collective mood of the bees within has long been
@@ -175,7 +175,7 @@ Edward Topsell, like Hyll, seems not to have kept bees himself, and his
 book synthesises a great number of earlier texts, including the work of
 Thomas Muffet on honeybees whose work Topsell must have had access to
 because he extensively paraphrases it in his 1608 *The Historie of
-Serpents*. Muffet's treatise on insects, itself syncretizing multiple
+Serpents*. Muffet's treatise on insects, itself syncretising multiple
 sources, is believed to have been completed by about 1590 when it was
 being prepared for publication. These plans fell through, though, and it
 was eventually published posthumously in Latin as *Insectorum sive
@@ -339,7 +339,7 @@ large audience to disseminate their words to political effect in
 performative conversations *intended* to be overheard (Smith, 1999, pp.
 83-95). The court soundscape, then, involves any listener potentially
 having to filter out significant speech from the more general
-soundscape, and for a speaker to modulate their voices either to carry
+soundscape, and for a speaker to modulate their voice either to carry
 over the soundscape of the court, or to be intentionally submerged into
 it, using the background noise to limit its general audibility. The
 challenge of such listening in public is made most explicit in Smith's
@@ -589,7 +589,7 @@ blurring together of the four closely overlapping versions of the melody
 creates a musical evocation of the swirling mass sonority of the swarm.
 The rustics attempt to settle the bees by 'tinging' or striking a
 'kettle of purest metal', a folk technique believed to bring down
-swarming bees. In the 1704 edition of *The Feminine Monarchie* the
+swarming bees. In the 1704 edition of *The Feminine Monarchy* the
 frontispiece depicts this activity (Butler, 1704), but it is clear from
 the clothing and stylised Arcadian landscape that this is an activity
 taking place in the distant past, and Butler is not the only
@@ -637,7 +637,7 @@ honour, Jupiter named them the Muses Birds. In the fourth book of *The
 Georgics* Virgil advises the beekeeper to 'jangle cymbals of great
 Cybele' to make the swarm 'settle on the scented place' already prepared
 for them by the spreading of '\[b\]ruised sprigs of balm and humble
-honey-wort' (Virgil, 1969, p. 71, see also f23, L3r). According
+honey-wort' (Virgil, 1969, p. 71). According
 to Robert Graves Cybele herself was worshipped in the form of a queen
 bee (Graves, 1996, p. 75), and so the connection between metallic noise
 and bees is further reinforced. The belief that the sound of struck
@@ -712,7 +712,7 @@ beleeve it may be a pricipall cause to make them go away the rather'.
 Tortona has never lost a swarm, he says, whereas those of his neighbours
 who have indulged in 'this kinde of ringing and jangling' have lost many
 (Levett, 1634, pp. 24-25/C4r-C4v). Tortona has, however, a short memory
-because later in the same book in advocating for the sensitivity of bees
+because later in the same book in advocating for the sensitivity of bees'
 hearing says that 'the tinkling of a Bason or such like Instrument will
 congregate and gather them together, when the swarmes are never so farre
 or wide dispersed' (Levett, 1634, H2v). Towards the end of the
@@ -754,7 +754,7 @@ words we cannot hear — gained significance and interacted with music and
 ambient sounds in the soundscapes inhabited by, and created by, those
 communities.
 
-**References**
+## References
 
 Austern, Linda Phyllis. 1998. 'Nature, Culture, Myth, and the Musician
 in Early Modern England', *Journal of the American Musicological
@@ -827,8 +827,7 @@ of Right-ordering of the Bee, Is Discovered and Described* (London: R.
 I. for Thomas Parkhurst).
 
 Ramsey, Michael-Thomas, Martin Bencsik, Michael Ian Newton, Maritza
-Reyes, Maryline Pioz, Didier Crauser, Noa Simon Delso and Yves Le Conte.
-2020. '[The Prediction of Swarming in Honeybee Colonies Using Vibrational
+Reyes, Maryline Pioz, Didier Crauser, Noa Simon Delso and Yves Le Conte. 2020. '[The Prediction of Swarming in Honeybee Colonies Using Vibrational
 Spectra](https://doi.org/10.1038/s41598-020-66115-5)', *Scientific Reports*,
 10.1:9798.
 
@@ -879,8 +878,8 @@ MacKenzie (London: The Folio Society).
 Virgil \[P. Vergili Maronis\]. 1909. *Georgicon Liber IV*, T. H. Page
 (ed.) (London: Macmillan and Co. Ltd.).
 
-Weiss, Harry B. 1926. 'Samuel Purchas and His 'Theatre of Politicall
-Flying Insects'' *Journal of the New York Entomological Society*, 34.1:
+Weiss, Harry B. 1926. 'Samuel Purchas and His "Theatre of Politicall
+Flying Insects"', *Journal of the New York Entomological Society*, 34.1:
 71-7.
 
 Yates, Frances A. 1966. *The Art of Memory* (London: Routledge & Kegan
