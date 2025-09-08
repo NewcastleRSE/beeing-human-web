@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import TagSelector from '../../src/lib/TagSelector.svelte';
 import { Filters } from '../../src/classes/Filters.svelte';
 import { capitaliseFirstLetter } from '../../src/utils/stringOperations';
+import people from '../../src/routes/(sections)/about/people/people.json';
 
 import { listAuthors } from '../mocks/mockVarsBuzzwords';
 
@@ -48,7 +49,7 @@ describe('Load and display tags in the TagSelector', () => {
         let filters = initFilters(listAuthors);
         render(TagSelector, {listTags: filters, filter: 'authors'});
         for (let author_name of listAuthors) {
-            const author_button = await screen.findByText(capitaliseFirstLetter(author_name), {exact: true});
+            const author_button = await screen.findByText(people[author_name].name, {exact: true});
             expect(author_button).toBeTruthy();
         }
     });
@@ -77,7 +78,7 @@ describe('Tag operations', () => {
         // mock function
         let filter = '';
 
-        const button = screen.getByText(capitaliseFirstLetter(listAuthors[0]), {exact: true});
+        const button = screen.getByText(people[listAuthors[0]].name, {exact: true});
         await user.click(button);
 
         let expectedObject = {
@@ -103,7 +104,7 @@ render(TagSelector, {listTags: filters, filter: 'authors', handleClick: mock});
         let filter = '';
 
         for (let author of listAuthors) {
-            const button = screen.getByText(capitaliseFirstLetter(author), {exact: true});
+            const button = screen.getByText(people[author].name, {exact: true});
             await user.click(button);
 
             let expectedObject = {
