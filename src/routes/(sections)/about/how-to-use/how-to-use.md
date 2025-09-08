@@ -37,7 +37,7 @@ By changing perspective you will understand Butler's multidisciplinary approach 
 
 You may be wondering, though, where you can find the bees in this human-made hive? 
 
-You will find photos of the bumble bees in the science lab, and learn about experiments in the [science]({base}/science) cell. You will hear both queen honeybees piping, and humans piping like queen honeybees in our [music]({base}/music) cell, and find humans (beekeepers and artists!) working with bees, even co-creating works of art with them in our [connections]({base}/connections) cell. If you look carefully you may occasionally spot a bee on our landing page, and you spy another one in the title bar of the browser…
+You will find photos of the bumble bees in the science lab, and learn about experiments in the [science]({base}/science) cell. You will hear both queen honeybees piping, and humans piping like queen honeybees in our [music]({base}/music) cell, and find humans (beekeepers and artists!) working with bees, even co-creating works of art with them in our [connections]({base}/connections) cell. If you look carefully you may occasionally spot a bee on our landing page, and spy another one in the title bar of the browser…
 
 ## What is the best way to explore our born-digital edition of *The Feminine Monarchie* (1623)?
 
@@ -73,7 +73,7 @@ Charles Butler's bee song was transcribed by [Magnus Williamson]({base}/about/pe
 
 The digital book was designed by [Tiago Sousa Garcia]({base}/about/people/tiago).
 
-The editorial work was proof-read by [Simon Davies]({base}/about/people/simon-davies); Charles Butler's Latin was translated by [Henry Howard]({base}/about/people/henry).
+The editorial work was proof-read by [Simon Davies]({base}/about/people/simon-davies); Charles Butler's Latin was translated by [Henry Howard]({base}/about/people/henry). Henry also checked the Latin transcriptions in our edition. 
 
 Please see our [people page]({base}/about/people/vivek) for the full list of everyone who co-created this Bee Book, including our Advisory Board, and the scholars (Contributors) who shared their work with us.
 
@@ -87,7 +87,7 @@ Image credits can be found [here]({base}/about/image-credits).
 
 ## How do I cite something from Bee-ing human?
 
-Please cite the author's from the page you are referencing, along with the title of their piece. 
+Please cite the author/s from the page you are referencing, along with the title of their piece. 
 
 For example:
 
@@ -103,7 +103,7 @@ Butler, Charles, *The Feminine Monarchie* (1623). *Bee-ing human.* Edited by Jen
 
 ## Who do I contact if I want to suggest a correction or make a contribution?
 
-This is a live project, and we are keen to keep improving it. If you spot an error do let us know. Similarly, if you have a project you think we should know about, please get in with [Jennifer Richards]({base}/about/people/jenny).
+This is a live project, and we are keen to keep improving it. If you spot an error do let us know. Similarly, if you have a project you think we should know about, please get in touch with [Jennifer Richards]({base}/about/people/jenny).
 
 Lovely beekeepers, please fill out our [Survey]({base}/connections/beekeepers-survey)! We are keen to continue working with you.
 
