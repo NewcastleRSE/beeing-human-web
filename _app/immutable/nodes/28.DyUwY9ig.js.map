@@ -1,0 +1,1 @@
+{"version":3,"file":"28.DyUwY9ig.js","sources":["../../../../../../src/routes/(sections)/music/+page.svelte"],"sourcesContent":["<script>\n  import Music from './music.md'\n</script>\n\n<Music/>\n"],"names":[],"mappings":"kZAAA,CAEA"}
