@@ -52,7 +52,7 @@ is pronounced. In his *English Grammar* (1633), Butler writes:
 > denominateth the voice, Loud or soft: so that it may be the same in
 > divers Tones, and divers in the same Tone.[^3]
 
-<ImgContainer imgUrl="/assets/articles/vocal-cues/image1.jpeg" altText="A page from Butler's book demonstrating his proposed ortography" captionCustomStyle="Charles Butler, *The English Grammar, or the Institution of Letters, Syllables, and Woo rds in the English Tung* (Oxford: William Turner, 1633), sig. G3r."/>
+<ImgContainer imgUrl="/assets/articles/vocal-cues/image1.jpeg" altText="A page from Butler's book demonstrating his proposed ortography" captionCustomStyle="Charles Butler, *The English Grammar, or the Institution of Letters, Syllables, and Woords in the English Tung* (Oxford: William Turner, 1633), sig. G3r."/>
 
 Butler criticised the 'opprobious cacographi' of English.[^4] Cacography
 -- bad writing -- and cacophony -- bad sound -- go hand in glove. The
@@ -228,7 +228,7 @@ endeavours show a preoccupation with the connections between speech, music, rhet
     1609), sig. F1r.
     
 [^3]: Charles Butler, *The English Grammar, or the Institution of
-    Letters, Syllables, and Woo rds in the English Tung* (Oxford:
+    Letters, Syllables, and Woords in the English Tung* (Oxford:
     William Turner, 1633), sig. G3r. I have regularised the spelling in
     this passage for ease of reading but all future quotations from
     Butler will follow the original orthography.
