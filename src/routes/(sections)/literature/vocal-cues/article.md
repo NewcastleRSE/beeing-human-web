@@ -3,7 +3,7 @@ title: "Vocal Cues: Charles Butler's Phonetic Orthography"
 id: vocal-cues
 parent: literature
 link: literature/vocal-cues
-lead: "sometoiajdflkasndfopijasdfpk"
+lead: "Rachel Willie discusses Charles Butler's proposed new English ortography in which, much like in *Melissomelos*, Butler attempts to capture and represent the sounds of the language as they are heard."
 img: 'assets/articles/vocal-cues/cover.jpg'
 imgAlt: "a few pieces of metal type with the letter n"
 type: article
@@ -276,7 +276,7 @@ endeavours show a preoccupation with the connections between speech, music, rhet
 [^13]: T. H. Howard-Hill, 'Early Modern Printers and the Standardization
     of English Spelling', *Modern Language Review* 101 (2006), 16-29.
     
-[^14]: Jason Peacey, 'Printers to the University\' 1584-1658' in *The
+[^14]: Jason Peacey, 'Printers to the University 1584-1658' in *The
     History of Oxford University Press* *Volume I: Beginnings to 1780*, ed. by Ian Gadd (Oxford: Oxford
     University Press, 2013), 51-78; Ian Gadd, 'Barnes, Joseph
     (1549/50--1618), bookseller and printer', *Oxford Dictionary of
