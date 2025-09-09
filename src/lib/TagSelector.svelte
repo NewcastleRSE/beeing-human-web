@@ -7,8 +7,6 @@
     let {listTags, filter, handleClick} = $props();
 </script>
 
-{@debug people}
-
 <div class="flex flex-col gap-2" data-testid="tag-selector-container">
     {#if listTags && filter}
         <h4 class="h4 font-light text-lg">{capitaliseFirstLetter(filter)}</h4>

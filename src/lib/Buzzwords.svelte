@@ -296,8 +296,6 @@
 
 </script>
 
-{@debug people}
-
 <svelte:window bind:innerWidth={windowWidth} />
 
 {#if loaded}
