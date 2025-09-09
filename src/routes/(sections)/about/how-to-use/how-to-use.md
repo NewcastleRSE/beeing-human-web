@@ -29,19 +29,19 @@ order: 2
 
 ## What is the best way to explore the Bee-ing Human website?
 
-In the [Introduction]({base}/about/introduction) we explain that we conceived our project as a research hive with different disciplinary perspectives brought together in a common space: our Digital Bee Book. Our [landing page]({base}/) takes inspiration from both an abstracted beehive and the frontispiece to Butler's book. It offers four separate entry points ([literature]({base}/literature), [music]({base}/music), [science]({base}/science), and [connections]({base}/connections). Each represents a honey storage/brood cell. You may be interested in one cell / disciplinary approach only, and choose to spend your time there. That's absolutely fine by us. But we'd be delighted if you also decided to jump from perspective to perspective—from music to literature to science to connections—by following one of the many hyperlinks in the articles, or by using either the view selector at the top of each page (<HiveSelector/>), or the search tool (<MagGlass class="w-4 inline"/> top right).
+In the [Introduction]({base}/about/introduction) we explain that we conceived our project as a research hive with different disciplinary perspectives brought together in a common space: our Digital Bee Book. Our [landing page]({base}/) takes inspiration from both an abstracted beehive and the frontispiece to Butler's book. It offers four separate entry points ([literature]({base}/literature), [music]({base}/music), [science]({base}/science), and [connections]({base}/connections)). Each represents a honey storage/brood cell. You may be interested in one cell / disciplinary approach only, and choose to spend your time there. That's absolutely fine by us. But we'd be delighted if you also decided to jump from perspective to perspective—from music to literature to science to connections—by following one of the many hyperlinks in the articles, or by using either the view selector at the top of each page (<HiveSelector/>), or the search tool (<MagGlass class="w-4 inline"/> top right).
 
 <ImgContainer imgUrl="/assets/articles/how-to-use/image1.png" altText="a screenshot of the website showing the section selector" captionCustomStyle="The view selector"/>
 
 By changing perspective you will understand Butler's multidisciplinary approach better. You will also understand how his interest in the 'emotions' of bees is taken up (differently) by today's scientists exploring animal sentience. You can collect perspectives on Butler's interest in sound as a tool for understanding emotions in the [literature]({base}/literature) and [music]({base}/music) cells. You can also read our own reflections on working across space and time: e.g. in the [connections]({base}/connections) cell you can read the reflections of a literary scholar on being in the bee lab (as we called it), or of a scientist on how reading Butler led him to rethink the idea of an experiment. 
 
-You may be wondering, though, where you can find the bees in this human-made hive? 
+You may be wondering, though, where you can find the bees in this human-made hive. 
 
 You will find photos of the bumble bees in the science lab, and learn about experiments in the [science]({base}/science) cell. You will hear both queen honeybees piping, and humans piping like queen honeybees in our [music]({base}/music) cell, and find humans (beekeepers and artists!) working with bees, even co-creating works of art with them in our [connections]({base}/connections) cell. If you look carefully you may occasionally spot a bee on our landing page, and spy another one in the title bar of the browser…
 
 ## What is the best way to explore our born-digital edition of *The Feminine Monarchie* (1623)?
 
-Our digital hive not only includes essays inspired by (or about) Charles Butler's remarkable, seventeenth-century bee manual, *The Feminine Monarchie* (1623), it also shares it.
+Our digital hive not only includes essays inspired by (or about) Charles Butler's remarkable seventeenth-century bee manual, *The Feminine Monarchie* (1623), it also shares it.
 
 This [hyperlink]({base}/literature/transcription) will take you directly to our born-digital edition of [*The Feminine Monarchie*]({base}/literature/transcription), which you can also access from the landing page by clicking the [literature]({base}/literature) cell. The view selector at the top of the screen offers you different ways of viewing the edited text.
 
