@@ -4,8 +4,8 @@ id: vocal-cues
 parent: literature
 link: literature/vocal-cues
 lead: "sometoiajdflkasndfopijasdfpk"
-img: 'assets/articles/bees-early-modern-soundscape/michael-held-6n5XRyPBzAI-unsplash.jpg'
-imgAlt: "many bees filling the entire frame of the photo"
+img: 'assets/articles/vocal-cues/cover.jpg'
+imgAlt: "a few pieces of metal type with the letter n"
 type: article
 layout: article
 author: rachel
@@ -51,6 +51,8 @@ is pronounced. In his *English Grammar* (1633), Butler writes:
 > strained, or slacked, according to the points: and therefore
 > denominateth the voice, Loud or soft: so that it may be the same in
 > divers Tones, and divers in the same Tone.[^3]
+
+<ImgContainer imgUrl="/assets/articles/vocal-cues/image1.jpeg" altText="A page from Butler's book demonstrating his proposed ortography" captionCustomStyle="Charles Butler, *The English Grammar, or the Institution of Letters, Syllables, and Woo rds in the English Tung* (Oxford: William Turner, 1633), sig. G3r."/>
 
 Butler criticised the 'opprobious cacographi' of English.[^4] Cacography
 -- bad writing -- and cacophony -- bad sound -- go hand in glove. The
