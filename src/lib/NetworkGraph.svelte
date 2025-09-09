@@ -221,7 +221,5 @@
     }
 </script>
 
-{@debug inputData}
-
 <h2 class="h2 my-4">Network Graph</h2>
 <div id={graphId} bind:this={container} class="w-full h-[70vh] min-h-[400px]"></div>
