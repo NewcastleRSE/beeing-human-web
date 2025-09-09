@@ -191,7 +191,7 @@ with the section on bees in the 1608 *Historie of Serpents*. Muffet
 hears what we now know to be the tooting of a newly emerged queen as 'a
 solitary, mournfull, and peculiar kinde of voyce, as it were of some
 trumpet' which he interprets as the voicing of a popular protest against
-a tyrranical king presaging the emigration of dissident bees from their
+a tyrannical king presaging the emigration of dissident bees from their
 overbearing ruler (Topsell, 1608, G5r; Muffet, 1658, 4G3r; see also
 Austern, 1998, p. 8). In Muffet's reading swarming amounts to justified
 rebellion against tyranny.
@@ -343,7 +343,7 @@ soundscape, and for a speaker to modulate their voice either to carry
 over the soundscape of the court, or to be intentionally submerged into
 it, using the background noise to limit its general audibility. The
 challenge of such listening in public is made most explicit in Smith's
-brief exploration of William Balwin's *Beware the Cat*, where Geoffrey
+brief exploration of William Baldwin's *Beware the Cat*, where Geoffrey
 Streamer, the sometime narrator, having attained preternaturally
 sensitive hearing through an elaborate (and fairly gruesome) series of
 devices, potions, and sympathetic magic, struggles to separate out
