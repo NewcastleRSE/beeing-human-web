@@ -3,10 +3,10 @@ title: Sound in *The Feminine Monarchie* (1623)
 id: sound-in-feminine-monarchie
 parent: music
 link: music/sound-in-feminine-monarchie
-lead: "somethinf asdokfnoals ndfaosidf"
-img: 'assets/articles/performing-melissomelos/susan-wilkinson-fMXyMuOxuYU-unsplash.jpg'
-imgAlt: 'An abstract painting of soundwaves in blue and cream tones'
-type: [article, media]
+lead: "Bennett discusses how Butler's training in the arts of grammar, rhetoric, and music predisposes him to attend to sound and how, in *The Feminine Monarchie*, sound plays a number of roles that, for Butler, afford insights into the world of the bees."
+img: 'assets/articles/sound-in-feminine-monarchie/md-mahdi-VlE1L22HS_I-unsplash.jpg'
+imgAlt: 'An abstract light painting of soundwaves in black and gold'
+type: article
 layout: article
 author: bennett
 date: 2025/09/10
@@ -19,8 +19,6 @@ date: 2025/09/10
 </script>
 
 <ByLine author={author} date={date} type={type} title={title}/>
-
-**Sound in *The Feminine Monarchie* (1623)**
 
 Renaissance and early modern music theorists tried to establish
 connections at the philosophical and practical levels between music and
@@ -201,21 +199,18 @@ chapel, albeit an imagined one.
     Proceedings Vol. XVIII, 1994). The changes in the rate of oxygen
     emission will affect the pitch of a sound produced by a digital
     synthesiser, often rising in pitch as the rate of oxygen emission
-    rises; see Stephen Barrass, 'Sonification Design and Aesthetics\' in
+    rises; see Stephen Barrass, 'Sonification Design and Aesthetics' in
     Thomas Hermann, Andrew D. Hunt, and John Neuhoff (eds.), *The
     Sonification Handbook* (Berlin: Logos Verlag 2011), 145-172, and
-    Paul Vickers, Bennett Hogg, David Worral, \'Aesthetics of
-    Sonification: Taking the Subject Position\', in Clemens Wöllner
+    Paul Vickers, Bennett Hogg, David Worral, 'Aesthetics of
+    Sonification: Taking the Subject Position', in Clemens Wöllner
     (ed.), *Body, Sound and Space in Music and Beyond* (London and New
     York: Routledge, 2017), 89-109.
-
+    
 [^3]: Charles Butler, *The Feminine Monarchie: Or The Historie of Bees*
-    (London: John
-
-    Haviland, 1623), [K4r]({base}/literature/transcription#ch5par37). See also [Rachel D. Carlson, *The Honey Bee
+    (London: John Haviland, 1623), [K4r]({base}/literature/transcription#ch5par37). See also [Rachel D. Carlson, *The Honey Bee
     and Apian Imagery in Classical Literature*, PhD Thesis, University
-    of Washington,
-    2015,](https://docslib.org/doc/9672040/the-honey-bee-and-apian-imagery-in-classical-literature)
+    of Washington, 2015,](https://docslib.org/doc/9672040/the-honey-bee-and-apian-imagery-in-classical-literature)
     44-57. Writing some sixty years after Butler, Moses Rusden,
     'Bee-Master to the King's most excellent Majesty' also mentions the
     muses' birds: 'Jupiter being fed by Bees, must needs eat Honey:
@@ -223,7 +218,7 @@ chapel, albeit an imagined one.
     Birds'. See Rusden, *A Full Discovery of Bees. Treating of The
     Nature, Government, Generation & Preservation of the Bee* (London:
     Henry Million, 1685), 74.
-
+    
 [^4]: Some years later William Mewe was to invent a 'glass beehive'
     inspired by Butler's reference to a transparent 'Lanthorne-hive' in
     Pliny, although Butler seems not to have tried to build such a hive.
@@ -231,16 +226,16 @@ chapel, albeit an imagined one.
     answering his questions about how exactly worker bees made the combs
     as 'unlesse the Bees also were transparent' the comb under
     construction would not be visible as 'they doe alwaies frequently
-    compasse the Combs round about' (N4r).
+    compasse the Combs round about' ([N4r]({base}/literature/transcription#ch6par3)).
 
 [^5]: Athanasius Kircher, *Musurgia Universalis sive Ars Magna Consoni
     et Dissoni in X. Libros Digesta* (Rome: Francisco Corbelletti,
     1650), 34-5.
-
+    
 [^6]: Jennifer Richards, 'Voices and Bees: the Evolution of a Sounded
     Book' in Christopher Cannon and Steven Justice, eds, *The Sound of
     Writing* (Baltimore: Johns Hopkins University Press, 2023), 63-83.
-
+    
 [^7]: A similar phenomenon is observed and described by Moses Rusden
     some 60 years later: 'Also by their several notes and hummings, the
     Bees give notice to one another when their King is absent, and when
@@ -252,18 +247,18 @@ chapel, albeit an imagined one.
     returned home at once, to the admiration of many beholders; for I
     have done it oftentimes, in several places' (Rusden, *A Full
     Discovery of Bees*, 1685, 12).
-
+    
 [^8]: Jürgen Tautz, *The Buzz About Bees: Biology of a Superorganism*,
     trans. David Sundeman (Berlin: Springer Verlag, 2009), and Keith
-    Botelho, \'Honey, Wax, and the Dead Bee\', *Early Modern Culture*
+    Botelho, 'Honey, Wax, and the Dead Bee', *Early Modern Culture*
     (2016), 11: 99-113, at 102-3.
-
+    
 [^9]: Michael-Thomas Ramsey, Martin Bencsik, Michael Ian Newton, Maritza
     Reyes, Maryline Pioz, Didier Crauser, Noa Simon Delso and Yves Le
     Conte, 'The Prediction of Swarming in Honeybee Colonies Using
     Vibrational Spectra', *Scientific Reports*, 2020, 10:9798:
     <https://doi.org/10.1038/s41598-020-66115-5>
-
+    
 [^10]: See Luigi Baciadonna's note on tooting and quacking in Chapter 5:
     'Tooting and quacking are sophisticated vibrational signals
     generated by honeybee queens through vibrations of their thoracic
@@ -283,15 +278,15 @@ chapel, albeit an imagined one.
     occasionally overlap with it. Both signals can regulate interactions
     between queens and influences the behaviour of worker bees, playing
     an essential role in colony dynamics', citing W. H. Kirchner,
-    \'Acoustical Communication in Honeybees', *Apidologie* (1993), 24:
+    'Acoustical Communication in Honeybees', *Apidologie* (1993), 24:
     297-307, and A. Michelsen, W. H. Kirchner, B. B. Andersen and M.
     Lindauer, 'The Tooting and Quacking Vibration Signals of Honeybee
     Queens: A Quantitative Analysis', *Journal of Comparative Physiology
     A*, (1986),158: 605-11.
-
+    
 [^11]: Martin Bencsik, Adam McVeigh, David Claeys Bouuaert, Nuno Capela,
     Frederick Penny, Michael Ian Newton, José Paolo Sousa and Dirk C. de
     Graf, 'Quantitative Assessments of Honeybee Colony's Response to an
     Artificial Vibrational Pulse Resulting in Non-invasive Measurements
     of Colony's Overall Mobility and Restfulness', *Scientific Reports*
-    (2024) 4:3827: <https://doi.org/10.1038/s41598-024-54107-8> \#
+    (2024) 4:3827: <https://doi.org/10.1038/s41598-024-54107-8>
