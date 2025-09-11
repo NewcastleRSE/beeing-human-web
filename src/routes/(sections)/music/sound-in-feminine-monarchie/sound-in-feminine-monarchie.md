@@ -119,7 +119,7 @@ beekeeper will bang on a metal object in the belief it will encourage
 the swarm to settle, but notes that even if it is not effective in
 controlling the swarm it does serve the purpose of notifying neighbours
 of a claim to ownership, something underlined in [Chapter 2]({base}/literature/transcription#ch2) where he says
-that hives should always be set within sight and sound or the
+that hives should always be set within sight and sound of the
 beekeeper's home. Later in [Chapter 5]({base}/literature/transcription#ch5) he notes that once swarming bees
 are out of the sight and hearing of their owner 'you have lost al right
 and propertie in them' ([L3v]({base}/literature/transcription#ch5par51)). In other words, they can be anyone's for
@@ -157,7 +157,7 @@ talke of the fight, and commend one an other for their fortitude' ([R2r](({base}
 But voice can also mark the presence of enemies, and the wasp in
 particular is identified by the bees by 'the strangenesse of hir voice'
 ([Q2r]({base}/literature/transcription#ch7par21)). Sound and tapping the hive can serve to identify, according to
-Butler, those hives most a risk from robbers. If on tapping the hive the
+Butler, those hives most at risk from robbers. If on tapping the hive the
 bees within 'doe make a great noise both above and beneath' then the
 hive is likely strong enough, in Butler's estimation, to resist any
 robbers. If, though, the bees within 'make a little short noise, though
