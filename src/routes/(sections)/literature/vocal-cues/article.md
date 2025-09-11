@@ -3,7 +3,7 @@ title: "Vocal Cues: Charles Butler's Phonetic Orthography"
 id: vocal-cues
 parent: literature
 link: literature/vocal-cues
-lead: "Rachel Willie discusses Charles Butler's proposed new English ortography in which, much like in *Melissomelos*, Butler attempts to capture and represent the sounds of the language as they are heard."
+lead: "Rachel Willie discusses Charles Butler's proposed new English orthography in which, much like in *Melissomelos*, Butler attempts to capture and represent the sounds of the language as they are heard."
 img: 'assets/articles/vocal-cues/cover.jpg'
 imgAlt: "a few pieces of metal type with the letter n"
 type: article
