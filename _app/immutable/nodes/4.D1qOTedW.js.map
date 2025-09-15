@@ -1,0 +1,1 @@
+{"version":3,"file":"4.D1qOTedW.js","sources":["../../../../../../node_modules/@sveltejs/kit/src/runtime/components/svelte-5/layout.svelte"],"sourcesContent":["<script>\n  let { children } = $props();\n</script>\n\n{@render children()}\n"],"names":[],"mappings":"qbAAA,4CAEA","x_google_ignoreList":[0]}
