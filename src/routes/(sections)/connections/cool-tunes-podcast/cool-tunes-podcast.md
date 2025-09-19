@@ -18,7 +18,7 @@ date: 2025/05/19
     import { base } from "$app/paths";
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 
 <EmbedYTVideo id="V5XezJwyX2A"/>

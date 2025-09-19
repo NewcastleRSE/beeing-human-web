@@ -16,7 +16,7 @@ date: 2025/03/03
     import ByLine from '$lib/ByLine.svelte'
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 <div class="md:w-1/2 md:ml-auto md:mr-0 my-4">
 <p class="italic text-lg text-secondary-600">Even insects express anger, terror,

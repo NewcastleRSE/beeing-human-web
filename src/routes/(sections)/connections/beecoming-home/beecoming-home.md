@@ -20,7 +20,7 @@ date: 2025/06/25
     import {base} from '$app/paths'
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 *Beecoming home* aims to provide a space where art, community, and nature can sit and talk a while. *So much of our daily lives have become disconnected from nature* — from our commute to work in individual cars, to our sterile and uniform lawns, to the way we speak about ourselves as separate from the animal kingdom. **We aim to unite culture and ecology in a thought- provoking, inter-species collaboration and facilitate an open and curious dialogue that invites everyone to the table.**
 

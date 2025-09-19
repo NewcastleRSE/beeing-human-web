@@ -19,7 +19,7 @@ order: 4
     import ByLine from '$lib/ByLine.svelte'
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 ## Bee society
 

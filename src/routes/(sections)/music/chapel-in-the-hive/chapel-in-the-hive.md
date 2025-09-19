@@ -20,7 +20,7 @@ date: 2025/08/04
     import EmbedYTVideo from '$lib/EmbedYTVideo.svelte'
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 ## Making with Bees, Making with Butler
 

@@ -17,7 +17,7 @@ date: 2025/04/24
     import CTA from '$lib/CTA.svelte'
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 <CTA h1text="Where the Bee Sucks" h2text="A film about bees and bee keeping by adrin neatrour" goText="Watch the film" goLink="https://vimeo.com/148950783"/>
 

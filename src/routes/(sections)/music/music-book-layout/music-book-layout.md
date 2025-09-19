@@ -18,7 +18,7 @@ date: 2025/06/09
     import ImgContainer from '$lib/ImgContainer.svelte'
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 In early modern Europe, just as today, most musicians usually performed together without needing written-down music, either composing it together on the spot or singing and playing from memory. However, as general musical literacy grew, especially with the technical innovations in the sixteenth century that made relatively low-cost printed music books increasingly available, making music by both professional and amateur ensembles by reading from notation became more and more widespread.
 

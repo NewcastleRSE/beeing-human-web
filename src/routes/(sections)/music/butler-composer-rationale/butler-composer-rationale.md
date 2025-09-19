@@ -18,7 +18,7 @@ date: 2025/08/29
     import ImgContainer from '$lib/ImgContainer.svelte';
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 Charles Butler was a prolific reader but a very selective composer. He
 wrote only two surviving pieces: *Melissomelos*, which appeared in two

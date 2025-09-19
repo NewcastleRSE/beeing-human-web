@@ -18,7 +18,7 @@ date: 2025/09/10
     import ImgContainer from '$lib/ImgContainer.svelte';
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 Renaissance and early modern music theorists tried to establish
 connections at the philosophical and practical levels between music and

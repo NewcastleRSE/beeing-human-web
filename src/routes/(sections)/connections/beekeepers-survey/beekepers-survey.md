@@ -17,7 +17,7 @@ date: 2025/04/11
     import CTA from '$lib/CTA.svelte'
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 *Bee-ing Human* is a humanities-science collaboration exploring the behaviour (and emotions) of bees. It is inspired by Charles Butler's *Feminine Monarchie, Or the Historie of Bees* (1623). Butler (1560-1647) was a clergyman, amateur scientist, and beekeeper. He was the first to confirm the feminine sex of the 'ruling' honeybee in a hive. He argued that this discovery meant naturalists should change how they studied bees. He left his books in his study and chose instead to observe and listen to bees in the field. We are particularly interested in his study of swarms. We hope that today's beekeepers can add their knowledge to our project.
 
