@@ -184,7 +184,7 @@
                         {#each personData.articles as article}
                             <li class="ml-12 text-lg">
                                 <a href="{base}/{article.url}" class="anchor"
-                                    >{article.title}</a
+                                    ><InjectMD content={article.title} layout={false} outerTag={false} /></a
                                 >
                                 ·
                                 <a

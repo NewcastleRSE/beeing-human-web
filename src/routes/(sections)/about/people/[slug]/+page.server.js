@@ -23,17 +23,18 @@ export async function load({ parent, params, fetch }) {
      //    find all articles where 'slug' matches the 'author' field in allData
      //    return the articles in an array
      let articles = [];
-     for (let article of Object.keys(allData)) {
-          if (allData[article].author === slug) {
-               articles.push(allData[article]);
-          } else if (Array.isArray(allData[article].author)) {
-               for (let a of allData[article].author) {
+     for (let [key, article] of Object.entries(allData.articleData)) {
+          if (article.author === slug) {
+               articles.push(article);
+          } else if (Array.isArray(article.author)) {
+               for (let a of article.author) {
                     if (a === slug) {
-                         articles.push(allData[article]);
+                         articles.push(article);
                     }
                }
           }
      }
+
 
      //     find all buzzwords where 'author' matches 'slug
      // get the buzzwords from /api/buzzwords
