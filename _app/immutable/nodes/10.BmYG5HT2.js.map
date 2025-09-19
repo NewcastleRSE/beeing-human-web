@@ -1,1 +1,0 @@
-{"version":3,"file":"10.BmYG5HT2.js","sources":["../../../../../../src/routes/(sections)/about/people/+page.svelte"],"sourcesContent":["<script>\n    import People from  './people.md'\n</script>\n\n<People/>"],"names":[],"mappings":"kZAAA,CAEA"}
