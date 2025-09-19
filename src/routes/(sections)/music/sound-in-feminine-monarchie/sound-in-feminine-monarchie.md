@@ -53,7 +53,7 @@ affords, for him, insights into the world of the bees. At the time
 Butler was writing, sound was the most reliable way to gain an insight
 into the interior of the beehive in its normal, working state.[^4] One
 of his key mistakes, from a scientific perspective, was his
-interpretation of the sounds that he hears inside the hive as 'voices',
+interpretation of the sounds that he heard inside the hive as 'voices',
 although this was a common perception in the seventeenth century (and
 earlier). Athanasius Kircher, for example, devotes an extensive section
 of his encyclopaedia of music to the vocal organs, as he sees them, of
@@ -148,7 +148,7 @@ current state of the population within.[^11]
 Despite being often held up as role models of hard-working, responsible
 behaviour, some bees turn to the bad, and hives are sometimes robbed by
 bees from other hives. Attacks by robber bees result in 'such a noise
-and dinne, as if the Drum did sound an all-arme\[alarm\]' along with 'a
+and dinne, as if the Drum did sound an all-arme \[alarm\]' along with 'a
 more shrill and sharpe note' that Butler understands as coming from
 'their generall Commander' to egg them on to fight the attackers
 ([R1r]({base}/literature/transcription#ch7par38)). After such a battle the successful defenders gather at the door
