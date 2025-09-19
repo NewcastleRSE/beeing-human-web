@@ -27,7 +27,7 @@ order: 4
 
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 <AdditionalInfoBox title = 'This article is a draft'>
     

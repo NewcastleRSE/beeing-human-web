@@ -123,7 +123,7 @@ order: 3
 
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 Most projects only publish the final results of their research. However, to aid researchers, especially those at an earlier stage of their careers, we are sharing the timeline of our three-year collaboration, from application to completion. We include the [original research proposal]({base}/assets/articles/project-timeline/Original-Project-Proposal.pdf) as well as the annual reports for [2023]({base}/assets/articles/project-timeline/Bee-ing-Human-2023-report.pdf) and [2024]({base}/assets/articles/project-timeline/Bee-ing-Human-2024-report.pdf). We think it is important to do this because deep, cross-disciplinary collaborations are rare, and a science project led from the humanities such as this one, even rarer.
 

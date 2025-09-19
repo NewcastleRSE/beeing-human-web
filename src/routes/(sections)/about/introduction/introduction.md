@@ -21,7 +21,7 @@ order: 1
 
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 This experimental project, funded by the [Leverhulme Trust](https://www.leverhulme.ac.uk/) (2022-26), is a collaboration between humanists and musicians (literary studies, musicology, composition), scientists (biology, psychology, animal cognition), and a research software engineer, who came together to explore historical and contemporary approaches to the study of bee 'sentience', and create a digital bee book that could set our different research findings side by side. Here we introduce our [Digital Bee Book]({base}/) (our research 'hive'), and our [born-digital edition]({base}/literature/transcription#titlepage) of the seventeenth-century printed book (or acoustic 'hive') that inspired it. You can find out more about why we chose to work together, and our defence of the importance of connecting knowledge across disciplines [here](#).
 

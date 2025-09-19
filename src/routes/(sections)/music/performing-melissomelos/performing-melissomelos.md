@@ -19,7 +19,7 @@ date: 2025/08/05
     import EmbedYTVideo from '$lib/EmbedYTVideo.svelte'
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 I first came across Butler's bee madrigal *Melissomelos* when working, like [Richard Wistreich]({base}/about/people/richard), on ideas of [music and sociability]({base}/music/music-book-layout). I was interested in the different ways in which music was published in the early modern period, and was reading up about table-book format – music printed on the page so that four singers seated around a table can each see their own part. In the *Grove* entry on table-books, the enticingly brief mention of Butler immediately caught my attention:
 

@@ -18,7 +18,7 @@ date: 2025/08/19
     import ImgContainer from '$lib/ImgContainer.svelte';
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 Charles Butler has received mixed reviews since the seventeenth century.
 To the gossipy Oxford antiquarian and musician Anthony Wood, he was 'an
