@@ -19,7 +19,7 @@ order: 4
     import ByLine from '$lib/ByLine.svelte'
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 ## Bee society
 
@@ -42,7 +42,7 @@ written:
 >
 > Of usurped freedome; instituted Law
 >
-> To keepe the Common-Wealth of Bees in awe. (frontispiece).
+> To keepe the Common-Wealth of Bees in awe.
 
 Animals of various sorts have been used in religion, mythology, and
 literature as emblems of human qualities and interactions, as they are
@@ -199,7 +199,7 @@ rebellion against tyranny.
 These bugle- or trumpet-like sounds (and their lower-pitched replies
 recorded in some accounts), the tooting and quacking of new queens in
 contemporary terminology, are [what Butler hears as the colloquy of the
-reigning queen and her daughters prior to swarming](#). This is actually quite a radical
+reigning queen and her daughters prior to swarming]({base}/music/sound-in-feminine-monarchie). This is actually quite a radical
 departure from other writers of the time. Samuel Purchas (1657) also
 hears the tooting as the voice of the queen, and as something 'performed
 in a musical manner', which is unsurprising given the extent to which he
@@ -314,7 +314,7 @@ and so we can never hope to hear how they heard, which is why, Mansell
 notes, most sound historians will draw on both approaches. In order to
 more effectively understand the role that sounds may have played in the
 past an 'analysis of the interface between sounds and subjectivities' is
-essential (Mansell, 2019, p. 344). [Bruce R. Smith](#)'s *The Acoustic World
+essential (Mansell, 2019, p. 344). [Bruce R. Smith]({base}/about/people/bruce)'s *The Acoustic World
 of Early Modern England* (1999) stands out as one of the pioneering
 attempts to not only integrate an attentiveness to sound in historical
 research, but to attempt to understand what the salient issues were that
@@ -434,7 +434,7 @@ the emotional tenor, and the courtly protocols, but cannot fathom the
 'words' themselves. Though Butler was unable to hear the words spoken by
 the apian royal family he could register (and record in music notation)
 its sound, and then subjectively frame these sounds in the nearest means
-available to him to present it in a comprehensible form what he had
+available to him to present in a comprehensible form what he had
 heard, in other words, as music. By turning his observations into music
 he brings an order to what he hears: by transposing unintelligible
 speech into music he frames it as knowable, but in the process he also
@@ -613,8 +613,7 @@ homophonically, to conclude with 'then no time lesse to hive your bees'.
 This leads immediately into the final 'harvest home' section that ends
 the piece. So whereas Butler brings the sound of bees that would have
 conventionally been outside the scope of music into the space of music
-so that it can be ordered and known, Dering seems to brings the swirling
-confusion of the swarm, and the metallic tinging of the rustics, into
+so that it can be ordered and known, Dering seems to bring the swirling confusion of the swarm, and the metallic tinging of the rustics, into
 the domestic performing space of his consort song to vividly — and
 disruptively in the normative context of music — evoke the rural
 soundscape and invigorate what might be the rather staid consort

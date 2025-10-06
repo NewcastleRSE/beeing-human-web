@@ -20,7 +20,7 @@ date: 2025/09/08
 
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 *Vocalise (for bees)* is lament for the plight of bees, as we witness their decline worldwide. It doesn’t imitate bee sounds directly, but makes reference to the humming and buzzing sounds they may make as they fly, pollinate flowers, and communicate with each other in the hive. The performer has a great deal of freedom in how they would like to interpret this piece in terms of tempo, timbre and character.
 

@@ -18,7 +18,7 @@ date: 2025/04/10
     import ImgContainer from '$lib/ImgContainer.svelte'
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 ## Introduction
 **What is consciousness?** Consciousness is defined as ***the capacity of a living being to have subjective experiences of itself and its surrounding world***. If this definition appears simple or raw, the study of consciousness, in particular in animals, remains a genuine challenge, primarily because, unlike humans, animals cannot provide verbal reports of their subjective experiences.

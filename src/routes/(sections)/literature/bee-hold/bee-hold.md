@@ -19,7 +19,7 @@ order: 3
     import ByLine from '$lib/ByLine.svelte'
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
 As in literary and moral discourses, the bee was a favoured animal for writers theorising the emerging discipline of natural philosophy in the early seventeenth century. Drawing on an established humanist conceit, Francis Bacon identifies the industrious bee as an emblem of the ideal natural philosopher, lauding how it 'collects its material from the flowers of field and garden' and, crucially, then 'convert[s] and digest[s]' this material.[^1] We can, however, discern a further analogy between the bee and the natural philosopher by reading *The Feminine Monarchie* alongside Charles Butler's contemporaries working in or alongside the Royal Society. Though Butler himself was not actively involved with institutional scientific activity in the seventeenth century, his prolonged, attentive observations are symptomatic of the amateur proto-scientific culture of the period.[^2] In particular, Butler's depiction of the bee's heightened 'sense of feeling' ([*Feminine Monarchie*, B4r]({base}/literature/transcription#ch1par15)) illuminates the role of 'feeling', both physical and affective, in early modern scientific practices.
 

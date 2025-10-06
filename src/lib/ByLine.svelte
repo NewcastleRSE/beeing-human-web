@@ -4,26 +4,27 @@
     import { base } from "$app/paths";
 
     import CitationModal from "./CitationModal.svelte";
+    import ReadingTime from "./ReadingTime.svelte";
 
-    let { author, date, type, title } = $props();
+    let { author, date, type, title, readingTime = null } = $props();
 
-    let dateType = new Date(date)
+    let dateType = new Date(date);
 
     let show = $state(false);
 
     let authorArray = $derived.by(() => {
-        if (typeof author === 'string') {
-            return [author]
+        if (typeof author === "string") {
+            return [author];
         } else {
-            return author
+            return author;
         }
-    })
+    });
 
     let colourType = $derived.by(() => {
         if (type && Array.isArray(type)) {
             return type[0];
         } else {
-            return type
+            return type;
         }
     });
 
@@ -32,21 +33,45 @@
     }
 </script>
 
-<div class="flex md:gap-6 w-full justify-evenly md:justify-start items-center align-center mb-4">
+<div
+    class="flex md:gap-6 w-full justify-evenly md:justify-start items-center align-center mb-4"
+>
     {#each authorArray as authorName}
-    <img
-        class="inline-block h-12 w-12 md:h-16 md:w-16 rounded-full border-solid border-2 border-primary-500"
-        src="{base}/thumbnails/{people[authorName].img}"
-        alt="A picture of {people[authorName].name}"
-    />
-    <div class="text-sm flex flex-col">
-        <span
-            ><em>by</em> <a rel="author" class="anchor" href="{base}/about/{people[authorName].url}"
-                >{people[authorName].name}</a
-            ></span
-        > <time datetime="{dateType}" class="text-xs">{dateType.toLocaleDateString("en-UK", {weekday: 'long', month: 'long', day:'numeric', year:'numeric'})}</time>
-    </div>
+        <img
+            class="inline-block h-12 w-12 md:h-16 md:w-16 rounded-full border-solid border-2 border-primary-500"
+            src="{base}/thumbnails/{people[authorName].img}"
+            alt="A picture of {people[authorName].name}"
+        />
+
+        <div class="text-sm flex flex-col">
+            <span
+                ><em>by</em>
+                <a
+                    rel="author"
+                    class="anchor"
+                    href="{base}/about/{people[authorName].url}"
+                    >{people[authorName].name}</a
+                ></span
+            >
+            <time datetime={dateType} class="text-xs"
+                >{dateType.toLocaleDateString("en-UK", {
+                    weekday: "long",
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                })}</time
+            >
+        </div>
     {/each}
-    <button class="text-xs md:ml-auto relative z-10 rounded-full {typeColours[colourType].background} px-3 py-1.5 font-normal {typeColours[colourType].text} hover:{typeColours[colourType].hover}" onclick={toggleModal}>Citation &#128366;</button>
+    {#if readingTime}
+        <ReadingTime {readingTime} />
+    {/if}
+    <button
+        class="text-xs md:ml-auto relative z-10 rounded-full {typeColours[
+            colourType
+        ].background} px-3 py-1.5 font-normal {typeColours[colourType]
+            .text} hover:{typeColours[colourType].hover}"
+        onclick={toggleModal}>Citation &#128366;</button
+    >
 </div>
-<CitationModal bind:show={show} citationInfo={{authorArray, date, title}}/>
+<CitationModal bind:show citationInfo={{ authorArray, date, title }} />

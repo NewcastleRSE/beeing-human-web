@@ -18,7 +18,7 @@ date: 2025/06/06
     import PdfViewer from '$lib/PdfViewer.svelte'
 </script>
 
-<ByLine author={author} date={date} type={type} title={title}/>
+<ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 <div class="h-dvh">
     <PdfViewer url='./Melissomelos-collated-edition-20250605.pdf' pageNum=0 objectTitle='Edition of Melissomelos'/>
 </div>
