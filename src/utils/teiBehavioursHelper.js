@@ -21,7 +21,7 @@ export function teiSetBodyLayout(elt) {
             addTailwindClasslist(notesDiv, 'col-span-1 grid md:h-full gap-4')
             let childNotes = [...elt.querySelectorAll('tei-note')]
             for (let child of childNotes) {
-                if (child.getAttribute('type') === 'authorial') {
+                if (child.getAttribute('type') === 'authorial' && child.getAttribute('data-origfile') != '1609') {
                     notesDiv.appendChild(child);
                 }
             }
