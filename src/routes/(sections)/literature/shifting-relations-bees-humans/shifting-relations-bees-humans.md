@@ -118,12 +118,12 @@ harvesting of honey was to kill the bees, so that the beekeeper could
 then remove the honeycombs from the straw or wicker skep. Butler
 advocates holding the skep over a hole in the ground in which sulphur is
 burned. This poisons the bees with the sulphur dioxide gas that is
-produced (Butler, 1623, sig. T3v). If sulphur is not available then
+produced ([Butler, 1623, sig. T3v]({base}/literature/transcription#ch10p1par6)). If sulphur is not available then
 other means of generating a thick smoke, such as burning damp hay, will
 smother them. John Levett's slightly later publication, *The Ordering
 of Bees* (1634), takes the form of a dialogue between the experienced
 beekeeper Tortona, and his pupil Petralba. To kill the bees Tortona
-advises 'driving' them into an empty skep[^3], but rather than doing
+advises 'driving' them into an empty skep,[^3], but rather than doing
 this to establish a new colony (he is against driving as a means to
 expand the bee garden) he waits until evening when the bees are settled
 together in the top of the new empty skep, shakes them out onto the
@@ -134,8 +134,8 @@ modular hives (which made the killing of bees unnecessary) accept the
 killing of the bees, there is a tactile, almost sadistic violence in
 Tortona's treatment of his bees that is quite untypical. The very fact
 of killing these creatures who 'in their labour and order . . . are so
-admirable, that they may be a patterne unto men' (Butler, 1623, sig.
-B1v) troubles several of these authors, and most accounts of killing the
+admirable, that they may be a patterne unto men' ([Butler, 1623, sig.
+B1v]({base}/literature/transcription#ch1par3)) troubles several of these authors, and most accounts of killing the
 bees are framed in something of a regretful tone.
 
 Caught, as so much of the beekeeping literature is, between ancient
@@ -146,7 +146,7 @@ Ancients made a constant Revenue of their Bees without killing them at
 any time' but 'this so profitable Government of Bees is now utterly
 lost' (Hartlib, 1655, p. 3). The letter was published in Hartlib's
 book, *The Reformed Common-Wealth of Bees*, *Presented in Severall
-Letters and Observations to Sammuel Hartlib* (1655) which, as its title
+Letters and Observations to Sammuel Hartlib* (1655), which, as its title
 suggests, takes the form of a collection of letters sent to Hartlib, a
 German-born emigré from the Thirty Years War who settled in England, and
 who was counted as one of the great epistolary 'intelligencers' of the
@@ -252,7 +252,7 @@ approaches, itemising three different states of a stock of bees, from
 ones that are secure with their own resources to those who are not worth
 saving because they are so weak, with a 'midling-sort' between that
 may be considered for feeding at three strategic points in the year
-(Butler, 1623, sigs. S2r-S2v). The care Levett demonstrates in feeding
+([Butler, 1623, sigs. S2r-S2v]({base}/literature/transcription#ch8par2)). The care Levett demonstrates in feeding
 his bees that have been weakened over winter, however, is driven
 primarily by economics rather than empathy: bees are a resource that
 should be preserved until the time comes to kill them and take the
@@ -317,7 +317,7 @@ case, more than one swarm is permissible: Southerne is writing in the
 pre-modular era (Southerne, 1597, sigs, C3r-C4v). Levett's Tortona also
 notes that 'if a stock swarm three or foure swarmes in a yeere (as
 sometimes I have seene) both the stock and the latter swarmes are all in
-great danger to die the next winter' (Levett 1634: 25). Hartlib's
+great danger to die the next winter' (Levett, 1634, p. 25). Hartlib's
 'High-Dutch' correspondent similarly advocates limiting the number of
 swarms, and notes how 'experienced Bee-masters \[do\] not . . . suffer
 any stock to swarm above twice in a year, but rather to prevent it, by
@@ -540,7 +540,7 @@ of the ape nor the iconic foxes and wolves of Machiavelli, nor the bears
 and dogs of London's Bear Garden, nor any of the many potent figures in
 the political bestiary had such power to focus the entanglements of
 human and non-human creatures as the bee \[. . .\] What large claims for
-such small creatures!' (Campana, 2013, 97).
+such small creatures!' (Campana, 2013, p. 97).
 
 **References:**
 
@@ -570,7 +570,7 @@ Nobel Soldier and the Welsh Embassador', *The Review of English
 Studies,* 3/11: 280-307.
 
 Hartlib, Samuel, et al. 1655. *The Reformed Common-Wealth of Bees.
-Presented in Severall Letters and Observations to Samuel Hartlib Esq.
+Presented in Severall Letters and Observations to Sammuel Hartlib Esq.
 with The Reformed Virginian Silk-Worm. Containing Many Excellent and
 Choice Secrets, Experiments, and Discoveries for attaining of National
 and Private Profits and Riches* (London: Giles Calvert).
@@ -622,7 +622,7 @@ Colledg.' \[sic\], *Philosophical Transactions* \[The Royal Society\],
     in Basel in 1563. Hyll's translation of the entire book was
     published in 1568, with the portion concerning bees issued
     separately as *A Profitable Instruction of the Perfite Ordering of
-    Bees* in 1574 (Prete, 1991, 123, n. 23).
+    Bees* in 1574 (Prete, 1991, p. 123, n. 23).
 
 [^2]: Generally beekeepers would kill their bees in order to harvest the
     honey and wax but some beekeepers practised what was called
