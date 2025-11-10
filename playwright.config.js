@@ -2,7 +2,9 @@
 const config = {
   webServer: {
     command: "npm run build && npm run preview",
-    port: 4173,
+    // port: 4173,
+    url: 'http://localhost:4173',
+    timeout: 120 * 1000,
   },
   testDir: "tests",
   testMatch: /(.+\.)?(test|spec)\.[jt]s/,
@@ -14,6 +16,9 @@ const config = {
   retries: 1,
   use: {
     trace: 'on-first-retry',
+    ignoreHTTPSErrors: true,
+    baseURL: 'http://localhost:4173',
+    reuseExistingServer: !process.env.CI,
   },
 };
 
