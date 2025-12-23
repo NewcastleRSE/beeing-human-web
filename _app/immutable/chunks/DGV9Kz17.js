@@ -1,0 +1,1 @@
+import"./CWj6FrbW.js";import{f as l,g as o,b as t,d as p,F as e,r as n}from"./C4amzdtC.js";var d=l('<ul class="list-disc list-inside pl-10"><!></ul>');function f(a,r){var s=d(),i=p(s);o(i,()=>r.children??e),n(s),t(a,s)}export{f as U};
