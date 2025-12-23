@@ -9,7 +9,7 @@ imgAlt: 'A photograph of magazine covers on a table'
 type: article
 layout: article
 author: []
-date: 2025/07/25
+date: 2025/12/23
 order: 6
 ---
 
