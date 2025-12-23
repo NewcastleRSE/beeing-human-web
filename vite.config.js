@@ -9,17 +9,17 @@ dotenv.config();
 
 export default defineConfig({
   plugins: [
-    sentrySvelteKit({
-      sourceMapsUploadOptions: {
-        org: "ncl-rse",
-        project: "beeing-human-web",
-        authToken: process.env.SENTRY_AUTH_TOKEN,
-        release: {
-          name: "being-human-web@" + process.env.npm_package_version,
-        }
+    // sentrySvelteKit({
+    //   sourceMapsUploadOptions: {
+    //     org: "ncl-rse",
+    //     project: "beeing-human-web",
+    //     authToken: process.env.SENTRY_AUTH_TOKEN,
+    //     release: {
+    //       name: "being-human-web@" + process.env.npm_package_version,
+    //     }
 
-      },
-    }),
+    //   },
+    // }),
     sveltekit(),
     svelteTesting(),
   ],

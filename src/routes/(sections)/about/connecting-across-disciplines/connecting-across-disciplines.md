@@ -154,7 +154,7 @@ Soundscape]({base}/literature/bees-early-modern-soundscape),
 something scientists are also doing again, using different instruments
 of course.
 
-<ImgContainer imgUrl="/assets/articles/connecting-across-disciplines/6-Listening-to-Bees-P3-copy.jpg" altText="A visualisation of the sound of bees" captionCustomStyle="Audio data, produced by Andy Welch for [The World Bee
+<ImgContainer imgUrl="assets/articles/connecting-across-disciplines/6-Listening-to-Bees-P3-copy.jpg" altText="A visualisation of the sound of bees" captionCustomStyle="Audio data, produced by Andy Welch for [The World Bee
 Project](https://worldbeeproject.org/2023/06/16/amazing-bee-stories-listening-to-bees/).
 The red line relates to the number of bees exiting the hive, with the
 peaks in the line corresponding 'roughly to the audio peaks'."/>
