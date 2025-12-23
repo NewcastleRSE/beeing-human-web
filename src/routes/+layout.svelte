@@ -10,6 +10,8 @@
   
   let { children } = $props();
 
+  import Footer from "../lib/Footer.svelte";
+
   let section = $derived.by(() => {
     const path = $page.route.id.split("/");
     return path.length >= 3 ? path[2] : undefined;
@@ -23,4 +25,7 @@
   <title>Bee-ing human{section ? ` — ${section.charAt(0).toUpperCase() + section.toLowerCase().slice(1)}` : ''}</title>
 </svelte:head>
 
+<div class="min-h-screen flex flex-col">
 {@render children?.()}
+<Footer />
+</div>
