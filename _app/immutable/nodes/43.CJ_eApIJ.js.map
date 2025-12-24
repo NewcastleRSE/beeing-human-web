@@ -1,1 +1,0 @@
-{"version":3,"file":"43.CJ_eApIJ.js","sources":["../../../../../../src/routes/(sections)/science/+page.svelte"],"sourcesContent":["<script>\n    import Science from './science.md'\n</script>\n\n<Science/>\n\n"],"names":[],"mappings":"kZAAA,CAEA"}
