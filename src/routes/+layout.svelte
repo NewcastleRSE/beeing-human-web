@@ -13,8 +13,13 @@
   import Footer from "../lib/Footer.svelte";
 
   let section = $derived.by(() => {
-    const path = $page.route.id.split("/");
-    return path.length >= 3 ? path[2] : undefined;
+    const routeId = $page.route?.id;
+    if (routeId) {
+      const parts = routeId.split("/");
+      if (parts.length >= 3) return parts[2];
+    }
+    const urlParts = $page.url.pathname.split("/").filter(Boolean);
+    return urlParts[0] ?? undefined;
   });
 </script>
 
