@@ -3,7 +3,7 @@ title: "How to use and cite *Bee-ing Human*"
 id: how-to-use
 parent: about
 link: about/how-to-use
-lead: "Read our quick, easy to use, manual on how to make the best of *Bee-ing Human*."
+lead: "Read our quick, easy-to-use manual on how to make the best of *Bee-ing Human*."
 img: 'assets/articles/how-to-use/bruce-warrington-Dqxfu4iehhU-unsplash.jpg'
 imgAlt: 'close-up of a hatch door with printed instructions on how to use it'
 type: article
@@ -49,11 +49,14 @@ This [hyperlink]({base}/literature/transcription) will take you directly to our 
 
 The copy text for our edition is the 1623 edition. You will see that [Olivia Smith]({base}/about/people/olivia)'s edited transcription sits alongside the facsimile (the images of the 1623 edition). With a click of a tab you can choose to view the facsimile only, or the edited transcription instead. If you view both side by side (the default setting), then the facsimile images will follow the transcription, changing page by page as you scroll down. If you want to go to a particular chapter, then click the dropdown menu top left. Olivia has compared 1623 with 1609. You can see the changes, and track Butler's revisions, and thus the evolution of his thinking, by clicking the **variation** button (major changes/all changes). The kinds of changes Butler made have been colour-coded (green, grey, pink). If you want to see the 1609 edition only then you can do so by clicking the down arrow next to **1623** at the top left corner. The translations button will give you access to [Henry Howard]({base}about/people/henry)'s complete Latin translations for the 1623 edition, while the **editorial notes** button will share our team's collective annotation of the central Chapter 5.
 
+
+The facsimile of *The Feminine Monarchie* is hosted by the [Internet Archive](https://archive.org/). This means that the facsimile is out of our control and may occasionally fail to load. If this happens for a significant period of time, we replace the facsimile with an identical `PDF` copy but, in doing so, we loose the ability to synchronise the facsimile and transcription pages and some of the functionality of the transcription viewer is lost.
+
 You can also explore Butler's remarkable system of cross-referencing by clicking the hyperlinked marginal references. 
 
 You can explore and compare the cross-references in 1609 and 1623 with these interactive [graphs]({base}/literature/cross-references).
 
-And you can learn about what makes our edition born-digital [here](#).
+And you can learn about what makes our edition born-digital [here]({base}/literature/born-digital-edition).
 
 ## How might you use Bee-ing Human in your teaching?
 
