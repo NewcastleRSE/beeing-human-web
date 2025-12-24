@@ -92,8 +92,7 @@ start is with ourselves, thinking about how we can interact and connect.
 
 This is the challenge that *Bee-ing Human* took up, focussing on one of
 our best known pollinators, honey bees. (All insects need their
-champions though!) One of the ways scientists have been contributing to
-this challenge is by exploring the possible sentience of invertebrates,
+champions though!) One of the ways scientists have been trying to address this challenge is by exploring the possible sentience of invertebrates,
 developing 'an empirical and scientific framework' to do so, one that
 includes 'neurobiological and behavioural criteria'. As [Luigi
 Baciadonna]({base}/about/people/luigi) and
