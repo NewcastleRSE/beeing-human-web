@@ -1,1 +1,0 @@
-import{ai as a}from"./C4amzdtC.js";const t=a({activeDataset:0,activeView:"details",variationDetail:"no variation",editorialNotes:!1,activeNavigator:"",navigatorChoice:!1,translations:!1,viewOptionsDisabled:!1});export{t as d};

@@ -1,1 +1,0 @@
-import"./CWj6FrbW.js";import{f as r,g as i,b as t,d as e,F as p,r as n}from"./C4amzdtC.js";var d=r('<ol class="list-decimal list-inside pl-10"><!></ol>');function f(s,a){var o=d(),l=e(o);i(l,()=>a.children??p),n(o),t(s,o)}export{f as O};
