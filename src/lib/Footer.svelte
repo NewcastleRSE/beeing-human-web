@@ -1,4 +1,6 @@
 <script>
+    import {base} from '$app/paths';
+
     let version = __APP_VERSION__;
     let buildDate = new Date(__BUILD_DATE__);
 
@@ -11,4 +13,5 @@
 <footer class="w-full  mt-12 mb-6 py-6 text-center md:text-sm text-xs text-secondary-300">
     <p>Beeing Human, v. {version}</p>
     <p>{dateString}</p>
+    <a href={`${base}/about/how-to-use#usage-rights`} class="text-xs hover:underline">License and copyright information</a>
 </footer>
