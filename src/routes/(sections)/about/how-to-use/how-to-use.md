@@ -25,8 +25,6 @@ order: 2
 
 <ByLine author={author} date={date} type={type} title={title} {readingTime}/>
 
-<AdditionalInfoBox title = 'This article is a draft'/>
-
 ## What is the best way to explore the Bee-ing Human website?
 
 In the [Introduction]({base}/about/introduction) we explain that we conceived our project as a research hive with different disciplinary perspectives brought together in a common space: our Digital Bee Book. Our [landing page]({base}/) takes inspiration from both an abstracted beehive and the frontispiece to Butler's book. It offers four separate entry points ([literature]({base}/literature), [music]({base}/music), [science]({base}/science), and [connections]({base}/connections)). Each represents a honey storage/brood cell. You may be interested in one cell / disciplinary approach only, and choose to spend your time there. That's absolutely fine by us. But we'd be delighted if you also decided to jump from perspective to perspective—from music to literature to science to connections—by following one of the many hyperlinks in the articles, or by using either the view selector at the top of each page (<HiveSelector/>), or the search tool (<MagGlass class="w-4 inline"/> top right).
@@ -110,5 +108,12 @@ This is a live project, and we are keen to keep improving it. If you spot an err
 
 Lovely beekeepers, please fill out our [Survey]({base}/connections/beekeepers-survey)! We are keen to continue working with you.
 
-## Usage rights
-TBD
+<h2 id="usage-rights" class="h2 mt-6 mb-2 font-thin">Usage rights</h2>
+
+The code of the website (available in the [GitHub repository](https://github.com/NewcastleRSE/beeing-human-web)) is published with the [MIT License](https://mit-license.org/).
+
+The [transcription]({base}/literature/transcription) and encoding of Butler's Feminine Monarchie (available directly through the [GitHub repository](https://github.com/NewcastleRSE/beeing-human-tei-data)) is published with a [CC-BY-NC-NA License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+The images are published here either under license or with permission of the copyright holder, [as described in this page]({base}/about/image-credits).
+
+The articles and any other textual or media content is not licensed for reuse, and the copyright remains with their respective authors unless otherwise noted. This content is published here with their permission.
