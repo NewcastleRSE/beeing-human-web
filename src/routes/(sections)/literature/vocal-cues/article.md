@@ -67,7 +67,7 @@ edition of *The Feminine Monarchie*, printed in 1634, which draws from
 his *English Grammar* to create a score for the speaking voice.
 
 The full title of the grammar -- *The English Grammar, or the
-institution of letters, syllables, and woo rds in the English tung* --
+institution of letters, syllables, and woords in the English tung* --
 focusses our attention on the textual qualities of speech and how the
 sounds of words can be inscribed. 'The English Tung' underscores how the
 mouth functions as an apparatus for sound production, with the

@@ -3,7 +3,7 @@ title: Pavans and Galliards for Butler's Bees
 id: pavans-and-galliards
 parent: music
 link: music/pavans-and-galliards
-lead: "a conceptual text score by Bennett Hogg, 2025"
+lead: "A conceptual text score by Bennett Hogg, 2025"
 img: 'assets/articles/pavans-and-galliards/ardian-lumi-6Woj_wozqmA-unsplash.jpg'
 imgAlt: 'An aerial photograph depicting a group of people dancing'
 type: [article]
