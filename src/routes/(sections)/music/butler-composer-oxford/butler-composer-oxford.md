@@ -49,7 +49,7 @@ music for church or chamber. He was certainly the composer of
 *Melissomelos* (1623: in *Feminine Monarchie*) and he was probably the
 composer of a 'Dial-song composed by *W. Syddael* in imitation of
 *Parsons'* In Nomine' (1636: in *Principles of Musick*). [In a separate
-study for the *Bee Book* I appraise Butler's aims as a composer](#), the
+study for the *Bee Book* I appraise Butler's aims as a composer]({base}/music/butler-composer-rationale), the
 extent to which he fulfils those aims, and the underlying reasoning
 behind them. In this study, I investigate Butler's years in Oxford.
 These years shaped his thinking and working methods but are easily

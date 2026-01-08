@@ -20,4 +20,4 @@ order: 6
 
 ## [Science]({base}/science)
 - Muth, F., Fischer, E.K., and Nityananda, V. 'Bumblebees as a powerful model for studying cognitive ecology'. *Trends in Cognitive Sciences* (2025). [https://doi.org/10.1016/j.tics.2025.11.006](https://doi.org/10.1016/j.tics.2025.11.006)
-- Read, Jenny C.A. and Nityananda, Vivek. 'Motivational trade-offs as evidence for sentience in bees: a critique'. *Animal Behaviour* 231 (2026). [https://doi.org/10.1016/j.anbehav.2025.123389](https://doi.org/10.1016/j.anbehav.2025.123389)
+- Read, Jenny C.A. and Nityananda, V. 'Motivational trade-offs as evidence for sentience in bees: a critique'. *Animal Behaviour* 231 (2026). [https://doi.org/10.1016/j.anbehav.2025.123389](https://doi.org/10.1016/j.anbehav.2025.123389)

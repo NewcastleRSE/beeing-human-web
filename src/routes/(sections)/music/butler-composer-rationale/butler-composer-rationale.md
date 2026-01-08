@@ -64,8 +64,7 @@ editions: given that they were working to a staff-gauge of only 6 mm and
 setting individual pieces of type often little more than 1mm wide,
 Butler or his typesetter(s) produced complex work of remarkable
 accuracy. In the 1623 edition, a black minim in the Contratenor part is
-printed upside-down.[^6] In all copies inspected for *Bee-ing Human*
-(listed in the [critical notes to the edition](#)) this
+printed upside-down.[^6] In all copies inspected for *Bee-ing Human* this
 error has been manually corrected in an identical fashion, probably in
 the printing house. The error is absent from the 1634 edition which,
 although generally cruder than the 1623 edition in the setting of
