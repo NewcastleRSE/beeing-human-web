@@ -330,10 +330,10 @@ supper, as the noise of a swarme of bees.[^45]
     critical expansion of Butler's musical vocabulary (A. Bullen/K.
     Showler (2009, October 08). Butler, Charles (1560–1647),
     philologist and apiarist. Oxford *Dictionary of National Biography*.
-    <https://www-oxforddnb-com.libproxy.ncl.ac.uk/view/10.1093/ref:odnb/9780198614128.001.0001/odnb-9780198614128-e-4178>;
+    <https://www.oxforddnb.com/display/10.1093/ref:odnb/9780198614128.001.0001/odnb-9780198614128-e-4178?rskey=NfEk1B&result=1>;
     J. Pruett/R. Herissone (2001). Butler, Charles. *Grove Music
     Online*.
-    https://www-oxfordmusiconline-com.libproxy.ncl.ac.uk/grovemusic/view/10.1093/gmo/9781561592630.001.0001/omo-9781561592630-e-0000004456).
+    https://www.oxfordmusiconline.com/grovemusic/display/10.1093/gmo/9781561592630.001.0001/omo-9781561592630-e-0000004456?rskey=ULKH2C&result=1).
 
 [^4]: For instance, Linda Phyllis Austern, 'Nature, Culture, Myth, and
     the Musician in Early Modern England', *Journal of the American
