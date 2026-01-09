@@ -17,6 +17,8 @@ order: 3
     import {base} from '$app/paths'
     import ImgContainer from '$lib/ImgContainer.svelte'
     import ByLine from '$lib/ByLine.svelte'
+
+    import Portal from '$lib/Portal.svelte'
 </script>
 
 <ByLine author={author} date={date} type={type} title={title} {readingTime}/>
@@ -58,9 +60,9 @@ aims for the volume, new developments in his expression.
 
 By coding-in Butler's marginal references we can show the pressure
 points where his text is tightened against external sources of
-authority. Likewise, [we've made visible Butler's internal
+authority. Likewise, <Portal id="digital-thoughts-1" type="destination">[we've made visible Butler's internal
 cross-referencing system]({base}/literature/cross-references), where he leads you to other places in his own
-book, creating a lattice of affinities. Our digital apparatus highlight
+book, creating a lattice of affinities</Portal>. Our digital apparatus highlight
 the pattern in which Butler structures the knowledge in his text,
 showing us places where he increases epistemological tension to convey
 fact and certainty, or lets it sit a little more loosely in the case of

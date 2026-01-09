@@ -8,6 +8,7 @@ img: 'assets/glen-carrie-oHoBIbDj7lo-unsplash.jpg'
 imgAlt: 'a view of a minaret from a ruined stone doorway or window'
 type: experience
 layout: false
+order: 2
 ---
 
 <script>

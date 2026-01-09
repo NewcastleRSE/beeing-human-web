@@ -17,6 +17,7 @@ order: 2
     import {base} from '$app/paths'
     import ImgContainer from '$lib/ImgContainer.svelte'
     import ByLine from '$lib/ByLine.svelte'
+    import Portal from '$lib/Portal.svelte'
 </script>
 
 <ByLine author={author} date={date} type={type} title={title} {readingTime}/>
@@ -94,7 +95,7 @@ It follows from this tripartite approach that a born-digital edition must consid
 
 In certain cases, encoding decisions do have an impact on the technical side of the interface.[^8] If the encoding and the interface are created at the same time, one will influence the other. What separates a *digital* edition from a *born-digital* edition in this case is that while we might tailor some of the encoding with a view to facilitate its rendering (for example by adding the `@rend='blackletter'` above), we do not include encodings whose only function would be to facilitate rendering. Instead, we created a post-processing[^9] step that takes our encoding, makes a few transformations that will help with rendering it for the web, and outputs a different file that we then display on the screen.
 
-Consider, for example, the cross-references. You might notice that they follow (consistently) a particular formatting: letters are italicised, numbers are not: '*V*.*c*.1.*n*.26.' We consider this to be a significant phenomenon, and there are two major types of approach that we could take to encode it. We could either:
+Consider, for example, <Portal id="born-digital-edition-1" type="destination">the cross-references. You might notice that they follow (consistently) a particular formatting: letters are italicised, numbers are not: '*V*.*c*.1.*n*.26.' We consider this to be a significant phenomenon</Portal>, and there are two major types of approach that we could take to encode it. We could either:
 
 a) encode every single letter as *italicised* or; b) postulate that cross-references will always follow this convention and instead encode cross-references that do *not* follow it;
 
