@@ -17,6 +17,7 @@ order: 2
     import {base} from '$app/paths'
     import ImgContainer from '$lib/ImgContainer.svelte'
     import ByLine from '$lib/ByLine.svelte'
+    import Portal from '$lib/Portal.svelte'
 </script>
 
 <ByLine author={author} date={date} type={type} title={title} {readingTime}/>
@@ -35,7 +36,7 @@ Butler continued to learn and add to his knowledge, thinking about how best to c
 
 For the differences between the 1609 and 1623 edition [see here](#).  
 
-With this change we can also both see and experience a significant shift in Butler’s thinking about his book, and how it should be read. In 1623, Butler is taking readers into the hive to participate in the bee ‘Musicke’, to sing about the virgin queens, and give voice to their piping (or imagine that they are doing so). Butler’s decision to create a song for four voices in harmony with the bee musicke is significant too. The music for multiple voices is companionable, sociable, like the hive itself (as [Richard Wistreich]({base}/about/people/richard) explains [here]({base}/music/music-book-layout)). Butler is creating a sonic learning experience for his readers, an idea that would be realised even more fully in the third edition (1634) with [phonetic spelling]({base}/literature/vocal-cues). 
+With this change we can also both see and experience a significant shift in Butler’s thinking about his book, and how it should be read. In 1623, <Portal id="book-hive-1" type="destination">Butler is taking readers into the hive to participate in the bee ‘Musicke’</Portal>, to sing about the virgin queens, and give voice to their piping (or imagine that they are doing so). Butler’s decision to create a song for four voices in harmony with the bee musicke is significant too. The music for multiple voices is companionable, sociable, like the hive itself (as [Richard Wistreich]({base}/about/people/richard) explains [here]({base}/music/music-book-layout)). Butler is creating a sonic learning experience for his readers, an idea that would be realised even more fully in the third edition (1634) with [phonetic spelling]({base}/literature/vocal-cues). 
 
 The idea that we are entering a ‘hive’ when we open the 1623 edition is also suggested by this work’s material features, indicating Butler’s collaboration with the printer, Haviland. One of those features meets us as soon as we open the book: the new woodcut facing the titlepage (the ‘frontispiece’). This is our buzzing portal to this lively, interactive book. Surrounding this depiction of a hive are the words *Solertia et Labore* (Diligence and Hard Work). On the honeycomb inside this hive the four orders of bee society are represented: the Queen (*Princeps*), wearing her crown at the top, then two generals (*Duces*), and, at the bottom, three plebeian or worker bees (*Plebs*). Just outside the hive we see an example of the fourth sort of bee, two lazy drones (*Inertes fuci*), who are being removed from this feminine monarchy by two more worker bees. The printers’ ornaments are also well chosen: the second line of ornaments above the floral shapes (gardens?) perhaps suggests cells, while the second, inverted line under the woodcut may allude to the spherical shape of hives.
 

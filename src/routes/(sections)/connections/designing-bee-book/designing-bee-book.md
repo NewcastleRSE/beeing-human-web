@@ -3,9 +3,9 @@ title: "Designing the *Bee book*"
 id: designing-bee-book
 parent: connections
 link: connections/designing-bee-book
-lead: "fasdf alksdjf alskdjf "
-img: 'assets/articles/queen-bee/leandro-fregoni-984b72nd5hg-unsplash.jpg'
-imgAlt: 'black and yellow bee on white surface'
+lead: "In this article, Tiago explains how the design of the bee book conveys our conception of interdisciplinary work, narrates the process that led to the current layout, and showcases a few early iterations of the landing page."
+img: 'assets/articles/designing-bee-book/ux-indonesia-qC2n6RQU4Vw-unsplash.jpg'
+imgAlt: 'Hands over draft design'
 type: article
 layout: article
 author: tiago
@@ -16,6 +16,7 @@ date: 2025/01/08
     import {base} from '$app/paths'
     import ImgContainer from '$lib/ImgContainer.svelte'
     import ByLine from '$lib/ByLine.svelte'
+    import Portal from '$lib/Portal.svelte'
 </script>
 
 <ByLine author={author} date={date} type={type} title={title} {readingTime}/>
@@ -40,7 +41,7 @@ We also wanted to avoid the impression that any one discipline was more importan
 
 The idea of the hive, which provided a metaphor for the way in which we worked together as well as a visual conceit to encapsulate that interdisciplinarity, is not as obvious as it appears. It is not hard to see that it might be apt for a *Digital Bee Book* in which we imagined ourselves depositing the fruit of our labours (much like the foraging bees returning with nectar from their travels). Where the metaphor begins to fail, however, is as an illustration of the relationship between the four main sections of our *Digital Bee Book*.
 
-<ImgContainer imgUrl="/assets/articles/designing-bee-book/michelle-mcewen-YEuzoaRsGaM-unsplash.jpg" altText="A picture of a naturally occurring bee hive covered in bees" caption="A naturally occurring bee hive"/>
+<ImgContainer imgUrl="/assets/articles/designing-bee-book/michelle-mcewen-YEuzoaRsGaM-unsplash.jpg" altText="A picture of a naturally occurring bee hive covered in bees" caption="A naturally occurring bee hive covered in bees"/>
 
 The way in which we came to reconcile our understanding of our interdisciplinary work, and, by extension, our *Digital Bee Book*, as a hive, was to think of each of our main disciplines as offering a different point of view on the same object. Here, again, thinking about the physical hive was helpful. Naturally occurring hives normally have only one small entrance so the bees can leave to forage and return to the colony. Human-made hives, however, have multiple access points from which beekeepers can inspect the bees and honey production. In other words, human-made hives offer multiple points of view on the same object. Our disciplinary division, likewise, can offer different  points of access to our project: each of the four main sections ([literature]({base}/literature), [music]({base}/music), [science]({base}/science), and [connections]({base}/connections)) offers a distinct entryway into *Bee-ing Human* while, simultaneously, the actual content lives happily side-by-side on the landing page.
 
@@ -50,7 +51,7 @@ The way in which we came to reconcile our understanding of our interdisciplinary
 
 Translating this rather complex metaphor into a usable web page design is, mostly, an exercise in abstraction. The hive — the thing itself — particularly a human made one, is little more than a nondescript box. There is one aspect of that box that we wanted to incorporate into our design: the multiple access points, as discussed above. Mostly, however, a box is not what we imagine when we think of a hive: what we have in mind is the honeycomb, the hexagonal structure that holds the honey. Moving from the thing itself to its echo in the *Digital Bee Book* is a process of simplification and abstraction, where a stylised honeycomb stands in for the box, and where particular cells are entrances to collections of material.
 
-\[A series of picture of progressive hive abstraction, culminating in our landing page, like in slide 14 of the cambridge presentation\]
+<ImgContainer imgUrl="/assets/articles/designing-bee-book/abstraction.png" altText="A series of progressively abstract representations of a hive culminating on the landing page of the website" caption="Abstracting from the hive to the landing page"/>
 
 The abstraction of the hive brought with it a number of design elements that became more or less obvious as our collaboration took shape, including:
 
@@ -60,17 +61,15 @@ The abstraction of the hive brought with it a number of design elements that bec
 
 These elements were present from the start and have stayed, broadly, unchanged from our first drafts. But the landing page where our hive is most clearly displayed, went through a number of iterative revisions. Broadly speaking, we started from a simple idea, and then multiplied the hexagons, and the links between them:
 
-\[A picture of the first 5 designs for the landing page as in slide 15 of the cambridge presentation\]
+<ImgContainer imgUrl="/assets/articles/designing-bee-book/early_iterations.png" altText="Four early designs for the landing page" caption="Early iterations of the landing page"/>
 
 At this point we, once again, returned to Charles Butler's *Feminine Monarchie* in search of inspiration. Like us, Butler used an engraving of a hive in his *frontispiece* (and Jennifer Richards talks about its significance [here](https://bee-inghuman.newcastle.ac.uk/literature/book-hive)), and like good thieves, we *borrowed* some of those ideas turning our landing page into an almost literal title page. We could have continued to play with this idea, as Butler clearly did, but we chose a minimalist design instead for pragmatic reasons: good web design must be accessible and responsive, and we needed a landing page that could adapt to different size screens and resolutions.
 
-\[A picture of the last 3 designs for the landing page as in slide 15 of the cambridge presentation\]
+<ImgContainer imgUrl="/assets/articles/designing-bee-book/final_iterations.png" altText="Three late designs for the landing page" caption="Final iterations of the landing page"/>
 
 At a certain point, while playing with the idea of cells as entryways into different sections of the hive, we realised that it would also be a good idea to make use of the other cells on the landing page as small doorways into specific content of the digital book. They are, figuratively, smaller but they still provide direct entrances into the work of the project, and that's why you can peek at a little section of its content but can't quite make out what it says: for that you need to click through to enter the cell itself. The content of the cells is chosen at random from the entire content of the website, as you can see every time you reload the landing page. This aspect performs two functions: on the one hand, it places all content (from all disciplines) on the same level; on the other, it invites a certain randomness in navigating the website, hopefully even encouraging readers who are more interested in the *music* aspects, for example, to explore the different disciplinary outputs of the project.
 
-We also wanted to enable readers to randomly jump disciplines and content throughout the website. This is why we have a permanent section switcher button on the header of the page that allows you to immediately move from the literature section to the science section without having to return to the landing page. At the planning stages, we even considered having multiple versions of the same content that could be displayed from wherever you had landed: for example, if you were reading an article on the literary history of Butler's text but had arrived through the music section, the article would be a more musically-inflected version of the same content available through the literature section. Time and resources have made that idea impractical. A similar feature that we developed (and is implemented), but which is not yet available, is a type of expanded link that would allow us to link to multiple specific places of content at the same time; we called these *portals* and they are another extension of our idea of cells as entryways.
-
-\[A screenshot of a portal — if there is time, I can also code an example of a portal in the book.\]
+We also wanted to enable readers to randomly jump disciplines and content throughout the website. This is why we have a permanent section switcher button on the header of the page that allows you to immediately move from the literature section to the science section without having to return to the landing page. At the planning stages, we even considered having multiple versions of the same content that could be displayed from wherever you had landed: for example, if you were reading an article on the literary history of Butler's text but had arrived through the music section, the article would be a more musically-inflected version of the same content available through the literature section. Time and resources have made that idea impractical. A similar feature that we developed (and is implemented), but which is not yet available, is a type of expanded link that would allow us to link to multiple specific places of content at the same time; we called these *portals* and they are another extension of our idea of cells as entryways. Here is an example of this, using different conceptions of <Portal id="designing-bee-book-1" type="origin" destination={['literature/book-hive#book-hive-1', 'music/sound-in-feminine-monarchie#sound-in-feminine-monarchie-1', 'about/introduction#introduction-1', 'music/performing-melissomelos#performing-melissomelos-1']}>hive</Portal>
 
 ## Conclusion
 

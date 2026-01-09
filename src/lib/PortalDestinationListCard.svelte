@@ -97,6 +97,8 @@
     });
 </script>
 
+{@debug link}
+
 <div class="card" data-testid="portal-panel-card">
     <header class="card-header" data-testid="card-header">
         <!-- {#await section}
