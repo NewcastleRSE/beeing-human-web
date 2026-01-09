@@ -1,8 +1,8 @@
 ---
 title: "Connecting across disciplines: why does this matter?"
 id: connecting-across-disciplines
-parent: about
-link: about/connecting-across-disciplines
+parent: connections
+link: connections/connecting-across-disciplines
 lead: "Read about the challenges and advantages of working together across different disciplines to tackle a common goal."
 img: 'assets/articles/connecting-across-disciplines/annie-spratt-p5NLd24gWsI-unsplash.jpg'
 imgAlt: 'Aerial view of connecting roads'
@@ -10,7 +10,7 @@ type: article
 layout: article
 author: [jenny]
 date: 2025/12/23
-order: 3
+order: 0
 ---
 
 <script>

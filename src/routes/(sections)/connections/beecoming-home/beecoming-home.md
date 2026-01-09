@@ -10,6 +10,7 @@ type: article
 layout: article
 author: [luke, sarah]
 date: 2025/06/25
+order: 2
 ---
 
 <script>
