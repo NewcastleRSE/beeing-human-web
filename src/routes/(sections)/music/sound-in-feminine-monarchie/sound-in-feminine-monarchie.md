@@ -16,6 +16,7 @@ date: 2025/09/10
     import ByLine from '$lib/ByLine.svelte';
     import { base } from "$app/paths";
     import ImgContainer from '$lib/ImgContainer.svelte';
+    import Portal from '$lib/Portal.svelte';
 </script>
 
 <ByLine author={author} date={date} type={type} title={title} {readingTime}/>
@@ -49,9 +50,9 @@ predisposes him to attend to sound. In *The Feminine Monarchie* sound
 plays a number of roles, and although his actual interpretations of some
 of these sounds would no longer be supported by scientific
 understanding, the role played by sound in his book illuminates how it
-affords, for him, insights into the world of the bees. At the time
+affords, for him, insights into the world of the bees. <Portal id="sound-in-feminine-monarchie-1" type="destination">At the time
 Butler was writing, sound was the most reliable way to gain an insight
-into the interior of the beehive in its normal, working state.[^4] One
+into the interior of the beehive in its normal, working state</Portal>.[^4] One
 of his key mistakes, from a scientific perspective, was his
 interpretation of the sounds that he heard inside the hive as 'voices',
 although this was a common perception in the seventeenth century (and
