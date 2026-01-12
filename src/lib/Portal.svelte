@@ -34,6 +34,7 @@
         type = ('both'),
         id = (undefined),
         toggleSidePanel = () =>  {
+            console.log('toggling side panel');
         showSidePanel = !showSidePanel
     },
         children

@@ -33,7 +33,7 @@
     }
 
     function buildGraph() {
-        var margin = { top: 10, right: 30, bottom: 30, left: 40 },
+        var margin = { top: 60, right: 60, bottom: 60, left: 60 },
             innerWidth = width - margin.left - margin.right,
             innerHeight = height - margin.top - margin.bottom;
 
@@ -42,6 +42,7 @@
             .append("svg")
             .attr("width", width)
             .attr("height", height)
+            .style("overflow", "hidden")
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -177,9 +178,15 @@
             )
             .force("charge", d3.forceManyBody().strength(-3000))
             .force("center", d3.forceCenter(innerWidth / 2, innerHeight / 2))
-            .on("end", ticked);
+            .force("collide", d3.forceCollide().radius(50))
+            .on("tick", ticked);
 
         function ticked() {
+            // Constrain nodes to stay within bounds
+            inputData.nodes.forEach(d => {
+                d.x = Math.max(40, Math.min(innerWidth - 40, d.x));
+                d.y = Math.max(40, Math.min(innerHeight - 40, d.y));
+            });
             link.attr("d", function (d) {
                 const dx = d.target.x - d.source.x,
                     dy = d.target.y - d.source.y,
@@ -222,4 +229,4 @@
 </script>
 
 <!-- <h2 class="h2 my-4">Network Graph</h2> -->
-<div id={graphId} bind:this={container} class="w-full h-[70vh] min-h-[400px]"></div>
+<div id={graphId} bind:this={container} class="w-full h-[70vh] min-h-[400px] overflow-hidden"></div>
