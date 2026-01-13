@@ -1184,7 +1184,7 @@ taste for that philosophy of yours'; 'I hear' (*audio*): \[Terence,\]
 
 > <span style="font-variant: small-caps;">Parmeno:</span> You, put on his dress. --
 > <span style="font-variant: small-caps;">Chaerea:</span> His dress? -- P<span style="font-variant: small-caps;">a</span>. I'll take you
-> instead of him. -- C<span style="font-variant: small-caps;">h<span style="font-variant: small-caps;">. I hear you,
+> instead of him. -- C<span style="font-variant: small-caps;">h</span>. I hear you,
 
 i.e. I understand why I should put on the Eunuch's dress; the proper
 word ('I understand', *intellego*) follows.[^90] 'I see' (*video*):
@@ -1791,9 +1791,9 @@ brute things sentiently and actively 'come out', 'receive' and
 
 **Synopsis of figures**[^126]
 
-![A diagram of a tree AI-generated content may be
+<!-- ![A diagram of a tree AI-generated content may be
 incorrect.](media/image1.png){width="3.0223272090988624in"
-height="3.937007874015748in"}
+height="3.937007874015748in"} -->
 
 Where the figure of a word is in the dimension[^127] of a sound, the
 measure is either poetic, that is
@@ -2126,63 +2126,63 @@ elsewhere the reading is: 'Dignaque sum' etc.[^151]
 The early Romans elided 's' and its preceding vowel before a vowel, but
 only the 's' before a consonant: as does Ennius,
 
-Spernitur orator bonus, horridu**[s]{.underline}** miles amatur\
+Spernitur orator bonus, horridu**<span class="underline">s</span>** miles amatur\
 (The good orator is scorned, the rough soldier adored)
 
-Vicit Olympia, nunc senio confectu**[s]{.underline}** quiescit\
+Vicit Olympia, nunc senio confectu**<span class="underline">s</span>** quiescit\
 (Who won the Olympics, now lives quiet, worn out in old age)
 
 (Cicero quotes the latter in *De Senectute* \[5.14\], the former in *Pro
 Murena* \[14.30\]), and Lucretius frequently, as in Book I \[186\]:
 
-Nam fierent iuvenes subito ex infantibu**[s]{.underline}** parvis\
+Nam fierent iuvenes subito ex infantibu**<span class="underline">s</span>** parvis\
 (For from being little infants they would suddenly become young men),
 
 and in the same book \[453\],
 
-Pondus uti saxis calor ignibu**[s]{.underline}** liquor aquai[^152]\
+Pondus uti saxis calor ignibu**<span class="underline">s</span>** liquor aquai[^152]\
 (As weight is a property of rocks, heat of fire, liquidness of water)
 
 and in the same book \[II.263\],
 
-> Nonne vides etiam patefacti**[s]{.underline}** tempore puncto\
+> Nonne vides etiam patefacti**<span class="underline">s</span>** tempore puncto\
 > (Do you not see too when they are opened at a point in time);
 
 and Hostilius, *Annales* I:[^153]
 
-> Saepe greges pecuum ex hybernis pastibu**[s]{.underline}** pulsae\
+> Saepe greges pecuum ex hybernis pastibu**<span class="underline">s</span>** pulsae\
 > (Often the herds of cattle driven from their winter pastures).
 
 Catullus too says to Gellius \[116.8\]:
 
-> Affixus nostris tu dabi**[s]{.underline}** supplicium[^154]\
+> Affixus nostris tu dabi**<span class="underline">s</span>** supplicium[^154]\
 > (You'll pay the price when you've been fastened),
 
 and Manilius, Book II \[440\]:
 
-Formosos Phoebus Geminos, Cylleniu**[s]{.underline}** Cancrum[^155]\
+Formosos Phoebus Geminos, Cylleniu**<span class="underline">s</span>** Cancrum[^155]\
 (Phoebus over the fair twins, Mercury over Cancer).
 
 So Lucretius, Book II \[?467\]:
 
-Est e laevibus et rotund**[is]{.underline}** adnixa volare[^156]\
+Est e laevibus et rotund**<span class="underline">is</span>** adnixa volare[^156]\
 (... is ..., \[bodies\] made of light and round things taking pains to
 fly)
 
 and Book IV \[214\]:
 
-Nonne vides igitur quam puncto tempor**[is]{.underline}** imago[^157]\
+Nonne vides igitur quam puncto tempor**<span class="underline">is</span>** imago[^157]\
 (Do you not see therefore how an image at a point in time),
 
 and even Virgil, *Aeneid* II \[508\]:
 
-Limina tectorum et medi**[is]{.underline}** in penetralibus
+Limina tectorum et medi**<span class="underline">is</span>** in penetralibus
 hostem[^158]\
 (The thresholds of houses and the enemy in their inner midst)
 
 and *Aeneid* XII \[709\]:
 
-Inter se coiisse vir**[os]{.underline}** et decernere ferro[^159]\
+Inter se coiisse vir**<span class="underline">os</span>** et decernere ferro[^159]\
 (That men met between themselves and decided the outcome with the
 sword).
 
@@ -2193,7 +2193,7 @@ verse, as in *Georgics* II \[69--70\]:
 
 \[B7r\]
 
-> Inseritur vero et foetu nucis arbutus horrid**[a]{.underline}**,\
+> Inseritur vero et foetu nucis arbutus horrid**<span class="underline">a</span>**,\
 > Et steriles platani ...\
 > (But the rough strawberry-tree is grafted with the scion of a
 > walnut-tree,\
@@ -2202,7 +2202,7 @@ verse, as in *Georgics* II \[69--70\]:
 and *Metamorphoses* XII \[395--6\]:
 
 > Barba erat incipiens, barbae color aureus,
-> aure**[a]{.underline}**               \
+> aure**<span class="underline">a</span>**               \
 > Ex humeris medios ...\
 > (His beard was beginning to grow, the colour of the beard was golden,
 > golden \[hair fell\]\
@@ -2211,14 +2211,14 @@ and *Metamorphoses* XII \[395--6\]:
 So *Aeneid* VII \[160--61\]:
 
 > Iamque iter emensi turris ac tecta
-> Latinor**[um]{.underline}**               \
+> Latinor**<span class="underline">um</span>**               \
 > Ardua cernebant ...\
 > (And now, their journey over, they beheld the towers and high roofs of
 > the Latini)
 
 and *Metamorphoses* XV \[718--19\]:
 
-> Et tellus Circaea et spissi littoris Anti**[um]{.underline}**.\
+> Et tellus Circaea et spissi littoris Anti**<span class="underline">um</span>**.\
 > Huc ubi ...\
 > (And the land of Circe, and Antium with its busy shores.\
 > Here, when ...).
@@ -2226,7 +2226,7 @@ and *Metamorphoses* XV \[718--19\]:
 The enclitic conjuction *--que* (and) very often makes an extra
 syllable, as *Georgics* II \[344--5\]:
 
-> Si non tanta quies iret frigusque calorem**[que]{.underline}**\
+> Si non tanta quies iret frigusque calorem**<span class="underline">que</span>**\
 > Inter, ...\
 > (If this great respite did not come between the frost and the heat of
 > summer),
@@ -2234,7 +2234,7 @@ syllable, as *Georgics* II \[344--5\]:
 and in the same book \[443--4\]:
 
 > Navigiis pinus, domibus cedrosque[^160]
-> cupressos**[que]{.underline}**;\
+> cupressos**<span class="underline">que</span>**;\
 > Hinc radios ...\
 > (Pines for ships, and cedars and cypresses for houses;\
 > From these, spokes ...);
@@ -2248,7 +2248,7 @@ in *Aeneid* II:[^161]
 
 in the same \[I.448--9\]:
 
-> Aurea[^162] cui gradibus surgebant limina, nexae**[que]{.underline}**\
+> Aurea[^162] cui gradibus surgebant limina, nexae**<span class="underline">que</span>**\
 > aere trabes, ...\
 > (Its bronze thresholds at the top of steps, and beams with bronze
 > joints);
@@ -2256,7 +2256,7 @@ in the same \[I.448--9\]:
 and in the same again \[II.745--6\]
 
 > Quem non incusavi amens hominumque
-> deorum**[que]{.underline}**,               \
+> deorum**<span class="underline">que</span>**,               \
 > Aut quid in eversa vide[^163] crudelius urbe?\
 > (Which of the gods, what man did I not blame in my madness,\
 > Or, behold, was anything more cruel in the city's overthrow?).
@@ -2294,23 +2294,23 @@ In place of *alitum*, *nauta*, *imperator*, *litera*.[^166]
 
 *Aeneid* VIII \[27\]:
 
-> Alit**[uu]{.underline}**m pecudumque genus sopor altus habebat\
+> Alit**<span class="underline">uu</span>**m pecudumque genus sopor altus habebat\
 > (Deep sleep held the race of birds and beasts);
 
 Juvenal, *Satires* IV \[28--9\]:
 
 > Quales tunc epulas ipsum glutisse putamus\
-> In**[du]{.underline}**peratorem ...\
+> In**<span class="underline">du</span>**peratorem ...\
 > (What sort of feasts do we think the emperor swallowed down then);
 
 another at Lucretius I \[82\]:
 
-In**[du]{.underline}**gredi sceleris, quin contra saepius olim[^167]\
+In**<span class="underline">du</span>**gredi sceleris, quin contra saepius olim[^167]\
 (Setting foot on a \[path\] of sin; but on the contrary, often once)
 
 and the same, II \[459\]:
 
-At non esse tamen perplexis in**[du]{.underline}**pedita\
+At non esse tamen perplexis in**<span class="underline">du</span>**pedita\
 (But not however to be entangled with ones entwined round).
 
 Thus *quattuor*,\* Porsenna, *quottidie*, etc; for in certain words the
@@ -2322,7 +2322,7 @@ after the prefix *re-*, as in *relliquiae*, *relligio*, *relligiosus*,
 \* The 'a' of q*uatuor* is shortened by nature, as is the 'o' of
 *quotidie* and the 'e' of Porsena, as in Ennius:[^169]
 
-Cedunt ter qu**[a]{.underline}**tuor de caelo corpora sancta[^170]\
+Cedunt ter qu**<span class="underline">a</span>**tuor de caelo corpora sancta[^170]\
 (Thrice four sacred bodies \[of birds\] came from the sky).
 
 And this is also found in *quăter* (four times) and *quăterni* (four
@@ -2595,17 +2595,17 @@ example *aurea*, *aureis*, *aureo* as disyllables.[^189]
 
 *Aeneid* I \[698\]:
 
-Aur**[ea]{.underline}** composuit sponda mediamque locavit\
+Aur**<span class="underline">ea</span>** composuit sponda mediamque locavit\
 (She has settled onto a golden couch and placed herself in the middle),
 
 in the same book \[726\]:
 
-Atria dependent lychni laquearibus aur**[ei]{.underline}**s\
+Atria dependent lychni laquearibus aur**<span class="underline">ei</span>**s\
 (... halls; lamps hang from golden ceilings),
 
 and *Aeneid* X \[116\]:
 
-Hic finis fandi: solio tum Iuppiter aur**[eo]{.underline}**\
+Hic finis fandi: solio tum Iuppiter aur**<span class="underline">eo</span>**\
 (Here was an end to speaking: then Jupiter \[rose\] from his golden
 throne).
 
@@ -2613,22 +2613,22 @@ For 'ea':
 
 Lucretius, II \[693\]:
 
-Aut nulla inter se duo sint ex omnibus **[ea]{.underline}**dem[^190]\
+Aut nulla inter se duo sint ex omnibus **<span class="underline">ea</span>**dem[^190]\
 (Or that no two of all of them are the same between them)
 
 Lucretius, IV \[744\]:
 
-Caetera de genere hoc **[ea]{.underline}**dem ratione creantur\
+Caetera de genere hoc **<span class="underline">ea</span>**dem ratione creantur\
 (The others of this kind are created in the same manner)
 
 *Aeneid* X \[487\]:
 
-Una **[ea]{.underline}**demque via sanguisque[^191] animusque sequuntur\
+Una **<span class="underline">ea</span>**demque via sanguisque[^191] animusque sequuntur\
 (Blood and spirit follow, in one and the same way)
 
 Propertius, III \[6.36\]:
 
-> Hac **[ea]{.underline}**dem rursus[^192] Lygdame curre via\
+> Hac **<span class="underline">ea</span>**dem rursus[^192] Lygdame curre via\
 > (Run, Lygdamus, back the same way)
 
 *Aeneid* VII \[190\]:
@@ -2638,25 +2638,25 @@ Aur**ea** percussum virga versumque venenis\
 
 Horace, *Sermones*, Book II, satire 2 \[21\]:
 
-> Sudando pinguem vitiis albumque nec ostr**[ea]{.underline}**\
+> Sudando pinguem vitiis albumque nec ostr**<span class="underline">ea</span>**\
 > (... by sweating; neither an oyster \[can please\] a man fat and pale
 > through his own faults)
 
 *Eclogues* VI \[40\]:
 
-> Nec tantum Rhodope miratur et Ismarus Orph**[ea]{.underline}**
+> Nec tantum Rhodope miratur et Ismarus Orph**<span class="underline">ea</span>**
 >
 > (Nor are Rhodope and Ismarus so amazed at Orpheus)
 
 *Georgics* IV \[34\]:
 
-> Seu lento fuerint alv**[ea]{.underline}**ria vimine texta
+> Seu lento fuerint alv**<span class="underline">ea</span>**ria vimine texta
 >
 > (Or whether the beehives are woven of pliable twigs) 
 
 *Aeneid* VI \[300\]:
 
-> Canicies inculta iacet, stant lumina flamm**[ea]{.underline}**[^193]
+> Canicies inculta iacet, stant lumina flamm**<span class="underline">ea</span>**[^193]
 >
 > (Unkempt his white hair lies, his eyes stare fixed and fiery)
 
@@ -2664,19 +2664,19 @@ For 'ei':
 
 *Aeneid* I \[41\]:
 
-> Unius ob noxam et furias Aiacis Oil**[ei]{.underline}**
+> Unius ob noxam et furias Aiacis Oil**<span class="underline">ei</span>**
 >
 > (On account of the offence and madness of one man, Ajex son of Oileus)
 
 in the same \[120\]:
 
-> Iam validam Ilion**[ei]{.underline}** navem, iam fortis Achatae 
+> Iam validam Ilion**<span class="underline">ei</span>** navem, iam fortis Achatae 
 >
 > (Now Iloneus' strong ship, now brave Achates')
 
 *Aeneid* VI \[280\]:
 
-> Ferr**[ei]{.underline}**que Eumenidum thalami, et discordia demens 
+> Ferr**<span class="underline">ei</span>**que Eumenidum thalami, et discordia demens 
 >
 > (And the Furies' iron bedchamber, and insane strife)
 
@@ -2684,26 +2684,26 @@ in the same \[120\]:
 
 in the same:[^194]
 
-> Centum aer**[ei]{.underline}** claudunt vectes, aeternaque ferri
+> Centum aer**<span class="underline">ei</span>** claudunt vectes, aeternaque ferri
 >
 > (A hundred bronze bars keep them shut, and the enduring \[strength\]
 > of iron)
 
 Catullus \[82.3\], to Quintius:
 
-> Eripere **[ei]{.underline}** noli quod multo charius illi
+> Eripere **<span class="underline">ei</span>** noli quod multo charius illi
 >
 > (Do not steal from him what is much more dear to him)
 
 *Metamorphoses* XI \[65\]:
 
-> Nunc praecedentem sequitur, nunc praevius ant**[ei]{.underline}**t
+> Nunc praecedentem sequitur, nunc praevius ant**<span class="underline">ei</span>**t
 >
 > (Now he follows her, going in front; now he leads and goes in front)
 
 *Aeneid* XII \[84\]:
 
-> Qui candore nives ant**[ei]{.underline}**rent, cursibus aequor[^195]
+> Qui candore nives ant**<span class="underline">ei</span>**rent, cursibus aequor[^195]
 >
 > (Who outdo the snows in their whiteness and the sea in speed)
 
@@ -2711,45 +2711,45 @@ For 'eo':
 
 Lucretius, VI \[961\]:
 
-> Atque **[eo]{.underline}**dem pacto rebus sint omnibus apta
+> Atque **<span class="underline">eo</span>**dem pacto rebus sint omnibus apta
 >
 > (And \[not\] equally fitted for all things)
 
 *Eclogues*, VIII \[81\]:
 
-> Uno **[eo]{.underline}**demque igni, sic nostro Daphnis amore
+> Uno **<span class="underline">eo</span>**demque igni, sic nostro Daphnis amore
 >
 > (With one and the same flame, so may Daphnis with our love)
 
 *Aeneid* VIII \[292\]:
 
-> Rege sub Euristh**[eo]{.underline}** fatis Iunonis iniquae
+> Rege sub Euristh**<span class="underline">eo</span>** fatis Iunonis iniquae
 >
 > (Under king Eurystheus and the fate dealt out by unjust Juno)
 
 *Aeneid* IX \[32\]:
 
-> Cum refluit campis et iam se condidit alv**[eo]{.underline}**
+> Cum refluit campis et iam se condidit alv**<span class="underline">eo</span>**
 >
 > (When it flows back over the fields and then sets itself back in its
 > channel)
 
 *Georgics*, IV \[270\]:
 
-> Cecropiumque thymum et grav**[eo]{.underline}**lentia centaurea[^196]
+> Cecropiumque thymum et grav**<span class="underline">eo</span>**lentia centaurea[^196]
 >
 > (Thyme of Attica and heavy-perfumed centaury)
 
 Lucretius, II \[230\]:
 
 > Nam per aquas quaecumque cadunt, atque aera
-> d**[eo]{.underline}**rsum[^197]
+> d**<span class="underline">eo</span>**rsum[^197]
 >
 > (For whatever fall downwards through the waters and air)
 
 Lucretius, III \[564\]:
 
-> Dispicere ipse oculus rem s**[eo]{.underline}**rsum corpore toto
+> Dispicere ipse oculus rem s**<span class="underline">eo</span>**rsum corpore toto
 >
 > (The eye, separated from the whole body, \[can\] look at \[no\]thing)
 
@@ -2757,19 +2757,19 @@ For 'ia':
 
 Lucretius, II \[719\]:
 
-> Legibus his, quaedam ratio res terminat omn**[ia]{.underline}**[^198]
+> Legibus his, quaedam ratio res terminat omn**<span class="underline">ia</span>**[^198]
 >
 > (By these laws, a certain reason defines things in all respects)
 
 *Aeneid* VI \[33\]:
 
-> Bis patriae cecidere manus quin protinus omn**[ia]{.underline}**
+> Bis patriae cecidere manus quin protinus omn**<span class="underline">ia</span>**
 >
 > (Twice the father's hands fell, and indeed all continuously)
 
 *Aeneid* VII \[237\]:
 
-> Praeferimus manibus vittas ac verba precant**[ia]{.underline}**
+> Praeferimus manibus vittas ac verba precant**<span class="underline">ia</span>**
 >
 > (We offer sacrificial bands and words of prayer)
 
@@ -2777,13 +2777,13 @@ And so *abiete*, *tenuia* as trisyllables:
 
 *Aeneid* II \[16\]:
 
-> Aedificant, sectaque intexunt ab**[ie]{.underline}**te costas
+> Aedificant, sectaque intexunt ab**<span class="underline">ie</span>**te costas
 >
 > (They build, and interlace ribs of cut fir)
 
 *Georgics* II \[121\]:
 
-> Velleraque ut foliis depectant ten**[ui]{.underline}**a Seres
+> Velleraque ut foliis depectant ten**<span class="underline">ui</span>**a Seres
 >
 > (And how the Chinese comb off slender flocks of silk from leaves)
 
@@ -2792,51 +2792,51 @@ following:
 
 Martial, Book V, epigram 11 \[1\]:
 
-> Sardonychas, smaragdos, adamantas, **[ia]{.underline}**spidas uno
+> Sardonychas, smaragdos, adamantas, **<span class="underline">ia</span>**spidas uno
 >
 > (Sardonyxes, emeralds, diamonds, jaspers together)
 
 *Aeneid* II \[442\]:
 
-> Haerent par**[ie]{.underline}**tibus scalae; postesque sub Ipsos
+> Haerent par**<span class="underline">ie</span>**tibus scalae; postesque sub Ipsos
 >
 > (The ladders cling to the walls; and beneath the very doorposts)
 
 in the same \[492\]:
 
-> Custodes sufferre valent, labat ar**[ie]{.underline}**te crebro
+> Custodes sufferre valent, labat ar**<span class="underline">ie</span>**te crebro
 >
 > (The guards are \[not\] strong enough to bear it, the \[door\]
 > collapses under repeated blows of fir-wood)
 
 *Aeneid* XI \[890\]:
 
-> Ar**[ie]{.underline}**tat in portas et duros obice postes
+> Ar**<span class="underline">ie</span>**tat in portas et duros obice postes
 >
 > (Batters at the gates and the hard posts that guard the way)
 
 Likewise *Georgics* I \[482\]:
 
-> Fluv**[io]{.underline}**rum rex Eridanus, camposque per omnes
+> Fluv**<span class="underline">io</span>**rum rex Eridanus, camposque per omnes
 >
 > (Eridanus king of rivers, and through all the fields)
 
 Lucretius, II \[232\]:
 
-> Propterea quia corpus aquae naturaque ten**[ui]{.underline}**s
+> Propterea quia corpus aquae naturaque ten**<span class="underline">ui</span>**s
 >
 > (For this reason, because the body of water and the thin nature \[of
 > air\])
 
 *Georgics* II \[180\]:
 
-> Ten**[ui]{.underline}**s ubi argilla, et dumosis calculus Arvis
+> Ten**<span class="underline">ui</span>**s ubi argilla, et dumosis calculus Arvis
 >
 > (Where there is thin white clay and gravel in the thorny fields)
 
 *Aeneid* XII \[905\]:
 
-> Gen**[ua]{.underline}** labant, gelido concrevit frigore sanguis[^199]
+> Gen**<span class="underline">ua</span>** labant, gelido concrevit frigore sanguis[^199]
 >
 > (His knees give way, and his blood has curdled in the icy cold)
 
@@ -2848,13 +2848,13 @@ Lucretius,
 
 Book II \[232\]:
 
-Propterea quia corpus aquae naturaque ten**[ui]{.underline}**s\
+Propterea quia corpus aquae naturaque ten**<span class="underline">ui</span>**s\
 (For this reason, because the body of water and the thin nature \[of
 air\])
 
 Book IV \[85\]:
 
-> Mittunt, effigies quoque debent mittere ten**[ue]{.underline}**s
+> Mittunt, effigies quoque debent mittere ten**<span class="underline">ue</span>**s
 >
 > (... send out, and must also send out their light appearances),
 
@@ -2866,19 +2866,19 @@ diaeresis a liquescent u becomes a vowel:
 
 Book I \[1061\]:
 
-Et simili ratione animalia s**[ua]{.underline}**pte[^202] vagari\
+Et simili ratione animalia s**<span class="underline">ua</span>**pte[^202] vagari\
 (And for their own like reason animals rove)
 
 Book II \[661\]:
 
-Lanigerae pecudes, et equorum d**[ue]{.underline}**llica proles\
+Lanigerae pecudes, et equorum d**<span class="underline">ue</span>**llica proles\
 (Wool-bearing flocks and the warlike race of horses)
 
 \[B9v\]
 
 and in Lactantius, *De Ave Phoenice* \[28\]:
 
-> D**[uo]{.underline}**decies undis irrigat omne nemus\
+> D**<span class="underline">uo</span>**decies undis irrigat omne nemus\
 > (Twelve times a year waters the whole grove with its floods)
 
 Certain examples are written with a contraction, as *cogo*, *tibicen*,
@@ -2904,19 +2904,19 @@ contracted, as:
 
 *Eclogues* III \[96\]:
 
-> Tityre, pascentes a flumine r**[eii]{.underline}**ce capellas
+> Tityre, pascentes a flumine r**<span class="underline">eii</span>**ce capellas
 >
 > (Tityrus, drive your grazing goats back from the river)
 
 *Thebaid* IV \[574\]:
 
-> Tela manu, r**[eii]{.underline}**citque canes in vulnus hiantes
+> Tela manu, r**<span class="underline">eii</span>**citque canes in vulnus hiantes
 >
 > (Weapon in hand, he drives back the dogs baying for his blood)
 
 Lucretius, IV \[1272\]:
 
-> **[Eii]{.underline}**cit enim sulci[^208] recta regione viaque
+> **<span class="underline">Eii</span>**cit enim sulci[^208] recta regione viaque
 >
 > (Throws off from the furrow's proper place and path)
 
@@ -2926,26 +2926,26 @@ discarded by syncope (which also happens with other compounds of
 
 \[Ovid,\] *Ex Ponto*, Book II, epistle 3 \[37\]:
 
-Turpe putas ab**[i]{.underline}**ci quia sit miserandus amicus[^209]\
+Turpe putas ab**<span class="underline">i</span>**ci quia sit miserandus amicus[^209]\
 (You think it shameful to cast \[a friend\] off, since a friend ought to
 be pitied)
 
 Martial, Book IV, epigram 54 \[9\]:
 
-Nil ad**[i]{.underline}**cit penso Lachesis fusosque sororum\
+Nil ad**<span class="underline">i</span>**cit penso Lachesis fusosque sororum\
 (Lachesis adds nothing to her spinning, and her sister's spindles \[she
 unwinds\])
 
 Lucan, Book VII:[^210]
 
-> Cur ob**[i]{.underline}**cis magno tumulum, manesque uagantes
+> Cur ob**<span class="underline">i</span>**cis magno tumulum, manesque uagantes
 >
 > (Why do you throw a tomb over \[Pompey\] the great, and \[shut in\]
 > his wandering spirit?)
 
 Lucan, Book VII \[574\]:
 
-> Ipse manu sub**[i]{.underline}**cit gladios, ac tela ministrat
+> Ipse manu sub**<span class="underline">i</span>**cit gladios, ac tela ministrat
 >
 > (He supplies the swords himself and sees to the weapons)),[^211]
 
@@ -3446,26 +3446,26 @@ elsewhere, as:
 
 *Iliad* I \[38\]:
 
-Κίλλάν [**τε** **ζ**]{.underline}αθέην Τενέδοιό τε ἶφι ἀνάσσεις[^241]\
-*Killan **[te z]{.underline}d**atheēn Tenedoio te iphi anasseis\
+Κίλλάν <span class="underline">**τε** **ζ**</span>αθέην Τενέδοιό τε ἶφι ἀνάσσεις[^241]\
+*Killan **<span class="underline">te z</span>d**atheēn Tenedoio te iphi anasseis\
 *(And holy Killa, and rule by might over Tenedos)
 
 in the same \[49\]:
 
-δεινὴ **[δὲ κλ]{.underline}**αγγὴ γένετ᾽ ἀργυρέοιο βιοῖο\
-*deinē **[de kl]{.underline}**angē genet' argureoio bioio\
+δεινὴ **<span class="underline">δὲ κλ</span>**αγγὴ γένετ᾽ ἀργυρέοιο βιοῖο\
+*deinē **<span class="underline">de kl</span>**angē genet' argureoio bioio\
 *(terrible was the silver bow's twang)
 
 in the same \[106\]:
 
-μάντι κακῶν οὐ πώ ποτέ μοι **[τὸ κρ]{.underline}**ήγυον εἶπας\
-*manti kakōn ou pō pote moi **[to kr]{.underline}**ēguon eipas\
+μάντι κακῶν οὐ πώ ποτέ μοι **<span class="underline">τὸ κρ</span>**ήγυον εἶπας\
+*manti kakōn ou pō pote moi **<span class="underline">to kr</span>**ēguon eipas\
 *(Prophet of ills, you have never spoken anything agreeable to me)
 
 in the same \[234\]:
 
-ναὶ μὰ τό**[δε σκ]{.underline}**ῆπτρον, τὸ μὲν οὔ ποτε φύλλα καὶ ὄζους\
-*nai ma to**[de sk]{.underline}**ēptron, to men ou pote phulla kai
+ναὶ μὰ τό**<span class="underline">δε σκ</span>**ῆπτρον, τὸ μὲν οὔ ποτε φύλλα καὶ ὄζους\
+*nai ma to**<span class="underline">de sk</span>**ēptron, to men ou pote phulla kai
 ozdous\
 *(by this staff, that never leaves and shoots).
 
@@ -3584,24 +3584,24 @@ III\. Synaeresis or crasis lengthens a syllable, as *nīl*, *cōgo*,
 
 Juvenal, *Satires* VI \[559\]:
 
-Magnus civis ob**[it]{.underline}** et formidatus Othoni\
+Magnus civis ob**<span class="underline">it</span>** et formidatus Othoni\
 (The great citizen died, the one Otho feared).
 
 So *Aeneid* IX \[418\]:
 
-Dum trepidant \[**[it]{.underline}**\][^253] hasta Tago per tempus
+Dum trepidant \[**<span class="underline">it</span>**\][^253] hasta Tago per tempus
 utrumque\
 (While they trembled, the spear went through both Tagus' temples)
 
 Ovid,[^254] *Consolatio ad Liviam* \[238\]:
 
-> Author ob**[it]{.underline}** operis sed tamen extat opus
+> Author ob**<span class="underline">it</span>** operis sed tamen extat opus
 >
 > (The author of the work has died but the work nevertheless survives)
 
 *Aeneid* IX \[9\]:
 
-> Sceptra Palatini, sedemque pet**[it]{.underline}** Euandri
+> Sceptra Palatini, sedemque pet**<span class="underline">it</span>** Euandri
 >
 > (Sought the realm and seat of Palatine Evander)
 
@@ -3616,20 +3616,20 @@ for the diphthong *Eu* is lengthened of necessity.[^255]
 
 Lucretius, Book III \[152\]:
 
-> Verum ubi v**[ehe]{.underline}**menti magis est commota metu[^256]
+> Verum ubi v**<span class="underline">ehe</span>**menti magis est commota metu[^256]
 > mens
 >
 > (But when the mind is stirred more by a more fierce alarm)
 
 Horace, *Epistles* II.2 \[120\]:
 
-> V**[ehe]{.underline}**mens et liquidus, puroque simillimus amni
+> V**<span class="underline">ehe</span>**mens et liquidus, puroque simillimus amni
 >
 > (Forceful and flowing and most like to a pure stream)
 
 Lucretius, Book V \[342\]:
 
-> Per terras, amnes, atque oppida c**[oo]{.underline}**peruisse
+> Per terras, amnes, atque oppida c**<span class="underline">oo</span>**peruisse
 >
 > (That the rivers \[had spilt\] across the lands and overwhelmed the
 > towns).
@@ -3795,7 +3795,7 @@ diphthong ae, as:
 
 Lucan, Book VIII \[716\]:
 
-> Quaestor ab Icario Cinyr**[ae]{.underline}**ae littore Cypri
+> Quaestor ab Icario Cinyr**<span class="underline">ae</span>**ae littore Cypri
 >
 > (The quaestor \[his companion\] from the Icarian shore of Cinyras'
 > land of Cyprus).
@@ -7435,15 +7435,15 @@ paronomasia and polyptoton.
 It is <span style="font-variant: small-caps;">paronomasia</span>[^590] when by the altering of a letter
 or syllable, a word is also changed in meaning. *In Verrem* II:[^591]
 
-> Nam, ut apertus in cor**[rip]{.underline}**iendis pecuniis; sic in spe
-> cor**[rump]{.underline}**endi iudicii\
+> Nam, ut apertus in cor**<span class="underline">rip</span>**iendis pecuniis; sic in spe
+> cor**<span class="underline">rump</span>**endi iudicii\
 > (For he was as blatant in stealing money, as he was in corrupting the
 > courts);
 
 *In Catilinam* I \[11.27\]:
 
-> Ut \[...\] non **[e]{.underline}**missus ex urbe, sed
-> **[im]{.underline}**missus in urbem esse videatur\
+> Ut \[...\] non **<span class="underline">e</span>**missus ex urbe, sed
+> **<span class="underline">im</span>**missus in urbem esse videatur\
 > (That he might seem not to have been sent away from the city but sent
 > into the city).
 
@@ -7467,8 +7467,8 @@ From this also comes that line of Cato's,\* who
 
 > **deambulate** 1. (*rare*): to go out walking; to stroll
 > (en/wiktionary/org). ... cum cuidam dixisset, Eamus deambulatum; et
-> ille, Quid opus est **[de]{.underline}**? Imo vero, inquit, quid opus
-> est **[te]{.underline}**?[^593]\
+> ille, Quid opus est **<span class="underline">de</span>**? Imo vero, inquit, quid opus
+> est **<span class="underline">te</span>**?[^593]\
 > (when he said to someone, Let us deambulate,[^594] and he replied,
 > What's the need for the 'de-'? replied, No, what's the need for
 > *thee*?)
@@ -7488,9 +7488,9 @@ mood, tense, person, case, gender or number.[^596]
 
 \[Cicero,\] *Pro Caelio* \[24.58\]:
 
-> Ipsius autem veneni **[quae]{.underline}** ratio fingitur? ubi
-> quaesitum est? \[...\] **[quo]{.underline}** pacto?
-> **[cui]{.underline}**? **[quo]{.underline}** in loco traditum?\
+> Ipsius autem veneni **<span class="underline">quae</span>** ratio fingitur? ubi
+> quaesitum est? \[...\] **<span class="underline">quo</span>** pacto?
+> **<span class="underline">cui</span>**? **<span>quo</span>** in loco traditum?\
 > (But what account has been made up of the poison itself? Where was it
 > found? By what means? Where was it handed over? To whom?)
 
@@ -7717,7 +7717,7 @@ Scipios, Marcelli, Maximi! You crazy Paulus! Idiot Marius!'
 I \[70--72\]:
 
 > Will a wicked soldier occupy such virgin lands as these, and a
-> barbarian these cornfields? **[O see]{.underline}** how civil strife
+> barbarian these cornfields? **<span class="underline">O see</span>** how civil strife
 > brings about the misery of citizens! Alas[^610] for those for whom we
 > sow our fields!
 
@@ -9289,7 +9289,7 @@ that he was professing.
     garbled MS tradition.
 
 [^157]: Modern editions read 'Iamne vides igitur quam puncto tempore
-    imago', with elision of tempor**[e]{.underline}**.
+    imago', with elision of tempor**<span class="underline">e</span>**.
 
 [^158]: Modern editions read 'medium', with (normal) elision of the m.
 
