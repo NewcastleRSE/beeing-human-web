@@ -57,7 +57,7 @@ Greek, written by R.C.
 \[A1r\]
 
 **BOOK I\
-*On Style* ([Elocutio]{.underline})**[^2]
+*On Style* (<span class="underline">Elocutio</span>)**[^2]
 
 **Chapter 1**
 
@@ -1989,8 +1989,8 @@ preceding vowel are elided\* when the following word begins with a
 vowel, and the length of the final syllable is considered of no import.
 Horace, *Epistles*, Book I, 2 \[54\]:
 
-Sincer**[um]{.underline}**[^140] est nisi vas,
-quodcumqu**[e]{.underline}** infundis acescit\
+Sincer**<span class="underline">um</span>**[^140] est nisi vas,
+quodcumqu**<span class="underline">e</span>** infundis acescit\
 (Unless the container is unblemished, whatever you pour in will go
 sour).
 
@@ -1998,7 +1998,7 @@ Here the 'e' in *quodcumque* and the 'um' in *sincerum* are elided; and
 the final 'scit', though it is short, is considered long. A diphthong
 here is accounted the same[^141] as a vowel, as *Aeneid* III \[530\]:
 
-Crebrescunt optat**[ae]{.underline}** aurae, portusque patescit\
+Crebrescunt optat**<span class="underline">ae</span>** aurae, portusque patescit\
 (The hoped-for breezes pick up and the port lies open).
 
 But *heu* (alas), *o*, *ah*, and *io* (exclamations) do not elide.
@@ -2006,7 +2006,7 @@ But *heu* (alas), *o*, *ah*, and *io* (exclamations) do not elide.
 *O* however, sometimes loses a quantity[^142] on account of a following
 vowel: *Eclogues* II \[65\]
 
-Te Corydon, **[o]{.underline}** Alexi. Trahit sua quemque voluptas\
+Te Corydon, **<span class="underline">o</span>** Alexi. Trahit sua quemque voluptas\
 (Alexis, Corydon \[hunts\] you: each follows his desire).
 
 See \[the note immediately\] below on omitted synaloephe.[^143]
@@ -2017,53 +2017,53 @@ See \[the note immediately\] below on omitted synaloephe.[^143]
 
 Synaloephe is omitted, Greek fashion, at *Eclogues* III \[79\]:
 
-Et longum formose vale, val**[e]{.underline}**, inquit, Iola\
+Et longum formose vale, val**<span class="underline">e</span>**, inquit, Iola\
 (And long he said farewell, farewell, beautiful Iollas).
 
 Both *Eclogues* VIII \[108\]:
 
-Credimus? an qu**[i]{.underline}** amant ipsi sibi somnia fingunt?\
+Credimus? an qu**<span class="underline">i</span>** amant ipsi sibi somnia fingunt?\
 (Do I believe it? Or do those who are in love make their own dreams for
 themselves?),
 
 *Aeneid* VI \[507\]:
 
-Nomen et arma locum servant; t**[e]{.underline}**, amice, nequivi\
+Nomen et arma locum servant; t**<span class="underline">e</span>**, amice, nequivi\
 (Your name and arms watch over the place. You, my friend, I could not),
 
 and *Aeneid* VIII \[72\]:
 
-Tuque, o Thybri, t**[u]{.underline}** o genitor cum flumine sancto\
+Tuque, o Thybri, t**<span class="underline">u</span>** o genitor cum flumine sancto\
 (And you, O Tiber, you, O Father, with your holy river),
 
 Catullus against Mamurra and Caesar \[57.7\]:
 
-Uno in lectul**[o]{.underline}** erudituli ambo[^144]\
+Uno in lectul**<span class="underline">o</span>** erudituli ambo[^144]\
 (Both a little experienced in one bed)
 
 and *Georgics* IV \[461\]:
 
-Implerunt montes\[,\] flerunt Rhodopei**[ae]{.underline}** arces\
+Implerunt montes\[,\] flerunt Rhodopei**<span class="underline">ae</span>** arces\
 (Filled the mountains, and the citadels of Rhodope wept')
 
 are where long vowels are not elided but lose half their quantity.
 
 Sometimes, too, they keep their full length; *Eclogues* VII \[53\]:
 
-Stant et iuniper**[i]{.underline}**, et castane**[ae]{.underline}**
+Stant et iuniper**<span class="underline">i</span>**, et castane**<span class="underline">ae</span>**
 hirsutae\
 (Junipers stand there too, and the prickly chestnuts)
 
 and *Eclogue* VI \[44\]:
 
-Clamassent, ut littus Hyl**[a]{.underline}**, Hyl**[a]{.underline}**,
+Clamassent, ut littus Hyl**<span class="underline">a</span>**, Hyl**<span class="underline">a</span>**,
 omne sonaret\
 (They cried out, so that the whole shore echoed 'Hylas! Hylas!'):
 
 here the 'a' in the first *Hyla* stays long, but in the second it is cut
 short. So *Georgics* I \[281\]:
 
-Ter sunt conat**[i]{.underline}** imponere Peli**[o]{.underline}**
+Ter sunt conat**<span class="underline">i</span>** imponere Peli**<span class="underline">o</span>**
 Ossam\
 (Thrice they tried to pile Pelion onto Ossa),
 
@@ -2078,39 +2078,39 @@ Natura*,\] I \[1078\]:
 
 *Aeneid* I \[405\]:
 
-Et vera incessu patuit de**[a]{.underline}**: ille ubi matrem\
+Et vera incessu patuit de**<span class="underline">a</span>**: ille ubi matrem\
 (And showed herself truly a goddess by her gait: when he \[recognised\]
 his mother)
 
 and *Metamorphosis* V \[625\]:
 
-Et bis 'io Arethus**[a]{.underline}**, io Arethusa!' vocavit[^146]\
+Et bis 'io Arethus**<span class="underline">a</span>**, io Arethusa!' vocavit[^146]\
 (And twice called out 'Io, Arethusa! Io Arethusa!').
 
 There are also cases where ecthlipsis is omitted, as in Ennius, quoted
 by Priscian,[^147]
 
-> Insignita fere tum millia milit**[um]{.underline}** octo\
+> Insignita fere tum millia milit**<span class="underline">um</span>** octo\
 > (Then near eight thousand soldiers, arrayed with banners).
 
 There are examples of this kind in Lucretius, as Book I \[436\]:
 
-Corpor**[um]{.underline}** augebit numerum, summamque sequetur;[^148]\
+Corpor**<span class="underline">um</span>** augebit numerum, summamque sequetur;[^148]\
 (Will increase the number of bodies, and go to make up the sum);
 
 Book II \[466\]:
 
-Nam quod fluvid**[um]{.underline}** est, e levibus atque rotundis[^149]\
+Nam quod fluvid**<span class="underline">um</span>** est, e levibus atque rotundis[^149]\
 (For because it is fluid, made of little and round things)
 
 Book III \[196\]:
 
-Namque papaver**[um]{.underline}** aura potest suspensa levisque[^150]\
+Namque papaver**<span class="underline">um</span>** aura potest suspensa levisque[^150]\
 (For a light and hovering breeze can \[blow the seed\] of poppies)
 
 and Book VI \[276\]:
 
-> Semina seque simul c**[um]{.underline}** eo commiscuit igni\
+> Semina seque simul c**<span class="underline">um</span>** eo commiscuit igni\
 > (And at the same time the seeds have mixed with that fire);
 
 and these Ovid too dared to imitate \[*Heroides*,\] epistle 5 \[85\];
