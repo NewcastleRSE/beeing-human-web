@@ -8891,7 +8891,7 @@ that he was professing.
 
     1\. Efficientis, ut Inventoris; *Marte. Lyaeo.* Au∣toris: *Legitur
     Juvenalis. Livius ingens.* Materiae: *Pinus, ferrum, aeris acervus,
-    arundo.* Aut instrumenti: *Gladius, lingua, arma manus{que}*
+    arundo.* Aut instrumenti: *Gladius, lingua, arma manus{'{'}que{'{'}*
 
     2\. Effecti: *Clades Libyae. Mors frigida pallet.*
 
