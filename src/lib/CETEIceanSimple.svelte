@@ -5,6 +5,8 @@
 
     import { onMount } from "svelte";
 
+    let {teiFile = "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/refs/heads/dev/odd/tei_beeing_human.odd"} = $props();
+
     let loaded = false;
 
     async function loadTei(path) {
@@ -37,7 +39,7 @@
     onMount(async () => {
         loaded = false;
         await loadTei(
-            "https://raw.githubusercontent.com/NewcastleRSE/beeing-human-tei-data/refs/heads/dev/odd/tei_beeing_human.odd",
+            teiFile,
         );
     });
 </script>
