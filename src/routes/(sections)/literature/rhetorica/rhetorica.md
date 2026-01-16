@@ -3,14 +3,14 @@ title: "Rhetorica"
 id: rhetorica
 parent: literature
 link: literature/rhetorica
-lead: "loiaj fkajsd kaj sdofkja sldkfj fdsf"
-img: 'assets/articles/digital-thoughts/markus-spiske-iar-afB0QQw-unsplash.jpg'
-imgAlt: "jflkajs dfkljas dlfkjsaldkfj"
-type: article
+lead: "Read Charles Butler's *Rhetorica* (1621), now translated for the first time into English by Henry Howard, with notes by Jennifer Richards."
+img: 'assets/articles/rhetorica/wan-san-yip-ID1yWa1Wpx0-unsplash.jpg'
+imgAlt: "two people speaking to an audience"
+type: [data]
 layout: article
 author: [henry, jenny]
 date: 2026/01/13
-order: 3
+order: 2
 ---
 
 <script>
