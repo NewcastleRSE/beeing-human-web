@@ -490,9 +490,9 @@ of metonymy in 'pale' and 'sad' makes an allegory.
 
 **Chapter 4**
 
-<span style="font-variant: small-caps;">Metonymy of the subject</span> is when the name proper to a
+<p><span style="font-variant: small-caps;">Metonymy of the subject</span> is when the name proper to a
 subject is used to signify the adjunct.[^44] \[Ovid,\] *Heroides* 16
-\[101--2\]:[^45]
+\[101--2\]:[^45]</p>
 
 > You do not see more, but you rashly dare more: there's no more heart
 > (1.) in you, but less face[^46] (2.);
