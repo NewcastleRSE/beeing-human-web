@@ -50,7 +50,7 @@ to his study of rhetoric at school and university. Subsequently, he
 would have used rhetoric to compose and deliver sermons, and he also
 taught it. Butler was appointed the rector of [Nately
 Scures](https://www.nationalchurchestrust.org/church/st-swithun-nately-scures)
-in east Basingstoke, [Hampshire in 1593, then master of the Holy Ghost
+in east Basingstoke, Hampshire in 1593, then [master of the Holy Ghost
 School in Basingstoke in
 1595](https://www.oxforddnb.com/display/10.1093/ref:odnb/9780198614128.001.0001/odnb-9780198614128-e-4178).[^2]
 Two years later he saw into print a school textbook on rhetoric titled
@@ -85,7 +85,7 @@ add to.
 Below you can see Butler's visual summary of the figures of speech and
 of thought in tabular form; this is located on an inserted leaf between
 sigs. B8v and C1r (blank on the verso) in the 1597 edition. The table is
-adapted from Talon's (and Ramus's) *Rhetorica*. [^7] You can get a sense
+adapted from Talon's (and Ramus's) *Rhetorica*.[^7] You can get a sense
 of the extent of the reduction to the number of figures by exploring the
 several hundred listed in this invaluable online resource: [Sylva
 Rhetoricae](https://rhetoric.byu.edu/).
@@ -119,7 +119,7 @@ metre has been significantly expanded: it now includes many more
 examples, as well as a new introduction to the
 '[quantities](https://dcc.dickinson.edu/grammar/latin/quantity-syllables)'
 of Latin vowels and syllables, knowledge of which was deemed crucial for
-their sounding.[^11] Adding examples is how Butler contributes something
+their pronunciation.[^11] Adding examples is how Butler contributes something
 new. The second volume focusses on delivery. It explains the importance
 of varying the voice for words and whole sentences. In chapter 4, Butler
 (following Talon) focusses on the relationship between the voice and
@@ -195,7 +195,7 @@ explains in the first volume thus:
 
 In volume one of *Rhetorica*, Butler explains that the expression of
 emotion might be silently identified (in Latin) through the choice of
-adverb: Proh! En! Lo! etc. But the figure of exclamation or *ecphonesis*
+interjection: Proh! En! Lo! etc. There is a similar emotional nuance to English interjections: Alas! is associated with grief, pity, regret, disappointment, or concern; O! with ‘appeal, surprise, lament’. Other possible interjections include Fie!, associated with disgust, and Ho!, associated with ‘surprise, admiration, exultation (often ironical), triumph, taunting’ (see the entries in The Oxford English Dictionary.) But the figure of exclamation or *ecphonesis*
 only becomes fully expressive when it is animated with the voice, and
 here we need to turn to volume two for guidance, especially chapter 4
 (excerpted in full below), where Butler explains the qualities of the
@@ -290,7 +290,7 @@ with emotion (see [Sylva Rhetoricae](https://rhetoric.byu.edu/)).
 > trained but almost a changed man.
 
 It is not hard to see how Butler might listen to the pitch and tone of
-the emerging virgin queens' piping, and think that he hears is 'a
+the emerging virgin queens' piping, and think that what he hears is 'a
 mournefull and begging note'.
 
 *Rhetorica* completes our study of Butler's training in the sound arts:
@@ -332,10 +332,10 @@ which I began. Only this time the parting is between a father (author)
 and his sons (books) rather than a mother (queen) bee and her daughters.
 Butler imagines sending his child (*The Feminine Monarchie*) into the
 world, and hopes 'he' will flourish as well as his older brother did.
-The book of 'tropes and figures', taught in the universities (Cambridge
-and Oxford) and grammar schools, is his *Rameae rhetoricae libri duo in
+The book of 'tropes and figures' taught in the universities (Cambridge
+and Oxford) and grammar schools is his *Rameae rhetoricae libri duo in
 usum scholarum*. A cross-reference like this one is not proof that
-Butler used his rhetoric book to interpret the bee music. However, what
+Butler used his knowledge of rhetoric to interpret the bee music. However, what
 his *Rhetorica* does establish is that Butler was trained to listen for
 emotion in specific qualities of sound like tone and pitch wherever he
 heard them.

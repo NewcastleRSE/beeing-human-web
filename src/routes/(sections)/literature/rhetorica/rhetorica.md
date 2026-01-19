@@ -27,5 +27,5 @@ order: 2
 </div>
 
 <div class="h-dvh">
-    <PdfViewer url='./rhetorica_1621.pdf' pageNum=0 objectTitle='Translation of Rhetorica'/>
+    <PdfViewer url='{base}/literature/rhetorica_1621.pdf' pageNum=0 objectTitle='Translation of Rhetorica'/>
 </div>
