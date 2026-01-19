@@ -45,7 +45,7 @@ reference to honeybees rooted in Greek classicism),[^3] he is but one of
 many participants in a long tradition that continues right up to the
 present.
 
-Butler's training in the arts of grammar, rhetoric, and music,
+Butler's training in the arts of [grammar]({base}/literature/vocal-cues), [rhetoric]({base}/literature/rhetoric-and-emotion), and music,
 predisposes him to attend to sound. In *The Feminine Monarchie* sound
 plays a number of roles, and although his actual interpretations of some
 of these sounds would no longer be supported by scientific
