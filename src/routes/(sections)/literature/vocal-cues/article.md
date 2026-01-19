@@ -150,7 +150,7 @@ ordinarily precede it being struck through with a horizontal line
 (<s>c</s>, <s>w</s>, <s>g</s>, <s>s</s> etc.), except for 't', where a diagonal line
 runs from the cross bar towards the tip of the letter, or the t is
 positioned upside down (ʇ). Curiously, æ and œ are not characters that
-Butler reintroduces as they 'are no' Engli<s>s</s> Di<s>p</s>ʇongs', judged
+Butler reintroduces as there 'are no' Engli<s>s</s> Di<s>p</s>ʇongs', judged
 instead to be vocal cues specific to Latin and having no place in the
 English language.[^12] Diacritical markings on the letter e (ë) are also
 adopted, though used sparingly, and seem limited to the word 'qiëscent'
@@ -208,7 +208,7 @@ to the University, [Joseph
 Barnes](https://www.oxforddnb.com/display/10.1093/ref:odnb/9780198614128.001.0001/odnb-9780198614128-e-69136)
 (1549/50--1618), occasionally used gothic type, but a comparison between
 Barnes and Turner suggests Barnes' e is marginally thicker than Turner's
-ee. The more rounded ee and oo , however, were most likely cut
+ee. The more rounded ee and oo, however, were most likely cut
 specifically for Butler's books. Further investigation into the material
 circumstances of producing the text might draw different conclusions,
 but these preliminary observations suggest just two new letters were
