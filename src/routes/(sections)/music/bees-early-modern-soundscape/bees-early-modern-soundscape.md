@@ -1,8 +1,8 @@
 ---
 title: "Bees in the Early Modern Soundscape: An Overview of Sound in Seventeenth-Century Beekeeping Books."
 id: bees-early-modern-soundscape
-parent: literature
-link: literature/bees-early-modern-soundscape
+parent: music
+link: music/bees-early-modern-soundscape
 lead: "In this article, Bennett Hogg explores how the sound of bees was variously interpreted, used, and represented in apiculture manuals and other bee-writings of the seventeenth century."
 img: 'assets/articles/bees-early-modern-soundscape/michael-held-6n5XRyPBzAI-unsplash.jpg'
 imgAlt: "many bees filling the entire frame of the photo"
@@ -10,7 +10,6 @@ type: article
 layout: article
 author: bennett
 date: 2025/09/05
-order: 4
 ---
 
 <script>

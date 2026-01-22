@@ -149,7 +149,7 @@ mutual exchanges between the human and more-than-human'. For Butler,
 though, it also involved listening, as [Bennett
 Hogg]({base}/about/people/bennett) argues
 in his study of bees in the [Early Modern
-Soundscape]({base}/literature/bees-early-modern-soundscape),
+Soundscape]({base}/music/bees-early-modern-soundscape),
 something scientists are also doing again, using different instruments
 of course.
 
