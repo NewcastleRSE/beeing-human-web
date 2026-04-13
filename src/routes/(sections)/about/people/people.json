@@ -350,11 +350,17 @@
     },
     "fran": {
         "name": "François·e Charmaille",
-        "img": "assets/people/incognito.png",
+        "img": "assets/people/CharmaillePhoto.jpg",
         "url": "people/fran",
         "title": "Research Fellow",
         "affiliation": "Gonville & Caius College, University of Cambridge",
-        "bio": "",
-        "role": "contributor"
+        "bio": "<p>Fran's research focuses on the ways disciplines of knowledge, such as grammar, natural philosophy, and meteorology shaped ideas about gender and sexual difference. They have published articles about <a href='https://muse.jhu.edu/article/961888' target='_blank'>the role animals played in the invention of 'sodomy'</a> as a concept, about <a href='https://www.journals.uchicago.edu/doi/10.1086/725191' target='_blank'>trans conceptions of the climate in medieval literature</a>, and about <a href='https://www.tandfonline.com/doi/full/10.1080/10412573.2021.1991720' target='_blank'>the role of greenness in twelfth-century medical models of sexual difference</a>. Their latest essay, on the transgender grammar of Arthurian prose, was awarded the Derek Brewer Prize by the journal <em>Arthurian Literature</em>.</a></p>",
+        "role": "contributor",
+        "web": {
+            "staff": "https://www.english.cam.ac.uk/people/Francois.e_.Charmaille"
+        },
+        "socials": {
+            "bluesky": "https://bsky.app/profile/fcharmaille.bsky.social"
+        }
     }
 }
