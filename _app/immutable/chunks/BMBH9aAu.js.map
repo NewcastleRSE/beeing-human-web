@@ -1,1 +1,0 @@
-{"version":3,"file":"BMBH9aAu.js","sources":["../../../../../../src/lib/customMDSvexComponents/ul.svelte"],"sourcesContent":["<script>\n    let {children} = $props();\n</script>\n\n<ul class=\"list-disc list-inside pl-10\">\n    {@render children?.()}\n</ul>"],"names":[],"mappings":"0eAAA,oDAEA"}
