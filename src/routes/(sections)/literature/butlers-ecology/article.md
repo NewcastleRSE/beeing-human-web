@@ -468,11 +468,11 @@ the material kingdom upon which it rests.
 
 [^5]: Robert Marsham, 'Indications of Spring, Observed by Robert
     Marsham, Esquire, F. R. S. of Stratton in Norfolk. Latitude
-    52^⚬^45^′^', *Philosophical Transactions of the Royal Society of
+    52⚬45′', *Philosophical Transactions of the Royal Society of
     London*, Vol. 9 (1789), pp. 154-156 (9 pages)
 
 [^6]: Scientists have shown that bees use flower colour for a number of
-    processes, and as an informational system. See Chittka and Menzel.
+    processes, and as an informational system. See Chittka and Menzel,
     'The Evolutionary Adaptation of Flower Colours'.
 
 [^7]: https://carolinahoneybees.com/honeydew-honey
