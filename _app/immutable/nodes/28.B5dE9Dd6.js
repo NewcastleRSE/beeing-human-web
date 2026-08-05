@@ -1,0 +1,323 @@
+import"../chunks/C7r4SE4Q.js";import"../chunks/BUOiNmmc.js";import{f as m,a as V,s as e,t as E,b as p,d as a,ak as n,r as o}from"../chunks/DBUjBvYb.js";import{a as s}from"../chunks/3rXom-3E.js";import{l as M,s as $}from"../chunks/DLqLUQRk.js";import{A as F}from"../chunks/DLLDRbfk.js";import{b as r}from"../chunks/CWX66vS0.js";import"../chunks/DPl6T7pg.js";import{B as R}from"../chunks/BjqV5k-7.js";import{U as W}from"../chunks/CqE8y9OJ.js";import{O}from"../chunks/DYrdYJH7.js";try{let t=typeof window<"u"?window:typeof global<"u"?global:typeof globalThis<"u"?globalThis:typeof self<"u"?self:{},i=new t.Error().stack;i&&(t._sentryDebugIds=t._sentryDebugIds||{},t._sentryDebugIds[i]="8225fe91-8dc9-42ef-a443-cdd54ba6421e",t._sentryDebugIdIdentifier="sentry-dbid-8225fe91-8dc9-42ef-a443-cdd54ba6421e")}catch{}const I={title:"Butler's ecology",id:"butlers-ecology",parent:"literature",link:"literature/butlers-ecology",lead:"Olivia explores the many references to plants and flowers in *The Feminine Monarchie* and how their use contributes to an *ecological* view of the world *avante la lettre*.",img:"assets/articles/butlers-ecology/emma-henderson-B645igbiKCw-unsplash.jpg",imgAlt:"a picture of a tree with a prominent root system",type:"article",layout:"article",author:"olivia",date:"2026/07/30",order:3,readingTime:{text:"19 min read",minutes:18.705,time:1122300,words:3741}},{title:L,id:le,parent:he,link:ce,lead:de,img:ue,imgAlt:fe,type:j,layout:pe,author:D,date:z,order:me,readingTime:N}=I;var G=m(`<li class="list-item mb-2"><strong>Pisces:</strong> winter gillyflower, hazel catkins</li> <li class="list-item mb-2"><strong>Aries:</strong> box, withy-palm, daffodil, lily, blackthorn</li> <li class="list-item mb-2"><strong>Taurus:</strong> plum, gooseberry, cherry, pear, apple, crab, barberry,
+vetch, maple</li> <li class="list-item mb-2"><strong>Gemini:</strong> beans, archangel, fumitory, ribwort, honeysuckle</li> <li class="list-item mb-2"><strong>Cancer:</strong> benet, mallows, thyme, knapweed, blackberry</li> <li class="list-item mb-2"><strong>Leo:</strong> lavender, melon, thistle, redweed</li> <li class="list-item mb-2"><strong>Virgo</strong>—<strong>Scorpio:</strong> dandelion, heath, ivy, archangel</li>`,1),U=m(`<li id="fn-1" class="list-item mb-2">Rembert Dodoens, <em>Cruydeboeck</em> (Jan van der Loe, 1554). (=Dodoens, <em>A Nievve Herball, or Historie of Plants</em>, trans. Henry Lyte (Gerard
+Dewes, 1578).)<a href="#fnref-1" class="footnote-backref anchor">↩</a></li> <li id="fn-2" class="list-item mb-2">Modern pollinator ecology increasingly emphasises the importance
+of microclimates — local variations in shade, moisture, airflow,
+vegetation, and temperature — in shaping bee behaviour and
+survival. Butler's observations about overgrown shade, damp
+grasses, sheltering trees, and flowering environments anticipate
+this ecological attention to the small-scale atmospheric conditions
+surrounding the hive. See Lars Chittka and Randolf Menzel. 'The
+Evolutionary Adaptation of Flower Colours and the Insect
+Pollinators' Colour Vision', <em>Journal of Comparative Physiology
+A</em>, 171.2 (1992): 171—181. Springer, doi:10.1007/BF00188925. And
+Thomas D. Seeley, <em>Honeybee Democracy</em> (Princeton University Press,
+2010).<a href="#fnref-2" class="footnote-backref anchor">↩</a></li> <li id="fn-3" class="list-item mb-2">John Parkinson, <em>Theatrum Botanicum: The Theater of Plants</em> (Thomas Cotes, 1640).<a href="#fnref-3" class="footnote-backref anchor">↩</a></li> <li id="fn-4" class="list-item mb-2">Eleni Hall Manolaraki, 'Senses and the Sacred in Pliny's <em>Natural History</em>'. <em>Illinois Classical Studies</em>, 43.1 (2018):
+207—33. <em>JSTOR</em>, <a href="https://doi.org/10.5406/illiclasstud.43.1.0207" rel="nofollow" class="anchor">https://doi.org/10.5406/illiclasstud.43.1.0207</a>,
+p.214.<a href="#fnref-4" class="footnote-backref anchor">↩</a></li> <li id="fn-5" class="list-item mb-2">Robert Marsham, 'Indications of Spring, Observed by Robert
+Marsham, Esquire, F. R. S. of Stratton in Norfolk. Latitude
+52⚬45′', <em>Philosophical Transactions of the Royal Society of
+London</em>, Vol. 9 (1789), pp. 154-156 (9 pages)<a href="#fnref-5" class="footnote-backref anchor">↩</a></li> <li id="fn-6" class="list-item mb-2">Scientists have shown that bees use flower colour for a number of
+processes, and as an informational system. See Chittka and Menzel,
+'The Evolutionary Adaptation of Flower Colours'.<a href="#fnref-6" class="footnote-backref anchor">↩</a></li> <li id="fn-7" class="list-item mb-2"><a href="https://carolinahoneybees.com/honeydew-honey" rel="nofollow" class="anchor">https://carolinahoneybees.com/honeydew-honey</a><a href="#fnref-7" class="footnote-backref anchor">↩</a></li> <li id="fn-8" class="list-item mb-2">See Ann Blair, <em>Too Much to Know: Managing Scholarly Information
+before the Modern Age</em> (Yale University Press, 2010) and Seneca, <em>Epistles</em> 84.3—5. Terence Cave, <em>The Cornucopian Text: Problems of
+Writing in the French Renaissance</em> (Oxford: Clarendon Press, 1979).<a href="#fnref-8" class="footnote-backref anchor">↩</a></li> <li id="fn-9" class="list-item mb-2">See Vivek Nityananda's work for the Bee-ing Human project. <a href="https://www.ncl.ac.uk/cbe/staff/profile/viveknityananda.html" rel="nofollow" class="anchor">https://www.ncl.ac.uk/cbe/staff/profile/viveknityananda.html</a><a href="#fnref-9" class="footnote-backref anchor">↩</a></li> <li id="fn-10" class="list-item mb-2">Figs are actually inverted flowers.<a href="#fnref-10" class="footnote-backref anchor">↩</a></li> <li id="fn-11" class="list-item mb-2">Aristotle, <em>Historia Animalium</em> IX.40<a href="#fnref-11" class="footnote-backref anchor">↩</a></li> <li id="fn-12" class="list-item mb-2">Kristine Kowalchuk, <em>Preserving on Paper: Seventeenth-Century
+Englishwomen's Receipt Books</em> (University of Toronto Press, 2017).<a href="#fnref-12" class="footnote-backref anchor">↩</a></li> <li id="fn-13" class="list-item mb-2">Artificial feeding is still a mainstream practice, for example
+see this 2025 government document from the National Bee Unit: <a href="https://www.nationalbeeunit.com/assets/PDFs/3_Resources_for_beekeepers/Best_practice_guidelines/BPG_7a_Feeding_Bees%5C_-%5C_sugar.pdf" rel="nofollow" class="anchor">https://www.nationalbeeunit.com/assets/PDFs/3_Resources_for_beekeepers/Best_practice_guidelines/BPG_7a_Feeding_Bees\\_-\\_sugar.pdf</a><a href="#fnref-13" class="footnote-backref anchor">↩</a></li> <li id="fn-14" class="list-item mb-2">For a literary investigation of sweetness see Elizabeth Swann, <em>Taste and Knowledge in Early Modern England</em> (Cambridge University
+Press, 2020).<a href="#fnref-14" class="footnote-backref anchor">↩</a></li> <li id="fn-15" class="list-item mb-2">Elaine Leong, <em>Recipes and Everyday Knowledge: Medicine, Science,
+and the Household in Early Modern England</em> (University of Chicago
+Press, 2018).<a href="#fnref-15" class="footnote-backref anchor">↩</a></li>`,1),J=m(`<!> <p>Like the bees themselves, Butler treats the flowers and plants around
+him as living agents shaping the world of the bees and the beekeeper.
+Flowers and plants move through multiple roles in <em>The Feminine
+Monarchie</em>: medicinal, ecological, architectural, behavioural,
+technological, temporal, culinary, and theological. In his book, Butler
+shows plants modulating through all these functions, and I will point to
+chapters that deal with plants and flowers in different ways; I've also
+supplied a <a class="anchor">list of plants that appear in <em>The Femmine Monarchie</em> with
+their names and places</a>.</p> <h2 class="h2 mt-6 mb-2 font-thin">Chapter I</h2> <p>Butler begins his story of plants with the human body and the
+beekeeper's unguarded vulnerability, introducing <em>flora</em> not through
+the bees' biology but through the experience of a beekeeper being
+stung: we are introduced to plants as pharmacopoeia. Health and safety
+first. The plant remedies featured follow humoral logic: bee stings
+introduce heat and swelling, so plants respond with cooling and
+emollient qualities.</p> <p>Butler lists houseleek, rue, mallows, ivy, marigold, and hollyhock as
+potentially soothing for pain and swelling, saying 'he has heard' they
+work (just as elsewhere in the book, he is highly selective and
+deliberate in how he frames the provenance of his knowledge). In
+addition to word of mouth on this topic, he also uses remedies from
+early modern herbals. There is one remedy from Rembert Dodoens that
+recommends mixing rue with hydromel, the mead drink detailed in chapter
+X.</p> <blockquote class="blockquote text-lg font-light not-italic pl-8 my-4 text-secondary-800 w-2/3 mx-auto"><p>Rue drunken with Wine, or rather with Hydromel, or the leaves stamped
+with Honie and Salt, and laid to the wound, is good against stinging
+of Bees, Waspes, Hornets, and Scorpions; Dodoens, l.2.c.83.<sup id="fnref-1"><a href="#fn-1" class="footnote-ref anchor">1</a></sup></p></blockquote> <p>Even before Butler elaborates the hive's organisation or the bees'
+labour, he situates apiculture within a tradition of practical household
+medicine, underscoring the way that botanical knowhow and beekeeping
+knowhow are inseparable. If the book welcomes the reader into the hive,
+herbal remedies are a crucial part of the kit required to visit the
+hive, just as a modern laboratory may have an epi-pen and lidocaine
+wipes in the drawer. We get a vivid sense of Butler's surroundings in
+his garden, as he textually gestures to the plants he understands to
+operate in an interactive relationship with the bees, and to be woven
+into the relevant parts of his library and experience.</p> <h2 class="h2 mt-6 mb-2 font-thin">Chapter II</h2> <blockquote class="blockquote text-lg font-light not-italic pl-8 my-4 text-secondary-800 w-2/3 mx-auto"><p>Beehives and bees are very greatly suited to gardens and flowers, a
+business of especial profit and economy, where circumstances have been
+favourable. <em>NH</em> XXI.70(41)</p></blockquote> <p>In Chapter II, plants define the physical environment in which bees live
+and work. Trees and herbs are understood as architectural features
+shaping air, shade, and bee behaviour.</p> <p>Plum, cherry, apple, filbert, hazel, thorn are preferred for catching or
+receiving swarms due to their branching structure. Butler talks about
+lavender borders, which bees willingly rest upon. Other plants are
+dangerous. Beans, hemp and pease are all too tall, obstructing the
+flight of young bees. There are thick weeds and grasses, which chill the
+bees that fall among them.</p> <p>These categories reveal an early modern understanding of plant
+microclimates.<sup id="fnref-2"><a href="#fn-2" class="footnote-ref anchor">2</a></sup> Butler perceives how shade, height, and
+moisture-retention affect bees physiologically. Early modern herbals
+similarly discuss the agricultural implications of crop height and
+shading. Thomas Parkinson, writing in the 1640s, for instance, warns
+that tall plants create 'unwholesome shadow', echoing Butler's
+practical concern for the bees' inability to rise after falling into
+dense foliage.<sup id="fnref-3"><a href="#fn-3" class="footnote-ref anchor">3</a></sup> Although bees can of course live unkept, they ideally
+need a curated botanical environment — both cleared and cultivated — to
+thrive. Reading Butler we are reminded how closely all these spheres of
+knowledge sit: agriculture, husbandry, botanical knowledge, herbals,
+physic.</p> <p>The procedural organisation of the beekeeping garden operates in
+Pliny's cultural tradition of sensory awareness. The quotation at the
+top of this section, which Butler attached to the <a href="https://bee-inghuman.newcastle.ac.uk/literature/cross-references" rel="nofollow" class="anchor">reference-webbing</a> of his book, is from a text that is all about considerations of how the
+garden feels to the bees. Eleni Hall Manoloraki has written about how
+Pliny demands 'simultaneous attunement to human and animal senses' and
+these early chapters are about exactly that — how the beekeeper
+attunes himself and his property to his bees.<sup id="fnref-4"><a href="#fn-4" class="footnote-ref anchor">4</a></sup> Attunement, in this
+Plinian metaphorical sense is made literal by Butler as we really do
+spend the first half of the book tuning our ear to listen to the bees'
+music in chapter V (a chapter that marks the moment at which reader,
+beekeeper, and hive begin to resonate on the same sensory register and
+the bees' voices become audible). The floral and vegetative environment
+of these early chapters is instructive, but it also acclimatises the
+reader to the sensory and acoustic world of the hive, bringing the
+reader into pitch.</p> <h2 class="h2 mt-6 mb-2 font-thin">Chapter III</h2> <p>In Chapter III, plants are no longer merely part of the landscape; they
+become instruments, building materials, and continued sensory stimuli.
+Butler writes about herbs as olfactory tools. To 'season' new hives,
+he recommends thyme, savoury, marjoram, balm, fennel, hyssop, mallow and
+bean-tops. Many of these plants are mythically and botanically layered.
+One such example is thyme, about which the <a href="https://www.youtube.com/watch?v=OapyM4s3Qbg" rel="nofollow" class="anchor">Folger library has made
+this lovely
+video</a>.</p> <p>Natural material is used to craft beekeeping equipment. Wheat and rye
+straw form the hackle covering; bethwyn, bramble and brier serve as
+fastenings; hazel, willow and oak are used as wiping rods. (Some of this
+material will be from outside the garden, so the beekeeper ventures
+further afield.) This artisanal activity from the beekeeper involves
+skill and industry, and Butler's description allows the reader to
+experiment with inversions of scale and attunement. The beekeeper is
+building the hive and environment just as the bees build their comb and
+undertake their constructive processes: both are collecting material
+from the garden.</p> <p>In the procedural sense, we are building a beehive; in the dramatic
+sense, we are setting the stage, in a palace, or theatre, woven from
+plant matter.</p> <h2 class="h2 mt-6 mb-2 font-thin">Chapter V</h2> <p>Chapter V treats plants as practical instruments for predicting,
+managing, and interpreting swarming behaviour. Butler recommends that
+the swarm-catching brush be made from rosemary, hyssop, or fennel,
+aromatic herbs whose scent and texture, length and brittleness help
+gather and settle moving bees. Elsewhere mugwort, marjoram, and wormwood
+are used to dislodge clustered bees or redirect their movement from
+inconvenient settling places. White nettle and true nettle become
+temporary resting surfaces onto which swarms may descend and cluster.
+The chapter repeatedly presents plants, herbs, and flowers as active
+behavioural tools. The beekeeper governs the swarm through scent, sound,
+irritation, attraction, and contact. The keeper acts less like a ruler
+than a conductor, cueing the environment itself and gradually moving the
+music into shape.</p> <p>Butler repeatedly ties the movement of the swarm to seasonal flowering
+patterns, using plants as temporal indicators through which the
+beekeeper reads the colony's condition. Early swarms appear 'before
+knapweed blow', while the flowering of blackberry indicates late
+swarms. Once blackberries and honeydew fail, however, swarming becomes
+dangerous and largely unprofitable.</p> <p>Here Butler describes the idea that the weather makes flowers more
+concentrated:</p> <blockquote class="blockquote text-lg font-light not-italic pl-8 my-4 text-secondary-800 w-2/3 mx-auto"><p>[I]n hot and drie weather the hony dewes are raised, and the
+adventitious moisture is drained from the flowers, the pure naturall
+juice onely being leaft in them: of both which they gather all the day
+long without interruption. (<a class="anchor">I2v</a>)</p></blockquote> <p>Chapter V also attends to the sound of swarming. Butler repeatedly
+describes the rising 'noise' and agitation that accompany a colony
+preparing to cast. Swarms are first recognised acoustically. The
+beekeeper hears the thickening hum and restless motion of the bees
+before locating where they will settle. This practical attention to
+swarm sound culminates in Butler's famous musical notation of bee
+piping, included as a transcription of the queen's and young bees'
+calls during swarming time. The music does not appear separately from
+the chapter's practical concerns but emerges directly from them.
+Changes in buzzing, humming, and piping become diagnostic signs through
+which the beekeeper judges the colony's condition just as carefully as
+he observes blossom times and flowering cycles. Looked at through this
+lens, the magical shift by which all the hard listening work of the
+reader and beekeeper resolves, temporarily, into an audible bee voice
+with words, is brought about by sensory attentiveness to the
+environment. Like a magic eye picture, the reward for five chapters of
+sensory immersion, or the real work of setting up a hive throughout the
+early part of the year, is rewarded with translation and communication
+between bee and human (in that one direction).</p> <p>Aromatic herbs are shaken or brushed through the moving cloud of bees;
+flowering conditions determine whether the swarm will thrive; enclosed
+straw hives amplify and contain the swarm's collective noise. Butler
+presents swarming as an event in which flowers, herbs, weather, sound,
+and insect movement interact simultaneously. In this respect, the
+chapter extends a tradition already visible in Pliny's <em>Natural
+History</em>, where bees are described as particularly responsive to
+fragrant plants and flowering gardens. Plants in Chapter V do not merely
+attract bees symbolically or ornamentally: they regulate the timing,
+movement, settlement, and behaviour of the swarm itself.</p> <h2 class="h2 mt-6 mb-2 font-thin">Chapter VI</h2> <p>Chapter VI is the botanical centrepiece of <em>The Feminine Monarchie</em>.
+Here Butler describes the cyclical progression of flowers through the
+zodiac months, constructing a phenological calendar long before modern
+ecology formalised the concept.</p> <p>'Phenology' now denotes the timing of natural events, and the way that
+the phases of the year can be understood not through our conventional
+date/month system, but through tracking of signs like the first bud of
+various trees, or the first nesting of birds. The Woodland Trust runs a
+collaborative phenological calendar, <a href="https://naturescalendar.woodlandtrust.org.uk/" rel="nofollow" class="anchor">which you can see
+here</a>. Some
+consider Robert Marsham as the first phenologist, and his article <em>Indications of Spring</em>, published in the Royal Society's journal <em>Philosophical Transactions</em> as the first openly phenological text.<sup id="fnref-5"><a href="#fn-5" class="footnote-ref anchor">5</a></sup> However, it is clear that Butler's seasonal bee observations from
+Wootton, which rest on a culture of popular zodiacal almanacs, form an
+important part of the history of this kind of phenological thinking.</p> <p>Plants appear in the text as seasonal markers. Each month — Pisces,
+Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio — is defined
+through its signature plants. Butler's lists align closely with
+contemporary herbal and agricultural calendars:</p> <!> <p>The sequence constructs a tonally shifting landscape through which the
+bees travel over the course of the year. Orchard trees appear alongside
+weeds, hedgerow plants beside cultivated herbs, heathland beside
+gardens. The chapter reads almost like a guided progression through the
+English landscape itself, its textures and colour schemes,<sup id="fnref-6"><a href="#fn-6" class="footnote-ref anchor">6</a></sup> following
+the changing availability of blossom, nectar, and pollen from late
+winter into autumn.</p> <p>It isn't as though this was unfamiliar -- quite the opposite. Herbals
+frequently arranged material seasonally, while many almanacs included
+tables of flowering and agricultural labour. Butler extends these
+conventions to create a specifically apicultural calendar in which the
+hive becomes synchronised with the unfolding botanical year, and, by
+implication, the human almanac, and indeed older georgic patterns
+derived from Virgil's calendrical classic. All of these traditions are
+folded into Butler's particular situation in Wootton and its
+surrounding area.</p> <p>We also find the idea of 'honey dew' which was, before modern
+entomology (and the knowledge that this is a residue left by sap-feeding
+insects), the concept that god sent down a sticky, delicious substance
+to land on the leaves of trees:<sup id="fnref-7"><a href="#fn-7" class="footnote-ref anchor">7</a></sup></p> <blockquote class="blockquote text-lg font-light not-italic pl-8 my-4 text-secondary-800 w-2/3 mx-auto"><p>But the greatest plentie of the purest Nectar commeth from above:
+which Almightie God doth miraculously destill out of the Aire, ( aerei
+mellis coelestia dona ) and hath ordained the Oake among all the trees
+of the Wood, to receive and keepe the same upon his smooth and solide
+leaves, ( Et quercus sudabunt roscida mella ) untill either the Bees
+tongue, or the heat of the Sunne have drawne it away. When there is a
+Honie-dew, you may perceive by the Bees: for, as if they smelled it <a class="anchor">v:</a> by the sweetnesse of the Aire, they presently issue out of their
+Hives, in great haste following one an other: and refusing their old
+haunts, search and seeke after the Oake: which for that time shall
+have more of their custome, than all the Plants of the Earth. Sometime
+the Maple and Hazell, take part with the Oake: but little and seldome.
+While the Honie-dew lasteth, they are exceeding earnest, plying their
+businesse like men in Harvest: you may see them so thicke at the
+Hive-doore passing to and fro, that oftentimes they throw downe one an
+other for haste. (<a class="anchor">O4r-v</a>).</p></blockquote> <p>Butler also ranks plants according to their value for bees and honey
+production. Thyme yields 'most and best honey'; vetch sustains bees
+for extended periods; maple provides prolonged nectar flow; heath
+produces distinctive late-summer honey. The chapter therefore constructs
+not simply a floral calendar but a hierarchy of deliciousness and taste
+(taste being another sense that gets attuned to the plants and the bees
+-- we taste what they taste, or at least the text makes us feel like
+it). Butler notes that out of disgusting plants delicious honey is made,
+with the bees conducting a kind of alchemy over bad smells and tastes.
+And he observes other behaviour: the bees only like to get one kind of
+pollen per voyage, no matter how many good things they see (this is now
+called 'floral consistency' or 'floral fidelity').</p> <p>At the same time, the sheer density of botanical naming produces an
+effect of abundance and plenitude. The prose starts gathering names the
+way a bee gathers pollen, moving quickly from blossom to blossom, hedge
+to orchard, heath to herb-bed. In this sense the chapter does not merely
+describe bee behaviour but formally reproduces it.<sup id="fnref-8"><a href="#fn-8" class="footnote-ref anchor">8</a></sup> Into this natural
+and linguistic feast Butler thickens his observations, as those on thyme
+(O4r), a plant that (as we know) makes the best honey according to three
+different authors layered up in a lattice of bibliographic annotations.</p> <p>Plants in Chapter VI also function symbolically and cosmologically.
+Honeydew gathered from oak leaves becomes a divine substance, <em>coelestia
+dona</em> — heavenly gifts — linking bee labour with providential order.
+The boundaries between atmosphere, vegetation, and divinity become
+permeable: heavenly dew descends upon trees before being transformed
+into honey by the bees. Such moments integrate empirical field
+observation with classical natural philosophy and Christian
+providentialism. Plants appear simultaneously as observable natural
+phenomena, economic resources, seasonal indicators, and metaphysical
+signs within a divinely ordered ecology, glittering with the sparkle of
+all these meanings without active tension between them.</p> <h2 class="h2 mt-6 mb-2 font-thin">Chapter VII</h2> <blockquote class="blockquote text-lg font-light not-italic pl-8 my-4 text-secondary-800 w-2/3 mx-auto"><p>At the beginning of Wheat-harvest, the state of flowers decaying,
+which is alwaies about Virgo, the maine robbing beginneth. (<a class="anchor"><em>FM</em>, R1r</a>)</p></blockquote> <p>In Chapter VII we meet enemies, and especially enemy bees. We see the
+exhaustion of the floral calendar established in the preceding chapter.
+Where Chapter VI unfolds through abundance, succession, and botanical
+plenitude, Chapter VII (at least in part) turns toward depletion,
+contraction, and scarcity. Wheat harvest, occurring around Virgo,
+signals not merely a calendar event but a turning point within the life
+of the hive. As fields are cut back and flowering plants begin to fade,
+the supply of nectar diminishes rapidly.</p> <p>The landscape itself changes texture, and the expansive scene of summer
+begins to collapse. As flowers disappear, the bees increasingly turn
+toward robbing, invading weaker hives in search of stored honey.
+Competition replaces the relative harmony of the flowering months.
+Plants therefore structure this chapter, though now through their
+absence and decline rather than their abundance.</p> <p>Butler uses the entropy of the season as a pressure or intensifier on
+the hive, transforming seasonal plant decline into a behavioural and
+political problem for the bees themselves. He conducts his own
+experiment, or observes nature doing so, and the natural scarcity is
+reminiscent of modern experiments on bee stress.<sup id="fnref-9"><a href="#fn-9" class="footnote-ref anchor">9</a></sup> The chapter
+therefore functions as the inverse of the lush catalogues of Chapter VI.
+Instead of accumulating blossoms and forage plants, it traces their
+disappearance from the landscape. Thinking musically, we might say the
+abundance <em>dissipates</em>. The sonic energy of high summer has dispersed,
+the numinous intensity has faded, and so have the flowers.</p> <p>Classical natural history frequently associated failed forage and poor
+flowering seasons with disorder among bees. Virgil's <em>Georgics</em> repeatedly associates environmental instability with agitation and
+disorder within the hive, emphasising the bees' dependence upon
+temperate climates, floral abundance, and carefully managed landscapes.
+Likewise, Pliny's <em>Natural History</em> stresses that the quality and
+productivity of honey depend upon seasonal regularity, favourable
+weather, and access to flowering plants.</p> <h2 class="h2 mt-6 mb-2 font-thin">Chapter VIII</h2> <p>When the bees' natural foraging fails, the beekeeper must artificially
+nourish the hive with substitute foods: figs, raisins, apples, pears,
+and sweet wort.<sup id="fnref-10"><a href="#fn-10" class="footnote-ref anchor">10</a></sup> Butler presents these substances as emergency
+provisions administered during periods of floral scarcity, when the
+seasonal ecology described in previous chapters can no longer adequately
+support the colony. Plants are different again here. Earlier chapters
+focused upon flowers, nectar, and living landscapes; here those things
+appear in preserved, processed, and stored forms. Bees no longer gather
+directly from blossoms but receive sustenance transformed through human
+labour and preparation.</p> <p>Butler would have read about artificial feeding in Aristotle, who
+explicitly recommends feeding bees figs and sweet substances, and more
+broadly in Roman writers like Varro, Columella, and Palladius, which he
+would have added to his own trial and error at the hive.<sup id="fnref-11"><a href="#fn-11" class="footnote-ref anchor">11</a></sup></p> <p>The foods Butler lists are also significant because they belong as much
+to the household pantry as to the garden or field. They are preserves,
+the purpose of which is to keep items from the plenitude of summer
+against the inevitability of natural decay.<sup id="fnref-12"><a href="#fn-12" class="footnote-ref anchor">12</a></sup></p> <p>At the same time, these substitute foods mirror the bees' own practices
+of storage and preservation. Just as the hive accumulates honey against
+winter scarcity, the beekeeper draws upon dried, concentrated, and
+fermented fruit to sustain the colony through periods of environmental
+decline. Artificial feeding links human and insect survival
+strategies.<sup id="fnref-13"><a href="#fn-13" class="footnote-ref anchor">13</a></sup> The floral abundance of earlier chapters is transformed
+into stored sweetness capable of extending life beyond the natural
+flowering season.<sup id="fnref-14"><a href="#fn-14" class="footnote-ref anchor">14</a></sup></p> <p>Plants in Chapter VIII are therefore no longer ecological partners
+within a reciprocal flowering landscape, but emergency rations
+administered within an increasingly fragile environment. The chapter
+reveals the limits of the hive's dependence upon natural forage and the
+growing necessity of human intervention once the botanical year begins
+to fail. Butler presents the beekeeper as a surrogate provider who
+temporarily replaces the absent flower, filling the ecological gap left
+by the collapse of seasonal bloom. In terms of book layout, the bees get
+their preserves, the memories of the full garden, a chapter before the
+humans. They are recompensed before their honey is enjoyed.</p> <h2 class="h2 mt-6 mb-2 font-thin">Chapter X</h2> <p>In Chapter X, the beekeeper harvests the fruit of this labour, and the
+final outcome of the bees' earlier industry with the flowers in the
+garden.</p> <p>After killing or removing the bees, and taking the combs, what remains
+is to process the honey. By part three of this chapter, the world of
+plants and flowers is wholly in the kitchen. Butler lists numerous
+fruits, herbs, and spices (including, here, imported spices) used in
+marmalades, syrups, conserves, and salves: quinces, wardens, apples,
+roses, violets, and damsons alongside cinnamon, ginger, cloves, mace,
+thyme, rosemary, and bay. The floral world of the hive ultimately
+re-enters the human body through sweetened medicines, preserves, and
+restorative compounds.</p> <p>Some recipes are unattributed, but are very similar to those found
+across early modern recipe books, while many are attributed to Guillaume
+Plançon ('Plantius'), the editor of physician Jean Fernel's work on
+physic. Others are caught up in huge cascades of references, such as the
+opening parts of section 3 (in the 1623 edition), where the majority of
+the text is made up of footnotes. Here, Butler confirms the worth of the
+work earlier in the book by ratifying the outcome. He writes about honey
+within a broader culture of household physic in which pleasure and
+remedy frequently overlap.<sup id="fnref-15"><a href="#fn-15" class="footnote-ref anchor">15</a></sup></p> <p>The unusual length of Chapter X reflects the preservative logic that
+governs its subject matter. Just as honey extends the life of flowers
+and fruits beyond their natural season, the chapter itself prolongs and
+accumulates botanical abundance through proliferating recipes,
+compounds, and preparations. Its accumulative structure resembles the
+expansive forms of recipe books, herbals, and books of household physic,
+layering ingredient upon ingredient in a textual analogue to
+preservation itself.</p> <p>The final chapter restocks the beekeeper with copious resources
+precisely at the moment when the flowering year has already passed. And
+so it can all begin again.</p> <p>* * *</p> <p>Following this line through the text, it is possible to see it as an
+ecological text <em>avant la lettre</em> — one that interweaves botany,
+agriculture, medicine, theology, and household practice into a single
+coherent natural philosophy. Bees may be the monarchy, but plants are
+the material kingdom upon which it rests.</p> <div class="footnotes"><hr/> <!></div>`,1);function X(t,i){const x=M(i,["children","$$slots","$$events","$$legacy"]);F(t,$(()=>x,()=>I,{children:(_,K)=>{var g=J(),b=V(g);R(b,{get author(){return D},get date(){return z},get type(){return j},get title(){return L},get readingTime(){return N}});var l=e(b,2),C=e(a(l),3);n(),o(l);var h=e(l,40),y=a(h),P=e(a(y));n(),o(y),o(h);var w=e(h,14);W(w,{children:(u,H)=>{var f=G();n(12),p(u,f)}});var c=e(w,8),v=a(c),k=e(a(v)),q=e(k,2);n(),o(v),o(c);var d=e(c,10),T=a(d),A=e(a(T));n(),o(T),o(d);var B=e(d,38),S=e(a(B),2);O(S,{children:(u,H)=>{var f=U();n(28),p(u,f)}}),o(B),E(()=>{s(C,"href",`${r??""}/literature/plants-list`),s(P,"href",`${r??""}/literature/transcription#ch5glon1`),s(k,"href",`${r??""}/literature/transcription#ch6bibln35`),s(q,"href",`${r??""}/literature/transcription#ch6par35`),s(A,"href",`${r??""}/literature/transcription#ch7par37`)}),p(_,g)},$$slots:{default:!0}}))}function ge(t){X(t,{})}export{ge as component};
